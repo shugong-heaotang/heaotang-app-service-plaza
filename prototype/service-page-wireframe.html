@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>服务页简图</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        background: #f3f3f3;
+        color: #111;
+        font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+      }
+
+      .page {
+        width: min(420px, 100vw);
+        min-height: 100vh;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        background: #fff;
+        border-left: 1px solid #ddd;
+        border-right: 1px solid #ddd;
+      }
+
+      .header,
+      .block,
+      .nav {
+        border: 2px solid #222;
+      }
+
+      .header {
+        margin: 14px;
+        padding: 14px;
+        font-size: 24px;
+        font-weight: 800;
+      }
+
+      .content {
+        flex: 1;
+        padding: 0 14px 14px;
+      }
+
+      .block {
+        margin-bottom: 12px;
+        padding: 12px;
+        min-height: 76px;
+      }
+
+      .title {
+        margin-bottom: 8px;
+        font-size: 18px;
+        font-weight: 800;
+      }
+
+      .sub {
+        font-size: 14px;
+        line-height: 1.6;
+      }
+
+      .club-row,
+      .service-grid,
+      .nav {
+        display: grid;
+        gap: 8px;
+      }
+
+      .club-row {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .club-row div,
+      .service-grid div,
+      .nav div {
+        min-height: 42px;
+        display: grid;
+        place-items: center;
+        border: 1px solid #222;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      .club-row div:first-child {
+        grid-column: 1 / -1;
+      }
+
+      .service-grid {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .service-grid div {
+        min-height: 70px;
+      }
+
+      .nav {
+        grid-template-columns: repeat(4, 1fr);
+        margin-top: auto;
+        padding: 8px;
+        border-left: 0;
+        border-right: 0;
+        border-bottom: 0;
+      }
+
+      .nav .active {
+        font-weight: 800;
+        background: #eee;
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page">
+      <header class="header">服务</header>
+
+      <section class="content">
+        <section class="block">
+          <div class="title">1. 生命导航</div>
+          <div class="sub">核心服务之一，放在最上方。</div>
+        </section>
+
+        <section class="block">
+          <div class="title">2. 俱乐部联盟体系</div>
+          <div class="club-row">
+            <div>俱乐部联盟</div>
+            <div>公益俱乐部</div>
+            <div>自建俱乐部</div>
+            <div>家庭俱乐部</div>
+            <div>俱乐部友联体</div>
+          </div>
+        </section>
+
+        <section class="block">
+          <div class="title">3. 健康大管家</div>
+          <div class="sub">核心服务之一，由大医健康院提供健康管理与健康服务。</div>
+        </section>
+
+        <section class="block">
+          <div class="title">4. 常见服务</div>
+          <div class="service-grid">
+            <div>活动</div>
+            <div>人脉</div>
+            <div>商城</div>
+            <div>二手集市</div>
+            <div>预留</div>
+            <div>预留</div>
+          </div>
+        </section>
+      </section>
+
+      <nav class="nav">
+        <div>首页</div>
+        <div class="active">服务</div>
+        <div>发现</div>
+        <div>我的</div>
+      </nav>
+    </main>
+  </body>
+</html>
