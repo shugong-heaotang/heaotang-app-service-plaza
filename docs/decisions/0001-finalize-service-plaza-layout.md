@@ -21,7 +21,7 @@ The Service page is finalized as the "服务广场" layout.
 The top page title area uses:
 
 - Standard brand logo: `prototype/assets/heaotang-logo.svg`
-- The logo is a transformation of "和奥堂": "和" remains at the center, while "奥堂" is abstracted into two supporting hands.
+- The logo uses "和" as the central identity and avoids a closed frame around the character, using open arcs to express harmony, movement, and growth.
 - Title: 服务广场
 - A global AI button on the right
 
@@ -57,7 +57,7 @@ The lower section is "常用服务", currently containing:
 - The Service page is a first-level tab, not a submodule of Home.
 - The three core services are the soul of the APP service structure: 生命导航, 俱乐部联盟, 健康大管家.
 - Users may miss horizontally hidden content, so core entries must wrap to multiple rows instead of relying on horizontal scrolling.
-- The Service Plaza uses the standard SVG logo at `prototype/assets/heaotang-logo.svg`, where "和" is held by two hands abstracted from "奥堂".
+- The Service Plaza uses the standard SVG logo at `prototype/assets/heaotang-logo.svg`, centered on an open "和" mark without a closed box around the character.
 
 ## Consequences
 

@@ -1,45 +1,17 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96" role="img" aria-labelledby="title desc">
   <title id="title">和奥堂商标</title>
-  <desc id="desc">A teal rounded-square brand mark where He is held at the center and Aotang is abstracted into two supporting hands.</desc>
+  <desc id="desc">An open teal brand mark centered on the Chinese character He, representing harmony and growth without a closed frame.</desc>
   <rect width="96" height="96" rx="22" fill="#0f766e"/>
-
-  <path
-    d="M17 50C20 30 33 18 48 18C63 18 76 30 79 50"
-    fill="none"
-    stroke="#d7a735"
-    stroke-width="5"
-    stroke-linecap="round"/>
-  <path
-    d="M22 59C29 50 37 46 46 47"
-    fill="none"
-    stroke="#ffffff"
-    stroke-width="8"
-    stroke-linecap="round"/>
-  <path
-    d="M74 59C67 50 59 46 50 47"
-    fill="none"
-    stroke="#ffffff"
-    stroke-width="8"
-    stroke-linecap="round"/>
-  <path
-    d="M20 69C29 77 38 81 48 81C58 81 67 77 76 69"
-    fill="none"
-    stroke="#ffffff"
-    stroke-width="8"
-    stroke-linecap="round"/>
-  <path
-    d="M29 65C36 70 42 72 48 72C54 72 60 70 67 65"
-    fill="none"
-    stroke="#d7a735"
-    stroke-width="4"
-    stroke-linecap="round"/>
-
+  <circle cx="48" cy="47" r="30" fill="#ffffff" opacity="0.1"/>
+  <path d="M23 31C31 22 41 18 52 20" fill="none" stroke="#d7a735" stroke-width="5" stroke-linecap="round"/>
+  <path d="M73 65C65 74 55 78 44 76" fill="none" stroke="#d7a735" stroke-width="5" stroke-linecap="round"/>
   <text
     x="48"
-    y="57"
+    y="63"
     fill="#ffffff"
     font-family="Microsoft YaHei, PingFang SC, SimHei, sans-serif"
-    font-size="44"
+    font-size="54"
     font-weight="800"
     text-anchor="middle">和</text>
+  <circle cx="74" cy="25" r="7" fill="#d7a735"/>
 </svg>
