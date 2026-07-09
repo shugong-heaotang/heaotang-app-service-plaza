@@ -246,18 +246,23 @@ h2 {
 }
 
 .club-main-row {
-  display: grid;
-  grid-template-columns: 1fr auto;
-  gap: 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-bottom: 8px;
+  min-height: 48px;
+  padding: 8px 104px 8px 14px;
+  color: #ffffff;
+  background: var(--service);
+  border-radius: 8px;
 }
 
 .club-main-button,
 .club-manage-button {
-  min-height: 44px;
-  padding: 9px 10px;
+  min-height: 0;
+  padding: 0;
   border-radius: 8px;
-  font-size: 14px;
   font-weight: 800;
   line-height: 1.2;
   text-align: center;
@@ -265,14 +270,22 @@ h2 {
 
 .club-main-button {
   color: #ffffff;
-  background: var(--service);
+  background: transparent;
+  font-size: 17px;
 }
 
 .club-manage-button {
-  min-width: 86px;
+  min-width: 82px;
+  min-height: 32px;
+  position: absolute;
+  right: 8px;
+  top: 50%;
+  padding: 7px 9px;
   color: var(--gold);
   background: var(--gold-soft);
   border: 1px solid #ead9a5;
+  font-size: 12px;
+  transform: translateY(-50%);
 }
 
 .club-grid button {

@@ -74,14 +74,16 @@
       }
 
       .club-main-row {
+        position: relative;
         display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 8px;
+        place-items: center;
         margin-bottom: 8px;
+        min-height: 48px;
+        padding-right: 94px;
+        border: 1px solid #222;
       }
 
       .club-row div,
-      .club-main-row div,
       .service-grid div,
       .nav div {
         min-height: 42px;
@@ -90,6 +92,18 @@
         border: 1px solid #222;
         font-size: 14px;
         text-align: center;
+      }
+
+      .club-main-row .manage {
+        position: absolute;
+        right: 8px;
+        top: 8px;
+        min-width: 78px;
+        min-height: 30px;
+        display: grid;
+        place-items: center;
+        border: 1px solid #222;
+        font-size: 12px;
       }
 
       .service-grid {
@@ -129,7 +143,7 @@
           <div class="title">2. 俱乐部联盟体系</div>
           <div class="club-main-row">
             <div>俱乐部联盟</div>
-            <div>管理中心</div>
+            <div class="manage">管理中心</div>
           </div>
           <div class="club-row">
             <div>公益俱乐部</div>

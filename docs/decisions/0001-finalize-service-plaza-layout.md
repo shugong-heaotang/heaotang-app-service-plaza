@@ -31,10 +31,11 @@ The first screen must prioritize three core services:
 2. 俱乐部联盟
 3. 健康大管家
 
-The club section uses a top main row:
+The club section uses one integrated top main block:
 
-- 俱乐部联盟
-- 管理中心 button on the right side of the same row
+- Main text: 俱乐部联盟, visually larger than ordinary entries
+- Embedded right-side button: 管理中心
+- 管理中心 is an action inside the 俱乐部联盟 block, not a separate main block
 
 The lower club grid keeps four entries:
 
