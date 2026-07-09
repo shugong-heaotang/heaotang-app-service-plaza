@@ -1,54 +1,56 @@
-# ADR 0001: Finalize Service Plaza Layout
+# 决策 0001：服务广场布局定版
 
-## Status
+## 状态
 
-Final
+最终定版
 
-## Date
+## 日期
 
 2026-07-09
 
-## Context
+## 背景
 
-The APP keeps four bottom navigation tabs: Home, Service, Discover, and Mine. At this stage, Home, Discover, and Mine are not being designed. The current confirmed scope is the Service page only.
+和奥堂 APP 底部主导航保留四个入口：首页、服务、发现、我的。
 
-The Service page is the main place to express the core positioning of the APP. It must keep the page simple, visible, and easy to understand without hiding key entries behind horizontal scrolling.
+当前阶段只定版“服务”页面，也就是“服务广场”。首页、发现、我的暂不展开设计，后续都围绕服务广场这个核心页面继续规划。
 
-## Decision
+服务广场是 APP 核心定位的集中表达页面，必须保持简洁、直接、可见，不能把关键入口藏在横向滚动里。
 
-The Service page is finalized as the "服务广场" layout.
+## 决策
 
-The top page title area uses:
+服务页定版为“服务广场”布局。
 
-- Standard brand logo: `prototype/assets/heaotang-logo.svg`
-- The logo uses "和" as the central identity and avoids a closed frame around the character, using open arcs to express harmony, movement, and growth.
-- Title: 服务广场
-- A global AI button on the right
+顶部标题区使用：
 
-The first screen must prioritize three core services:
+- 标准品牌商标：`prototype/assets/heaotang-logo.svg`
+- 商标以“和”字为核心，不使用封闭框把“和”字锁住，采用开放弧线表达和合、流动与发展。
+- 页面标题：服务广场
+- 右侧放全局 AI 按钮
+
+首屏优先展示三个核心服务：
 
 1. 生命导航
 2. 俱乐部联盟
 3. 健康大管家
 
-The club section uses one integrated top main block:
+俱乐部区域使用一个一体化主板块：
 
-- Main text: 俱乐部联盟, visually larger than ordinary entries
-- Embedded right-side button: 管理中心
-- 管理中心 is an action inside the 俱乐部联盟 block, not a separate main block
+- 主文字：俱乐部联盟，字号大于普通入口。
+- 右侧嵌入小按钮：管理中心。
+- 管理中心是俱乐部联盟主板块里的附属操作，不作为独立大块处理。
 
-The lower club grid keeps four entries:
+俱乐部下方保留四个入口：
 
 - 公益俱乐部
 - 自建俱乐部
 - 家庭俱乐部
 - 俱乐部友联体
 
-The club section does not show an extra "核心服务 / 俱乐部联盟" heading because the top main row already names the section.
+俱乐部区域不再额外显示“核心服务 / 俱乐部联盟”标题，因为上方主板块已经表达该区域名称。
 
-The health section uses "健康大管家" as the user-facing service name. "大医健康院" remains the organization or service provider concept, not the primary entry name on the Service Plaza.
+健康区域使用“健康大管家”作为用户可理解的服务入口名称。“大医健康院”保留为背后的组织或服务提供方概念，不作为服务广场里的主入口名称。
 
-The lower section is "常用服务", currently containing:
+下方区域为“常用服务”，当前包含：
 
 - 活动广场
 - 人脉中心
@@ -57,16 +59,16 @@ The lower section is "常用服务", currently containing:
 - AI
 - 学习广场
 
-## Premises
+## 前提
 
-- The four bottom navigation tabs remain Home, Service, Discover, and Mine.
-- The Service page is a first-level tab, not a submodule of Home.
-- The three core services are the soul of the APP service structure: 生命导航, 俱乐部联盟, 健康大管家.
-- Users may miss horizontally hidden content, so core entries must wrap to multiple rows instead of relying on horizontal scrolling.
-- The Service Plaza uses the standard SVG logo at `prototype/assets/heaotang-logo.svg`, centered on an open "和" mark without a closed box around the character.
+- 底部主导航固定为：首页、服务、发现、我的。
+- 服务广场是一级页面，不是首页里的普通模块。
+- 三个核心服务是 APP 服务结构的核心：生命导航、俱乐部联盟、健康大管家。
+- 用户容易忽略横向隐藏内容，所以核心入口必须直接可见，一行放不下时换成两行或多行。
+- 服务广场使用标准 SVG 商标：`prototype/assets/heaotang-logo.svg`。
 
-## Consequences
+## 影响
 
-- Future page design should treat this Service Plaza structure as fixed unless a new decision supersedes this ADR.
-- Home, Discover, and Mine can be designed later around this fixed service structure.
-- Service Plaza UI changes should refine visual style, copy, and assets without changing the confirmed information hierarchy.
+- 后续页面设计应把服务广场结构视为固定基准，除非有新的正式决策取代本决策。
+- 首页、发现、我的可以在此基础上继续设计。
+- 服务广场后续只允许做视觉细节、文案、真实资产和功能接入调整，不改变已确认的信息架构。

@@ -1,55 +1,79 @@
-# ADR 0002: Service Plaza Content Governance
+# 决策 0002：服务广场内容治理与负责人分工
 
-## Status
+## 状态
 
-Accepted
+已接受
 
-## Date
+## 日期
 
 2026-07-09
 
-## Context
+## 背景
 
-The Service Plaza layout is finalized. The next stage is to fill real content into each module and connect each service area to its own pages and data.
+服务广场布局已经定版。下一阶段要把真实内容填进各个模块，并把每个服务入口连接到对应页面和数据。
 
-If each module team directly changes the Service Plaza, the APP core entry will become inconsistent and hard to maintain.
+如果每个板块团队都直接修改服务广场，APP 的核心入口会变得不统一，也很难长期维护。
 
-## Decision
+## 决策
 
-Use a three-layer responsibility model:
+采用三层责任制。
 
-1. APP architecture owner
-   - Owns Service Plaza structure, module order, navigation boundaries, and cross-module rules.
-   - Approves any change to entry names, entry order, and core service scope.
+### 1. APP 总架构负责人
 
-2. Module owner
-   - Owns the content, business rules, pages, and acceptance criteria of one module.
-   - Submits module entry requirements through a standard module access card.
-   - Does not directly change the Service Plaza structure.
+APP 总架构负责人负责：
 
-3. Platform integration owner
-   - Integrates module entries into the Service Plaza.
-   - Owns frontend routing, interface contracts, permissions, analytics, and release checks.
-   - Detects naming, permission, and interaction conflicts across modules.
+- 服务广场结构
+- 模块顺序
+- 导航边界
+- 跨板块规则
+- 入口名称、入口顺序和核心服务范围的变更审批
 
-People are not assigned automatically by whoever edits first. The project owner must formally appoint:
+### 2. 板块负责人
 
-- APP architecture owner
-- Platform integration owner
-- Module owners for each service entry
+板块负责人负责：
 
-Until formal appointment, all owner fields remain "to be assigned"; the project owner keeps final decision authority.
+- 本板块内容
+- 本板块业务规则
+- 本板块页面
+- 本板块验收标准
+- 按标准“板块接入卡”提交入口需求
 
-## Premises
+板块负责人不能直接修改服务广场结构。
 
-- Service Plaza is the APP's core entry page.
-- The Service Plaza layout is final and should not be changed casually.
-- Each module needs freedom to build its own internal pages.
-- The core entry page needs one architecture owner to prevent fragmentation.
+### 3. 平台集成负责人
 
-## Consequences
+平台集成负责人负责：
 
-- Module teams can move independently inside their own boundaries.
-- Service Plaza remains stable and unified.
-- Cross-module combinations must be reviewed by the APP architecture owner.
-- A module cannot join the Service Plaza until its entry name, route, permission, owner, and acceptance rules are clear.
+- 把各板块入口接入服务广场
+- 前端路由
+- 接口契约
+- 权限
+- 埋点
+- 发布检查
+- 发现跨板块命名、权限和交互冲突
+
+## 负责人任命规则
+
+负责人不能按“谁先做谁负责”来定。
+
+项目最高负责人必须正式任命：
+
+- APP 总架构负责人
+- 平台集成负责人
+- 各服务入口的板块负责人
+
+在正式任命之前，所有负责人字段都保持“待任命”，项目最高负责人保留最终裁决权。
+
+## 前提
+
+- 服务广场是 APP 的核心入口页。
+- 服务广场布局已经定版，不应被随意改动。
+- 每个板块需要在自己的边界内独立推进。
+- 核心入口页必须有一个总架构负责人，避免各板块割裂。
+
+## 影响
+
+- 各板块可以在自己的边界内独立推进。
+- 服务广场保持稳定和统一。
+- 跨板块组合必须由 APP 总架构负责人组织评审。
+- 一个板块在入口名称、路由、权限、负责人、验收规则没有明确前，不能正式接入服务广场。
