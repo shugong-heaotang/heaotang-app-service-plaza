@@ -44,8 +44,8 @@ The health section uses "健康大管家" as the user-facing service name. "大�
 
 The lower section is "常用服务", currently containing:
 
-- 活动
-- 人脉
+- 活动广场
+- 人脉中心
 - 保障商城
 - 二手集市
 - AI
