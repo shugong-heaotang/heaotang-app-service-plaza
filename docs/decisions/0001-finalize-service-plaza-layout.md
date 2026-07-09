@@ -34,11 +34,13 @@ The first screen must prioritize three core services:
 The club section contains:
 
 - 俱乐部联盟
+- 管理中心
 - 公益俱乐部
 - 自建俱乐部
 - 家庭俱乐部
 - 俱乐部友联体
-- 各地管理中心 button
+
+The club section does not show an extra "核心服务 / 俱乐部联盟" heading because the first button already names the section.
 
 The health section uses "健康大管家" as the user-facing service name. "大医健康院" remains the organization or service provider concept, not the primary entry name on the Service Plaza.
 

@@ -259,13 +259,6 @@ h2 {
   text-align: center;
 }
 
-.club-grid button:first-child {
-  flex-basis: 100%;
-  color: #ffffff;
-  background: var(--service);
-  border-color: var(--service);
-}
-
 .more-button {
   background: #243b35;
 }
