@@ -1,0 +1,210 @@
+﻿<!doctype html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+<title>和奥堂 - 服务广场（联调）</title>
+<style>
+:root {
+  --ink: #17211f; --subtle: #5f6f69; --muted: #8b9692; --line: #d9e0dc;
+  --paper: #f7f8f5; --panel: #ffffff; --service: #0f766e; --service-soft: #dff2ee;
+  --life: #b9382f; --life-soft: #f8e5df; --health: #256c3f; --health-soft: #e3f1df;
+  --gold: #9b6a13; --gold-soft: #fff3cf; --shadow: 0 18px 42px rgba(23,33,31,0.12);
+}
+* { box-sizing: border-box; }
+html, body { min-height: 100%; }
+body {
+  margin: 0; color: var(--ink); background: #e8ede9;
+  font-family: "Microsoft YaHei","PingFang SC",system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+}
+button { border: 0; color: inherit; font: inherit; cursor: pointer; }
+h1,h2,h3,h4,p { margin: 0; }
+.app-shell { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+.phone { width: min(100%,430px); height: min(900px,calc(100vh - 48px)); min-height: 680px; display: flex; flex-direction: column; overflow: hidden; background: var(--paper); border: 1px solid rgba(23,33,31,0.08); border-radius: 28px; box-shadow: var(--shadow); }
+.topbar { display: flex; align-items: center; justify-content: space-between; padding: 22px 20px 14px; background: var(--panel); border-bottom: 1px solid var(--line); position: relative; }
+.brand-title { display: flex; align-items: center; gap: 10px; }
+.brand-mark { width: 42px; height: 42px; flex: 0 0 auto; display: block; border-radius: 8px; object-fit: contain; }
+h1 { font-size: 28px; font-weight: 800; line-height: 1.12; }
+h2 { font-size: 20px; font-weight: 800; line-height: 1.2; }
+.back-btn { width: 42px; height: 42px; display: grid; place-items: center; background: var(--service); color: #fff; border-radius: 50%; font-size: 20px; font-weight: 700; cursor: pointer; position: absolute; left: 14px; top: 50%; transform: translateY(-50%); border:0; }
+.topbar .page-title { margin-left: 50px; }
+.topbar .page-title h1 { font-size: 22px; }
+.topbar .page-title .badge { font-size: 10px; color: #fff; background: var(--gold); padding: 2px 8px; border-radius: 10px; display: inline-block; margin-left: 8px; }
+.content { flex: 1; min-height: 0; display: flex; flex-direction: column; gap: 12px; padding: 14px 14px 18px; overflow-y: auto; }
+.section-kicker { margin-bottom: 5px; color: var(--subtle); font-size: 12px; font-weight: 700; }
+.hero-entry, .club-panel, .services-panel, .temp-card { background: var(--panel); border: 1px solid var(--line); border-radius: 8px; }
+.hero-entry { display: grid; grid-template-columns: auto 1fr auto; gap: 12px; align-items: center; padding: 16px; }
+.life-entry { border-left: 5px solid var(--life); }
+.health-entry { border-left: 5px solid var(--health); }
+.entry-icon { width: 50px; height: 50px; display: grid; place-items: center; border-radius: 8px; font-size: 22px; font-weight: 900; }
+.life-mark { color: var(--life); background: var(--life-soft); }
+.health-mark { color: var(--health); background: var(--health-soft); }
+.health-word { font-size: 17px; letter-spacing: 0; }
+.entry-action, .more-button { min-width: 50px; padding: 9px 11px; color: #fff; background: var(--service); border-radius: 8px; font-size: 13px; font-weight: 700; text-align: center; }
+.entry-action.landing { background: var(--gold); }
+.club-panel, .services-panel { padding: 16px; }
+.panel-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
+.club-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+.club-main-row { position: relative; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; min-height: 48px; padding: 8px 104px 8px 14px; color: #fff; background: var(--service); border-radius: 8px; }
+.club-main-button { color: #fff; background: transparent; font-size: 17px; font-weight: 800; }
+.club-manage-button { min-width: 82px; min-height: 32px; position: absolute; right: 8px; top: 50%; padding: 7px 9px; color: var(--gold); background: var(--gold-soft); border: 1px solid #ead9a5; font-size: 12px; font-weight: 800; border-radius: 8px; transform: translateY(-50%); }
+.club-grid button { min-height: 40px; flex: 1 1 calc(50% - 8px); padding: 9px 10px; background: var(--service-soft); border: 1px solid #bddbd4; border-radius: 8px; color: #115e59; font-size: 14px; font-weight: 800; line-height: 1.2; text-align: center; }
+.service-grid { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 10px; }
+.service-tile { min-height: 92px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 12px 8px; background: #f4f7f5; border: 1px solid var(--line); border-radius: 8px; }
+.service-tile strong { max-width: 100%; font-size: 14px; line-height: 1.2; text-align: center; overflow-wrap: anywhere; }
+.tile-icon { width: 30px; height: 30px; border-radius: 8px; background: var(--service-soft); display: block; }
+.tabbar { display: grid; grid-template-columns: repeat(4,1fr); gap: 2px; padding: 8px 10px 12px; background: var(--panel); border-top: 1px solid var(--line); }
+.tabbar button { min-width: 0; display: flex; flex-direction: column; align-items: center; gap: 5px; padding: 6px 4px; color: var(--muted); background: transparent; border-radius: 8px; font-size: 12px; font-weight: 700; }
+.tabbar button.active { color: var(--service); background: var(--service-soft); }
+.tab-icon { width: 22px; height: 22px; display: block; }
+
+/* Temp page */
+.temp-card { padding: 16px; text-align: center; }
+.temp-card h2 { font-size: 20px; margin-bottom: 4px; }
+.temp-card .kicker { font-size: 12px; color: var(--gold); font-weight: 700; margin-bottom: 10px; }
+.temp-card .desc { font-size: 13px; color: var(--subtle); line-height: 1.6; margin-bottom: 16px; }
+.temp-card .action-btn { width: 100%; padding: 14px; border-radius: 8px; font-size: 16px; font-weight: 700; background: var(--service); color: #fff; margin-bottom: 10px; border:0; }
+.temp-card .action-btn.success { background: #256c3f; }
+.temp-card .action-btn.pending { background: var(--gold); }
+
+.status-banner { padding: 12px; border-radius: 8px; font-size: 13px; font-weight: 600; margin: 0 0 14px; text-align: center; }
+.status-banner.success { background: var(--health-soft); color: var(--health); }
+.status-banner.pending { background: var(--gold-soft); color: var(--gold); }
+.status-banner.error { background: var(--life-soft); color: var(--life); }
+.status-banner.info { background: var(--service-soft); color: var(--service); }
+
+.mode-toggle { display: flex; align-items: center; justify-content: center; gap: 8px; padding: 10px; background: var(--service-soft); border-radius: 8px; margin-bottom: 14px; }
+.mode-toggle .mode-label { font-size: 13px; font-weight: 700; color: var(--subtle); }
+.mode-toggle .mode-label.active { color: var(--service); }
+.toggle-switch { width: 48px; height: 26px; background: var(--muted); border-radius: 13px; position: relative; cursor: pointer; transition: background 0.2s; flex: 0 0 auto; }
+.toggle-switch.on { background: var(--service); }
+.toggle-switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 20px; height: 20px; background: #fff; border-radius: 50%; transition: transform 0.2s; }
+.toggle-switch.on::after { transform: translateX(22px); }
+
+.state-sim { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; padding: 8px; background: #f4f7f5; border-radius: 8px; margin-bottom: 14px; }
+.state-sim button { padding: 5px 10px; border-radius: 8px; font-size: 11px; font-weight: 700; background: var(--panel); border: 1px solid var(--line); color: var(--subtle); }
+.state-sim button.active { background: var(--service); color: #fff; border-color: var(--service); }
+
+.flow-steps { margin-bottom: 16px; }
+.flow-step { display: flex; align-items: center; gap: 10px; padding: 10px; border-left: 3px solid var(--line); margin-left: 10px; position: relative; }
+.flow-step::before { content: attr(data-step); position: absolute; left: -22px; top: 10px; width: 22px; height: 22px; border-radius: 50%; background: var(--line); color: var(--subtle); font-size: 11px; font-weight: 800; display: grid; place-items: center; }
+.flow-step.completed { border-left-color: var(--service); }
+.flow-step.completed::before { background: var(--service); color: #fff; }
+.flow-step.current { border-left-color: var(--gold); }
+.flow-step.current::before { background: var(--gold); color: #fff; }
+.flow-step span { font-size: 13px; }
+.flow-step.completed span { color: var(--ink); }
+.flow-step.current span { font-weight: 700; }
+
+.return-bar { display: flex; justify-content: center; padding: 10px 0 0; border-top: 1px solid var(--line); margin-top: 14px; }
+.return-bar button { font-size: 13px; color: var(--service); font-weight: 700; background: transparent; padding: 6px 14px; border:0; }
+
+@media (max-width: 520px) {
+  .app-shell { display: block; padding: 0; }
+  .phone { width: 100%; height: 100vh; min-height: 0; border: 0; border-radius: 0; box-shadow: none; }
+}
+@media (max-width: 360px) {
+  .hero-entry { grid-template-columns: auto 1fr; }
+  .entry-action { grid-column: 1 / -1; width: 100%; }
+}
+.page-enter { animation: fadeIn 0.25s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: translateY(0); } }
+</style>
+</head>
+<body>
+<main class="app-shell"><section class="phone" id="app-container"></section></main>
+<script>
+const state = { page: 'plaza', simState: 'normal', needApply: true, flowStep: 'idle', submitted: false };
+
+function getSvc(id) {
+  const m = {
+    life: { title: '生命导航', color: 'var(--life)', action: '提交导航申请', direct: '进入生命导航', flow: ['填写导航申请','提交审核','后台处理','查看结果'], desc: '提交导航需求，获取专业的人生导航服务。' },
+    club: { title: '俱乐部联盟', color: 'var(--service)', action: '申请加入俱乐部', direct: '进入俱乐部联盟', flow: ['选择俱乐部类型','提交加入申请','管理员审核','加入成功'], desc: '加入适合您的俱乐部，与志同道合的朋友一起成长。' },
+    health: { title: '健康大管家', color: 'var(--health)', action: '提交健康咨询', direct: '进入健康大管家', flow: ['填写健康咨询','分配咨询师','咨询回复','查看建议'], desc: '专业健康管理团队为您提供个性化的健康咨询与服务。' }
+  }; return m[id];
+}
+
+function render() {
+  const c = document.getElementById('app-container');
+  c.innerHTML = state.page === 'plaza' ? renderPlaza() : renderPage(state.page);
+  bindEvents();
+  const h = { plaza:'#plaza', life:'#life-navigation', club:'#club-alliance', health:'#health-manager' }[state.page]||'#plaza';
+  if (window.location.hash !== h) history.replaceState(null,'',h);
+}
+
+function renderPlaza() {
+  return '<header class="topbar"><div class="brand-title"><span class="brand-mark" style="display:grid;place-items:center;background:#0f766e;color:#fff;border-radius:8px;font-size:20px;font-weight:900">和</span><h1>服务广场</h1></div><button style="width:42px;height:42px;display:grid;place-items:center;color:#fff;background:var(--service);border-radius:50%;font-size:13px;font-weight:900;border:0">AI</button></header><section class="content"><div class="status-banner info" style="margin-bottom:10px">第一阶段联调版本 · 正式页面上线后替换</div><article class="hero-entry life-entry" data-page="life" style="cursor:pointer"><div class="entry-icon life-mark">导</div><div class="entry-copy"><p class="section-kicker">核心服务</p><h2>生命导航</h2></div><span class="entry-action landing">进入</span></article><article class="club-panel"><div class="club-main-row"><button class="club-main-button" data-page="club">俱乐部联盟</button><button class="club-manage-button" data-subpage="manage">管理中心</button></div><div class="club-grid"><button data-page="club">公益俱乐部</button><button data-page="club">自建俱乐部</button><button data-page="club">家庭俱乐部</button><button data-page="club">俱乐部友联体</button></div></article><article class="hero-entry health-entry" data-page="health" style="cursor:pointer"><div class="entry-icon health-mark health-word">健康</div><div class="entry-copy"><p class="section-kicker">核心服务</p><h2>健康大管家</h2></div><span class="entry-action landing">进入</span></article><section class="services-panel"><div class="panel-heading compact"><div><h2>常用服务</h2></div><button class="more-button">更多</button></div><div class="service-grid"><button class="service-tile"><span class="tile-icon" style="background:#f8e5df"></span><strong>活动广场</strong></button><button class="service-tile"><span class="tile-icon"></span><strong>人脉中心</strong></button><button class="service-tile"><span class="tile-icon" style="background:#fff3cf"></span><strong>保障商城</strong></button><button class="service-tile"><span class="tile-icon" style="background:#e3ebf6"></span><strong>二手集市</strong></button><button class="service-tile"><span class="tile-icon" style="background:#0f766e;color:#fff;font-size:12px;font-weight:900;display:grid;place-items:center">AI</span><strong>AI</strong></button><button class="service-tile"><span class="tile-icon" style="background:#eee7f8"></span><strong>学习广场</strong></button></div></section></section><nav class="tabbar"><button><span class="tab-icon" style="border:2px solid currentColor;border-radius:5px"></span>首页</button><button class="active"><span class="tab-icon" style="border:2px solid currentColor;border-radius:5px"></span>服务</button><button><span class="tab-icon" style="border:2px solid currentColor;border-radius:50%"></span>发现</button><button><span class="tab-icon" style="border:2px solid currentColor;border-radius:50%"></span>我的</button></nav>';
+}
+
+function renderPage(id) {
+  const s = getSvc(id);
+  const apply = state.needApply;
+  let btnText = apply ? s.action : s.direct;
+  let banner = '<div class="status-banner info" style="margin-bottom:14px">第一阶段联调承接页 · 正式版将替换此页</div>';
+  let disable = false;
+
+  if (state.simState === 'no-permission') { banner = '<div class="status-banner error">⚠ 您暂无权限访问此服务，请联系管理员</div>'; disable = true; }
+  else if (state.simState === 'empty') { banner = '<div class="status-banner info">ℹ 暂无数据，请先提交您的第一条记录</div>'; }
+  else if (state.simState === 'error') { banner = '<div class="status-banner error">⚠ 系统异常，请稍后重试</div>'; disable = true; }
+
+  if (state.submitted && apply) {
+    if (state.flowStep === 'submitted') { banner = '<div class="status-banner success">✓ 提交成功！等待后台处理</div>'; btnText = '查看进度'; }
+    else if (state.flowStep === 'processing') { banner = '<div class="status-banner pending">⟳ 后台处理中，请稍候...</div>'; btnText = '刷新状态'; }
+    else if (state.flowStep === 'done') { banner = '<div class="status-banner success">✓ 处理完成！请查看结果</div>'; btnText = '查看结果'; }
+  }
+
+  let flowHtml = '';
+  if (apply && state.submitted) {
+    const steps = ['idle','submitted','processing','done'];
+    const ci = steps.indexOf(state.flowStep);
+    flowHtml = '<div class="flow-steps">';
+    s.flow.forEach((st,i) => {
+      const cls = i<ci?'completed':(i===ci?'current':'');
+      flowHtml += '<div class="flow-step '+cls+'" data-step="'+(i+1)+'"><span>'+st+'</span></div>';
+    });
+    flowHtml += '</div>';
+  }
+
+  return '<header class="topbar"><button class="back-btn" data-page="plaza">←</button><div class="page-title"><h1>'+s.title+'<span class="badge">联调</span></h1></div><div style="width:42px"></div></header><section class="content page-enter">'+banner+'<div class="temp-card"><div class="kicker">核心服务 · 第一阶段联调</div><h2>'+s.title+'</h2><p class="desc">'+s.desc+'</p><div class="mode-toggle"><span class="mode-label'+(apply?' active':'')+'">需申请</span><div class="toggle-switch'+(apply?' on':'')+'" id="mt"></div><span class="mode-label'+(!apply?' active':'')+'">无需申请</span></div><div class="state-sim"><button'+(state.simState==='normal'?' class="active"':'')+' data-sim="normal">正常</button><button'+(state.simState==='no-permission'?' class="active"':'')+' data-sim="noperm">无权限</button><button'+(state.simState==='empty'?' class="active"':'')+' data-sim="empty">空状态</button><button'+(state.simState==='error'?' class="active"':'')+' data-sim="error">异常</button></div>'+flowHtml+(disable?'':'<button class="action-btn" data-action="do">'+btnText+'</button>')+(apply&&!state.submitted&&state.simState==='normal'?'<p style="font-size:12px;color:var(--muted);margin-top:4px">点击上方按钮模拟提交，体验完整流程</p>':'')+(!apply?'<p style="font-size:12px;color:var(--muted);margin-top:4px">无需申请模式：用户可直接访问服务内容</p>':'')+'</div><div class="return-bar"><button data-page="plaza">← 返回服务广场</button></div></section>';
+}
+
+function bindEvents() {
+  document.querySelectorAll('[data-page]').forEach(el => {
+    el.addEventListener('click',e=>{ e.stopPropagation(); const p=el.dataset.page; state.page=p; state.submitted=false; state.flowStep='idle'; render(); });
+  });
+  const mt = document.getElementById('mt');
+  if (mt) mt.addEventListener('click',()=>{ state.needApply=!state.needApply; if(state.needApply){state.submitted=false;state.flowStep='idle';} render(); });
+  document.querySelectorAll('[data-sim]').forEach(el => {
+    el.addEventListener('click',e=>{ e.stopPropagation();
+      const sim = el.dataset.sim;
+      if (sim==='normal') state.simState='normal';
+      else if (sim==='noperm') state.simState='no-permission';
+      else if (sim==='empty') state.simState='empty';
+      else if (sim==='error') state.simState='error';
+      render();
+    });
+  });
+  document.querySelectorAll('[data-action="do"]').forEach(el => {
+    el.addEventListener('click',()=>{
+      if (state.needApply) {
+        if (!state.submitted) { state.submitted=true; state.flowStep='submitted'; }
+        else if (state.flowStep==='submitted') state.flowStep='processing';
+        else if (state.flowStep==='processing') state.flowStep='done';
+        else { state.submitted=false; state.flowStep='idle'; }
+      } else { state.submitted=true; state.flowStep='done'; }
+      render();
+    });
+  });
+}
+
+window.addEventListener('hashchange',()=>{
+  const h = window.location.hash;
+  const m = {'#plaza':'plaza','#life-navigation':'life','#club-alliance':'club','#health-manager':'health'};
+  const p = m[h] || 'plaza';
+  if (state.page !== p) { state.page=p; state.submitted=false; state.flowStep='idle'; render(); }
+});
+
+render();
+</script>
+</body>
+</html>
