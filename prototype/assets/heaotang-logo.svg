@@ -3,7 +3,7 @@
   <desc id="desc">An open teal brand mark centered on the Chinese character He, representing harmony and growth without a closed frame.</desc>
   <rect width="96" height="96" rx="22" fill="#0f766e"/>
   <circle cx="48" cy="47" r="30" fill="#ffffff" opacity="0.1"/>
-  <path d="M23 31C31 22 41 18 52 20" fill="none" stroke="#d7a735" stroke-width="5" stroke-linecap="round"/>
+  <path d="M21 23C31 14 45 11 59 15" fill="none" stroke="#d7a735" stroke-width="5" stroke-linecap="round"/>
   <path d="M73 65C65 74 55 78 44 76" fill="none" stroke="#d7a735" stroke-width="5" stroke-linecap="round"/>
   <text
     x="48"

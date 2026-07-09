@@ -46,7 +46,7 @@ The lower section is "常用服务", currently containing:
 
 - 活动
 - 人脉
-- 商城
+- 保障商城
 - 二手集市
 - AI
 - 学习广场
