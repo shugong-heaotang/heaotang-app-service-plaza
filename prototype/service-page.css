@@ -245,6 +245,36 @@ h2 {
   gap: 8px;
 }
 
+.club-main-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.club-main-button,
+.club-manage-button {
+  min-height: 44px;
+  padding: 9px 10px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 800;
+  line-height: 1.2;
+  text-align: center;
+}
+
+.club-main-button {
+  color: #ffffff;
+  background: var(--service);
+}
+
+.club-manage-button {
+  min-width: 86px;
+  color: var(--gold);
+  background: var(--gold-soft);
+  border: 1px solid #ead9a5;
+}
+
 .club-grid button {
   min-height: 40px;
   flex: 1 1 calc(50% - 8px);

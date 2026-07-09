@@ -73,7 +73,15 @@
         grid-template-columns: repeat(2, 1fr);
       }
 
+      .club-main-row {
+        display: grid;
+        grid-template-columns: 1fr auto;
+        gap: 8px;
+        margin-bottom: 8px;
+      }
+
       .club-row div,
+      .club-main-row div,
       .service-grid div,
       .nav div {
         min-height: 42px;
@@ -119,9 +127,11 @@
 
         <section class="block">
           <div class="title">2. 俱乐部联盟体系</div>
-          <div class="club-row">
+          <div class="club-main-row">
             <div>俱乐部联盟</div>
             <div>管理中心</div>
+          </div>
+          <div class="club-row">
             <div>公益俱乐部</div>
             <div>自建俱乐部</div>
             <div>家庭俱乐部</div>
