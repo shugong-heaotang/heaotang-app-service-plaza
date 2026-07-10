@@ -418,6 +418,51 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": null,
       "handoff_record": "docs/project-management/service-plaza/club-my-applications-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-CLUB-REVIEW-IDEMPOTENCY-GOVERNANCE",
+      "title": "俱乐部加入申请审核幂等与并发一致性治理",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-review-idempotency-governance",
+      "branch": "codex/club-review-idempotency-governance",
+      "base_commit": "62cc0edaddd9704fc4e4a1bf2fe90c2b54832102",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-club-review-idempotency.json",
+        "contracts/foundation/governance-exams/2026-07-11-club-review-idempotency-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-club-review-idempotency.json",
+        "contracts/modules/club-alliance/internal-dependencies.v1.json",
+        "docs/project-management/modules/club-alliance-first-slice-contract-v1.md",
+        "docs/project-management/service-plaza/club-review-idempotency-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "只固化加入申请审核的 Idempotency-Key、同键异载荷拒绝和并发最终唯一决定；不实施板块页面或资金功能。",
+      "handoff_record": "docs/project-management/service-plaza/club-review-idempotency-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-CLUB-REVIEW-IDEMPOTENCY-BACKEND",
+      "title": "俱乐部加入申请审核幂等与并发一致性后端实现",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台后端负责人",
+      "status": "integrated",
+      "repository_root": "C:/Users/shugo/Documents/heaotang-main",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-review-idempotency",
+      "branch": "codex/club-review-idempotency",
+      "base_commit": "7659c1836a63d4a9b18cb45c6821a58d3f972992",
+      "allowed_paths": [
+        "backend-go/plugins/club-plugin/plugin.go",
+        "backend-go/plugins/club-plugin/service.go",
+        "backend-go/plugins/club-plugin/service_test.go"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": null,
+      "handoff_record": "docs/project-management/service-plaza/club-review-idempotency-2026-07-11.md"
     }
   ]
 }

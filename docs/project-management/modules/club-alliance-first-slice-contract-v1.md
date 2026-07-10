@@ -12,6 +12,16 @@
 
 上述五项未关闭时只允许 M0/M1 事实核对和接口变更申请，M2 No-Go。`club-manage` 动作仍为 preview；模块可以直测管理视图，但不得自行改为 active。
 
+审核写入幂等契约冻结为：
+
+- `PUT /api/v1/clubs/:id/join-applications/:aid/review` 强制携带合法 ASCII `Idempotency-Key`；
+- 规范化载荷由 `club_id`、`application_id`、`approved` 和 trim 后的 `note` 组成；
+- 首次成功返回 200；同一管理者、同一键、同一规范化载荷重放返回原申请并设置 `Idempotency-Replayed: true`；
+- 同一键改变任一规范化字段返回 409 / `IDEMPOTENCY_KEY_REUSED`；处理中返回 409 / `IDEMPOTENCY_IN_PROGRESS`；
+- 不同键并发提交批准与拒绝时，只允许一个事务把 pending 改为最终状态；失败方返回 409 / `CLUB_APPLICATION_ALREADY_REVIEWED`，不得覆盖最终决定；
+- 路径 application 不存在或不属于路径 club 时返回 404 / `CLUB_APPLICATION_NOT_FOUND`；非法 key、club ID、application ID 分别返回稳定 400 机器码；
+- 批准事务内同时写成员、成员数、积分、申请状态和幂等完成记录；任一事务内写入失败均回滚，幂等 reservation 释放后允许安全重试。
+
 本人申请状态接口冻结为：
 
 - `GET /api/v1/clubs/join-applications/my?page=<1..>&size=<1..100>&status=pending|approved|rejected`；
@@ -20,7 +30,7 @@
 - 成功使用统一列表信封 `data.items/total/page/size`，空结果 `items=[]`；
 - 非法分页返回 HTTP 400 / `INVALID_PAGINATION`；非法状态返回 HTTP 400 / `INVALID_CLUB_APPLICATION_STATUS`；内部查询失败返回 HTTP 500 / `CLUB_APPLICATIONS_UNAVAILABLE`。
 
-当前实现进度：第 3 项已在后端提交 `b8996793` 完成本地实现与全量 Go 回归；第 1 项已在后端提交 `7659c183` 完成本地实现、本人隔离/分页/过滤/空数组/稳定错误码测试及全量 Go 回归。测试环境 HTTP 验收前两项状态均为 implemented，不视为已关闭。第 2、4、5 项仍保持 No-Go。
+当前实现进度：第 3 项已在后端提交 `b8996793` 完成本地实现与全量 Go 回归；第 1 项已在后端提交 `7659c183` 完成本地实现；第 2 项已在后端提交 `e46c5e02` 完成首次/重放/异载荷、并发相反决定及事务一致性本地测试。测试环境 HTTP 验收前这些依赖均只记为 implemented，不视为 verified。第 4、5 项尚未全部关闭，M2 仍 No-Go。
 
 
 家庭俱乐部、公益俱乐部、俱乐部友联体、会费、支付、提现和分账不属于本切片。页面、适配器和测试禁止调用 fee、account、paid-service、payment、withdraw 路由。付费家庭套餐、请求体价格和旧收入记账在资金专项根因修复、版本化定价、双人审批与资金安全门禁完成前不可激活。

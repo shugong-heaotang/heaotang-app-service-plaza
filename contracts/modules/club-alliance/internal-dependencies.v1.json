@@ -89,10 +89,21 @@
       "description": "批准状态和成员写入原子一致，失败保持 pending",
       "status": "verified",
       "required_for_slice": true,
-      "depends_on": ["review.manager-api"],
+      "depends_on": ["review.idempotency"],
       "contracts": ["docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
       "evidence": ["C:/Users/shugo/Documents/heaotang-main/backend-go/plugins/club-plugin/service_test.go"],
       "unresolved": []
+    },
+    {
+      "dependency_id": "review.idempotency",
+      "kind": "workflow",
+      "description": "审核写入强制 Idempotency-Key，同键同载荷重放、异载荷冲突，并发相反决定只能产生一个最终结果",
+      "status": "implemented",
+      "required_for_slice": true,
+      "depends_on": ["review.manager-api"],
+      "contracts": ["docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
+      "evidence": ["docs/project-management/service-plaza/club-review-idempotency-2026-07-11.md"],
+      "unresolved": ["等待测试环境部署后完成双请求 HTTP 并发和重放验收"]
     }
   ]
 }

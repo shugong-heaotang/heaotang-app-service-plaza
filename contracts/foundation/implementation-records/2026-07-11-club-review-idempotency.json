@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-CLUB-REVIEW-IDEMPOTENCY",
+  "title": "俱乐部加入申请审核幂等与并发一致性",
+  "date": "2026-07-11",
+  "status": "implemented",
+  "objective": "让俱乐部加入申请审核具备原子幂等重放、同键异载荷拒绝和并发相反决定唯一结果。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-club-review-idempotency.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-club-review-idempotency-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/governance-reading-list.v1.json", "contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/module-dependencies/club-alliance.v1.json", "contracts/modules/club-alliance/internal-dependencies.v1.json", "docs/project-management/modules/club-alliance/README.md", "docs/project-management/notices/2026-07-11-club-alliance-first-phase-task-order.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-11-club-alliance-first-phase-task-order.md", "docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
+  "capabilities": ["foundation.authorization-idempotency", "foundation.ai-engineering-traceability", "foundation.governance-certification"],
+  "contracts": ["contracts/modules/club-alliance/internal-dependencies.v1.json", "docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
+  "decisions": ["docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"],
+  "changed_areas": ["backend-go/plugins/club-plugin/plugin.go", "backend-go/plugins/club-plugin/service.go", "backend-go/plugins/club-plugin/service_test.go", "contracts/foundation/agent-collaboration.v1.json", "contracts/modules/club-alliance/internal-dependencies.v1.json", "docs/project-management/modules/club-alliance-first-slice-contract-v1.md", "docs/project-management/service-plaza/club-review-idempotency-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "verification": ["go test -count=1 ./plugins/club-plugin", "go test -count=1 ./...", "go vet ./...", "scripts/Test-ServicePlazaContracts.ps1", "scripts/Test-TextEncoding.ps1", "git diff --check"],
+  "evidence": ["docs/project-management/service-plaza/club-review-idempotency-2026-07-11.md", "contracts/foundation/development-checklists/2026-07-11-club-review-idempotency.json", "contracts/foundation/governance-exams/2026-07-11-club-review-idempotency-attempt-1.json", "docs/project-management/service-plaza/handoff-log.md"],
+  "premises": ["审核路由始终在资源级 club manager 授权后调用服务", "同一管理者的 Idempotency-Key 在审核 operation 内唯一", "SQLite 事务串行化确保不同 key 的并发相反决定只有一个 pending 更新成功", "本地全量回归不等于测试环境 HTTP 已验证", "本切片不修改板块页面或资金接口"],
+  "implementation_mode": "ai-assisted"
+}
