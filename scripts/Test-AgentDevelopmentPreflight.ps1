@@ -10,6 +10,15 @@ if (-not (Test-Path -LiteralPath $readingListPath)) {
 }
 $readingList = Get-Content -LiteralPath $readingListPath -Raw -Encoding UTF8 | ConvertFrom-Json
 $required = @($readingList.core | Select-Object -Unique)
+$examRequired = @(
+  "contracts\foundation\governance-exam-bank.v1.schema.json",
+  "contracts\foundation\governance-exam-bank.v1.json",
+  "contracts\foundation\governance-exam.v1.schema.json",
+  "scripts\New-AgentGovernanceExam.ps1",
+  "scripts\Submit-AgentGovernanceExam.ps1",
+  "scripts\validate_governance_exams.py"
+)
+$required += $examRequired
 
 $missing = @($required | Where-Object { -not (Test-Path -LiteralPath (Join-Path $root $_)) })
 if ($missing.Count -gt 0) {
@@ -27,6 +36,6 @@ $fingerprints = foreach ($relative in $required) {
 
 [ordered]@{
   status = "ready"
-  message = "Create a pending flight checklist, read every listed input, and explicitly check each item before editing."
+  message = "Create and complete the flight checklist, then pass the randomized governance exam with score 100 before editing business code."
   governance_inputs = $fingerprints
 } | ConvertTo-Json -Depth 4

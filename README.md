@@ -21,9 +21,10 @@
 6. `contracts/foundation/engineering-standards.v1.json` 与 `docs/project-management/engineering-toolchain-standard-v1.md`：批准工具链和编码原则。
 7. `contracts/foundation/recurring-issues.v1.json`：已经重复发生、不得再次局部修补的问题模式。
 8. `contracts/foundation/agent-collaboration.v1.json` 与 `docs/project-management/ai-coding-incident-lessons-2026-07-10.md`：当前工作项所有权、隔离范围和外部事故防线。
-9. `docs/decisions/` 中与任务相关的 ADR，尤其 0007 至 0016。
-10. 所属板块的 `contracts/foundation/module-dependencies/*.json` 和 `contracts/modules/<module>/internal-dependencies.v1.json`：平台级与板块内部两层依赖。
-11. `contracts/foundation/implementation-records/` 与 `docs/project-management/service-plaza/handoff-log.md`：前序实现依据和交接证据。
+9. `docs/project-management/recursive-project-governance-v1.md`：大小项目同制、父子职责和分段验收。
+10. `docs/decisions/` 中与任务相关的 ADR，尤其 0007 至 0018。
+11. 所属板块的项目 README、任务通知、`contracts/foundation/module-dependencies/*.json` 和 `contracts/modules/<module>/internal-dependencies.v1.json`。
+12. `contracts/foundation/implementation-records/` 与对应 Handoff：前序实现依据和交接证据。
 
 开始工作前运行：
 
@@ -31,7 +32,9 @@
 powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-AgentDevelopmentPreflight.ps1
 ```
 
-随后确认自己拥有 `agent-collaboration.v1` 中唯一活动工作项，并使用 `scripts/New-AgentDevelopmentChecklist.ps1` 为本次实现生成逐项待勾选清单。脚本不会自动勾选；读取每个文件后记录 `checked=true`、`checked_at` 和当前哈希。文件变化会使旧勾失效。
+随后确认自己拥有 `agent-collaboration.v1` 中唯一活动工作项，并使用 `scripts/New-AgentDevelopmentChecklist.ps1` 为本次实现生成逐项待勾选清单。脚本不会自动勾选；读取每个文件后记录 `checked=true`、`checked_at` 和当前哈希。历史清单保留当时快照，但不能被新任务复用；新任务始终重新读取和考试。
+
+检查单完成后必须使用 `scripts/New-AgentGovernanceExam.ps1` 随机抽取 8 道场景题，并通过 `scripts/Submit-AgentGovernanceExam.ps1` 提交答案。必须 100 分；失败试卷保留，重读补课来源后生成下一次随机试卷。推荐统一执行 `$heaotang-project-preflight` Skill。
 
 结束切片前必须运行契约、测试、构建和 UTF-8 门禁，并提交 `implementation-record.v1`。文档存在不代表已经采用；实现记录必须列出本次实际读取的治理输入。
 
@@ -54,6 +57,7 @@ powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-AgentDevelopmen
 | 单一入口 | 所有 Agent 按本 README 第 0 节读取治理基线，再读任务入口 |
 | Handoff 强制 | 每个阶段切换必须有 Handoff 记录 |
 | 门禁驱动 | 所有决策由 Go/Partial Go/No-Go 门禁驱动 |
+| 大小项目同制 | 每个板块和重要切片均作为独立子项目，按短检查点交付 |
 
 ---
 

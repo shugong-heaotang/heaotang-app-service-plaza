@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/foundation/governance-exam.v1.schema.json",
+  "title": "Heaotang Governance Exam Attempt v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "attempt_id", "record_id", "actor", "attempt_number", "status", "generated_at", "completed_at", "question_count", "passing_score", "score", "bank_sha256", "reading_list_sha256", "checklist_path", "checklist_sha256", "responses", "remediation_sources"],
+  "properties": {
+    "contract_version": { "const": "governance-exam.v1" },
+    "attempt_id": { "type": "string", "pattern": "^EX-[0-9]{8}-[A-Z0-9-]+-[0-9]+$" },
+    "record_id": { "type": "string", "pattern": "^IR-[0-9]{8}-[A-Z0-9-]+$" },
+    "actor": { "type": "string", "minLength": 1 },
+    "attempt_number": { "type": "integer", "minimum": 1 },
+    "status": { "enum": ["pending", "passed", "failed"] },
+    "generated_at": { "type": "string", "format": "date-time" },
+    "completed_at": { "type": ["string", "null"], "format": "date-time" },
+    "question_count": { "const": 8 },
+    "passing_score": { "const": 100 },
+    "score": { "type": ["integer", "null"], "minimum": 0, "maximum": 100 },
+    "bank_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "reading_list_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "checklist_path": { "type": "string", "minLength": 1 },
+    "checklist_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "responses": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["question_id", "selected_option", "correct", "source_path"],
+        "properties": {
+          "question_id": { "type": "string", "pattern": "^GQ-[0-9]{3}$" },
+          "selected_option": { "type": ["string", "null"], "enum": ["A", "B", "C", null] },
+          "correct": { "type": ["boolean", "null"] },
+          "source_path": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    "remediation_sources": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
+  }
+}

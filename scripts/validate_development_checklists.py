@@ -8,7 +8,7 @@ from pathlib import Path
 from jsonschema import Draft202012Validator
 
 
-def validate(schema_path: Path, directory: Path, project_root: Path) -> list[str]:
+def validate(schema_path: Path, directory: Path, project_root: Path, require_current: bool = False) -> list[str]:
     schema = json.loads(schema_path.read_text(encoding="utf-8"))
     Draft202012Validator.check_schema(schema)
     validator = Draft202012Validator(schema)
@@ -30,18 +30,19 @@ def validate(schema_path: Path, directory: Path, project_root: Path) -> list[str
             errors.append(f"{path}: checklist is not completed")
         if data.get("attestation") != "I read and applied every checked governance input to this implementation.":
             errors.append(f"{path}: exact attestation is required")
-        expected = list(reading_list.get("core", []))
-        module_id = data.get("module_id")
-        if module_id:
-            expected.extend(reading_list.get("module_overlays", {}).get(module_id, []))
-        expected = list(dict.fromkeys(expected))
         actual = [item.get("path") for item in data.get("items", [])]
         if len(actual) != len(set(actual)):
             errors.append(f"{path}: duplicate governance input path")
-        if set(actual) != set(expected):
-            missing = sorted(set(expected) - set(actual))
-            extra = sorted(set(actual) - set(expected))
-            errors.append(f"{path}: checklist does not match reading list; missing={missing}, extra={extra}")
+        if require_current:
+            expected = list(reading_list.get("core", []))
+            module_id = data.get("module_id")
+            if module_id:
+                expected.extend(reading_list.get("module_overlays", {}).get(module_id, []))
+            expected = list(dict.fromkeys(expected))
+            if set(actual) != set(expected):
+                missing = sorted(set(expected) - set(actual))
+                extra = sorted(set(actual) - set(expected))
+                errors.append(f"{path}: checklist does not match reading list; missing={missing}, extra={extra}")
         for item in data.get("items", []):
             source = project_root / item.get("path", "")
             if not item.get("checked") or not item.get("checked_at"):
@@ -50,9 +51,10 @@ def validate(schema_path: Path, directory: Path, project_root: Path) -> list[str
             if not source.exists():
                 errors.append(f"{path}: missing governance input {item.get('path')}")
                 continue
-            digest = hashlib.sha256(source.read_bytes()).hexdigest()
-            if digest != item.get("sha256"):
-                errors.append(f"{path}: stale acknowledgement for {item.get('path')}; file changed and must be reread")
+            if require_current:
+                digest = hashlib.sha256(source.read_bytes()).hexdigest()
+                if digest != item.get("sha256"):
+                    errors.append(f"{path}: stale acknowledgement for {item.get('path')}; file changed and must be reread")
     return errors
 
 
@@ -61,13 +63,17 @@ def main() -> int:
     parser.add_argument("schema", type=Path)
     parser.add_argument("directory", type=Path)
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
+    parser.add_argument("--require-current", action="store_true")
     args = parser.parse_args()
-    errors = validate(args.schema, args.directory, args.project_root.resolve())
+    errors = validate(args.schema, args.directory, args.project_root.resolve(), args.require_current)
     if errors:
         for error in errors:
             print(f"ERROR: {error}", file=sys.stderr)
         return 1
-    print("AI development flight checklists are complete and match current governance file hashes.")
+    if args.require_current:
+        print("AI development flight checklists are complete and match current governance file hashes.")
+    else:
+        print("AI development flight checklist snapshots are complete, immutable and internally valid.")
     return 0
 
 

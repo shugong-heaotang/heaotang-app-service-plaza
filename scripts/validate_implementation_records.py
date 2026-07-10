@@ -36,6 +36,16 @@ def validate(schema_path: Path, records_dir: Path, project_root: Path) -> list[s
                 errors.append(f"{record_id}: checklist belongs to {checklist_data.get('record_id')}")
             if checklist_data.get("status") != "completed":
                 errors.append(f"{record_id}: checklist is not completed")
+        exam = record.get("governance_exam")
+        requires_exam = "docs/decisions/0017-readme-course-and-random-governance-exam.md" in record.get("decisions", [])
+        if requires_exam:
+            exam_path = project_root / (exam or "")
+            if not exam or not exam_path.exists():
+                errors.append(f"{record_id}: missing required governance exam {exam}")
+            else:
+                exam_data = json.loads(exam_path.read_text(encoding="utf-8"))
+                if exam_data.get("record_id") != record_id or exam_data.get("status") != "passed" or exam_data.get("score") != 100:
+                    errors.append(f"{record_id}: governance exam must be passed with score 100 for the same record_id")
         for field in path_fields:
             for value in record.get(field, []):
                 if not (project_root / value).exists():

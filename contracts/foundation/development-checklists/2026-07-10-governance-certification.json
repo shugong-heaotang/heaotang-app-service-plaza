@@ -1,8 +1,8 @@
 {
   "contract_version": "development-checklist.v1",
-  "checklist_id": "FC-20260710-FOUNDATION-STANDARD",
-  "record_id": "IR-20260710-FOUNDATION-STANDARD",
-  "task": "前置能力、业务变量和工程标准当前治理复核",
+  "checklist_id": "FC-20260710-GOVERNANCE-CERTIFICATION",
+  "record_id": "IR-20260710-GOVERNANCE-CERTIFICATION",
+  "task": "README 课程、随机考试 Skill 与递归子项目治理",
   "actor": "Codex platform integration agent",
   "module_id": null,
   "status": "completed",

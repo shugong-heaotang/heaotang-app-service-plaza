@@ -69,6 +69,15 @@ try {
   if ($LASTEXITCODE -ne 0) {
     throw "AI development flight checklist validation failed."
   }
+  & python -X utf8 (Join-Path $PSScriptRoot "validate_governance_exams.py") `
+    (Join-Path $repoRoot "contracts\foundation\governance-exam.v1.schema.json") `
+    (Join-Path $repoRoot "contracts\foundation\governance-exam-bank.v1.schema.json") `
+    (Join-Path $repoRoot "contracts\foundation\governance-exam-bank.v1.json") `
+    (Join-Path $repoRoot "contracts\foundation\governance-exams") `
+    --project-root $repoRoot
+  if ($LASTEXITCODE -ne 0) {
+    throw "README course and randomized governance exam validation failed."
+  }
   & python -X utf8 (Join-Path $PSScriptRoot "validate_implementation_records.py") `
     (Join-Path $repoRoot "contracts\foundation\implementation-record.v1.schema.json") `
     (Join-Path $repoRoot "contracts\foundation\implementation-records") `

@@ -12,6 +12,7 @@
     "contracts/foundation/recurring-issues.v1.json",
     "contracts/foundation/agent-collaboration.v1.json",
     "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+    "docs/project-management/recursive-project-governance-v1.md",
     "docs/project-management/foundation-dependency-standard-v1.md",
     "docs/project-management/module-internal-dependency-standard-v1.md",
     "docs/decisions/0007-stable-foundation-variable-business.md",
@@ -23,7 +24,9 @@
     "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
     "docs/decisions/0014-ai-development-flight-checklist.md",
     "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
-    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
   ],
   "module_overlays": {
     "life-navigation": [

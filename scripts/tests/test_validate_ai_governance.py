@@ -46,14 +46,14 @@ class AIGovernanceValidationTests(unittest.TestCase):
             }
             target = checklists / "test.json"
             target.write_text(json.dumps(checklist), encoding="utf-8")
-            self.assertEqual(validate_checklists(schema, checklists, root), [])
+            self.assertEqual(validate_checklists(schema, checklists, root, require_current=True), [])
             source.write_text("v2", encoding="utf-8")
-            self.assertTrue(any("stale acknowledgement" in error for error in validate_checklists(schema, checklists, root)))
+            self.assertTrue(any("stale acknowledgement" in error for error in validate_checklists(schema, checklists, root, require_current=True)))
             source.write_text("v1", encoding="utf-8")
             reading_list.write_text(
                 json.dumps({"core": ["RULE.md", "MISSING.md"], "module_overlays": {}}), encoding="utf-8"
             )
-            self.assertTrue(any("does not match reading list" in error for error in validate_checklists(schema, checklists, root)))
+            self.assertTrue(any("does not match reading list" in error for error in validate_checklists(schema, checklists, root, require_current=True)))
 
     def test_collaboration_rejects_shared_workspace_and_overlapping_scope(self) -> None:
         with tempfile.TemporaryDirectory() as directory:

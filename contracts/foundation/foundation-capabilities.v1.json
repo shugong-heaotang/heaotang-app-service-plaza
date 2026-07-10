@@ -54,13 +54,26 @@
       "last_verified_at": "2026-07-10"
     },
     {
+      "capability_id": "foundation.governance-certification",
+      "version": "v1",
+      "name": "README 课程、随机考试与递归项目治理",
+      "layer": "L0",
+      "status": "verified",
+      "owner_role": "平台集成负责人",
+      "depends_on": ["foundation.ai-collaboration-safety"],
+      "provides": ["随机场景考试", "失败补课与重考", "成绩和治理哈希绑定", "大小项目同制", "短检查点验收"],
+      "gates": [{ "gate_id": "FG-L0-CERT", "description": "后续实施记录必须绑定当前检查单和 100 分考试", "evidence": ["contracts/foundation/governance-exam-bank.v1.json", "scripts/validate_governance_exams.py", "contracts/foundation/governance-exams/2026-07-10-governance-certification-attempt-1.json", "docs/project-management/skills/heaotang-project-preflight-acceptance-2026-07-10.md", "docs/decisions/0017-readme-course-and-random-governance-exam.md", "docs/decisions/0018-recursive-project-governance.md"] }],
+      "compatibility_policy": "locked",
+      "last_verified_at": "2026-07-10"
+    },
+    {
       "capability_id": "foundation.recurrence-prevention",
       "version": "v1",
       "name": "重复问题两次触发与系统性防复发",
       "layer": "L0",
       "status": "verified",
       "owner_role": "平台质量负责人",
-      "depends_on": ["foundation.ai-collaboration-safety"],
+      "depends_on": ["foundation.governance-certification"],
       "provides": ["重复问题模式登记", "第二次强制根因分析", "公共防复发门禁", "第三次升级审计"],
       "gates": [{ "gate_id": "FG-L0-RECURRENCE", "description": "重复次数、根因、门禁和回归证据可自动验证", "evidence": ["contracts/foundation/recurring-issues.v1.json", "scripts/validate_recurring_issues.py", "docs/decisions/0012-two-strike-root-cause-rule.md"] }],
       "compatibility_policy": "locked",

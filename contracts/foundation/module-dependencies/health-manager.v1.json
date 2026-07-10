@@ -4,6 +4,7 @@
   "module_version": "v1",
   "requires": [
     { "capability_id": "foundation.ai-engineering-traceability", "minimum_version": "v1" },
+    { "capability_id": "foundation.governance-certification", "minimum_version": "v1" },
     { "capability_id": "foundation.service-action-contracts", "minimum_version": "v1" },
     { "capability_id": "foundation.identity-api", "minimum_version": "v1" },
     { "capability_id": "foundation.authorization-idempotency", "minimum_version": "v1" },

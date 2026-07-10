@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/foundation/governance-exam-bank.v1.schema.json",
+  "title": "Heaotang Governance Exam Bank v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "question_count_per_attempt", "passing_score", "questions"],
+  "properties": {
+    "contract_version": { "const": "governance-exam-bank.v1" },
+    "question_count_per_attempt": { "const": 8 },
+    "passing_score": { "const": 100 },
+    "questions": {
+      "type": "array",
+      "minItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["question_id", "scenario", "options", "correct_option", "source_path", "explanation"],
+        "properties": {
+          "question_id": { "type": "string", "pattern": "^GQ-[0-9]{3}$" },
+          "scenario": { "type": "string", "minLength": 10 },
+          "options": {
+            "type": "array",
+            "minItems": 3,
+            "maxItems": 3,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["option_id", "text"],
+              "properties": {
+                "option_id": { "enum": ["A", "B", "C"] },
+                "text": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          "correct_option": { "enum": ["A", "B", "C"] },
+          "source_path": { "type": "string", "minLength": 1 },
+          "explanation": { "type": "string", "minLength": 1 }
+        }
+      }
+    }
+  }
+}
