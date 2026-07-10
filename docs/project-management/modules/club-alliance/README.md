@@ -4,7 +4,7 @@
 板块负责人：俱乐部联盟负责人
 父项目集成负责人：服务广场平台集成负责人
 当前阶段：`CA-F0-M0 + CA-H0`
-当前状态：模块 G0 / CA-F0-M0 已由平台验收 Go；CA-F0/H0 Standards 当前检查单和考试已完成，H0 base 机器合同与 33 项 conformance 已形成。完整 H0 Go 仍等待平台 internal-dependencies v2、`D-CA-003` 裁决和本检查点验收。
+当前状态：模块 G0 / CA-F0-M0 已由平台验收 Go；平台 `module-internal-dependencies.v2` 已吸收并通过总契约验证，H0 base 机器合同与 33 项 conformance 已形成。完整 H0 Go 仍等待 `D-CA-003` 裁决和本检查点平台验收。
 
 ## 目标与阶段
 

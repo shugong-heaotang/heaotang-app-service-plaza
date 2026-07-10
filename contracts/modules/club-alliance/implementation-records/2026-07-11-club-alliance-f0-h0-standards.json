@@ -3,7 +3,7 @@
   "record_id": "IR-20260711-CLUB-ALLIANCE-F0-H0-STANDARDS",
   "title": "俱乐部联盟 CA-F0/H0 顶层标准与 base conformance",
   "date": "2026-07-11",
-  "status": "implemented",
+  "status": "verified",
   "objective": "建立覆盖公益、自建、家庭和友联体的顶层需求、可证伪决策、递归子项目标准、四组机器契约、稳定错误目录与 H0-B001-B033 base conformance。",
   "governance_checklist": "contracts/modules/club-alliance/development-checklists/2026-07-11-club-alliance-f0-h0-standards.json",
   "governance_exam": "contracts/modules/club-alliance/governance-exams/2026-07-11-club-alliance-f0-h0-standards-attempt-1.json",
@@ -95,6 +95,8 @@
     "scripts/validate_governance_exams.py",
     "jsonschema Draft202012Validator for five module contract pairs",
     "contracts/modules/club-alliance/conformance/test_club_alliance_contracts.py",
+    "scripts/validate_module_internal_dependencies.py",
+    "scripts/Test-ServicePlazaContracts.ps1",
     "scripts/Test-TextEncoding.ps1",
     "git diff --check"
   ],
@@ -104,6 +106,7 @@
     "docs/project-management/modules/club-alliance/CA-H0-acceptance-matrix.md",
     "docs/project-management/modules/club-alliance/CA-H0-conformance-report.md",
     "contracts/modules/club-alliance/conformance/fixtures/cases.v1.json"
+    ,"contracts/foundation/module-internal-dependencies.v2.schema.json"
   ],
   "premises": [
     "service-plaza-actions.v1 remains the only presentation and ordering source",

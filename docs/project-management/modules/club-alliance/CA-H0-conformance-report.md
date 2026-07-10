@@ -6,6 +6,7 @@
 - 工作项：`AIW-20260711-CLUB-FOUNDATION-DISPATCH`
 - 检查单：`FC-20260711-CLUB-ALLIANCE-F0-H0-STANDARDS`
 - 考试：`EX-20260711-CLUB-ALLIANCE-F0-H0-STANDARDS-1`，score=100
+- 公共依赖：`module-internal-dependencies.v2`，平台实现 `62cdddf`，权威集成 `d6ddad1`
 - 结论：H0 base conformance 33/33 Pass；完整 H0 Go 仍为 No-Go
 
 ## 验证结果
@@ -23,7 +24,9 @@
 
 ```powershell
 python -X utf8 -m json.tool <each-module-json>
+python -X utf8 scripts/validate_module_internal_dependencies.py contracts/foundation/module-internal-dependencies.v1.schema.json contracts/modules/club-alliance/internal-dependencies.v1.json
 python -X utf8 contracts/modules/club-alliance/conformance/test_club_alliance_contracts.py
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-ServicePlazaContracts.ps1
 ```
 
 Schema 验证使用仓库已批准并锁定的 `jsonschema` Draft 2020-12 validator，对五组 Schema/实例逐一执行 `check_schema` 和 `iter_errors`。
@@ -57,6 +60,6 @@ SUMMARY passed=33 total=33
 
 ## 未关闭项
 
-- 平台正在发布向后兼容的 module internal dependencies v2；该公共依赖只阻塞新依赖图最终化与 H0 Handoff。
+- `module-internal-dependencies.v2` 已验证；`D-CA-003` 使用 `blocked-local` 及 `blocks/does_not_block` 精确表达局部阻塞。
 - `D-CA-003` 必须在完整 H0 Go 前由项目负责人裁决。
 - 本报告不是环境、发布或运营证据，不得提升为 release-go 或 operations-go。
