@@ -596,6 +596,33 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": null,
       "handoff_record": "docs/project-management/service-plaza/health-history-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-HEALTH-SUBMISSION-NO-FALLBACK",
+      "title": "健康咨询空症状伪造回退根因修复与敏感数据审计",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-no-fallback",
+      "branch": "codex/health-submission-no-fallback",
+      "base_commit": "076cd344dab05fdfe2db86718a19b86f9067c7f5",
+      "allowed_paths": [
+        "app/src/infrastructure/submissionRepository.ts",
+        "app/src/infrastructure/submissionRepository.test.ts",
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-health-submission-no-fallback.json",
+        "contracts/foundation/governance-exams/2026-07-11-health-submission-no-fallback-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-health-submission-no-fallback.json",
+        "contracts/modules/health-manager/internal-dependencies.v1.json",
+        "docs/project-management/modules/health-manager-first-slice-contract-v1.md",
+        "docs/project-management/service-plaza/health-sensitive-data-audit-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "安全审计发现共享前端把空症状替换为固定句子，违反冻结合同；本工作项删除伪造回退并固化日志/遥测敏感数据证据。",
+      "handoff_record": "docs/project-management/service-plaza/health-sensitive-data-audit-2026-07-11.md"
     }
   ]
 }

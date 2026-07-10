@@ -73,4 +73,31 @@ describe("realSubmissionRepository", () => {
     const headers = fetchMock.mock.calls[0][1]?.headers as Headers;
     expect(headers.get("Idempotency-Key")).toMatch(/^health-manager-/);
   });
+
+  it("用户未填写症状时绝不伪造健康内容", async () => {
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(
+        JSON.stringify({
+          success: false,
+          code: "HEALTH_SYMPTOMS_REQUIRED",
+          error: "symptoms is required",
+        }),
+        { status: 400, headers: { "Content-Type": "application/json" } },
+      ),
+    );
+
+    await expect(
+      realSubmissionRepository.submit("health-manager", {
+        patientName: "合成测试用户",
+        symptoms: "   ",
+      }),
+    ).rejects.toMatchObject({ code: "HEALTH_SYMPTOMS_REQUIRED" });
+
+    const requestBody = String(fetchMock.mock.calls[0][1]?.body);
+    expect(JSON.parse(requestBody)).toEqual({
+      patient_name: "合成测试用户",
+      symptoms: "",
+    });
+    expect(requestBody).not.toContain("希望获得健康咨询");
+  });
 });

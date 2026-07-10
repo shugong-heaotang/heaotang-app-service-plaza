@@ -137,6 +137,17 @@
       "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
       "evidence": [],
       "unresolved": ["正式法律文本后续由业务和合规负责人确认"]
+    },
+    {
+      "dependency_id": "consultation.sensitive-evidence",
+      "kind": "policy",
+      "description": "咨询正文不进入结构化日志、动作遥测、截图或验收报告，测试仅使用明确合成数据，前端不得伪造空症状",
+      "status": "implemented",
+      "required_for_slice": true,
+      "depends_on": ["consultation.input-cache-boundary", "consultation.display-dto"],
+      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+      "evidence": ["docs/project-management/service-plaza/health-sensitive-data-audit-2026-07-11.md"],
+      "unresolved": ["等待测试环境提交合成数据后扫描运行日志、遥测载荷和 UAT 截图"]
     }
   ]
 }

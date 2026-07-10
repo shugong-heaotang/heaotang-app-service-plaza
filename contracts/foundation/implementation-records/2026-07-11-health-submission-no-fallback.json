@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-HEALTH-SUBMISSION-NO-FALLBACK",
+  "title": "健康咨询空症状伪造回退根因修复与敏感数据审计",
+  "date": "2026-07-11",
+  "status": "implemented",
+  "objective": "删除前端伪造健康症状回退，并证明咨询正文不进入应用日志、动作遥测或本地验收制品。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-health-submission-no-fallback.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-health-submission-no-fallback-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/governance-reading-list.v1.json", "contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/module-dependencies/health-manager.v1.json", "contracts/modules/health-manager/internal-dependencies.v1.json", "docs/project-management/modules/health-manager/README.md", "docs/project-management/notices/2026-07-11-health-manager-first-phase-task-order.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-11-health-manager-first-phase-task-order.md", "docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+  "capabilities": ["foundation.authorization-idempotency", "foundation.observability-config", "foundation.governance-certification"],
+  "contracts": ["contracts/modules/health-manager/internal-dependencies.v1.json", "docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+  "decisions": ["docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"],
+  "changed_areas": ["app/src/infrastructure/submissionRepository.ts", "app/src/infrastructure/submissionRepository.test.ts", "contracts/foundation/agent-collaboration.v1.json", "contracts/modules/health-manager/internal-dependencies.v1.json", "docs/project-management/modules/health-manager-first-slice-contract-v1.md", "docs/project-management/service-plaza/health-sensitive-data-audit-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "verification": ["npm test -- --run src/infrastructure/submissionRepository.test.ts", "npm test -- --run", "npm run build", "targeted sensitive production-path rg scan", "scripts/Test-ServicePlazaContracts.ps1", "scripts/Test-TextEncoding.ps1", "git diff --check"],
+  "evidence": ["docs/project-management/service-plaza/health-sensitive-data-audit-2026-07-11.md", "contracts/foundation/development-checklists/2026-07-11-health-submission-no-fallback.json", "contracts/foundation/governance-exams/2026-07-11-health-submission-no-fallback-attempt-1.json", "docs/project-management/service-plaza/handoff-log.md"],
+  "premises": ["用户未输入的健康内容不得由客户端生成", "服务端必填校验是空症状的权威处理", "动作遥测只记录动作元数据且不接收咨询正文", "静态扫描不能替代部署后服务器日志和截图复核", "测试只使用明确合成数据", "本切片不启用健康 AI 或生产发布"],
+  "implementation_mode": "ai-assisted"
+}
