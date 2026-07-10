@@ -1,0 +1,31 @@
+{
+  "contract_version": "life-navigation-m4-deployment-evidence.v1",
+  "recorded_at": "2026-07-11T01:57:34+08:00",
+  "verdict": "pass",
+  "overall_m4_verdict": "no-go",
+  "environment": "test",
+  "backend": {
+    "deployed": true,
+    "source_commit": "70fa12276e6eac17369c0d1d3c1d23a8e757fcc0",
+    "source_root": "C:/Users/shugo/Documents/worktrees/heaotang-life-m1-backend/backend-go",
+    "binary_sha256": "75a9de31b2094c4be6d14c26e9bed96c62a6b6ea7f5876d22ea6f3383a2723b7",
+    "remote_backup": "/root/heaotang-backups/20260711-014016.tar.gz",
+    "local_backup": "D:/Backup/heaotang-test-server/20260711-014016/test-server-state.tar.gz",
+    "ready": { "status": "ready", "db": true, "plugins": 24 },
+    "catalog_services": 9,
+    "page_actions": 20
+  },
+  "frontend": {
+    "deployed": true,
+    "remote_backup": "/root/heaotang-backups/20260711-014107.tar.gz",
+    "local_backup": "D:/Backup/heaotang-test-server/20260711-014107/test-server-state.tar.gz",
+    "target": "/var/www/heaotang/app/service-plaza",
+    "rollback": "/var/www/heaotang/app/service-plaza.rollback-20260711-014107",
+    "javascript_asset": "index-BzyZrLZ3.js"
+  },
+  "secrets_recorded": false,
+  "notes": [
+    "Backend and frontend deployment gates passed.",
+    "Deployment success is separate from the blocked authenticated browser UAT and does not make M4 Go."
+  ]
+}
