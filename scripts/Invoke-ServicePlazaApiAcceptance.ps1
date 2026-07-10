@@ -3,18 +3,31 @@
   [string]$Phone = "19900009991",
   [string]$IsolationPhone = "19900009993",
   [int]$ClubId = 1,
+  [string]$Server = "root@47.94.159.60",
+  [string]$OtpDatabasePath = "/root/heaotang-acceptance/runtime/data/heao.db",
   [string]$ReportPath = ""
 )
 
 $ErrorActionPreference = "Stop"
 
 . (Join-Path $PSScriptRoot "Initialize-PowerShellUtf8.ps1") -Quiet
+Import-Module (Join-Path $PSScriptRoot "TestAccountOtp.psm1") -Force
+
+if ($BaseUrl.TrimEnd("/") -ne "https://heaotang.cn") {
+  throw "API acceptance is restricted to the approved test environment."
+}
+if ($Server -ne "root@47.94.159.60" -or $OtpDatabasePath -ne "/root/heaotang-acceptance/runtime/data/heao.db") {
+  throw "API acceptance OTP access is restricted to the approved test server and database."
+}
 
 if ($Phone -notmatch '^1[3-9]\d{9}$') {
   throw "Phone must match the backend mobile-number contract."
 }
 if ($IsolationPhone -notmatch '^1[3-9]\d{9}$' -or $IsolationPhone -eq $Phone) {
   throw "IsolationPhone must be a different number matching the backend mobile-number contract."
+}
+if ($Phone -notmatch '^1990000999[1-4]$' -or $IsolationPhone -notmatch '^1990000999[1-4]$') {
+  throw "Acceptance is restricted to the approved synthetic test-account pool."
 }
 
 $BaseUrl = $BaseUrl.TrimEnd("/")
@@ -92,6 +105,25 @@ function Assert-Status {
   }
 }
 
+function Assert-OtpCapacity {
+  param([Parameter(Mandatory = $true)][string]$TargetPhone)
+
+  $capacityScript = Join-Path $PSScriptRoot "Test-TestAccountOtpCapacity.ps1"
+  $capacityOutput = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File $capacityScript -Phone $TargetPhone -RequiredRequests 1
+  if ($LASTEXITCODE -ne 0) {
+    throw "OTP capacity preflight failed for an approved test account."
+  }
+  $capacity = $capacityOutput | ConvertFrom-Json
+  if (-not $capacity.capacity_ready -or $capacity.secrets_read) {
+    throw "OTP capacity preflight did not produce a safe ready result."
+  }
+  $capacityOutput = $null
+  $capacity = $null
+}
+
+Assert-OtpCapacity -TargetPhone $Phone
+Assert-OtpCapacity -TargetPhone $IsolationPhone
+
 $ready = Invoke-JsonRequest -Method GET -Path "/ready"
 Assert-Status $ready @(200) "Readiness"
 if (-not $ready.Payload.db -or $ready.Payload.status -ne "ready") {
@@ -113,10 +145,8 @@ if ([string]$invalidTokenMe.Headers["X-Request-ID"] -ne $requestIdProbe) {
 
 $sendCode = Invoke-JsonRequest -Method POST -Path "/api/v1/auth/send-code" -Body @{ phone = $Phone }
 Assert-Status $sendCode @(200) "Send code"
-$verificationCode = [string]$sendCode.Payload.data.code
-if ($verificationCode -notmatch '^\d{6}$') {
-  throw "The target does not expose a one-time verification code. This acceptance script is restricted to the configured test environment."
-}
+$sendCode.Payload.data.PSObject.Properties.Remove("code")
+$verificationCode = Get-TestAccountOtpInMemory -Phone $Phone -Server $Server -DatabasePath $OtpDatabasePath
 
 $login = Invoke-JsonRequest -Method POST -Path "/api/v1/auth/login" -Body @{
   phone = $Phone
@@ -125,6 +155,7 @@ $login = Invoke-JsonRequest -Method POST -Path "/api/v1/auth/login" -Body @{
 Assert-Status $login @(200) "Login"
 $token = [string]$login.Payload.data.token
 $userId = [int64]$login.Payload.data.user_id
+$login.Payload.data.PSObject.Properties.Remove("token")
 $verificationCode = $null
 if (-not $token -or $userId -le 0) {
   throw "Login response is missing the token or user id."
@@ -192,6 +223,12 @@ if ($lifeConflict.Payload.code -ne "IDEMPOTENCY_KEY_REUSED") {
 $clubBody = @{
   message = "$runId 自动化验收申请"
 }
+$standardClubs = Invoke-JsonRequest -Method GET -Path "/api/v1/clubs/search?type=standard" -BearerToken $token
+Assert-Status $standardClubs @(200) "Authoritative standard-club search"
+$nonStandardClubs = @($standardClubs.Payload.data.items | Where-Object { $_.type -ne "standard" -or $_.status -ne "active" })
+if ($nonStandardClubs.Count -ne 0) {
+  throw "Authoritative standard-club search returned a non-standard or inactive club."
+}
 $clubKey = "$runId-club"
 $club = Invoke-JsonRequest -Method POST -Path "/api/v1/clubs/$ClubId/join" -BearerToken $token -ExtraHeaders @{ "Idempotency-Key" = $clubKey } -Body $clubBody
 Assert-Status $club @(200, 201) "Club join application"
@@ -204,6 +241,13 @@ if ($duplicateClubApplicationId -ne $clubApplicationId -or [string]$duplicateClu
   throw "Repeated club join created a second pending application instead of returning the existing application."
 }
 
+$myClubApplications = Invoke-JsonRequest -Method GET -Path "/api/v1/clubs/join-applications/my?page=1&size=100" -BearerToken $token
+Assert-Status $myClubApplications @(200) "Current-user club applications"
+$myClubApplicationIds = @($myClubApplications.Payload.data.items | ForEach-Object { [int64]$_.id })
+if ($myClubApplicationIds -notcontains $clubApplicationId) {
+  throw "The current user cannot read the newly created club application."
+}
+
 $healthBody = @{
   patient_name = "服务广场验收-$runId"
   symptoms = "自动化接口验收，无真实健康信息"
@@ -211,6 +255,10 @@ $healthBody = @{
 $healthKey = "$runId-health"
 $health = Invoke-JsonRequest -Method POST -Path "/api/v1/health/consultations" -BearerToken $token -ExtraHeaders @{ "Idempotency-Key" = $healthKey } -Body $healthBody
 Assert-Status $health @(201) "Health consultation"
+$healthCreateCacheControl = [string]$health.Headers["Cache-Control"]
+if ($healthCreateCacheControl -notmatch '(?i)private' -or $healthCreateCacheControl -notmatch '(?i)no-store') {
+  throw "Health consultation creation is missing the required private, no-store cache boundary."
+}
 $healthId = [int64]$health.Payload.data.id
 $healthReplay = Invoke-JsonRequest -Method POST -Path "/api/v1/health/consultations" -BearerToken $token -ExtraHeaders @{ "Idempotency-Key" = $healthKey } -Body $healthBody
 Assert-Status $healthReplay @(200) "Health consultation idempotency replay"
@@ -227,23 +275,38 @@ if ($healthConflict.Payload.code -ne "IDEMPOTENCY_KEY_REUSED") {
 
 $ownerConsultations = Invoke-JsonRequest -Method GET -Path "/api/v1/health/consultations?page=1&size=100" -BearerToken $token
 Assert-Status $ownerConsultations @(200) "Owner consultation list"
+$ownerCacheControl = [string]$ownerConsultations.Headers["Cache-Control"]
+if ($ownerCacheControl -notmatch '(?i)private' -or $ownerCacheControl -notmatch '(?i)no-store') {
+  throw "Health consultation history is missing the required private, no-store cache boundary."
+}
+$unsafeHealthFields = @($ownerConsultations.Payload.data.items | Where-Object {
+  $_.PSObject.Properties.Name -contains "user_id" -or $_.PSObject.Properties.Name -contains "ai_advice"
+})
+if ($unsafeHealthFields.Count -ne 0) {
+  throw "Health consultation history exposed fields outside the minimal display DTO."
+}
 $ownerHealthIds = @($ownerConsultations.Payload.data.items | ForEach-Object { [int64]$_.id })
 if ($ownerHealthIds -notcontains $healthId) {
   throw "The consultation owner cannot read the newly created consultation."
 }
 
+$healthPaginationFallback = Invoke-JsonRequest -Method GET -Path "/api/v1/health/consultations?page=0&size=0" -BearerToken $token
+Assert-Status $healthPaginationFallback @(200) "Health consultation pagination fallback"
+if ([int]$healthPaginationFallback.Payload.data.page -ne 1 -or [int]$healthPaginationFallback.Payload.data.size -ne 20) {
+  throw "Health consultation pagination did not fall back to page=1 and size=20."
+}
+
 $isolationCodeResponse = Invoke-JsonRequest -Method POST -Path "/api/v1/auth/send-code" -Body @{ phone = $IsolationPhone }
 Assert-Status $isolationCodeResponse @(200) "Isolation user send code"
-$isolationCode = [string]$isolationCodeResponse.Payload.data.code
-if ($isolationCode -notmatch '^\d{6}$') {
-  throw "The isolation test account did not receive a test-only verification code."
-}
+$isolationCodeResponse.Payload.data.PSObject.Properties.Remove("code")
+$isolationCode = Get-TestAccountOtpInMemory -Phone $IsolationPhone -Server $Server -DatabasePath $OtpDatabasePath
 $isolationLogin = Invoke-JsonRequest -Method POST -Path "/api/v1/auth/login" -Body @{
   phone = $IsolationPhone
   code = $isolationCode
 }
 Assert-Status $isolationLogin @(200) "Isolation user login"
 $isolationToken = [string]$isolationLogin.Payload.data.token
+$isolationLogin.Payload.data.PSObject.Properties.Remove("token")
 $isolationCode = $null
 if (-not $isolationToken) {
   throw "Isolation user login did not return a token."
@@ -277,6 +340,7 @@ $report = [ordered]@{
     invalid_idempotency_key = $invalidIdempotency.StatusCode
     missing_idempotency_key = $missingIdempotency.StatusCode
     life_navigation = [ordered]@{ status = $life.StatusCode; id = $lifeId; replay_status = $lifeReplay.StatusCode; conflict_status = $lifeConflict.StatusCode }
+    club_standard_filter = [ordered]@{ status = $standardClubs.StatusCode; authoritative = $true }
     club_join = [ordered]@{ status = $club.StatusCode; id = $clubApplicationId; club_id = $ClubId }
     duplicate_club_join = [ordered]@{
       status = $duplicateClub.StatusCode
@@ -284,7 +348,9 @@ $report = [ordered]@{
       id = $duplicateClubApplicationId
     }
     health_consultation = [ordered]@{ status = $health.StatusCode; id = $healthId; replay_status = $healthReplay.StatusCode; conflict_status = $healthConflict.StatusCode }
-    health_owner_list = [ordered]@{ status = $ownerConsultations.StatusCode; contains_created_record = $true }
+    club_my_applications = [ordered]@{ status = $myClubApplications.StatusCode; contains_created_application = $true }
+    health_owner_list = [ordered]@{ status = $ownerConsultations.StatusCode; contains_created_record = $true; minimal_dto = $true; private_no_store = $true }
+    health_pagination_fallback = [ordered]@{ status = $healthPaginationFallback.StatusCode; page = 1; size = 20 }
     health_cross_user_isolation = [ordered]@{ status = $otherConsultations.StatusCode; leaked_record = $false }
   }
   secrets_persisted = $false

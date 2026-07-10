@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-SECURE-MODULE-API-ACCEPTANCE-R3",
+  "title": "三大核心服务安全取码与部署后 API 验收标准化",
+  "date": "2026-07-11",
+  "status": "implemented",
+  "objective": "移除 API 验收对 HTTP 明文验证码的依赖，强制验证码额度预检和测试环境白名单，并覆盖最新俱乐部与健康接口边界。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-secure-module-api-acceptance-r3.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-secure-module-api-acceptance-r3-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/governance-reading-list.v1.json", "contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/recurring-issues.v1.json", "docs/project-management/dependency-driven-master-plan-v1.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"],
+  "requirement_sources": ["docs/project-management/service-plaza/project-status-one-page.md", "docs/project-management/service-plaza/test-account-otp-capacity-gate-2026-07-11.md", "docs/project-management/modules/club-alliance-first-slice-contract-v1.md", "docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+  "capabilities": ["foundation.identity-api", "foundation.authorization-idempotency", "foundation.contract-tooling", "foundation.governance-certification"],
+  "contracts": ["contracts/foundation/foundation-capabilities.v1.json", "contracts/modules/club-alliance/internal-dependencies.v1.json", "contracts/modules/health-manager/internal-dependencies.v1.json"],
+  "decisions": ["docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"],
+  "changed_areas": ["scripts/Invoke-ServicePlazaApiAcceptance.ps1", "scripts/TestAccountOtp.psm1", "scripts/Test-ServicePlazaApiAcceptanceSafety.ps1", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/service-plaza/secure-module-api-acceptance-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "verification": ["scripts/Test-ServicePlazaApiAcceptanceSafety.ps1", "invalid target and invalid environment fail-closed checks", "scripts/Test-ServicePlazaContracts.ps1", "scripts/Test-TextEncoding.ps1", "git diff --check"],
+  "evidence": ["docs/project-management/service-plaza/secure-module-api-acceptance-2026-07-11.md", "contracts/foundation/development-checklists/2026-07-11-secure-module-api-acceptance-r3.json", "contracts/foundation/governance-exams/2026-07-11-secure-module-api-acceptance-r3-attempt-1.json", "docs/project-management/service-plaza/handoff-log.md"],
+  "premises": ["验收只允许批准的测试环境和合成测试账号", "SSH 只读查询返回的 OTP 仅驻留于当前 PowerShell 进程内存", "验证码日额度不足时等待自然 UTC 日重置而不清计数或修改限流", "静态安全门禁不能替代候选制品部署后的真实 API 和浏览器验收", "本切片不执行生产发布、真实资金或不可逆数据操作"],
+  "implementation_mode": "ai-assisted"
+}

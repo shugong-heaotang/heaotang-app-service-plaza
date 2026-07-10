@@ -648,6 +648,37 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": "现有前端脚本只创建 rollback 目录但激活失败不自动恢复，且缺少部署后入口资源验证；本工作项先修基础设施，不提前部署。",
       "handoff_record": "docs/project-management/service-plaza/frontend-deploy-atomic-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-SECURE-MODULE-API-ACCEPTANCE",
+      "title": "三大核心服务安全取码与部署后 API 验收标准化",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "handoff-ready",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-secure-api-acceptance",
+      "branch": "codex/secure-module-api-acceptance",
+      "base_commit": "665d2e43ffda78a322133d92ae8de0c3ecee33c7",
+      "allowed_paths": [
+        "scripts/Invoke-ServicePlazaApiAcceptance.ps1",
+        "scripts/TestAccountOtp.psm1",
+        "scripts/Test-ServicePlazaApiAcceptanceSafety.ps1",
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-secure-module-api-acceptance.json",
+        "contracts/foundation/development-checklists/2026-07-11-secure-module-api-acceptance-r2.json",
+        "contracts/foundation/development-checklists/2026-07-11-secure-module-api-acceptance-r3.json",
+        "contracts/foundation/governance-exams/2026-07-11-secure-module-api-acceptance-attempt-1.json",
+        "contracts/foundation/governance-exams/2026-07-11-secure-module-api-acceptance-r2-attempt-1.json",
+        "contracts/foundation/governance-exams/2026-07-11-secure-module-api-acceptance-r3-attempt-1.json",
+        "contracts/foundation/invalidated-snapshots/secure-module-api-acceptance",
+        "contracts/foundation/implementation-records/2026-07-11-secure-module-api-acceptance.json",
+        "docs/project-management/service-plaza/secure-module-api-acceptance-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "旧验收脚本从 HTTP 响应读取验证码且缺少最新俱乐部/健康接口验证；本工作项改为 SSH 安全取码、先查额度、令牌只驻内存且报告不落敏感值。",
+      "handoff_record": "docs/project-management/service-plaza/secure-module-api-acceptance-2026-07-11.md"
     }
   ]
 }
