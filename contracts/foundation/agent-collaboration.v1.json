@@ -17,7 +17,7 @@
       "title": "服务广场平台依赖、治理门禁和双人配置审批收口",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "handoff-ready",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/APP系统",
       "branch": "codex/platform-governance",
@@ -27,6 +27,26 @@
       "preexisting_changes_acknowledged": true,
       "migration_note": "历史工作在共享 master 脏工作区开始；由平台集成负责人迁入专用分支收口。所有新工作项不得复用此例外。",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h007平台依赖ai-协作治理与双人配置审批收口"
+    },
+    {
+      "work_id": "AIW-20260711-LIFE-APPLICATION-HISTORY",
+      "title": "生命导航申请与本人历史第一切片",
+      "owner": "Life Navigation module agent",
+      "owner_role": "生命导航负责人",
+      "status": "planned",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-life-navigation",
+      "branch": "codex/life-navigation-application-history",
+      "base_commit": "c153998a5e741fe13dc0b0a678cae1d7a663b926",
+      "allowed_paths": [
+        "app/src/modules/life-navigation",
+        "app/src/styles.css",
+        "docs/project-management/modules/life-navigation"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": null,
+      "handoff_record": null
     }
   ]
 }

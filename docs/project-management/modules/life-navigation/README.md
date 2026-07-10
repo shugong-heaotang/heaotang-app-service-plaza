@@ -29,4 +29,8 @@
 
 - development：Go
 - acceptance：Partial Go
-- 当前检查点：M0 起飞认证与接口确认
+- 通知状态：待项目负责人审阅，尚未正式下达
+- 当前检查点：尚未启动；下达后先执行 M0 起飞认证
+- 签收回执：`task-receipt.md`
+- 阶段 Handoff：`checkpoint-handoff-template.md`
+- 接口变更申请：`interface-change-request-template.md`
