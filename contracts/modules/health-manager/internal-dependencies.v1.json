@@ -73,6 +73,28 @@
       "unresolved": []
     },
     {
+      "dependency_id": "consultation.input-cache-boundary",
+      "kind": "policy",
+      "description": "咨询字段统一归一化、必填和字符上限校验，敏感 POST/GET 响应禁止缓存",
+      "status": "implemented",
+      "required_for_slice": true,
+      "depends_on": ["consultation.api"],
+      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+      "evidence": ["docs/project-management/service-plaza/health-platform-safety-2026-07-11.md"],
+      "unresolved": ["等待测试环境部署后验证稳定错误码、trim 持久化和 Cache-Control"]
+    },
+    {
+      "dependency_id": "health.ai-fail-closed",
+      "kind": "policy",
+      "description": "未批准健康 AI 独立契约前，健康分析兼容路由不读取敏感数据且固定失败关闭",
+      "status": "implemented",
+      "required_for_slice": true,
+      "depends_on": ["entry.contract", "consultation.ai-boundary"],
+      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+      "evidence": ["docs/project-management/service-plaza/health-platform-safety-2026-07-11.md"],
+      "unresolved": ["等待测试环境部署后验证 HEALTH_AI_CONSENT_REQUIRED 且无 AI 调用"]
+    },
+    {
       "dependency_id": "health.schema",
       "kind": "data",
       "description": "咨询及公开健康路由所需表由正式迁移创建",

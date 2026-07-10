@@ -189,7 +189,7 @@
       "title": "测试账号验证码日额度预检与重复问题根因固化",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-otp-capacity-gate",
       "branch": "codex/test-otp-capacity-gate",
@@ -225,7 +225,56 @@
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
       "migration_note": null,
+      "handoff_record": "docs/project-management/service-plaza/test-account-otp-capacity-gate-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-HEALTH-PLATFORM-SAFETY-GOVERNANCE",
+      "title": "健康咨询输入缓存与 AI 失败关闭平台安全前置",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-platform-safety-governance",
+      "branch": "codex/health-manager-platform-safety-governance",
+      "base_commit": "4c29156d3e37e11777e3747e3f402ca4d77a604f",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-health-platform-safety.json",
+        "contracts/foundation/development-checklists/2026-07-11-health-platform-safety-r2.json",
+        "contracts/foundation/development-checklists/2026-07-11-health-platform-safety-r3.json",
+        "contracts/foundation/governance-exams/2026-07-11-health-platform-safety-attempt-1.json",
+        "contracts/foundation/governance-exams/2026-07-11-health-platform-safety-r2-attempt-1.json",
+        "contracts/foundation/governance-exams/2026-07-11-health-platform-safety-r3-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-health-platform-safety.json",
+        "contracts/modules/health-manager/internal-dependencies.v1.json",
+        "docs/project-management/modules/health-manager-first-slice-contract-v1.md",
+        "docs/project-management/service-plaza/health-platform-safety-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "生命导航二最终浏览器验收等待 UTC 日自然重置期间，仅关闭健康板块平台安全前置；不构成健康板块正式派发。",
       "handoff_record": null
+    },
+    {
+      "work_id": "AIW-20260711-HEALTH-PLATFORM-SAFETY-BACKEND",
+      "title": "健康接口输入缓存与 AI 失败关闭后端实现",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台后端负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/heaotang-main",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-platform-safety",
+      "branch": "codex/health-manager-platform-safety",
+      "base_commit": "70fa12276e6eac17369c0d1d3c1d23a8e757fcc0",
+      "allowed_paths": [
+        "backend-go/plugins/health-plugin/plugin.go",
+        "backend-go/plugins/health-plugin/service.go",
+        "backend-go/plugins/health-plugin/service_test.go"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": null,
+      "handoff_record": "docs/project-management/service-plaza/health-platform-safety-2026-07-11.md"
     }
   ]
 }
