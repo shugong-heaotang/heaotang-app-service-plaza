@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-CLUB-FOUNDATION-DISPATCH-GOVERNANCE",
+  "title": "俱乐部联盟 CA-F0/H0 正式派发治理",
+  "date": "2026-07-11",
+  "status": "verified",
+  "objective": "取代旧自建切片入口，正式派发俱乐部联盟长期项目 CA-F0-M0 与 CA-H0 标准工作，并建立独立模块工作项。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-club-foundation-dispatch-governance.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-club-foundation-dispatch-governance-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/recursive-project-governance-v1.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-11-club-alliance-foundation-task-order.md", "docs/project-management/modules/club-alliance/README.md"],
+  "capabilities": ["foundation.ai-collaboration-safety", "foundation.governance-certification", "foundation.service-action-contracts", "foundation.contract-tooling"],
+  "contracts": ["contracts/service-plaza/service-plaza-actions.v1.json", "contracts/foundation/module-dependencies/club-alliance.v1.json"],
+  "decisions": ["docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0018-recursive-project-governance.md"],
+  "changed_areas": ["contracts/foundation/agent-collaboration.v1.json", "docs/project-management/modules/club-alliance/README.md", "docs/project-management/notices/2026-07-11-club-alliance-foundation-task-order.md", "docs/project-management/service-plaza/club-foundation-dispatch-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "verification": ["scripts/Test-AgentDevelopmentPreflight.ps1", "scripts/validate_development_checklists.py", "scripts/validate_governance_exams.py", "scripts/validate_agent_collaboration.py", "scripts/validate_implementation_records.py", "scripts/Test-TextEncoding.ps1", "git diff --check"],
+  "evidence": ["contracts/foundation/development-checklists/2026-07-11-club-foundation-dispatch-governance.json", "contracts/foundation/governance-exams/2026-07-11-club-foundation-dispatch-governance-attempt-1.json", "docs/project-management/service-plaza/club-foundation-dispatch-2026-07-11.md"],
+  "premises": ["旧 standard-club-join-review Go 不证明 CA-F0/H0 Go", "D-CA-003 Pending 只局部阻塞分类语义编码", "CA-H1 和四类业务须后续独立授权", "生产、真实资金和不可逆操作不在本轮范围"],
+  "implementation_mode": "ai-assisted"
+}

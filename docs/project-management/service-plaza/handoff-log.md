@@ -415,3 +415,15 @@ Handoff 运行规则见 `handoff-operating-mechanism.md`。首轮具体表单见
 上线责任：
 最终确认人：
 ```
+# SP-H010 俱乐部联盟 CA-F0/H0 正式派发
+
+- 日期：2026-07-11
+- 提交：服务广场平台集成负责人
+- 接收：俱乐部联盟负责人
+- 状态：Handoff ready；模块须完成自身 G0 后正式接收
+- 范围：CA-F0-M0 + CA-H0；CA-H1 和业务编码未授权
+- 通知：`docs/project-management/notices/2026-07-11-club-alliance-foundation-task-order.md`
+- 平台记录：`IR-20260711-CLUB-FOUNDATION-DISPATCH-GOVERNANCE`
+- 模块工作项：`AIW-20260711-CLUB-FOUNDATION-DISPATCH`
+- Pending：D-CA-003 仅局部阻塞分类 selector/category API/SC-PC 编码
+- 未授权：测试环境、生产、真实资金、不可逆操作
