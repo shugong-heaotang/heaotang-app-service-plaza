@@ -87,12 +87,12 @@
       "dependency_id": "review.transaction",
       "kind": "workflow",
       "description": "批准状态和成员写入原子一致，失败保持 pending",
-      "status": "verified",
+      "status": "implemented",
       "required_for_slice": true,
       "depends_on": ["review.idempotency"],
       "contracts": ["docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
-      "evidence": ["C:/Users/shugo/Documents/heaotang-main/backend-go/plugins/club-plugin/service_test.go"],
-      "unresolved": []
+      "evidence": ["docs/project-management/service-plaza/club-review-security-2026-07-11.md"],
+      "unresolved": ["等待测试环境部署后验证审核事务与幂等重放"]
     },
     {
       "dependency_id": "review.idempotency",
@@ -104,6 +104,17 @@
       "contracts": ["docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
       "evidence": ["docs/project-management/service-plaza/club-review-idempotency-2026-07-11.md"],
       "unresolved": ["等待测试环境部署后完成双请求 HTTP 并发和重放验收"]
+    },
+    {
+      "dependency_id": "review.authorization-errors",
+      "kind": "policy",
+      "description": "普通用户和跨俱乐部管理者默认拒绝，路径错配隐藏资源存在性，审核使用稳定 400/403/404/409 机器码",
+      "status": "implemented",
+      "required_for_slice": true,
+      "depends_on": ["review.idempotency", "review.transaction"],
+      "contracts": ["docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
+      "evidence": ["docs/project-management/service-plaza/club-review-security-2026-07-11.md"],
+      "unresolved": ["等待测试环境 JWT 双角色和跨俱乐部 HTTP 验收"]
     }
   ]
 }

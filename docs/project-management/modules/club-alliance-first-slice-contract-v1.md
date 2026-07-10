@@ -22,6 +22,25 @@
 - 路径 application 不存在或不属于路径 club 时返回 404 / `CLUB_APPLICATION_NOT_FOUND`；非法 key、club ID、application ID 分别返回稳定 400 机器码；
 - 批准事务内同时写成员、成员数、积分、申请状态和幂等完成记录；任一事务内写入失败均回滚，幂等 reservation 释放后允许安全重试。
 
+审核与待审列表错误矩阵冻结为：
+
+| 场景 | HTTP | code |
+|---|---:|---|
+| 缺失、含空格、非 ASCII 或超长 Idempotency-Key | 400 | `INVALID_IDEMPOTENCY_KEY` |
+| 非数字 club ID | 400 | `CLUB_ID_INVALID` |
+| 非数字 application ID | 400 | `CLUB_APPLICATION_ID_INVALID` |
+| 非法申请状态过滤 | 400 | `INVALID_CLUB_APPLICATION_STATUS` |
+| 非法 JSON 请求体 | 400 | `INVALID_REQUEST` |
+| 登录用户不是路径俱乐部管理者 | 403 | `CLUB_MANAGER_REQUIRED` |
+| application 不存在或不属于路径 club | 404 | `CLUB_APPLICATION_NOT_FOUND` |
+| 同一幂等键异载荷 | 409 | `IDEMPOTENCY_KEY_REUSED` |
+| 同键请求仍处理中 | 409 | `IDEMPOTENCY_IN_PROGRESS` |
+| 申请已由另一最终决定处理 | 409 | `CLUB_APPLICATION_ALREADY_REVIEWED` |
+| 俱乐部非 active | 409 | `CLUB_NOT_ACTIVE` |
+| family 成员容量已满 | 409 | `CLUB_MEMBER_LIMIT_REACHED` |
+
+资源授权先于 application 查询：普通用户审核和 A 管理者读写 B 俱乐部均返回 403；只有路径俱乐部管理者通过授权后，路径 club/application 错配才以 404 隐藏资源存在性。
+
 本人申请状态接口冻结为：
 
 - `GET /api/v1/clubs/join-applications/my?page=<1..>&size=<1..100>&status=pending|approved|rejected`；
@@ -30,7 +49,7 @@
 - 成功使用统一列表信封 `data.items/total/page/size`，空结果 `items=[]`；
 - 非法分页返回 HTTP 400 / `INVALID_PAGINATION`；非法状态返回 HTTP 400 / `INVALID_CLUB_APPLICATION_STATUS`；内部查询失败返回 HTTP 500 / `CLUB_APPLICATIONS_UNAVAILABLE`。
 
-当前实现进度：第 3 项已在后端提交 `b8996793` 完成本地实现与全量 Go 回归；第 1 项已在后端提交 `7659c183` 完成本地实现；第 2 项已在后端提交 `e46c5e02` 完成首次/重放/异载荷、并发相反决定及事务一致性本地测试。测试环境 HTTP 验收前这些依赖均只记为 implemented，不视为 verified。第 4、5 项尚未全部关闭，M2 仍 No-Go。
+当前实现进度：第 3 项已在后端提交 `b8996793` 完成本地实现；第 1 项已在后端提交 `7659c183` 完成本地实现；第 2 项已在后端提交 `e46c5e02` 完成幂等和并发一致性；第 4、5 项已在后端提交 `ece6d4fe` 完成资源授权、错配拒绝、五个事务故障点和上述错误矩阵的本地自动化。测试环境 HTTP 验收前这些依赖均只记为 implemented，不视为 verified，M2 仍 No-Go。
 
 
 家庭俱乐部、公益俱乐部、俱乐部友联体、会费、支付、提现和分账不属于本切片。页面、适配器和测试禁止调用 fee、account、paid-service、payment、withdraw 路由。付费家庭套餐、请求体价格和旧收入记账在资金专项根因修复、版本化定价、双人审批与资金安全门禁完成前不可激活。

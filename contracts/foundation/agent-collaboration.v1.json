@@ -463,6 +463,51 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": null,
       "handoff_record": "docs/project-management/service-plaza/club-review-idempotency-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-CLUB-REVIEW-SECURITY-GOVERNANCE",
+      "title": "俱乐部审核资源授权、事务故障与错误矩阵治理",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-review-security-governance",
+      "branch": "codex/club-review-security-governance",
+      "base_commit": "f3980e43c3d4ece46255008ecb13001beb1e25a6",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-club-review-security.json",
+        "contracts/foundation/governance-exams/2026-07-11-club-review-security-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-club-review-security.json",
+        "contracts/modules/club-alliance/internal-dependencies.v1.json",
+        "docs/project-management/modules/club-alliance-first-slice-contract-v1.md",
+        "docs/project-management/service-plaza/club-review-security-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "只关闭普通用户/跨俱乐部审核越权、路径错配、事务故障和首切片错误码矩阵；不实施页面或资金功能。",
+      "handoff_record": "docs/project-management/service-plaza/club-review-security-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-CLUB-REVIEW-SECURITY-BACKEND",
+      "title": "俱乐部审核资源授权、事务故障与错误矩阵后端实现",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台后端负责人",
+      "status": "integrated",
+      "repository_root": "C:/Users/shugo/Documents/heaotang-main",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-review-security",
+      "branch": "codex/club-review-security",
+      "base_commit": "e46c5e027b412d9abb50b504e04172e512bebaf6",
+      "allowed_paths": [
+        "backend-go/plugins/club-plugin/plugin.go",
+        "backend-go/plugins/club-plugin/service.go",
+        "backend-go/plugins/club-plugin/service_test.go"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": null,
+      "handoff_record": "docs/project-management/service-plaza/club-review-security-2026-07-11.md"
     }
   ]
 }
