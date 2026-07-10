@@ -281,7 +281,7 @@
       "title": "健康大管家精确模块路由平台挂载",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-route-mount",
       "branch": "codex/health-manager-route-mount",
@@ -302,6 +302,32 @@
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
       "migration_note": "只建立稳定的模块挂载边界并委托现有页面；不启动健康业务开发，不关闭 M2 其余前置。",
+      "handoff_record": "docs/project-management/service-plaza/health-route-mount-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-PILOT-RETROSPECTIVE-TEMPLATE",
+      "title": "首个板块试点复盘模板预制与冻结门禁",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-pilot-retrospective",
+      "branch": "codex/pilot-retrospective-template",
+      "base_commit": "422b0dc6f850a44630b690b61ad54d50a9ef6883",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-pilot-retrospective-template.json",
+        "contracts/foundation/development-checklists/2026-07-11-pilot-retrospective-template-r2.json",
+        "contracts/foundation/governance-exams/2026-07-11-pilot-retrospective-template-attempt-1.json",
+        "contracts/foundation/governance-exams/2026-07-11-pilot-retrospective-template-r2-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-pilot-retrospective-template.json",
+        "docs/project-management/templates/module-pilot-retrospective-v1.md",
+        "docs/project-management/service-plaza/pilot-retrospective-template-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "先预制可复用模板和冻结条件；生命导航二 M4 未 Go 前不得回填成功结论或把模板标为已发布。",
       "handoff_record": null
     }
   ]
