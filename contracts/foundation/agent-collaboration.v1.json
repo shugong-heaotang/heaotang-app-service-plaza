@@ -47,6 +47,52 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": null,
       "handoff_record": null
+    },
+    {
+      "work_id": "AIW-20260711-LIFE-M1-PLATFORM-META",
+      "title": "生命导航 M1 共享响应元数据兼容扩展",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "handoff-ready",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-life-m1-platform",
+      "branch": "codex/life-m1-platform-contract",
+      "base_commit": "4876817d8c162ae2e93ef7e5290fee1d0357ada5",
+      "allowed_paths": [
+        "app/src/infrastructure/apiClient.ts",
+        "app/src/infrastructure/apiClient.test.ts",
+        "app/src/infrastructure/businessApiAdapter.ts",
+        "app/src/infrastructure/businessApiAdapter.test.ts",
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-life-m1-platform-fix.json",
+        "contracts/foundation/governance-exams/2026-07-11-life-m1-platform-fix-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-life-m1-platform-fix.json",
+        "docs/project-management/service-plaza/life-m1-platform-fix-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": null,
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h009生命导航-m1-公共接口根因修复"
+    },
+    {
+      "work_id": "AIW-20260711-LIFE-M1-BACKEND-BOUNDARY",
+      "title": "生命导航记录列表上限和跨用户回归",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "handoff-ready",
+      "repository_root": "C:/Users/shugo/Documents/heaotang-main",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-life-m1-backend",
+      "branch": "codex/life-m1-backend-contract",
+      "base_commit": "4cb61a550959e6aa70dd45bdc8fba73992c86083",
+      "allowed_paths": [
+        "backend-go/plugins/life-navigation-plugin/service.go",
+        "backend-go/plugins/life-navigation-plugin/service_test.go"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": null,
+      "handoff_record": "docs/project-management/service-plaza/life-m1-platform-fix-2026-07-11.md"
     }
   ]
 }

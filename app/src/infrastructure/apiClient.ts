@@ -30,6 +30,17 @@ export type ApiRequestOptions = {
   envelope?: "strict" | "compatible";
 };
 
+export type ApiResponseMetadata = {
+  status: number;
+  requestId: string;
+  idempotencyReplayed: boolean;
+};
+
+export type ApiResponse<T> = {
+  data: T;
+  meta: ApiResponseMetadata;
+};
+
 export class ApiError extends Error {
   constructor(
     message: string,
@@ -192,11 +203,11 @@ function waitForRetry(delayMs: number, signals: Array<AbortSignal | null | undef
   });
 }
 
-export async function apiRequest<T>(
+export async function apiRequestWithMeta<T>(
   path: string,
   init: RequestInit = {},
   options: ApiRequestOptions = {},
-): Promise<T> {
+): Promise<ApiResponse<T>> {
   const headers = new Headers(init.headers);
   const requestId = options.requestId?.trim() || headers.get("X-Request-ID")?.trim() || createRequestId();
   const timeoutMs = resolveTimeout(options.timeoutMs ?? DEFAULT_API_TIMEOUT_MS, requestId);
@@ -256,7 +267,14 @@ export async function apiRequest<T>(
         );
       }
 
-      return (payload.data ?? payload) as T;
+      return {
+        data: (payload.data ?? payload) as T,
+        meta: {
+          status: response.status,
+          requestId: responseRequestId,
+          idempotencyReplayed: response.headers.get("Idempotency-Replayed")?.toLowerCase() === "true",
+        },
+      };
     } catch (reason) {
       if (reason instanceof ApiError) {
         throw reason;
@@ -281,4 +299,12 @@ export async function apiRequest<T>(
   }
 
   throw new ApiError("请求失败", 0, "REQUEST_FAILED", requestId);
+}
+
+export async function apiRequest<T>(
+  path: string,
+  init: RequestInit = {},
+  options: ApiRequestOptions = {},
+): Promise<T> {
+  return (await apiRequestWithMeta<T>(path, init, options)).data;
 }
