@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-HEALTH-HISTORY",
+  "title": "健康咨询本人历史最小展示 DTO",
+  "date": "2026-07-11",
+  "status": "implemented",
+  "objective": "冻结并实现健康咨询 POST/GET 最小展示 DTO、会话归属和与实际查询一致的分页回退信封。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-health-history.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-health-history-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/governance-reading-list.v1.json", "contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/module-dependencies/health-manager.v1.json", "contracts/modules/health-manager/internal-dependencies.v1.json", "docs/project-management/modules/health-manager/README.md", "docs/project-management/notices/2026-07-11-health-manager-first-phase-task-order.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-11-health-manager-first-phase-task-order.md", "docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+  "capabilities": ["foundation.identity-api", "foundation.authorization-idempotency", "foundation.governance-certification"],
+  "contracts": ["contracts/modules/health-manager/internal-dependencies.v1.json", "docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+  "decisions": ["docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"],
+  "changed_areas": ["backend-go/plugins/health-plugin/plugin.go", "backend-go/plugins/health-plugin/service_test.go", "contracts/foundation/agent-collaboration.v1.json", "contracts/modules/health-manager/internal-dependencies.v1.json", "docs/project-management/modules/health-manager-first-slice-contract-v1.md", "docs/project-management/service-plaza/health-history-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "verification": ["go test -count=1 ./plugins/health-plugin", "go test -count=1 ./...", "go vet ./...", "scripts/Test-ServicePlazaContracts.ps1", "scripts/Test-TextEncoding.ps1", "git diff --check"],
+  "evidence": ["docs/project-management/service-plaza/health-history-2026-07-11.md", "contracts/foundation/development-checklists/2026-07-11-health-history.json", "contracts/foundation/governance-exams/2026-07-11-health-history-attempt-1.json", "docs/project-management/service-plaza/handoff-log.md"],
+  "premises": ["咨询正文是用户提交后需要在本人历史中展示的敏感字段", "内部 user_id 和未批准 ai_advice 不属于页面展示合同", "用户归属只来自认证会话", "非法分页按既有兼容合同回退而非拒绝", "本地自动化不等于测试环境 HTTP 已验证", "本切片不实现健康页面或 AI"],
+  "implementation_mode": "ai-assisted"
+}

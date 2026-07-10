@@ -117,6 +117,17 @@
       "unresolved": ["服务广场健康页面尚未展示本人咨询列表"]
     },
     {
+      "dependency_id": "consultation.display-dto",
+      "kind": "interface",
+      "description": "POST/GET 仅返回页面必需咨询字段，排除内部归属和未批准 AI 建议，分页回退信封与实际查询一致",
+      "status": "implemented",
+      "required_for_slice": true,
+      "depends_on": ["consultation.api", "consultation.ownership", "consultation.input-cache-boundary"],
+      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+      "evidence": ["docs/project-management/service-plaza/health-history-2026-07-11.md"],
+      "unresolved": ["等待测试环境验证最小 DTO、本人隔离、空数组和分页回退信封"]
+    },
+    {
       "dependency_id": "medical.disclaimer",
       "kind": "policy",
       "description": "页面明确咨询收件不构成诊断、处方或急救服务",

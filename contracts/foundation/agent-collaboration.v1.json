@@ -552,6 +552,50 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": null,
       "handoff_record": "docs/project-management/service-plaza/club-standard-filter-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-HEALTH-HISTORY-GOVERNANCE",
+      "title": "健康咨询本人历史可展示 DTO 与分页治理",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-history-governance",
+      "branch": "codex/health-consultation-history-governance",
+      "base_commit": "8538b8837fa4cd62498907773e8ca408b9ad3e3a",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-health-history.json",
+        "contracts/foundation/governance-exams/2026-07-11-health-history-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-health-history.json",
+        "contracts/modules/health-manager/internal-dependencies.v1.json",
+        "docs/project-management/modules/health-manager-first-slice-contract-v1.md",
+        "docs/project-management/service-plaza/health-history-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "只冻结并实现本人咨询历史的最小展示 DTO、严格分页和敏感响应边界；不实施健康页面或 AI。",
+      "handoff_record": "docs/project-management/service-plaza/health-history-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-HEALTH-HISTORY-BACKEND",
+      "title": "健康咨询本人历史可展示 DTO 与分页后端适配",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台后端负责人",
+      "status": "integrated",
+      "repository_root": "C:/Users/shugo/Documents/heaotang-main",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-history",
+      "branch": "codex/health-consultation-history",
+      "base_commit": "d0154ad96ffbd1c8fa54e6d3161d1e6e3917b45a",
+      "allowed_paths": [
+        "backend-go/plugins/health-plugin/plugin.go",
+        "backend-go/plugins/health-plugin/service_test.go"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": null,
+      "handoff_record": "docs/project-management/service-plaza/health-history-2026-07-11.md"
     }
   ]
 }

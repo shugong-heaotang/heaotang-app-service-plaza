@@ -10,12 +10,13 @@
 - 前端必须复用共享 `BusinessApiAdapter.executeWithMeta`，不得直接调用 `fetch` 读取重放头。
 - `patient_name` 与 `symptoms` 均先执行 Unicode 空白 trim，再校验必填；最大长度分别为 80 和 2000 个 Unicode 字符。归一化发生在幂等载荷哈希之前，同键的等价空白输入必须重放原资源。
 - POST/GET 咨询响应统一返回 `Cache-Control: private, no-store`。请求体不是有效 JSON 返回 400 `INVALID_REQUEST_BODY`；姓名缺失/超长返回 `HEALTH_PATIENT_REQUIRED` / `HEALTH_PATIENT_TOO_LONG`；症状缺失/超长返回 `HEALTH_SYMPTOMS_REQUIRED` / `HEALTH_SYMPTOMS_TOO_LONG`。
+- POST/GET 可展示 DTO 固定为 `id`、`patient_name`、`symptoms`、`status`、`created_at`；不得返回内部 `user_id` 或尚未批准的 `ai_advice`。请求体中的 `user_id`、`ai_advice` 必须忽略，归属只取会话。分页输入回退后，列表信封的 `page/size` 必须返回实际使用的 1/20，而不是原始非法值。列表内部失败返回 500 `HEALTH_CONSULTATIONS_UNAVAILABLE`。
 - 在健康 AI 同意、供应商、医疗安全、危急分流和保留规则形成独立契约前，兼容路由 `POST /api/v1/health/analyze` 固定返回 503 `HEALTH_AI_CONSENT_REQUIRED`，不得读取健康档案/指标或调用 AI Provider；健康插件不得因此依赖 AI 插件。
 
 ## M2 前平台必须冻结并实现
 
 1. `patient_name` 与 `symptoms` 的 trim、必填和服务端最大长度；禁止前端把空症状悄悄替换为固定句子。后端提交 `e361a8ac` 已实现，等待测试环境部署验证。
-2. POST/GET 可展示 DTO、稳定错误矩阵和敏感字段最小化；列表响应必须增加 `Cache-Control: no-store`。输入错误矩阵和缓存头已在 `e361a8ac` 实现；可展示 DTO 仍未冻结，M2 继续 No-Go。
+2. POST/GET 可展示 DTO、稳定错误矩阵和敏感字段最小化；列表响应必须增加 `Cache-Control: no-store`。输入错误矩阵和缓存头已在 `e361a8ac` 实现；最小 DTO、伪造字段忽略和分页回退信封已在 `a27b6f76` 实现。等待测试环境验证前状态为 implemented。
 3. 证明咨询正文不会进入结构化日志、遥测、截图和测试报告；M1/M4 只使用合成非真实健康数据。
 4. 平台提供 `app/src/modules/health-manager` 的精确路由挂载工作项；模块负责人不得修改共享 `App.tsx`、认证或 SDK。
 
