@@ -750,6 +750,34 @@
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h025-俱乐部联盟-ca-f0h0-正式派发"
     },
     {
+      "work_id": "AIW-20260711-MODULE-INTERNAL-DEPENDENCIES-V2",
+      "title": "模块内部依赖 v2 五维门禁与版本路由",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "handoff-ready",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-module-dependencies-v2",
+      "branch": "codex/module-internal-dependencies-v2",
+      "base_commit": "59b8a47ff9716b21cc45ce6354e25dc235209b73",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/module-internal-dependencies.v2.schema.json",
+        "contracts/foundation/development-checklists/2026-07-11-module-internal-dependencies-v2.json",
+        "contracts/foundation/governance-exams/2026-07-11-module-internal-dependencies-v2-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-module-internal-dependencies-v2.json",
+        "scripts/validate_module_internal_dependencies.py",
+        "scripts/Test-ServicePlazaContracts.ps1",
+        "scripts/tests/test_validate_module_internal_dependencies.py",
+        "scripts/tests/fixtures/module-internal-dependencies",
+        "docs/project-management/service-plaza/module-internal-dependencies-v2-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "发布并行 v2，不修改或放宽历史 v1；validator 按 contract_version 选择精确 Schema。",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h026模块内部依赖-v2-五维门禁"
+    },
+    {
       "work_id": "AIW-20260711-SECURE-MODULE-API-ACCEPTANCE",
       "title": "三大核心服务安全取码与部署后 API 验收标准化",
       "owner": "Codex platform integration agent",

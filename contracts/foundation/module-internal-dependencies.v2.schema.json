@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/foundation/module-internal-dependencies.v2.schema.json",
+  "title": "Heaotang Module Internal Dependencies v2",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "module_id", "module_version", "slice_id", "readiness", "dependencies"],
+  "properties": {
+    "contract_version": { "const": "module-internal-dependencies.v2" },
+    "module_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "module_version": { "type": "string", "pattern": "^v[1-9][0-9]*$" },
+    "slice_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["governance", "development", "acceptance", "release", "operations"],
+      "properties": {
+        "governance": { "$ref": "#/$defs/readiness" },
+        "development": { "$ref": "#/$defs/readiness" },
+        "acceptance": { "$ref": "#/$defs/readiness" },
+        "release": { "$ref": "#/$defs/readiness" },
+        "operations": { "$ref": "#/$defs/readiness" }
+      }
+    },
+    "dependencies": {
+      "type": "array", "minItems": 1,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["dependency_id", "kind", "description", "status", "required_for_slice", "depends_on", "contracts", "evidence", "unresolved", "owner", "blocks", "does_not_block"],
+        "properties": {
+          "dependency_id": { "type": "string", "pattern": "^[a-z0-9]+(?:[.-][a-z0-9]+)*$" },
+          "kind": { "enum": ["interface", "data", "policy", "configuration", "workflow", "acceptance", "governance", "decision", "contract", "handoff"] },
+          "description": { "type": "string", "minLength": 1 },
+          "status": { "enum": ["planned", "pending", "accepted", "blocked-local", "draft", "standardized", "implemented", "verified", "code-present-unverified", "test-verified", "release-go", "operations-go", "forbidden"] },
+          "required_for_slice": { "type": "boolean" },
+          "depends_on": { "$ref": "#/$defs/stringSet" },
+          "contracts": { "$ref": "#/$defs/stringSet" },
+          "evidence": { "$ref": "#/$defs/stringSet" },
+          "unresolved": { "$ref": "#/$defs/stringSet" },
+          "owner": { "type": "string", "minLength": 1 },
+          "blocks": { "$ref": "#/$defs/stringSet" },
+          "does_not_block": { "$ref": "#/$defs/stringSet" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "readiness": { "enum": ["pending", "no-go", "partial-go", "go"] },
+    "stringSet": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true }
+  }
+}
