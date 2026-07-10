@@ -2,7 +2,7 @@
 
 项目 ID：`life-navigation`
 父项目：和奥堂 APP 服务广场
-板块负责人：生命导航负责人
+板块负责人：生命导航二负责人
 平台集成负责人：服务广场平台集成负责人
 当前切片：`application-history`
 

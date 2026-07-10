@@ -2,7 +2,7 @@
 
 - 通知编号：`LN-TASK-20260710-001`
 - 工作项 ID：`AIW-20260711-LIFE-APPLICATION-HISTORY`
-- 承接负责人：待填写
+- 承接负责人：生命导航二负责人（待本人确认）
 - 接收时间：待填写
 - 分支：`codex/life-navigation-application-history`
 - 工作树：`C:/Users/shugo/Documents/worktrees/heaotang-life-navigation`
