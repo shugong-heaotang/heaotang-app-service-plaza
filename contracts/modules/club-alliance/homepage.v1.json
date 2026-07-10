@@ -1,0 +1,30 @@
+{
+  "contract_version": "club-alliance.homepage.v1",
+  "root_route": "/services/club-alliance",
+  "return_route": "/services",
+  "source_contract": "contracts/service-plaza/service-plaza-actions.v1.json",
+  "source_schema": "contracts/service-plaza/service-plaza-action.schema.json",
+  "category_registry_ref": "contracts/modules/club-alliance/category-registry.v1.json",
+  "capability_catalog_ref": "contracts/modules/club-alliance/capability-catalog.v1.json",
+  "accepted_category_action_ids": ["public-benefit-club", "self-created-club", "family-club", "club-federation"],
+  "management_action_id": "club-manage",
+  "query_contract": {
+    "no_query_mode": "home",
+    "compatibility_parameter": "category",
+    "mapping_source": "upstream-target-query",
+    "selected_state_field": "selected_action_id",
+    "calls_business_api": false,
+    "invalid_behavior": "fail-closed",
+    "invalid_error_ids": ["CAH0_QUERY_BLANK", "CAH0_QUERY_UNKNOWN", "CAH0_QUERY_AMBIGUOUS"]
+  },
+  "state_contract": ["home", "focused", "loading", "empty", "error", "unauthorized", "maintenance", "offline"],
+  "responsive_contract": {
+    "source": "shared-app-shell",
+    "small": "single-column",
+    "medium": "adaptive-grid",
+    "large": "bounded-grid"
+  },
+  "presentation_derivation": ["label", "sort_order", "target", "access", "lifecycle_status", "return_target", "telemetry_event"],
+  "telemetry_mode": "upstream-reference",
+  "business_writes": "forbidden"
+}

@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/club-alliance/homepage.v1.schema.json",
+  "title": "Club Alliance Homepage Contract v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "root_route", "return_route", "source_contract", "source_schema", "category_registry_ref", "capability_catalog_ref", "accepted_category_action_ids", "management_action_id", "query_contract", "state_contract", "responsive_contract", "presentation_derivation", "telemetry_mode", "business_writes"],
+  "properties": {
+    "contract_version": {"const": "club-alliance.homepage.v1"},
+    "root_route": {"const": "/services/club-alliance"},
+    "return_route": {"const": "/services"},
+    "source_contract": {"const": "contracts/service-plaza/service-plaza-actions.v1.json"},
+    "source_schema": {"const": "contracts/service-plaza/service-plaza-action.schema.json"},
+    "category_registry_ref": {"const": "contracts/modules/club-alliance/category-registry.v1.json"},
+    "capability_catalog_ref": {"const": "contracts/modules/club-alliance/capability-catalog.v1.json"},
+    "accepted_category_action_ids": {"type": "array", "minItems": 4, "maxItems": 4, "uniqueItems": true, "items": {"enum": ["public-benefit-club", "self-created-club", "family-club", "club-federation"]}},
+    "management_action_id": {"const": "club-manage"},
+    "query_contract": {"$ref": "#/$defs/query"},
+    "state_contract": {"type": "array", "minItems": 7, "uniqueItems": true, "items": {"enum": ["home", "focused", "loading", "empty", "error", "unauthorized", "maintenance", "offline"]}},
+    "responsive_contract": {"$ref": "#/$defs/responsive"},
+    "presentation_derivation": {"type": "array", "minItems": 7, "uniqueItems": true, "items": {"enum": ["label", "sort_order", "target", "access", "lifecycle_status", "return_target", "telemetry_event"]}},
+    "telemetry_mode": {"const": "upstream-reference"},
+    "business_writes": {"const": "forbidden"}
+  },
+  "$defs": {
+    "query": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["no_query_mode", "compatibility_parameter", "mapping_source", "selected_state_field", "calls_business_api", "invalid_behavior", "invalid_error_ids"],
+      "properties": {
+        "no_query_mode": {"const": "home"},
+        "compatibility_parameter": {"const": "category"},
+        "mapping_source": {"const": "upstream-target-query"},
+        "selected_state_field": {"const": "selected_action_id"},
+        "calls_business_api": {"const": false},
+        "invalid_behavior": {"const": "fail-closed"},
+        "invalid_error_ids": {"type": "array", "minItems": 3, "maxItems": 3, "uniqueItems": true, "items": {"enum": ["CAH0_QUERY_BLANK", "CAH0_QUERY_UNKNOWN", "CAH0_QUERY_AMBIGUOUS"]}}
+      }
+    },
+    "responsive": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source", "small", "medium", "large"],
+      "properties": {
+        "source": {"const": "shared-app-shell"},
+        "small": {"const": "single-column"},
+        "medium": {"const": "adaptive-grid"},
+        "large": {"const": "bounded-grid"}
+      }
+    }
+  }
+}

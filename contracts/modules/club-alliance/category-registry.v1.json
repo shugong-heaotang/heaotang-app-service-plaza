@@ -1,0 +1,63 @@
+{
+  "contract_version": "club-alliance.category-registry.v1",
+  "source_contract": "contracts/service-plaza/service-plaza-actions.v1.json",
+  "source_schema": "contracts/service-plaza/service-plaza-action.schema.json",
+  "accepted_action_ids": ["public-benefit-club", "self-created-club", "family-club", "club-federation"],
+  "management_action_id": "club-manage",
+  "entries": [
+    {
+      "action_id": "public-benefit-club",
+      "child_project_id": "CA-PC",
+      "entity_kind": "club",
+      "semantic_selector": {
+        "status": "accepted",
+        "executable": false,
+        "clauses": [
+          {"field": "type", "operator": "eq", "value": "standard"},
+          {"field": "category", "operator": "eq", "value": "charity"}
+        ]
+      },
+      "capability_profile_id": "ca.pc",
+      "governance_refs": ["D-CA-001"]
+    },
+    {
+      "action_id": "self-created-club",
+      "child_project_id": "CA-SC",
+      "entity_kind": "club",
+      "semantic_selector": {
+        "status": "pending",
+        "executable": false,
+        "clauses": [
+          {"field": "type", "operator": "eq", "value": "standard"},
+          {"field": "category", "operator": "eq", "value": "general"}
+        ]
+      },
+      "capability_profile_id": "ca.sc",
+      "governance_refs": ["D-CA-003"]
+    },
+    {
+      "action_id": "family-club",
+      "child_project_id": "CA-FC",
+      "entity_kind": "club",
+      "semantic_selector": {
+        "status": "code-present-unverified",
+        "executable": false,
+        "clauses": [{"field": "type", "operator": "eq", "value": "family"}]
+      },
+      "capability_profile_id": "ca.fc",
+      "governance_refs": ["CA-FC-P0-REQUIRED"]
+    },
+    {
+      "action_id": "club-federation",
+      "child_project_id": "CA-UF",
+      "entity_kind": "club_relationship",
+      "semantic_selector": {
+        "status": "accepted",
+        "executable": false,
+        "clauses": [{"field": "relationship_kind", "operator": "eq", "value": "club-federation"}]
+      },
+      "capability_profile_id": "ca.uf",
+      "governance_refs": ["D-CA-002"]
+    }
+  ]
+}

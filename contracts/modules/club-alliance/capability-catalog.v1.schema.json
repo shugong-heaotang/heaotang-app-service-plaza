@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/club-alliance/capability-catalog.v1.schema.json",
+  "title": "Club Alliance Capability Catalog v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "status_values", "profile_ids", "homepage_consumed_capabilities", "commercial_capability_ids", "capabilities"],
+  "properties": {
+    "contract_version": {"const": "club-alliance.capability-catalog.v1"},
+    "status_values": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": {"enum": ["planned", "code-present-unverified", "standardized", "implemented", "test-verified", "release-go", "operations-go", "forbidden"]}
+    },
+    "profile_ids": {"type": "array", "minItems": 4, "maxItems": 4, "uniqueItems": true, "items": {"enum": ["ca.pc", "ca.sc", "ca.fc", "ca.uf"]}},
+    "homepage_consumed_capabilities": {"type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true, "items": {"enum": ["ENTRY", "CATALOG", "ACCESS", "LIFECYCLE", "TELEMETRY"]}},
+    "commercial_capability_ids": {"type": "array", "minItems": 4, "maxItems": 4, "uniqueItems": true, "items": {"enum": ["PAYMENT", "WITHDRAWAL", "REFUND", "SUBSCRIPTION"]}},
+    "capabilities": {"type": "array", "minItems": 15, "items": {"$ref": "#/$defs/capability"}}
+  },
+  "$defs": {
+    "readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["governance", "development", "acceptance", "release", "operations"],
+      "properties": {
+        "governance": {"enum": ["pending", "partial-go", "go", "not-applicable"]},
+        "development": {"enum": ["pending", "partial-go", "go", "not-applicable"]},
+        "acceptance": {"enum": ["pending", "partial-go", "go", "not-applicable"]},
+        "release": {"enum": ["pending", "partial-go", "go", "not-applicable"]},
+        "operations": {"enum": ["pending", "partial-go", "go", "not-applicable"]}
+      }
+    },
+    "profiles": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["ca.pc", "ca.sc", "ca.fc", "ca.uf"],
+      "properties": {
+        "ca.pc": {"enum": ["required", "optional", "forbidden"]},
+        "ca.sc": {"enum": ["required", "optional", "forbidden"]},
+        "ca.fc": {"enum": ["required", "optional", "forbidden"]},
+        "ca.uf": {"enum": ["required", "optional", "forbidden"]}
+      }
+    },
+    "capability": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["capability_id", "status", "owner", "contract_refs", "dependency_refs", "evidence_refs", "readiness", "profiles"],
+      "properties": {
+        "capability_id": {"type": "string", "pattern": "^[A-Z][A-Z0-9_]*$"},
+        "status": {"enum": ["planned", "code-present-unverified", "standardized", "implemented", "test-verified", "release-go", "operations-go", "forbidden"]},
+        "owner": {"type": "string", "minLength": 1},
+        "contract_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "dependency_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "evidence_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "readiness": {"$ref": "#/$defs/readiness"},
+        "profiles": {"$ref": "#/$defs/profiles"}
+      }
+    }
+  }
+}
