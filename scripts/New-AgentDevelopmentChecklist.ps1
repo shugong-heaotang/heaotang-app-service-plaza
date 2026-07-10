@@ -43,5 +43,6 @@ $checklist = [ordered]@{
 $target = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($OutputPath)
 $directory = Split-Path $target -Parent
 if ($directory -and -not (Test-Path -LiteralPath $directory)) { New-Item -ItemType Directory -Path $directory -Force | Out-Null }
-[IO.File]::WriteAllText($target, ($checklist | ConvertTo-Json -Depth 6) + "`n", (New-Object Text.UTF8Encoding($false)))
+$json = (($checklist | ConvertTo-Json -Depth 6) -replace "`r?`n", "`n").TrimEnd() + "`n"
+[IO.File]::WriteAllText($target, $json, (New-Object Text.UTF8Encoding($false)))
 Write-Output "Pending checklist created. Read every file, then explicitly set each checked=true with checked_at before completion: $target"

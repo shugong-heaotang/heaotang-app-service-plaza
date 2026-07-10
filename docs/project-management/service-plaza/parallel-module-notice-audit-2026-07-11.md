@@ -2,7 +2,7 @@
 
 - 日期：2026-07-11
 - 工作项：`AIW-20260711-PARALLEL-NOTICES-AUDIT-FIX`
-- 实现记录：`IR-20260711-PARALLEL-NOTICES-AUDIT-FIX-R3`
+- 实现记录：`IR-20260711-PARALLEL-NOTICES-AUDIT-FIX-R4`
 - 当前结论：任务包审计修订 Go；正式派发仍 No-Go
 
 ## 权威状态统一
@@ -62,7 +62,7 @@ M2 前仍须由独立平台/后端工作项关闭：
 
 ## 验证
 
-- 三轮治理检查单均完整：R2 用于状态入口变更后的重新认证，R3 用于协作登记收口后的最终认证。
-- 三轮随机考试均为 8/8、100 分；最终实现记录只引用 R3。
+- 原 R1-R3 检查单内容仍保留，但考试的原始字节哈希在 Git LF 规范化后无法验证，三份旧试卷已原样失效隔离，不再作为通过证据。
+- 当前 R4 检查单使用规范 UTF-8 无 BOM/LF，随机考试 8/8、100 分；最终实现记录只引用 R4。根因与防复发见 `governance-snapshot-repair-2026-07-11.md`。
 - `Test-ServicePlazaContracts.ps1`、`Test-TextEncoding.ps1`、实施记录校验和 `git diff --check` 在提交前复跑。
 - 本切片未修改业务代码、后端、测试服务器、生产、资金或不可逆数据。

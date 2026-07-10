@@ -15,6 +15,19 @@ $readingListPath = Join-Path $root "contracts\foundation\governance-reading-list
 $resolvedChecklist = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($ChecklistPath)
 
 if (-not (Test-Path -LiteralPath $resolvedChecklist)) { throw "Completed flight checklist not found: $ChecklistPath" }
+$checklistBytes = [IO.File]::ReadAllBytes($resolvedChecklist)
+if ($checklistBytes.Length -ge 3 -and $checklistBytes[0] -eq 0xEF -and $checklistBytes[1] -eq 0xBB -and $checklistBytes[2] -eq 0xBF) {
+  throw "Completed flight checklist must be canonical UTF-8 without BOM before the exam."
+}
+$strictUtf8 = New-Object Text.UTF8Encoding($false, $true)
+try {
+  $checklistText = $strictUtf8.GetString($checklistBytes)
+} catch {
+  throw "Completed flight checklist must be valid UTF-8 before the exam."
+}
+if ($checklistText.Contains("`r") -or -not $checklistText.EndsWith("`n")) {
+  throw "Completed flight checklist must use LF line endings and one final newline before the exam."
+}
 $checklist = Get-Content -LiteralPath $resolvedChecklist -Raw -Encoding UTF8 | ConvertFrom-Json
 if ($checklist.status -ne "completed" -or $checklist.record_id -ne $RecordId) { throw "Exam requires a completed checklist for the same record_id." }
 $readingList = Get-Content -LiteralPath $readingListPath -Raw -Encoding UTF8 | ConvertFrom-Json

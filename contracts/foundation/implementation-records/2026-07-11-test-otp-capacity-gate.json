@@ -1,0 +1,75 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-TEST-OTP-CAPACITY-GATE-R5",
+  "title": "测试账号验证码日额度预检与重复问题根因固化",
+  "date": "2026-07-11",
+  "status": "implemented",
+  "objective": "在任何验证码验收开始前，用与后端一致的 SQLite UTC 日口径只读核对测试账号累计消耗和所需独立会话数，容量不足失败关闭，并把两次重复阻塞升级为公共防复发门禁。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-test-otp-capacity-gate-r5.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-test-otp-capacity-gate-r5-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/service-plaza/project-status-one-page.md",
+    "docs/project-management/dependency-driven-master-plan-v1.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/modules/life-navigation/LN-M4-001-preflight-plan.md",
+    "docs/project-management/modules/life-navigation/LN-M4-001-handoff.md",
+    "docs/project-management/service-plaza/test-accounts-and-data.md"
+  ],
+  "capabilities": [
+    "foundation.governance-utf8",
+    "foundation.governance-certification",
+    "foundation.recurrence-prevention",
+    "foundation.delivery-recovery"
+  ],
+  "contracts": [
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "changed_areas": [
+    "scripts/Test-TestAccountOtpCapacity.ps1",
+    "scripts/New-AgentDevelopmentChecklist.ps1",
+    "scripts/New-AgentGovernanceExam.ps1",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/service-plaza/test-accounts-and-data.md",
+    "docs/project-management/service-plaza/test-account-otp-capacity-gate-2026-07-11.md",
+    "docs/project-management/service-plaza/governance-snapshot-repair-2026-07-11.md",
+    "docs/project-management/service-plaza/handoff-log.md"
+  ],
+  "verification": [
+    "scripts/Test-TestAccountOtpCapacity.ps1 insufficient-capacity remote test",
+    "PowerShell AST parse for scripts/Test-TestAccountOtpCapacity.ps1",
+    "scripts/Test-ServicePlazaContracts.ps1",
+    "scripts/Test-TextEncoding.ps1",
+    "scripts/validate_recurring_issues.py",
+    "scripts/validate_implementation_records.py",
+    "git diff --check"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/test-account-otp-capacity-gate-2026-07-11.md",
+    "contracts/foundation/development-checklists/2026-07-11-test-otp-capacity-gate-r5.json",
+    "contracts/foundation/governance-exams/2026-07-11-test-otp-capacity-gate-r5-attempt-1.json",
+    "docs/project-management/service-plaza/handoff-log.md"
+  ],
+  "premises": [
+    "批准测试服务器的后端仍以 SQLite date('now') 和每手机号每日 5 次执行验证码限流",
+    "完整测试手机号只从已批准测试计划传入，不写入报告、日志或命令行；输出只保留脱敏标识",
+    "容量检查只读取计数和 UTC 日期，不读取验证码、JWT 或生产凭据",
+    "成功路径必须等待 UTC 日自然重置后验证，当前 implemented 不等于 verified",
+    "生产、真实资金、不可逆数据和人为清理限流计数均不在本切片范围"
+  ],
+  "implementation_mode": "ai-assisted"
+}

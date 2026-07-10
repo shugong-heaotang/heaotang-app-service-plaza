@@ -95,6 +95,21 @@
       "systemic_fix": "一任务一分支一工作树，活动范围互斥；平台公共路径归平台集成负责人；以基线、实现记录和 Handoff 受控合并。",
       "prevention_gates": ["contracts/foundation/agent-collaboration.v1.json", "scripts/validate_agent_collaboration.py", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"],
       "regression_evidence": []
+    },
+    {
+      "pattern_id": "RI-TEST-OTP-CAPACITY-NOT-RESERVED",
+      "title": "测试验收在发送验证码前未核对并预留 UTC 日额度",
+      "occurrence_count": 2,
+      "status": "implemented",
+      "owner_role": "平台集成负责人",
+      "root_cause": "测试账号计划只预算当前步骤的发送次数，没有在 API 与受控浏览器分别建立会话前读取服务端当日累计消耗，也没有把不同验收表面的独立会话计入同一账号容量。",
+      "occurrences": [
+        { "date": "2026-07-11", "summary": "生命导航 M4 前置阶段曾因验证码发送频率受限调整账号会话计划", "evidence": "docs/project-management/modules/life-navigation/LN-M4-001-preflight-plan.md" },
+        { "date": "2026-07-11", "summary": "API UAT 后浏览器需要独立会话，但主账号当日 5 次额度已耗尽，登录后 UAT 无法执行", "evidence": "docs/project-management/modules/life-navigation/LN-M4-001-handoff.md" }
+      ],
+      "systemic_fix": "所有需要发送验证码的 API、浏览器和管理验收在开始前，按测试账号和验收表面汇总所需独立会话；使用只读门禁核对服务端 SQLite UTC 日计数，容量不足即失败关闭，不换号、不清计数、不改限流。",
+      "prevention_gates": ["scripts/Test-TestAccountOtpCapacity.ps1"],
+      "regression_evidence": ["docs/project-management/service-plaza/test-account-otp-capacity-gate-2026-07-11.md"]
     }
   ]
 }
