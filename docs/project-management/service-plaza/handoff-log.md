@@ -17,6 +17,16 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 | SP-H011 | 并行板块通知书审计修订 | 需求准备复核 | 平台集成 Agent | 健康/俱乐部负责人、验收 Agent | 2026-07-11 | 修订 Go，正式派发 No-Go | 权威状态、跨业务依赖、M0/M1 范围和 M2 公共前置已统一 |
 | SP-H025 | 俱乐部联盟 CA-F0/H0 | 标准与 H0 Base 验收 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | H0 Base Go；H0 Full No-Go | 3eb25ae 独立验收通过；D-CA-003/category 契约局部阻塞 Full Go |
 | SP-H026 | 模块内部依赖 v2 | 平台合同给模块 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | 验证完成，待受控集成 | v1/v2 按 contract_version 路由；五维 readiness 与局部阻塞 |
+| SP-H027 | 健康大管家 V1.0 需求策划 | 文档任务派发 | 平台集成负责人 | 健康大管家负责人 | 2026-07-11 | 正式派发，待模块 G0 | 独立于旧咨询切片；仅文档和治理证据，可推送 Draft PR |
+
+## SP-H027：健康大管家 V1.0 需求策划文档派发
+
+- 工作项：`AIW-20260711-HEALTH-V1-REQUIREMENTS-DOCS`
+- 通知：`HM-V1-DOCS-TASK-20260711-001`
+- 范围：V1.0 PDCAR 需求与开发计划文档、receipt、checklist/exam/IR/Handoff。
+- 允许：专用分支 commit/push、Draft PR。
+- 禁止：业务代码、接口、Schema、环境、部署、生产、真实健康数据、资金操作。
+- 接收条件：专用工作树创建并激活后，模块完成当前 checklist、100 分考试和 receipt。
 
 ## 首轮 Handoff 提交清单
 

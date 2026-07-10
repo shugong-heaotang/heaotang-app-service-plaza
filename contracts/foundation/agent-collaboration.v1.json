@@ -794,6 +794,30 @@
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h025-俱乐部联盟-ca-f0h0-正式派发"
     },
     {
+      "work_id": "AIW-20260711-HEALTH-V1-DOCS-DISPATCH-GOVERNANCE",
+      "title": "健康大管家 V1.0 需求策划文档独立派发",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "handoff-ready",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-v1-docs-dispatch",
+      "branch": "codex/health-manager-v1-docs-dispatch",
+      "base_commit": "8bf5c01fe35b67841bdf6f4197211a1ca55b108d",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-health-v1-docs-dispatch.json",
+        "contracts/foundation/governance-exams/2026-07-11-health-v1-docs-dispatch-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-health-v1-docs-dispatch.json",
+        "docs/project-management/notices/2026-07-11-health-manager-v1-docs-task-order.md",
+        "docs/project-management/service-plaza/health-v1-docs-dispatch-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "独立于旧 personal-consultation-inbox；只派发 V1.0 PDCAR 需求策划文档，不授权业务实现。",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h027健康大管家-v10-需求策划文档派发"
+    },
+    {
       "work_id": "AIW-20260711-SECURE-MODULE-API-ACCEPTANCE",
       "title": "三大核心服务安全取码与部署后 API 验收标准化",
       "owner": "Codex platform integration agent",
