@@ -1,4 +1,9 @@
-import { ApiError, apiRequest, type ApiRequestOptions } from "./apiClient";
+import {
+  ApiError,
+  apiRequestWithMeta,
+  type ApiRequestOptions,
+  type ApiResponse,
+} from "./apiClient";
 
 export type BusinessApiExecutionOptions = Pick<
   ApiRequestOptions,
@@ -106,6 +111,11 @@ export type BusinessApiAdapter = {
     input: Input,
     options?: BusinessApiExecutionOptions,
   ): Promise<Output>;
+  executeWithMeta<Input, Output>(
+    operation: BusinessApiOperation<Input, Output>,
+    input: Input,
+    options?: BusinessApiExecutionOptions,
+  ): Promise<ApiResponse<Output>>;
 };
 
 /**
@@ -117,6 +127,46 @@ export type BusinessApiAdapter = {
 export function createBusinessApiAdapter(serviceId: string): BusinessApiAdapter {
   validateIdentifier("serviceId", serviceId);
 
+  async function executeWithMeta<Input, Output>(
+    operation: BusinessApiOperation<Input, Output>,
+    input: Input,
+    options: BusinessApiExecutionOptions = {},
+  ): Promise<ApiResponse<Output>> {
+    validateIdentifier("operationId", operation.operationId);
+    const path = operation.path(input);
+    validatePath(path, options.requestId);
+
+    const commonOptions: ApiRequestOptions = {
+      auth: operation.authMode !== "anonymous",
+      envelope: "strict",
+      requestId: options.requestId,
+      signal: options.signal,
+      timeoutMs: options.timeoutMs,
+    };
+
+    if (operation.kind === "read") {
+      return apiRequestWithMeta<Output>(path, { method: "GET" }, {
+        ...commonOptions,
+        retry: { mode: "safe-method", maxAttempts: 2, baseDelayMs: 200 },
+      });
+    }
+
+    const idempotencyKey = resolveIdempotencyKey(
+      serviceId,
+      operation.operationId,
+      options.idempotencyKey,
+      options.requestId,
+    );
+    return apiRequestWithMeta<Output>(path, {
+      method: operation.method,
+      headers: { "Idempotency-Key": idempotencyKey },
+      body: JSON.stringify(operation.body(input)),
+    }, {
+      ...commonOptions,
+      retry: { mode: "idempotency-key", maxAttempts: 2, baseDelayMs: 200 },
+    });
+  }
+
   return {
     serviceId,
     async execute<Input, Output>(
@@ -124,39 +174,8 @@ export function createBusinessApiAdapter(serviceId: string): BusinessApiAdapter 
       input: Input,
       options: BusinessApiExecutionOptions = {},
     ): Promise<Output> {
-      validateIdentifier("operationId", operation.operationId);
-      const path = operation.path(input);
-      validatePath(path, options.requestId);
-
-      const commonOptions: ApiRequestOptions = {
-        auth: operation.authMode !== "anonymous",
-        envelope: "strict",
-        requestId: options.requestId,
-        signal: options.signal,
-        timeoutMs: options.timeoutMs,
-      };
-
-      if (operation.kind === "read") {
-        return apiRequest<Output>(path, { method: "GET" }, {
-          ...commonOptions,
-          retry: { mode: "safe-method", maxAttempts: 2, baseDelayMs: 200 },
-        });
-      }
-
-      const idempotencyKey = resolveIdempotencyKey(
-        serviceId,
-        operation.operationId,
-        options.idempotencyKey,
-        options.requestId,
-      );
-      return apiRequest<Output>(path, {
-        method: operation.method,
-        headers: { "Idempotency-Key": idempotencyKey },
-        body: JSON.stringify(operation.body(input)),
-      }, {
-        ...commonOptions,
-        retry: { mode: "idempotency-key", maxAttempts: 2, baseDelayMs: 200 },
-      });
+      return (await executeWithMeta(operation, input, options)).data;
     },
+    executeWithMeta,
   };
 }

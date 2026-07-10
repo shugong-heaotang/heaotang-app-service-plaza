@@ -1,0 +1,68 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-LIFE-M1-PLATFORM-FIX",
+  "title": "生命导航 M1 共享响应元数据与历史边界根因修复",
+  "date": "2026-07-11",
+  "status": "verified",
+  "objective": "关闭生命导航 M1 发现的共享适配器元数据不可达、历史列表上限漂移和跨用户负向证据缺口，并保持现有消费者向后兼容。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-life-m1-platform-fix.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-life-m1-platform-fix-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/foundation-dependency-standard-v1.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-10-life-navigation-first-phase-task-order.md",
+    "docs/project-management/modules/life-navigation-first-slice-contract-v1.md",
+    "C:/Users/shugo/Documents/worktrees/heaotang-life-navigation/docs/project-management/modules/life-navigation/LN-ICR-20260711-001.md"
+  ],
+  "capabilities": [
+    "foundation.identity-api",
+    "foundation.authorization-idempotency",
+    "foundation.app-shell-adapter",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/service-plaza/service-plaza-actions.v1.json",
+    "contracts/foundation/module-dependencies/life-navigation.v1.json",
+    "contracts/modules/life-navigation/internal-dependencies.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "changed_areas": [
+    "app/src/infrastructure/apiClient.ts",
+    "app/src/infrastructure/apiClient.test.ts",
+    "app/src/infrastructure/businessApiAdapter.ts",
+    "app/src/infrastructure/businessApiAdapter.test.ts",
+    "C:/Users/shugo/Documents/worktrees/heaotang-life-m1-backend/backend-go/plugins/life-navigation-plugin/service.go",
+    "C:/Users/shugo/Documents/worktrees/heaotang-life-m1-backend/backend-go/plugins/life-navigation-plugin/service_test.go"
+  ],
+  "verification": [
+    "npm test",
+    "npm run build",
+    "go test -count=1 ./...",
+    "go vet ./...",
+    "scripts/Test-ServicePlazaContracts.ps1",
+    "scripts/Test-TextEncoding.ps1"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/life-m1-platform-fix-2026-07-11.md",
+    "contracts/foundation/development-checklists/2026-07-11-life-m1-platform-fix.json",
+    "contracts/foundation/governance-exams/2026-07-11-life-m1-platform-fix-attempt-1.json"
+  ],
+  "premises": [
+    "现有 execute 和 apiRequest 返回形状不得改变",
+    "响应元数据只暴露稳定非敏感字段",
+    "记录历史固定合同上限为30且仓库内没有登记的更大上限消费者",
+    "测试环境部署和真实会话验收在生命导航 M4 完成"
+  ],
+  "implementation_mode": "ai-assisted"
+}
