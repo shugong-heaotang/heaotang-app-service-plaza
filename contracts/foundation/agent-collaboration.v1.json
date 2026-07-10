@@ -719,7 +719,7 @@
       "title": "俱乐部联盟正式派发 Handoff ID 冲突修正",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-handoff-id-correction",
       "branch": "codex/club-handoff-id-correction",
