@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/foundation/module-dependencies.v1.schema.json",
+  "title": "Heaotang Module Foundation Dependencies v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "module_id", "module_version", "requires"],
+  "properties": {
+    "contract_version": { "const": "module-dependencies.v1" },
+    "module_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+    "module_version": { "type": "string", "pattern": "^v[1-9][0-9]*$" },
+    "requires": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["capability_id", "minimum_version"],
+        "properties": {
+          "capability_id": { "type": "string" },
+          "minimum_version": { "type": "string", "pattern": "^v[1-9][0-9]*$" }
+        }
+      }
+    }
+  }
+}

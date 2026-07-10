@@ -1,0 +1,12 @@
+{
+    "executed_at":  "2026-07-10T14:19:49.8002537Z",
+    "server":  "root@47.94.159.60",
+    "archive":  "D:\\Backup\\heaotang-test-server\\20260710-220144\\test-server-state.tar.gz",
+    "isolated_linux_restore":  true,
+    "extraction_succeeded":  true,
+    "sqlite_integrity":  "ok",
+    "required_tables":  5,
+    "action_count":  20,
+    "binary_bytes":  39261543,
+    "startup_script_bytes":  1275
+}

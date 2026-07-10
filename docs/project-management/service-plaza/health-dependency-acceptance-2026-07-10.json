@@ -1,0 +1,21 @@
+{
+  "executed_at": "2026-07-10T23:11:02+08:00",
+  "environment": "https://heaotang.cn",
+  "deployment_binary_sha256": "4a21a90ad0cfc96f60b3b3c42e02650040038360bf7689ab665c9d72a7444b40",
+  "core_service_required_scopes": {
+    "life-navigation": [],
+    "club-alliance": [],
+    "health-manager": []
+  },
+  "synthetic_consultation": {
+    "status": "pending",
+    "ai_advice": "",
+    "request_id": "uat-health-no-ai-20260710",
+    "contains_real_health_data": false
+  },
+  "supporting_schema_routes": {
+    "profile_status": 200,
+    "metrics_status": 200,
+    "reports_status": 200
+  }
+}

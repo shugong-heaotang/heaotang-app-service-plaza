@@ -1,0 +1,15 @@
+{
+  "contract_version": "service-plaza.v1",
+  "service_id": "partner-example",
+  "display_name": "合作服务",
+  "summary": "破坏性候选",
+  "category": "common",
+  "sort_order": 100,
+  "lifecycle_status": "preview",
+  "entry": { "type": "internal_route", "target": "/services/partner-example", "return_target": "/services/partner-example" },
+  "access": { "auth_mode": "shared_session", "required_scopes": ["partner:admin"] },
+  "provider": { "provider_id": "partner-example", "display_name": "合作方" },
+  "capabilities": ["navigate"],
+  "privacy_level": "sensitive",
+  "business_api_version": "v2"
+}

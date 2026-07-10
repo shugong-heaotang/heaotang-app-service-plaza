@@ -1,0 +1,41 @@
+{
+  "executed_at": "2026-07-10T23:38:45+08:00",
+  "environment": "https://heaotang.cn",
+  "deployment_binary_sha256": "262c9b8f6e85fced36eaf0b48316d59ea19cc4c8ac26bde115bbaddd8a781277",
+  "pre_deployment_backup": {
+    "remote_archive": "/root/heaotang-backups/20260710-233749.tar.gz",
+    "local_copy": "D:/Backup/heaotang-test-server/20260710-233749/test-server-state.tar.gz"
+  },
+  "readiness": { "db": true, "plugins": 24 },
+  "json_content_type": "application/json; charset=utf-8",
+  "membership_middle": { "configured": false },
+  "family_standard": { "configured": false },
+  "family_member_capacity_public_status": 404,
+  "anonymous_admin_status": 401,
+  "family_plans": {
+    "free": { "price_minor": 0, "currency": "CNY", "configured": true, "purchasable": true },
+    "paid_count": 4,
+    "paid_unconfigured_count": 4,
+    "paid_purchasable_count": 0
+  },
+  "chinese_decode_probe": {
+    "name": "基础版",
+    "description": "家庭基础空间与 P0 三个维度"
+  },
+  "maker_checker": {
+    "verdict": "pass",
+    "change_id": 1,
+    "distinct_service_principals": true,
+    "probe_key": "club.family.member_capacity",
+    "probe_value": 20,
+    "probe_effective_at": "2099-01-01T00:00:00Z",
+    "proposal_status_before_review": "pending",
+    "same_person_review_status": 403,
+    "independent_review_status": "approved",
+    "version_created": true,
+    "current_behavior_changed": false,
+    "legacy_direct_write_status": 409,
+    "real_membership_price_configured": false,
+    "credentials_persisted": false
+  }
+}

@@ -1,0 +1,43 @@
+{
+    "run_id":  "service-plaza-uat-20260710-210748",
+    "executed_at":  "2026-07-10T13:07:56.1102563Z",
+    "base_url":  "https://heaotang.cn",
+    "phone":  "199****9991",
+    "user_id":  84,
+    "checks":  {
+                   "ready":  200,
+                   "unauthenticated_write":  401,
+                   "invalid_token":  401,
+                   "login":  200,
+                   "me":  200,
+                   "life_validation":  400,
+                   "health_validation":  400,
+                   "life_navigation":  {
+                                           "status":  201,
+                                           "id":  116
+                                       },
+                   "club_join":  {
+                                     "status":  200,
+                                     "id":  12,
+                                     "club_id":  1
+                                 },
+                   "duplicate_club_join":  {
+                                               "status":  200,
+                                               "same_application":  true,
+                                               "id":  12
+                                           },
+                   "health_consultation":  {
+                                               "status":  201,
+                                               "id":  3
+                                           },
+                   "health_owner_list":  {
+                                             "status":  200,
+                                             "contains_created_record":  true
+                                         },
+                   "health_cross_user_isolation":  {
+                                                       "status":  200,
+                                                       "leaked_record":  false
+                                                   }
+               },
+    "secrets_persisted":  false
+}

@@ -20,7 +20,7 @@
 | --- | --- | --- | --- | --- | --- | --- |
 | FE-PLAT-001 | P0-RUN-001 | EV-PLAT-001 | 平台路由事实 | 环境地址 https://47.94.159.60、服务广场入口 /app/service-plaza-temp.html#plaza、三大核心服务临时承接页 /app/service-plaza-temp.html#{life-navigation,club-alliance,health-manager}、方案A 单页模拟 | 证据已形成，待门禁复核 | 未复核 |
 | FE-PLAT-002 | P0-RUN-002 | EV-PLAT-002 | 权限事实 | 三级权限结构：未登录（公开路由）/ 普通会员（JWT user_id）/ 管理员（JWT is_admin）；代码实现于 backend-go/internal/member/routes.go 和 middleware/auth.go | 证据已形成，待门禁复核 | 未复核 |
-| FE-PLAT-003 | P0-RUN-003 | EV-PLAT-003 | 测试账号事实 | admin/admin123（管理端）、13700137001~13700137003（会员端）；验证于测试代码 backend-go/tests/member_integration_test.go | 证据已形成，待门禁复核 | 未复核 |
+| FE-PLAT-003 | P0-RUN-003 | EV-PLAT-003 | 测试账号事实 | 管理员测试账号（凭据通过安全渠道获取）（管理端）、13700137001~13700137003（会员端）；验证于测试代码 backend-go/tests/member_integration_test.go | 证据已形成，待门禁复核 | 未复核 |
 | FE-PLAT-004 | P0-RUN-004 | EV-PLAT-004 | 测试数据事实 | 会员资料模型（nickname/avatar/gender/birthday/location/signature/phone/email/real_name）；俱乐部模块（backend-go/internal/club/）；健康模块（backend-go/internal/health/calm,gym,kitchen,security） | 证据已形成，待门禁复核 | 未复核 |
 | FE-PLAT-005 | P0-RUN-005 | EV-PLAT-005 | 返回路径事实 | 每个临时页底部均有"← 返回服务广场"按钮 | 证据已形成，待门禁复核 | 未复核 |
 | FE-MOD-001 | P0-RUN-006 | EV-MOD-001 | 生命导航板块事实 | 主动作：提交导航申请（已确认）；路由：/app/service-plaza-temp.html#life-navigation；返回路径：已部署 | 证据已形成，待门禁复核 | 未复核 |

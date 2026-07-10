@@ -1,0 +1,9 @@
+{
+    "executed_at":  "2026-07-10T14:32:17.0298236Z",
+    "server":  "root@47.94.159.60",
+    "expected_failure_observed":  true,
+    "original_binary_restored":  true,
+    "binary_sha256":  "72684ca237e853051f03565cf388396c0a6992b3b05942371b4bece6fe2acc5d",
+    "ready":  true,
+    "database_ready":  true
+}

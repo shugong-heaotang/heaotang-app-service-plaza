@@ -1,0 +1,50 @@
+{
+    "run_id":  "service-plaza-uat-20260710-220412",
+    "executed_at":  "2026-07-10T14:04:21.3788961Z",
+    "base_url":  "https://heaotang.cn",
+    "phone":  "199****9806",
+    "user_id":  90,
+    "checks":  {
+                   "ready":  200,
+                   "unauthenticated_write":  401,
+                   "invalid_token":  401,
+                   "request_id_round_trip":  true,
+                   "login":  200,
+                   "me":  200,
+                   "life_validation":  400,
+                   "health_validation":  400,
+                   "invalid_idempotency_key":  400,
+                   "missing_idempotency_key":  400,
+                   "life_navigation":  {
+                                           "status":  201,
+                                           "id":  117,
+                                           "replay_status":  200,
+                                           "conflict_status":  409
+                                       },
+                   "club_join":  {
+                                     "status":  201,
+                                     "id":  13,
+                                     "club_id":  1
+                                 },
+                   "duplicate_club_join":  {
+                                               "status":  200,
+                                               "same_application":  true,
+                                               "id":  13
+                                           },
+                   "health_consultation":  {
+                                               "status":  201,
+                                               "id":  4,
+                                               "replay_status":  200,
+                                               "conflict_status":  409
+                                           },
+                   "health_owner_list":  {
+                                             "status":  200,
+                                             "contains_created_record":  true
+                                         },
+                   "health_cross_user_isolation":  {
+                                                       "status":  200,
+                                                       "leaked_record":  false
+                                                   }
+               },
+    "secrets_persisted":  false
+}

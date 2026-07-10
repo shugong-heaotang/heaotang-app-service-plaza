@@ -1,0 +1,15 @@
+{
+  "contract_version": "service-plaza.v1",
+  "service_id": "partner-example",
+  "display_name": "合作服务",
+  "summary": "旧说明",
+  "category": "common",
+  "sort_order": 100,
+  "lifecycle_status": "preview",
+  "entry": { "type": "external_https", "target": "https://partner.example/entry", "return_target": "/services" },
+  "access": { "auth_mode": "oidc_pkce", "required_scopes": ["partner:use"] },
+  "provider": { "provider_id": "partner-example", "display_name": "合作方" },
+  "capabilities": ["navigate", "partner-service"],
+  "privacy_level": "account",
+  "business_api_version": "v1"
+}

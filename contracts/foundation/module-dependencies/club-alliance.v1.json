@@ -1,0 +1,16 @@
+{
+  "contract_version": "module-dependencies.v1",
+  "module_id": "club-alliance",
+  "module_version": "v1",
+  "requires": [
+    { "capability_id": "foundation.ai-engineering-traceability", "minimum_version": "v1" },
+    { "capability_id": "foundation.service-action-contracts", "minimum_version": "v1" },
+    { "capability_id": "foundation.identity-api", "minimum_version": "v1" },
+    { "capability_id": "foundation.authorization-idempotency", "minimum_version": "v1" },
+    { "capability_id": "foundation.contract-tooling", "minimum_version": "v1" },
+    { "capability_id": "foundation.observability-config", "minimum_version": "v1" },
+    { "capability_id": "foundation.business-variables", "minimum_version": "v1" },
+    { "capability_id": "foundation.delivery-recovery", "minimum_version": "v1" },
+    { "capability_id": "foundation.app-shell-adapter", "minimum_version": "v1" }
+  ]
+}

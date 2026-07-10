@@ -1,0 +1,22 @@
+{
+  "contract_version": "business-variables.v1",
+  "variables": [
+    { "key": "membership.middle.monthly_fee", "kind": "money", "module": "membership", "currency": "CNY", "public": true, "required": true, "default": null },
+    { "key": "membership.senior.monthly_fee", "kind": "money", "module": "membership", "currency": "CNY", "public": true, "required": true, "default": null },
+    { "key": "membership.vip.monthly_fee", "kind": "money", "module": "membership", "currency": "CNY", "public": true, "required": true, "default": null },
+    { "key": "club.family.standard.monthly_fee", "kind": "money", "module": "club", "currency": "CNY", "public": true, "required": true, "default": null },
+    { "key": "club.family.premium.monthly_fee", "kind": "money", "module": "club", "currency": "CNY", "public": true, "required": true, "default": null },
+    { "key": "club.family.annual.yearly_fee", "kind": "money", "module": "club", "currency": "CNY", "public": true, "required": true, "default": null },
+    { "key": "club.family.clan.yearly_fee", "kind": "money", "module": "club", "currency": "CNY", "public": true, "required": true, "default": null },
+    { "key": "club.family.member_capacity", "kind": "integer", "module": "club", "public": false, "required": true, "bootstrap": 20 }
+  ],
+  "money_format": { "amount_minor": "integer", "currency": "ISO-4217" },
+  "unconfigured_policy": "display_unconfigured_and_reject_charge",
+  "update_policy": "maker_checker_append_only_effective_dated_idempotent_audited",
+  "approval_policy": {
+    "proposal_status": "pending",
+    "separation_of_duties": "proposed_by_must_differ_from_reviewed_by",
+    "version_creation": "approved_review_only",
+    "legacy_direct_writes": "locked"
+  }
+}

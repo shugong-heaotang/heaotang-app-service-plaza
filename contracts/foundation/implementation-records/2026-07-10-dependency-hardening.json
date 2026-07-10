@@ -1,0 +1,63 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260710-DEPENDENCY-HARDENING",
+  "title": "业务变量、俱乐部一致性、健康隐私和编码依赖加固",
+  "date": "2026-07-10",
+  "status": "deployed",
+  "objective": "关闭进入具体板块开发前已经发现的可变价格、非事务审核、健康 AI 数据边界、虚假 scope、缺失迁移和中文响应编码根因。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-10-dependency-hardening.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/recurring-issues.v1.json", "docs/project-management/module-internal-dependency-standard-v1.md"],
+  "requirement_sources": [
+    "docs/project-management/business-variable-standard-v1.md",
+    "docs/project-management/engineering-toolchain-standard-v1.md",
+    "docs/project-management/dependency-driven-master-plan-v1.md"
+  ],
+  "capabilities": [
+    "foundation.business-variables",
+    "foundation.authorization-idempotency",
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-utf8"
+  ],
+  "contracts": [
+    "contracts/foundation/business-variables.v1.json",
+    "contracts/foundation/foundation-capabilities.v1.json",
+    "contracts/foundation/module-dependencies.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md"
+  ],
+  "changed_areas": [
+    "C:/Users/shugo/Documents/heaotang-main/backend-go/internal/businessconfig",
+    "C:/Users/shugo/Documents/heaotang-main/backend-go/plugins/config-plugin",
+    "C:/Users/shugo/Documents/heaotang-main/backend-go/plugins/club-plugin",
+    "C:/Users/shugo/Documents/heaotang-main/backend-go/plugins/health-plugin",
+    "C:/Users/shugo/Documents/heaotang-main/backend-go/pkg/response",
+    "C:/Users/shugo/Documents/heaotang-main/backend-go/internal/db/schema.go",
+    "scripts/Test-TextEncoding.ps1"
+  ],
+  "verification": [
+    "go test ./...",
+    "go vet ./...",
+    "pnpm run typecheck",
+    "pnpm run build",
+    "scripts/Test-ServicePlazaContracts.ps1",
+    "scripts/Test-TextEncoding.ps1",
+    "scripts/Deploy-ServicePlazaBackendTest.ps1"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/business-variable-acceptance-2026-07-10.json",
+    "docs/project-management/service-plaza/health-dependency-acceptance-2026-07-10.json",
+    "docs/project-management/service-plaza/deployment-rollback-drill-2026-07-10.json"
+  ],
+  "premises": [
+    "具体会员和家庭套餐价格仍未由业务负责人确定",
+    "健康咨询首阶段只做收件，不做 AI 诊断、医生预约或收费",
+    "付费家庭套餐在真实订单和支付授权闭环完成前不可自行激活"
+  ],
+  "implementation_mode": "ai-assisted"
+}

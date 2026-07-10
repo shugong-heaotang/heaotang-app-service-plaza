@@ -1,0 +1,87 @@
+{
+  "contract_version": "module-internal-dependencies.v1",
+  "module_id": "life-navigation",
+  "module_version": "v1",
+  "slice_id": "application-history",
+  "development_readiness": "go",
+  "acceptance_readiness": "partial-go",
+  "dependencies": [
+    {
+      "dependency_id": "entry.contract",
+      "kind": "interface",
+      "description": "服务入口、返回路径和主动作稳定",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": [],
+      "contracts": ["contracts/service-plaza/service-plaza-actions.v1.json"],
+      "evidence": ["docs/project-management/service-plaza/foundation-acceptance-2026-07-10.md"],
+      "unresolved": []
+    },
+    {
+      "dependency_id": "records.data",
+      "kind": "data",
+      "description": "申请记录归属、类型、标题、备注和创建时间模型",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": ["entry.contract"],
+      "contracts": ["docs/project-management/modules/life-navigation-first-slice-contract-v1.md"],
+      "evidence": ["C:/Users/shugo/Documents/heaotang-main/backend-go/plugins/life-navigation-plugin/service.go"],
+      "unresolved": []
+    },
+    {
+      "dependency_id": "records.api",
+      "kind": "interface",
+      "description": "本人申请 POST/GET v1 接口和稳定错误语义",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": ["records.data"],
+      "contracts": ["docs/project-management/modules/life-navigation-first-slice-contract-v1.md"],
+      "evidence": ["docs/project-management/service-plaza/api-acceptance-2026-07-10-foundation.json"],
+      "unresolved": []
+    },
+    {
+      "dependency_id": "records.ownership",
+      "kind": "policy",
+      "description": "用户身份来自会话且只能读取本人记录",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": ["records.data"],
+      "contracts": ["docs/project-management/modules/life-navigation-first-slice-contract-v1.md"],
+      "evidence": ["C:/Users/shugo/Documents/heaotang-main/backend-go/plugins/life-navigation-plugin/service_test.go"],
+      "unresolved": []
+    },
+    {
+      "dependency_id": "records.idempotency",
+      "kind": "policy",
+      "description": "首次、重放、异载荷冲突和日限额顺序固定",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": ["records.api"],
+      "contracts": ["docs/project-management/modules/life-navigation-first-slice-contract-v1.md"],
+      "evidence": ["docs/project-management/service-plaza/api-acceptance-2026-07-10-foundation.json"],
+      "unresolved": []
+    },
+    {
+      "dependency_id": "history.ui",
+      "kind": "workflow",
+      "description": "提交后展示本人最近申请及空、加载、错误和限额状态",
+      "status": "standardized",
+      "required_for_slice": true,
+      "depends_on": ["records.api", "records.ownership", "records.idempotency"],
+      "contracts": ["docs/project-management/modules/life-navigation-first-slice-contract-v1.md"],
+      "evidence": [],
+      "unresolved": ["尚未实现服务广场内的本人申请列表"]
+    },
+    {
+      "dependency_id": "compliance.boundary",
+      "kind": "policy",
+      "description": "不作确定性预测且不替代专业意见",
+      "status": "standardized",
+      "required_for_slice": true,
+      "depends_on": ["entry.contract"],
+      "contracts": ["docs/project-management/modules/life-navigation-first-slice-contract-v1.md"],
+      "evidence": [],
+      "unresolved": []
+    }
+  ]
+}

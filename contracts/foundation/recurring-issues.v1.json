@@ -1,0 +1,100 @@
+{
+  "contract_version": "recurring-issues.v1",
+  "two_strike_rule": true,
+  "issues": [
+    {
+      "pattern_id": "RI-UTF8-MOJIBAKE",
+      "title": "UTF-8 字节合法但 PowerShell 或历史注释显示乱码",
+      "occurrence_count": 3,
+      "status": "verified",
+      "owner_role": "平台质量负责人",
+      "root_cause": "只验证 UTF-8 字节是否合法，没有同时约束 PowerShell 解码、HTTP charset 和常见乱码内容模式。",
+      "occurrences": [
+        { "date": "2026-07-10", "summary": "PowerShell 读取 UTF-8 JSON 出现乱码", "evidence": "docs/project-management/service-plaza/foundation-acceptance-2026-07-10.md" },
+        { "date": "2026-07-10", "summary": "API JSON 未声明 charset 导致中文套餐名误解码", "evidence": "docs/project-management/service-plaza/business-variable-acceptance-2026-07-10.json" },
+        { "date": "2026-07-10", "summary": "club-plugin 留有历史 mojibake 注释", "evidence": "docs/project-management/service-plaza/recurring-issue-audit-2026-07-10.md" }
+      ],
+      "systemic_fix": "统一 PowerShell UTF-8 初始化、API JSON charset、跨仓库 BOM/严格 UTF-8/乱码特征扫描。",
+      "prevention_gates": ["scripts/Test-TextEncoding.ps1"],
+      "regression_evidence": ["docs/project-management/service-plaza/business-variable-acceptance-2026-07-10.json"]
+    },
+    {
+      "pattern_id": "RI-HARDCODED-BUSINESS-VARIABLE",
+      "title": "价格、容量和费率被写入业务代码或启动默认值",
+      "occurrence_count": 3,
+      "status": "verified",
+      "owner_role": "平台后端负责人",
+      "root_cause": "缺少统一的类型化业务变量契约，开发者为尽快展示功能直接使用示例数值。",
+      "occurrences": [
+        { "date": "2026-07-10", "summary": "会员和套餐历史文档存在相互冲突的固定价格", "evidence": "docs/project-management/business-variable-standard-v1.md" },
+        { "date": "2026-07-10", "summary": "家庭俱乐部四档价格硬编码在 Go 代码", "evidence": "docs/project-management/service-plaza/recurring-issue-audit-2026-07-10.md" },
+        { "date": "2026-07-10", "summary": "平台服务费在新数据库中自动种入固定金额和比例", "evidence": "docs/project-management/service-plaza/recurring-issue-audit-2026-07-10.md" }
+      ],
+      "systemic_fix": "建立类型化、版本化、双人审批的业务变量；未配置价格失败关闭；旧单人配置写入口锁定。",
+      "prevention_gates": ["contracts/foundation/business-variables.v1.json", "docs/decisions/0008-versioned-business-variables.md"],
+      "regression_evidence": ["docs/project-management/service-plaza/business-variable-acceptance-2026-07-10.json"]
+    },
+    {
+      "pattern_id": "RI-FALSE-PERMISSION-CONTRACT",
+      "title": "契约声明不存在的 scope 而运行时只校验登录",
+      "occurrence_count": 3,
+      "status": "verified",
+      "owner_role": "平台安全负责人",
+      "root_cause": "把未来可能的权限名称写进 Manifest，却没有与真实授权来源和后端校验联检。",
+      "occurrences": [
+        { "date": "2026-07-10", "summary": "生命导航声明无真实来源的 life-navigation:use", "evidence": "docs/project-management/service-plaza/health-dependency-acceptance-2026-07-10.json" },
+        { "date": "2026-07-10", "summary": "俱乐部声明无真实来源的 clubs:read/clubs:join", "evidence": "docs/project-management/service-plaza/health-dependency-acceptance-2026-07-10.json" },
+        { "date": "2026-07-10", "summary": "健康声明无真实来源的 health:consult", "evidence": "docs/project-management/service-plaza/health-dependency-acceptance-2026-07-10.json" }
+      ],
+      "systemic_fix": "三个基础自助服务统一为共享登录加本人资源归属，管理动作只保留真实 club:manage。",
+      "prevention_gates": ["scripts/Test-ServicePlazaContracts.ps1"],
+      "regression_evidence": ["docs/project-management/service-plaza/health-dependency-acceptance-2026-07-10.json"]
+    },
+    {
+      "pattern_id": "RI-CONFIG-SINGLE-PERSON-WRITE",
+      "title": "管理员可以同时录入并生效关键配置",
+      "occurrence_count": 3,
+      "status": "verified",
+      "owner_role": "平台安全负责人",
+      "root_cause": "历史配置接口只校验管理员角色，没有将职责分离建模为服务端工作流。",
+      "occurrences": [
+        { "date": "2026-07-10", "summary": "通用 system_configs 可由单个管理员直接覆盖", "evidence": "docs/project-management/service-plaza/recurring-issue-audit-2026-07-10.md" },
+        { "date": "2026-07-10", "summary": "动作遥测功能开关可由单个管理员直接启用", "evidence": "docs/project-management/service-plaza/recurring-issue-audit-2026-07-10.md" },
+        { "date": "2026-07-10", "summary": "平台服务费可由单个管理员直接修改", "evidence": "docs/project-management/service-plaza/recurring-issue-audit-2026-07-10.md" }
+      ],
+      "systemic_fix": "业务变量改为录入提案和独立审核；同人审核服务端拒绝；其他旧写接口在迁入工作流前锁定。",
+      "prevention_gates": ["docs/decisions/0011-two-person-config-approval.md"],
+      "regression_evidence": ["docs/project-management/service-plaza/business-variable-acceptance-2026-07-10.json"]
+    },
+    {
+      "pattern_id": "RI-GOVERNANCE-NOT-DISCOVERED",
+      "title": "新 Agent 未读取零散治理文档而重复旧错误",
+      "occurrence_count": 2,
+      "status": "implemented",
+      "owner_role": "平台架构负责人",
+      "root_cause": "规定分散在项目台账、ADR 和提交记录中，仓库首屏入口没有完整必读顺序，后端 README 还保留了与运行事实冲突的历史技术栈。",
+      "occurrences": [
+        { "date": "2026-07-10", "summary": "服务广场已有多份管理规定但新 Agent 没有系统读取", "evidence": "docs/project-management/service-plaza/recurring-issue-audit-2026-07-10.md" },
+        { "date": "2026-07-10", "summary": "后端 README 声称 Gin/PostgreSQL，与实际 Fiber/SQLite 冲突", "evidence": "docs/project-management/service-plaza/recurring-issue-audit-2026-07-10.md" }
+      ],
+      "systemic_fix": "两个仓库 README/AGENTS 建立唯一必读入口，开发前置脚本校验治理输入，实现记录强制声明实际读取文件。",
+      "prevention_gates": ["scripts/Test-AgentDevelopmentPreflight.ps1", "scripts/validate_implementation_records.py", "docs/decisions/0013-mandatory-ai-development-entrypoint.md"],
+      "regression_evidence": []
+    },
+    {
+      "pattern_id": "RI-AGENT-SHARED-WORKSPACE-OVERWRITE",
+      "title": "后序 Agent 在共享脏工作区覆盖或重写前序成果",
+      "occurrence_count": 2,
+      "status": "implemented",
+      "owner_role": "平台集成负责人",
+      "root_cause": "工作项没有独立分支和工作树，也没有基线、范围所有权及受控交接，后序 Agent 无法判断已有修改的归属和设计依据。",
+      "occurrences": [
+        { "date": "2026-07-10", "summary": "项目负责人报告后序 Agent 曾把前序 Agent 已完成修改重新改乱", "evidence": "docs/project-management/service-plaza/recurring-issue-audit-2026-07-10.md" },
+        { "date": "2026-07-10", "summary": "当前平台收口工作从共享 master 脏工作区开始且包含大量未归属到独立工作项的变更", "evidence": "contracts/foundation/agent-collaboration.v1.json" }
+      ],
+      "systemic_fix": "一任务一分支一工作树，活动范围互斥；平台公共路径归平台集成负责人；以基线、实现记录和 Handoff 受控合并。",
+      "prevention_gates": ["contracts/foundation/agent-collaboration.v1.json", "scripts/validate_agent_collaboration.py", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"],
+      "regression_evidence": []
+    }
+  ]
+}

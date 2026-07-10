@@ -111,7 +111,7 @@
 | 未登录访问服务广场预期状态 | 可访问公开页面和会员列表，不可查看个人资料、关注、发布需求 | 证据已形成 |
 | 普通会员访问三大核心服务预期状态 | JWT 认证后可通过 Authorization:Bearer {token} 访问受保护路由；可查看/更新个人资料、关注/取关、发布需求 | 证据已形成 |
 | 无权限账号访问三大核心服务预期状态 | Token 无效或过期时返回 401 Unauthorized；无 user_id claim 时不可访问受保护路由 | 证据已形成 |
-| 管理或审核权限账号可访问范围 | 管理员登录 POST /api/member/admin/login（username=admin, password=admin123）；可管理系统配置、查看管理统计、管理会员 | 证据已形成 |
+| 管理或审核权限账号可访问范围 | 管理员登录 POST /api/member/admin/login（管理员测试账号凭据通过安全渠道获取）；可管理系统配置、查看管理统计、管理会员 | 证据已形成 |
 | 权限规则证据位置 | backend-go/internal/member/routes.go（公开/需认证/管理员三级路由注册）；backend-go/internal/middleware/auth.go（JWT 验证中间件，含 is_admin 声明） | 代码级别证据就绪 |
 | 回写文件 | test-accounts-and-data.md、integration-checklist.md | 待回写 |
 
@@ -119,13 +119,13 @@
 
 | 字段 | 填写内容 | 当前状态 |
 | --- | --- | --- |
-| 管理员账号类型和获取方式 | username=admin, password=admin123；登录 POST /api/member/admin/login | 证据已形成 |
+| 管理员账号类型和获取方式 | 管理员测试账号凭据通过安全渠道获取；登录 POST /api/member/admin/login | 证据已形成 |
 | 普通会员账号类型和获取方式 | phone=13700137001~13700137003；登录 POST /api/member/login | 证据已形成（测试代码） |
 | 无权限账号类型和获取方式 | 不存在的 user_id 或无 is_admin 声明的普通用户 token | 需在数据库中注册 |
 | 所属测试环境 | https://47.94.159.60（HTTPS） | 已确认 |
 | 安全保管方式 | 仅登记账号类型和获取方式，不记录真实密码 | 已脱敏 |
 | 可用状态 | 管理员账号已验证可用（测试代码已验证通过） | 已确认 |
-| 证据位置 | backend-go/tests/member_integration_test.go（测试代码中使用 admin/admin123 和 13700137001 等账号） | 代码级别证据就绪 |
+| 证据位置 | backend-go/tests/member_integration_test.go（测试代码中使用 管理员测试账号（凭据通过安全渠道获取） 和 13700137001 等账号） | 代码级别证据就绪 |
 | 回写文件 | test-accounts-and-data.md、fact-evidence-submission-packet.md | 待回写 |
 
 ## 二C、FE-PLAT-004 测试数据事实（已从后端代码提取）

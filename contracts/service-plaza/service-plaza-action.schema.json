@@ -1,0 +1,145 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/service-plaza/service-plaza-action.v1.schema.json",
+  "title": "Heaotang Service Plaza Page Actions v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "page_id", "expected_action_count", "actions"],
+  "properties": {
+    "contract_version": { "const": "service-plaza.action.v1" },
+    "page_id": { "const": "service-plaza" },
+    "expected_action_count": { "const": 20 },
+    "actions": {
+      "type": "array",
+      "minItems": 20,
+      "maxItems": 20,
+      "prefixItems": [
+        { "$ref": "#/$defs/pageAiAssistant" },
+        { "$ref": "#/$defs/lifeNavigation" },
+        { "$ref": "#/$defs/clubAlliance" },
+        { "$ref": "#/$defs/clubManage" },
+        { "$ref": "#/$defs/publicBenefitClub" },
+        { "$ref": "#/$defs/selfCreatedClub" },
+        { "$ref": "#/$defs/familyClub" },
+        { "$ref": "#/$defs/clubFederation" },
+        { "$ref": "#/$defs/healthManager" },
+        { "$ref": "#/$defs/commonMore" },
+        { "$ref": "#/$defs/activityPlaza" },
+        { "$ref": "#/$defs/networkCenter" },
+        { "$ref": "#/$defs/protectionMall" },
+        { "$ref": "#/$defs/secondhandMarket" },
+        { "$ref": "#/$defs/aiAssistant" },
+        { "$ref": "#/$defs/learningPlaza" },
+        { "$ref": "#/$defs/primaryHome" },
+        { "$ref": "#/$defs/primaryServices" },
+        { "$ref": "#/$defs/primaryDiscover" },
+        { "$ref": "#/$defs/primaryProfile" }
+      ],
+      "items": false
+    }
+  },
+  "$defs": {
+    "access": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["auth_mode", "required_scopes"],
+      "properties": {
+        "auth_mode": { "enum": ["anonymous", "shared_session", "oidc_pkce"] },
+        "required_scopes": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^[a-z0-9._:-]+$" }
+        }
+      }
+    },
+    "action": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "action_id",
+        "region",
+        "sort_order",
+        "label",
+        "action_type",
+        "target",
+        "lifecycle_status",
+        "access",
+        "return_target",
+        "telemetry_event"
+      ],
+      "properties": {
+        "action_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$", "minLength": 3, "maxLength": 64 },
+        "region": { "enum": ["topbar", "core_services", "club_alliance", "common_services", "primary_navigation"] },
+        "sort_order": { "type": "integer", "minimum": 10, "maximum": 200, "multipleOf": 10 },
+        "label": { "type": "string", "minLength": 1, "maxLength": 40 },
+        "action_type": { "enum": ["service_entry", "service_variant", "platform_command", "primary_navigation"] },
+        "target": { "type": "string", "pattern": "^(?:/|https://|heaotang://)", "minLength": 1, "maxLength": 500 },
+        "lifecycle_status": { "enum": ["active", "preview", "planned", "maintenance", "offline"] },
+        "access": { "$ref": "#/$defs/access" },
+        "service_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$", "minLength": 3, "maxLength": 64 },
+        "return_target": { "type": "string", "pattern": "^/services(?:/.*)?$" },
+        "telemetry_event": { "type": "string", "pattern": "^[a-z][a-z0-9_]*(?:\\.[a-z][a-z0-9_]*)+$", "maxLength": 120 }
+      }
+    },
+    "pageAiAssistant": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "page-ai-assistant" }, "sort_order": { "const": 10 } } }]
+    },
+    "lifeNavigation": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "life-navigation" }, "sort_order": { "const": 20 } } }]
+    },
+    "clubAlliance": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "club-alliance" }, "sort_order": { "const": 30 } } }]
+    },
+    "clubManage": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "club-manage" }, "sort_order": { "const": 40 } } }]
+    },
+    "publicBenefitClub": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "public-benefit-club" }, "sort_order": { "const": 50 } } }]
+    },
+    "selfCreatedClub": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "self-created-club" }, "sort_order": { "const": 60 } } }]
+    },
+    "familyClub": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "family-club" }, "sort_order": { "const": 70 } } }]
+    },
+    "clubFederation": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "club-federation" }, "sort_order": { "const": 80 } } }]
+    },
+    "healthManager": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "health-manager" }, "sort_order": { "const": 90 } } }]
+    },
+    "commonMore": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "common-more" }, "sort_order": { "const": 100 } } }]
+    },
+    "activityPlaza": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "activity-plaza" }, "sort_order": { "const": 110 } } }]
+    },
+    "networkCenter": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "network-center" }, "sort_order": { "const": 120 } } }]
+    },
+    "protectionMall": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "protection-mall" }, "sort_order": { "const": 130 } } }]
+    },
+    "secondhandMarket": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "secondhand-market" }, "sort_order": { "const": 140 } } }]
+    },
+    "aiAssistant": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "ai-assistant" }, "sort_order": { "const": 150 } } }]
+    },
+    "learningPlaza": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "learning-plaza" }, "sort_order": { "const": 160 } } }]
+    },
+    "primaryHome": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "primary-home" }, "sort_order": { "const": 170 } } }]
+    },
+    "primaryServices": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "primary-services" }, "sort_order": { "const": 180 } } }]
+    },
+    "primaryDiscover": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "primary-discover" }, "sort_order": { "const": 190 } } }]
+    },
+    "primaryProfile": {
+      "allOf": [{ "$ref": "#/$defs/action" }, { "properties": { "action_id": { "const": "primary-profile" }, "sort_order": { "const": 200 } } }]
+    }
+  }
+}

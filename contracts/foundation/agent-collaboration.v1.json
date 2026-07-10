@@ -1,0 +1,32 @@
+{
+  "contract_version": "agent-collaboration.v1",
+  "integration_owner_role": "平台集成负责人",
+  "workspace_policy": "isolated-branch-and-worktree",
+  "protected_paths": [
+    "AGENTS.md",
+    "CONSTRAINTS.md",
+    "README.md",
+    "contracts/foundation",
+    "contracts/service-plaza",
+    "docs/decisions",
+    "scripts"
+  ],
+  "work_items": [
+    {
+      "work_id": "AIW-20260710-PLATFORM-GOVERNANCE",
+      "title": "服务广场平台依赖、治理门禁和双人配置审批收口",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "handoff-ready",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/APP系统",
+      "branch": "codex/platform-governance",
+      "base_commit": "2e6a8840a68eb93f5c85aaad43619c4086f3c1f3",
+      "allowed_paths": ["."],
+      "started_with_clean_worktree": false,
+      "preexisting_changes_acknowledged": true,
+      "migration_note": "历史工作在共享 master 脏工作区开始；由平台集成负责人迁入专用分支收口。所有新工作项不得复用此例外。",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h007平台依赖ai-协作治理与双人配置审批收口"
+    }
+  ]
+}

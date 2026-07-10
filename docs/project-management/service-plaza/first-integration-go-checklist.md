@@ -19,7 +19,7 @@ P0 证据关闭主控表：`p0-evidence-closure-queue.md`。未按该队列关�
 | 三大核心服务责任边界明确 | `owner-roster.md`、`module-intake-cards.md` | 项目负责人临时担当，联系人信息待补齐 | 部分 |
 | 三大核心服务主动作确认 | `core-service-main-action-confirmation.md` | 三大核心服务主动作均已确认（2026-07-10 项目负责人确认） | 是 |
 | 正式页面或临时承接页路由确认 | `routing-and-temporary-page-spec.md` | 方案A 单页模拟已部署：/app/service-plaza-temp.html#{plaza,life-navigation,club-alliance,health-manager} | 是 |
-| 测试账号准备完成 | `test-accounts-and-data.md` | admin/admin123（管理员）；phone=13700137001~13700137003（会员）已验证于测试代码 | 是 |
+| 测试账号准备完成 | `test-accounts-and-data.md` | 管理员测试账号（凭据通过安全渠道获取）（管理员）；phone=13700137001~13700137003（会员）已验证于测试代码 | 是 |
 | 测试数据准备完成 | `test-accounts-and-data.md` | 会员资料模型 + 俱乐部模块 + 健康模块集成测试数据；数据来源 backend-go/tests/ | 是 |
 | 首轮 Handoff 提交并通过质量复核 | `round-1-handoff-forms.md`、`handoff-quality-review.md` | 表单已部分补齐（主动作、路由），待完整提交和复核 | 部分 |
 | 启动确认结果已记录 | `round-1-kickoff-meeting-minutes.md` | 模板已建，临时承接页已部署上线视为启动 | 是 |
@@ -51,7 +51,7 @@ P0 证据关闭主控表：`p0-evidence-closure-queue.md`。未按该队列关�
 - 环境：https://47.94.159.60（HTTPS）/ http://47.94.159.60（HTTP）
 - 临时承接页：/app/service-plaza-temp.html#{plaza,life-navigation,club-alliance,health-manager}
 - API：/api/member/ 
-- 管理员：POST /api/member/admin/login（admin/admin123）
+- 管理员：POST /api/member/admin/login（管理员测试账号（凭据通过安全渠道获取））
 - 会员：POST /api/member/login（phone=13700137001~13700137003）
 - 权限结构：公开路由 / 需 JWT 认证 / 管理员权限 三级
 

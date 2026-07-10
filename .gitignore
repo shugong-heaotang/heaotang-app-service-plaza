@@ -1,0 +1,26 @@
+# Frontend dependencies and build output
+app/node_modules/
+app/dist/
+app/coverage/
+app/vite.config.js
+app/vite.config.mjs
+app/vite.config.cjs
+app/vite.config.d.ts
+app/*.tsbuildinfo
+
+# Local preview logs
+app/*.log
+
+# Environment files
+.env
+.env.*
+!.env.example
+!app/.env.test-server
+
+# Editor and OS files
+.DS_Store
+Thumbs.db
+
+# Python validation caches
+__pycache__/
+*.py[cod]

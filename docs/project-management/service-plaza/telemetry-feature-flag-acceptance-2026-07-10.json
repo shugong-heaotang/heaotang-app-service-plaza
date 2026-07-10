@@ -1,0 +1,27 @@
+{
+  "executed_at": "2026-07-10T22:34:21+08:00",
+  "environment": "https://heaotang.cn",
+  "feature_flags": {
+    "status": 200,
+    "action_telemetry": false,
+    "safe_default_verified": true
+  },
+  "valid_event_while_disabled": {
+    "status": 200,
+    "accepted": false,
+    "reason": "feature_disabled",
+    "request_id_roundtrip": "uat-telemetry-default-off-native"
+  },
+  "event_with_unknown_sensitive_field": {
+    "status": 400,
+    "code": "ACTION_EVENT_INVALID"
+  },
+  "anonymous_admin_query": {
+    "status": 401,
+    "code": "AUTH_REQUIRED"
+  },
+  "frontend": {
+    "status": 200,
+    "asset": "index-BWL53_Q0.js"
+  }
+}

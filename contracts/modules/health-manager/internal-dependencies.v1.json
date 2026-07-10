@@ -1,0 +1,109 @@
+{
+  "contract_version": "module-internal-dependencies.v1",
+  "module_id": "health-manager",
+  "module_version": "v1",
+  "slice_id": "personal-consultation-inbox",
+  "development_readiness": "go",
+  "acceptance_readiness": "partial-go",
+  "dependencies": [
+    {
+      "dependency_id": "entry.contract",
+      "kind": "interface",
+      "description": "健康大管家入口、返回路径、敏感级别和主动作稳定",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": [],
+      "contracts": ["contracts/service-plaza/service-plaza-actions.v1.json"],
+      "evidence": ["docs/project-management/service-plaza/health-dependency-acceptance-2026-07-10.json"],
+      "unresolved": []
+    },
+    {
+      "dependency_id": "consultation.data",
+      "kind": "data",
+      "description": "咨询姓名、正文、本人归属、pending 状态和创建时间模型",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": ["entry.contract"],
+      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+      "evidence": ["C:/Users/shugo/Documents/heaotang-main/backend-go/plugins/health-plugin/service.go"],
+      "unresolved": []
+    },
+    {
+      "dependency_id": "consultation.api",
+      "kind": "interface",
+      "description": "本人 POST/GET 咨询接口、分页和稳定错误语义",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": ["consultation.data"],
+      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+      "evidence": ["docs/project-management/service-plaza/api-acceptance-2026-07-10-foundation.json"],
+      "unresolved": []
+    },
+    {
+      "dependency_id": "consultation.ownership",
+      "kind": "policy",
+      "description": "用户身份来自会话且咨询严格跨用户隔离",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": ["consultation.data"],
+      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+      "evidence": ["C:/Users/shugo/Documents/heaotang-main/backend-go/plugins/health-plugin/service_test.go"],
+      "unresolved": []
+    },
+    {
+      "dependency_id": "consultation.idempotency",
+      "kind": "policy",
+      "description": "首次、重放、异载荷冲突和一次写入固定",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": ["consultation.api"],
+      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+      "evidence": ["docs/project-management/service-plaza/api-acceptance-2026-07-10-foundation.json"],
+      "unresolved": []
+    },
+    {
+      "dependency_id": "consultation.ai-boundary",
+      "kind": "policy",
+      "description": "未形成医疗 AI 独立契约前不向 AI 发送咨询正文",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": ["consultation.api"],
+      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+      "evidence": ["docs/project-management/service-plaza/health-dependency-acceptance-2026-07-10.json"],
+      "unresolved": []
+    },
+    {
+      "dependency_id": "health.schema",
+      "kind": "data",
+      "description": "咨询及公开健康路由所需表由正式迁移创建",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": ["consultation.data"],
+      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+      "evidence": ["docs/project-management/service-plaza/health-dependency-acceptance-2026-07-10.json"],
+      "unresolved": []
+    },
+    {
+      "dependency_id": "history.ui",
+      "kind": "workflow",
+      "description": "页面展示本人咨询历史及空、加载、错误、重放状态",
+      "status": "standardized",
+      "required_for_slice": true,
+      "depends_on": ["consultation.api", "consultation.ownership", "consultation.ai-boundary"],
+      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+      "evidence": [],
+      "unresolved": ["服务广场健康页面尚未展示本人咨询列表"]
+    },
+    {
+      "dependency_id": "medical.disclaimer",
+      "kind": "policy",
+      "description": "页面明确咨询收件不构成诊断、处方或急救服务",
+      "status": "standardized",
+      "required_for_slice": true,
+      "depends_on": ["entry.contract"],
+      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+      "evidence": [],
+      "unresolved": ["正式法律文本后续由业务和合规负责人确认"]
+    }
+  ]
+}

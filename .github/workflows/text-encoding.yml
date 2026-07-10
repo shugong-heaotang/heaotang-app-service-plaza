@@ -1,0 +1,40 @@
+name: Text encoding
+
+on:
+  pull_request:
+  push:
+
+jobs:
+  validate:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Validate UTF-8 and PowerShell files
+        shell: powershell
+        run: powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-TextEncoding.ps1
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Install contract validator
+        run: python -X utf8 -m pip install jsonschema==4.26.0
+
+      - name: Validate Service Plaza contracts
+        shell: powershell
+        run: powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-ServicePlazaContracts.ps1
+
+      - name: Reject backward-incompatible Service Plaza contract changes
+        shell: powershell
+        env:
+          COMPATIBILITY_BASE: ${{ github.event.pull_request.base.sha || github.event.before }}
+        run: powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-ServicePlazaContractCompatibility.ps1 -BaseRef "$env:COMPATIBILITY_BASE"
+
+      - name: Validate example integration package
+        shell: powershell
+        run: powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-ServiceIntegrationPackage.ps1 -ManifestPath contracts/service-plaza/examples/external-partner.example.json

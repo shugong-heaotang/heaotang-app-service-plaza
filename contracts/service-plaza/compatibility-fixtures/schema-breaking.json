@@ -1,0 +1,11 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/example.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["service_id", "status"],
+  "properties": {
+    "service_id": { "type": "string", "minLength": 8, "pattern": "^service-" },
+    "status": { "enum": ["active", "preview"] }
+  }
+}

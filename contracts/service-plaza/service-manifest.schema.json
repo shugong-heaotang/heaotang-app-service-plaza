@@ -1,0 +1,62 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/service-plaza/service-manifest.v1.schema.json",
+  "title": "Heaotang Service Plaza Manifest v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "service_id",
+    "display_name",
+    "summary",
+    "category",
+    "sort_order",
+    "lifecycle_status",
+    "entry",
+    "access",
+    "provider",
+    "capabilities",
+    "privacy_level",
+    "business_api_version"
+  ],
+  "properties": {
+    "contract_version": { "const": "service-plaza.v1" },
+    "service_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$", "minLength": 3, "maxLength": 64 },
+    "display_name": { "type": "string", "minLength": 1, "maxLength": 40 },
+    "summary": { "type": "string", "minLength": 1, "maxLength": 160 },
+    "category": { "enum": ["core", "common"] },
+    "sort_order": { "type": "integer", "minimum": 1, "maximum": 9999 },
+    "lifecycle_status": { "enum": ["active", "preview", "planned", "maintenance", "offline"] },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "target", "return_target"],
+      "properties": {
+        "type": { "enum": ["internal_route", "external_https", "mini_program"] },
+        "target": { "type": "string", "minLength": 1, "maxLength": 500 },
+        "return_target": { "type": "string", "pattern": "^/services(?:/.*)?$" }
+      }
+    },
+    "access": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["auth_mode", "required_scopes"],
+      "properties": {
+        "auth_mode": { "enum": ["shared_session", "oidc_pkce", "anonymous"] },
+        "required_scopes": { "type": "array", "items": { "type": "string", "pattern": "^[a-z0-9._:-]+$" }, "uniqueItems": true }
+      }
+    },
+    "provider": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["provider_id", "display_name"],
+      "properties": {
+        "provider_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+        "display_name": { "type": "string", "minLength": 1, "maxLength": 80 }
+      }
+    },
+    "capabilities": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "pattern": "^[a-z0-9]+(?:[._-][a-z0-9]+)*$" } },
+    "privacy_level": { "enum": ["public", "account", "sensitive"] },
+    "business_api_version": { "type": "string", "pattern": "^v[1-9][0-9]*$" }
+  }
+}

@@ -1,11 +1,39 @@
-﻿# 和奥堂 APP 服务广场 -- 总架构与开发规范
+# 和奥堂 APP 服务广场 -- 总架构与开发规范
 
 > 本文档是和奥堂 APP 服务广场项目的**唯一总入口**。
 > 所有板块负责人、平台集成负责人、开发 Agent 在开始任何工作前，必须全文阅读本文档。
 >
 > **总架构负责人：** Codex（总架构 Agent）
 > **最后更新：** 2026-07-10
-> **部署测试服务器：** `https://47.94.159.60`
+> **部署测试服务器：** `https://heaotang.cn`
+
+---
+
+## 0. AI 开发强制启动顺序
+
+任何人员或编程 Agent 第一次进入本项目，必须按顺序读取，未完成不得修改代码：
+
+1. `AGENTS.md`：当前工作区不可违反的执行约束。
+2. 本 `README.md`：项目边界、架构和当前开发入口。
+3. `CONSTRAINTS.md`：根因优先、稳定依赖、配置双人审批、两次触发和实现记录硬约束。
+4. `docs/project-management/service-plaza/project-status-one-page.md` 与 `docs/project-management/dependency-driven-master-plan-v1.md`：当前真实状态和执行顺序。
+5. `contracts/foundation/foundation-capabilities.v1.json`：平台级能力依赖。
+6. `contracts/foundation/engineering-standards.v1.json` 与 `docs/project-management/engineering-toolchain-standard-v1.md`：批准工具链和编码原则。
+7. `contracts/foundation/recurring-issues.v1.json`：已经重复发生、不得再次局部修补的问题模式。
+8. `contracts/foundation/agent-collaboration.v1.json` 与 `docs/project-management/ai-coding-incident-lessons-2026-07-10.md`：当前工作项所有权、隔离范围和外部事故防线。
+9. `docs/decisions/` 中与任务相关的 ADR，尤其 0007 至 0016。
+10. 所属板块的 `contracts/foundation/module-dependencies/*.json` 和 `contracts/modules/<module>/internal-dependencies.v1.json`：平台级与板块内部两层依赖。
+11. `contracts/foundation/implementation-records/` 与 `docs/project-management/service-plaza/handoff-log.md`：前序实现依据和交接证据。
+
+开始工作前运行：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-AgentDevelopmentPreflight.ps1
+```
+
+随后确认自己拥有 `agent-collaboration.v1` 中唯一活动工作项，并使用 `scripts/New-AgentDevelopmentChecklist.ps1` 为本次实现生成逐项待勾选清单。脚本不会自动勾选；读取每个文件后记录 `checked=true`、`checked_at` 和当前哈希。文件变化会使旧勾失效。
+
+结束切片前必须运行契约、测试、构建和 UTF-8 门禁，并提交 `implementation-record.v1`。文档存在不代表已经采用；实现记录必须列出本次实际读取的治理输入。
 
 ---
 
@@ -23,7 +51,7 @@
 |------|------|
 | 结构锁定 | 服务广场布局已定版，不再调整核心信息架构 |
 | 统一接入 | 各板块不能自行修改服务广场页面结构 |
-| 单一入口 | 所有 Agent 先读 START-HERE.md |
+| 单一入口 | 所有 Agent 按本 README 第 0 节读取治理基线，再读任务入口 |
 | Handoff 强制 | 每个阶段切换必须有 Handoff 记录 |
 | 门禁驱动 | 所有决策由 Go/Partial Go/No-Go 门禁驱动 |
 
@@ -104,54 +132,41 @@ START-HERE.md -> agent-coordination-board.md -> current-week-command-board.md ->
 
 路由统一使用 services 命名空间，三大核心服务路由：life-navigation、club-alliance、health-manager。
 
-测试服务器：47.94.159.60 | 临时承接页：/app/service-plaza-temp.html | Go API：8080 端口 | 管理员：admin/admin123 | 权限：三级（公开/JWT/管理员）
+测试服务器：47.94.159.60 | 临时承接页：/app/service-plaza-temp.html | Go API：8080 端口 | 管理员：管理员测试账号（凭据通过安全渠道获取） | 权限：三级（公开/JWT/管理员）
 
 ---
 
 ## 8. 门禁状态与决策框架
 
-准备阶段：Go | 启动会阶段：Go | 首次真实联调：Partial Go | 问题关闭阶段：No-Go | 第一阶段验收：No-Go
+平台 L0-L5：Go | 三大板块第一切片 development：Go | 三大板块 acceptance：Partial Go | 外部合作：No-Go | 第一阶段综合验收：No-Go
 
 ---
 
 ## 9. 工具与 Skills 评估
 
-现有 Skills 基本满足需求。核心的部署、验收、安全审计、浏览器验证能力已覆盖。
-
-建议补充：Code Review Skill 用于 Go 后端代码审计（P1）。
-
-建议安装 GitHub Plugin 用于代码托管和 PR 审查。
+现有 Skills 已覆盖部署、验收、安全审计、浏览器验证、决策记录、PowerShell UTF-8 和外部专家建议。GitHub Plugin 已可用于后续 PR、CI 和安全审查；启用远程 Agent 协作前仍需现场确认分支保护、CodeQL、Secret Scanning 和依赖扫描设置。
 
 ---
 
 ## 10. 项目当前状态
 
-管理台帐体系已建立。临时承接页已部署。三大核心服务主动作已确认。三大核心服务均接近 Partial Go。
+服务广场正式前端、9 服务/20 动作契约、三大核心路由和 L0-L5 公共底座已在测试环境运行。三大板块第一切片已形成平台依赖、内部依赖和人类可读契约，均达到 development Go、acceptance Partial Go。
 
 ### 当前 P0 阻塞
-- 责任边界未汇总（待补）
-- 测试账号和数据未准备（已建清单）
-- 路由未确认（已给建议）
-- Handoff 未通过质量复核
+
+- 平台内部开发无 P0 阻塞。
+- 外部合作因 OIDC/PKCE、域名白名单、数据协议和退出方案未完成保持 No-Go。
+- 第一阶段综合验收等待三大板块具体业务切片和跨板块主链路完成。
 
 ---
 
 ## 11. 下一步行动清单
 
-### 第一批：通知 -> 反馈 -> 对接会
-1. 发出正式通知（本 README 上传 GitHub）
-2. 各板块 Agent 阅读规范后反馈确认
-3. 组织第一次对接会
-
-### 第二批：Handoff 质量复核
-1. 三大核心服务完成 Handoff 完整提交
-2. 平台 Agent 复核联调条件
-3. 审计 Agent 复核质量和门禁
-
-### 第三批：平台条件补缺
-1. 补缺路由、权限、账号、数据、返回路径
-2. 完成事实证据提交和复核
-3. 更新测试账号就绪状态
+1. 项目负责人协调首个具体板块；建议先做生命导航“申请与本人历史”最小切片。
+2. 为首板块创建独立工作项、`codex/` 分支、工作树和模块起飞检查单。
+3. 按已冻结契约实现、测试、部署和验收，不修改服务广场定版结构。
+4. 依次关闭俱乐部本人申请状态、健康咨询历史等 acceptance Partial Go 缺口。
+5. 完成跨板块主链路、压力、安全、恢复和第一阶段综合验收。
 
 ---
 
@@ -160,3 +175,28 @@ START-HERE.md -> agent-coordination-board.md -> current-week-command-board.md ->
 关键文件：START-HERE.md、project-status-one-page.md、agent-coordination-board.md、current-week-command-board.md、phase-gate-status.md、first-integration-go-checklist.md
 
 项目文档位于 docs/project-management/service-plaza/ 目录下。
+
+### 正式前端工程
+
+正式前端位于 `app/`，使用 React、TypeScript 和 Vite。当前提供 `/services` 及三大核心服务路由。
+
+```powershell
+cd app
+npm install
+npm test
+npm run build
+```
+
+### Windows UTF-8 工作流
+
+仓库编码规则由 `.editorconfig` 和 `.gitattributes` 统一约束。PowerShell 5.1 读取中文文件前先初始化 UTF-8 环境：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Initialize-PowerShellUtf8.ps1
+```
+
+提交前执行编码门禁：
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-TextEncoding.ps1
+```

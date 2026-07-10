@@ -1,0 +1,25 @@
+{
+  "contract_version": "service-plaza.v1",
+  "service_id": "partner-example",
+  "display_name": "合作服务示例",
+  "summary": "演示外部合作方按标准接入服务广场",
+  "category": "common",
+  "sort_order": 500,
+  "lifecycle_status": "preview",
+  "entry": {
+    "type": "external_https",
+    "target": "https://partner.example.com/heaotang-entry",
+    "return_target": "/services"
+  },
+  "access": {
+    "auth_mode": "oidc_pkce",
+    "required_scopes": ["partner-example:use"]
+  },
+  "provider": {
+    "provider_id": "partner-example",
+    "display_name": "合作方示例机构"
+  },
+  "capabilities": ["navigate", "partner-service"],
+  "privacy_level": "account",
+  "business_api_version": "v1"
+}

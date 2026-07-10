@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/foundation/recurring-issues.v1.schema.json",
+  "title": "Heaotang Recurring Issue Registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "two_strike_rule", "issues"],
+  "properties": {
+    "contract_version": { "const": "recurring-issues.v1" },
+    "two_strike_rule": { "const": true },
+    "issues": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["pattern_id", "title", "occurrence_count", "status", "owner_role", "root_cause", "occurrences", "systemic_fix", "prevention_gates", "regression_evidence"],
+        "properties": {
+          "pattern_id": { "type": "string", "pattern": "^RI-[A-Z0-9-]+$" },
+          "title": { "type": "string", "minLength": 1 },
+          "occurrence_count": { "type": "integer", "minimum": 2 },
+          "status": { "enum": ["open", "implemented", "verified"] },
+          "owner_role": { "type": "string", "minLength": 1 },
+          "root_cause": { "type": "string", "minLength": 1 },
+          "occurrences": {
+            "type": "array",
+            "minItems": 2,
+            "items": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["date", "summary", "evidence"],
+              "properties": {
+                "date": { "type": "string", "format": "date" },
+                "summary": { "type": "string", "minLength": 1 },
+                "evidence": { "type": "string", "minLength": 1 }
+              }
+            }
+          },
+          "systemic_fix": { "type": "string", "minLength": 1 },
+          "prevention_gates": { "type": "array", "minItems": 1, "items": { "type": "string" }, "uniqueItems": true },
+          "regression_evidence": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+        }
+      }
+    }
+  }
+}
