@@ -734,6 +734,22 @@
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h025-俱乐部联盟-ca-f0h0-正式派发"
     },
     {
+      "work_id": "AIW-20260711-CLUB-F0-M0-ACCEPTANCE",
+      "title": "俱乐部联盟 G0 与 CA-F0-M0 平台检查点验收",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-f0-m0-acceptance",
+      "branch": "codex/club-f0-m0-acceptance",
+      "base_commit": "2e92c838e1252752c8893a2e1df502f54c14c359",
+      "allowed_paths": ["contracts/foundation/agent-collaboration.v1.json", "docs/project-management/service-plaza/handoff-log.md"],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "独立复核模块 d622cba 的范围、当前 SHA、考试、回执、实现记录和 SP-H025；只更新平台验收结论。",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h025-俱乐部联盟-ca-f0h0-正式派发"
+    },
+    {
       "work_id": "AIW-20260711-SECURE-MODULE-API-ACCEPTANCE",
       "title": "三大核心服务安全取码与部署后 API 验收标准化",
       "owner": "Codex platform integration agent",
