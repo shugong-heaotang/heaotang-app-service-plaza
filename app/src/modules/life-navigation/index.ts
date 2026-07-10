@@ -18,6 +18,8 @@ export {
   resolveLifeNavigationHistoryLimit,
   submitLifeNavigationApplication,
 } from "./lifeNavigationApi";
+export { LifeNavigationPage } from "./LifeNavigationPage";
+export type { LifeNavigationPageApi, LifeNavigationPageProps } from "./LifeNavigationPage";
 export type {
   LifeNavigationApplicationInput,
   LifeNavigationApplicationRecord,
