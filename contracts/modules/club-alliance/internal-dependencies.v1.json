@@ -51,6 +51,17 @@
       "unresolved": []
     },
     {
+      "dependency_id": "join.family-capacity-boundary",
+      "kind": "policy",
+      "description": "standard 申请和批准不读取家庭容量配置，只有 family 类型解析容量并在配置不可用时失败关闭",
+      "status": "implemented",
+      "required_for_slice": true,
+      "depends_on": ["join.application-api"],
+      "contracts": ["docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
+      "evidence": ["docs/project-management/service-plaza/club-capacity-decoupling-2026-07-11.md"],
+      "unresolved": ["等待测试环境部署后以 HTTP 级 standard/family 场景验证"]
+    },
+    {
       "dependency_id": "join.my-status-api",
       "kind": "interface",
       "description": "用户分页读取自己的加入申请及最终状态",

@@ -309,7 +309,7 @@
       "title": "首个板块试点复盘模板预制与冻结门禁",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-pilot-retrospective",
       "branch": "codex/pilot-retrospective-template",
@@ -328,7 +328,51 @@
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
       "migration_note": "先预制可复用模板和冻结条件；生命导航二 M4 未 Go 前不得回填成功结论或把模板标为已发布。",
+      "handoff_record": "docs/project-management/service-plaza/pilot-retrospective-template-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-CLUB-CAPACITY-GOVERNANCE",
+      "title": "标准俱乐部与家庭容量配置依赖解耦治理",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-capacity-governance",
+      "branch": "codex/club-capacity-governance",
+      "base_commit": "3b8928da837d23841107d46aabaf539f1e2b0a1a",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-club-capacity-decoupling.json",
+        "contracts/foundation/governance-exams/2026-07-11-club-capacity-decoupling-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-club-capacity-decoupling.json",
+        "contracts/modules/club-alliance/internal-dependencies.v1.json",
+        "docs/project-management/modules/club-alliance-first-slice-contract-v1.md",
+        "docs/project-management/service-plaza/club-capacity-decoupling-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "只关闭 standard 申请/批准错误依赖 family 容量配置；不实现板块页面、本人状态接口或资金功能。",
       "handoff_record": null
+    },
+    {
+      "work_id": "AIW-20260711-CLUB-CAPACITY-BACKEND",
+      "title": "标准俱乐部申请批准与家庭容量配置解耦实现",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台后端负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/heaotang-main",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-capacity",
+      "branch": "codex/club-capacity-decoupling",
+      "base_commit": "e361a8ac792d1caaa15241062be904a266bf83ea",
+      "allowed_paths": [
+        "backend-go/plugins/club-plugin/service.go",
+        "backend-go/plugins/club-plugin/service_test.go"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": null,
+      "handoff_record": "docs/project-management/service-plaza/club-capacity-decoupling-2026-07-11.md"
     }
   ]
 }
