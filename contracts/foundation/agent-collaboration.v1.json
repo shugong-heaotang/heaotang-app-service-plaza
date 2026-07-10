@@ -754,7 +754,7 @@
       "title": "模块内部依赖 v2 五维门禁与版本路由",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "handoff-ready",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-module-dependencies-v2",
       "branch": "codex/module-internal-dependencies-v2",
