@@ -7,7 +7,7 @@
 - 当前分支与基线提交：`codex/life-navigation-application-history` / `9a2717f`
 - 检查点：M3
 - 实现记录：`IR-20260711-LIFE-APPLICATION-HISTORY-M3`
-- 当前结论：模块内页面闭环已完成；平台路由接线和平台验收待完成
+- 当前结论：M3 最终 Go；平台路由接线与独立复核完成，已授权按治理入口进入 M4，但 M4 尚未开始
 
 ## 本阶段交付
 
@@ -70,3 +70,26 @@
 - No-Go 必须修复项：`/services/life-navigation` 尚未精确路由到 `LifeNavigationPage`；平台接线和路由级验证完成前不得签最终 Go。
 - 是否授权进入下一阶段：否，不得进入 M4。
 - 平台复核人及时间：服务广场平台集成负责人，`2026-07-11T01:16:33+08:00`。
+
+## 平台路由集成后最终复核
+
+- 平台集成提交：`be1b26aab5e85fe63c4494689e1b6551a4417718`（`fix: route life navigation page`）。
+- 平台证据：`IR-20260711-LIFE-M3-ROUTE-INTEGRATION` 和 `SP-H010` 均存在、引用路径完整；平台路由集成清单状态为 `completed`，随机治理考试 attempt 1 为 8/8、score 100、status `passed`。
+- 路由与代码审查：
+  - `AppRoutes` 将 `/services/life-navigation` 精确映射到导出的 `LifeNavigationPage`，并置于 `/services/:serviceKey` 动态路由之前。
+  - 从 `/services` 标准目录点击生命导航进入模块页面，不再落入通用临时承接页，也不展示联调状态切换。
+  - 路由测试未注入页面假 API，而是经过页面生产默认值调用 M2 `loadLifeNavigationApplicationHistory` 与 `submitLifeNavigationApplication` 边界。
+  - 生命导航请求序列精确为 `GET /api/v1/life-nav/records?limit=30`、`POST /api/v1/life-nav/records`、成功后再次 `GET /api/v1/life-nav/records?limit=30`，证明提交后刷新本人历史。
+  - 页面底部返回动作导航到 `/services`，路由级测试确认重新显示服务广场。
+- 生命导航二负责人独立复跑证据（基线 `be1b26a`）：
+  - `npm test -- --run src/App.test.tsx`：1 个测试文件、4 项通过。
+  - `npm test`：15 个测试文件、90 项通过。
+  - `npm run build`：TypeScript 与 Vite production build 通过。
+  - `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-ServicePlazaContracts.ps1`：通过，含依赖、协作、清单、考试、实施记录和工具链门禁。
+  - `powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-TextEncoding.ps1`：通过，450 个文件符合编码规则。
+  - `git diff --check`：通过。
+- 最终结论：Go。M3 的精确入口、真实 M2 API 边界、提交后刷新和返回路径均已形成可复跑的本地路由闭环，先前唯一 No-Go 项已关闭。
+- No-Go 必须修复项：无。
+- 是否授权进入下一阶段：是；仅授权在新建当前 M4 checklist、重新全文阅读、通过 8/8 及 100 分随机治理考试后进入 M4。
+- 阶段边界：本次未进入 M4、未部署测试环境、未执行真实登录或跨用户隔离 UAT；这些证据不得由 M3 本地结果替代。
+- 最终复核人及时间：生命导航二负责人，`2026-07-11T01:29:27+08:00`。
