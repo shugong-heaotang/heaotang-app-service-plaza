@@ -15,7 +15,7 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 | SP-H008 | 健康与俱乐部任务包预制 | 需求准备给开发 | 平台集成 Agent | 板块负责人 | 2026-07-11 | 已预制，审计后待修订 | 未正式派发，不授权签收或编码 |
 | SP-H010 | 生命导航二 M3 平台路由 | 开发给联调 | 平台集成 Agent | 生命导航二负责人、验收 Agent | 2026-07-11 | 本地路由 Go，待 M4 | 精确路由、真实适配器路由级闭环、90 项全量测试与生产构建通过 |
 | SP-H011 | 并行板块通知书审计修订 | 需求准备复核 | 平台集成 Agent | 健康/俱乐部负责人、验收 Agent | 2026-07-11 | 修订 Go，正式派发 No-Go | 权威状态、跨业务依赖、M0/M1 范围和 M2 公共前置已统一 |
-| SP-H025 | 俱乐部联盟 CA-F0/H0 | 正式派发给模块 G0 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | 模块 G0 / CA-F0-M0 Go | d622cba 独立验收通过；继续 CA-F0/H0 标准文件，CA-H1 和业务编码未授权 |
+| SP-H025 | 俱乐部联盟 CA-F0/H0 | 标准与 H0 Base 验收 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | H0 Base Go；H0 Full No-Go | 3eb25ae 独立验收通过；D-CA-003/category 契约局部阻塞 Full Go |
 | SP-H026 | 模块内部依赖 v2 | 平台合同给模块 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | 验证完成，待受控集成 | v1/v2 按 contract_version 路由；五维 readiness 与局部阻塞 |
 
 ## 首轮 Handoff 提交清单
@@ -439,6 +439,15 @@ Handoff 运行规则见 `handoff-operating-mechanism.md`。首轮具体表单见
 - receipt、实现记录和模块 Handoff 均引用 `SP-H025`；`SP-H010` 明确保留给生命导航。
 - 独立复跑：preflight ready；checklist/exam/IR/collaboration/UTF-8/git diff 全部通过。
 - 结论：G0 / CA-F0-M0 Go。该结论不等于 CA-H0 Go；D-CA-003 Pending 不阻塞 H0 base，但完整 H0 Go 前必须关闭；CA-H1、frontend、backend、deploy 和业务编码继续禁止。
+
+## H0 Base 平台验收（2026-07-11）
+
+- 模块提交：`3eb25aea6314ae5b35ec81eef510e064923f367f`；包含公共集成 `d6ddad1b21157661e53153e99d4d2ce29a956831`，工作树干净。
+- 范围：34 个累计变更路径全部位于模块精确允许范围，越界 0。
+- 治理：R3 检查单 28/28、当前 SHA mismatch 0；考试 score 100 passed；实现记录同一 RecordId。
+- 合同：`module-internal-dependencies.v2` 通过；category registry、capability catalog、homepage、relationship、error catalog 五组 Schema 5/5 通过。
+- Conformance：H0-B001 至 H0-B033 为 33/33 Pass；服务广场总合同、协作、实现记录、UTF-8、git diff 均通过。
+- 结论：CA-F0/H0 Standards + H0 Base Go。`D-CA-003` 与服务端 category 契约继续阻塞 executable selector、SC/PC 分类编码和 H0 Full Go；CA-H1、frontend、backend、deploy、环境、生产和资金操作仍未授权。
 
 ## SP-H026：模块内部依赖 v2 五维门禁
 
