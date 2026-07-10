@@ -118,6 +118,36 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": null,
       "handoff_record": "docs/project-management/service-plaza/life-m3-route-integration-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-PARALLEL-MODULE-NOTICES",
+      "title": "健康大管家与俱乐部联盟待启动任务包预制",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "handoff-ready",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-parallel-module-notices",
+      "branch": "codex/parallel-module-notices",
+      "base_commit": "4876817d8c162ae2e93ef7e5290fee1d0357ada5",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-parallel-module-notices.json",
+        "contracts/foundation/development-checklists/2026-07-11-parallel-module-notices-r1.json",
+        "contracts/foundation/development-checklists/2026-07-11-parallel-module-notices-r2.json",
+        "contracts/foundation/governance-exams/2026-07-11-parallel-module-notices-attempt-1.json",
+        "contracts/foundation/governance-exams/2026-07-11-parallel-module-notices-r1-attempt-1.json",
+        "contracts/foundation/governance-exams/2026-07-11-parallel-module-notices-r2-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-parallel-module-notices.json",
+        "docs/project-management/modules/health-manager",
+        "docs/project-management/modules/club-alliance",
+        "docs/project-management/notices/2026-07-11-health-manager-first-phase-task-order.md",
+        "docs/project-management/notices/2026-07-11-club-alliance-first-phase-task-order.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "首次尝试在平台主工作树复用旧工作项被协作门禁拒绝；本工作项迁入独立分支和工作树后重新认证。",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h008并行板块待启动任务包预制"
     }
   ]
 }
