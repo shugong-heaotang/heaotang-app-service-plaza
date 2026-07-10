@@ -175,13 +175,21 @@ type LifeNavigationApplicationRecord = {
 - 提交状态模型：`idle | submitting | created | replayed | limited | conflict | in-progress | error`。
 - 错误映射只消费 `ApiError.code`：`AUTH_REQUIRED`、`LIFE_RECORD_DAILY_LIMIT`、`IDEMPOTENCY_KEY_REUSED`、`IDEMPOTENCY_IN_PROGRESS`、`INVALID_IDEMPOTENCY_KEY`、`REQUEST_TIMEOUT`、`REQUEST_ABORTED`、`NETWORK_ERROR`；未知码进入可恢复通用错误。
 
-### 4.3 当前阻塞
+### 4.3 平台兼容扩展已就绪
 
-共享 `apiRequest/businessApiAdapter` 当前只返回 `payload.data`，没有把响应状态或 `Idempotency-Replayed` 暴露给模块。模块若绕过 adapter 自行 `fetch` 才能识别重放，会复制认证、信封和重试逻辑并违反平台边界。平台已接受 `LN-ICR-20260711-001` 的兼容扩展方案：保留 `execute(): Promise<T>`，另增可选 `{ data, meta }` 能力，`meta` 至少包含 `status`、`requestId`、`idempotencyReplayed`；同时收敛 limit 并补跨用户负向测试。上述能力由平台独立工作项实施和验证，完成前 M1 保持 No-Go。
+平台独立工作项已经实施 `LN-ICR-20260711-001`：
+
+- `apiRequestWithMeta<T>` 返回 `{ data, meta }`，`meta` 包含 `status`、`requestId`、`idempotencyReplayed`。
+- `apiRequest<T>` 继续调用新能力并只返回 `.data`，保持旧调用 API。
+- `BusinessApiAdapter.executeWithMeta` 提供可选元数据路径；既有 `execute(): Promise<T>` 继续只返回 data。
+- 后端 `maxRecordHistoryLimit=30`；越界安全默认 30。
+- 新 Go 测试覆盖 0/1/30/31/100/101 和服务层、handler 层跨用户不可见。
+
+APP 定向 30 项测试与后端固定提交目标测试均通过，原 M1 公共边界阻塞已解除。模块后续实现仍只能调用共享 adapter，不得自行 `fetch`。测试环境验证留待 M4。
 
 ## 5. 结论
 
 - POST/GET 路由、认证、本人归属、稳定信封、首次/重放/冲突/进行中/限额语义均有运行实现和测试依据。
 - 当前前端已能通过共享 adapter 创建申请，但尚无本人历史 read operation 和类型/状态映射。
-- GET limit 范围存在运行时漂移；重放响应头在共享 adapter 边界不可达。
-- 平台已接受 ICR，但三项修复尚未由独立平台工作项实施和验证；在平台重新签发 M1 Go 前，不进入 M2，不绕过共享 adapter，不修改公共契约。
+- GET limit 已收敛为 1..30，越界安全默认 30；重放元数据已通过共享 adapter 的兼容扩展可达。
+- 原三项 No-Go 修复已在平台独立工作项中完成并通过本地复验；M2 可按平台授权开始，但开工前必须新建当前检查单并通过 100 分随机治理考试。
