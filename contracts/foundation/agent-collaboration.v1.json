@@ -53,7 +53,7 @@
       "title": "生命导航 M1 共享响应元数据兼容扩展",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "handoff-ready",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-life-m1-platform",
       "branch": "codex/life-m1-platform-contract",
@@ -80,7 +80,7 @@
       "title": "生命导航记录列表上限和跨用户回归",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "handoff-ready",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/heaotang-main",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-life-m1-backend",
       "branch": "codex/life-m1-backend-contract",
@@ -93,6 +93,31 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": null,
       "handoff_record": "docs/project-management/service-plaza/life-m1-platform-fix-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-LIFE-M3-ROUTE-INTEGRATION",
+      "title": "生命导航模块页面平台路由接线",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "handoff-ready",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-life-m3-route",
+      "branch": "codex/life-m3-route-integration",
+      "base_commit": "e6243e186b322404e50cf80419ee6c210c335098",
+      "allowed_paths": [
+        "app/src/App.tsx",
+        "app/src/App.test.tsx",
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-life-m3-route-integration.json",
+        "contracts/foundation/governance-exams/2026-07-11-life-m3-route-integration-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-life-m3-route-integration.json",
+        "docs/project-management/service-plaza/life-m3-route-integration-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": null,
+      "handoff_record": "docs/project-management/service-plaza/life-m3-route-integration-2026-07-11.md"
     }
   ]
 }
