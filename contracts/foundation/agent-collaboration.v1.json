@@ -335,7 +335,7 @@
       "title": "标准俱乐部与家庭容量配置依赖解耦治理",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-capacity-governance",
       "branch": "codex/club-capacity-governance",
@@ -353,14 +353,14 @@
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
       "migration_note": "只关闭 standard 申请/批准错误依赖 family 容量配置；不实现板块页面、本人状态接口或资金功能。",
-      "handoff_record": null
+      "handoff_record": "docs/project-management/service-plaza/club-capacity-decoupling-2026-07-11.md"
     },
     {
       "work_id": "AIW-20260711-CLUB-CAPACITY-BACKEND",
       "title": "标准俱乐部申请批准与家庭容量配置解耦实现",
       "owner": "Codex platform integration agent",
       "owner_role": "平台后端负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/heaotang-main",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-capacity",
       "branch": "codex/club-capacity-decoupling",
@@ -373,6 +373,51 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": null,
       "handoff_record": "docs/project-management/service-plaza/club-capacity-decoupling-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-CLUB-MY-APPLICATIONS-GOVERNANCE",
+      "title": "俱乐部本人加入申请状态接口治理",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-my-applications-governance",
+      "branch": "codex/club-my-applications-governance",
+      "base_commit": "e355d6f68196623a6ff60fd37a9e56e14537deee",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-club-my-applications.json",
+        "contracts/foundation/governance-exams/2026-07-11-club-my-applications-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-club-my-applications.json",
+        "contracts/modules/club-alliance/internal-dependencies.v1.json",
+        "docs/project-management/modules/club-alliance-first-slice-contract-v1.md",
+        "docs/project-management/service-plaza/club-my-applications-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "只实现登录用户读取本人加入申请状态；不开放他人数据、不修改审核接口或板块页面。",
+      "handoff_record": "docs/project-management/service-plaza/club-my-applications-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-CLUB-MY-APPLICATIONS-BACKEND",
+      "title": "俱乐部本人加入申请状态后端接口",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台后端负责人",
+      "status": "integrated",
+      "repository_root": "C:/Users/shugo/Documents/heaotang-main",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-my-applications",
+      "branch": "codex/club-my-applications",
+      "base_commit": "b8996793d91516d716992cfbef5953c924bf5670",
+      "allowed_paths": [
+        "backend-go/plugins/club-plugin/plugin.go",
+        "backend-go/plugins/club-plugin/service.go",
+        "backend-go/plugins/club-plugin/service_test.go"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": null,
+      "handoff_record": "docs/project-management/service-plaza/club-my-applications-2026-07-11.md"
     }
   ]
 }

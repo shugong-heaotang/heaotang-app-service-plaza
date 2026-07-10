@@ -21,7 +21,7 @@
       "dependency_id": "standard.type-mapping",
       "kind": "policy",
       "description": "前台自建俱乐部固定映射后端 type=standard",
-      "status": "standardized",
+      "status": "implemented",
       "required_for_slice": true,
       "depends_on": ["entry.contract"],
       "contracts": ["docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
@@ -69,8 +69,8 @@
       "required_for_slice": true,
       "depends_on": ["join.application-api"],
       "contracts": ["docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
-      "evidence": [],
-      "unresolved": ["本人申请状态接口尚未实现"]
+      "evidence": ["docs/project-management/service-plaza/club-my-applications-2026-07-11.md"],
+      "unresolved": ["等待测试环境部署后验证 JWT 鉴权、本人隔离、分页过滤和 v1 信封"]
     },
     {
       "dependency_id": "review.manager-api",

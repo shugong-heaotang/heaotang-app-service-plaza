@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-CLUB-MY-APPLICATIONS",
+  "title": "俱乐部本人加入申请状态接口",
+  "date": "2026-07-11",
+  "status": "implemented",
+  "objective": "冻结并实现登录用户分页读取本人俱乐部加入申请状态的标准接口，禁止客户端选择他人身份。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-club-my-applications.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-club-my-applications-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/governance-reading-list.v1.json", "contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/module-dependencies/club-alliance.v1.json", "contracts/modules/club-alliance/internal-dependencies.v1.json", "docs/project-management/module-internal-dependency-standard-v1.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-11-club-alliance-first-phase-task-order.md", "docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
+  "capabilities": ["foundation.authentication-authorization", "foundation.interface-contracts", "foundation.ai-collaboration-safety"],
+  "contracts": ["contracts/modules/club-alliance/internal-dependencies.v1.json", "docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
+  "decisions": ["docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"],
+  "changed_areas": ["backend-go/plugins/club-plugin/plugin.go", "backend-go/plugins/club-plugin/service.go", "backend-go/plugins/club-plugin/service_test.go", "contracts/foundation/agent-collaboration.v1.json", "contracts/modules/club-alliance/internal-dependencies.v1.json", "docs/project-management/modules/club-alliance-first-slice-contract-v1.md", "docs/project-management/service-plaza/club-my-applications-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "verification": ["go test -count=1 ./plugins/club-plugin", "go test -count=1 ./...", "go vet ./...", "scripts/Test-ServicePlazaContracts.ps1", "scripts/Test-TextEncoding.ps1", "git diff --check"],
+  "evidence": ["docs/project-management/service-plaza/club-my-applications-2026-07-11.md", "contracts/foundation/development-checklists/2026-07-11-club-my-applications.json", "contracts/foundation/governance-exams/2026-07-11-club-my-applications-attempt-1.json", "docs/project-management/service-plaza/handoff-log.md"],
+  "premises": ["认证中间件在 Auth=true 路由上提供可信 int64 user_id", "客户端不得通过查询参数选择申请所有者", "本地全量 Go 回归不等于测试环境 HTTP 已验证", "本切片不修改审核写入、板块页面或资金接口"],
+  "implementation_mode": "ai-assisted"
+}
