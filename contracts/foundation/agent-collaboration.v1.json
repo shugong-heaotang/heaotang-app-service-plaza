@@ -738,7 +738,7 @@
       "title": "俱乐部联盟 G0 与 CA-F0-M0 平台检查点验收",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-f0-m0-acceptance",
       "branch": "codex/club-f0-m0-acceptance",
