@@ -30,6 +30,9 @@
   ],
   "module_overlays": {
     "life-navigation": [
+      "docs/project-management/modules/life-navigation/README.md",
+      "docs/project-management/notices/2026-07-10-life-navigation-first-phase-task-order.md",
+      "docs/project-management/modules/life-navigation-first-slice-contract-v1.md",
       "contracts/foundation/module-dependencies/life-navigation.v1.json",
       "contracts/modules/life-navigation/internal-dependencies.v1.json"
     ],
