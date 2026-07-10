@@ -314,6 +314,22 @@ Handoff 运行规则见 `handoff-operating-mechanism.md`。首轮具体表单见
 当前结论：本地实现 Go；测试环境未验证；不构成俱乐部板块正式派发
 ```
 
+## SP-H020：自建俱乐部 type=standard 权威筛选
+
+```text
+编号：SP-H020
+板块名称：俱乐部联盟平台后端前置
+当前责任边界：自建俱乐部 active/type=standard 权威筛选与搜索稳定错误码；不实施板块页面
+交接阶段：平台后端给俱乐部联盟 M1
+已完成内容：standard/direct/family 混合数据；pending standard 排除；HTTP 正向筛选；非法 type/query/city 稳定 400；定向/全量 Go 回归和 vet
+未完成内容：测试环境真实 JWT/HTTP 混合类型数据验收
+依赖对象：IR-20260711-CLUB-STANDARD-FILTER；后端提交 d0154ad9
+阻塞问题：生命导航二 M4 收口前不改变测试环境后端制品；俱乐部 M2 仍 No-Go
+下一步动作：生命导航二 M4 后统一备份部署全部俱乐部前置并执行 HTTP 验收
+需要谁确认：平台集成/后端负责人；俱乐部负责人正式派发后接收结果
+当前结论：本地实现 Go；俱乐部 M2 本地前置已齐；测试环境未验证
+```
+
 ```text
 测试范围：
 不测试范围：

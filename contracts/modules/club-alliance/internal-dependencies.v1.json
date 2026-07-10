@@ -32,12 +32,12 @@
       "dependency_id": "club.filter-api",
       "kind": "interface",
       "description": "列表由后端按权威 type 过滤而非前端标签伪筛选",
-      "status": "standardized",
+      "status": "implemented",
       "required_for_slice": true,
       "depends_on": ["standard.type-mapping"],
       "contracts": ["docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
-      "evidence": [],
-      "unresolved": ["GET /api/v1/clubs 尚未实现 type=standard 筛选"]
+      "evidence": ["docs/project-management/service-plaza/club-standard-filter-2026-07-11.md"],
+      "unresolved": ["等待测试环境混合类型数据执行 GET /api/v1/clubs/search?type=standard 验收"]
     },
     {
       "dependency_id": "join.application-api",

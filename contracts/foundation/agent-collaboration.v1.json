@@ -508,6 +508,50 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": null,
       "handoff_record": "docs/project-management/service-plaza/club-review-security-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-CLUB-STANDARD-FILTER-GOVERNANCE",
+      "title": "自建俱乐部 type=standard 权威筛选治理",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-standard-filter-governance",
+      "branch": "codex/club-standard-filter-governance",
+      "base_commit": "5f7889d74a550b480f4d3e65f1691931f7576663",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-club-standard-filter.json",
+        "contracts/foundation/governance-exams/2026-07-11-club-standard-filter-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-club-standard-filter.json",
+        "contracts/modules/club-alliance/internal-dependencies.v1.json",
+        "docs/project-management/modules/club-alliance-first-slice-contract-v1.md",
+        "docs/project-management/service-plaza/club-standard-filter-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "只固化 search?type=standard 的混合类型权威筛选与稳定错误语义；不实施俱乐部业务页面。",
+      "handoff_record": "docs/project-management/service-plaza/club-standard-filter-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-CLUB-STANDARD-FILTER-BACKEND",
+      "title": "自建俱乐部 type=standard 权威筛选自动化",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台后端负责人",
+      "status": "integrated",
+      "repository_root": "C:/Users/shugo/Documents/heaotang-main",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-standard-filter",
+      "branch": "codex/club-standard-filter",
+      "base_commit": "ece6d4fe9f6626f6609c78077847d1724a79f4f7",
+      "allowed_paths": [
+        "backend-go/plugins/club-plugin/plugin.go",
+        "backend-go/plugins/club-plugin/service_test.go"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": null,
+      "handoff_record": "docs/project-management/service-plaza/club-standard-filter-2026-07-11.md"
     }
   ]
 }

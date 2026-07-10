@@ -2,6 +2,8 @@
 
 首切片：自建俱乐部加入审核闭环。前台“自建俱乐部”固定使用现有 `GET /api/v1/clubs/search?type=standard`，筛选由后端权威执行，不使用 `/api/v1/clubs` 做前端标签伪筛选。用户通过 `POST /api/v1/clubs/:id/join` 幂等提交申请；管理者读取本俱乐部 pending 申请并批准或拒绝。批准时成员写入和申请状态必须在同一事务中成功，任何失败保持 pending。
 
+自建俱乐部筛选契约：`GET /api/v1/clubs/search?type=standard` 只返回 `status=active AND type=standard`；direct、family、pending、rejected、dissolved 均不得出现。非法 type 返回 400 / `INVALID_CLUB_TYPE`，超过 80 字符的 query 返回 400 / `SEARCH_QUERY_TOO_LONG`，超过 60 字符的 city 返回 400 / `CITY_FILTER_TOO_LONG`，内部查询失败返回 500 / `CLUB_SEARCH_UNAVAILABLE`。
+
 ## M2 前平台必须冻结并实现
 
 1. 本人申请状态接口：精确路径、分页/过滤、状态枚举、v1 信封、本人归属、跨用户不可见和稳定错误码。
@@ -49,7 +51,7 @@
 - 成功使用统一列表信封 `data.items/total/page/size`，空结果 `items=[]`；
 - 非法分页返回 HTTP 400 / `INVALID_PAGINATION`；非法状态返回 HTTP 400 / `INVALID_CLUB_APPLICATION_STATUS`；内部查询失败返回 HTTP 500 / `CLUB_APPLICATIONS_UNAVAILABLE`。
 
-当前实现进度：第 3 项已在后端提交 `b8996793` 完成本地实现；第 1 项已在后端提交 `7659c183` 完成本地实现；第 2 项已在后端提交 `e46c5e02` 完成幂等和并发一致性；第 4、5 项已在后端提交 `ece6d4fe` 完成资源授权、错配拒绝、五个事务故障点和上述错误矩阵的本地自动化。测试环境 HTTP 验收前这些依赖均只记为 implemented，不视为 verified，M2 仍 No-Go。
+当前实现进度：权威 standard 筛选已在后端提交 `d0154ad9` 完成混合类型、active 状态和 HTTP 稳定错误码自动化；第 3 项已在 `b8996793` 实现；第 1 项已在 `7659c183` 实现；第 2 项已在 `e46c5e02` 完成；第 4、5 项已在 `ece6d4fe` 完成本地自动化。测试环境 HTTP 验收前这些依赖均只记为 implemented，不视为 verified，M2 仍 No-Go。
 
 
 家庭俱乐部、公益俱乐部、俱乐部友联体、会费、支付、提现和分账不属于本切片。页面、适配器和测试禁止调用 fee、account、paid-service、payment、withdraw 路由。付费家庭套餐、请求体价格和旧收入记账在资金专项根因修复、版本化定价、双人审批与资金安全门禁完成前不可激活。

@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-CLUB-STANDARD-FILTER",
+  "title": "自建俱乐部 type=standard 权威筛选",
+  "date": "2026-07-11",
+  "status": "implemented",
+  "objective": "证明并固化自建俱乐部列表由后端按 active 和 type=standard 权威筛选，补齐稳定搜索错误码。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-club-standard-filter.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-club-standard-filter-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/governance-reading-list.v1.json", "contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/module-dependencies/club-alliance.v1.json", "contracts/modules/club-alliance/internal-dependencies.v1.json", "docs/project-management/modules/club-alliance/README.md", "docs/project-management/notices/2026-07-11-club-alliance-first-phase-task-order.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-11-club-alliance-first-phase-task-order.md", "docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
+  "capabilities": ["foundation.authorization-idempotency", "foundation.service-action-contracts", "foundation.governance-certification"],
+  "contracts": ["contracts/modules/club-alliance/internal-dependencies.v1.json", "docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
+  "decisions": ["docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"],
+  "changed_areas": ["backend-go/plugins/club-plugin/plugin.go", "backend-go/plugins/club-plugin/service_test.go", "contracts/foundation/agent-collaboration.v1.json", "contracts/modules/club-alliance/internal-dependencies.v1.json", "docs/project-management/modules/club-alliance-first-slice-contract-v1.md", "docs/project-management/service-plaza/club-standard-filter-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "verification": ["go test -count=1 ./plugins/club-plugin", "go test -count=1 ./...", "go vet ./...", "scripts/Test-ServicePlazaContracts.ps1", "scripts/Test-TextEncoding.ps1", "git diff --check"],
+  "evidence": ["docs/project-management/service-plaza/club-standard-filter-2026-07-11.md", "contracts/foundation/development-checklists/2026-07-11-club-standard-filter.json", "contracts/foundation/governance-exams/2026-07-11-club-standard-filter-attempt-1.json", "docs/project-management/service-plaza/handoff-log.md"],
+  "premises": ["自建俱乐部固定映射后端 type=standard", "只有 status=active 的俱乐部可供申请加入", "服务端权威筛选不能由前端标签过滤代替", "本地混合类型自动化不等于测试环境 HTTP 已验证", "本切片不修改俱乐部业务页面"],
+  "implementation_mode": "ai-assisted"
+}
