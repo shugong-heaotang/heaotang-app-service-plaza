@@ -33,11 +33,11 @@
       "title": "生命导航申请与本人历史第一切片",
       "owner": "Life Navigation module agent",
       "owner_role": "生命导航负责人",
-      "status": "planned",
+      "status": "active",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-life-navigation",
       "branch": "codex/life-navigation-application-history",
-      "base_commit": "c153998a5e741fe13dc0b0a678cae1d7a663b926",
+      "base_commit": "65ec907c061b743784acc568ec5304581351b6fb",
       "allowed_paths": [
         "app/src/modules/life-navigation",
         "app/src/styles.css",
