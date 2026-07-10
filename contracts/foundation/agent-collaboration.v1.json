@@ -715,6 +715,25 @@
       "handoff_record": null
     },
     {
+      "work_id": "AIW-20260711-CLUB-HANDOFF-ID-CORRECTION",
+      "title": "俱乐部联盟正式派发 Handoff ID 冲突修正",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-handoff-id-correction",
+      "branch": "codex/club-handoff-id-correction",
+      "base_commit": "3f1b4b19dfb68fc4fc9fd147917741fd4a66948c",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "保留生命导航原 SP-H010；俱乐部联盟派发改用下一未占用 SP-H025。",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h025-俱乐部联盟-ca-f0h0-正式派发"
+    },
+    {
       "work_id": "AIW-20260711-SECURE-MODULE-API-ACCEPTANCE",
       "title": "三大核心服务安全取码与部署后 API 验收标准化",
       "owner": "Codex platform integration agent",
