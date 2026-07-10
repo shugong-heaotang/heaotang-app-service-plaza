@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-FRONTEND-DEPLOY-ATOMIC",
+  "title": "服务广场前端原子部署自动回滚与资源验证",
+  "date": "2026-07-11",
+  "status": "implemented",
+  "objective": "修复前端激活失败不能自动恢复的问题，并把构建资产、公共入口和 readiness 纳入可验证部署门禁。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-frontend-deploy-atomic.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-frontend-deploy-atomic-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/governance-reading-list.v1.json", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/dependency-driven-master-plan-v1.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"],
+  "requirement_sources": ["docs/project-management/dependency-driven-master-plan-v1.md", "docs/project-management/service-plaza/deployment-rollback-drill-2026-07-10.json"],
+  "capabilities": ["foundation.delivery-recovery", "foundation.contract-tooling", "foundation.governance-certification"],
+  "contracts": ["contracts/foundation/foundation-capabilities.v1.json"],
+  "decisions": ["docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"],
+  "changed_areas": ["scripts/Deploy-ServicePlazaTest.ps1", "scripts/Test-ServicePlazaFrontendDeploymentSafety.ps1", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/service-plaza/frontend-deploy-atomic-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "verification": ["scripts/Test-ServicePlazaFrontendDeploymentSafety.ps1", "PowerShell AST parse", "scripts/Test-ServicePlazaContracts.ps1", "scripts/Test-TextEncoding.ps1", "git diff --check"],
+  "evidence": ["docs/project-management/service-plaza/frontend-deploy-atomic-2026-07-11.md", "contracts/foundation/development-checklists/2026-07-11-frontend-deploy-atomic.json", "contracts/foundation/governance-exams/2026-07-11-frontend-deploy-atomic-attempt-1.json", "docs/project-management/service-plaza/handoff-log.md"],
+  "premises": ["测试环境前端由 nginx 从 /var/www/heaotang/app/service-plaza 提供", "timestamp staging rollback 和 failed 路径不会相互覆盖", "公共入口 HTML 必须引用本次构建的版本化 entry asset", "本地静态门禁不能替代测试服务器真实失败演练", "本切片不执行生产发布、不轮换秘密、不改变真实资金或数据"],
+  "implementation_mode": "ai-assisted"
+}

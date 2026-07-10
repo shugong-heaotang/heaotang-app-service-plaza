@@ -623,6 +623,31 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": "安全审计发现共享前端把空症状替换为固定句子，违反冻结合同；本工作项删除伪造回退并固化日志/遥测敏感数据证据。",
       "handoff_record": "docs/project-management/service-plaza/health-sensitive-data-audit-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-FRONTEND-DEPLOY-ATOMIC",
+      "title": "服务广场前端原子部署、自动回滚与资源验证",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-frontend-deploy-atomic",
+      "branch": "codex/frontend-deploy-atomic",
+      "base_commit": "20cb1f2fc689a726cd11fa00a4a23ae6b53a70a5",
+      "allowed_paths": [
+        "scripts/Deploy-ServicePlazaTest.ps1",
+        "scripts/Test-ServicePlazaFrontendDeploymentSafety.ps1",
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-frontend-deploy-atomic.json",
+        "contracts/foundation/governance-exams/2026-07-11-frontend-deploy-atomic-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-frontend-deploy-atomic.json",
+        "docs/project-management/service-plaza/frontend-deploy-atomic-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "现有前端脚本只创建 rollback 目录但激活失败不自动恢复，且缺少部署后入口资源验证；本工作项先修基础设施，不提前部署。",
+      "handoff_record": "docs/project-management/service-plaza/frontend-deploy-atomic-2026-07-11.md"
     }
   ]
 }

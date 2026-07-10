@@ -362,6 +362,22 @@ Handoff 运行规则见 `handoff-operating-mechanism.md`。首轮具体表单见
 当前结论：本地代码和静态安全证据 Go；测试环境运行时证据未验证
 ```
 
+## SP-H023：服务广场前端原子部署与自动回滚
+
+```text
+编号：SP-H023
+板块名称：服务广场发布恢复基础设施
+当前责任边界：前端 staging、原子激活、远程/公共验证失败回滚、entry asset 与 readiness 验证
+交接阶段：平台发布基础设施给测试环境部署
+已完成内容：backup-before-upload；staging 完整性；Bash trap 回滚；模拟失败开关；公共缓存穿透资源验证；ready 前后检查；回滚后二次验证；静态安全门禁
+未完成内容：测试服务器真实模拟失败回滚和正常部署证据
+依赖对象：IR-20260711-FRONTEND-DEPLOY-ATOMIC
+阻塞问题：生命导航二 M4 收口前不改变当前测试环境制品
+下一步动作：M4 后先运行 -SimulatePostDeployFailure，确认旧 asset 恢复，再正常部署候选前端
+需要谁确认：平台集成/运维负责人
+当前结论：本地实现 Go；环境 verified No-Go
+```
+
 ```text
 测试范围：
 不测试范围：
