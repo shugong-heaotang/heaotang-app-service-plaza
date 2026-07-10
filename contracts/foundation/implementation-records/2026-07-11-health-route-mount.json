@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-HEALTH-ROUTE-MOUNT",
+  "title": "健康大管家精确模块路由平台挂载",
+  "date": "2026-07-11",
+  "status": "implemented",
+  "objective": "建立健康大管家稳定的精确模块挂载边界，使后续板块实现无需修改服务广场总路由。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-health-route-mount.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-health-route-mount-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/governance-reading-list.v1.json", "contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/engineering-standards.v1.json", "contracts/foundation/module-dependencies/health-manager.v1.json", "contracts/modules/health-manager/internal-dependencies.v1.json"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-11-health-manager-first-phase-task-order.md", "docs/project-management/modules/health-manager-first-slice-contract-v1.md", "docs/project-management/service-plaza/parallel-module-notice-audit-2026-07-11.md"],
+  "capabilities": ["foundation.service-action-contracts", "foundation.app-shell-adapter", "foundation.ai-collaboration-safety"],
+  "contracts": ["contracts/service-plaza/service-plaza-actions.v1.json", "contracts/foundation/module-dependencies/health-manager.v1.json", "contracts/modules/health-manager/internal-dependencies.v1.json"],
+  "decisions": ["docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0009-approved-toolchain-per-layer.md", "docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0018-recursive-project-governance.md"],
+  "changed_areas": ["app/src/App.tsx", "app/src/App.test.tsx", "app/src/pages/CoreServicePage.tsx", "app/src/pages/CoreServicePage.test.tsx", "app/src/modules/health-manager/HealthManagerRoute.tsx", "app/src/modules/health-manager/index.ts", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/service-plaza/health-route-mount-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "verification": ["npm test -- --run src/App.test.tsx src/pages/CoreServicePage.test.tsx", "npm test -- --run", "npm run build", "scripts/Test-ServicePlazaContracts.ps1", "scripts/Test-TextEncoding.ps1", "git diff --check"],
+  "evidence": ["docs/project-management/service-plaza/health-route-mount-2026-07-11.md", "contracts/foundation/development-checklists/2026-07-11-health-route-mount.json", "contracts/foundation/governance-exams/2026-07-11-health-route-mount-attempt-1.json", "docs/project-management/service-plaza/handoff-log.md"],
+  "premises": ["精确平台路由挂载属于平台集成责任，不是健康板块业务实现", "现有通用健康页面在模块负责人接管前保持行为兼容", "本地测试和构建通过不等于测试环境已经部署", "健康历史列表、敏感日志证据和后端测试环境验收仍未完成，因此健康 M2 保持 No-Go"],
+  "implementation_mode": "ai-assisted"
+}

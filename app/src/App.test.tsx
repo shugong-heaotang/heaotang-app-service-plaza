@@ -117,6 +117,14 @@ describe("服务广场主链路", () => {
     expect(screen.getByRole("link", { name: "← 返回服务广场" })).toBeInTheDocument();
   });
 
+  it("健康大管家使用独立模块路由挂载边界", () => {
+    renderAt("/services/health-manager");
+
+    expect(screen.getByTestId("health-manager-module-route")).toBeInTheDocument();
+    expect(screen.getByRole("heading", { level: 1, name: "健康大管家" })).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "← 返回服务广场" })).toBeInTheDocument();
+  });
+
   it("未知路由提供返回服务广场的恢复路径", () => {
     renderAt("/missing");
 

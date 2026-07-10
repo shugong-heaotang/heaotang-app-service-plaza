@@ -232,7 +232,7 @@
       "title": "健康咨询输入缓存与 AI 失败关闭平台安全前置",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-platform-safety-governance",
       "branch": "codex/health-manager-platform-safety-governance",
@@ -254,7 +254,7 @@
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
       "migration_note": "生命导航二最终浏览器验收等待 UTC 日自然重置期间，仅关闭健康板块平台安全前置；不构成健康板块正式派发。",
-      "handoff_record": null
+      "handoff_record": "docs/project-management/service-plaza/health-platform-safety-2026-07-11.md"
     },
     {
       "work_id": "AIW-20260711-HEALTH-PLATFORM-SAFETY-BACKEND",
@@ -275,6 +275,34 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": null,
       "handoff_record": "docs/project-management/service-plaza/health-platform-safety-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-HEALTH-ROUTE-MOUNT",
+      "title": "健康大管家精确模块路由平台挂载",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-route-mount",
+      "branch": "codex/health-manager-route-mount",
+      "base_commit": "074e59b8eee0aceb48f6c9ca0301b557e27505e8",
+      "allowed_paths": [
+        "app/src/App.tsx",
+        "app/src/App.test.tsx",
+        "app/src/pages/CoreServicePage.tsx",
+        "app/src/pages/CoreServicePage.test.tsx",
+        "app/src/modules/health-manager",
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-health-route-mount.json",
+        "contracts/foundation/governance-exams/2026-07-11-health-route-mount-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-health-route-mount.json",
+        "docs/project-management/service-plaza/health-route-mount-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "只建立稳定的模块挂载边界并委托现有页面；不启动健康业务开发，不关闭 M2 其余前置。",
+      "handoff_record": null
     }
   ]
 }

@@ -3,6 +3,7 @@ import { Link, useParams, useSearchParams } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext";
 import { AppFrame } from "../components/AppFrame";
 import { AuthPanel } from "../components/AuthPanel";
+import type { ServiceKey } from "../domain/services";
 import { isServiceKey, serviceDefinitions } from "../domain/services";
 import {
   isRealSubmissionMode,
@@ -28,8 +29,13 @@ const stateCopy: Record<Exclude<ViewState, "normal">, { title: string; body: str
   },
 };
 
-export function CoreServicePage() {
-  const { serviceKey } = useParams();
+type CoreServicePageProps = {
+  serviceKeyOverride?: ServiceKey;
+};
+
+export function CoreServicePage({ serviceKeyOverride }: CoreServicePageProps = {}) {
+  const { serviceKey: routeServiceKey } = useParams();
+  const serviceKey = serviceKeyOverride ?? routeServiceKey;
   const { isAuthenticated, user, logout } = useAuth();
   const [searchParams] = useSearchParams();
   const [viewState, setViewState] = useState<ViewState>("normal");

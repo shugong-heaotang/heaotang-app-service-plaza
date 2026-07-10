@@ -1,0 +1,1 @@
+export { HealthManagerRoute } from "./HealthManagerRoute";
