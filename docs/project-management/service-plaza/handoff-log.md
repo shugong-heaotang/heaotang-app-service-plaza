@@ -15,7 +15,7 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 | SP-H008 | 健康与俱乐部任务包预制 | 需求准备给开发 | 平台集成 Agent | 板块负责人 | 2026-07-11 | 已预制，审计后待修订 | 未正式派发，不授权签收或编码 |
 | SP-H010 | 生命导航二 M3 平台路由 | 开发给联调 | 平台集成 Agent | 生命导航二负责人、验收 Agent | 2026-07-11 | 本地路由 Go，待 M4 | 精确路由、真实适配器路由级闭环、90 项全量测试与生产构建通过 |
 | SP-H011 | 并行板块通知书审计修订 | 需求准备复核 | 平台集成 Agent | 健康/俱乐部负责人、验收 Agent | 2026-07-11 | 修订 Go，正式派发 No-Go | 权威状态、跨业务依赖、M0/M1 范围和 M2 公共前置已统一 |
-| SP-H025 | 俱乐部联盟 CA-F0/H0 | 正式派发给模块 G0 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | 已派发，待模块 G0 接收 | 取代旧自建切片入口；CA-H1 和业务编码未授权 |
+| SP-H025 | 俱乐部联盟 CA-F0/H0 | 正式派发给模块 G0 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | 模块 G0 / CA-F0-M0 Go | d622cba 独立验收通过；继续 CA-F0/H0 标准文件，CA-H1 和业务编码未授权 |
 
 ## 首轮 Handoff 提交清单
 
@@ -421,10 +421,20 @@ Handoff 运行规则见 `handoff-operating-mechanism.md`。首轮具体表单见
 - 日期：2026-07-11
 - 提交：服务广场平台集成负责人
 - 接收：俱乐部联盟负责人
-- 状态：Handoff ready；模块须完成自身 G0 后正式接收
+- 状态：模块 G0 / CA-F0-M0 已由平台验收 Go；继续当前已授权 CA-F0/H0 标准文件检查点
 - 范围：CA-F0-M0 + CA-H0；CA-H1 和业务编码未授权
 - 通知：`docs/project-management/notices/2026-07-11-club-alliance-foundation-task-order.md`
 - 平台记录：`IR-20260711-CLUB-FOUNDATION-DISPATCH-GOVERNANCE`
 - 模块工作项：`AIW-20260711-CLUB-FOUNDATION-DISPATCH`
 - Pending：D-CA-003 仅局部阻塞分类 selector/category API/SC-PC 编码
 - 未授权：测试环境、生产、真实资金、不可逆操作
+
+## 平台检查点验收（2026-07-11）
+
+- 模块提交：`d622cba4ac1309e47531412e51ae7dd974720dd0`，远端分支指向相同提交，工作树干净。
+- 变更范围：7 个文件，全部位于 `AIW-20260711-CLUB-FOUNDATION-DISPATCH` 精确允许路径，越界 0。
+- 检查单：28/28 completed，当前 SHA mismatch 0。
+- 考试：同一 RecordId，score 100，status passed。
+- receipt、实现记录和模块 Handoff 均引用 `SP-H025`；`SP-H010` 明确保留给生命导航。
+- 独立复跑：preflight ready；checklist/exam/IR/collaboration/UTF-8/git diff 全部通过。
+- 结论：G0 / CA-F0-M0 Go。该结论不等于 CA-H0 Go；D-CA-003 Pending 不阻塞 H0 base，但完整 H0 Go 前必须关闭；CA-H1、frontend、backend、deploy 和业务编码继续禁止。
