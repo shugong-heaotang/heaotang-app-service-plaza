@@ -3,8 +3,8 @@
 ## 当前裁定
 
 - 状态：`In Progress / No-Go`。
-- 原因：`CA-H1-M4-B001` 已完成根因修复、双人审批、测试环境部署并取得 guest blocked 真实事件；登录允许、登录缺 `club:manage`、其余合法 category、完整键盘与导航证据仍未全部完成。部署成功和单类事件通过不等于 M4 Go。
-- 产品 Blocker：未发现页面实现 Blocker。
+- 原因：`CA-H1-M4-B001` 已关闭；`CA-H1-M4-B002` 根因修复已受控集成并部署，但部署后的“已登录且缺 `club:manage`”点击与 direct view 环境复验仍等待新的合法会话。Enter、Shift+Tab 仍为控制通道未验证。部署成功和自动化通过不等于 M4 Go。
+- 产品 Blocker：`CA-H1-M4-B002` 代码缺口已修复；环境关闭证据尚未完成，因此 M4 仍按 Blocker 未关闭处理。
 - 平台 Blocker：`CA-H1-M4-B001` 已 resolved；根因修复和环境启用均使用版本化 business variable 与不同管理员提案/审核，未直接改数据库、未恢复旧单管理员入口。
 - 验收通道问题：应用内浏览器控制层向 `ab.chatgpt.com` 发送自身 Statsig 请求时多次 10 秒超时；页面 DOM 与测试服务器访问日志仍正常。该流量不是和奥堂 APP 请求，不计入模块或 APP 网络面。
 
@@ -15,7 +15,7 @@
 - 模块实现提交：`e8c5dd23e7f87ee92f158ba6a719e498ca4eb577`。
 - M3 平台集成：`91547b3db4a8a92537ff19193f2e2a6740318ccd`。
 - M4 登记提交：`d38e3e796b81fd5aada6b16ca0dec5214bfba446`。
-- 前端资产：`assets/index-CfiMm2q0.js`；CSS：`assets/index-CG40mPcg.css`。
+- 初始 M4 前端资产：`assets/index-CfiMm2q0.js`；CSS：`assets/index-CG40mPcg.css`。
 - 部署目标：`/var/www/heaotang/app/service-plaza`。
 - 服务器备份：`/root/heaotang-backups/20260711-102730.tar.gz`。
 - 本地备份：`D:/Backup/heaotang-test-server/20260711-102730/test-server-state.tar.gz`。
@@ -23,6 +23,14 @@
 - 部署前后 `/ready`：`ready`、`db=true`；`/health?json=1`：`status=ok`、`db.connected=true`、`plugins=24`。
 - 公开资产校验：通过；部署脚本确认公开页面引用 `assets/index-CfiMm2q0.js`。
 - 运行时目录：9 个服务、20 个动作；`club-alliance` 为 core sort 20。
+
+### 2026-07-11 B002 修复部署增量证据
+
+- 权威集成：`004800f6fec01c3a31a769dbf3d9d12830683a3f`；本组核对该提交同时为本地/远端 `codex/service-plaza-phase1-integration` 与 `codex/club-h1-m4-manage-guard` 的权威头，提交内容为 `fix(club-alliance): fail manage view closed`。
+- 修复自动化证据来自该提交的实现记录：定向 3 files / 61 tests、前端全量 18 files / 155 tests、production build 与 test-server build 均通过；本组未把该历史记录冒充新一轮环境 UAT。
+- 本轮部署日志证据：服务器备份 `/root/heaotang-backups/20260711-194454.tar.gz`；本地备份 `D:/Backup/heaotang-test-server/20260711-194454/test-server-state.tar.gz`；回滚目标 `/var/www/heaotang/app/service-plaza.rollback-20260711-194451`；部署资产 `assets/index-CPIj0Kh9.js`。
+- 本组只读交叉验证：本地备份文件存在、大小 18,695,428 bytes，归档可列举；公开服务页当前引用 `assets/index-CPIj0Kh9.js` 与 `assets/index-CG40mPcg.css`；`GET /ready` 返回 `status=ready / db=true / plugins=24`；`GET /health?json=1` 返回 `status=ok / db.connected=true / plugins=24`。
+- 当前裁定：修复已集成并部署；由于上一合法普通会员浏览器会话不再可用，本组按授权边界未申请 OTP、未登录、未读取或注入 token/cookie，也未点击浏览器。普通会员点击管理中心保持原 URL、`blocked/scope_required` 三方证据，以及 direct `?view=manage` 的 `unauthorized/scope_required` 页面证据仍待合法已登录缺 scope 会话复验。
 
 ## 自动化与本地入口
 
@@ -115,7 +123,7 @@
 
 1. `CA-H1-M4-B001` 已关闭；保留上述 exact commit、部署、双审与 guest blocked 证据。
 2. 刷新、浏览器后退和两个返回入口已 Pass；Enter、Shift+Tab 因浏览器控制通道不能稳定触发而保持未验证，最终门禁前需换稳定真实键盘通道复测。
-3. 合成登录、四分类 activated 和管理中心 blocked/scope_required 事件证据已完成；仍需关闭 `CA-H1-M4-B002` 用户可见管理页面权限状态缺口。
+3. 合成登录、四分类 activated 和修复前管理中心 blocked/scope_required 事件证据已完成；`CA-H1-M4-B002` 修复已集成部署，但修复后的点击不导航、direct view 用户可见权限状态和三方事件仍待合法会话复验。
 4. 四分类 guest blocked 与登录 activated/管理 blocked 遥测均已完成，载荷未保存 OTP/JWT/完整个人标识/敏感业务数据。
 5. 八态由 143/143 全量与 56/56 定向自动化证明；环境只记录安全、自然可重复状态，不新增人工状态切换器，不把未构造的 maintenance/offline 冒充截图通过。
 6. 完成后才能把 verdict 改为 Pass；任何 Blocker/Major 未关闭维持 No-Go。
@@ -149,3 +157,10 @@
 - 影响：后端 scope、前端 evaluator 和遥测均正确，但用户可见权限状态错误，属于 M4 Blocker；不得以事件正确替代页面修复。
 - 关闭方案：独立前端根因工作项为 `view=manage` 建立确定性解析和失败关闭；无 scope 时渲染 unauthorized/scope_required，有 scope 时才允许管理 focused 状态；补缺失、重复、未知 view 负例及页面/事件回归。
 - Owner：平台集成负责人负责权限路由壳修复与独立验收；俱乐部业务 API、后端、数据和生产继续禁止。
+
+### CA-H1-M4-B002 修复部署后的关闭状态
+
+- `004800f6fec01c3a31a769dbf3d9d12830683a3f` 已实现两层失败关闭：`scope_required` 阻止内部链接默认导航；direct management view 由上游 action target 与共享 evaluator 确定性解析。`authentication_required` 继续保留既有登录承接路径。
+- 该提交已进入权威 integration，并以 `assets/index-CPIj0Kh9.js` 部署到测试环境；现场 ready/health/资产交叉验证通过。
+- 未完成项仅保留环境关闭证据：使用合法已登录且缺 `club:manage` 的普通会员会话，验证点击管理中心不导航、事件为 `blocked/scope_required/user_id=non-null`，以及 direct `?view=manage` 显示 `unauthorized/scope_required`；每项仍需页面、Nginx 和只读事件三方交叉。
+- 在合法会话可用前，状态为 `Implemented + Deployed / Environment Retest Pending`，M4 继续 `In Progress / No-Go`。guest 四分类证据无需重复；Enter、Shift+Tab 继续保持控制通道未验证。
