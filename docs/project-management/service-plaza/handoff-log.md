@@ -22,8 +22,8 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 | SP-H029 | 俱乐部联盟 CA-H1 | 页面壳需求、实现与 M4 环境验收 | 平台集成负责人 | 俱乐部联盟负责人、验收 Agent | 2026-07-12 | H1 M4 Go | B001/B002、登录角色、四分类、导航、denylist 和人工真实 Enter/Shift+Tab 全部通过 |
 | SP-H030 | 生命导航二 M4 | 浏览器主链路最终验收 | 平台集成负责人 | 生命导航二负责人、验收 Agent | 2026-07-11 | M4 Go | 真实登录、合成提交、即时历史、刷新持久、返回服务广场通过 |
 | SP-H031 | 健康大管家 MVP-90 | PRD 独立文档派发 | 平台集成负责人 | 健康大管家负责人 | 2026-07-11 | 正式派发，待最终激活 | Technical Go / Professional Freeze Pending；仅文档，不授权实现 |
-| SP-H032 | 健康大管家 MVP-90 M0 | 合同与合成一致性正式派发 | 平台集成负责人 | 健康大管家负责人 | 2026-07-12 | 平台派发完成，待模块激活签收 | 16 对象、6 状态机、6 角色、15 合成场景；禁止业务代码和真实健康数据 |
-| SP-H033 | 生命导航 LN-S2 | 维度引导申请 P0/P1 正式派发 | 平台集成负责人 | 生命导航二负责人 | 2026-07-12 | 平台派发完成，待模块激活签收 | Pending 维度决策、窄目录/selector/error 合同和合成 conformance；禁止实现 |
+| SP-H032 | 健康大管家 MVP-90 M0 | 合同与合成一致性正式派发 | 平台集成负责人 | 健康大管家负责人 | 2026-07-12 | M0 Contract Go / Acceptance Partial Go，已受控集成 | 16 对象、6 状态机、6 角色、15 合成场景；27 Pending、M1、业务和真实健康数据继续 No-Go |
+| SP-H033 | 生命导航 LN-S2 | 维度引导申请 P0/P1 正式派发 | 平台集成负责人 | 生命导航二负责人 | 2026-07-12 | Base Contract Go / Executable No-Go，已受控集成 | D-LN-S2-001 Pending；registry 未冻结、selector 不可执行；禁止前后端和环境实现 |
 
 ## SP-H033：生命导航 LN-S2 P0/P1 正式派发
 
@@ -36,6 +36,7 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 - 合成数据：固定 seed `HEAOTANG-LN-S2-20260712-V1`；允许固定版本 Faker/确定性工具；禁止真实个人数据、申请正文和凭据。
 - 边界：禁止 executable selector、前后端代码、API/数据库、环境、部署、生产、评分/预测/八字/AI 建议/价格或交易。
 - 激活：本派发受控集成后模块工作树快进 final integration HEAD；独立 activation commit 转 active，模块完成 overlay checklist、考试100和 receipt 后开始 P0/P1。
+- 验收收口：模块提交 `93ae058f1ba53a958937e78d1270ebbae3d938a7` 经平台独立复核，Schema 4/4、合成 conformance 12/12、R2 31/31、考试100；受控集成提交 `47f4e7c1adb63d42a9dcca825b24362c7d8dc7ea`。结论 `Base Contract Go / Executable No-Go`，下一步仅提交 `D-LN-S2-001` 项目负责人决策包。
 
 ## SP-H032：健康大管家 MVP-90 M0 合同与合成一致性派发
 
@@ -48,6 +49,7 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 - 合成数据：显式 synthetic、固定 seed/version、可重放、可销毁；允许固定版本 Faker 等批准工具；禁止真实健康数据、手机号、身份证、OTP、JWT 或 cookie。
 - 边界：禁止前端、后端、API、数据库、环境、部署、生产、收费和专业 Pending 提前 Accepted。
 - 激活：本派发受控集成后，把模块工作树快进至 final integration HEAD 并核验 clean；再以独立 activation commit 将模块工作项转 active，模块自行完成 current checklist、考试 100、receipt 后开始 M0。
+- 验收收口：模块提交 `f7d0d6e7c2056d119e164204f99a4596ea08a8a9` 经平台独立复核，16 对象、27 Pending 全不可执行、6 状态机、6 角色、15 场景、conformance 12/12、R2 28/28、考试100；成果受控集成至 `8b1b952d17d90a8a3d572518dc672589dbbcb1a3`，状态收口后权威基线继续前进。结论 `M0 Contract Go / Acceptance Partial Go`，HM-R0 专业会签、27 Pending、M1、业务实现和环境继续 No-Go。
 
 ## SP-H031：健康大管家 MVP-90 PRD 独立派发
 
