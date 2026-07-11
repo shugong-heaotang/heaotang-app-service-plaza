@@ -8,6 +8,7 @@
 - base：`6149504959ea779102022d6b6e172fe0999dcaec`
 - activation HEAD：`73b21bb15fcefa5aad4140619e9661216aca54c7`
 - implementation commit：`4ae2b8f17ffab4bc131a3f67f13873eb02d080f9`
+- canonical/detail Major correction commit：`6649bf3d5bfc4605ec1c6718201a1799b53e4b26`
 - status：handoff-ready / local F0 Go candidate / T0 No-Go
 
 ## 治理证据
