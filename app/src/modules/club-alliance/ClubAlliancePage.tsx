@@ -5,6 +5,10 @@ import { AppFrame } from "../../components/AppFrame";
 import type { ServiceAction } from "../../domain/serviceActions";
 import type { ActionAccessDecision } from "../../infrastructure/actionExecutor";
 import { clubAllianceReturnRoute, clubAllianceRootRoute } from "./clubAllianceHomepageContract";
+import {
+  selfCreatedClubActionId,
+  selfCreatedClubRootRoute,
+} from "./self-created/selfCreatedClubContract";
 import "./ClubAlliancePage.css";
 
 type BaseReadyModel = { actions: readonly ServiceAction[] };
@@ -146,6 +150,11 @@ export function ClubAlliancePage({ model, onRetry }: ClubAlliancePageProps) {
               : "四类入口均来自服务广场标准动作目录，展示顺序、权限和状态保持一致。"}
           </p>
           {selectedActionId && <code>selected_action_id={selectedActionId}</code>}
+          {selectedActionId === selfCreatedClubActionId && (
+            <Link className="club-alliance-return" to={selfCreatedClubRootRoute}>
+              进入自建俱乐部
+            </Link>
+          )}
         </header>
 
         <section className="club-alliance-grid" aria-label="俱乐部联盟四类入口">
