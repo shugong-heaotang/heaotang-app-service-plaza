@@ -15,7 +15,7 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 | SP-H008 | 健康与俱乐部任务包预制 | 需求准备给开发 | 平台集成 Agent | 板块负责人 | 2026-07-11 | 已预制，审计后待修订 | 未正式派发，不授权签收或编码 |
 | SP-H010 | 生命导航二 M3 平台路由 | 开发给联调 | 平台集成 Agent | 生命导航二负责人、验收 Agent | 2026-07-11 | 本地路由 Go，待 M4 | 精确路由、真实适配器路由级闭环、90 项全量测试与生产构建通过 |
 | SP-H011 | 并行板块通知书审计修订 | 需求准备复核 | 平台集成 Agent | 健康/俱乐部负责人、验收 Agent | 2026-07-11 | 修订 Go，正式派发 No-Go | 权威状态、跨业务依赖、M0/M1 范围和 M2 公共前置已统一 |
-| SP-H025 | 俱乐部联盟 CA-F0/H0 | 标准与 H0 Base 验收 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | H0 Base Go；H0 Full No-Go | 3eb25ae 独立验收通过；D-CA-003/category 契约局部阻塞 Full Go |
+| SP-H025 | 俱乐部联盟 CA-F0/H0 | 标准与 H0 Full 验收 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | H0 Full Go | 159d004 独立验收并受控集成；CA-H1 与业务仍未授权 |
 | SP-H026 | 模块内部依赖 v2 | 平台合同给模块 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | 验证完成，待受控集成 | v1/v2 按 contract_version 路由；五维 readiness 与局部阻塞 |
 | SP-H027 | 健康大管家 V1.0 需求策划 | 文档任务派发 | 平台集成负责人 | 健康大管家负责人 | 2026-07-11 | 正式派发，待模块 G0 | 独立于旧咨询切片；仅文档和治理证据，可推送 Draft PR |
 | SP-H028 | 俱乐部 category 权威筛选 | 平台合同、后端与环境给模块 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | 后端与环境 Go，待模块吸收复核 | D-CA-003 Accepted；实现/集成 47ef91bb；SC general、PC charity |
@@ -443,12 +443,12 @@ Handoff 运行规则见 `handoff-operating-mechanism.md`。首轮具体表单见
 - 日期：2026-07-11
 - 提交：服务广场平台集成负责人
 - 接收：俱乐部联盟负责人
-- 状态：模块 G0 / CA-F0-M0 已由平台验收 Go；继续当前已授权 CA-F0/H0 标准文件检查点
+- 状态：CA-F0/H0 Standards、H0 Base 与 H0 Full 均已由平台验收 Go
 - 范围：CA-F0-M0 + CA-H0；CA-H1 和业务编码未授权
 - 通知：`docs/project-management/notices/2026-07-11-club-alliance-foundation-task-order.md`
 - 平台记录：`IR-20260711-CLUB-FOUNDATION-DISPATCH-GOVERNANCE`
 - 模块工作项：`AIW-20260711-CLUB-FOUNDATION-DISPATCH`
-- Pending：D-CA-003 仅局部阻塞分类 selector/category API/SC-PC 编码
+- 已关闭：D-CA-003、category 权威筛选合同、后端实现与环境验收、H0 Full 单一真相源
 - 未授权：测试环境、生产、真实资金、不可逆操作
 
 ## 平台检查点验收（2026-07-11）
@@ -469,6 +469,16 @@ Handoff 运行规则见 `handoff-operating-mechanism.md`。首轮具体表单见
 - 合同：`module-internal-dependencies.v2` 通过；category registry、capability catalog、homepage、relationship、error catalog 五组 Schema 5/5 通过。
 - Conformance：H0-B001 至 H0-B033 为 33/33 Pass；服务广场总合同、协作、实现记录、UTF-8、git diff 均通过。
 - 结论：CA-F0/H0 Standards + H0 Base Go。`D-CA-003` 与服务端 category 契约继续阻塞 executable selector、SC/PC 分类编码和 H0 Full Go；CA-H1、frontend、backend、deploy、环境、生产和资金操作仍未授权。
+
+## H0 Full 平台验收（2026-07-11）
+
+- 最终模块提交：`159d0042b4f1f20ef84beccc4cfb4250dbc2f79d`；主关闭提交为 `40c5b1b0c5042d5ce061b6cf1b211c98590d43c1`，最终提交修正 Handoff 的 R3 引用。
+- 范围：相对授权基线 `fd5d8cb` 共 15 个 changed paths，全部位于精确 allowed paths，越界 0，模块工作树干净。
+- 治理：R3 checklist 28/28、current SHA mismatch 0；R3 exam score 100 passed；IR 与 checklist/exam 使用同一 RecordId。
+- 单一真相源：D-CA-003 在 decisions、v2 internal dependencies 与 category registry 均为 Accepted；SC=`standard+general`，PC=`standard+charity`；所有 selector 继续 `executable=false`。
+- 负例：H0-B013 由 fixture 显式构造 `pending+executable`，稳定返回 `CAH0_SELECTOR_PENDING_EXECUTABLE`。
+- 独立复跑：v2 dependency 1/1、五组 Schema 5/5、H0-B001～B033 33/33、category mixed fixture、服务广场总合同、checklist/exam/IR/collaboration、UTF-8 与 git diff 全部通过。
+- 结论：H0 Full Go。该结论仅完成 CA-H0 标准与门禁，不授权 CA-H1、前端实现、四类业务编码、发布、生产或运营；后续阶段必须建立独立工作项和门禁。
 
 ## SP-H026：模块内部依赖 v2 五维门禁
 

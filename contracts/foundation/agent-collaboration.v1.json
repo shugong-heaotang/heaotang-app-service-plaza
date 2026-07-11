@@ -33,7 +33,7 @@
       "title": "生命导航申请与本人历史第一切片",
       "owner": "Life Navigation 2 module agent",
       "owner_role": "生命导航二负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-life-navigation",
       "branch": "codex/life-navigation-application-history",
@@ -699,7 +699,7 @@
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
-      "migration_note": "2026-07-11 基于 APP integration 0a159d7 最小受控恢复；完成性审计后补充机器 category registry、H0-B013 显式 Pending 负例夹具/测试及两份 H0 验收报告，消除 Accepted/Pending 双真相源。仅授权吸收 D-CA-003、后端与环境 Go 证据及本轮 checklist/exam/IR；禁止 Schema、CA-H1、前后端业务代码、部署和其他标准文件。",
+      "migration_note": "2026-07-11 基于 APP integration 0a159d7 最小受控恢复；完成性审计后补充机器 category registry、H0-B013 显式 Pending 负例夹具/测试及两份 H0 验收报告，消除 Accepted/Pending 双真相源。最终模块 HEAD 159d004 经平台独立复核和全门禁复跑后受控集成，SP-H025 更新为 H0 Full Go；CA-H1、业务、release 与 operations 仍需独立授权。",
       "handoff_record": "docs/project-management/modules/club-alliance/CA-F0-H0-handoff.md"
     },
     {
