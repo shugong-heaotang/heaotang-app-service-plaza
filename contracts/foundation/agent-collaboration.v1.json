@@ -1249,6 +1249,68 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": "仅负责为 B002 与 M4 增加 2026-07-12 当前治理快照路径，并在两项证据分别受控集成后完成真实状态转换；不修改前端、后端、部署、配置或业务数据，不把未完成的真实键盘 UAT 标记为通过。",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h029俱乐部联盟-ca-h1-m4-测试环境验收"
+    },
+    {
+      "work_id": "AIW-20260712-LIFE-LN-S2-DISPATCH",
+      "title": "生命导航 LN-S2 维度引导申请 P0/P1 正式派发",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-life-ln-s2-dispatch",
+      "branch": "codex/life-ln-s2-dispatch",
+      "base_commit": "7d261d8276c4d72883598f72a8dbaac8a48837b1",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/module-dependencies/life-navigation.v1.json",
+        "contracts/foundation/development-checklists/2026-07-12-life-ln-s2-dispatch.json",
+        "contracts/foundation/governance-exams/2026-07-12-life-ln-s2-dispatch-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-12-life-ln-s2-dispatch.json",
+        "docs/project-management/notices/2026-07-12-life-ln-s2-task-order.md",
+        "docs/project-management/service-plaza/life-ln-s2-dispatch-2026-07-12.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "从权威 integration 7d261d8 创建独立干净工作树；只派发 LN-S2 P0/P1 需求事实、维度注册表/目录/selector/error 合同与合成 conformance，不授权前端、后端、API、数据库、环境或部署。",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h033生命导航-ln-s2-p0p1-正式派发"
+    },
+    {
+      "work_id": "AIW-20260712-LIFE-LN-S2-P0-P1",
+      "title": "生命导航 LN-S2 维度引导申请 P0/P1 标准",
+      "owner": "Life Navigation 2 module agent",
+      "owner_role": "生命导航二负责人",
+      "status": "planned",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-life-ln-s2-p0-p1",
+      "branch": "codex/life-navigation-ln-s2-p0-p1",
+      "base_commit": "7d261d8276c4d72883598f72a8dbaac8a48837b1",
+      "allowed_paths": [
+        "docs/project-management/modules/life-navigation/README.md",
+        "docs/project-management/modules/life-navigation/LN-S2-requirements.md",
+        "docs/project-management/modules/life-navigation/LN-S2-decisions.md",
+        "docs/project-management/modules/life-navigation/LN-S2-receipt.md",
+        "docs/project-management/modules/life-navigation/LN-S2-handoff.md",
+        "docs/project-management/modules/life-navigation/LN-S2-conformance-report.md",
+        "contracts/modules/life-navigation/internal-dependencies.v1.json",
+        "contracts/modules/life-navigation/dimension-guided-application/dimension-registry.v1.json",
+        "contracts/modules/life-navigation/dimension-guided-application/dimension-registry.v1.schema.json",
+        "contracts/modules/life-navigation/dimension-guided-application/dimension-directory.v1.json",
+        "contracts/modules/life-navigation/dimension-guided-application/dimension-directory.v1.schema.json",
+        "contracts/modules/life-navigation/dimension-guided-application/application-dimension-selector.v1.json",
+        "contracts/modules/life-navigation/dimension-guided-application/application-dimension-selector.v1.schema.json",
+        "contracts/modules/life-navigation/dimension-guided-application/error-catalog.v1.json",
+        "contracts/modules/life-navigation/dimension-guided-application/error-catalog.v1.schema.json",
+        "contracts/modules/life-navigation/dimension-guided-application/fixtures/cases.v1.json",
+        "contracts/modules/life-navigation/dimension-guided-application/test_life_dimension_contracts.py",
+        "contracts/modules/life-navigation/development-checklists/2026-07-12-life-ln-s2-p0-p1.json",
+        "contracts/modules/life-navigation/governance-exams/2026-07-12-life-ln-s2-p0-p1-attempt-1.json",
+        "contracts/modules/life-navigation/implementation-records/2026-07-12-life-ln-s2-p0-p1.json"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "已从 7d261d8 预创建专用干净工作树；平台派发受控集成后必须快进至 final integration HEAD 并再次核验 clean，再单独激活。P0 决策前保持 registry_frozen=false、executable=false，旧 yun mapping_target=null。",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h033生命导航-ln-s2-p0p1-正式派发"
     }
   ]
 }

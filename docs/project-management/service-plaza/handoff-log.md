@@ -23,6 +23,19 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 | SP-H030 | 生命导航二 M4 | 浏览器主链路最终验收 | 平台集成负责人 | 生命导航二负责人、验收 Agent | 2026-07-11 | M4 Go | 真实登录、合成提交、即时历史、刷新持久、返回服务广场通过 |
 | SP-H031 | 健康大管家 MVP-90 | PRD 独立文档派发 | 平台集成负责人 | 健康大管家负责人 | 2026-07-11 | 正式派发，待最终激活 | Technical Go / Professional Freeze Pending；仅文档，不授权实现 |
 | SP-H032 | 健康大管家 MVP-90 M0 | 合同与合成一致性正式派发 | 平台集成负责人 | 健康大管家负责人 | 2026-07-12 | 平台派发完成，待模块激活签收 | 16 对象、6 状态机、6 角色、15 合成场景；禁止业务代码和真实健康数据 |
+| SP-H033 | 生命导航 LN-S2 | 维度引导申请 P0/P1 正式派发 | 平台集成负责人 | 生命导航二负责人 | 2026-07-12 | 平台派发完成，待模块激活签收 | Pending 维度决策、窄目录/selector/error 合同和合成 conformance；禁止实现 |
+
+## SP-H033：生命导航 LN-S2 P0/P1 正式派发
+
+- 通知：`LN-S2-TASK-20260712-001`。
+- 平台工作项：`AIW-20260712-LIFE-LN-S2-DISPATCH`；模块工作项：`AIW-20260712-LIFE-LN-S2-P0-P1`。
+- 目标：服务端权威、版本化、失败关闭的维度 registry、窄目录、申请 selector、稳定 error catalog 与合成 conformance。
+- 现有事实：application-history M0-M4 继续作为身份/幂等/本人历史/跨用户隔离证据；现有 dimensions 端点为 code-present-unverified，不证明窄目录或配置失败关闭。
+- P0 状态：`decision_status=pending`、`registry_frozen=false`、`executable=false`、旧 `yun mapping_target=null`；项目负责人裁决前只允许 Pending 结构和 Base Contract。
+- 治理：平台 current checklist 26/26、SHA mismatch 0；随机考试 score 100；独立分支和两个干净工作树已建立。
+- 合成数据：固定 seed `HEAOTANG-LN-S2-20260712-V1`；允许固定版本 Faker/确定性工具；禁止真实个人数据、申请正文和凭据。
+- 边界：禁止 executable selector、前后端代码、API/数据库、环境、部署、生产、评分/预测/八字/AI 建议/价格或交易。
+- 激活：本派发受控集成后模块工作树快进 final integration HEAD；独立 activation commit 转 active，模块完成 overlay checklist、考试100和 receipt 后开始 P0/P1。
 
 ## SP-H032：健康大管家 MVP-90 M0 合同与合成一致性派发
 
