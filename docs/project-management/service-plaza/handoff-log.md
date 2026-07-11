@@ -30,6 +30,15 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 - 边界：selector 继续 `executable=false`；禁止四类业务 API、后端、deploy、production。
 - 环境门禁：模块本地 Go 后，平台另行授权测试环境部署与真实浏览器 UAT。
 
+### H1-M1 平台检查点验收（2026-07-11）
+
+- 模块提交：`e87feecd0dbfd53cd9e5e6e48f80eee650562839`，工作树 clean，8 个 changed paths 全在精确 allowed paths。
+- 治理：current checklist 28/28、SHA mismatch 0；exam score 100；IR/Handoff 同一 record。
+- 实现：纯 homepage contract 与共享 action adapter；四入口从上游动作派生并按 sort_order 排序，club-manage 独立；query 确定性解析并失败关闭。
+- 验证：定向 9/9、前端全量 102/102、production/test-server build、总合同、治理和 UTF-8 全通过。
+- 边界：无页面、路由、repository、业务 API、后端或部署修改；selector 未执行。
+- 结论：H1-M1 Go，授权进入 H1-M2。M2/M3 必须补非法/缺失 category target 显式负例、精确八态渲染和网络 allowlist/denylist；CA-H1 Full Go 仍需 M3 与真实环境 UAT。
+
 ## SP-H028：俱乐部 category 权威筛选
 
 - 决策：D-CA-003 Accepted，见 ADR 0019。
