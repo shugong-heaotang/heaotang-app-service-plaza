@@ -66,6 +66,7 @@
     "M4 verdict remains In Progress / No-Go until login activated and missing club:manage scope_required are verified",
     "Enter and Shift+Tab remain browser-control-channel unverified and are neither Pass nor product No-Go",
     "No legal authenticated browser session is currently visible; candidate B passed the read-only capacity gate and is authoritatively expected to lack club:manage, but one send-code remains separately unauthorized",
+    "The authorized one-time candidate B login completed and produced four activated events plus one club-manage blocked scope_required event; CA-H1-M4-B002 remains a user-visible management view authorization Blocker",
     "business denylist remains zero and no club search/create/join/review/member/payment/charity/federation API is authorized",
     "OTP, JWT, phone, full user identifiers and sensitive business content are excluded from evidence"
   ],

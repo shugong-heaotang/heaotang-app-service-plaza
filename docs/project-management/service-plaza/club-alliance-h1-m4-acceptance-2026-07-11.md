@@ -13,3 +13,5 @@
 导航增量：合法 category 刷新重放、浏览器后退、顶部和主体两个返回服务广场入口均已通过；最近俱乐部页面 Nginx 窗口只出现 catalog/actions、APP 全局 feature-flags 与 action-events，业务 denylist=0。Enter 与 Shift+Tab 因当前浏览器控制通道未能稳定触发，保留为未验证而不是产品失败。登录 activated 与缺 `club:manage` blocked 仍待关闭，M4 verdict 继续 `In Progress / No-Go`。
 
 登录根因已精确到合法会话前提：受支持浏览器没有已登录标签；candidate A 当日额度已满，candidate B 容量为 `used=0 / remaining=5` 且服务端权威关系证明其没有 `club:manage`。最小解阻是经明确授权后仅对 candidate B 发送一次验证码，在浏览器完成普通会员登录，随即采集四分类 activated 与管理中心 scope_required 三方证据；禁止换号、清计数、调整限流或注入 token。其余不依赖登录的 M4 项不受阻塞且不得重复。
+
+一次性授权已执行：candidate B 登录成功，四分类页面 active/focused 且事件均为 `activated/none/user_id=non-null`；管理中心事件正确为 `blocked/scope_required/user_id=non-null`。但管理 URL `?view=manage` 仍显示标准首页和 active 管理链接，没有呈现 scope_required 页面。根因是 `ClubAllianceRoute` 未解析 management view，现有测试也只覆盖 category 权限。登记 `CA-H1-M4-B002` Blocker，必须用独立前端工作项关闭后再重部署/复测；M4 继续 No-Go。

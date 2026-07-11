@@ -115,8 +115,8 @@
 
 1. `CA-H1-M4-B001` 已关闭；保留上述 exact commit、部署、双审与 guest blocked 证据。
 2. 刷新、浏览器后退和两个返回入口已 Pass；Enter、Shift+Tab 因浏览器控制通道不能稳定触发而保持未验证，最终门禁前需换稳定真实键盘通道复测。
-3. 使用批准的合成测试账号验证登录允许和登录但缺 `club:manage`；不得注入 shell token或在报告记录 OTP/JWT。
-4. 四分类 guest blocked 已完成；仍需取得登录 activated 与缺 `club:manage` blocked 的真实环境证据，并确认载荷无 OTP/JWT/完整个人标识/敏感业务数据。
+3. 合成登录、四分类 activated 和管理中心 blocked/scope_required 事件证据已完成；仍需关闭 `CA-H1-M4-B002` 用户可见管理页面权限状态缺口。
+4. 四分类 guest blocked 与登录 activated/管理 blocked 遥测均已完成，载荷未保存 OTP/JWT/完整个人标识/敏感业务数据。
 5. 八态由 143/143 全量与 56/56 定向自动化证明；环境只记录安全、自然可重复状态，不新增人工状态切换器，不把未构造的 maintenance/offline 冒充截图通过。
 6. 完成后才能把 verdict 改为 Pass；任何 Blocker/Major 未关闭维持 No-Go。
 
@@ -132,3 +132,20 @@
 - 登录后的唯一验收动作：四分类各一次，预期 `activated / none / user_id=non-null`；管理中心一次，预期 `blocked / scope_required / user_id=non-null`。每项由页面、Nginx action-events POST 和管理查询/只读数据库三方交叉；不执行业务 API。
 - does_not_block：部署、备份、ready/health、四视口、query 正反例、四分类 guest、刷新、后退、双返回、allowlist/denylist、自动化八态和本地总门禁均已完成，不需重复。
 - 当前仍禁止申请新 OTP；在最小授权明确前，登录角色两项保持 Pending，M4 继续 No-Go。
+
+## 2026-07-11 合成普通会员登录与权限取证
+
+- 最小授权后仅对 candidate B 执行一次 send-code；登录成功后页面出现“退出登录”和本人功能。系统临时秘密文件已删除，身份/OTP 内存值已清空，未执行第二次发送。
+- 四分类页面：公益、自建、家庭、友联体分别进入唯一 category URL，对应标题可见且入口为 active/focused。
+- 数据库只读事件：四分类依次为 `activated / none / user_id=non-null`，UTC 时间分别为 `10:08:51`、`10:10:53`、`10:20:46`、`10:22:22`；Nginx action-events POST 均为 HTTP 200。
+- 管理中心：candidate B 权威关系继续为 owned clubs=0、privileged memberships=0；动作事件正确记录 `club-manage / blocked / scope_required / user_id=non-null`，UTC `10:23:52`，Nginx POST 200。
+- 敏感信息：报告与工具结果未保存完整号码、OTP、JWT、cookie、完整 user_id 或业务正文。
+
+### CA-H1-M4-B002 管理 view 页面权限状态缺口
+
+- 现象：点击管理中心后 URL 进入 `?view=manage`，遥测正确为 `blocked/scope_required`，但页面仍显示标准首页并把管理中心链接标为 active，没有呈现 unauthorized/scope_required。
+- 代码根因：`ActionControl` 的内部 Link 会报告拒绝并继续导航；`ClubAllianceRoute` 仅调用 `resolveClubAllianceQuery(location.search, view.categories)` 解析 category，没有解析或验证 `view=manage`，因此该 query 落入 home model。
+- 测试缺口：现有 `ActionControl.test.tsx` 只断言 access-required 事件内容；`ClubAlliancePage.test.tsx` 只覆盖 category 的 scope_required，没有覆盖 management view。
+- 影响：后端 scope、前端 evaluator 和遥测均正确，但用户可见权限状态错误，属于 M4 Blocker；不得以事件正确替代页面修复。
+- 关闭方案：独立前端根因工作项为 `view=manage` 建立确定性解析和失败关闭；无 scope 时渲染 unauthorized/scope_required，有 scope 时才允许管理 focused 状态；补缺失、重复、未知 view 负例及页面/事件回归。
+- Owner：平台集成负责人负责权限路由壳修复与独立验收；俱乐部业务 API、后端、数据和生产继续禁止。
