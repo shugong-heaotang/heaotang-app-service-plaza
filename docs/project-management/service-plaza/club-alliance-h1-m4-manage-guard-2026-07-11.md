@@ -1,7 +1,7 @@
 # CA-H1-M4-B002 管理入口权限失败关闭根因修复
 
 日期：2026-07-11
-状态：本地实现与自动化验证完成，待提交、受控集成、部署和环境复验
+状态：已完成实现、受控集成、测试环境部署与 B002 环境复验
 
 ## 现象与根因
 
@@ -33,11 +33,16 @@
 未修改依赖、锁文件或正式工作树。独立工作树依赖自举缺口另列平台工具后续项，
 不在本缺陷范围内临时扩写脚本。
 
-## 剩余门禁
+## 集成、部署与环境关闭证据
 
-1. 完成治理、合同、UTF-8 与差异检查。
-2. 提交、推送并受控集成。
-3. 重新构建和部署测试环境前端。
-4. 复验普通会员点击管理中心保持原 URL、blocked/scope_required 三方证据；
-   direct `view=manage` 显示 scope_required。
-5. M4 最终复核后才能给出 H1 Full Go。
+- 根因修复提交：`004800f6fec01c3a31a769dbf3d9d12830683a3f`，已进入服务广场权威集成基线。
+- 测试环境前端资产：`assets/index-CPIj0Kh9.js`；部署前备份、资产哈希、`/health?json=1` 与 `/ready` 已在 M4 验收证据中记录。
+- 使用一次性授权的合成普通会员登录，权威关系证明其不具备 `club:manage`；仓库证据仅记录 `authenticated=true`、`scope_present=false`，不保存手机号、OTP、JWT、cookie 或完整用户标识。
+- 首页单击管理入口一次后 URL 保持 `/app/service-plaza/services/club-alliance/`，没有默认进入管理 view。
+- 同一时窗 Nginx 记录 `POST /api/v1/service-plaza/action-events` HTTP 200；只读事件记录为 `club-manage / blocked / scope_required / user_id=non-null`，未保存 IP 或完整 `user_id`。
+- 同一合法会话直达 `?view=manage`，页面稳定为 `data-page-state=unauthorized`、`reason=scope_required`，并明确缺少 `club:manage`；直达本身不额外伪造动作事件。
+- B002 的“事件正确但页面仍导航/仍显示首页”因果链已关闭，页面、Nginx 和权威事件三方一致。
+
+## B002 结论与 M4 剩余门禁
+
+`CA-H1-M4-B002` 结论为 **Verified / Closed**。本结论只关闭管理入口权限失败关闭缺陷；M4 仍需独立完成当前检查单、100 分考试、真实键盘 UAT 结论和最终 Handoff，不能由 B002 关闭结论自动推导 H1 Full Go。

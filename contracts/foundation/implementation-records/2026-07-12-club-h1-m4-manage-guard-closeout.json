@@ -1,0 +1,69 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-CLUB-H1-M4-MANAGE-GUARD-CLOSEOUT",
+  "title": "俱乐部联盟 CA-H1 M4 B002 环境复验收口",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "以合法已登录且缺 club:manage 的合成普通会员复验 B002：点击不导航、事件 scope_required、直达管理 view 页面失败关闭。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-club-h1-m4-manage-guard-closeout.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-club-h1-m4-manage-guard-closeout-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-11-club-h1-m4-manage-guard-task-order.md",
+    "docs/project-management/service-plaza/club-alliance-h1-m4-manage-guard-2026-07-11.md",
+    "docs/project-management/modules/club-alliance/acceptance/CA-H1-M4-frontend-uat.md"
+  ],
+  "capabilities": [
+    "foundation.authorization-idempotency",
+    "foundation.app-shell-adapter",
+    "foundation.observability-config",
+    "foundation.ai-engineering-traceability"
+  ],
+  "contracts": [
+    "contracts/service-plaza/service-plaza-actions.v1.json",
+    "contracts/modules/club-alliance/homepage.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/development-checklists/2026-07-12-club-h1-m4-manage-guard-closeout.json",
+    "contracts/foundation/governance-exams/2026-07-12-club-h1-m4-manage-guard-closeout-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-12-club-h1-m4-manage-guard-closeout.json",
+    "docs/project-management/service-plaza/club-alliance-h1-m4-manage-guard-2026-07-11.md"
+  ],
+  "verification": [
+    "browser: homepage management click kept original URL",
+    "browser: direct ?view=manage returned unauthorized/scope_required with missing club:manage",
+    "nginx: action-events POST HTTP 200 in the same action window",
+    "sqlite read-only: club-manage blocked scope_required user_id=non-null",
+    "scripts/validate_development_checklists.py",
+    "scripts/validate_governance_exams.py",
+    "scripts/validate_implementation_records.py",
+    "scripts/validate_agent_collaboration.py",
+    "scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/foundation/development-checklists/2026-07-12-club-h1-m4-manage-guard-closeout.json",
+    "contracts/foundation/governance-exams/2026-07-12-club-h1-m4-manage-guard-closeout-attempt-1.json",
+    "docs/project-management/service-plaza/club-alliance-h1-m4-manage-guard-2026-07-11.md",
+    "docs/project-management/modules/club-alliance/acceptance/CA-H1-M4-frontend-uat.md"
+  ],
+  "premises": [
+    "测试会话仅证明 authenticated 且缺 club:manage，不保存任何登录秘密",
+    "scope_required 必须阻止默认导航并在 direct view 失败关闭",
+    "B002 关闭不替代 M4 真实键盘和最终 Handoff 门禁"
+  ],
+  "implementation_mode": "ai-assisted"
+}
