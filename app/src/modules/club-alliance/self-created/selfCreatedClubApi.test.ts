@@ -121,18 +121,26 @@ describe("selfCreatedClubApi", () => {
       memberCount: 9,
       createdAt: "2026-07-12T00:00:00Z",
     });
-    expect(requestUrl(fetchMock.mock.calls[0][0])).toBe("/api/v1/clubs/101");
+    expect(requestUrl(fetchMock.mock.calls[0][0])).toBe("/api/v1/clubs/self-created/101");
     await expect(selfCreatedClubApi.detail(101)).rejects.toMatchObject({
       code: "CLUB_CATEGORY_CROSSOVER_DETECTED",
     });
   });
 
-  it("非法详情 ID 不发网络请求", async () => {
+  it("非法详情和加入 ID 不发网络请求", async () => {
     const fetchMock = vi.spyOn(globalThis, "fetch");
-    await expect(selfCreatedClubApi.detail(Number.NaN)).rejects.toMatchObject({
-      code: "CLUB_ID_INVALID",
-      status: 0,
-    });
+    for (const invalidId of [Number.NaN, 0, -1, Number.MAX_SAFE_INTEGER + 1]) {
+      await expect(selfCreatedClubApi.detail(invalidId)).rejects.toMatchObject({
+        code: "CLUB_ID_INVALID",
+        status: 0,
+      });
+      await expect(selfCreatedClubApi.join(invalidId, "", {
+        idempotencyKey: "club-alliance-join-invalid-id",
+      })).rejects.toMatchObject({
+        code: "CLUB_ID_INVALID",
+        status: 0,
+      });
+    }
     expect(fetchMock).not.toHaveBeenCalled();
   });
 
@@ -198,7 +206,7 @@ describe("selfCreatedClubApi", () => {
       if (url.endsWith("/join-applications/my?page=1&size=20")) {
         return jsonResponse({ items: [], total: 0, page: 1, size: 20 });
       }
-      if (url.endsWith("/101")) {
+      if (url.endsWith("/self-created/101")) {
         return jsonResponse({ ...club(), member_count: 1, created_at: "2026-07-12T00:00:00Z" });
       }
       if (url.endsWith("/101/join")) {
@@ -217,7 +225,7 @@ describe("selfCreatedClubApi", () => {
 
     expect(calls).toHaveLength(4);
     expect(calls.join("\n")).not.toMatch(
-      /\/clubs$|create|review|members?|payment|withdraw|refund|subscription|charity|family|federation/i,
+      /\/clubs$|\/clubs\/create(?:[/?]|$)|review|members?|payment|withdraw|refund|subscription|charity|family|federation/i,
     );
   });
 });

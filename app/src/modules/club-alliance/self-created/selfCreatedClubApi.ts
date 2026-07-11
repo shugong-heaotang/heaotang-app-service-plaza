@@ -191,7 +191,7 @@ const searchOperation = defineBusinessRead<
 
 const detailOperation = defineBusinessRead<{ clubId: number }, SelfCreatedClubDetailDto>({
   operationId: "get-self-created-club",
-  path: ({ clubId }) => `/api/v1/clubs/${requireClubId(clubId)}`,
+  path: ({ clubId }) => `/api/v1/clubs/self-created/${requireClubId(clubId)}`,
 });
 
 const joinOperation = defineBusinessWrite<
