@@ -3,8 +3,8 @@
   "record_id": "IR-20260711-LIFE-APPLICATION-HISTORY-M4",
   "title": "生命导航测试环境部署与 M4 验收记录",
   "date": "2026-07-11",
-  "status": "implemented",
-  "objective": "记录生命导航 M4 本地门禁、测试环境部署、API UAT、浏览器 UAT 阻塞和精确重测条件，不把部分通过伪报为 M4 Go。",
+  "status": "verified",
+  "objective": "记录生命导航 M4 本地门禁、测试环境部署、API UAT，以及UTC日自然重置后真实浏览器登录、提交、历史刷新、页面刷新持久和返回服务广场的完整 Go 证据。",
   "governance_checklist": "docs/project-management/modules/life-navigation/certification/checklists/IR-20260711-LIFE-APPLICATION-HISTORY-M4-checklist.json",
   "governance_exam": "docs/project-management/modules/life-navigation/certification/exams/IR-20260711-LIFE-APPLICATION-HISTORY-M4-exam-attempt-1.json",
   "governance_inputs": [
@@ -94,10 +94,9 @@
     "docs/project-management/modules/life-navigation/LN-M4-001-handoff.md"
   ],
   "premises": [
-    "Deployment and API acceptance passing do not replace authenticated browser UAT.",
-    "The implementation-record schema has no blocked status, so implemented records completed work while the Handoff remains authoritative for the M4 No-Go verdict.",
-    "The failed browser login attempt created no life record and did not trigger account rotation, rate-limit changes or data cleanup.",
-    "Retest waits for the UTC daily counter to reset and confirms available quota read-only before one AuthPanel send-code.",
+    "Deployment and API acceptance passing do not replace authenticated browser UAT; the latter is now independently evidenced.",
+    "The initial failed browser attempt created no life record and did not trigger account rotation, rate-limit changes or data cleanup.",
+    "The successful retest followed UTC daily natural reset and used one AuthPanel send-code with secrets only in memory.",
     "Successful artifacts are not redeployed unless their identity or readiness state drifts."
   ],
   "implementation_mode": "ai-assisted"

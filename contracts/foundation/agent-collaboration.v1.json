@@ -966,6 +966,30 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": "派发提交 ad4840d 已受控集成；专用分支/工作树从同一基线实际创建，HEAD 与 merge-base 均为 ad4840d，工作树 clean 后正式激活。只实现首页目录/导航壳，selector executable 仍 false，禁止四类业务 API、后端、deploy 与 production。",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h029-俱乐部联盟-ca-h1-页面壳正式派发"
+    },
+    {
+      "work_id": "AIW-20260711-LIFE-M4-BROWSER-CLOSEOUT",
+      "title": "生命导航 M4 八点后真实浏览器验收收口",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-life-m4-browser-closeout",
+      "branch": "codex/life-m4-browser-closeout",
+      "base_commit": "7c987ff4a62eff8b383ccf15b4cf4e5700a4c2e6",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/modules/life-navigation/internal-dependencies.v1.json",
+        "docs/project-management/modules/life-navigation/acceptance/LN-M4-001-frontend-uat.md",
+        "docs/project-management/modules/life-navigation/implementation-records/IR-20260711-LIFE-APPLICATION-HISTORY-M4.json",
+        "docs/project-management/modules/life-navigation/LN-M4-001-handoff.md",
+        "docs/project-management/service-plaza/project-status-one-page.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "只记录UTC日自然重置后的认证浏览器登录、合成提交、即时历史、刷新持久和返回路径证据；不重新部署、不修改业务代码、不记录OTP/JWT。",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h030-生命导航-m4-浏览器验收收口"
     }
   ]
 }

@@ -4,7 +4,7 @@
   "module_version": "v1",
   "slice_id": "application-history",
   "development_readiness": "go",
-  "acceptance_readiness": "partial-go",
+  "acceptance_readiness": "go",
   "dependencies": [
     {
       "dependency_id": "entry.contract",
@@ -65,22 +65,22 @@
       "dependency_id": "history.ui",
       "kind": "workflow",
       "description": "提交后展示本人最近申请及空、加载、错误和限额状态",
-      "status": "standardized",
+      "status": "verified",
       "required_for_slice": true,
       "depends_on": ["records.api", "records.ownership", "records.idempotency"],
       "contracts": ["docs/project-management/modules/life-navigation-first-slice-contract-v1.md"],
-      "evidence": [],
-      "unresolved": ["尚未实现服务广场内的本人申请列表"]
+      "evidence": ["docs/project-management/modules/life-navigation/acceptance/LN-M4-001-frontend-uat.md"],
+      "unresolved": []
     },
     {
       "dependency_id": "compliance.boundary",
       "kind": "policy",
       "description": "不作确定性预测且不替代专业意见",
-      "status": "standardized",
+      "status": "verified",
       "required_for_slice": true,
       "depends_on": ["entry.contract"],
       "contracts": ["docs/project-management/modules/life-navigation-first-slice-contract-v1.md"],
-      "evidence": [],
+      "evidence": ["docs/project-management/modules/life-navigation-first-slice-contract-v1.md", "docs/project-management/modules/life-navigation/acceptance/LN-M4-001-frontend-uat.md"],
       "unresolved": []
     }
   ]
