@@ -687,14 +687,19 @@
       "allowed_paths": [
         "docs/project-management/modules/club-alliance/CA-F0-H0-decisions.md",
         "docs/project-management/modules/club-alliance/CA-F0-H0-handoff.md",
+        "docs/project-management/modules/club-alliance/CA-H0-conformance-report.md",
+        "docs/project-management/modules/club-alliance/CA-H0-acceptance-matrix.md",
         "contracts/modules/club-alliance/internal-dependencies.v1.json",
+        "contracts/modules/club-alliance/category-registry.v1.json",
+        "contracts/modules/club-alliance/conformance/test_club_alliance_contracts.py",
+        "contracts/modules/club-alliance/conformance/fixtures/cases.v1.json",
         "contracts/modules/club-alliance/development-checklists",
         "contracts/modules/club-alliance/governance-exams",
         "contracts/modules/club-alliance/implementation-records"
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
-      "migration_note": "2026-07-11 基于 APP integration 0a159d7 最小受控恢复，仅授权吸收 D-CA-003、后端与环境 Go 证据，更新 v2 internal-dependencies、决策、Handoff 及本轮 checklist/exam/IR；禁止 CA-H1、前后端业务代码、部署和其他标准文件。",
+      "migration_note": "2026-07-11 基于 APP integration 0a159d7 最小受控恢复；完成性审计后补充机器 category registry、H0-B013 显式 Pending 负例夹具/测试及两份 H0 验收报告，消除 Accepted/Pending 双真相源。仅授权吸收 D-CA-003、后端与环境 Go 证据及本轮 checklist/exam/IR；禁止 Schema、CA-H1、前后端业务代码、部署和其他标准文件。",
       "handoff_record": "docs/project-management/modules/club-alliance/CA-F0-H0-handoff.md"
     },
     {
