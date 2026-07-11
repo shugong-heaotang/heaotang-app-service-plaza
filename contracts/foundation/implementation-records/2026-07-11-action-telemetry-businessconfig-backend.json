@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-ACTION-TELEMETRY-BUSINESSCONFIG-BACKEND",
+  "title": "动作遥测 boolean 业务变量与 Service Plaza 适配后端实现",
+  "date": "2026-07-11",
+  "status": "implemented",
+  "objective": "以版本化 businessconfig 的双人提案/审核替代 action_telemetry 旧表开关，保持未配置和失败关闭，并关闭 CA-H1-M4-B001 的后端根因。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-action-telemetry-businessconfig-backend.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-action-telemetry-businessconfig-backend-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "docs/decisions/0011-two-person-config-approval.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-11-action-telemetry-config-task-order.md", "docs/decisions/0020-action-telemetry-business-variable.md"],
+  "capabilities": ["foundation.business-variable-service", "foundation.feature-flag-service", "foundation.governance-certification"],
+  "contracts": ["contracts/foundation/business-variables.v1.json", "docs/decisions/0020-action-telemetry-business-variable.md"],
+  "decisions": ["docs/decisions/0011-two-person-config-approval.md", "docs/decisions/0020-action-telemetry-business-variable.md"],
+  "changed_areas": ["heaotang-main@c4319c206add11f92d763b13b63be8ab2e47679e: backend-go/internal/businessconfig/businessconfig.go", "heaotang-main@c4319c206add11f92d763b13b63be8ab2e47679e: backend-go/internal/businessconfig/businessconfig_test.go", "heaotang-main@c4319c206add11f92d763b13b63be8ab2e47679e: backend-go/plugins/config-plugin/plugin_test.go", "heaotang-main@c4319c206add11f92d763b13b63be8ab2e47679e: backend-go/plugins/service-plaza-plugin/infrastructure.go", "heaotang-main@c4319c206add11f92d763b13b63be8ab2e47679e: backend-go/plugins/service-plaza-plugin/infrastructure_test.go"],
+  "verification": ["go test ./internal/businessconfig ./plugins/service-plaza-plugin ./plugins/config-plugin", "go test ./... -count=1", "go vet ./...", "gofmt on all five authorized Go paths", "git diff --check"],
+  "evidence": ["contracts/foundation/development-checklists/2026-07-11-action-telemetry-businessconfig-backend.json", "contracts/foundation/governance-exams/2026-07-11-action-telemetry-businessconfig-backend-attempt-1.json", "docs/project-management/notices/2026-07-11-action-telemetry-config-task-order.md", "docs/decisions/0020-action-telemetry-business-variable.md"],
+  "premises": ["service-plaza.action-telemetry.enabled is the only authority", "legacy service_plaza_feature_flags is compatibility-only and forbidden as authority", "unconfigured, unreadable or invalid boolean resolves false", "two distinct synthetic administrators are required before test-environment enablement", "deployment and M4 telemetry retest remain pending"],
+  "implementation_mode": "ai-assisted"
+}

@@ -1,0 +1,70 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-CLUB-H1-M4-MANAGE-GUARD",
+  "title": "俱乐部联盟 CA-H1 M4 管理 view 权限失败关闭根因修复",
+  "date": "2026-07-11",
+  "status": "verified",
+  "objective": "关闭 B002：缺少 club:manage 时阻止默认导航，并使 direct view=manage 通过共享 evaluator 确定性失败关闭。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-club-h1-m4-manage-guard.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-club-h1-m4-manage-guard-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-11-club-h1-m4-manage-guard-task-order.md",
+    "docs/project-management/modules/club-alliance/acceptance/CA-H1-M4-frontend-uat.md"
+  ],
+  "capabilities": [
+    "foundation.authorization-idempotency",
+    "foundation.app-shell-adapter",
+    "foundation.ai-engineering-traceability"
+  ],
+  "contracts": [
+    "contracts/service-plaza/service-plaza-actions.v1.json",
+    "contracts/modules/club-alliance/homepage.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "changed_areas": [
+    "app/src/components/ActionControl.tsx",
+    "app/src/components/ActionControl.test.tsx",
+    "app/src/modules/club-alliance/clubAllianceActionAdapter.ts",
+    "app/src/modules/club-alliance/clubAllianceActionAdapter.test.ts",
+    "app/src/modules/club-alliance/ClubAllianceRoute.tsx",
+    "app/src/modules/club-alliance/ClubAlliancePage.test.tsx",
+    "docs/project-management/notices/2026-07-11-club-h1-m4-manage-guard-task-order.md",
+    "docs/project-management/service-plaza/club-alliance-h1-m4-manage-guard-2026-07-11.md"
+  ],
+  "verification": [
+    "vitest: 3 files / 61 tests passed",
+    "vitest full: 18 files / 155 tests passed",
+    "npm run build: passed",
+    "npm run build:test-server: passed",
+    "scripts/Test-ServicePlazaContracts.ps1",
+    "scripts/validate_development_checklists.py",
+    "scripts/validate_governance_exams.py",
+    "scripts/validate_implementation_records.py",
+    "scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/foundation/development-checklists/2026-07-11-club-h1-m4-manage-guard.json",
+    "contracts/foundation/governance-exams/2026-07-11-club-h1-m4-manage-guard-attempt-1.json",
+    "docs/project-management/service-plaza/club-alliance-h1-m4-manage-guard-2026-07-11.md"
+  ],
+  "premises": [
+    "service-plaza.action.v1 remains the sole target and access source",
+    "authentication_required must still reach the existing login or unauthorized handoff",
+    "scope_required must fail closed without default navigation",
+    "environment UAT remains mandatory before M4 Go"
+  ],
+  "implementation_mode": "ai-assisted"
+}

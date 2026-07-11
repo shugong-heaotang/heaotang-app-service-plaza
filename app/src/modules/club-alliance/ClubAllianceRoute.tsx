@@ -83,7 +83,11 @@ export function ClubAllianceRoute({
 
     try {
       const view = deriveClubAllianceActions(catalogState.actions);
-      const selection = resolveClubAllianceQuery(location.search, view.categories);
+      const selection = resolveClubAllianceQuery(
+        location.search,
+        view.categories,
+        view.management,
+      );
       if (selection.mode === "home") {
         return {
           status: "home",
@@ -93,9 +97,12 @@ export function ClubAllianceRoute({
         };
       }
 
-      const selected = view.categories.find(
-        (action) => action.action_id === selection.selected_action_id,
-      );
+      const selected =
+        selection.selected_action_id === view.management.action_id
+          ? view.management
+          : view.categories.find(
+              (action) => action.action_id === selection.selected_action_id,
+            );
       if (!selected) {
         throw new ClubAllianceHomepageContractError(
           "CAH1_ACTION_MISSING",
