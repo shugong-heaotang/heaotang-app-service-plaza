@@ -1,0 +1,44 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/health-manager/mvp90/state-machines.v1.schema.json",
+  "title": "Health Manager MVP-90 state machines v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "module_id", "unknown_transition_error_id", "machines"],
+  "properties": {
+    "contract_version": {"const": "health-manager.mvp90.state-machines.v1"},
+    "module_id": {"const": "health-manager"},
+    "unknown_transition_error_id": {"const": "HMM0_TRANSITION_NOT_REGISTERED"},
+    "machines": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"$ref": "#/$defs/machine"}}
+  },
+  "$defs": {
+    "machine": {
+      "type": "object", "additionalProperties": false,
+      "required": ["machine_id", "version", "initial_state", "states", "transitions", "forbidden_transitions"],
+      "properties": {
+        "machine_id": {"pattern": "^[a-z][a-z0-9-]+$"},
+        "version": {"const": "v1"},
+        "initial_state": {"type": "string", "minLength": 1},
+        "states": {"type": "array", "minItems": 3, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]+$"}},
+        "transitions": {"type": "array", "minItems": 2, "items": {"$ref": "#/$defs/transition"}},
+        "forbidden_transitions": {"type": "array", "minItems": 1, "items": {"$ref": "#/$defs/forbidden"}}
+      }
+    },
+    "transition": {
+      "type": "object", "additionalProperties": false,
+      "required": ["from", "to", "event", "required_actor_roles"],
+      "properties": {
+        "from": {"type": "string"}, "to": {"type": "string"}, "event": {"pattern": "^[A-Z][A-Z0-9_]+$"},
+        "required_actor_roles": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["member","ai","health_manager","professional","doctor_group","platform"]}}
+      }
+    },
+    "forbidden": {
+      "type": "object", "additionalProperties": false,
+      "required": ["from", "to", "error_id", "reason"],
+      "properties": {
+        "from": {"type": "string"}, "to": {"type": "string"},
+        "error_id": {"pattern": "^HMM0_[A-Z0-9_]+$"}, "reason": {"type": "string", "minLength": 3}
+      }
+    }
+  }
+}

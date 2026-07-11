@@ -2,21 +2,21 @@
 
 项目 ID：`health-manager`  
 父项目：和奥堂 APP 服务广场  
-板块负责人：健康大管家负责人（正式派发时确认）  
+板块负责人：健康大管家负责人
 平台集成负责人：服务广场平台集成负责人  
-当前切片：`personal-consultation-inbox`  
-当前状态：待启动；平台首个试验复盘模板版本尚未发布，通知审计前置尚未全部关闭，不得签收或编码。
+当前切片：`health-mvp90-m0`
+当前状态：正式激活；只执行 MVP-90 M0 合同与合成一致性首检查点。
 
 ## 目标
 
-完成“进入健康大管家—提交个人健康咨询—查看本人咨询历史和状态—返回服务广场”的测试环境闭环。
+把 PRD C5 已确认的 16 个产品语义对象、6 组状态机、6 类角色和 `MVP-A001`—`MVP-A015` 转换为版本化合同、Schema、显式合成 fixtures 与 conformance。
 
 ## 启动后的必读输入
 
 除平台 README 第 0 节课程外，还必须完整阅读：
 
-1. `docs/project-management/notices/2026-07-11-health-manager-first-phase-task-order.md`
-2. `docs/project-management/modules/health-manager-first-slice-contract-v1.md`
+1. `docs/project-management/notices/2026-07-12-health-manager-mvp90-m0-task-order.md`
+2. `docs/project-management/modules/health-manager/health-manager-mvp90-m0-requirements.md`
 3. `contracts/foundation/module-dependencies/health-manager.v1.json`
 4. `contracts/modules/health-manager/internal-dependencies.v1.json`
 
@@ -24,18 +24,18 @@
 
 ## 边界
 
-本切片只做个人咨询收件与本人历史，不做 AI 诊断、医生预约、收费、健康报告生成、家庭共享或后台医生处置闭环。咨询正文属于敏感数据，不进入结构化日志，也不得发送给 AI。
+本切片只做 M0 机器合同和合成一致性，不做前端、后端、API、数据库、环境、部署、生产、真实健康数据、收费或真实会员试运行。27 项 `Pending with owner` 只作为不可执行元数据；HM-R0 仍为 `Technical Go / Professional Freeze Pending`。
 
 模块负责人只修改正式工作项列出的模块专属路径。共享样式、共享 API、平台合同、认证、错误信封和部署基础设施均受平台保护，必须通过接口变更申请处理。
 
 ## 阶段门禁
 
 - development：Go
-- acceptance：Partial Go
-- 派发门禁：平台发布并冻结首个试验复盘模板版本；建立唯一工作项和干净工作树；通知列出的平台前置有明确无重叠 Owner
-- M0/M1：修订通知正式下达后可启动
-- M2：字段/DTO/错误矩阵、`no-store`、敏感日志证据和平台路由挂载全部关闭后才可 Go
-- 当前检查点：未启动
-- 签收回执：`task-receipt.md`
-- 阶段 Handoff：`checkpoint-handoff-template.md`
+- acceptance：Pending（M0 只做合同与合成一致性）
+- 派发门禁：已完成；`AIW-20260711-HEALTH-MVP90-M0-CONTRACTS` 为唯一 active 工作项
+- M0：当前正式授权
+- M1 及以后：No-Go，必须另行派发
+- 当前检查点：M0 首检查点
+- 签收回执：`health-manager-mvp90-m0-receipt.md`
+- 阶段 Handoff：`health-manager-mvp90-m0-handoff.md`
 - 接口变更申请：`interface-change-request-template.md`

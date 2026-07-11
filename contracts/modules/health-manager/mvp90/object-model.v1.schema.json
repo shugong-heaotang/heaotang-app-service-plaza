@@ -1,0 +1,58 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/health-manager/mvp90/object-model.v1.schema.json",
+  "title": "Health Manager MVP-90 product semantic object model v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "module_id", "source", "model_kind", "objects", "pending_decisions"],
+  "properties": {
+    "contract_version": {"const": "health-manager.mvp90.object-model.v1"},
+    "module_id": {"const": "health-manager"},
+    "model_kind": {"const": "product-semantics-not-api-or-database"},
+    "source": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["prd_id", "exact_commit", "sha256", "status"],
+      "properties": {
+        "prd_id": {"const": "HM-MVP90-PRD-V1"},
+        "exact_commit": {"pattern": "^[0-9a-f]{40}$"},
+        "sha256": {"pattern": "^[0-9a-f]{64}$"},
+        "status": {"const": "document-handoff-ready-professional-freeze-pending"}
+      }
+    },
+    "objects": {
+      "type": "array", "minItems": 16, "maxItems": 16,
+      "items": {"$ref": "#/$defs/object"}
+    },
+    "pending_decisions": {
+      "type": "array", "minItems": 27, "maxItems": 27,
+      "items": {"$ref": "#/$defs/pending"}
+    }
+  },
+  "$defs": {
+    "object": {
+      "type": "object", "additionalProperties": false,
+      "required": ["object_id", "version", "name_zh", "owner", "required_semantics", "forbidden_fields", "config_refs"],
+      "properties": {
+        "object_id": {"type": "string", "pattern": "^[A-Z][A-Za-z]+$"},
+        "version": {"const": "v1"},
+        "name_zh": {"type": "string", "minLength": 2},
+        "owner": {"type": "string", "minLength": 1},
+        "required_semantics": {"type": "array", "minItems": 4, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}},
+        "forbidden_fields": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "config_refs": {"type": "array", "uniqueItems": true, "items": {"type": "string", "pattern": "^config://[a-z0-9._/-]+$"}}
+      }
+    },
+    "pending": {
+      "type": "object", "additionalProperties": false,
+      "required": ["decision_id", "status", "owner", "executable", "blocks"],
+      "properties": {
+        "decision_id": {"pattern": "^C4-[PHLSOT][0-9]{2}$"},
+        "status": {"const": "pending-with-owner"},
+        "owner": {"type": "string", "minLength": 1},
+        "executable": {"const": false},
+        "blocks": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    }
+  }
+}
