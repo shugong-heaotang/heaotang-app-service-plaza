@@ -10,7 +10,7 @@
 - 工作树：`C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-prd`
 - 登记基线：`3399b90adcef785534e0556fd2006eefac686ffe`
 - 激活 HEAD：`182b6063027e7d73d6667c47f82e3c09e99f3772`
-- 状态：已签收；PRD-C0、C1、C2 Go，平台已正式授权进入 PRD-C3。
+- 状态：已签收；PRD-C0、C1、C2、C3 Go，平台已正式授权进入 PRD-C4。
 
 ## C0 准入证据
 
@@ -34,5 +34,6 @@
 - 已完成：PRD-C0。
 - 平台已验收：PRD-C1，exact HEAD `deb55880ab466c478441f0229e929cc57c6a2fba`，结论 Go、无需修订。
 - 平台已验收：PRD-C2，exact HEAD `146158e820866ff32abfb6797dd4e0ed9af90fa8`，结论 Go。
-- 正在进行：PRD-C3，风险、授权、隐私、异常、15场景、合成数据、生命周期和非功能验收。
-- 后续：C3 提交平台短检查点；未获 C3 Go 不进入 C4。
+- 平台已验收：PRD-C3，exact HEAD `edb698b898b5708c06eba7a0dd186303d4bb4f06`，结论 Go。
+- 正在进行：PRD-C4，产品、专业、法律/隐私、安全、运营/商业和平台联合决策登记。
+- 后续：C4 提交平台短检查点；未获 C4 Go 不进入 C5。
