@@ -405,6 +405,22 @@ describe("ClubAllianceRoute exact eight-state shell", () => {
     renderRoute(route, repository);
     expect(await screen.findByText("selected_action_id=public-benefit-club")).toBeInTheDocument();
   });
+
+  it("自建 focused 只增加 action_id 驱动的子项目 CTA，不在 H1 发业务请求", async () => {
+    const actions = actionWith("self-created-club", {
+      access: { auth_mode: "anonymous", required_scopes: [] },
+    });
+    renderRoute(
+      "/services/club-alliance?category=自建俱乐部",
+      repositoryWith(actions),
+    );
+
+    expect(await screen.findByText("selected_action_id=self-created-club")).toBeInTheDocument();
+    expect(screen.getByRole("link", { name: "进入自建俱乐部" })).toHaveAttribute(
+      "href",
+      "/services/club-alliance/self-created",
+    );
+  });
 });
 
 describe("ClubAlliancePage local responsive contract", () => {
