@@ -18,14 +18,16 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 | SP-H025 | 俱乐部联盟 CA-F0/H0 | 标准与 H0 Base 验收 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | H0 Base Go；H0 Full No-Go | 3eb25ae 独立验收通过；D-CA-003/category 契约局部阻塞 Full Go |
 | SP-H026 | 模块内部依赖 v2 | 平台合同给模块 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | 验证完成，待受控集成 | v1/v2 按 contract_version 路由；五维 readiness 与局部阻塞 |
 | SP-H027 | 健康大管家 V1.0 需求策划 | 文档任务派发 | 平台集成负责人 | 健康大管家负责人 | 2026-07-11 | 正式派发，待模块 G0 | 独立于旧咨询切片；仅文档和治理证据，可推送 Draft PR |
-| SP-H028 | 俱乐部 category 权威筛选 | 平台合同给后端 | 平台集成负责人 | 平台后端负责人、俱乐部联盟负责人 | 2026-07-11 | 合同验证完成，后端实现中 | D-CA-003 Accepted；SC general、PC charity、服务端组合筛选 |
+| SP-H028 | 俱乐部 category 权威筛选 | 平台合同、后端与环境给模块 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | 后端与环境 Go，待模块吸收复核 | D-CA-003 Accepted；实现/集成 47ef91bb；SC general、PC charity |
 
 ## SP-H028：俱乐部 category 权威筛选
 
 - 决策：D-CA-003 Accepted，见 ADR 0019。
 - 合同：`club-category-filter.v1`。
 - 后端工作项：`AIW-20260711-CLUB-CATEGORY-AUTHORITY-BACKEND`。
-- 平台结论：合同、Schema、validator 和混合 fixture Go；后端实现与环境验收尚未通过。
+- 后端实现：`be06897a`；分页根因修复及最终集成：`47ef91bb`。独立复核最终 Go。
+- 环境证据：2026-07-11 08:22 部署，备份 `20260711-082209.tar.gz`；`/ready`、24 插件、20 动作契约、认证 general/health/charity 查询、分页及稳定负例错误码均通过。
+- 平台结论：合同、Schema、validator、混合 fixture、后端实现、本地门禁和测试环境 HTTP 验收 Go；模块更新 v2 dependency/Handoff 并经平台复核后可裁定 H0 Full Go。
 - 边界：不授权 CA-H1 或四类业务编码。
 
 ## SP-H027：健康大管家 V1.0 需求策划文档派发

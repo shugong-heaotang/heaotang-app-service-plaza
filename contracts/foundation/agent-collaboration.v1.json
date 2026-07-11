@@ -875,7 +875,7 @@
       "title": "俱乐部 type+category 服务端权威组合筛选实现",
       "owner": "Club backend module agent",
       "owner_role": "平台后端负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/heaotang-main",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-category-authority-backend",
       "branch": "codex/club-category-authority-backend",
@@ -887,7 +887,7 @@
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
-      "migration_note": "只实现 search 的 category 参数、type+category 权威组合过滤、稳定错误和混合数据回归；禁止其他俱乐部业务。",
+      "migration_note": "实现提交 be06897a，分页根因修复 47ef91bb；后端集成 HEAD=47ef91bb。全量 go test/go vet、独立复核、测试环境部署及认证 HTTP 正反例已通过；仍不授权 CA-H1 或其他俱乐部业务。",
       "handoff_record": "docs/project-management/service-plaza/club-category-authority-2026-07-11.md"
     },
     {
