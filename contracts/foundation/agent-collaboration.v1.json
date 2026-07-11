@@ -1509,7 +1509,7 @@
       "migration_note": "从权威 integration 6149504 创建独立干净工作树；本检查点只冻结双层会员首页需求并派发 H2-M0 至 M3。H2 页面实现等待 CA-SC 当前切片受控集成，禁止重叠修改 ClubAlliancePage。",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h035俱乐部联盟-h2-会员首页需求变更与派发"
     },
-            {
+                {
       "work_id": "AIW-20260712-CLUB-MEMBER-HOME-H2",
       "title": "俱乐部联盟 H2 会员工作台双层首页",
       "owner": "Club Alliance module agent",
@@ -1528,19 +1528,22 @@
         "app/src/modules/club-alliance/member-home",
         "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-h2-m1*.json",
         "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-h2-m1*.json",
-        "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-h2-m1*.json"
+        "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-h2-m1*.json",
+        "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-h2-m2*.json",
+        "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-h2-m2*.json",
+        "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-h2-m2*.json"
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
       "migration_note": "H2 派发已受控集成至 fd79e3d；H2-M0 独立工作树从同一 exact base 创建且 clean。当前只授权需求、view model、Schema、fixtures、稳定错误与 conformance；不授权父页面、前端运行时代码、后端、部署、生产或真实数据。",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h035俱乐部联盟-h2-会员首页需求变更与派发"
     },
-        {
+            {
       "work_id": "AIW-20260712-CLUB-MEMBER-HOME-M1-DISPATCH",
       "title": "俱乐部联盟 H2-M1 独立页面壳派发",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-member-home-m1-dispatch",
       "branch": "codex/club-member-home-m1-dispatch",
@@ -1553,7 +1556,10 @@
         "docs/project-management/notices/2026-07-12-club-member-home-m1-task-order.md",
         "contracts/foundation/development-checklists/2026-07-12-club-member-home-m1-dispatch-r2.json",
         "contracts/foundation/governance-exams/2026-07-12-club-member-home-m1-dispatch-r2-attempt-1.json",
-        "contracts/foundation/implementation-records/2026-07-12-club-member-home-m1-dispatch-r2.json"
+        "contracts/foundation/implementation-records/2026-07-12-club-member-home-m1-dispatch-r2.json",
+        "contracts/foundation/development-checklists/2026-07-12-club-member-home-m2-dispatch-r3.json",
+        "contracts/foundation/governance-exams/2026-07-12-club-member-home-m2-dispatch-r3-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-12-club-member-home-m2-dispatch-r3.json"
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
