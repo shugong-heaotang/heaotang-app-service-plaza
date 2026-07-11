@@ -1043,11 +1043,11 @@
       "title": "健康大管家 MVP-90 M0 合同与合成一致性正式派发",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "planned",
+      "status": "active",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-m0-dispatch",
       "branch": "codex/health-mvp90-m0-dispatch",
-      "base_commit": "6dc126f5812795d5fc4624906828de3de2ac77a1",
+      "base_commit": "d67b0a9df0dc9b9132ee960704d2170b0d63b1e8",
       "allowed_paths": [
         "contracts/foundation/agent-collaboration.v1.json",
         "contracts/foundation/development-checklists/2026-07-11-health-mvp90-m0-dispatch.json",
@@ -1059,7 +1059,7 @@
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
-      "migration_note": "正式预登记。自动激活条件：CA-H1 M4 工作项完成并 integrated、共享 registry/Handoff 路径释放；随后平台在本干净工作树完成 current checklist、100分考试、正式通知、IR和受控集成。只派发对象、状态机、角色动作和15个合成场景的机器合同与一致性测试，不授权业务实现。",
+      "migration_note": "CA-H1 M4 已于权威基线 d67b0a9 完成并 integrated，共享 registry/Handoff 路径释放；本专用工作树已快进至同一 base 且 clean，正式激活。下一步完成 current checklist、100分考试、正式通知、IR和受控集成。只派发对象、状态机、角色动作和15个合成场景的机器合同与一致性测试，不授权业务实现。",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h032健康大管家-mvp-90-m0-合同与合成一致性派发"
     },
     {
@@ -1228,7 +1228,7 @@
       "title": "俱乐部联盟 CA-H1 M4 最终证据与状态收口治理",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "handoff-ready",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-h1-m4-final-governance",
       "branch": "codex/club-h1-m4-final-governance",
