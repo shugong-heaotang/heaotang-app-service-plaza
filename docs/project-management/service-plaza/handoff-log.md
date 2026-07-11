@@ -24,7 +24,7 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 | SP-H031 | 健康大管家 MVP-90 | PRD 独立文档派发 | 平台集成负责人 | 健康大管家负责人 | 2026-07-11 | 正式派发，待最终激活 | Technical Go / Professional Freeze Pending；仅文档，不授权实现 |
 | SP-H032 | 健康大管家 MVP-90 M0 | 合同与合成一致性正式派发 | 平台集成负责人 | 健康大管家负责人 | 2026-07-12 | M0 Contract Go / Acceptance Partial Go，已受控集成 | 16 对象、6 状态机、6 角色、15 合成场景；27 Pending、M1、业务和真实健康数据继续 No-Go |
 | SP-H033 | 生命导航 LN-S2 | 维度引导申请 P0/P1 正式派发 | 平台集成负责人 | 生命导航二负责人 | 2026-07-12 | Base Contract Go / Executable No-Go，已受控集成 | D-LN-S2-001 Pending；registry 未冻结、selector 不可执行；禁止前后端和环境实现 |
-| SP-H034 | CA-SC 自建俱乐部 | 首个会员侧列表/详情/加入/本人状态闭环派发 | 平台集成负责人 | 俱乐部联盟自建俱乐部负责人 | 2026-07-12 | P0/P1 Contract Go；后端与前端工作项并行 active | standard+general；创建/审核/成员管理/资金继续禁止 |
+| SP-H034 | CA-SC 自建俱乐部 | 首个会员侧列表/详情/加入/本人状态闭环派发 | 平台集成负责人 | 俱乐部联盟自建俱乐部负责人 | 2026-07-12 | B0/F0 Handoff Ready；T0 前置本地 Go；待平台独立集成 | standard+general + shared_session；创建/审核/成员管理/资金继续禁止 |
 
 ## SP-H034：CA-SC 自建俱乐部首个会员侧闭环
 
@@ -36,7 +36,10 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 - 固定 seed：`HEAOTANG-CA-SC-20260712-V1`；禁止真实个人、申请、凭据和生产数据。
 - 非目标：创建、审核、成员管理、其他三类俱乐部、管理中心激活、资金和生产。
 - Contract Go：模块最终提交 `30efd9cafdd0ea597af2e6dd4cce2494d867004c` 经平台独立复核，R2 28/28、考试100、Schema 2/2、conformance 13/13、23路径越界0；受控集成至 `6149504959ea779102022d6b6e172fe0999dcaec`。
-- 当前状态：后端工作项从 `c4319c206add11f92d763b13b63be8ab2e47679e` 干净基线激活；前端工作项从 `6149504` 干净基线激活，二者范围互斥并行推进。
+- B0 后端：实现提交 `b0ca6b7735287b22c90f84565cadbad67f710102`、治理证据 `cf62a4c129fc8f3ede6243f4fa0a04892a39d648` 已推送；详情资源隐藏、安全 DTO、内部 500、幂等和 family 容量隔离通过，等待平台独立集成。
+- F0 前端：最终提交 `8c7b423b2276b703d602706f87ed8fb0f8a184d6`（实现 `4ae2b8f17ffab4bc131a3f67f13873eb02d080f9`）已推送；定向 60、全量 179、双 build 通过，等待平台独立集成。
+- T0 前置：提交 `03c3e6c5bf940f4e85682fa46b537478c53003e9` 统一 `shared_session`、404 资源隐藏、内部 500、权威 category error id、完整固定 seed replay 和 list/applications 静态包路由；conformance 15/15，R4 28/28、考试100。
+- 当前状态：三个检查点均已形成可复核提交；T0 环境授权、部署、合成数据装载和双用户 UAT 尚未开始，不能据此宣称首闭环 Go。
 
 ## SP-H033：生命导航 LN-S2 P0/P1 正式派发
 
