@@ -30,6 +30,8 @@
 - 修复自动化证据来自该提交的实现记录：定向 3 files / 61 tests、前端全量 18 files / 155 tests、production build 与 test-server build 均通过；本组未把该历史记录冒充新一轮环境 UAT。
 - 本轮部署日志证据：服务器备份 `/root/heaotang-backups/20260711-194454.tar.gz`；本地备份 `D:/Backup/heaotang-test-server/20260711-194454/test-server-state.tar.gz`；回滚目标 `/var/www/heaotang/app/service-plaza.rollback-20260711-194451`；部署资产 `assets/index-CPIj0Kh9.js`。
 - 本组只读交叉验证：本地备份文件存在、大小 18,695,428 bytes，归档可列举；公开服务页当前引用 `assets/index-CPIj0Kh9.js` 与 `assets/index-CG40mPcg.css`；`GET /ready` 返回 `status=ready / db=true / plugins=24`；`GET /health?json=1` 返回 `status=ok / db.connected=true / plugins=24`。
+- 平台主线部署后浏览器只读证据：首页 DOM 的四入口仍按公益/自建/家庭/友联体排序，管理中心仍位于独立 complementary，上下返回均指向 `/app/service-plaza/services`；guest 直接访问 `?view=manage` 显示“需要登录或相应权限”“管理中心当前不可访问”、稳定原因 `authentication_required`，并提供返回俱乐部联盟首页。该项证明修复未破坏 guest 登录承接语义。
+- 上述只读回合中仅浏览器控制层 `ab.chatgpt.com` Statsig 请求超时，页面 DOM 正常；该流量继续归类为控制层噪声，不计入 APP 或模块网络面。
 - 当前裁定：修复已集成并部署；由于上一合法普通会员浏览器会话不再可用，本组按授权边界未申请 OTP、未登录、未读取或注入 token/cookie，也未点击浏览器。普通会员点击管理中心保持原 URL、`blocked/scope_required` 三方证据，以及 direct `?view=manage` 的 `unauthorized/scope_required` 页面证据仍待合法已登录缺 scope 会话复验。
 
 ## 自动化与本地入口
@@ -162,5 +164,6 @@
 
 - `004800f6fec01c3a31a769dbf3d9d12830683a3f` 已实现两层失败关闭：`scope_required` 阻止内部链接默认导航；direct management view 由上游 action target 与共享 evaluator 确定性解析。`authentication_required` 继续保留既有登录承接路径。
 - 该提交已进入权威 integration，并以 `assets/index-CPIj0Kh9.js` 部署到测试环境；现场 ready/health/资产交叉验证通过。
+- 部署后 guest direct `?view=manage` 已在真实 DOM 显示 `authentication_required` 与管理中心不可访问，证明登录承接路径未因 B002 修复而回归；这不替代已登录缺 scope 的 `scope_required` 复验。
 - 未完成项仅保留环境关闭证据：使用合法已登录且缺 `club:manage` 的普通会员会话，验证点击管理中心不导航、事件为 `blocked/scope_required/user_id=non-null`，以及 direct `?view=manage` 显示 `unauthorized/scope_required`；每项仍需页面、Nginx 和只读事件三方交叉。
 - 在合法会话可用前，状态为 `Implemented + Deployed / Environment Retest Pending`，M4 继续 `In Progress / No-Go`。guest 四分类证据无需重复；Enter、Shift+Tab 继续保持控制通道未验证。

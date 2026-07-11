@@ -22,6 +22,8 @@
 - 修复记录证明定向 3 files / 61 tests、前端全量 18 files / 155 tests、production build 和 test-server build 通过。环境证据与自动化证据分开记录。
 - 本轮部署日志记录：remote backup `/root/heaotang-backups/20260711-194454.tar.gz`，local backup `D:/Backup/heaotang-test-server/20260711-194454/test-server-state.tar.gz`，rollback target `/var/www/heaotang/app/service-plaza.rollback-20260711-194451`，deployed asset `assets/index-CPIj0Kh9.js`。
 - 本组只读交叉验证：本地备份存在且归档可读；公开页面当前引用 `assets/index-CPIj0Kh9.js`；`/ready` 为 `ready / db=true / plugins=24`，`/health?json=1` 为 `ok / db.connected=true / plugins=24`。
+- 平台主线部署后浏览器只读证据：首页仍保持四入口既定顺序、独立管理 complementary 和两个 `/app/service-plaza/services` 返回入口；guest direct `?view=manage` 显示“需要登录或相应权限”“管理中心当前不可访问”及 `authentication_required`，可返回俱乐部联盟首页。该证据证明 guest 登录承接路径未回归，但不替代已登录缺 scope 的 `scope_required` 复验。
+- 同一回合仅出现浏览器控制层 `ab.chatgpt.com` Statsig timeout，页面 DOM 正常；该流量不是 APP 网络请求，继续按控制层噪声记录。
 - 当前状态：`CA-H1-M4-B002` 为 `Implemented + Deployed / Environment Retest Pending`。上一合法普通会员浏览器会话已不再可用；本组未申请 OTP、未登录、未读取或注入 token/cookie，也未执行浏览器点击。
 - 关闭条件：取得合法已登录且缺 `club:manage` 的普通会员会话后，复验点击管理中心不发生默认导航、动作事件为 `blocked/scope_required/user_id=non-null`，并验证 direct `?view=manage` 显示 `unauthorized/scope_required`；页面、Nginx、只读事件三方一致后才能关闭 B002 并裁定 M4 Go。
 - does not block：既有四分类 guest、响应式、query、刷新/后退/双返回、网络 denylist 与自动化八态证据无需重复。Enter 与 Shift+Tab 保持控制通道未验证。
