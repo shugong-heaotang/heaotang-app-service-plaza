@@ -27,7 +27,7 @@
 - 本人申请：`/services/club-alliance/self-created/applications`，必须在 `:clubId` 前匹配
 - 详情与加入：`/services/club-alliance/self-created/:clubId`
 - 列表：`GET /api/v1/clubs/search?type=standard&category=general&page=&size=&q=&city=`
-- 详情：`GET /api/v1/clubs/:id`，服务端必须拒绝非 active、非 standard 或非 general
+- SC 详情：`GET /api/v1/clubs/self-created/:id`，服务端必须拒绝非 active、非 standard 或非 general；共享 `GET /api/v1/clubs/:id` 保持类型无关的通用详情语义，不得被本切片收窄
 - 加入：`POST /api/v1/clubs/:id/join`，强制 `Idempotency-Key`
 - 本人状态：`GET /api/v1/clubs/join-applications/my?page=&size=&status=`，身份只来自认证会话
 

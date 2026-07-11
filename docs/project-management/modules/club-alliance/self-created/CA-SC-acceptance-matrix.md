@@ -19,5 +19,7 @@
 | SC-C14 | 治理 | checklist/exam/IR/Handoff/current SHA 全通过 |
 | SC-C15 | 错误一致性 | category 使用权威 `CLUB_FILTER_CATEGORY_INVALID`；join 内部故障 500 `CLUB_JOIN_UNAVAILABLE` |
 | SC-C16 | fixture replay | 固定 seed 生成器输出与 committed `cases.v1.json` 逐字段完全一致 |
+| SC-C17 | 共享兼容性 | SC 使用 `/clubs/self-created/:id`；共享 `/clubs/:id` 继续返回 family/charity 等通用详情，静态专用路由不被 `:id` 吞掉 |
+| SC-C18 | route ID | 仅 canonical positive safe integer；`1e2/0x65/+101/00101/0/overflow` 均零请求并返回 `CLUB_ID_INVALID` |
 
 任何 Blocker 或未接受 Major 均为 No-Go。P0/P1 Go 只允许后端下一切片，不代表环境、发布或完整业务 Go。

@@ -60,6 +60,10 @@ def semantic_error(contract, errors, fixtures):
         return "SC_DTO_FIELD_INVALID"
     if interfaces["detail"]["required_predicate"] != "type=standard AND category=general AND status=active" or interfaces["detail"]["failure_mode"] != "not-found-resource-hiding":
         return "SC_DETAIL_GUARD_INVALID"
+    if interfaces["detail"].get("path") != "/api/v1/clubs/self-created/:id" or interfaces["detail"].get("generic_detail_compatibility") != "/api/v1/clubs/:id remains type-agnostic":
+        return "SC_DETAIL_ROUTE_COMPATIBILITY_INVALID"
+    if interfaces["detail"].get("route_id_format") != "canonical-positive-safe-integer" or interfaces["detail"].get("invalid_route_behavior") != "zero-request-CLUB_ID_INVALID":
+        return "SC_ROUTE_ID_CANONICALIZATION_INVALID"
     if interfaces["detail"]["allowed_fields"] != ["id","name","intro","city","type","category","status","member_count","created_at"]:
         return "SC_DTO_FIELD_INVALID"
     idem = interfaces["join"]["idempotency"]
@@ -171,6 +175,16 @@ class SelfCreatedClubContractsTest(unittest.TestCase):
         changed = copy.deepcopy(self.errors)
         next(item for item in changed["errors"] if item["error_id"] == "CLUB_JOIN_UNAVAILABLE")["http_status"] = 409
         self.assertEqual("SC_ERROR_CATALOG_INVALID", semantic_error(self.contract, changed, self.fixtures))
+
+    def test_16_generic_detail_cannot_be_narrowed_by_sc(self):
+        changed = copy.deepcopy(self.contract)
+        changed["interfaces"]["detail"]["path"] = "/api/v1/clubs/:id"
+        self.assertEqual("SC_DETAIL_ROUTE_COMPATIBILITY_INVALID", semantic_error(changed, self.errors, self.fixtures))
+
+    def test_17_route_id_must_be_canonical_before_request(self):
+        changed = copy.deepcopy(self.contract)
+        changed["interfaces"]["detail"]["route_id_format"] = "coerce-number"
+        self.assertEqual("SC_ROUTE_ID_CANONICALIZATION_INVALID", semantic_error(changed, self.errors, self.fixtures))
 
 
 if __name__ == "__main__":

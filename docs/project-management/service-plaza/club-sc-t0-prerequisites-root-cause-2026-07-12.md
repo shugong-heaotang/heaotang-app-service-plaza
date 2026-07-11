@@ -10,7 +10,7 @@
 
 ## Evidence
 
-- symptom：P0/P1 写 guest 可浏览、错误目录使用旧 error id/HTTP；现有 action/backend 要求认证并使用另一组稳定语义。测试包只显式生成父路由静态入口。
+- symptom：P0/P1 写 guest 可浏览、错误目录使用旧 error id/HTTP；现有 action/backend 要求认证并使用另一组稳定语义。首个后端实现把共享 `/clubs/:id` 收窄为 SC，首个前端实现用 `Number(clubId)` 重解释非规范资源 ID。测试包只显式生成父路由静态入口。
 - exact_stop：后端与前端可以继续实现，但在合同统一和深链包装回归前不得进入 T0。
 - reproduction：对照 `service-plaza-actions.v1.json`、后端 `Auth:true`、`club-category-filter.v1.json`、CA-SC error catalog 和 `Build-ServicePlazaTestPackage.ps1`。
 - expected / actual：期望单一访问/错误真相源和可验证深链包；实际存在双口径和缺失的子路由清单。
@@ -25,13 +25,13 @@
 
 - affected_modules_and_paths：CA-SC 合同、conformance、测试服前端打包。
 - security_data_release_impact：禁止意外开放匿名 club 数据；无生产和真实数据变更。
-- blocks：T0 派发与环境 Go。
+- blocks：后端/前端 Integration Go、T0 派发与环境 Go。
 - does_not_block：已认证的后端/前端本地实现与测试。
 
 ## Resolution
 
 - rejected_workaround_and_reason：不通过修改 UAT 预期、前端本地吞错或临时 Nginx 规则绕过。
-- systemic_fix：统一 `shared_session`；资源边界统一 404 `CLUB_NOT_FOUND`，内部 detail/join 统一 500；category 使用平台权威 error id；固定子路由进入打包清单和可执行检查。
+- systemic_fix：统一 `shared_session`；SC 使用专用静态优先路由 `/clubs/self-created/:id`，共享 `/clubs/:id` 保持类型无关；资源边界统一 404 `CLUB_NOT_FOUND`，内部 detail/join 统一 500；category 使用平台权威 error id；固定子路由进入打包清单和可执行检查。
 - changed_contracts_code_tools：CA-SC 合同/错误目录/conformance、构建脚本和打包检查。
 - compatibility_or_migration：不开放新权限；保持既有后端安全语义，修正未发布业务合同。
 - rollback：回退本工作项提交即可；不触及环境数据。
