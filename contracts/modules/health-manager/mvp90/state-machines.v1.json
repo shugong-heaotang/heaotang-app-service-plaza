@@ -39,7 +39,7 @@
       ],
       "forbidden_transitions":[
         {"from":"ai_draft","to":"active","error_id":"HMM0_UNCONFIRMED_PLAN_ACTIVATION_FORBIDDEN","reason":"AI 草案不能冒充会员确认后的生效计划"},
-        {"from":"member_confirmation","to":"active","error_id":"HMM0_DEFAULT_CONSENT_FORBIDDEN","reason":"持续使用或默认同意不能替代会员明确确认"}
+        {"from":"manager_review","to":"active","error_id":"HMM0_MEMBER_CONFIRMATION_BYPASS_FORBIDDEN","reason":"管理师审核不能绕过会员明确确认直接生效"}
       ]
     },
     {
