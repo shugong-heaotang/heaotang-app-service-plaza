@@ -51,6 +51,7 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 - 环境门禁：模块本地 Go 后，平台另行授权测试环境部署与真实浏览器 UAT。
 - M4 增量：部署、备份、回滚目标、四视口、query 负例、四分类 guest `blocked/authentication_required/user_id=null`、refresh/back/上下两个返回和 Nginx denylist=0 已取得真实证据。
 - M4 未完成：合成登录 activated、缺 `club:manage` 的 `blocked/scope_required`；Enter/Shift+Tab 因当前浏览器控制通道不能稳定触发而保持未验证。M4 不得判 Go。
+- 登录根因：无可接管的合法已登录标签；candidate B 容量门禁通过且权威关系证明没有 `club:manage`。等待一次 send-code 的最小明确授权后即可同时完成 activated 与 scope_required 三方取证，禁止换号、清计数、改限流或注入 token。
 
 ### H1-M1 平台检查点验收（2026-07-11）
 

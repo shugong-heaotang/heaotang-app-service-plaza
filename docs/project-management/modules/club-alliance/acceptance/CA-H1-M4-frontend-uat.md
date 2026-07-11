@@ -119,3 +119,16 @@
 4. 四分类 guest blocked 已完成；仍需取得登录 activated 与缺 `club:manage` blocked 的真实环境证据，并确认载荷无 OTP/JWT/完整个人标识/敏感业务数据。
 5. 八态由 143/143 全量与 56/56 定向自动化证明；环境只记录安全、自然可重复状态，不新增人工状态切换器，不把未构造的 maintenance/offline 冒充截图通过。
 6. 完成后才能把 verdict 改为 Pass；任何 Blocker/Major 未关闭维持 No-Go。
+
+## 登录角色证据根因与正式解阻方案
+
+- 浏览器只读枚举：当前受支持通道只有 Codex In-app Browser，且仅存在一个空白 New tab；没有可见合法已登录测试会话。当前运行时未提供可接管的 Chrome 标签。未读取 cookie、localStorage、token、OTP 或手机号。
+- 合成账号容量门禁（UTC `2026-07-11`）：candidate A `used=5 / remaining=0 / capacity_ready=false`；candidate B `used=0 / remaining=5 / capacity_ready=true`；两次查询均 `secrets_read=false`。
+- candidate B 服务端只读资格核对：账号已存在，owned clubs=0，privileged club memberships=0，预期 `club:manage=false`；未读取或输出完整身份。
+- 后端权威机制：每个身份每个 SQLite UTC 日最多5次 send-code，验证码30分钟过期；自然重置为 UTC 00:00（北京时间次日08:00）。登录使用 `FindOrCreateUser`，scope 仅由俱乐部 owner 或特权成员关系派生，禁止管理员直接伪造 scope。
+- 根因：M4 缺少一个合法普通会员浏览器会话；不是页面、遥测、权限 evaluator 或后端 scope 逻辑失败。
+- Owner：平台集成负责人负责容量门禁、一次合成登录和三方取证；模块负责人继续只读，不接触凭据。
+- 最小授权：允许对已批准且容量通过的 candidate B 执行且仅执行一次 send-code；OTP 仅通过一次性非仓库通道进入同一浏览器，登录成功/过期后立即销毁，不在消息、命令、报告或 Git 中出现。不得换号、清计数、改限流、注入 JWT/shell token。
+- 登录后的唯一验收动作：四分类各一次，预期 `activated / none / user_id=non-null`；管理中心一次，预期 `blocked / scope_required / user_id=non-null`。每项由页面、Nginx action-events POST 和管理查询/只读数据库三方交叉；不执行业务 API。
+- does_not_block：部署、备份、ready/health、四视口、query 正反例、四分类 guest、刷新、后退、双返回、allowlist/denylist、自动化八态和本地总门禁均已完成，不需重复。
+- 当前仍禁止申请新 OTP；在最小授权明确前，登录角色两项保持 Pending，M4 继续 No-Go。
