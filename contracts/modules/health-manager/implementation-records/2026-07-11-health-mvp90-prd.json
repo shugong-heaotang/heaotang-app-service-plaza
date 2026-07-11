@@ -4,7 +4,7 @@
   "title": "健康大管家 MVP-90 开发 PRD V1.0",
   "date": "2026-07-11",
   "status": "implemented",
-  "objective": "将 HM-R0 产品宪法压缩为 8 个会员页面、5 个管理页面和最小 PDCAR 的 MVP-90 开发 PRD，并把会员需求汇总形成的 52 项长期业务、外部能力池和老年跌倒预防专项纳入受控范围，明确 MVP 核心、最小入口、后置能力和所有专业商业 Pending。",
+  "objective": "将 HM-R0 产品宪法压缩为 8 个会员页面、5 个管理页面和最小 PDCAR 的 MVP-90 开发 PRD；完成 C1 业务范围后，进一步冻结 C2 的 PDCAR 主流程、16 个核心产品对象、六组状态机、页面追踪、角色责任、转人工/接管/恢复与失败关闭规则，同时保持所有专业商业 Pending。",
   "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-11-health-mvp90-prd.json",
   "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-11-health-mvp90-prd-attempt-1.json",
   "governance_inputs": [
@@ -95,6 +95,8 @@
     "Elderly fall prevention is not a promise to prevent all falls and currently has only a screening and human-escalation entry in MVP scope",
     "Medical, privacy, pricing, capacity, timing and professional responsibility decisions remain Pending with named owners",
     "External cooperation remains No-Go until identity, data agreement, exit, qualification and quality gates pass",
+    "PRD-C1 was independently reviewed by the platform integration owner at exact HEAD deb55880ab466c478441f0229e929cc57c6a2fba and accepted without revision",
+    "PRD-C2 defines product semantics only and does not authorize or define business code, APIs, database schema, environments or real-data processing",
     "This work item authorizes documentation only and excludes code, interfaces, Schema, environments, deployment, production, real health data and funds"
   ],
   "implementation_mode": "ai-assisted"

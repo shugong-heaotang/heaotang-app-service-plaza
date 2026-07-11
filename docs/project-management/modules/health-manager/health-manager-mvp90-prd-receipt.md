@@ -10,7 +10,7 @@
 - 工作树：`C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-prd`
 - 登记基线：`3399b90adcef785534e0556fd2006eefac686ffe`
 - 激活 HEAD：`182b6063027e7d73d6667c47f82e3c09e99f3772`
-- 状态：已签收；PRD-C0 Go，允许进入 PRD-C1。
+- 状态：已签收；PRD-C0、C1 Go，平台已正式授权进入 PRD-C2。
 
 ## C0 准入证据
 
@@ -32,5 +32,6 @@
 ## 当前检查点
 
 - 已完成：PRD-C0。
-- 正在进行：PRD-C1，首批会员、核心问题、承诺/禁止承诺、8+5 页面、母文档追踪和业务能力范围。
-- 后续：PRD-C2 至 PRD-C5 按正式通知逐检查点推进。
+- 平台已验收：PRD-C1，exact HEAD `deb55880ab466c478441f0229e929cc57c6a2fba`，结论 Go、无需修订。
+- 正在进行：PRD-C2，PDCAR 主流程、核心对象与状态、页面追踪、角色责任及转人工/接管/恢复规则。
+- 后续：C2 提交平台短检查点；未获 C2 Go 不进入 C3。
