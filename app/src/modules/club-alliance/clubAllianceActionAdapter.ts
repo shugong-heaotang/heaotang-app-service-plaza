@@ -52,29 +52,6 @@ export type ClubAllianceActionView = {
   management: ServiceAction;
 };
 
-export const deriveClubAllianceActions = (
-  actions: readonly ServiceAction[],
-): ClubAllianceActionView => {
-  const unexpected = actions.find(
-    (action) => isCorrectScope(action) && !expectedActionIds.has(action.action_id),
-  );
-  if (unexpected) {
-    throw new ClubAllianceHomepageContractError(
-      "CAH1_ACTION_UNEXPECTED",
-      `俱乐部联盟首页合同不接受动作 ${unexpected.action_id}`,
-    );
-  }
-
-  const categories = clubAllianceCategoryActionIds
-    .map((actionId) => requireUniqueAction(actions, actionId))
-    .sort((left, right) => left.sort_order - right.sort_order);
-
-  return {
-    categories,
-    management: requireUniqueAction(actions, clubAllianceManagementActionId),
-  };
-};
-
 const categoryFromTarget = (action: ServiceAction) => {
   let target: URL;
   try {
@@ -94,6 +71,49 @@ const categoryFromTarget = (action: ServiceAction) => {
     );
   }
   return values[0];
+};
+
+const validateCategoryTargets = (categories: readonly ServiceAction[]) => {
+  const ownersByCategory = new Map<string, string>();
+  categories.forEach((action) => {
+    const category = categoryFromTarget(action);
+    const existingOwner = ownersByCategory.get(category);
+    if (existingOwner) {
+      throw new ClubAllianceHomepageContractError(
+        "CAH1_ACTION_TARGET_INVALID",
+        `俱乐部联盟动作 ${existingOwner} 与 ${action.action_id} 的 category target 重复`,
+      );
+    }
+    ownersByCategory.set(category, action.action_id);
+  });
+};
+
+export const deriveClubAllianceActions = (
+  actions: readonly ServiceAction[],
+): ClubAllianceActionView => {
+  const unexpected = actions.find(
+    (action) => isCorrectScope(action) && !expectedActionIds.has(action.action_id),
+  );
+  if (unexpected) {
+    throw new ClubAllianceHomepageContractError(
+      "CAH1_ACTION_UNEXPECTED",
+      `俱乐部联盟首页合同不接受动作 ${unexpected.action_id}`,
+    );
+  }
+
+  const categories = clubAllianceCategoryActionIds
+    .map((actionId) => requireUniqueAction(actions, actionId))
+    .sort((left, right) => left.sort_order - right.sort_order);
+
+  // The home state renders every category target before a query is selected.
+  // Validate all targets during derivation so a malformed catalog cannot leak
+  // an unusable link merely because the current URL has no category query.
+  validateCategoryTargets(categories);
+
+  return {
+    categories,
+    management: requireUniqueAction(actions, clubAllianceManagementActionId),
+  };
 };
 
 export type ClubAllianceQuerySelection =

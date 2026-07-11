@@ -11,6 +11,8 @@ import {
   serviceCatalogRepository,
   type ServiceCatalogRepository,
 } from "../infrastructure/serviceCatalogRepository";
+import { deriveClubAllianceActions } from "../modules/club-alliance/clubAllianceActionAdapter";
+import { ClubAllianceHomepageContractError } from "../modules/club-alliance/clubAllianceHomepageContract";
 
 const iconClassByService: Record<string, string> = {
   "activity-plaza": "activity",
@@ -42,6 +44,7 @@ const validatePlazaActions = (
   if (unknownServiceAction) {
     throw new Error(`动作引用了目录中不存在的服务：${unknownServiceAction.service_id}`);
   }
+  deriveClubAllianceActions(actionCatalog.items);
   return actionCatalog.items;
 };
 
@@ -76,7 +79,13 @@ export function ServicePlazaPage({
     } catch (loadError) {
       setCatalog(null);
       setActions(null);
-      setError(loadError instanceof Error ? loadError.message : "服务目录加载失败");
+      setError(
+        loadError instanceof ClubAllianceHomepageContractError
+          ? `${loadError.errorId}: ${loadError.message}`
+          : loadError instanceof Error
+            ? loadError.message
+            : "服务目录加载失败",
+      );
     }
   }, [repository]);
 
@@ -86,17 +95,13 @@ export function ServicePlazaPage({
 
   const view = useMemo(() => {
     if (!catalog || !actions) return null;
+    const clubAlliance = deriveClubAllianceActions(actions);
     return {
       life: requireAction(actions, "life-navigation"),
       club: requireAction(actions, "club-alliance"),
       health: requireAction(actions, "health-manager"),
-      clubManagement: requireAction(actions, "club-manage"),
-      clubCategories: [
-        "public-benefit-club",
-        "self-created-club",
-        "family-club",
-        "club-federation",
-      ].map((actionId) => requireAction(actions, actionId)),
+      clubManagement: clubAlliance.management,
+      clubCategories: clubAlliance.categories,
       more: requireAction(actions, "common-more"),
       common: [
         "activity-plaza",

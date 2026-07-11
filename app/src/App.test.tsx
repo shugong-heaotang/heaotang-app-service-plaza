@@ -107,12 +107,13 @@ describe("服务广场主链路", () => {
     expect(screen.getByRole("heading", { name: "服务广场" })).toBeInTheDocument();
   });
 
-  it("无权限状态会显示恢复说明且不展示主动作", async () => {
-    const user = userEvent.setup();
+  it("俱乐部联盟使用独立标准首页路由，不再落入通用业务页", async () => {
     renderAt("/services/club-alliance");
 
-    await user.click(screen.getByRole("button", { name: "无权限" }));
-    expect(screen.getByText("暂时没有访问权限")).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { level: 2, name: "选择俱乐部服务" })).toBeInTheDocument();
+    expect(screen.getByText("公益俱乐部")).toBeInTheDocument();
+    expect(screen.getByText("俱乐部友联体")).toBeInTheDocument();
+    expect(screen.queryByLabelText("联调状态切换")).not.toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "申请加入俱乐部" })).not.toBeInTheDocument();
     expect(screen.getByRole("link", { name: "← 返回服务广场" })).toBeInTheDocument();
   });

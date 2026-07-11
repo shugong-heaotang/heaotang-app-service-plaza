@@ -1,4 +1,5 @@
 import { Navigate, Route, Routes } from "react-router-dom";
+import { ClubAllianceRoute } from "./modules/club-alliance";
 import { HealthManagerRoute } from "./modules/health-manager";
 import { LifeNavigationPage } from "./modules/life-navigation";
 import { CoreServicePage } from "./pages/CoreServicePage";
@@ -11,6 +12,7 @@ export function AppRoutes() {
       <Route path="/" element={<Navigate to="/services" replace />} />
       <Route path="/services" element={<ServicePlazaPage />} />
       <Route path="/services/life-navigation" element={<LifeNavigationPage />} />
+      <Route path="/services/club-alliance" element={<ClubAllianceRoute />} />
       <Route path="/services/health-manager" element={<HealthManagerRoute />} />
       <Route path="/services/:serviceKey" element={<CoreServicePage />} />
       <Route path="*" element={<NotFoundPage />} />

@@ -104,6 +104,38 @@ describe("deriveClubAllianceActions", () => {
       "CAH1_ACTION_UNEXPECTED",
     );
   });
+
+  it.each([
+    ["missing", "/services/club-alliance"],
+    ["blank", "/services/club-alliance?category=%20"],
+    ["repeated", "/services/club-alliance?category=公益俱乐部&category=公益俱乐部"],
+    ["multiple", "/services/club-alliance?category=公益俱乐部&category=自建俱乐部"],
+    ["malformed", "http://["],
+  ])("fails home derivation closed for a %s category target", (_kind, target) => {
+    const actions = cloneActions().map((action) =>
+      action.action_id === "public-benefit-club" ? { ...action, target } : action,
+    );
+    expectContractError(
+      () => deriveClubAllianceActions(actions),
+      "CAH1_ACTION_TARGET_INVALID",
+    );
+  });
+
+  it("fails home derivation closed when different actions map to one category", () => {
+    const actions = cloneActions();
+    const publicBenefit = actions.find(
+      (action) => action.action_id === "public-benefit-club",
+    ) as ServiceAction;
+    const duplicatedCategory = actions.map((action) =>
+      action.action_id === "self-created-club"
+        ? { ...action, target: publicBenefit.target }
+        : action,
+    );
+    expectContractError(
+      () => deriveClubAllianceActions(duplicatedCategory),
+      "CAH1_ACTION_TARGET_INVALID",
+    );
+  });
 });
 
 describe("resolveClubAllianceQuery", () => {
@@ -148,6 +180,25 @@ describe("resolveClubAllianceQuery", () => {
     expectContractError(
       () => resolveClubAllianceQuery(query, duplicatedTarget),
       "CAH0_QUERY_AMBIGUOUS",
+    );
+  });
+
+  it("fails closed when an upstream category target is missing or malformed", () => {
+    const { categories } = deriveClubAllianceActions(cloneActions());
+    const missingCategory = categories.map((action, index) =>
+      index === 0 ? { ...action, target: "/services/club-alliance" } : action,
+    );
+    expectContractError(
+      () => resolveClubAllianceQuery("?category=公益俱乐部", missingCategory),
+      "CAH1_ACTION_TARGET_INVALID",
+    );
+
+    const malformedTarget = categories.map((action, index) =>
+      index === 0 ? { ...action, target: "http://[" } : action,
+    );
+    expectContractError(
+      () => resolveClubAllianceQuery("?category=公益俱乐部", malformedTarget),
+      "CAH1_ACTION_TARGET_INVALID",
     );
   });
 });
