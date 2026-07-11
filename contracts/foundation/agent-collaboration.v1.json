@@ -938,7 +938,7 @@
       "title": "俱乐部联盟 CA-H1 标准首页与页面壳实现",
       "owner": "Club Alliance module agent",
       "owner_role": "俱乐部联盟负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-alliance-h1",
       "branch": "codex/club-alliance-h1-homepage",
@@ -1120,6 +1120,34 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": "M3 Local Go 后独立执行测试环境前端部署、备份/回滚、真实浏览器多视口/键盘/网络/八态 UAT；禁止业务代码、后端、production、真实资金与不可逆操作。",
       "handoff_record": null
+    },
+    {
+      "work_id": "AIW-20260711-CLUB-ALLIANCE-H1-M4-MANAGE-GUARD",
+      "title": "俱乐部联盟 CA-H1 M4 管理 view 权限失败关闭根因修复",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-h1-m4-manage-guard",
+      "branch": "codex/club-h1-m4-manage-guard",
+      "base_commit": "eb763f0a7342effb46a5bd0cc6a729a29cafeb26",
+      "allowed_paths": [
+        "app/src/components/ActionControl.tsx",
+        "app/src/components/ActionControl.test.tsx",
+        "app/src/modules/club-alliance/clubAllianceActionAdapter.ts",
+        "app/src/modules/club-alliance/clubAllianceActionAdapter.test.ts",
+        "app/src/modules/club-alliance/ClubAllianceRoute.tsx",
+        "app/src/modules/club-alliance/ClubAlliancePage.test.tsx",
+        "contracts/foundation/development-checklists/2026-07-11-club-h1-m4-manage-guard.json",
+        "contracts/foundation/governance-exams/2026-07-11-club-h1-m4-manage-guard-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-club-h1-m4-manage-guard.json",
+        "docs/project-management/notices/2026-07-11-club-h1-m4-manage-guard-task-order.md",
+        "docs/project-management/service-plaza/club-alliance-h1-m4-manage-guard-2026-07-11.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "关闭 CA-H1-M4-B002：blocked 内部链接必须阻止默认导航，直接 view=manage 必须确定性解析并按 club:manage 失败关闭；只改页面壳权限路由和测试，不授权俱乐部业务 API、后端、数据、部署或生产。",
+      "handoff_record": "docs/project-management/service-plaza/club-alliance-h1-m4-manage-guard-2026-07-11.md"
     },
     {
       "work_id": "AIW-20260711-ACTION-TELEMETRY-CONFIG-GOVERNANCE",
