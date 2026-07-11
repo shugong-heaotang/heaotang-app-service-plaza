@@ -914,7 +914,7 @@
       "title": "俱乐部联盟 CA-H1 独立页面壳正式派发治理",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-h1-dispatch",
       "branch": "codex/club-alliance-h1-dispatch",
@@ -938,11 +938,11 @@
       "title": "俱乐部联盟 CA-H1 标准首页与页面壳实现",
       "owner": "Club Alliance module agent",
       "owner_role": "俱乐部联盟负责人",
-      "status": "planned",
+      "status": "active",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-alliance-h1",
       "branch": "codex/club-alliance-h1-homepage",
-      "base_commit": "e1dc1e28a97a36d1b85cae1aedebaee808d3d0fe",
+      "base_commit": "ad4840d5ca55da1eeabe84cb59445a0580a2aa2c",
       "allowed_paths": [
         "app/src/App.tsx",
         "app/src/App.test.tsx",
@@ -962,9 +962,9 @@
         "contracts/modules/club-alliance/implementation-records",
         "docs/project-management/modules/club-alliance/CA-H1-handoff.md"
       ],
-      "started_with_clean_worktree": false,
-      "preexisting_changes_acknowledged": true,
-      "migration_note": "预登记状态：工作树尚未创建，preexisting_changes_acknowledged 仅满足当前 validator 对 started_with_clean_worktree=false 的统一检查，不表示已发现或接受脏修改。仅在派发提交受控集成、专用工作树从新基线创建且实际 clean 后，activation commit 才改为 started_with_clean_worktree=true、preexisting_changes_acknowledged=false 并转 active。只实现首页目录/导航壳，selector executable 仍 false，禁止四类业务 API、后端、deploy 与 production。",
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "派发提交 ad4840d 已受控集成；专用分支/工作树从同一基线实际创建，HEAD 与 merge-base 均为 ad4840d，工作树 clean 后正式激活。只实现首页目录/导航壳，selector executable 仍 false，禁止四类业务 API、后端、deploy 与 production。",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h029-俱乐部联盟-ca-h1-页面壳正式派发"
     }
   ]
