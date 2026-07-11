@@ -99,10 +99,12 @@
     "PRD-C2 was independently reviewed by the platform integration owner at exact HEAD 146158e820866ff32abfb6797dd4e0ed9af90fa8 and accepted for C3 documentation work",
     "PRD-C3 was independently reviewed by the platform integration owner at exact HEAD edb698b898b5708c06eba7a0dd186303d4bb4f06 and accepted for C4 documentation work",
     "PRD-C4 was independently reviewed by the platform integration owner at exact HEAD c5225db4d5985e0c0c5f770cdda42c9378459466 and accepted for C5 documentation work",
+    "PRD-C5 was independently reviewed by the platform integration owner at exact HEAD 6da519ff5b47e05474d9180d55b78d111fc49cba and accepted as Document Handoff Ready",
     "PRD-C2 defines product semantics only and does not authorize or define business code, APIs, database schema, environments or real-data processing",
     "PRD-C3 evidence locations are logical future deliverable types and do not claim that tests, APIs, environments or real-data trials already exist",
     "PRD-C4 Accepted entries are limited to documented product and governance principles; professional, legal, privacy, operational, commercial and environment decisions remain Pending unless an authorized owner signs them",
     "The recommended HM-MVP90-M0-CONTRACTS-AND-SYNTHETIC-CONFORMANCE slice is a planning recommendation only and requires a new formal work item before any contract, schema, test or code change",
+    "Draft PR 2 remains open and draft; the current work item is ready for handoff-ready status rather than integrated, and no M0 authorization exists",
     "This work item authorizes documentation only and excludes code, interfaces, Schema, environments, deployment, production, real health data and funds"
   ],
   "implementation_mode": "ai-assisted"

@@ -10,7 +10,7 @@
 - 工作树：`C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-prd`
 - 登记基线：`3399b90adcef785534e0556fd2006eefac686ffe`
 - 激活 HEAD：`182b6063027e7d73d6667c47f82e3c09e99f3772`
-- 状态：已签收；PRD-C0、C1、C2、C3、C4 Go，已进入 PRD-C5 Review Candidate。
+- 状态：PRD-C0—C5 全部 Go；`Document Handoff Ready`，等待平台将工作项转 handoff-ready。
 
 ## C0 准入证据
 
@@ -36,5 +36,5 @@
 - 平台已验收：PRD-C2，exact HEAD `146158e820866ff32abfb6797dd4e0ed9af90fa8`，结论 Go。
 - 平台已验收：PRD-C3，exact HEAD `edb698b898b5708c06eba7a0dd186303d4bb4f06`，结论 Go。
 - 平台已验收：PRD-C4，exact HEAD `c5225db4d5985e0c0c5f770cdda42c9378459466`，结论 Go。
-- 正在进行：PRD-C5，全文完成性审计、最终 Handoff 和后续最小业务切片建议。
-- 后续：提交 C5 平台最终文档验收；C5 不自动授权 M0 或任何业务实现。
+- 平台已验收：PRD-C5，exact HEAD `6da519ff5b47e05474d9180d55b78d111fc49cba`，结论 `Go / Document Handoff Ready`。
+- 后续：平台将当前工作项转 handoff-ready，PR #2 继续 OPEN/Draft；M0 需新任务书，不自动授权任何业务实现。

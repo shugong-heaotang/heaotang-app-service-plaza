@@ -1,14 +1,14 @@
 # 健康大管家 MVP-90 开发 PRD V1.0
 
 - 文档 ID：`HM-MVP90-PRD-V1`
-- 当前版本：`1.0 Review Candidate`
-- 当前检查点：`PRD-C5`
+- 当前版本：`1.0 Document Handoff Ready`
+- 当前检查点：`PRD-C5 Go`
 - 工作项：`AIW-20260711-HEALTH-MVP90-PRD-DOCS`
 - 上游通知：`HM-MVP90-PRD-TASK-20260711-001`
 - 上游 Handoff：`SP-H031`
 - 上游母文档：HM-R0 / V1.0 Final Candidate
 - 母文档状态：`Technical Go / Professional Freeze Pending`
-- 本文状态：C0、C1、C2、C3、C4 已通过平台检查点评审；C5 Review Candidate，待平台最终文档验收
+- 本文状态：C0—C5 已通过平台检查点评审；`Document Handoff Ready`
 - 业务实现状态：`No-Go`
 
 ## 1. 文档目的
@@ -1076,3 +1076,27 @@ C4 Go 只证明联合决策登记完整、没有把 Pending 伪装为 Accepted�
 - `Pending with owner`：列出阻断证据、责任人和下一检查点。
 
 即使 C5 Go，PR #2 仍保持 Draft，是否合并、何时受控集成、旧工作项如何关闭以及是否派发 M0，均由平台集成负责人另行裁定。HM-R0 正式冻结继续需要平台集成负责人和和奥堂医生集团专业负责人共同验收。
+
+## 46. C5 平台最终验收结论
+
+平台已对 exact HEAD `6da519ff5b47e05474d9180d55b78d111fc49cba` 完成独立只读最终验收，并正式裁定：
+
+`C5 Go / Document Handoff Ready`
+
+验收确认：
+
+- 工作树 clean，相对 C4 只修改 PRD、receipt、Handoff、IR 四条授权文档路径；
+- current checklist、100 分治理考试和 implementation record 均有效；
+- 通知逐项追踪、16 个对象、六组状态机、15 个场景和 41 项决定完整且边界一致；
+- M0 合同与合成一致性建议及后续路线合理；
+- 27 项 Pending、专业会签、HM-R0 冻结、接口/Schema、业务实现、环境/真实数据、收费和试运行没有被偷换为已授权。
+
+最终状态边界：
+
+- Draft PR #2 继续 `OPEN / Draft`，当前不合并；
+- 本文档工作项应由平台从 active 转为 `handoff-ready`，不能写成 integrated；
+- HM-R0 保持 `Technical Go / Professional Freeze Pending`；
+- M0 必须另行正式任务书、分支/工作树、两层依赖、current checklist/exam/IR 和精确 allowed paths；
+- 本结论不授权 M0、业务代码、接口、Schema、环境、部署、真实数据、收费或试运行。
+
+本节是对平台 exact HEAD 验收结论的状态落盘，不修改 C1—C5 已验收的需求、对象、状态、场景或决定内容。
