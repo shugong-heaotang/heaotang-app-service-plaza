@@ -4,7 +4,9 @@
 
 工作项：`AIW-20260711-HEALTH-MVP90-M0-CONTRACTS`
 
-结论：`PASS for module checkpoint / platform M0 acceptance pending`
+结论：`M0 Contract Go / Acceptance Partial Go`
+
+平台独立复核已通过：模块检查点 `f7d0d6e7c2056d119e164204f99a4596ea08a8a9` 已受控集成至权威基线 `8b1b952d17d90a8a3d572518dc672589dbbcb1a3`。该结论只证明 M0 合同与合成一致性，不关闭 HM-R0 专业会签、27 项 Pending、M1、业务实现或环境 No-Go。
 
 ## 1. 数量与边界
 

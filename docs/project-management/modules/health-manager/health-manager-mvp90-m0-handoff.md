@@ -4,8 +4,10 @@
 - notice：`HM-MVP90-M0-TASK-20260712-001`
 - upstream：`SP-H032`
 - branch：`codex/health-manager-mvp90-m0`
-- current status：`M0 checkpoint handoff-ready`
-- acceptance：`Partial Go; platform independent review pending`
+- current status：`M0 Contract Go / controlled integration complete`
+- acceptance：`M0 Contract Go; Acceptance Partial Go`
+- module checkpoint：`f7d0d6e7c2056d119e164204f99a4596ea08a8a9`
+- authoritative integration：`8b1b952d17d90a8a3d572518dc672589dbbcb1a3`
 
 ## 最终 R2 治理证据
 
@@ -39,12 +41,14 @@
 - 5 组 Draft 2020-12 Schema、12 项 conformance/负例、敏感模式、固定 seed 重放通过；
 - 内部依赖 readiness：governance=go、development=go、acceptance=partial-go、release/operations=pending。
 
-## 当前未完成
+## 平台验收结论
 
-- 平台独立复核、M0 Go/No-Go 与受控集成；
+- 平台已独立复核模块提交 `f7d0d6e7c2056d119e164204f99a4596ea08a8a9`，并受控集成至权威基线 `8b1b952d17d90a8a3d572518dc672589dbbcb1a3`；
+- M0 Contract Go；Acceptance Partial Go；
+- 本 Handoff 只关闭 M0 合同与合成一致性检查点，不关闭下列 No-Go；
 - HM-R0 专业会签和 27 项 Pending 决策；
 - M1 及以后任何业务实现、环境与发布。
 
 ## 保持 No-Go
 
-M1、前后端、API、数据库、环境、部署、生产、真实健康数据、收费、真实会员试运行、专业规则和 27 项 Pending 均未授权。平台即使判定 M0 Go，也只允许另行派发下一切片。
+M1、前后端、API、数据库、环境、部署、生产、真实健康数据、收费、真实会员试运行、专业规则和 27 项 Pending 均未授权；任何下一切片必须另行正式派发。
