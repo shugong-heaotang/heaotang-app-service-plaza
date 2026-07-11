@@ -1608,6 +1608,30 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": "独立验收预审发现访问合同、稳定错误目录与既有后端事实不一致，且测试包未为 CA-SC 深链生成静态 fallback。本工作项只统一 shared-session、错误一对一和打包回归；不修改业务页面、后端、环境、数据或生产。",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h034-ca-sc自建俱乐部首个会员侧闭环"
+    },
+    {
+      "work_id": "AIW-20260712-CLUB-SC-T0-ACCEPTANCE-DISPATCH",
+      "title": "CA-SC 自建俱乐部测试环境 T0 验收正式派发",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-sc-t0-acceptance-dispatch",
+      "branch": "codex/club-sc-t0-acceptance-dispatch",
+      "base_commit": "ea45d82d24b9eff907ba5401e8d0a2f11151224e",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-12-club-sc-t0-acceptance-dispatch*.json",
+        "contracts/foundation/governance-exams/2026-07-12-club-sc-t0-acceptance-dispatch*.json",
+        "contracts/foundation/implementation-records/2026-07-12-club-sc-t0-acceptance-dispatch*.json",
+        "docs/project-management/notices/2026-07-12-club-sc-t0-acceptance-task-order.md",
+        "docs/project-management/service-plaza/club-sc-t0-acceptance-dispatch-2026-07-12.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "CA-SC 合同、后端和前端已独立复核并受控集成；本工作项只派发测试环境 T0 验收与证据工作，不授权生产、真实数据、创建、审核、成员管理或资金操作。",
+      "handoff_record": "docs/project-management/notices/2026-07-12-club-sc-t0-acceptance-task-order.md"
     }
   ]
 }
