@@ -69,6 +69,15 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 - 平台集成后复跑：定向 43/43、production build、总合同、治理、UTF-8 656 和 diff 全通过。
 - 结论：H1-M2 R2 Go；允许模块进入任务书已定义的 H1-M3 自动化与本地完成性检查。测试环境部署、真实浏览器 UAT、四类业务、后端与 production 仍需独立授权。
 
+### H1-M3 平台检查点验收（2026-07-11）
+
+- 模块提交：`e8c5dd23e7f87ee92f158ba6a719e498ca4eb577`；基线 `d96affc4573997b788781d0c0df05efec8f27f46`；6 个 changed paths 全在精确 allowed paths，工作树 clean。
+- 治理：M3 checklist 28/28、当前 SHA mismatch 0；exam `EX-20260711-CLUB-ALLIANCE-H1-M3-1` score 100；IR/Handoff 同一 record。
+- 本地完成性：上游 href/顺序/access/telemetry 继承、guest 登录与 scope 顺序、键盘与 aria、planned/maintenance/offline 不提升、direct query 重挂载重放、允许/拒绝网络路径仅 catalog/actions、四档响应式 CSS 合同及统一 focus-visible 均有自动化证据。
+- 模块验证：定向 56/56、前端全量 143/143、production/test-server build、总合同、治理、UTF-8 659 和 diff 全通过；平台集成后复跑定向 56/56、test-server build、总合同、治理、UTF-8 664 和 diff 全通过。
+- 证据边界：CSS 静态合同只证明本地实现约束，不替代 320/360/768/desktop 真实浏览器 UAT；平台将在 M4 环境验收中验证实际布局、键盘、焦点、aria、网络请求和八态。
+- 结论：H1-M3 Local Go；CA-H1 本地实现阶段完成。下一步必须建立独立 M4 测试环境部署与浏览器 UAT 工作项；四类业务、后端、production 仍禁止。
+
 ## SP-H028：俱乐部 category 权威筛选
 
 - 决策：D-CA-003 Accepted，见 ADR 0019。
