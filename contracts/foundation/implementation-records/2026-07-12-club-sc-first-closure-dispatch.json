@@ -1,0 +1,83 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-CLUB-SC-FIRST-CLOSURE-DISPATCH",
+  "title": "CA-SC 自建俱乐部首个会员侧闭环正式派发",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "在不夹带创建、审核、成员管理和资金能力的前提下，正式派发自建俱乐部列表、详情、加入申请与本人申请状态纵切。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-club-sc-first-closure-dispatch.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-club-sc-first-closure-dispatch-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md",
+    "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json",
+    "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-club-sc-first-closure-task-order.md",
+    "docs/project-management/modules/club-alliance/CA-F0-H0-decisions.md",
+    "docs/project-management/modules/club-alliance/acceptance/CA-H1-M4-frontend-uat.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.identity-api",
+    "foundation.authorization-idempotency",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/service-plaza/club-category-filter.v1.json",
+    "contracts/modules/club-alliance/category-registry.v1.json",
+    "contracts/modules/club-alliance/capability-catalog.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0019-club-category-authoritative-filter.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklists/2026-07-12-club-sc-first-closure-dispatch.json",
+    "contracts/foundation/governance-exams/2026-07-12-club-sc-first-closure-dispatch-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-12-club-sc-first-closure-dispatch.json",
+    "docs/project-management/notices/2026-07-12-club-sc-first-closure-task-order.md",
+    "docs/project-management/service-plaza/club-sc-first-closure-dispatch-2026-07-12.md",
+    "docs/project-management/service-plaza/handoff-log.md"
+  ],
+  "verification": [
+    "scripts/Test-AgentDevelopmentPreflight.ps1: ready",
+    "FC-20260712-CLUB-SC-FIRST-CLOSURE-DISPATCH: 26/26",
+    "EX-20260712-CLUB-SC-FIRST-CLOSURE-DISPATCH-1: score 100",
+    "scripts/validate_development_checklists.py",
+    "scripts/validate_governance_exams.py",
+    "scripts/validate_implementation_records.py",
+    "scripts/validate_agent_collaboration.py",
+    "scripts/Test-ServicePlazaContracts.ps1",
+    "scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/foundation/development-checklists/2026-07-12-club-sc-first-closure-dispatch.json",
+    "contracts/foundation/governance-exams/2026-07-12-club-sc-first-closure-dispatch-attempt-1.json",
+    "docs/project-management/notices/2026-07-12-club-sc-first-closure-task-order.md",
+    "docs/project-management/service-plaza/club-sc-first-closure-dispatch-2026-07-12.md",
+    "docs/project-management/service-plaza/handoff-log.md"
+  ],
+  "premises": [
+    "D-CA-003、H0 Full Go 和 H1 M4 Go 已有权威证据",
+    "首闭环只到会员提交和本人状态重读，不包含管理者审核",
+    "详情必须由服务端保证 active+standard+general，前端判断不能替代",
+    "所有合成数据为非生产虚构数据，真实数据、资金和生产保持禁止"
+  ],
+  "implementation_mode": "ai-assisted"
+}
