@@ -4,6 +4,7 @@
 - 状态：正式下达；待平台治理提交集成后激活后端工作项
 - 阻断：`CA-H1-M4-B001`
 - 后端 work_id：`AIW-20260711-ACTION-TELEMETRY-BUSINESSCONFIG-BACKEND`
+- 伴随证据 work_id：`AIW-20260711-ACTION-TELEMETRY-BUSINESSCONFIG-EVIDENCE`
 - repository：`C:/Users/shugo/Documents/heaotang-main`
 - branch/worktree：`codex/action-telemetry-businessconfig` / `C:/Users/shugo/Documents/worktrees/heaotang-action-telemetry-businessconfig`
 - base：`47ef91bb5ca6774c40f6c4301ba3f25e224a4bd9`
@@ -17,6 +18,8 @@
 - `backend-go/plugins/config-plugin/plugin_test.go`
 - `backend-go/plugins/service-plaza-plugin/infrastructure.go`
 - `backend-go/plugins/service-plaza-plugin/infrastructure_test.go`
+
+后端 Git 根只承载上述五个 Go 路径。当前检查单、随机治理考试和 implementation record 由 APP 治理仓库的独立伴随证据工作项在 `codex/action-telemetry-businessconfig-evidence` 工作树生成；两项使用同一 record_id，禁止把 APP 的 `contracts/` 目录复制到后端仓库，禁止无归属跨仓写入。
 
 机器映射必须固定：权威 variable=`service-plaza.action-telemetry.enabled`；兼容 consumer endpoint/key=`GET /api/v1/service-plaza/feature-flags` / `action_telemetry`；legacy table=`service_plaza_feature_flags` authority=`forbidden`、role=`compatibility_only`。实现 boolean kind 和权威变量定义；Service Plaza 的 `action_telemetry` 只适配权威批准版本，未配置/失败关闭。复用现有配置插件提案/审核 API，不新增第二套审批，不改数据库、不修改前端、俱乐部业务或生产。
 
