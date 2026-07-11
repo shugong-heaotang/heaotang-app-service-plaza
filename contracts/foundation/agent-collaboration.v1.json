@@ -1373,7 +1373,7 @@
       "title": "CA-SC 自建俱乐部首闭环 P0/P1 合同与合成一致性",
       "owner": "Club Alliance self-created module agent",
       "owner_role": "俱乐部联盟自建俱乐部负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-sc-p0-p1-contracts",
       "branch": "codex/club-sc-p0-p1-contracts",
@@ -1412,7 +1412,7 @@
       "title": "CA-SC 自建俱乐部详情边界与本人状态后端闭环",
       "owner": "Club backend agent",
       "owner_role": "平台后端负责人",
-      "status": "planned",
+      "status": "active",
       "repository_root": "C:/Users/shugo/Documents/heaotang-main",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-sc-first-closure-backend",
       "branch": "codex/club-sc-first-closure-backend",
@@ -1422,9 +1422,9 @@
         "backend-go/plugins/club-plugin/service.go",
         "backend-go/plugins/club-plugin/service_test.go"
       ],
-      "started_with_clean_worktree": false,
-      "preexisting_changes_acknowledged": true,
-      "migration_note": "预登记；只关闭详情 active+standard+general 失败关闭、稳定错误与本人状态组合所需后端缺口；不得重写已 Go 的列表、加入和本人申请能力，不得修改其他插件。",
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "Contract Go 已受控集成；后端分支/工作树从 authoritative backend c4319c20 实际创建，HEAD/base一致且 clean 后激活。只关闭详情 active+standard+general 失败关闭、稳定错误与本人状态投影缺口；不得重写已 Go 的列表、加入和本人申请能力。",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h034-ca-sc自建俱乐部首个会员侧闭环"
     },
     {
@@ -1432,11 +1432,11 @@
       "title": "CA-SC 自建俱乐部会员侧列表详情加入与本人状态页面",
       "owner": "Club Alliance self-created frontend agent",
       "owner_role": "俱乐部联盟自建俱乐部前端负责人",
-      "status": "planned",
+      "status": "active",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-sc-first-closure-frontend",
       "branch": "codex/club-sc-first-closure-frontend",
-      "base_commit": "d186e5fc0140546e2ccab5eefe0feb99a58e5ee4",
+      "base_commit": "6149504959ea779102022d6b6e172fe0999dcaec",
       "allowed_paths": [
         "app/src/App.tsx",
         "app/src/App.test.tsx",
@@ -1445,9 +1445,9 @@
         "app/src/modules/club-alliance/index.ts",
         "app/src/modules/club-alliance/self-created/"
       ],
-      "started_with_clean_worktree": false,
-      "preexisting_changes_acknowledged": true,
-      "migration_note": "预登记；合同与后端门禁 Go 后从最终集成基线创建工作树并转 active。只新增 SC 专属路由/adapter/page/tests，不修改 CoreServicePage、submissionRepository、ServicePlazaPage、父 action adapter/contract、ActionControl 或其他三类业务。",
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "Contract Go 已受控集成至 6149504；前端分支/工作树从同一 exact base 实际创建，HEAD/base一致且 clean 后激活。只新增 SC 专属路由/adapter/page/tests，不修改 CoreServicePage、submissionRepository、ServicePlazaPage、父 action adapter/contract、ActionControl 或其他三类业务。",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h034-ca-sc自建俱乐部首个会员侧闭环"
     }
   ]
