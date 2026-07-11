@@ -2,9 +2,10 @@
 
 ## 当前裁定
 
-- 状态：`In Progress / No-Go`。
-- 原因：部署、目录、视口、query 失败关闭和部分键盘焦点证据已经通过；登录允许、登录缺 `club:manage`、真实 activated/blocked 遥测、完整导航/刷新/后退/返回、八态环境取证仍未全部完成。部署成功不等于 M4 Go。
-- 产品 Blocker：当前未发现。
+- 状态：`No-Go`。
+- 原因：部署、目录、视口、query 失败关闭、guest 点击和部分键盘焦点证据已经通过；测试环境权威功能开关 `action_telemetry=false`，且功能开关双人审批写流程尚未接入，导致任务书要求的真实 activated/blocked 事件无法生成。登录允许、登录缺 `club:manage`、完整导航/刷新/后退/返回仍未全部完成。部署成功不等于 M4 Go。
+- 产品 Blocker：未发现页面实现 Blocker。
+- 平台 Blocker：`CA-H1-M4-B001`，动作遥测功能开关缺少可用的 maker-checker 配置流程；禁止直接改数据库或恢复旧单管理员写入口。
 - 验收通道问题：应用内浏览器控制层向 `ab.chatgpt.com` 发送自身 Statsig 请求时多次 10 秒超时；页面 DOM 与测试服务器访问日志仍正常。该流量不是和奥堂 APP 请求，不计入模块或 APP 网络面。
 
 ## 环境与部署
@@ -42,7 +43,7 @@
 | 768×900 | 768/768 | 2 列，各 340px | 无横向滚动，Pass |
 | 1280×900 | 1280/1280 | 有界 2 列，各约 300px | 无横向滚动，Pass |
 
-焦点证据：顶部返回链接获得真实 `focus-visible`，computed outline 为 `rgba(15, 118, 110, 0.32) solid 3px`。浏览器控制层的 Tab/Enter 复合步骤超时；后续按一动作一调用继续，当前不得把自动化单测替代为完整环境键盘 UAT。
+焦点证据：顶部返回链接获得真实 `focus-visible`，computed outline 为 `rgba(15, 118, 110, 0.32) solid 3px`。浏览器控制层没有可靠发送 Enter；唯一 locator 的真实 click 已成功进入公益俱乐部 guest `unauthorized` 状态，URL 带唯一 category，页面显示 `authentication_required`。当前不得把自动化单测替代为完整环境键盘 UAT。
 
 ## Query 与失败关闭
 
@@ -67,10 +68,20 @@
 - 同一时间窗未出现 club search/create/join/review/member/payment/charity/federation 请求。
 - 浏览器控制层 `ab.chatgpt.com` Statsig 请求不是测试应用请求，服务器访问日志中不存在，不纳入 APP 证据。
 
+### 动作遥测阻断事实
+
+- `GET /api/v1/service-plaza/feature-flags` 实际返回 `action_telemetry=false`。
+- 源码事实：开关关闭时 `reportActionEvent` 在客户端返回 `feature_disabled`，不发送 `POST /api/v1/service-plaza/action-events`。
+- Nginx 同时间窗印证：真实 guest click 后只有 catalog/actions/feature-flags，没有 action-events POST，也没有俱乐部业务 API。
+- 后端旧 `PUT /api/v1/admin/service-plaza/feature-flags/:flagKey` 固定返回 `409 CONFIG_APPROVAL_WORKFLOW_REQUIRED`；这是正确失败关闭，但当前没有后续 maker-checker 提案/独立审核接口可完成开关启用。
+- 直接修改 SQLite、复活旧单人入口或伪造 action-events 均违反 ADR 0011，本验收不采用。
+- 关闭条件：平台实现并验收功能开关 proposal/review/version/audit 的双人流程；使用两个独立测试管理员在测试环境启用 telemetry；随后复测 guest blocked、登录 activated、缺 `club:manage` blocked，并通过管理 API/只读数据库验证字段白名单与脱敏 user_id。
+
 ## 尚未关闭
 
-1. 单步完成 Enter、Shift+Tab、刷新、浏览器后退和两个返回入口。
-2. 使用批准的合成测试账号验证登录允许和登录但缺 `club:manage`；不得注入 shell token或在报告记录 OTP/JWT。
-3. 取得真实环境 activated/blocked 遥测证据，并确认载荷无 OTP/JWT/完整个人标识/敏感业务数据。
-4. 以可重复、非生产方式补齐 focused/unauthorized 之外的 loading/empty/error/maintenance/offline 环境证据；无法安全构造的状态必须明确由自动化证明而非伪装成环境通过。
-5. 完成后才能把 verdict 改为 Pass；任何 Blocker/Major 未关闭维持 No-Go。
+1. 先关闭 `CA-H1-M4-B001`；未关闭前 M4 保持 No-Go。
+2. 单步完成 Enter、Shift+Tab、刷新、浏览器后退和两个返回入口。
+3. 使用批准的合成测试账号验证登录允许和登录但缺 `club:manage`；不得注入 shell token或在报告记录 OTP/JWT。
+4. 取得真实环境 activated/blocked 遥测证据，并确认载荷无 OTP/JWT/完整个人标识/敏感业务数据。
+5. 八态由 143/143 全量与 56/56 定向自动化证明；环境只记录安全、自然可重复状态，不新增人工状态切换器，不把未构造的 maintenance/offline 冒充截图通过。
+6. 完成后才能把 verdict 改为 Pass；任何 Blocker/Major 未关闭维持 No-Go。
