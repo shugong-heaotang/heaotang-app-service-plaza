@@ -51,13 +51,16 @@
 | --- | --- | --- | --- |
 | 无 query | home | 四入口 + 管理附属 | 不适用 |
 | 公益俱乐部 | unauthorized（guest） | `authentication_required` | 未执行业务 API |
+| 自建俱乐部 | unauthorized（guest） | `authentication_required` | 未执行业务 API |
+| 家庭俱乐部 | unauthorized（guest） | `authentication_required` | 未执行业务 API |
+| 俱乐部友联体 | unauthorized（guest） | `authentication_required` | 未执行业务 API |
 | 空白 | error/alert | `CAH0_QUERY_BLANK` | 0 |
 | UNKNOWN | error/alert | `CAH0_QUERY_UNKNOWN` | 0 |
 | 同值重复 | error/alert | `CAH0_QUERY_AMBIGUOUS` | 0 |
 | 多个不同值 | error/alert | `CAH0_QUERY_AMBIGUOUS` | 0 |
 | 畸形编码 `%E0%A4%A` | error/alert | 解码后未知值，`CAH0_QUERY_UNKNOWN` | 0 |
 
-其余三个合法 category 的独立 focused/guest 状态仍需逐项环境记录；本地自动化已经覆盖四项，不作为环境完成证据。
+四个合法 category 的独立访客状态均已逐项取得真实页面证据；每项均显示对应入口“当前不可访问”、`unauthorized` 页面和稳定原因 `authentication_required`。
 
 ## 网络分类
 
@@ -87,11 +90,20 @@
 - 数据库只读交叉：最新记录为 `public-benefit-club / service_plaza.public_benefit_club.open / blocked / authentication_required / user_id=null`，UTC 时间 `2026-07-11 08:43:16`。
 - 结论：guest blocked 遥测项 Pass；B001 resolved。该证据不替代登录 activated、缺 `club:manage` blocked 或其余 M4 项。
 
+### 2026-07-11 四分类 guest blocked 完整环境证据
+
+- 自建俱乐部：真实点击后 URL 为唯一自建 category，页面为 `unauthorized / authentication_required`；数据库记录 `self-created-club / service_plaza.self_created_club.open / blocked / authentication_required / user_id=null`，UTC `2026-07-11 09:11:10`。
+- 家庭俱乐部：真实点击后 URL 为唯一家庭 category，页面为 `unauthorized / authentication_required`；数据库记录 `family-club / service_plaza.family_club.open / blocked / authentication_required / user_id=null`，UTC `2026-07-11 09:08:34`。
+- 俱乐部友联体：真实点击后 URL 为唯一友联体 category，页面为 `unauthorized / authentication_required`；数据库记录 `club-federation / service_plaza.club_federation.open / blocked / authentication_required / user_id=null`，UTC `2026-07-11 09:23:50`。
+- 连同上节公益记录，四分类均由页面状态、Nginx `POST /api/v1/service-plaza/action-events` HTTP 200 和数据库只读记录交叉证明；数据库输出仅保留 `user_id=null`，未落手机号、OTP、JWT、IP 或完整用户标识。
+- 自建页面在浏览器回合清理后仅用同一已返回 URL 直达恢复 DOM，没有重复点击；数据库中 09:11:10 仅有一条本轮自建事件。
+- 浏览器控制层 `ab.chatgpt.com` Statsig 超时继续归类为控制层噪声，未进入 APP/Nginx 证据。
+
 ## 尚未关闭
 
 1. `CA-H1-M4-B001` 已关闭；保留上述 exact commit、部署、双审与 guest blocked 证据。
 2. 单步完成 Enter、Shift+Tab、刷新、浏览器后退和两个返回入口。
 3. 使用批准的合成测试账号验证登录允许和登录但缺 `club:manage`；不得注入 shell token或在报告记录 OTP/JWT。
-4. 取得真实环境 activated/blocked 遥测证据，并确认载荷无 OTP/JWT/完整个人标识/敏感业务数据。
+4. 四分类 guest blocked 已完成；仍需取得登录 activated 与缺 `club:manage` blocked 的真实环境证据，并确认载荷无 OTP/JWT/完整个人标识/敏感业务数据。
 5. 八态由 143/143 全量与 56/56 定向自动化证明；环境只记录安全、自然可重复状态，不新增人工状态切换器，不把未构造的 maintenance/offline 冒充截图通过。
 6. 完成后才能把 verdict 改为 Pass；任何 Blocker/Major 未关闭维持 No-Go。
