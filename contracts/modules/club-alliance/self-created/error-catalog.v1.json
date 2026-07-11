@@ -4,15 +4,15 @@
   "errors": [
     {"error_id":"CLUB_ID_INVALID","category":"input","http_status":400,"severity":"major","blocks":["detail","join"]},
     {"error_id":"CLUB_NOT_FOUND","category":"resource","http_status":404,"severity":"major","blocks":["detail","join"]},
-    {"error_id":"CLUB_DETAIL_UNAVAILABLE","category":"boundary","http_status":404,"severity":"blocker","blocks":["detail"]},
+    {"error_id":"CLUB_DETAIL_UNAVAILABLE","category":"boundary","http_status":500,"severity":"blocker","blocks":["detail"]},
     {"error_id":"INVALID_IDEMPOTENCY_KEY","category":"idempotency","http_status":400,"severity":"blocker","blocks":["join"]},
     {"error_id":"CLUB_JOIN_MESSAGE_TOO_LONG","category":"input","http_status":400,"severity":"major","blocks":["join"]},
     {"error_id":"IDEMPOTENCY_KEY_REUSED","category":"idempotency","http_status":409,"severity":"blocker","blocks":["join"]},
     {"error_id":"IDEMPOTENCY_IN_PROGRESS","category":"idempotency","http_status":409,"severity":"major","blocks":["join"]},
     {"error_id":"CLUB_NOT_ACTIVE","category":"boundary","http_status":409,"severity":"blocker","blocks":["join"]},
     {"error_id":"CLUB_ALREADY_MEMBER","category":"membership","http_status":409,"severity":"major","blocks":["join"]},
-    {"error_id":"CLUB_JOIN_UNAVAILABLE","category":"boundary","http_status":409,"severity":"blocker","blocks":["join"]},
-    {"error_id":"CLUB_CATEGORY_FILTER_INVALID","category":"input","http_status":400,"severity":"blocker","blocks":["list"]},
+    {"error_id":"CLUB_JOIN_UNAVAILABLE","category":"boundary","http_status":500,"severity":"blocker","blocks":["join"]},
+    {"error_id":"CLUB_FILTER_CATEGORY_INVALID","category":"input","http_status":400,"severity":"blocker","blocks":["list"]},
     {"error_id":"CLUB_CATEGORY_CROSSOVER_DETECTED","category":"isolation","http_status":500,"severity":"blocker","blocks":["list","detail"]},
     {"error_id":"CLUB_APPLICATION_ACCESS_DENIED","category":"authorization","http_status":403,"severity":"blocker","blocks":["my-applications"]}
   ]

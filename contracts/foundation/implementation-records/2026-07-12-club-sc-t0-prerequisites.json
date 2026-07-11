@@ -1,0 +1,60 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-CLUB-SC-T0-PREREQUISITES-R4",
+  "title": "CA-SC T0 合同勘误与深链打包根因关闭",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "统一 CA-SC 访问与错误真相源，修复固定 seed fixture 漂移，并使固定子路由进入测试包可执行回归。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-club-sc-t0-prerequisites-r4.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-club-sc-t0-prerequisites-r4-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json", "AGENTS.md", "README.md", "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md", "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json", "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json", "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md", "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md", "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md", "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md", "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md", "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md", "docs/decisions/0018-recursive-project-governance.md",
+    "contracts/foundation/module-dependencies/club-alliance.v1.json", "contracts/modules/club-alliance/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-club-sc-first-closure-task-order.md",
+    "docs/project-management/modules/club-alliance/self-created/CA-SC-P0-P1-requirements.md",
+    "docs/project-management/service-plaza/club-sc-t0-prerequisites-root-cause-2026-07-12.md"
+  ],
+  "capabilities": ["foundation.identity-api", "foundation.contract-tooling", "foundation.delivery-recovery", "foundation.governance-certification"],
+  "contracts": [
+    "contracts/service-plaza/service-plaza-actions.v1.json", "contracts/service-plaza/club-category-filter.v1.json",
+    "contracts/modules/club-alliance/self-created/self-created-club.v1.json", "contracts/modules/club-alliance/self-created/error-catalog.v1.json"
+  ],
+  "decisions": ["docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0019-club-category-authoritative-filter.md"],
+  "changed_areas": [
+    "contracts/modules/club-alliance/self-created", "docs/project-management/modules/club-alliance/self-created",
+    "docs/project-management/notices/2026-07-12-club-sc-first-closure-task-order.md",
+    "scripts/Build-ServicePlazaTestPackage.ps1", "scripts/Test-ServiceIntegrationPackage.ps1",
+    "docs/project-management/service-plaza/club-sc-t0-prerequisites-root-cause-2026-07-12.md"
+  ],
+  "verification": [
+    "CA-SC conformance 15/15", "Service Plaza contracts pass", "test-server build pass",
+    "fixed list/applications route package positive and missing-route negative pass",
+    "R2 current checklist 28/28", "R2 governance exam score 100", "UTF-8 and git diff checks pass"
+  ],
+  "evidence": [
+    "contracts/foundation/development-checklists/2026-07-12-club-sc-t0-prerequisites-r4.json",
+    "contracts/foundation/governance-exams/2026-07-12-club-sc-t0-prerequisites-r4-attempt-1.json",
+    "docs/project-management/service-plaza/club-sc-t0-prerequisites-root-cause-2026-07-12.md",
+    "docs/project-management/modules/club-alliance/self-created/CA-SC-conformance-report.md"
+  ],
+  "premises": [
+    "既有 service action 与后端认证契约继续采用 shared_session",
+    "非 SC 与非 active 详情使用 404 隐藏资源存在性",
+    "测试环境 Nginx SPA fallback 的动态详情深链必须在 T0 真实验证",
+    "本工作项不授权测试环境、生产或真实数据"
+  ],
+  "implementation_mode": "ai-assisted"
+}
