@@ -972,7 +972,7 @@
       "title": "生命导航 M4 八点后真实浏览器验收收口",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-life-m4-browser-closeout",
       "branch": "codex/life-m4-browser-closeout",
@@ -988,7 +988,7 @@
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
-      "migration_note": "只记录UTC日自然重置后的认证浏览器登录、合成提交、即时历史、刷新持久和返回路径证据；不重新部署、不修改业务代码、不记录OTP/JWT。",
+      "migration_note": "提交5c3aa59已受控集成：UTC日自然重置后真实浏览器登录、合成提交、即时历史、刷新持久和返回路径全部通过；未重新部署、未修改业务代码、未记录OTP/JWT。",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h030-生命导航-m4-浏览器验收收口"
     }
   ]
