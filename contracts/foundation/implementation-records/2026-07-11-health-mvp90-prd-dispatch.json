@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-HEALTH-MVP90-PRD-DISPATCH",
+  "title": "健康大管家 MVP-90 PRD 独立文档派发治理",
+  "date": "2026-07-11",
+  "status": "verified",
+  "objective": "在 HM-R0 技术评审 Go、专业冻结 Pending 的真实状态下，建立独立 MVP-90 PRD 文档工作项和短检查点，不扩大为业务实现授权。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-health-mvp90-prd-dispatch.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-health-mvp90-prd-dispatch-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/recursive-project-governance-v1.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-11-health-manager-mvp90-prd-task-order.md"],
+  "capabilities": ["foundation.ai-collaboration-safety", "foundation.governance-certification", "foundation.ai-engineering-traceability"],
+  "contracts": ["contracts/foundation/agent-collaboration.v1.json"],
+  "decisions": ["docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0018-recursive-project-governance.md"],
+  "changed_areas": ["contracts/foundation/agent-collaboration.v1.json", "docs/project-management/notices/2026-07-11-health-manager-mvp90-prd-task-order.md", "docs/project-management/service-plaza/health-mvp90-prd-dispatch-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "verification": ["scripts/Test-AgentDevelopmentPreflight.ps1", "scripts/validate_agent_collaboration.py", "scripts/validate_development_checklists.py", "scripts/validate_governance_exams.py", "scripts/validate_implementation_records.py", "scripts/Test-TextEncoding.ps1", "git diff --check"],
+  "evidence": ["contracts/foundation/development-checklists/2026-07-11-health-mvp90-prd-dispatch.json", "contracts/foundation/governance-exams/2026-07-11-health-mvp90-prd-dispatch-attempt-1.json", "docs/project-management/service-plaza/health-mvp90-prd-dispatch-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "premises": ["HM-R0 Technical Review Go 不等于 Professional Freeze", "PRD 文档准备不等于业务开发授权", "专业与隐私 Pending 只能由责任人裁决", "后续业务必须再次拆分独立工作项"],
+  "implementation_mode": "ai-assisted"
+}
