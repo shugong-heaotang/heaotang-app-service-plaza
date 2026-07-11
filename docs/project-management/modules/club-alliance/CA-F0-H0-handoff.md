@@ -112,4 +112,4 @@
 
 ## 请求平台验收
 
-请平台复核 exact changed paths、R2 checklist/exam、D-CA-003 单一真相源、H0-B013 独立负例、v2 依赖、五组 Schema、33/33 conformance、category contract/mixed fixture、总合同、实现记录、UTF-8 与 git diff。验收通过后更新 `SP-H025` 为 H0 Full Go，并另行决定是否派发 CA-H1。
+请平台复核 exact changed paths、R3 checklist/exam、D-CA-003 单一真相源、H0-B013 独立负例、v2 依赖、五组 Schema、33/33 conformance、category contract/mixed fixture、总合同、实现记录、UTF-8 与 git diff。验收通过后更新 `SP-H025` 为 H0 Full Go，并另行决定是否派发 CA-H1。
