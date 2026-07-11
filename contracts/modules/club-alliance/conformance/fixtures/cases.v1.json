@@ -13,7 +13,7 @@
     {"case_id": "H0-B010", "mutation": "registry-copy-target", "expected_error_id": "CAH0_PRESENTATION_FIELD_COPIED"},
     {"case_id": "H0-B011", "mutation": "registry-unknown-action", "expected_error_id": "CAH0_CATEGORY_UNKNOWN_ACTION"},
     {"case_id": "H0-B012", "mutation": "registry-duplicate-action", "expected_error_id": "CAH0_CATEGORY_DUPLICATE_ACTION"},
-    {"case_id": "H0-B013", "mutation": "pending-selector-executable", "expected_error_id": "CAH0_SELECTOR_PENDING_EXECUTABLE"},
+    {"case_id": "H0-B013", "mutation": "force-pending-selector-executable", "expected_error_id": "CAH0_SELECTOR_PENDING_EXECUTABLE"},
     {"case_id": "H0-B014", "mutation": "capability-remove-owner", "expected_error_id": "CAH0_CAPABILITY_OWNER_MISSING"},
     {"case_id": "H0-B015", "mutation": "capability-remove-contracts", "expected_error_id": "CAH0_CAPABILITY_CONTRACT_MISSING"},
     {"case_id": "H0-B016", "mutation": "capability-remove-dependencies", "expected_error_id": "CAH0_CAPABILITY_DEPENDENCY_MISSING"},

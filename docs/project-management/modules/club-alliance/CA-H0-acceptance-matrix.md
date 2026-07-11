@@ -35,7 +35,7 @@
 | H0-B010 | category registry 复制 target | reject | `CAH0_PRESENTATION_FIELD_COPIED` |
 | H0-B011 | registry 引用未知 action | reject | `CAH0_CATEGORY_UNKNOWN_ACTION` |
 | H0-B012 | registry action 重复 | reject | `CAH0_CATEGORY_DUPLICATE_ACTION` |
-| H0-B013 | D-CA-003 Pending 却标 executable | reject | `CAH0_SELECTOR_PENDING_EXECUTABLE` |
+| H0-B013 | 任一 selector 被构造为 Pending 却标 executable | reject | `CAH0_SELECTOR_PENDING_EXECUTABLE` |
 | H0-B014 | capability 缺 owner | reject | `CAH0_CAPABILITY_OWNER_MISSING` |
 | H0-B015 | capability 缺 contract refs | reject | `CAH0_CAPABILITY_CONTRACT_MISSING` |
 | H0-B016 | capability 缺 dependency refs | reject | `CAH0_CAPABILITY_DEPENDENCY_MISSING` |
@@ -62,4 +62,6 @@
 - 每个用例必须输出稳定 `error_id`、fixture ID、contract version 和 pass/fail。
 - 已知错误优先于 `CAH0_INTERNAL_ERROR`；可附 `related_errors`，但主错误唯一。
 - 删除错误 ID 或改变语义属于 breaking change，必须升级错误目录主版本。
-- `D-CA-003` Pending 时 H0-B001～B033 base 可以通过，但不得生成 SC executable selector；完整 H0 Go 仍为 No-Go。
+- `D-CA-003` 已 Accepted；SC=`standard+general`、PC=`standard+charity`，服务端组合筛选为唯一权威。CA-H0 只冻结语义，SC selector 继续 `executable=false`；只有 CA-H1 或对应业务切片另行授权后才可启用消费。
+- H0-B013 必须由 fixture 显式构造 `status=pending + executable=true`，不能依赖当前基线恰好为 Pending。
+- H0 Full 证据必须同时包含模块合同、稳定负例、后端定向/全量回归、测试环境认证 HTTP 零串类与平台最终复核；release/operations 仍不由 H0 提升。

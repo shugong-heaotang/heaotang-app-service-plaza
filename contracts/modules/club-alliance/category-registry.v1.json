@@ -25,7 +25,7 @@
       "child_project_id": "CA-SC",
       "entity_kind": "club",
       "semantic_selector": {
-        "status": "pending",
+        "status": "accepted",
         "executable": false,
         "clauses": [
           {"field": "type", "operator": "eq", "value": "standard"},

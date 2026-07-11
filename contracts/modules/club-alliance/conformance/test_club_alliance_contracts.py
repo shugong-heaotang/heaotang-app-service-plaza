@@ -104,8 +104,10 @@ def apply_mutation(bundle: dict[str, Any], mutation: str) -> None:
         registry["entries"][0]["action_id"] = "unknown-club"
     elif mutation == "registry-duplicate-action":
         registry["entries"][1]["action_id"] = registry["entries"][0]["action_id"]
-    elif mutation == "pending-selector-executable":
-        next(e for e in registry["entries"] if e["action_id"] == "self-created-club")["semantic_selector"]["executable"] = True
+    elif mutation == "force-pending-selector-executable":
+        selector = next(e for e in registry["entries"] if e["action_id"] == "self-created-club")["semantic_selector"]
+        selector["status"] = "pending"
+        selector["executable"] = True
     elif mutation == "capability-remove-owner":
         catalog["capabilities"][0].pop("owner")
     elif mutation == "capability-remove-contracts":

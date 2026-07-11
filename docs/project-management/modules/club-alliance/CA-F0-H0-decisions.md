@@ -32,18 +32,20 @@
 
 ## D-CA-003 自建俱乐部精确分类
 
-- status：Pending User Decision
-- decision maker：待项目负责人裁决
+- status：Accepted
+- decision maker：项目负责人
+- decision date：2026-07-11
 - background：旧 `type=standard` 同时可能承载普通和公益数据，无法在新增公益入口后继续作为自建的精确集合。
-- recommendation：`type=standard + category=general`。
+- decision：自建俱乐部精确映射为 `type=standard + category=general`；公益继续使用 `type=standard + category=charity`。`GET /api/v1/clubs/search` 的服务端 `type+category` 组合筛选是分页、计数和结果集合的唯一权威，禁止前端全量拉取 `standard` 后本地伪筛选。
 - alternatives：standard 且 category 为空（未来需要脆弱的负向排除）；新增 self-created ClubType（破坏旧契约）；推荐的正向 general 分类。
-- consequences：推荐方案能防止未来 category 串类；代价是历史 standard 数据必须审计迁移，不能自动猜测。
+- consequences：正向 general 分类能防止 charity、family、其他 ClubType 和 `club-federation` 串类；代价是历史 standard 数据必须审计迁移，不能自动猜测。
 - premises：general 能正向标识普通自建 standard Club，并与 charity 及未来 category 隔离。
-- falsification evidence：若 general 在权威后端语义中并非自建普通类别，或现有数据无法可靠迁移，则推荐方案失效。
-- review trigger/date：完整 H0 Go 前必须裁决；最迟 CA-SC/P0 前复审迁移证据。
+- falsification evidence：若 general 无法兼容历史 standard 数据、category 变为多值或层级分类、服务端组合筛选无法与分页/索引保持一致，或公益不再共享 standard 生命周期，则本决策失效。
+- review trigger/date：出现任一 falsification evidence、首次 CA-SC/P0 数据迁移评审或 category 合同主版本变化时复审。
 - compatibility/migration：旧 `type=standard` 可保留宽查询兼容；精确入口使用 type+category；缺 category 历史数据不得自动猜测，默认排除并进入待分类清单。
-- forbidden alternatives：D-CA-003 未 Accepted 前生成 executable selector；用“排除 charity”伪造自建集合；新增 self-created ClubType。
-- local blocking：只阻塞 SC selector、category API、SC/PC 混合分类实现和完整 H0 Go；不阻塞 H0 base。
+- forbidden alternatives：仅按 `type=standard`；用“排除 charity”伪造自建集合；前端本地筛选；新增 self-created ClubType；让 family 或 `club-federation` 进入 general/charity Club 分类。
+- authority/evidence：ADR `0019-club-category-authoritative-filter`、合同 `club-category-filter.v1`、后端根因修复 `47ef91bb` 和 `SP-H028`。
+- authorization boundary：本决策只关闭 D-CA-003 语义与 H0 Full 前置，不授权 CA-H1、前端消费或四类业务编码；category registry 的 selector 继续 `executable=false`。
 
 ## D-CA-004 先建设独立标准首页
 
