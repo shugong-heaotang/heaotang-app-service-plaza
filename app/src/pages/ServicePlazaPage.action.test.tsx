@@ -21,7 +21,10 @@ describe("服务广场动作清单渲染", () => {
             ...action,
             target: `/contract-target/${action.action_id}`,
             lifecycle_status: "active" as const,
-            action_type: "service_entry" as const,
+            action_type:
+              action.region === "club_alliance"
+                ? action.action_type
+                : ("service_entry" as const),
           })),
         };
       },
@@ -47,5 +50,37 @@ describe("服务广场动作清单渲染", () => {
         expect(link.getAttribute("href")).toMatch(/^\/contract-target\//);
       });
     });
+  });
+
+  it("与俱乐部首页共用适配器并按上游 sort_order 排列四入口", async () => {
+    const baseActions = await mockServiceCatalogRepository.getActions();
+    const repository: ServiceCatalogRepository = {
+      getCatalog: () => mockServiceCatalogRepository.getCatalog(),
+      async getActions() {
+        return {
+          contract_version: serviceActionContractVersion,
+          count: baseActions.count,
+          items: [...baseActions.items].reverse(),
+        };
+      },
+    };
+
+    render(
+      <MemoryRouter initialEntries={["/services"]}>
+        <ServicePlazaPage repository={repository} />
+      </MemoryRouter>,
+    );
+
+    await screen.findByRole("link", { name: "公益俱乐部" });
+    const categoryIds = Array.from(
+      document.querySelectorAll<HTMLElement>(".club-grid [data-action-id]"),
+    ).map((element) => element.dataset.actionId);
+    expect(categoryIds).toEqual([
+      "public-benefit-club",
+      "self-created-club",
+      "family-club",
+      "club-federation",
+    ]);
+    expect(categoryIds).not.toContain("club-manage");
   });
 });

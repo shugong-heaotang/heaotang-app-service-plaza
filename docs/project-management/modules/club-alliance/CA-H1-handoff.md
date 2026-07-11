@@ -36,3 +36,45 @@
 ### 请求平台验收
 
 请平台复核 M1 的单一真相源、失败关闭错误 ID、管理入口排除、query 映射、变更范围和自动化证据；平台 Go 后再进入 H1-M2。
+
+## H1-M1 平台验收结论
+
+- 平台于 2026-07-11 对 `e87feecd0dbfd53cd9e5e6e48f80eee650562839` 独立复核为 Go。
+- 平台验收及权威集成 HEAD：`7c987ff4a62eff8b383ccf15b4cf4e5700a4c2e6`。
+- `SP-H029` 已记录 M1 Go，并正式授权进入 H1-M2。
+
+## H1-M2 精确路由与八态页面壳检查点
+
+- 日期：2026-07-11
+- 实施记录：`IR-20260711-CLUB-ALLIANCE-H1-M2`
+- 当前结论：模块自验通过，等待平台检查点验收
+
+### 已完成
+
+1. 新增 `/services/club-alliance` 精确模块路由，优先于 `/services/:serviceKey`，不再进入包含俱乐部查询/加入提交的 `CoreServicePage`。
+2. `ServicePlazaPage` 与俱乐部联盟首页共同调用 M1 `deriveClubAllianceActions`，服务广场不再维护第二套四入口数组。
+3. `ClubAllianceRoute` 只读取版本化 catalog/actions，并从真实目录、query、权限和生命周期派生 `home/focused/loading/empty/error/unauthorized/maintenance/offline` 精确八态。
+4. 四入口继承上游 label/target/sort/access/lifecycle/telemetry；`club-manage` 单独作为管理附属入口，不进入四分类。
+5. 通过 `ActionControl` 复用权限、生命周期和 activated/blocked 遥测；页面不自行放宽 scope。
+6. `category` query 只产生 `selected_action_id` 页面状态，不触发业务 API；非法 query 显示稳定 error ID。
+7. 增补 missing/malformed category target 显式负例并稳定返回 `CAH1_ACTION_TARGET_INVALID`。
+8. 建立网络 allowlist：仅 `/api/v1/service-plaza/catalog` 与 `/api/v1/service-plaza/actions`；测试对 club search/create/join/review/member/payment/charity/federation 请求失败关闭。
+9. 页面提供 320/360 单列、560+ 双列、900+ 有界布局，无固定内容宽度；交互控件具备键盘焦点、aria label/status/alert 和恢复路径。
+
+### 验证证据
+
+- M2 定向测试：ClubAlliance、ServicePlaza 与 App 路由测试通过。
+- 前端全量：18 files、117 tests，全通过。
+- production build 与 test-server build：通过。
+- current checklist：28/28、SHA mismatch 0；考试 `EX-20260711-CLUB-ALLIANCE-H1-M2-1` score 100。
+- 总合同、checklist/exam/IR/collaboration、UTF-8、Git diff 与精确路径门禁在提交前复跑。
+
+### 未完成与边界
+
+- M2 只证明实现检查点；测试环境浏览器布局、直达/刷新/后退、真实权限和网络证据仍属于 M3/M4。
+- H1-M4 部署和浏览器 UAT 未授权。
+- CA-SC/FC/PC/UF 业务、selector 执行、backend、Schema、deploy、production 均保持禁止。
+
+### 请求平台验收
+
+请平台独立复核精确路由、单一 adapter、八态、ActionControl 复用、网络 allowlist/denylist、响应式/可访问性和变更范围；M2 Go 后再进入 H1-M3。

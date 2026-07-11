@@ -150,4 +150,23 @@ describe("resolveClubAllianceQuery", () => {
       "CAH0_QUERY_AMBIGUOUS",
     );
   });
+
+  it("fails closed when an upstream category target is missing or malformed", () => {
+    const { categories } = deriveClubAllianceActions(cloneActions());
+    const missingCategory = categories.map((action, index) =>
+      index === 0 ? { ...action, target: "/services/club-alliance" } : action,
+    );
+    expectContractError(
+      () => resolveClubAllianceQuery("?category=公益俱乐部", missingCategory),
+      "CAH1_ACTION_TARGET_INVALID",
+    );
+
+    const malformedTarget = categories.map((action, index) =>
+      index === 0 ? { ...action, target: "http://[" } : action,
+    );
+    expectContractError(
+      () => resolveClubAllianceQuery("?category=公益俱乐部", malformedTarget),
+      "CAH1_ACTION_TARGET_INVALID",
+    );
+  });
 });
