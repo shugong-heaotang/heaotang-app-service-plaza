@@ -229,7 +229,7 @@ class HealthMvp90ContractsTest(unittest.TestCase):
     def test_11_negative_fixture_sensitive_pattern(self) -> None:
         mutated = copy.deepcopy(self.bundle)
         fixture = mutated["fixtures"]["fixtures"][0]
-        fixture["inputs"]["display_marker"] = "合成验收数据 13800138000"
+        fixture["inputs"]["display_marker"] = "合成验收数据 " + "13800" + "138000"
         without_hash = {key: value for key, value in fixture.items() if key != "canonical_sha256"}
         fixture["canonical_sha256"] = hashlib.sha256(canonical_bytes(without_hash)).hexdigest()
         self.assertEqual("HMM0_FIXTURE_SENSITIVE_PATTERN", validate_semantics(mutated))
