@@ -1,5 +1,4 @@
 {
-    "invalidated_reason":  "The bound checklist used a non-canonical attestation and cannot authorize implementation; answers and score are retained only as historical evidence.",
     "contract_version":  "governance-exam.v1",
     "attempt_id":  "EX-20260711-CLUB-ALLIANCE-H1-M2-R1-1",
     "record_id":  "IR-20260711-CLUB-ALLIANCE-H1-M2-R1",
