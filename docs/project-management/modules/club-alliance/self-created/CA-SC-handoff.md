@@ -5,12 +5,17 @@
 - date：2026-07-12
 - work item：`AIW-20260712-CLUB-SC-P0-P1-CONTRACTS`
 - status：handoff-ready
+- implementation commit：`8d4d6fe5ece99e411da02f2ccf0b6a0f6902ad87`
+- current checklist：`FC-20260712-CLUB-SC-P0-P1-R2`（28/28）
+- current exam：`EX-20260712-CLUB-SC-P0-P1-R2-1`（100）
+- current IR：`IR-20260712-CLUB-SC-P0-P1-R2`
 
 ## 完成
 
 - 冻结 list/detail/join/my、`standard+general` 与详情 active guard。
 - 建立合同、Schema、稳定错误、固定 seed 合成 fixtures 和 conformance。
 - 建立子项目两层依赖、验收矩阵、回执、R2 current 治理证据与 IR。
+- conformance 13/13 通过；`intro` 为权威 Club 文本字段，`description` 负例被拒绝。
 
 ## 未完成/禁止推断
 

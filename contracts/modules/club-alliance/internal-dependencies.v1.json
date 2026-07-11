@@ -192,6 +192,48 @@
       "owner": "俱乐部联盟负责人",
       "blocks": ["H0-PLATFORM-ACCEPTANCE"],
       "does_not_block": []
+    },
+    {
+      "dependency_id": "sc.p0p1-contract",
+      "kind": "contract",
+      "description": "CA-SC 会员侧 list/detail/join/my、standard+general、active 详情边界与稳定错误",
+      "status": "standardized",
+      "required_for_slice": false,
+      "depends_on": ["decision.sc-general", "category.registry", "h0.conformance-semantic"],
+      "contracts": ["contracts/modules/club-alliance/self-created/self-created-club.v1.json", "contracts/modules/club-alliance/self-created/error-catalog.v1.json"],
+      "evidence": ["docs/project-management/modules/club-alliance/self-created/CA-SC-P0-P1-requirements.md"],
+      "unresolved": [],
+      "owner": "俱乐部联盟自建俱乐部负责人",
+      "blocks": ["sc.p0p1-conformance", "sc.backend"],
+      "does_not_block": ["CA-FC", "CA-PC", "CA-UF"]
+    },
+    {
+      "dependency_id": "sc.p0p1-conformance",
+      "kind": "acceptance",
+      "description": "CA-SC 固定 seed 合成分类、详情、幂等与跨用户一致性",
+      "status": "test-verified",
+      "required_for_slice": false,
+      "depends_on": ["sc.p0p1-contract"],
+      "contracts": ["contracts/modules/club-alliance/self-created/conformance/fixtures/cases.v1.json"],
+      "evidence": ["contracts/modules/club-alliance/self-created/conformance/test_self_created_club_contracts.py", "docs/project-management/modules/club-alliance/self-created/CA-SC-conformance-report.md"],
+      "unresolved": [],
+      "owner": "俱乐部联盟自建俱乐部负责人",
+      "blocks": ["sc.p0p1-handoff"],
+      "does_not_block": ["sc.backend-planning"]
+    },
+    {
+      "dependency_id": "sc.p0p1-handoff",
+      "kind": "handoff",
+      "description": "CA-SC P0/P1 合同检查点等待平台独立验收",
+      "status": "implemented",
+      "required_for_slice": false,
+      "depends_on": ["sc.p0p1-conformance"],
+      "contracts": ["docs/project-management/modules/club-alliance/self-created/CA-SC-handoff.md"],
+      "evidence": ["docs/project-management/modules/club-alliance/self-created/CA-SC-handoff.md"],
+      "unresolved": ["platform independent acceptance pending"],
+      "owner": "俱乐部联盟自建俱乐部负责人",
+      "blocks": ["sc.backend-activation"],
+      "does_not_block": ["sc.backend-planning", "CA-FC", "CA-PC", "CA-UF"]
     }
   ]
 }
