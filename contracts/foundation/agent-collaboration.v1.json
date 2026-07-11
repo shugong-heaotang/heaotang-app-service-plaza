@@ -47,6 +47,29 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": null,
       "handoff_record": null
+    },
+    {
+      "work_id": "AIW-20260712-NOVA-M1-RUNTIME",
+      "title": "NOVA 第五阶段 M1 任务运行时与跨模块工具契约",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/项目最高负责人/worktrees/heaotang-nova-m1-dispatch",
+      "branch": "codex/nova-m1-dispatch",
+      "base_commit": "4876817d8c162ae2e93ef7e5290fee1d0357ada5",
+      "allowed_paths": [
+        "docs/project-management/notices/2026-07-12-nova-m1-task-order.md",
+        "docs/project-management/modules/nova",
+        "contracts/modules/nova",
+        "app/src/modules/nova",
+        "backend-go/internal/nova",
+        "backend-go/plugins/nova-plugin"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": null,
+      "handoff_record": null
     }
   ]
 }
