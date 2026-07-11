@@ -12,6 +12,7 @@ import {
 } from "../../infrastructure/serviceCatalogRepository";
 import { reportActionEvent } from "../../infrastructure/actionTelemetry";
 import { ClubAllianceRoute } from "./ClubAllianceRoute";
+import clubAllianceCss from "./ClubAlliancePage.css?inline";
 
 vi.mock("../../infrastructure/actionTelemetry", () => ({
   primeFeatureFlags: vi.fn(async () => undefined),
@@ -75,6 +76,7 @@ describe("ClubAllianceRoute exact eight-state shell", () => {
     renderRoute("/services/club-alliance", repository);
     expect(screen.getByText("正在读取服务目录与动作目录…")).toBeInTheDocument();
     expect(document.querySelector('[data-page-state="loading"]')).toBeInTheDocument();
+    expect(screen.getByRole("status")).toHaveAttribute("data-page-state", "loading");
   });
 
   it("renders empty when the authoritative service manifest is absent", async () => {
@@ -103,6 +105,7 @@ describe("ClubAllianceRoute exact eight-state shell", () => {
     };
     renderRoute("/services/club-alliance", repository);
     expect(await screen.findByText("catalog unavailable")).toBeInTheDocument();
+    expect(screen.getByRole("alert")).toHaveAttribute("data-page-state", "error");
     await user.click(screen.getByRole("button", { name: "重新加载" }));
     expect(await screen.findByRole("heading", { name: "选择俱乐部服务" })).toBeInTheDocument();
     expect(attempts).toBe(2);
@@ -120,7 +123,55 @@ describe("ClubAllianceRoute exact eight-state shell", () => {
       "data-access-state",
       "authentication_required",
     );
+    expect(
+      Array.from(categoryRegion.querySelectorAll<HTMLAnchorElement>("a")).map((link) => link.href),
+    ).toEqual([
+      expect.stringContaining("/services/club-alliance?category=%E5%85%AC%E7%9B%8A%E4%BF%B1%E4%B9%90%E9%83%A8"),
+      expect.stringContaining("/services/club-alliance?category=%E8%87%AA%E5%BB%BA%E4%BF%B1%E4%B9%90%E9%83%A8"),
+      expect.stringContaining("/services/club-alliance?category=%E5%AE%B6%E5%BA%AD%E4%BF%B1%E4%B9%90%E9%83%A8"),
+      expect.stringContaining("/services/club-alliance?category=%E4%BF%B1%E4%B9%90%E9%83%A8%E5%8F%8B%E8%81%94%E4%BD%93"),
+    ]);
+    expect(screen.getByRole("link", { name: "管理中心" })).toHaveAttribute(
+      "data-access-state",
+      "authentication_required",
+    );
+    expect(screen.getByRole("link", { name: "管理中心" })).toHaveAttribute(
+      "data-telemetry-event",
+      "service_plaza.club_manage.open",
+    );
   });
+
+  it("keeps the home shell keyboard reachable and exposes state semantics", async () => {
+    const user = userEvent.setup();
+    renderRoute();
+
+    const back = await screen.findByRole("link", { name: "返回服务广场" });
+    const publicBenefit = screen.getByRole("link", { name: "公益俱乐部" });
+    await user.tab();
+    expect(back).toHaveFocus();
+    await user.tab();
+    expect(publicBenefit).toHaveFocus();
+    await user.keyboard("{Enter}");
+
+    expect(await screen.findByRole("status")).toHaveAttribute(
+      "data-page-state",
+      "unauthorized",
+    );
+    expect(screen.getByText("authentication_required")).toBeInTheDocument();
+  });
+
+  it.each(["planned", "maintenance", "offline"] as const)(
+    "does not elevate a %s category into an enabled home action",
+    async (lifecycle) => {
+      renderRoute(
+        "/services/club-alliance",
+        repositoryWith(actionWith("family-club", { lifecycle_status: lifecycle })),
+      );
+
+      expect(await screen.findByRole("button", { name: "家庭俱乐部" })).toBeDisabled();
+      expect(screen.getByText(lifecycle)).toBeInTheDocument();
+    },
+  );
 
   it("reuses ActionControl lifecycle and telemetry behavior", async () => {
     const user = userEvent.setup();
@@ -277,6 +328,40 @@ describe("ClubAllianceRoute exact eight-state shell", () => {
     await user.click(screen.getByRole("link", { name: "← 返回服务广场" }));
     expect(await screen.findByText("service-plaza-return-target")).toBeInTheDocument();
   });
+
+  it("replays the same direct query after a route remount", async () => {
+    const route = "/services/club-alliance?category=公益俱乐部";
+    const repository = repositoryWith(
+      actionWith("public-benefit-club", {
+        access: { auth_mode: "anonymous", required_scopes: [] },
+      }),
+    );
+    const first = renderRoute(route, repository);
+    expect(await screen.findByText("selected_action_id=public-benefit-club")).toBeInTheDocument();
+    first.unmount();
+
+    renderRoute(route, repository);
+    expect(await screen.findByText("selected_action_id=public-benefit-club")).toBeInTheDocument();
+  });
+});
+
+describe("ClubAlliancePage local responsive contract", () => {
+  it("covers 320, 360, 768 and desktop layouts without fixed content width", () => {
+    expect(clubAllianceCss).toContain("min-width: 0");
+    expect(clubAllianceCss).toContain("@media (max-width: 359px)");
+    expect(clubAllianceCss).toContain("@media (min-width: 560px)");
+    expect(clubAllianceCss).toContain("@media (min-width: 900px)");
+    expect(clubAllianceCss).toContain("grid-template-columns: repeat(2, minmax(0, 1fr))");
+    expect(clubAllianceCss).toContain("grid-template-columns: minmax(0, 2fr) minmax(240px, 1fr)");
+    expect(clubAllianceCss).toContain("width: min(calc(100vw - 48px), 760px)");
+    expect(clubAllianceCss).toContain("width: min(calc(100vw - 64px), 960px)");
+    expect(clubAllianceCss).toContain(":focus-visible");
+    expect(clubAllianceCss).toContain(".back-button:focus-visible");
+    expect(clubAllianceCss).toContain(".club-alliance-management a:focus-visible");
+    expect(clubAllianceCss).toContain(".club-alliance-state button:focus-visible");
+    expect(clubAllianceCss).toContain(".club-alliance-return:focus-visible");
+    expect(clubAllianceCss).not.toMatch(/\.phone\s*\{[^}]*\n\s*width:\s*\d+px/s);
+  });
 });
 
 describe("ClubAllianceRoute network boundary", () => {
@@ -306,5 +391,33 @@ describe("ClubAllianceRoute network boundary", () => {
     ]);
     const denied = /club.*(search|create|join|review|member|payment|charity|federation)/i;
     expect(requests.some((url) => denied.test(url))).toBe(false);
+  });
+
+  it("keeps an allowed focused action inside the same catalog/actions allowlist", async () => {
+    const user = userEvent.setup();
+    const catalog = await mockServiceCatalogRepository.getCatalog();
+    const actions = await mockServiceCatalogRepository.getActions();
+    const allowedActions = {
+      ...actions,
+      items: actions.items.map((action) =>
+        action.action_id === "public-benefit-club"
+          ? { ...action, access: { auth_mode: "anonymous" as const, required_scopes: [] } }
+          : action,
+      ),
+    };
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
+      const url = requestUrl(input);
+      if (url.endsWith("/api/v1/service-plaza/catalog")) return jsonResponse(catalog);
+      if (url.endsWith("/api/v1/service-plaza/actions")) return jsonResponse(allowedActions);
+      throw new Error(`Club Alliance H1 made a denied request: ${url}`);
+    });
+
+    renderRoute("/services/club-alliance", realServiceCatalogRepository);
+    await user.click(await screen.findByRole("link", { name: "公益俱乐部" }));
+    expect(await screen.findByText("selected_action_id=public-benefit-club")).toBeInTheDocument();
+    expect(fetchMock.mock.calls.map(([input]) => requestUrl(input))).toEqual([
+      "/api/v1/service-plaza/catalog",
+      "/api/v1/service-plaza/actions",
+    ]);
   });
 });

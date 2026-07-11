@@ -90,3 +90,20 @@
 - R2 current checklist：`28/28`、当前 SHA mismatch `0`；考试 `EX-20260711-CLUB-ALLIANCE-H1-M2-R2-1` score `100`；实施记录 `IR-20260711-CLUB-ALLIANCE-H1-M2-R2`。
 - 定向：3 files、43 tests；全量：18 files、136 tests；production 与 test-server build 均通过。
 - 当前结论：M2 R2 模块复验通过，等待平台重新独立验收；M3、业务、后端、部署和生产仍未启动。
+
+## H1-M2 R2 平台验收结论
+
+- 平台以模块最新 HEAD `ec65c103a56b2ceea812ecef623d4224bfb06c02`（功能修复 `5017060110b98caa4b515d06d6af73835254e3e6`）独立复核并判定 M2 R2 Go。
+- 权威 integration HEAD：`d96affc4573997b788781d0c0df05efec8f27f46`；`SP-H029` 已记录 M2 Go，模块分支和工作树已安全快进到同一提交并保持 clean。
+- 平台复跑确认 11 个修复路径越界 0、定向 43/43、模块全量 136/136、双 build、总合同、治理、UTF-8 与 diff 通过；受控集成后再次复跑定向、生产 build 和总门禁通过。
+- 平台授权进入 H1-M3 自动化与本地完成性检查；测试环境部署、真实浏览器 UAT、四类业务、后端和 production 仍禁止。
+
+## H1-M3 自动化与本地完成性检查点
+
+- 日期：2026-07-11
+- 实施记录：`IR-20260711-CLUB-ALLIANCE-H1-M3`
+- current checklist：28/28、当前 SHA mismatch 0；考试 `EX-20260711-CLUB-ALLIANCE-H1-M3-1` score 100。
+- 任务书逐项审计后补齐：四入口上游 target 顺序、管理入口权限/遥测继承、键盘 Tab/Enter、loading/error/unauthorized aria 语义、planned/maintenance/offline 禁用、直达 query 重挂载重放、guest 与 allowed 两条网络路径均只读 catalog/actions。
+- 响应式本地合同明确覆盖 320、360、768 和桌面断点，验证单列/双列/有界网格、无裸固定 `.phone` 宽度，并为返回、管理、重试、状态恢复和主返回链接补统一显式 `focus-visible`。
+- 定向：5 files、56 tests；全量：18 files、143 tests；production 与 test-server build 均通过。
+- 当前结论：M3 模块自验通过，等待平台独立检查点验收；测试环境部署与真实浏览器 UAT 尚未授权，CA-H1 Full Go 仍未成立。

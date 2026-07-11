@@ -68,6 +68,17 @@
   background: var(--service-soft);
 }
 
+body:has(.club-alliance-page) .back-button:focus-visible,
+body:has(.club-alliance-state) .back-button:focus-visible,
+.club-alliance-management a:focus-visible,
+.club-alliance-management button:focus-visible,
+.club-alliance-state button:focus-visible,
+.club-alliance-state a:focus-visible,
+.club-alliance-return:focus-visible {
+  outline: 3px solid rgba(15, 118, 110, 0.32);
+  outline-offset: 3px;
+}
+
 .club-alliance-grid small {
   color: var(--subtle);
   font-size: 11px;
