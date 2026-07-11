@@ -1110,6 +1110,8 @@
       "allowed_paths": [
         "contracts/foundation/development-checklists/2026-07-11-club-h1-m4-acceptance.json",
         "contracts/foundation/governance-exams/2026-07-11-club-h1-m4-acceptance-attempt-1.json",
+        "contracts/foundation/development-checklists/2026-07-12-club-h1-m4-final.json",
+        "contracts/foundation/governance-exams/2026-07-12-club-h1-m4-final-attempt-1.json",
         "contracts/foundation/implementation-records/2026-07-11-club-h1-m4-acceptance.json",
         "docs/project-management/modules/club-alliance/acceptance/CA-H1-M4-frontend-uat.md",
         "docs/project-management/service-plaza/club-alliance-h1-m4-acceptance-2026-07-11.md",
@@ -1140,6 +1142,8 @@
         "app/src/modules/club-alliance/ClubAlliancePage.test.tsx",
         "contracts/foundation/development-checklists/2026-07-11-club-h1-m4-manage-guard.json",
         "contracts/foundation/governance-exams/2026-07-11-club-h1-m4-manage-guard-attempt-1.json",
+        "contracts/foundation/development-checklists/2026-07-12-club-h1-m4-manage-guard-closeout.json",
+        "contracts/foundation/governance-exams/2026-07-12-club-h1-m4-manage-guard-closeout-attempt-1.json",
         "contracts/foundation/implementation-records/2026-07-11-club-h1-m4-manage-guard.json",
         "docs/project-management/notices/2026-07-11-club-h1-m4-manage-guard-task-order.md",
         "docs/project-management/service-plaza/club-alliance-h1-m4-manage-guard-2026-07-11.md"
@@ -1216,6 +1220,27 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": "已在干净专用工作树激活。伴随证据工作项与后端 AIW-20260711-ACTION-TELEMETRY-BUSINESSCONFIG-BACKEND 使用同一 record_id，但不复制 contracts 到后端仓库。先完成 current checklist 和 100 分考试，后端提交后才写 implementation record；不允许业务代码、部署或环境改动。",
       "handoff_record": null
+    },
+    {
+      "work_id": "AIW-20260712-CLUB-H1-M4-FINAL-GOVERNANCE",
+      "title": "俱乐部联盟 CA-H1 M4 最终证据与状态收口治理",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-h1-m4-final-governance",
+      "branch": "codex/club-h1-m4-final-governance",
+      "base_commit": "fd893ffbf375dd151407e71a52ce72e065672032",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-12-club-h1-m4-final-governance.json",
+        "contracts/foundation/governance-exams/2026-07-12-club-h1-m4-final-governance-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-12-club-h1-m4-final-governance.json"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "仅负责为 B002 与 M4 增加 2026-07-12 当前治理快照路径，并在两项证据分别受控集成后完成真实状态转换；不修改前端、后端、部署、配置或业务数据，不把未完成的真实键盘 UAT 标记为通过。",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h029俱乐部联盟-ca-h1-m4-测试环境验收"
     }
   ]
 }
