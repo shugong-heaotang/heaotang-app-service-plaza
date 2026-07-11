@@ -1114,20 +1114,20 @@
       "title": "动作遥测后端切片跨仓治理证据",
       "owner": "Backend platform agent",
       "owner_role": "平台集成负责人",
-      "status": "planned",
+      "status": "active",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-action-telemetry-businessconfig-evidence",
       "branch": "codex/action-telemetry-businessconfig-evidence",
-      "base_commit": "4098c8ae9de4238d1a54cee60fc8e59febd20378",
+      "base_commit": "9d4406d713fede2caf9cf380880690de1841a038",
       "allowed_paths": [
         "contracts/foundation/agent-collaboration.v1.json",
         "contracts/foundation/development-checklists/2026-07-11-action-telemetry-businessconfig-backend.json",
         "contracts/foundation/governance-exams/2026-07-11-action-telemetry-businessconfig-backend-attempt-1.json",
         "contracts/foundation/implementation-records/2026-07-11-action-telemetry-businessconfig-backend.json"
       ],
-      "started_with_clean_worktree": false,
+      "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
-      "migration_note": "伴随证据工作项：与后端 AIW-20260711-ACTION-TELEMETRY-BUSINESSCONFIG-BACKEND 使用同一 record_id，但不复制 contracts 到后端仓库。先完成 current checklist 和 100 分考试，后端提交后才写 implementation record；不允许业务代码、部署或环境改动。",
+      "migration_note": "已在干净专用工作树激活。伴随证据工作项与后端 AIW-20260711-ACTION-TELEMETRY-BUSINESSCONFIG-BACKEND 使用同一 record_id，但不复制 contracts 到后端仓库。先完成 current checklist 和 100 分考试，后端提交后才写 implementation record；不允许业务代码、部署或环境改动。",
       "handoff_record": null
     }
   ]
