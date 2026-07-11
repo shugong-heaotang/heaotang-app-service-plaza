@@ -40,9 +40,9 @@
     "docs/project-management/service-plaza/club-sc-t0-prerequisites-root-cause-2026-07-12.md"
   ],
   "verification": [
-    "CA-SC conformance 15/15", "Service Plaza contracts pass", "test-server build pass",
+    "CA-SC conformance 17/17", "Service Plaza contracts pass", "test-server build pass",
     "fixed list/applications route package positive and missing-route negative pass",
-    "R2 current checklist 28/28", "R2 governance exam score 100", "UTF-8 and git diff checks pass"
+    "R4 current checklist 28/28", "R4 governance exam score 100", "UTF-8 and git diff checks pass"
   ],
   "evidence": [
     "contracts/foundation/development-checklists/2026-07-12-club-sc-t0-prerequisites-r4.json",
