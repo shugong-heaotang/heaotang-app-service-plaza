@@ -1,0 +1,74 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-CLUB-H1-M4-ACCEPTANCE",
+  "title": "俱乐部联盟 CA-H1 M4 测试环境与浏览器 UAT",
+  "date": "2026-07-11",
+  "status": "implemented",
+  "objective": "在不触发四类业务 API 的前提下验收俱乐部联盟标准首页部署、四分类访客失败关闭、响应式、query、导航、权限和动作遥测，并保留未验证键盘与登录角色门禁。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-club-h1-m4-acceptance.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-club-h1-m4-acceptance-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/decisions/0011-two-person-config-approval.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-11-club-alliance-h1-task-order.md",
+    "docs/project-management/service-plaza/club-alliance-h1-m4-acceptance-2026-07-11.md",
+    "docs/project-management/modules/club-alliance/acceptance/CA-H1-M4-frontend-uat.md"
+  ],
+  "capabilities": [
+    "foundation.governance-certification",
+    "foundation.service-action-contracts",
+    "foundation.observability-config",
+    "foundation.release-recovery"
+  ],
+  "contracts": [
+    "contracts/service-plaza/service-plaza-actions.v1.json",
+    "contracts/modules/club-alliance/homepage.v1.json",
+    "contracts/modules/club-alliance/category-registry.v1.json"
+  ],
+  "decisions": [
+    "docs/project-management/modules/club-alliance/CA-F0-H0-decisions.md",
+    "docs/decisions/0011-two-person-config-approval.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/implementation-records/2026-07-11-club-h1-m4-acceptance.json",
+    "docs/project-management/modules/club-alliance/acceptance/CA-H1-M4-frontend-uat.md",
+    "docs/project-management/service-plaza/club-alliance-h1-m4-acceptance-2026-07-11.md",
+    "docs/project-management/service-plaza/handoff-log.md"
+  ],
+  "verification": [
+    "frontend 18 files / 143 tests",
+    "test-server production build",
+    "Test-ServicePlazaContracts.ps1",
+    "scripts/validate_development_checklists.py",
+    "scripts/validate_governance_exams.py",
+    "scripts/validate_implementation_records.py",
+    "scripts/validate_agent_collaboration.py",
+    "scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/foundation/development-checklists/2026-07-11-club-h1-m4-acceptance.json",
+    "contracts/foundation/governance-exams/2026-07-11-club-h1-m4-acceptance-attempt-1.json",
+    "docs/project-management/modules/club-alliance/acceptance/CA-H1-M4-frontend-uat.md",
+    "docs/project-management/service-plaza/club-alliance-h1-m4-acceptance-2026-07-11.md",
+    "docs/project-management/service-plaza/handoff-log.md"
+  ],
+  "premises": [
+    "M4 verdict remains In Progress / No-Go until login activated and missing club:manage scope_required are verified",
+    "Enter and Shift+Tab remain browser-control-channel unverified and are neither Pass nor product No-Go",
+    "No legal authenticated browser session is currently visible; candidate B passed the read-only capacity gate and is authoritatively expected to lack club:manage, but one send-code remains separately unauthorized",
+    "The authorized one-time candidate B login completed and produced four activated events plus one club-manage blocked scope_required event; CA-H1-M4-B002 remains a user-visible management view authorization Blocker",
+    "business denylist remains zero and no club search/create/join/review/member/payment/charity/federation API is authorized",
+    "OTP, JWT, phone, full user identifiers and sensitive business content are excluded from evidence"
+  ],
+  "implementation_mode": "ai-assisted"
+}
