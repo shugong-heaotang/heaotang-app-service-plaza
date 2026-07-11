@@ -17,7 +17,7 @@
 3. `applications` 静态路由在 `:clubId` 前注册，避免被解释为详情 ID。
 4. 新适配器只调用：
    - `GET /api/v1/clubs/search?type=standard&category=general...`
-   - `GET /api/v1/clubs/:id`
+   - `GET /api/v1/clubs/self-created/:id`
    - `POST /api/v1/clubs/:id/join`
    - `GET /api/v1/clubs/join-applications/my`
 5. 未复用或修改 `CoreServicePage`、`submissionRepository`、`ServicePlazaPage`、父 action adapter/contract、`ActionControl`。
@@ -31,6 +31,8 @@
 - join 由共享业务适配器生成/携带 `Idempotency-Key`；提交中和成功后按钮禁用，同一内容失败重试复用原键，服务端 replay header 映射为明确重放状态。
 - 本人申请只发送 page/size/status，不发送 `user_id`，展示 pending/approved/rejected。
 - create/review/member/payment/withdraw/refund/subscription/charity/family/federation 均不在网络面。
+- `:clubId` 先按 `/^[1-9]\d*$/` 与 `Number.isSafeInteger` 校验；`1e2`、`0x65`、`+101`、`00101`、`0`、超安全整数全部稳定返回 `CLUB_ID_INVALID`，且 detail/join 均零调用。
+- 通用 `GET /api/v1/clubs/:id` 保持类型无关；本切片只调用 SC 专用详情端点，不用前端二次筛选冒充资源隔离。
 
 ## 页面状态与可用性
 
@@ -42,8 +44,8 @@
 
 ## 自动化证据
 
-- 定向：4 files / 60 tests。
-- 前端全量：20 files / 179 tests。
+- Major 定向：2 files / 28 tests；最终四文件定向：4 files / 66 tests。
+- 前端全量：20 files / 185 tests。
 - production build：通过。
 - test-server build：通过。
 - `Test-ServicePlazaContracts.ps1`：通过。
@@ -51,28 +53,30 @@
 - governance checklist：28/28 completed，current SHA 一致。
 - governance exam：100 分。
 
-## 已发现合同漂移及关闭要求
+## 已发现合同漂移及关闭结果
+
+平台 T0 prerequisite 最终 HEAD `815d29cff13e9d0b52cfd802b35f67f34594e426` 已受独立交叉复审：17/17 conformance、R4 28/28、考试100、总合同、双构建/打包、UTF-8 与治理验证通过。以下三项均已由平台合同根因修复关闭，前端随本 Major 对齐专用详情端点与 canonical ID。
 
 ### F0-CORR-001 guest access 漂移
 
 - P0/P1 需求文档仍写 guest 可浏览 list/detail。
 - 现行服务广场 action 使用 `shared_session`，后端 search/detail 路由均 `Auth:true`。
 - 本实现采用运行时权威边界：未登录不得发 list/detail 请求。
-- 平台在 T0 前必须受控修正 P0/P1 人类/机器合同和合成案例，使 access 与部署事实一致；不得为了旧文档把后端或前端降为匿名。
+- 平台已受控修正 P0/P1 人类/机器合同和合成案例，使 access 与部署事实一致；未降低后端或前端认证边界。
 
 ### F0-CORR-002 category error ID 漂移
 
 - P0/P1 error catalog 写 `CLUB_CATEGORY_FILTER_INVALID`。
 - 平台 `club-category-filter.v1` 和后端真实错误为 `CLUB_FILTER_CATEGORY_INVALID`。
-- 前端采用后者；平台在 T0 前必须修正错误目录和 conformance，禁止同时长期保留两个含义相同的机器码。
-
-上述漂移不否定本地 F0 实现，但在受控合同修正进入权威基线前，T0 保持 No-Go。
+- 前端采用后者；平台已修正错误目录和 conformance，不再保留双机器码。
 
 ### F0-CORR-003 边界故障 HTTP 状态漂移
 
 - P0/P1 error catalog 把 `CLUB_DETAIL_UNAVAILABLE` 记为 404、把 `CLUB_JOIN_UNAVAILABLE` 记为 409。
 - 当前后端实现对这两个非业务性内部故障均返回 500；非 SC/非 active 详情另行隐藏为 404 `CLUB_NOT_FOUND`。
-- 前端只依赖稳定 error ID，不根据错误文案或错误的 404/409 推断业务状态。平台必须在 T0 前裁定并统一 error catalog 与后端 HTTP 语义。
+- 前端只依赖稳定 error ID，不根据错误文案推断业务状态；平台已统一 error catalog 与后端 HTTP 语义。
+
+上述漂移已在平台 T0 prerequisite 检查点关闭；测试环境 T0 仍须等待前后端实现独立集成和正式派发，不因本地修复自动 Go。
 
 ## 未完成和禁止推断
 

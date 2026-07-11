@@ -60,6 +60,12 @@ const makeIdempotencyKey = () => {
   return `club-alliance-join-${nonce}`;
 };
 
+const parseCanonicalClubId = (value: string | undefined) => {
+  if (!value || !/^[1-9]\d*$/.test(value)) return null;
+  const parsed = Number(value);
+  return Number.isSafeInteger(parsed) ? parsed : null;
+};
+
 const isAuthenticationError = (reason: unknown) =>
   reason instanceof ApiError &&
   (reason.status === 401 || reason.code === "AUTH_REQUIRED");
@@ -311,7 +317,7 @@ function ClubDetail({
   clubId: string | undefined;
   onAuthenticationExpired(): void;
 }) {
-  const parsedClubId = Number(clubId);
+  const parsedClubId = parseCanonicalClubId(clubId);
   const [requestVersion, setRequestVersion] = useState(0);
   const [state, setState] = useState<LoadState<SelfCreatedClubDetail>>({ status: "loading" });
   const [message, setMessage] = useState("");
@@ -320,6 +326,13 @@ function ClubDetail({
   const attempt = useRef<{ payload: string; key: string } | null>(null);
 
   useEffect(() => {
+    if (parsedClubId === null) {
+      setState({
+        status: "error",
+        error: new ApiError("俱乐部编号无效", 0, "CLUB_ID_INVALID"),
+      });
+      return;
+    }
     const controller = new AbortController();
     setState({ status: "loading" });
     void api.detail(parsedClubId, { signal: controller.signal }).then((detail) => {
@@ -334,6 +347,13 @@ function ClubDetail({
 
   const join = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
+    if (parsedClubId === null) {
+      setFeedback({
+        status: "error",
+        error: new ApiError("俱乐部编号无效", 0, "CLUB_ID_INVALID"),
+      });
+      return;
+    }
     const payload = message.trim();
     if ([...payload].length > 500) {
       setFeedback({

@@ -76,6 +76,8 @@
   ],
   "verification": [
     "npm test -- --run src/modules/club-alliance/self-created/selfCreatedClubApi.test.ts src/modules/club-alliance/self-created/SelfCreatedClubPage.test.tsx src/modules/club-alliance/ClubAlliancePage.test.tsx src/App.test.tsx",
+    "canonical route IDs 1e2/0x65/+101/00101/0/unsafe-integer fail closed as CLUB_ID_INVALID with zero detail/join calls",
+    "detail adapter calls only GET /api/v1/clubs/self-created/:id and never the generic detail endpoint",
     "npm test",
     "npm run build",
     "npm run build:test-server",
@@ -100,7 +102,7 @@
     "The platform action and deployed club routes remain shared-session/Auth:true; unauthenticated users must not start SC business reads",
     "The server remains authoritative for type=standard AND category=general filtering and pagination",
     "Non-active or non-SC detail remains hidden behind CLUB_NOT_FOUND",
-    "The platform will correct the guest-access and category-error-ID contract drift before T0",
+    "T0 prerequisite contract HEAD 815d29cff13e9d0b52cfd802b35f67f34594e426 standardizes shared-session access, canonical IDs, the SC-specific detail endpoint and authoritative errors",
     "This local F0 checkpoint does not prove backend integration, deployment, cross-user environment isolation or final closure Go"
   ],
   "implementation_mode": "ai-assisted"

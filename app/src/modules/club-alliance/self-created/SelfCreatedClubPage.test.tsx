@@ -100,6 +100,20 @@ describe("SelfCreatedClubRoute", () => {
     });
   });
 
+  it.each(["1e2", "0x65", "+101", "00101", "0", "9007199254740992"])(
+    "登录用户访问非 canonical 详情编号 %s 时失败关闭且详情和加入均零请求",
+    async (clubId) => {
+      setAuthenticatedSession();
+      const testApi = api();
+      renderRoute(`/services/club-alliance/self-created/${clubId}`, "detail", testApi);
+
+      expect(await screen.findByText("CLUB_ID_INVALID")).toBeInTheDocument();
+      expect(screen.getByText("俱乐部编号无效。")).toBeInTheDocument();
+      expect(testApi.detail).not.toHaveBeenCalled();
+      expect(testApi.join).not.toHaveBeenCalled();
+    },
+  );
+
   it("登录用户加载服务端列表并生成详情、本人状态和双返回路径", async () => {
     setAuthenticatedSession();
     const testApi = api();
