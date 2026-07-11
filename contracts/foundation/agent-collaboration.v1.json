@@ -996,7 +996,7 @@
       "title": "健康大管家 MVP-90 PRD 独立文档派发治理",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-prd-dispatch",
       "branch": "codex/health-mvp90-prd-dispatch",
@@ -1013,18 +1013,18 @@
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
       "migration_note": "独立派发仅文档 MVP-90 PRD；HM-R0 Technical Go 但 Professional Freeze Pending，禁止把专业 Pending 改为 Accepted，禁止业务代码、接口、Schema、环境、真实健康数据与资金操作。",
-      "handoff_record": null
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h031健康大管家-mvp-90-prd-独立派发"
     },
     {
       "work_id": "AIW-20260711-HEALTH-MVP90-PRD-DOCS",
       "title": "健康大管家 MVP-90 开发 PRD V1.0 文档",
       "owner": "Health Manager module agent",
       "owner_role": "健康大管家负责人",
-      "status": "planned",
+      "status": "active",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-prd",
       "branch": "codex/health-manager-mvp90-prd",
-      "base_commit": "75ccf2e04e1bf5ca6c2ebfbb24c87c68a7597d28",
+      "base_commit": "3399b90adcef785534e0556fd2006eefac686ffe",
       "allowed_paths": [
         "docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md",
         "docs/project-management/modules/health-manager/health-manager-mvp90-prd-receipt.md",
@@ -1035,8 +1035,8 @@
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
-      "migration_note": "预登记；待平台派发提交受控集成后，从包含正式通知的权威基线创建并核验专用工作树，再转 active。仅文档，不授权业务代码。",
-      "handoff_record": null
+      "migration_note": "正式派发提交 0f35057 已受控集成；模块工作树实际快进至包含通知与 SP-H031 的 3399b90，HEAD 与 base 一致且 clean 后激活。仅文档，不授权业务代码。",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h031健康大管家-mvp-90-prd-独立派发"
     }
   ]
 }
