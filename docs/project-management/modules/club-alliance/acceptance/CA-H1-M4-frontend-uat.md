@@ -3,10 +3,10 @@
 ## 当前裁定
 
 - 状态：`In Progress / No-Go`。
-- 原因：`CA-H1-M4-B001` 已关闭；`CA-H1-M4-B002` 根因修复已受控集成并部署，但部署后的“已登录且缺 `club:manage`”点击与 direct view 环境复验仍等待新的合法会话。Enter、Shift+Tab 仍为控制通道未验证。部署成功和自动化通过不等于 M4 Go。
-- 产品 Blocker：`CA-H1-M4-B002` 代码缺口已修复；环境关闭证据尚未完成，因此 M4 仍按 Blocker 未关闭处理。
+- 原因：`CA-H1-M4-B001` 与 `CA-H1-M4-B002` 均已完成根因修复、部署和环境关闭证据；唯一未关闭项为真实环境 Enter 与 Shift+Tab 键盘 UAT。部署成功、自动化和焦点样式证据不能替代真实按键结果。
+- 产品 Blocker：无。B002 的点击不导航、`blocked/scope_required/user_id=non-null` 事件和 direct `?view=manage` 的 `unauthorized/scope_required` 页面已三方一致。
 - 平台 Blocker：`CA-H1-M4-B001` 已 resolved；根因修复和环境启用均使用版本化 business variable 与不同管理员提案/审核，未直接改数据库、未恢复旧单管理员入口。
-- 验收通道问题：应用内浏览器控制层向 `ab.chatgpt.com` 发送自身 Statsig 请求时多次 10 秒超时；页面 DOM 与测试服务器访问日志仍正常。该流量不是和奥堂 APP 请求，不计入模块或 APP 网络面。
+- 验收通道问题：应用内浏览器的 locator、DOM/CUA 和 CUA 键盘通道均能让目标链接取得 `focus-visible`，但未触发 Shift+Tab 焦点移动或 Enter 默认导航；Windows 原生通道连续两次因无法高置信确认 Chrome 当前 URL而被安全策略停止。该问题归类为控制通道证据缺口，不推断为产品失败，也不降低门禁。
 
 ## 环境与部署
 
@@ -32,7 +32,7 @@
 - 本组只读交叉验证：本地备份文件存在、大小 18,695,428 bytes，归档可列举；公开服务页当前引用 `assets/index-CPIj0Kh9.js` 与 `assets/index-CG40mPcg.css`；`GET /ready` 返回 `status=ready / db=true / plugins=24`；`GET /health?json=1` 返回 `status=ok / db.connected=true / plugins=24`。
 - 平台主线部署后浏览器只读证据：首页 DOM 的四入口仍按公益/自建/家庭/友联体排序，管理中心仍位于独立 complementary，上下返回均指向 `/app/service-plaza/services`；guest 直接访问 `?view=manage` 显示“需要登录或相应权限”“管理中心当前不可访问”、稳定原因 `authentication_required`，并提供返回俱乐部联盟首页。该项证明修复未破坏 guest 登录承接语义。
 - 上述只读回合中仅浏览器控制层 `ab.chatgpt.com` Statsig 请求超时，页面 DOM 正常；该流量继续归类为控制层噪声，不计入 APP 或模块网络面。
-- 当前裁定：修复已集成并部署；由于上一合法普通会员浏览器会话不再可用，本组按授权边界未申请 OTP、未登录、未读取或注入 token/cookie，也未点击浏览器。普通会员点击管理中心保持原 URL、`blocked/scope_required` 三方证据，以及 direct `?view=manage` 的 `unauthorized/scope_required` 页面证据仍待合法已登录缺 scope 会话复验。
+- 当前裁定：修复已集成并部署，并已在一次性授权的合法合成普通会员会话中完成环境关闭。首页点击管理入口后 URL 保持原首页；同一时间窗 Nginx `POST action-events` HTTP 200，权威只读事件为 `club-manage / blocked / scope_required / user_id=non-null`。同一会话 direct `?view=manage` 显示 `data-page-state=unauthorized`、`reason=scope_required` 和缺少 `club:manage`。B002 状态为 `Verified / Closed`。
 
 ## 自动化与本地入口
 
@@ -124,11 +124,11 @@
 ## 尚未关闭
 
 1. `CA-H1-M4-B001` 已关闭；保留上述 exact commit、部署、双审与 guest blocked 证据。
-2. 刷新、浏览器后退和两个返回入口已 Pass；Enter、Shift+Tab 因浏览器控制通道不能稳定触发而保持未验证，最终门禁前需换稳定真实键盘通道复测。
-3. 合成登录、四分类 activated 和修复前管理中心 blocked/scope_required 事件证据已完成；`CA-H1-M4-B002` 修复已集成部署，但修复后的点击不导航、direct view 用户可见权限状态和三方事件仍待合法会话复验。
+2. 刷新、浏览器后退和两个返回入口已 Pass；Enter、Shift+Tab 因受支持的自动化键盘通道未产生浏览器默认行为、Windows 通道又被 URL 安全校验停止而保持未验证。最终门禁需要人工在已知测试 URL 上执行一次 Shift+Tab 和一次 Enter，并记录前后焦点/URL。
+3. 合成登录、四分类 activated、管理 blocked/scope_required，以及 B002 修复后的点击不导航、direct view `unauthorized/scope_required` 与三方事件均已完成；B002 已关闭。
 4. 四分类 guest blocked 与登录 activated/管理 blocked 遥测均已完成，载荷未保存 OTP/JWT/完整个人标识/敏感业务数据。
 5. 八态由 143/143 全量与 56/56 定向自动化证明；环境只记录安全、自然可重复状态，不新增人工状态切换器，不把未构造的 maintenance/offline 冒充截图通过。
-6. 完成后才能把 verdict 改为 Pass；任何 Blocker/Major 未关闭维持 No-Go。
+6. 人工真实键盘证据完成后才能把 verdict 改为 Pass；该项未验证时维持 No-Go。
 
 ## 登录角色证据根因与正式解阻方案
 
@@ -165,5 +165,21 @@
 - `004800f6fec01c3a31a769dbf3d9d12830683a3f` 已实现两层失败关闭：`scope_required` 阻止内部链接默认导航；direct management view 由上游 action target 与共享 evaluator 确定性解析。`authentication_required` 继续保留既有登录承接路径。
 - 该提交已进入权威 integration，并以 `assets/index-CPIj0Kh9.js` 部署到测试环境；现场 ready/health/资产交叉验证通过。
 - 部署后 guest direct `?view=manage` 已在真实 DOM 显示 `authentication_required` 与管理中心不可访问，证明登录承接路径未因 B002 修复而回归；这不替代已登录缺 scope 的 `scope_required` 复验。
-- 未完成项仅保留环境关闭证据：使用合法已登录且缺 `club:manage` 的普通会员会话，验证点击管理中心不导航、事件为 `blocked/scope_required/user_id=non-null`，以及 direct `?view=manage` 显示 `unauthorized/scope_required`；每项仍需页面、Nginx 和只读事件三方交叉。
-- 在合法会话可用前，状态为 `Implemented + Deployed / Environment Retest Pending`，M4 继续 `In Progress / No-Go`。guest 四分类证据无需重复；Enter、Shift+Tab 继续保持控制通道未验证。
+- 合法已登录且缺 `club:manage` 的合成普通会员会话已复验：点击管理中心不导航；同一时间窗 Nginx `POST action-events` 200；权威只读事件为 `blocked/scope_required/user_id=non-null`。
+- direct `?view=manage` 页面为 `unauthorized/scope_required`，并显示缺少 `club:manage`；direct view 不额外伪造动作事件。
+- B002 状态为 `Verified / Closed`。M4 继续 `In Progress / No-Go` 的唯一原因是 Enter、Shift+Tab 真实键盘证据尚未取得。
+
+## RI-BROWSER-UAT-KEYBOARD-CONTROL 根因记录
+
+- pattern_id：`RI-BROWSER-UAT-KEYBOARD-CONTROL`；owner：平台集成负责人；recurrence_count：3；affected_checkpoint：`CA-H1-M4`。
+- symptom：目标链接可获得 `focus-visible`，但受支持的应用内键盘通道未产生 Shift+Tab 焦点移动或 Enter 默认导航；Windows 原生交互通道在输入前因无法高置信确认 Chrome URL 被安全策略停止。
+- exact_stop：产品页面、DOM、URL、自动化测试与焦点样式均可读取；只有“真实键盘默认行为”无法形成可信环境证据。
+- causal_chain：应用内 locator `press` 能聚焦但未触发默认行为；DOM/CUA 与 CUA 组合键仍不改变焦点/URL；因此切换 Windows 原生通道；Windows 通道无法确认浏览器 URL，因策略拒绝继续；因此证据采集失败，而非产品行为被证明失败。
+- product_evidence：18 files / 155 tests、页面链接语义、真实点击导航、focus-visible 和全部非键盘 UAT 均通过；没有证据证明产品键盘失败。
+- tool_or_environment_evidence：三类应用内键盘调用均无默认行为；Windows 通道两轮返回同一 URL 可信度拒绝。
+- blocks：M4 Full Go、M4 工作项 integrated、健康 M0 自动激活。
+- does_not_block：B001/B002 关闭、部署/回滚、query、导航点击、响应式、权限、遥测、denylist、健康与生命导航仓库外正式化包准备。
+- rejected_workaround：禁止用自动化单测、脚本 `element.click()`、合成 KeyboardEvent、弱化任务书或风险接受替代真实环境键盘证据。
+- systemic_fix：由人工在 Chrome 已知俱乐部首页执行一次 Shift+Tab 和一次 Enter；记录起始 URL、焦点名称、focus-visible、结束 URL，不输入账号或敏感数据。平台随后只读复核并更新最终 verdict。
+- security_note：早期一次宽 DOM 读取在瞬时工具输出中暴露了合成测试身份标识；未写入仓库、报告或消息，之后全部改用定向脱敏读取。最终报告只允许 `user_id=null/non-null`。
+- verdict：`Fail for evidence completion / no product verdict`；next_authorization：人工真实键盘 UAT 回执。
