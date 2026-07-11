@@ -7,7 +7,7 @@
 - branch：`codex/club-sc-first-closure-frontend`
 - base：`6149504959ea779102022d6b6e172fe0999dcaec`
 - activation HEAD：`73b21bb15fcefa5aad4140619e9661216aca54c7`
-- implementation commit：待首个实现提交后由 closeout 提交补录
+- implementation commit：`4ae2b8f17ffab4bc131a3f67f13873eb02d080f9`
 - status：handoff-ready / local F0 Go candidate / T0 No-Go
 
 ## 治理证据
