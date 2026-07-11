@@ -9,7 +9,7 @@
 
 ## 目标
 
-完成会员侧最小可执行纵切：从俱乐部联盟标准首页进入自建俱乐部，服务端权威返回 `type=standard AND category=general AND status=active`；用户浏览列表与详情，登录后幂等提交加入申请，并在本人申请列表中读取 `pending/approved/rejected` 状态。
+完成会员侧最小可执行纵切：从俱乐部联盟标准首页进入自建俱乐部，服务端权威返回 `type=standard AND category=general AND status=active`；用户在共享登录会话中浏览列表与详情、幂等提交加入申请，并在本人申请列表中读取 `pending/approved/rejected` 状态。本切片不新增匿名业务读取能力。
 
 本通知不包含管理者审核。首闭环的完成定义是“用户提交后可持久、可重放、可在本人状态中重新读取且跨用户隔离”，不是“申请已批准成为成员”。
 
@@ -43,6 +43,7 @@
 ## 合同硬边界
 
 - 列表、详情和本人状态 DTO 不向页面暴露 `owner_id`、`user_id`、`user_name`、`reviewed_by` 或内部代码。
+- 列表、详情、加入和本人状态全部继承 `shared_session`；guest 由父首页承接登录要求，不得先发 SC 业务请求。
 - 详情稳定错误至少含 `CLUB_ID_INVALID`、`CLUB_NOT_FOUND`、`CLUB_DETAIL_UNAVAILABLE`。
 - 加入稳定错误至少含 `INVALID_IDEMPOTENCY_KEY`、`CLUB_ID_INVALID`、`CLUB_NOT_FOUND`、`CLUB_JOIN_MESSAGE_TOO_LONG`、`IDEMPOTENCY_KEY_REUSED`、`IDEMPOTENCY_IN_PROGRESS`、`CLUB_NOT_ACTIVE`、`CLUB_ALREADY_MEMBER`、`CLUB_JOIN_UNAVAILABLE`。
 - 首次加入 201；同键同规范化载荷重放 200 且 `Idempotency-Replayed:true`；同键异载荷 409；已有 pending 不得重复创建。
@@ -62,4 +63,3 @@
 ## 最终 Go
 
 合同/Schema/conformance、后端相关测试与 vet、前端定向/全量/双 build、总合同与安全门禁全部通过；测试环境 `/health`、`/ready`、真实认证、搜索→详情→申请→本人状态→刷新持久与 B 用户隔离通过；320/360/768/desktop、键盘、直达/刷新/后退/返回、网络 denylist 和脱敏证据通过；无 Blocker 或未接受 Major。
-

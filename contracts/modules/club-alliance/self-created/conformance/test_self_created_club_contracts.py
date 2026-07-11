@@ -21,7 +21,7 @@ REQUIRED_ERRORS = {
     "CLUB_ID_INVALID","CLUB_NOT_FOUND","CLUB_DETAIL_UNAVAILABLE","INVALID_IDEMPOTENCY_KEY",
     "CLUB_JOIN_MESSAGE_TOO_LONG","IDEMPOTENCY_KEY_REUSED","IDEMPOTENCY_IN_PROGRESS",
     "CLUB_NOT_ACTIVE","CLUB_ALREADY_MEMBER","CLUB_JOIN_UNAVAILABLE",
-    "CLUB_CATEGORY_FILTER_INVALID","CLUB_CATEGORY_CROSSOVER_DETECTED","CLUB_APPLICATION_ACCESS_DENIED",
+    "CLUB_FILTER_CATEGORY_INVALID","CLUB_CATEGORY_CROSSOVER_DETECTED","CLUB_APPLICATION_ACCESS_DENIED",
 }
 
 
@@ -49,6 +49,8 @@ def semantic_error(contract, errors, fixtures):
     if contract.get("member_side_capabilities") != ["list","detail","join","my-applications"]:
         return "SC_CAPABILITY_SCOPE_INVALID"
     interfaces = contract["interfaces"]
+    if any(interfaces[name].get("authentication") != "required" or interfaces[name].get("auth_mode") != "shared_session" for name in ("list", "detail", "join", "my_applications")):
+        return "SC_ACCESS_CONTRACT_INVALID"
     exposed = set(interfaces["list"]["allowed_item_fields"]) | set(interfaces["detail"]["allowed_fields"])
     if exposed & SENSITIVE_FIELDS or not SENSITIVE_FIELDS.issubset(set(contract["forbidden_response_fields"])):
         return "SC_SENSITIVE_FIELD_EXPOSED"
@@ -56,7 +58,7 @@ def semantic_error(contract, errors, fixtures):
         return "SC_LIST_AUTHORITY_INVALID"
     if interfaces["list"]["allowed_item_fields"] != ["id","name","intro","city","type","category","status"]:
         return "SC_DTO_FIELD_INVALID"
-    if interfaces["detail"]["required_predicate"] != "type=standard AND category=general AND status=active" or interfaces["detail"]["failure_mode"] != "fail-closed":
+    if interfaces["detail"]["required_predicate"] != "type=standard AND category=general AND status=active" or interfaces["detail"]["failure_mode"] != "not-found-resource-hiding":
         return "SC_DETAIL_GUARD_INVALID"
     if interfaces["detail"]["allowed_fields"] != ["id","name","intro","city","type","category","status","member_count","created_at"]:
         return "SC_DTO_FIELD_INVALID"
@@ -69,6 +71,9 @@ def semantic_error(contract, errors, fixtures):
         return "SC_FORBIDDEN_SCOPE_MISSING"
     error_ids = [item["error_id"] for item in errors["errors"]]
     if len(error_ids) != len(set(error_ids)) or not REQUIRED_ERRORS.issubset(set(error_ids)):
+        return "SC_ERROR_CATALOG_INVALID"
+    status_by_error = {item["error_id"]: item["http_status"] for item in errors["errors"]}
+    if status_by_error.get("CLUB_DETAIL_UNAVAILABLE") != 500 or status_by_error.get("CLUB_JOIN_UNAVAILABLE") != 500 or status_by_error.get("CLUB_NOT_FOUND") != 404:
         return "SC_ERROR_CATALOG_INVALID"
     if fixtures.get("seed") != SEED or fixtures.get("synthetic_only") is not True or fixtures.get("environment") != "non-production":
         return "SC_FIXTURE_NOT_SYNTHETIC"
@@ -105,8 +110,7 @@ class SelfCreatedClubContractsTest(unittest.TestCase):
     def test_03_generator_replay(self):
         module = generator_module()
         self.assertEqual(module.build_bundle(), module.build_bundle())
-        self.assertEqual(module.build_bundle()["seed"], self.fixtures["seed"])
-        self.assertEqual(len(module.build_bundle()["clubs"]), len(self.fixtures["clubs"]))
+        self.assertEqual(module.build_bundle(), self.fixtures)
 
     def test_04_selector_rejects_type_only(self):
         changed = copy.deepcopy(self.contract)
@@ -157,6 +161,16 @@ class SelfCreatedClubContractsTest(unittest.TestCase):
         changed = copy.deepcopy(self.contract)
         changed["interfaces"]["detail"]["allowed_fields"][2] = "description"
         self.assertEqual("SC_DTO_FIELD_INVALID", semantic_error(changed, self.errors, self.fixtures))
+
+    def test_14_access_requires_shared_session(self):
+        changed = copy.deepcopy(self.contract)
+        changed["interfaces"]["list"]["authentication"] = "anonymous"
+        self.assertEqual("SC_ACCESS_CONTRACT_INVALID", semantic_error(changed, self.errors, self.fixtures))
+
+    def test_15_internal_errors_are_not_resource_boundaries(self):
+        changed = copy.deepcopy(self.errors)
+        next(item for item in changed["errors"] if item["error_id"] == "CLUB_JOIN_UNAVAILABLE")["http_status"] = 409
+        self.assertEqual("SC_ERROR_CATALOG_INVALID", semantic_error(self.contract, changed, self.fixtures))
 
 
 if __name__ == "__main__":

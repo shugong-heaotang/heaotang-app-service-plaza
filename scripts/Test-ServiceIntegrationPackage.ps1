@@ -2,7 +2,9 @@
   [Parameter(Mandatory = $true)]
   [string[]]$ManifestPath,
   [string]$ActionsPath = "",
-  [switch]$CompleteCatalog
+  [switch]$CompleteCatalog,
+  [string]$DistRoot = "",
+  [string[]]$ExpectedRoute = @()
 )
 
 $ErrorActionPreference = "Stop"
@@ -26,6 +28,22 @@ if ($ActionsPath) {
 }
 if ($CompleteCatalog) {
   $arguments += "--complete-catalog"
+}
+
+if ($ExpectedRoute.Count -gt 0 -and -not $DistRoot) {
+  throw "DistRoot is required when ExpectedRoute is provided."
+}
+if ($DistRoot) {
+  $resolvedDist = (Resolve-Path -LiteralPath $DistRoot).Path
+  foreach ($route in $ExpectedRoute) {
+    if ($route -notmatch '^[a-z0-9/-]+$' -or $route.Contains("..")) {
+      throw "Invalid expected route: $route"
+    }
+    $routeIndex = Join-Path $resolvedDist (Join-Path $route "index.html")
+    if (-not (Test-Path -LiteralPath $routeIndex -PathType Leaf)) {
+      throw "Expected packaged route is missing: $route"
+    }
+  }
 }
 
 $previousPythonUtf8 = $env:PYTHONUTF8
