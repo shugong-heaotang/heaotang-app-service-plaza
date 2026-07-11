@@ -52,12 +52,14 @@
   ],
   "evidence": [
     "contracts/foundation/development-checklists/2026-07-12-club-h1-m4-final-governance.json",
-    "contracts/foundation/governance-exams/2026-07-12-club-h1-m4-final-governance-attempt-1.json"
+    "contracts/foundation/governance-exams/2026-07-12-club-h1-m4-final-governance-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-12-club-h1-m4-final.json",
+    "docs/project-management/modules/club-alliance/acceptance/CA-H1-M4-frontend-uat.md"
   ],
   "premises": [
     "历史检查单保留不可变但不能授权本次最终证据更新",
-    "B002 与 M4 必须分别完成新检查单、100 分考试和自身验收后才允许状态转换",
-    "真实键盘 UAT 未取得证据时不得宣称 H1 Full Go"
+    "B002 与 M4 已分别完成新检查单、100 分考试和自身验收，允许转换为 integrated",
+    "项目负责人于 2026-07-12 完成人工真实 Shift+Tab 与 Enter 验收并明确回执两项正常，H1 M4 Go"
   ],
   "implementation_mode": "ai-assisted"
 }
