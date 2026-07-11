@@ -1067,7 +1067,7 @@
       "title": "动作遥测功能开关双人审批公共依赖治理",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-action-telemetry-config-governance",
       "branch": "codex/action-telemetry-config-governance",
@@ -1084,7 +1084,7 @@
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
-      "migration_note": "关闭 CA-H1-M4-B001：复用 businessconfig 双人提案/审核，新增 boolean 权威变量并使旧 feature flag 表降为兼容证据；禁止直接 SQL 或恢复单管理员写入口。",
+      "migration_note": "治理合同已于 8a0da7242014a23ddeda5622639b0e08869d69e3 受控集成：关闭 CA-H1-M4-B001 的公共依赖，复用 businessconfig 双人提案/审核，新增 boolean 权威变量并使旧 feature flag 表降为兼容证据；禁止直接 SQL 或恢复单管理员写入口。",
       "handoff_record": null
     },
     {
@@ -1092,7 +1092,7 @@
       "title": "动作遥测 boolean 业务变量与 service-plaza 适配",
       "owner": "Backend platform agent",
       "owner_role": "后端平台负责人",
-      "status": "planned",
+      "status": "active",
       "repository_root": "C:/Users/shugo/Documents/heaotang-main",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-action-telemetry-businessconfig",
       "branch": "codex/action-telemetry-businessconfig",
@@ -1106,7 +1106,7 @@
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
-      "migration_note": "预登记；待平台合同/通知受控集成后激活。新增 boolean kind 与 service-plaza.action-telemetry.enabled，读取失败关闭；复用既有 maker-checker/idempotency/audit，禁止新增第二套审批。",
+      "migration_note": "已在干净专用工作树激活；起始基线为 47ef91bb5ca6774c40f6c4301ba3f25e224a4bd9。新增 boolean kind 与 service-plaza.action-telemetry.enabled，读取失败关闭；复用既有 maker-checker/idempotency/audit，禁止新增第二套审批。",
       "handoff_record": null
     }
   ]
