@@ -74,6 +74,10 @@
 
 - 2026-07-11 已重新完成 GitHub 设备授权；`gh auth status` 确认活动账号为 `shugong-heaotang`、凭据保存在 keyring、Git operations protocol=`ssh`，原 OAuth 令牌交换超时阻塞已解除。
 - 当前允许按任务通知完成精确路径暂存、commit、SSH push 和 Draft PR；Draft PR 仍只代表专家评审入口，不代表合并或业务实现批准。
+- 初始发布提交：`5ab231005e15c2355730f9b1cbc86e1383141717`；
+- GitHub 分支：`codex/health-manager-v1-requirements`；
+- Draft PR：`https://github.com/shugong-heaotang/heaotang-app-service-plaza/pull/1`；
+- PR 目标分支：`codex/service-plaza-phase1-integration`；状态：Draft。
 - `agent-collaboration.v1` 中当前属于健康大管家负责人的唯一活动工作项仍为 `AIW-20260711-HEALTH-V1-REQUIREMENTS-DOCS`，只授权产品宪法、回执、Handoff 和模块治理证据。
 - `2026-07-11-health-manager-first-phase-task-order.md` 的状态仍是“预制待启动”，不能作为 MVP-90 业务开发授权。
 - 下一阶段必须由平台集成负责人另行写入 MVP-90 的精确 `work_id`、owner、repository、base、branch、worktree、allowed paths、检查点和正式通知状态；在此之前业务编码保持 No-Go。
