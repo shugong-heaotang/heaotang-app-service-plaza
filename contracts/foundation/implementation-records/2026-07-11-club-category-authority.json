@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-CLUB-CATEGORY-AUTHORITY",
+  "title": "俱乐部 type+category 服务端权威筛选合同",
+  "date": "2026-07-11",
+  "status": "verified",
+  "objective": "固化 D-CA-003 Accepted 语义、服务端组合筛选合同和零串类门禁，并为后端建立独立实现工作项。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-club-category-authority.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-club-category-authority-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/module-internal-dependency-standard-v1.md"],
+  "requirement_sources": ["docs/decisions/0019-club-category-authoritative-filter.md", "docs/project-management/service-plaza/club-category-authority-2026-07-11.md"],
+  "capabilities": ["foundation.service-action-contracts", "foundation.contract-tooling", "foundation.ai-collaboration-safety"],
+  "contracts": ["contracts/service-plaza/club-category-filter.v1.json", "contracts/service-plaza/club-category-filter.v1.schema.json"],
+  "decisions": ["docs/decisions/0019-club-category-authoritative-filter.md", "docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"],
+  "changed_areas": ["contracts/service-plaza/club-category-filter.v1.json", "contracts/service-plaza/club-category-filter.v1.schema.json", "scripts/validate_club_category_filter.py", "scripts/tests/test_validate_club_category_filter.py", "scripts/tests/fixtures/club-category-filter/mixed-dataset.v1.json", "scripts/Test-ServicePlazaContracts.ps1", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/service-plaza/handoff-log.md"],
+  "verification": ["python -X utf8 -m unittest scripts.tests.test_validate_club_category_filter -v", "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-ServicePlazaContracts.ps1", "scripts/Test-TextEncoding.ps1", "git diff --check"],
+  "evidence": ["contracts/foundation/development-checklists/2026-07-11-club-category-authority.json", "contracts/foundation/governance-exams/2026-07-11-club-category-authority-attempt-1.json", "docs/project-management/service-plaza/club-category-authority-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "premises": ["Club category 是单值平面分类", "standard+general 与历史数据可兼容", "服务端组合筛选和分页索引可保持一致", "本合同不授权 CA-H1 或业务编码"],
+  "implementation_mode": "ai-assisted"
+}

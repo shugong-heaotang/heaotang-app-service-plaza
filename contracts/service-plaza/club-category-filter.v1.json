@@ -1,0 +1,12 @@
+{
+  "contract_version": "club-category-filter.v1",
+  "endpoint": "GET /api/v1/clubs/search",
+  "authority": "server",
+  "allowed_categories": ["general", "charity", "health", "education", "trade"],
+  "profiles": {
+    "self-created": { "club_type": "standard", "category": "general", "excludes": ["standard+charity", "family", "club-federation", "other-types"] },
+    "public-benefit": { "club_type": "standard", "category": "charity", "excludes": ["standard+general", "family", "club-federation", "other-types"] }
+  },
+  "stable_errors": ["CLUB_FILTER_CATEGORY_INVALID", "CLUB_FILTER_COMBINATION_UNSUPPORTED"],
+  "zero_cross_category_required": true
+}

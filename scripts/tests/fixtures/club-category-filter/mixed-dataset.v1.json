@@ -1,0 +1,8 @@
+[
+  {"id": 1, "type": "standard", "category": "general"},
+  {"id": 2, "type": "standard", "category": "charity"},
+  {"id": 3, "type": "family", "category": "general"},
+  {"id": 4, "type": "direct", "category": "general"},
+  {"id": 5, "type": "standard", "category": "health"},
+  {"id": 6, "entity_kind": "club-relationship", "relationship_kind": "club-federation"}
+]

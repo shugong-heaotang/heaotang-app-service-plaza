@@ -841,6 +841,56 @@
       "handoff_record": null
     },
     {
+      "work_id": "AIW-20260711-CLUB-CATEGORY-AUTHORITY-GOVERNANCE",
+      "title": "俱乐部 type+category 服务端权威筛选合同",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "handoff-ready",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-category-authority",
+      "branch": "codex/club-category-authority-governance",
+      "base_commit": "3ba521b1191232b9bba56ed37f005a74078fe76f",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-club-category-authority.json",
+        "contracts/foundation/governance-exams/2026-07-11-club-category-authority-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-club-category-authority.json",
+        "contracts/service-plaza/club-category-filter.v1.json",
+        "contracts/service-plaza/club-category-filter.v1.schema.json",
+        "docs/decisions/0019-club-category-authoritative-filter.md",
+        "docs/project-management/service-plaza/club-category-authority-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md",
+        "scripts/validate_club_category_filter.py",
+        "scripts/Test-ServicePlazaContracts.ps1",
+        "scripts/tests/test_validate_club_category_filter.py",
+        "scripts/tests/fixtures/club-category-filter"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "只冻结 D-CA-003 和服务端组合筛选门禁；后端实现由独立仓库工作项负责。",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h028俱乐部-category-权威筛选"
+    },
+    {
+      "work_id": "AIW-20260711-CLUB-CATEGORY-AUTHORITY-BACKEND",
+      "title": "俱乐部 type+category 服务端权威组合筛选实现",
+      "owner": "Club backend module agent",
+      "owner_role": "平台后端负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/heaotang-main",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-category-authority-backend",
+      "branch": "codex/club-category-authority-backend",
+      "base_commit": "a27b6f766d0281e9b767a5844bab7adc227bb7db",
+      "allowed_paths": [
+        "backend-go/plugins/club-plugin/plugin.go",
+        "backend-go/plugins/club-plugin/service.go",
+        "backend-go/plugins/club-plugin/service_test.go"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "只实现 search 的 category 参数、type+category 权威组合过滤、稳定错误和混合数据回归；禁止其他俱乐部业务。",
+      "handoff_record": "docs/project-management/service-plaza/club-category-authority-2026-07-11.md"
+    },
+    {
       "work_id": "AIW-20260711-SECURE-MODULE-API-ACCEPTANCE",
       "title": "三大核心服务安全取码与部署后 API 验收标准化",
       "owner": "Codex platform integration agent",
