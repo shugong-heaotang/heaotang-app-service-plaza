@@ -49,6 +49,16 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 - 边界：无页面、路由、repository、业务 API、后端或部署修改；selector 未执行。
 - 结论：H1-M1 Go，授权进入 H1-M2。M2/M3 必须补非法/缺失 category target 显式负例、精确八态渲染和网络 allowlist/denylist；CA-H1 Full Go 仍需 M3 与真实环境 UAT。
 
+### H1-M2 R2 平台检查点验收（2026-07-11）
+
+- 模块最新 HEAD：`ec65c103a56b2ceea812ecef623d4224bfb06c02`；功能根因修复提交：`5017060110b98caa4b515d06d6af73835254e3e6`；工作树 clean，11 个修复路径全部在精确 allowed paths。
+- 根因关闭：共享 adapter 在 home 与服务广场渲染前验证四类 target 可解析、恰有一个非空 category，且跨 action 一对一；缺失、空白、重复、多值、不可解析及跨 action 重复均以 `CAH1_ACTION_TARGET_INVALID` 失败关闭。
+- 自动化：无 query 首页和服务广场负例不渲染错误链接；允许入口点击断言 `activated/none`，既有 `blocked` 遥测断言保留；网络边界仍只允许 catalog/actions，禁止俱乐部业务 API。
+- 治理：R2 checklist 28/28、当前 SHA mismatch 0；R2 exam score 100；IR 同一 record。R1 非固定 attestation 记录保留在 `invalidated/`，原始试卷内容未修改。
+- 模块验证：定向 43/43、前端全量 136/136、production/test-server build、总合同、治理、UTF-8 656 和 diff 全通过。
+- 平台集成后复跑：定向 43/43、production build、总合同、治理、UTF-8 656 和 diff 全通过。
+- 结论：H1-M2 R2 Go；允许模块进入任务书已定义的 H1-M3 自动化与本地完成性检查。测试环境部署、真实浏览器 UAT、四类业务、后端与 production 仍需独立授权。
+
 ## SP-H028：俱乐部 category 权威筛选
 
 - 决策：D-CA-003 Accepted，见 ADR 0019。
