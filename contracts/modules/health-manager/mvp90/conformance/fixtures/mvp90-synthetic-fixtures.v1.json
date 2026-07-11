@@ -22,6 +22,12 @@
         "trigger_code": "SYNTHETIC_A001",
         "display_marker": "合成验收数据"
       },
+      "scenario_payload": {
+        "consent_state": "confirmed",
+        "screening_state": "clear",
+        "goal_marker": "synthetic-daily-routine",
+        "task_feedback": "completed"
+      },
       "expected_outcomes": [
         "PDCAR_TRACE_COMPLETE",
         "ONE_CURRENT_PLAN",
@@ -31,7 +37,7 @@
         "MEDICAL_CONCLUSION",
         "UNCONFIRMED_PLAN_ACTIVE"
       ],
-      "canonical_sha256": "0b4797b34cf8e19d47face60f730e5c892f17c27c6094de6a080f40940055ede"
+      "canonical_sha256": "88129b7fc1b16e1a8357cdf0ecc8f891f590326471c9654533bc438aaf682c59"
     },
     {
       "scenario_id": "MVP-A002",
@@ -48,6 +54,10 @@
         "trigger_code": "SYNTHETIC_A002",
         "display_marker": "合成验收数据"
       },
+      "scenario_payload": {
+        "critical_answer_state": "unknown-or-refused",
+        "default_answer_allowed": false
+      },
       "expected_outcomes": [
         "MISSING_INFORMATION_VISIBLE",
         "NO_ACTIVE_PLAN",
@@ -57,7 +67,7 @@
         "DETERMINISTIC_PROFILE",
         "MISSING_DATA_DEFAULT"
       ],
-      "canonical_sha256": "d58fb541f6406c7c823b679603f43b306a3c36e77cbc5b3c2031efac8be1e01f"
+      "canonical_sha256": "58ee643e5ef2d2e9225362adc759e40ccd3ee044dc12e1ce145e40f7b86723af"
     },
     {
       "scenario_id": "MVP-A003",
@@ -74,6 +84,10 @@
         "trigger_code": "SYNTHETIC_A003",
         "display_marker": "合成验收数据"
       },
+      "scenario_payload": {
+        "reviewed_rule_result": "synthetic-urgent",
+        "normal_plan_allowed": false
+      },
       "expected_outcomes": [
         "NORMAL_PLAN_STOPPED",
         "EMERGENCY_GUIDANCE_VISIBLE",
@@ -83,7 +97,7 @@
         "AI_RISK_CLOSE",
         "NORMAL_PLAN_CONTINUE"
       ],
-      "canonical_sha256": "0109eede7b8984c1f6349ae29369a57b2e97c2c275a7f9a1e73ddb5e14475740"
+      "canonical_sha256": "c5ff52d386a6db19a99b04c35949af446a1aa3d39dab8b3a6347f1ae86e61b10"
     },
     {
       "scenario_id": "MVP-A004",
@@ -100,6 +114,11 @@
         "trigger_code": "SYNTHETIC_A004",
         "display_marker": "合成验收数据"
       },
+      "scenario_payload": {
+        "task_state": "in-progress",
+        "feedback_type": "discomfort",
+        "continue_encouragement_allowed": false
+      },
       "expected_outcomes": [
         "TASK_PAUSED_FOR_DISCOMFORT",
         "ORIGINAL_FEEDBACK_PRESERVED",
@@ -109,7 +128,7 @@
         "CONTINUE_ENCOURAGEMENT",
         "AI_SUMMARY_OVERWRITE"
       ],
-      "canonical_sha256": "af3de120a8186d9ed9c6879a1c5e3c23db75c8b77ec6f72644b4ee3310d46f44"
+      "canonical_sha256": "e49a35dccba8c228ac6e3456cbd811033b123bd8ff655295df6950429da8831e"
     },
     {
       "scenario_id": "MVP-A005",
@@ -126,6 +145,11 @@
         "trigger_code": "SYNTHETIC_A005",
         "display_marker": "合成验收数据"
       },
+      "scenario_payload": {
+        "execution_barrier_state": "repeated-synthetic",
+        "red_flag_present": false,
+        "penalty_allowed": false
+      },
       "expected_outcomes": [
         "BARRIER_SUMMARY_CREATED",
         "ADVANCE_DRAFT_PENDING_CONFIRMATION",
@@ -135,7 +159,7 @@
         "MEMBER_PENALTY",
         "OLD_PLAN_OVERWRITE"
       ],
-      "canonical_sha256": "a320f447243a997920b16b6d7e3c20e58d3a345544cc12717eadbc1d383e94ad"
+      "canonical_sha256": "1e3aa3d926def0867a4f396525f9302e410d5aba16c3a61feab69e0e1b4ac0c9"
     },
     {
       "scenario_id": "MVP-A006",
@@ -152,6 +176,14 @@
         "trigger_code": "SYNTHETIC_A006",
         "display_marker": "合成验收数据"
       },
+      "scenario_payload": {
+        "request_classes": [
+          "diagnosis",
+          "medication-change",
+          "outcome-guarantee"
+        ],
+        "professional_answer_allowed": false
+      },
       "expected_outcomes": [
         "BOUNDARY_EXPLAINED",
         "HANDOFF_CREATED",
@@ -163,7 +195,7 @@
         "MEDICATION_CHANGE",
         "OUTCOME_GUARANTEE"
       ],
-      "canonical_sha256": "200ee5f67d7837d64798dc0dd3cee9e1c3ef6b8ae8846a24d0750bafb79ba772"
+      "canonical_sha256": "2126e2cc1fdf9df822b25979496ca88da1f03aa1a14fc7178a40a705ba35dded"
     },
     {
       "scenario_id": "MVP-A007",
@@ -180,6 +212,14 @@
         "trigger_code": "SYNTHETIC_A007",
         "display_marker": "合成验收数据"
       },
+      "scenario_payload": {
+        "failure_modes": [
+          "timeout",
+          "unavailable",
+          "unparsable"
+        ],
+        "confirmed_plan_available": true
+      },
       "expected_outcomes": [
         "CONFIRMED_PLAN_STILL_VISIBLE",
         "FEEDBACK_AVAILABLE",
@@ -191,7 +231,7 @@
         "FABRICATED_ADVICE",
         "HUMAN_RECORD_OVERWRITE"
       ],
-      "canonical_sha256": "85ed598675b2f79696af0b48249a3accead4e1f95f4bed3cc9f70ebb65819e75"
+      "canonical_sha256": "08daf7e43f84f979199ded76745fe2eeb7e3ad15343f0e5df39c1074954e9003"
     },
     {
       "scenario_id": "MVP-A008",
@@ -208,6 +248,13 @@
         "trigger_code": "SYNTHETIC_A008",
         "display_marker": "合成验收数据"
       },
+      "scenario_payload": {
+        "withdrawn_purposes": [
+          "ai-processing",
+          "sharing"
+        ],
+        "new_processing_allowed": false
+      },
       "expected_outcomes": [
         "NEW_PROCESSING_DENIED",
         "IMPACT_VISIBLE",
@@ -218,7 +265,7 @@
         "UNAUTHORIZED_SHARING",
         "UNAPPROVED_DELETION"
       ],
-      "canonical_sha256": "1bb70484ec1ab00992219e2319d92254a37f6b5c8a6785a7cb0f76435f965032"
+      "canonical_sha256": "ac35817880346508afadcb70e9039f57ef5f34b77a9aa1e23ffc0884d740a15c"
     },
     {
       "scenario_id": "MVP-A009",
@@ -235,6 +282,11 @@
         "trigger_code": "SYNTHETIC_A009",
         "display_marker": "合成验收数据"
       },
+      "scenario_payload": {
+        "service_relationship": "absent",
+        "requester_role_state": "mismatched",
+        "resource_disclosure_allowed": false
+      },
       "expected_outcomes": [
         "SERVER_ACCESS_DENIED",
         "OBJECT_EXISTENCE_NOT_DISCLOSED",
@@ -244,7 +296,7 @@
         "CROSS_MEMBER_DATA",
         "FRONTEND_ONLY_AUTHORIZATION"
       ],
-      "canonical_sha256": "3b2b5f473ebcfeccb71efa3a5d86abf5d729ac17e978c5ae579d6d6bf6531742"
+      "canonical_sha256": "bca4220b3671adeca04dfebe7dd5f525a8d6882f560b0cc945e3540e6f75e870"
     },
     {
       "scenario_id": "MVP-A010",
@@ -261,6 +313,11 @@
         "trigger_code": "SYNTHETIC_A010",
         "display_marker": "合成验收数据"
       },
+      "scenario_payload": {
+        "capacity_policy_state": "limit-reached",
+        "new_assignment_allowed": false,
+        "existing_risk_visibility": true
+      },
       "expected_outcomes": [
         "NEW_ASSIGNMENT_DENIED",
         "DISPATCH_REQUIRED",
@@ -270,7 +327,7 @@
         "HARDCODED_CAPACITY",
         "FALSE_TAKEOVER"
       ],
-      "canonical_sha256": "06951e953d97e2229445443be3b1116e5dabc03547b90493f431ddce10dad5e5"
+      "canonical_sha256": "8ba84496ab811e68e5cfde6c71d3b1da4460dd8e1f65c6d6f1dd4269ce686602"
     },
     {
       "scenario_id": "MVP-A011",
@@ -287,6 +344,14 @@
         "trigger_code": "SYNTHETIC_A011",
         "display_marker": "合成验收数据"
       },
+      "scenario_payload": {
+        "template_states": [
+          "expired",
+          "unreviewed"
+        ],
+        "reviewer_separation": "same-person-negative",
+        "new_plan_allowed": false
+      },
       "expected_outcomes": [
         "NEW_PLAN_ACTIVATION_DENIED",
         "STABLE_FAILURE_REASON",
@@ -297,7 +362,7 @@
         "UNREVIEWED_TEMPLATE_USE",
         "SAME_PERSON_APPROVAL"
       ],
-      "canonical_sha256": "5033068761d5a888d52c14a811774ab08a5b1916c652d730286f731ca13be39f"
+      "canonical_sha256": "af12f3f52e87baeefb0e6926492f8ffd1ade9b6b26a949e99b3549b27be45ba4"
     },
     {
       "scenario_id": "MVP-A012",
@@ -314,6 +379,13 @@
         "trigger_code": "SYNTHETIC_A012",
         "display_marker": "合成验收数据"
       },
+      "scenario_payload": {
+        "replay_variants": [
+          "same-payload",
+          "conflicting-payload"
+        ],
+        "duplicate_object_allowed": false
+      },
       "expected_outcomes": [
         "SAME_PAYLOAD_SAME_RESULT",
         "CONFLICTING_PAYLOAD_REJECTED",
@@ -323,7 +395,7 @@
         "DUPLICATE_OBJECT",
         "DUPLICATE_NOTIFICATION"
       ],
-      "canonical_sha256": "931b54572e48d04785a5da0db3256e8ddbdfa693c0399a864e50ef2f592c3ed0"
+      "canonical_sha256": "4eb86b5aa98f9729428825fc13c8ce782d79e19a3ae025e0f4796e976e08104e"
     },
     {
       "scenario_id": "MVP-A013",
@@ -340,6 +412,14 @@
         "trigger_code": "SYNTHETIC_A013",
         "display_marker": "合成验收数据"
       },
+      "scenario_payload": {
+        "message_states": [
+          "send-failed",
+          "unread",
+          "channel-unavailable"
+        ],
+        "resolved_allowed": false
+      },
       "expected_outcomes": [
         "SENT_DELIVERED_REPLIED_RESOLVED_SEPARATE",
         "RETRY_OR_ESCALATION_PENDING",
@@ -349,7 +429,7 @@
         "SENT_AS_RESOLVED",
         "UNREACHABLE_AS_RESOLVED"
       ],
-      "canonical_sha256": "6e82bcc840ab8f52bbeaca1cd4b7d25c0c782d8971cc4a3fa519cebb82b72a18"
+      "canonical_sha256": "2020590bb2b3d0ef6bab11e8e4fde1f62352c5b66665be0e770c4cc5182f0d07"
     },
     {
       "scenario_id": "MVP-A014",
@@ -366,6 +446,11 @@
         "trigger_code": "SYNTHETIC_A014",
         "display_marker": "合成验收数据"
       },
+      "scenario_payload": {
+        "correction_source": "synthetic-extraction-error",
+        "history_preservation_required": true,
+        "impact_review_state": "pending"
+      },
       "expected_outcomes": [
         "ORIGINAL_SOURCE_PRESERVED",
         "NEW_CURRENT_VERSION",
@@ -375,7 +460,7 @@
         "SILENT_HISTORY_OVERWRITE",
         "SILENT_PROFESSIONAL_OPINION_CHANGE"
       ],
-      "canonical_sha256": "707dc8dca4d55c2fcb686ce126830f53f6c32f5c77ec12b8e742c89403638a5e"
+      "canonical_sha256": "294c0f7d7428e933578002573dfcf210c90070b6a0f8e947b13869f4652cd12b"
     },
     {
       "scenario_id": "MVP-A015",
@@ -392,6 +477,11 @@
         "trigger_code": "SYNTHETIC_A015",
         "display_marker": "合成验收数据"
       },
+      "scenario_payload": {
+        "service_state": "exit-requested",
+        "ordinary_task_continuation": false,
+        "open_risk_preserved": true
+      },
       "expected_outcomes": [
         "ORDINARY_TASKS_STOPPED",
         "OPEN_RISK_HANDOFF_PRESERVED",
@@ -402,7 +492,7 @@
         "OPEN_RISK_DELETION",
         "UNAPPROVED_DATA_DELETION"
       ],
-      "canonical_sha256": "ddba34b5ba76686cb5ec861c698fc70a4c02d45f609505481da96632ebfcf109"
+      "canonical_sha256": "6188b1c095a556b99ff272c8189385936a0fb8aea0c9db4b227e9738ba4626ba"
     }
   ]
 }

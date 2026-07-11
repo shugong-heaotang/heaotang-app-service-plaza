@@ -27,6 +27,27 @@ def trigger_code(scenario_id: str) -> str:
     return "SYNTHETIC_" + scenario_id.replace("MVP-", "").replace("-", "_")
 
 
+def scenario_payload(scenario_id: str) -> dict[str, Any]:
+    payloads: dict[str, dict[str, Any]] = {
+        "MVP-A001": {"consent_state": "confirmed", "screening_state": "clear", "goal_marker": "synthetic-daily-routine", "task_feedback": "completed"},
+        "MVP-A002": {"critical_answer_state": "unknown-or-refused", "default_answer_allowed": False},
+        "MVP-A003": {"reviewed_rule_result": "synthetic-urgent", "normal_plan_allowed": False},
+        "MVP-A004": {"task_state": "in-progress", "feedback_type": "discomfort", "continue_encouragement_allowed": False},
+        "MVP-A005": {"execution_barrier_state": "repeated-synthetic", "red_flag_present": False, "penalty_allowed": False},
+        "MVP-A006": {"request_classes": ["diagnosis", "medication-change", "outcome-guarantee"], "professional_answer_allowed": False},
+        "MVP-A007": {"failure_modes": ["timeout", "unavailable", "unparsable"], "confirmed_plan_available": True},
+        "MVP-A008": {"withdrawn_purposes": ["ai-processing", "sharing"], "new_processing_allowed": False},
+        "MVP-A009": {"service_relationship": "absent", "requester_role_state": "mismatched", "resource_disclosure_allowed": False},
+        "MVP-A010": {"capacity_policy_state": "limit-reached", "new_assignment_allowed": False, "existing_risk_visibility": True},
+        "MVP-A011": {"template_states": ["expired", "unreviewed"], "reviewer_separation": "same-person-negative", "new_plan_allowed": False},
+        "MVP-A012": {"replay_variants": ["same-payload", "conflicting-payload"], "duplicate_object_allowed": False},
+        "MVP-A013": {"message_states": ["send-failed", "unread", "channel-unavailable"], "resolved_allowed": False},
+        "MVP-A014": {"correction_source": "synthetic-extraction-error", "history_preservation_required": True, "impact_review_state": "pending"},
+        "MVP-A015": {"service_state": "exit-requested", "ordinary_task_continuation": False, "open_risk_preserved": True},
+    }
+    return payloads[scenario_id]
+
+
 def build_bundle() -> dict[str, Any]:
     scenarios = json.loads(SCENARIOS_PATH.read_text(encoding="utf-8"))
     generator = scenarios["generator"]
@@ -49,6 +70,7 @@ def build_bundle() -> dict[str, Any]:
                 "trigger_code": trigger_code(scenario_id),
                 "display_marker": "合成验收数据",
             },
+            "scenario_payload": scenario_payload(scenario_id),
             "expected_outcomes": scenario["expected_outcomes"],
             "forbidden_outcomes": scenario["forbidden_outcomes"],
         }
