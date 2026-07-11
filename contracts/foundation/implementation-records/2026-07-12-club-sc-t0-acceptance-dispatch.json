@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-CLUB-SC-T0-ACCEPTANCE-DISPATCH",
+  "title": "CA-SC 自建俱乐部测试环境 T0 验收正式派发",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "建立独立测试环境验收范围、合成数据安全边界、部署恢复门禁和证据路径。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-club-sc-t0-acceptance-dispatch.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-club-sc-t0-acceptance-dispatch-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/module-dependencies/club-alliance.v1.json", "contracts/modules/club-alliance/internal-dependencies.v1.json"],
+  "requirement_sources": ["docs/project-management/modules/club-alliance/self-created/CA-SC-P0-P1-requirements.md", "docs/project-management/modules/club-alliance/self-created/CA-SC-acceptance-matrix.md"],
+  "capabilities": ["foundation.identity-api", "foundation.authorization-idempotency", "foundation.delivery-recovery", "foundation.app-shell-adapter"],
+  "contracts": ["contracts/modules/club-alliance/self-created/self-created-club.v1.json", "contracts/modules/club-alliance/self-created/error-catalog.v1.json"],
+  "decisions": ["docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"],
+  "changed_areas": ["contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/development-checklists/2026-07-12-club-sc-t0-acceptance-dispatch.json", "contracts/foundation/governance-exams/2026-07-12-club-sc-t0-acceptance-dispatch-attempt-1.json", "contracts/foundation/implementation-records/2026-07-12-club-sc-t0-acceptance-dispatch.json", "docs/project-management/notices/2026-07-12-club-sc-t0-acceptance-task-order.md", "docs/project-management/service-plaza/club-sc-t0-acceptance-dispatch-2026-07-12.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "verification": ["scripts/validate_development_checklists.py", "scripts/validate_governance_exams.py", "scripts/validate_implementation_records.py", "scripts/validate_agent_collaboration.py", "scripts/Test-ServicePlazaContracts.ps1", "scripts/Test-TextEncoding.ps1", "git diff --check"],
+  "evidence": ["docs/project-management/notices/2026-07-12-club-sc-t0-acceptance-task-order.md", "docs/project-management/service-plaza/club-sc-t0-acceptance-dispatch-2026-07-12.md", "docs/project-management/modules/club-alliance/self-created/CA-SC-frontend-report.md", "docs/project-management/service-plaza/club-sc-backend-implementation-2026-07-12.md"],
+  "premises": ["Only deterministic synthetic test data may be mutated", "Production real data real funds and irreversible operations remain forbidden", "Environment Go requires real HTTP browser backup restore and rollback evidence", "Product defects require a separate scoped repair item"],
+  "implementation_mode": "ai-assisted"
+}

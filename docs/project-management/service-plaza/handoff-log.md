@@ -609,3 +609,14 @@ Handoff 运行规则见 `handoff-operating-mechanism.md`。首轮具体表单见
 - does_not_block：CA-SC 按原任务继续；H2-M0 纯需求、Schema、fixtures 和 conformance 可在独立范围派发。
 - 门禁：本派发检查单 current、随机治理考试 100、IR/协作登记/UTF-8/差异门禁通过后方可集成；H2 预登记不得被当作开发 Go。
 - 结论：需求变更 Accepted；H2 页面实现 Planned，未授权业务代码、后端、部署、生产或真实数据。
+
+## SP-H036：CA-SC 自建俱乐部测试环境 T0 验收派发
+
+- from / to：平台集成负责人 / CA-SC T0 验收负责人
+- date：2026-07-12
+- upstream APP / backend：`ea45d82d24b9eff907ba5401e8d0a2f11151224e` / `a998812cf44dc449d85b726706d4ae2573179860`
+- task order：`docs/project-management/notices/2026-07-12-club-sc-t0-acceptance-task-order.md`
+- scope：固定 seed 合成数据、测试环境部署、真实 API/浏览器 UAT、备份恢复、回滚和脱敏证据。
+- forbidden：生产、真实数据、真实资金、创建、审核、成员管理及其他俱乐部子项目业务。
+- activation：派发提交集成后，从最终 integration HEAD 创建干净工作树并登记 active；聊天不替代仓库证据。
+- status：Dispatch Go；Environment Go pending。
