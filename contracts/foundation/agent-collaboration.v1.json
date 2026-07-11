@@ -1428,6 +1428,27 @@
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h034-ca-sc自建俱乐部首个会员侧闭环"
     },
     {
+      "work_id": "AIW-20260712-CLUB-SC-FIRST-CLOSURE-BACKEND-EVIDENCE",
+      "title": "CA-SC 自建俱乐部后端实现治理与证据",
+      "owner": "Club backend agent",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-sc-first-closure-backend-evidence",
+      "branch": "codex/club-sc-first-closure-backend-evidence",
+      "base_commit": "d8c1ad078e06d5d4fca9c04bb9d8222ae3e09972",
+      "allowed_paths": [
+        "contracts/foundation/development-checklists/2026-07-12-club-sc-first-closure-backend.json",
+        "contracts/foundation/governance-exams/2026-07-12-club-sc-first-closure-backend-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-12-club-sc-first-closure-backend.json",
+        "docs/project-management/service-plaza/club-sc-backend-implementation-2026-07-12.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "后端 Go 实现在独立 heaotang-main Git 根执行；本伴随工作项只在 APP 治理根保存同一 owner、同一切片的 current checklist、100 分考试、IR 和后端 exact commit/test Handoff，不复制后端源码或跨根相对路径。",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h034-ca-sc自建俱乐部首个会员侧闭环"
+    },
+    {
       "work_id": "AIW-20260712-CLUB-SC-FIRST-CLOSURE-FRONTEND",
       "title": "CA-SC 自建俱乐部会员侧列表详情加入与本人状态页面",
       "owner": "Club Alliance self-created frontend agent",
@@ -1443,7 +1464,12 @@
         "app/src/modules/club-alliance/ClubAlliancePage.tsx",
         "app/src/modules/club-alliance/ClubAlliancePage.test.tsx",
         "app/src/modules/club-alliance/index.ts",
-        "app/src/modules/club-alliance/self-created/"
+        "app/src/modules/club-alliance/self-created/",
+        "contracts/modules/club-alliance/development-checklists/2026-07-12-club-sc-frontend.json",
+        "contracts/modules/club-alliance/governance-exams/2026-07-12-club-sc-frontend-attempt-1.json",
+        "contracts/modules/club-alliance/implementation-records/2026-07-12-club-sc-frontend.json",
+        "docs/project-management/modules/club-alliance/self-created/CA-SC-frontend-handoff.md",
+        "docs/project-management/modules/club-alliance/self-created/CA-SC-frontend-report.md"
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
