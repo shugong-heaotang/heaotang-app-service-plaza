@@ -1,0 +1,47 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-HEALTH-MVP90-M0",
+  "title": "健康大管家 MVP-90 M0 合同与合成一致性首检查点",
+  "date": "2026-07-12",
+  "status": "implemented",
+  "objective": "把 PRD C5 已确认的 16 对象、6 状态机、6 角色和 15 合成场景转换为版本化机器合同与一致性证据；当前先形成治理和三组核心合同安全检查点。",
+  "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m0.json",
+  "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m0-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json", "AGENTS.md", "README.md", "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md", "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json", "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json", "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md", "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md", "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md", "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md", "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md", "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md", "docs/decisions/0018-recursive-project-governance.md",
+    "contracts/foundation/module-dependencies/health-manager.v1.json", "contracts/modules/health-manager/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-health-manager-mvp90-m0-task-order.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m0-requirements.md",
+    "docs/project-management/service-plaza/handoff-log.md"
+  ],
+  "capabilities": ["foundation.ai-engineering-traceability", "foundation.governance-certification", "foundation.contract-tooling", "foundation.authorization-idempotency", "foundation.business-variables"],
+  "contracts": [
+    "contracts/modules/health-manager/mvp90/object-model.v1.json", "contracts/modules/health-manager/mvp90/object-model.v1.schema.json",
+    "contracts/modules/health-manager/mvp90/state-machines.v1.json", "contracts/modules/health-manager/mvp90/state-machines.v1.schema.json",
+    "contracts/modules/health-manager/mvp90/role-actions.v1.json", "contracts/modules/health-manager/mvp90/role-actions.v1.schema.json"
+  ],
+  "decisions": ["docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0009-approved-toolchain-per-layer.md", "docs/decisions/0018-recursive-project-governance.md"],
+  "changed_areas": ["contracts/modules/health-manager/mvp90", "contracts/modules/health-manager/internal-dependencies.v1.json", "contracts/modules/health-manager/development-checklists", "contracts/modules/health-manager/governance-exams", "contracts/modules/health-manager/implementation-records", "docs/project-management/modules/health-manager"],
+  "verification": ["Draft202012Validator for object model, state machines and role actions", "validate_development_checklists.py", "validate_governance_exams.py", "git diff --check"],
+  "evidence": ["contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m0.json", "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m0-attempt-1.json", "docs/project-management/modules/health-manager/health-manager-mvp90-m0-handoff.md"],
+  "premises": [
+    "PRD C5 is Document Handoff Ready but HM-R0 Professional Freeze remains Pending",
+    "27 Pending decisions remain non-executable metadata",
+    "M0 product semantic contracts are not API or database schemas",
+    "M0 does not authorize business code, environment, real health data, charging or M1"
+  ],
+  "implementation_mode": "ai-assisted"
+}

@@ -1,0 +1,46 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/health-manager/mvp90/role-actions.v1.schema.json",
+  "title": "Health Manager MVP-90 product role actions v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "module_id", "scope_naming", "roles"],
+  "properties": {
+    "contract_version": {"const": "health-manager.mvp90.role-actions.v1"},
+    "module_id": {"const": "health-manager"},
+    "scope_naming": {
+      "type": "object", "additionalProperties": false,
+      "required": ["status", "decision_ref", "executable", "scope_name"],
+      "properties": {
+        "status": {"const": "pending-with-owner"},
+        "decision_ref": {"const": "C4-S04"},
+        "executable": {"const": false},
+        "scope_name": {"type": "null"}
+      }
+    },
+    "roles": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"$ref": "#/$defs/role"}}
+  },
+  "$defs": {
+    "role": {
+      "type": "object", "additionalProperties": false,
+      "required": ["role_id", "name_zh", "responsibilities", "allowed_actions", "contributing_actions", "forbidden_actions", "server_authorization"],
+      "properties": {
+        "role_id": {"enum": ["member","ai","health_manager","professional","doctor_group","platform"]},
+        "name_zh": {"type": "string", "minLength": 1},
+        "responsibilities": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 2}},
+        "allowed_actions": {"type": "array", "uniqueItems": true, "items": {"pattern": "^[A-Z][A-Z0-9_]+$"}},
+        "contributing_actions": {"type": "array", "uniqueItems": true, "items": {"pattern": "^[A-Z][A-Z0-9_]+$"}},
+        "forbidden_actions": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"pattern": "^[A-Z][A-Z0-9_]+$"}},
+        "server_authorization": {
+          "type": "object", "additionalProperties": false,
+          "required": ["required", "prerequisites", "missing_behavior"],
+          "properties": {
+            "required": {"const": true},
+            "prerequisites": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+            "missing_behavior": {"const": "fail-closed"}
+          }
+        }
+      }
+    }
+  }
+}

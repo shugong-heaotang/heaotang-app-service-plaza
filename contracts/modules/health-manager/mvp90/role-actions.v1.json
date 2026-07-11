@@ -1,0 +1,55 @@
+{
+  "contract_version": "health-manager.mvp90.role-actions.v1",
+  "module_id": "health-manager",
+  "scope_naming": {"status":"pending-with-owner","decision_ref":"C4-S04","executable":false,"scope_name":null},
+  "roles": [
+    {
+      "role_id":"member","name_zh":"会员",
+      "responsibilities":["提供或拒绝本人资料","确认目标、计划和授权","提交原始反馈并自主退出"],
+      "allowed_actions":["PROVIDE_OR_REFUSE_PERSONAL_DATA","CONFIRM_PLAN_VERSION","REPORT_TASK_FEEDBACK","INITIATE_HANDOFF","WITHDRAW_CONSENT","END_SERVICE"],
+      "contributing_actions":["DEFINE_GOAL","REVIEW_PLAN_FEASIBILITY","REPORT_RULE_TRIGGER"],
+      "forbidden_actions":["REPLACE_MEDICAL_ADVICE","CLOSE_PROFESSIONAL_RISK","APPROVE_OWN_CONFIG_CHANGE"],
+      "server_authorization":{"required":true,"prerequisites":["authenticated_subject","resource_ownership","valid_consent_when_required"],"missing_behavior":"fail-closed"}
+    },
+    {
+      "role_id":"ai","name_zh":"AI",
+      "responsibilities":["在已授权资料内整理和起草","识别已审核规则触发并发起转人工","保留来源和不确定性"],
+      "allowed_actions":["ORGANIZE_AUTHORIZED_DATA","DRAFT_PLAN_VERSION","DECOMPOSE_ORDINARY_ACTION","DETECT_REVIEWED_RULE_TRIGGER","INITIATE_HANDOFF"],
+      "contributing_actions":["SUMMARIZE_MEMBER_FEEDBACK","EXPLAIN_PRODUCT_BOUNDARY"],
+      "forbidden_actions":["ACTIVATE_PLAN","DIAGNOSE","PRESCRIBE","CHANGE_MEDICATION","GUARANTEE_OUTCOME","CLOSE_PROFESSIONAL_RISK","CLOSE_EMERGENCY_RISK","ACCEPT_HANDOFF","BLOCK_CONSENT_WITHDRAWAL","PROPOSE_OR_APPROVE_CONFIG"],
+      "server_authorization":{"required":true,"prerequisites":["explicit_ai_purpose_consent","minimum_data_scope","approved_model_and_rule_policy"],"missing_behavior":"fail-closed"}
+    },
+    {
+      "role_id":"health_manager","name_zh":"健康管理师",
+      "responsibilities":["澄清资料并审核普通计划","检查任务反馈和普通风险","在资格、关系和容量有效时接管"],
+      "allowed_actions":["CLARIFY_MEMBER_DATA","REVIEW_PLAN_DRAFT","SUBMIT_PLAN_FOR_MEMBER_CONFIRMATION","REVIEW_ORDINARY_ACTION","REVIEW_RULE_TRIGGER","ACCEPT_ORDINARY_HANDOFF","PROPOSE_CONFIG_CHANGE"],
+      "contributing_actions":["DEFINE_GOAL","REQUEST_PROFESSIONAL_REVIEW","EXPLAIN_WITHDRAWAL_IMPACT"],
+      "forbidden_actions":["DIAGNOSE","PRESCRIBE","CHANGE_MEDICATION","CLOSE_PROFESSIONAL_RISK_ALONE","CLOSE_EMERGENCY_RISK","APPROVE_OWN_CONFIG_CHANGE","ACCESS_WITHOUT_RELATIONSHIP"],
+      "server_authorization":{"required":true,"prerequisites":["authenticated_identity","valid_service_relationship","role_authorization","capacity_policy_passed","minimum_consent_scope"],"missing_behavior":"fail-closed"}
+    },
+    {
+      "role_id":"professional","name_zh":"医生或专业人员",
+      "responsibilities":["在资质范围内签署专业内容","处理和复核专业或紧急风险","明确普通流程恢复条件"],
+      "allowed_actions":["SIGN_PROFESSIONAL_CONTENT","CHANGE_MEDICAL_ADVICE_WITHIN_QUALIFICATION","ACCEPT_PROFESSIONAL_HANDOFF","CLOSE_PROFESSIONAL_RISK","AUTHORIZE_SAFE_RESUME","REVIEW_PROFESSIONAL_CONFIG"],
+      "contributing_actions":["REVIEW_PLAN_DRAFT","REVIEW_RULE_TRIGGER","EXPLAIN_RETENTION_EXCEPTION"],
+      "forbidden_actions":["ACT_BEYOND_QUALIFICATION","ACCESS_FULL_PROFILE_BY_DEFAULT","OVERRIDE_MEMBER_CONSENT","APPROVE_OWN_CONFIG_CHANGE"],
+      "server_authorization":{"required":true,"prerequisites":["authenticated_identity","verified_qualification","authorized_service_scope","formal_referral","minimum_consent_scope"],"missing_behavior":"fail-closed"}
+    },
+    {
+      "role_id":"doctor_group","name_zh":"和奥堂医生集团",
+      "responsibilities":["治理专业标准和质量","监督管理师与专业人员","承担已正式接受范围内的组织责任"],
+      "allowed_actions":["GOVERN_PROFESSIONAL_STANDARD","SUPERVISE_QUALITY","REVIEW_PROFESSIONAL_CONFIG","DEFINE_QUALIFICATION_POLICY"],
+      "contributing_actions":["REVIEW_PLAN_POLICY","REVIEW_RISK_POLICY","REVIEW_CONSENT_POLICY"],
+      "forbidden_actions":["IMPERSONATE_MEMBER_CONSENT","DIRECTLY_FILL_MEMBER_DATA","ACCESS_MEMBER_DATA_WITHOUT_PURPOSE","CLAIM_UNACCEPTED_LEGAL_RESPONSIBILITY"],
+      "server_authorization":{"required":true,"prerequisites":["authenticated_identity","organization_role","approved_purpose","minimum_data_scope"],"missing_behavior":"fail-closed"}
+    },
+    {
+      "role_id":"platform","name_zh":"平台",
+      "responsibilities":["强制身份、关系、授权、状态、版本和审计门禁","提供队列、路由、幂等和失败关闭","执行 maker-checker"],
+      "allowed_actions":["ENFORCE_AUTHORIZATION","ENFORCE_STATE_TRANSITION","ENFORCE_VERSION_HISTORY","ENFORCE_IDEMPOTENCY","WRITE_MINIMUM_AUDIT","ROUTE_HANDOFF","ENFORCE_MAKER_CHECKER"],
+      "contributing_actions":["PRESENT_PRODUCT_BOUNDARY","PRESENT_RECOVERY_PATH"],
+      "forbidden_actions":["DIAGNOSE","PRESCRIBE","GUARANTEE_OUTCOME","INVENT_PENDING_POLICY","USE_REAL_HEALTH_DATA_IN_M0","FAIL_OPEN_ON_MISSING_POLICY"],
+      "server_authorization":{"required":true,"prerequisites":["versioned_contract","resource_authorization","current_policy_reference","audit_context"],"missing_behavior":"fail-closed"}
+    }
+  ]
+}
