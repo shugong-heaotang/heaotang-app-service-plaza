@@ -118,6 +118,29 @@ describe("服务广场主链路", () => {
     expect(screen.getByRole("link", { name: "← 返回服务广场" })).toBeInTheDocument();
   });
 
+  it("本人申请静态路由优先于 :clubId 并且只读取本人列表", async () => {
+    setAuthenticatedSession();
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockImplementation(async (input, init) => {
+      const url = requestUrl(input);
+      const method = (init?.method ?? "GET").toUpperCase();
+      if (
+        url === "/api/v1/clubs/join-applications/my?page=1&size=20" &&
+        method === "GET"
+      ) {
+        return jsonResponse({ items: [], total: 0, page: 1, size: 20 });
+      }
+      throw new Error(`SC 路由测试出现未声明的请求：${method} ${url}`);
+    });
+
+    renderAt("/services/club-alliance/self-created/applications");
+
+    expect(await screen.findByRole("heading", { name: "我的加入申请" })).toBeInTheDocument();
+    expect(screen.getByText("暂无加入申请")).toBeInTheDocument();
+    expect(fetchMock.mock.calls.map(([input]) => requestUrl(input))).toEqual([
+      "/api/v1/clubs/join-applications/my?page=1&size=20",
+    ]);
+  });
+
   it("健康大管家使用独立模块路由挂载边界", () => {
     renderAt("/services/health-manager");
 
