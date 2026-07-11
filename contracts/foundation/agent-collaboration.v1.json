@@ -1346,7 +1346,7 @@
       "title": "CA-SC 自建俱乐部首个会员侧闭环正式派发",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-sc-first-closure-dispatch",
       "branch": "codex/club-sc-first-closure-dispatch",
@@ -1373,11 +1373,11 @@
       "title": "CA-SC 自建俱乐部首闭环 P0/P1 合同与合成一致性",
       "owner": "Club Alliance self-created module agent",
       "owner_role": "俱乐部联盟自建俱乐部负责人",
-      "status": "planned",
+      "status": "active",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-sc-p0-p1-contracts",
       "branch": "codex/club-sc-p0-p1-contracts",
-      "base_commit": "d186e5fc0140546e2ccab5eefe0feb99a58e5ee4",
+      "base_commit": "893f7856530e2396d66c877b97198bf3d365e3b0",
       "allowed_paths": [
         "docs/project-management/modules/club-alliance/README.md",
         "docs/project-management/modules/club-alliance/self-created/README.md",
@@ -1402,9 +1402,9 @@
         "contracts/modules/club-alliance/implementation-records/2026-07-12-club-sc-p0-p1.json",
         "contracts/modules/club-alliance/implementation-records/2026-07-12-club-sc-p0-p1-r2.json"
       ],
-      "started_with_clean_worktree": false,
-      "preexisting_changes_acknowledged": true,
-      "migration_note": "预登记；平台派发受控集成后从包含正式通知和 SP-H034 的最终基线创建工作树并核验 clean，再转 active。父内部依赖属于治理 overlay 与切片输出，已预留 R2 最终 current 快照。",
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "平台派发已受控集成至 893f785；模块分支和独立工作树从同一 exact base 实际创建，HEAD/base/merge-base 一致且 worktree clean 后转 active。父内部依赖属于治理 overlay 与切片输出，已预留 R2 最终 current 快照。",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h034-ca-sc自建俱乐部首个会员侧闭环"
     },
     {
