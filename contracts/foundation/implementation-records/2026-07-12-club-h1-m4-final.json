@@ -3,7 +3,7 @@
   "record_id": "IR-20260712-CLUB-H1-M4-FINAL",
   "title": "俱乐部联盟 CA-H1 M4 最终测试环境验收与 Handoff",
   "date": "2026-07-12",
-  "status": "implemented",
+  "status": "verified",
   "objective": "收口俱乐部联盟标准首页测试环境部署、浏览器 UAT、权限、遥测、网络边界和根因问题，并对唯一未验证的真实键盘项保持失败关闭。",
   "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-club-h1-m4-final.json",
   "governance_exam": "contracts/foundation/governance-exams/2026-07-12-club-h1-m4-final-attempt-1.json",
@@ -54,7 +54,7 @@
     "guest and authenticated action telemetry evidence passed",
     "business API denylist count is zero",
     "refresh, browser back and both return links passed by pointer navigation",
-    "real Enter and Shift+Tab remain unverified because both supported control surfaces rejected or failed to deliver trustworthy page input",
+    "project owner completed real Chrome Shift+Tab focus movement and Enter return navigation and explicitly confirmed both were normal on 2026-07-12",
     "scripts/validate_development_checklists.py",
     "scripts/validate_governance_exams.py",
     "scripts/validate_implementation_records.py",
@@ -73,8 +73,8 @@
   "premises": [
     "B001 and B002 are verified closed and must not be repeated",
     "keyboard automation unit tests and focus styles do not substitute for real-environment key behavior",
-    "M4 remains No-Go until a human records one Shift+Tab focus move and one Enter activation on the known test URL",
-    "health M0 activation and Life LN-S2 dispatch remain prepared but shared governance paths cannot be released before M4 closeout"
+    "manual keyboard evidence was independent of the failed automation control surfaces and did not use scripted click or synthetic KeyboardEvent",
+    "M4 is Go; shared governance paths may be released for health M0 activation and subsequent Life LN-S2 dispatch"
   ],
   "implementation_mode": "ai-assisted"
 }
