@@ -1,0 +1,28 @@
+# CA-SC P0/P1 需求与合同边界
+
+## 目标
+
+冻结自建俱乐部首个会员侧闭环：列表、详情、加入申请、本人申请状态。提交成功只代表申请可持久、可幂等重放、可由本人重新读取；不代表已批准或已成为成员。
+
+## 权威规则
+
+1. 列表仅允许 `GET /api/v1/clubs/search?type=standard&category=general`，分页默认 1/20、`size<=100`。
+2. 详情仅返回 `status=active AND type=standard AND category=general`；其余统一失败关闭。
+3. 加入必须认证并提供 `Idempotency-Key`。首次 201；同键同规范化载荷重放 200 且 `Idempotency-Replayed:true`；同键异载荷 409；已有 pending 不重复创建。
+4. 本人列表身份只来自认证会话，伪造 `user_id` 无效；按 ID 倒序并严格跨用户隔离。
+5. Club 文本字段统一使用后端权威 `intro`，禁止发明 `description`；DTO 禁止暴露 `owner_id/user_id/user_name/reviewed_by/internal_code`。
+
+## 角色
+
+- guest：可浏览列表与详情；加入和本人状态要求认证。
+- candidate A：可提交一次加入并读取自己的 pending/approved/rejected。
+- isolated B：只能读取 B 自己的申请，不能观察 A。
+- existing member C：重复加入失败关闭。
+
+## 非目标
+
+创建、创建审核、管理者审核、成员/角色管理、退出、解散、公益/家庭/友联体、管理中心激活、会费/支付/退款/提现/订阅、生产和真实数据。
+
+## 完成门禁
+
+JSON/Schema、固定 seed fixtures、稳定错误、正负例 conformance、两层依赖、current R2 检查单、100 分考试、IR 与 Handoff 全部通过。本门禁不授权 API 或页面实现。

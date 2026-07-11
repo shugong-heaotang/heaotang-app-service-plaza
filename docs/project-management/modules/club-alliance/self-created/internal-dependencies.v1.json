@@ -1,0 +1,14 @@
+{
+  "contract_version": "module-internal-dependencies.v2",
+  "module_id": "club-alliance-self-created",
+  "module_version": "v1",
+  "slice_id": "ca-sc-p0-p1",
+  "readiness": {"governance":"go","development":"go","acceptance":"partial-go","release":"pending","operations":"pending"},
+  "dependencies": [
+    {"dependency_id":"sc.decision.selector","kind":"decision","description":"SC uses server-authoritative standard+general","status":"accepted","required_for_slice":true,"depends_on":[],"contracts":["docs/project-management/modules/club-alliance/self-created/CA-SC-decisions.md"],"evidence":["docs/decisions/0019-club-category-authoritative-filter.md"],"unresolved":[],"owner":"项目负责人","blocks":["sc.contract"],"does_not_block":[]},
+    {"dependency_id":"sc.contract","kind":"contract","description":"member-side list/detail/join/my contract and stable errors","status":"standardized","required_for_slice":true,"depends_on":["sc.decision.selector"],"contracts":["contracts/modules/club-alliance/self-created/self-created-club.v1.json","contracts/modules/club-alliance/self-created/error-catalog.v1.json"],"evidence":["docs/project-management/modules/club-alliance/self-created/CA-SC-conformance-report.md"],"unresolved":[],"owner":"俱乐部联盟自建俱乐部负责人","blocks":["sc.backend","sc.frontend"],"does_not_block":[]},
+    {"dependency_id":"sc.conformance","kind":"acceptance","description":"fixed-seed synthetic conformance","status":"test-verified","required_for_slice":true,"depends_on":["sc.contract"],"contracts":["contracts/modules/club-alliance/self-created/conformance/fixtures/cases.v1.json"],"evidence":["contracts/modules/club-alliance/self-created/conformance/test_self_created_club_contracts.py"],"unresolved":[],"owner":"俱乐部联盟自建俱乐部负责人","blocks":["sc.handoff"],"does_not_block":[]},
+    {"dependency_id":"sc.backend","kind":"interface","description":"detail guard and status projection implementation","status":"planned","required_for_slice":false,"depends_on":["sc.contract"],"contracts":[],"evidence":[],"unresolved":["separate backend work item not active"],"owner":"平台后端负责人","blocks":["sc.frontend","sc.environment"],"does_not_block":["sc.handoff"]},
+    {"dependency_id":"sc.handoff","kind":"handoff","description":"P0/P1 contract checkpoint","status":"implemented","required_for_slice":true,"depends_on":["sc.conformance"],"contracts":["docs/project-management/modules/club-alliance/self-created/CA-SC-handoff.md"],"evidence":["docs/project-management/modules/club-alliance/self-created/CA-SC-handoff.md"],"unresolved":["platform independent acceptance pending"],"owner":"俱乐部联盟自建俱乐部负责人","blocks":["sc.platform-acceptance"],"does_not_block":["sc.backend-planning"]}
+  ]
+}

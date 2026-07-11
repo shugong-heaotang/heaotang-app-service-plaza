@@ -1,0 +1,21 @@
+{
+  "contract_version": "self-created-club.v1",
+  "module_id": "club-alliance-self-created",
+  "contract_status": "standardized",
+  "semantic_selector": {"club_type":"standard","category":"general","operator":"and","authority":"server","frontend_filtering":false},
+  "member_side_capabilities": ["list","detail","join","my-applications"],
+  "routes": {
+    "list": "/services/club-alliance/self-created",
+    "detail": "/services/club-alliance/self-created/:clubId",
+    "my_applications": "/services/club-alliance/self-created/applications"
+  },
+  "interfaces": {
+    "list": {"method":"GET","path":"/api/v1/clubs/search","required_query":{"type":"standard","category":"general"},"optional_query":["page","size","q","city"],"pagination":{"default_page":1,"default_size":20,"maximum_size":100,"authority":"server-after-filter"},"allowed_item_fields":["id","name","intro","city","type","category","status"],"required_item_predicate":"type=standard AND category=general AND status=active"},
+    "detail": {"method":"GET","path":"/api/v1/clubs/:id","required_predicate":"type=standard AND category=general AND status=active","failure_mode":"fail-closed","allowed_fields":["id","name","intro","city","type","category","status","member_count","created_at"]},
+    "join": {"method":"POST","path":"/api/v1/clubs/:id/join","authentication":"required","idempotency":{"header":"Idempotency-Key","required":true,"first_status":201,"same_payload_replay_status":200,"replay_header":"Idempotency-Replayed:true","different_payload_status":409,"concurrency_result":"at-most-one-pending"},"request_fields":["message"],"existing_pending_behavior":"return-existing-without-create"},
+    "my_applications": {"method":"GET","path":"/api/v1/clubs/join-applications/my","authentication":"required","identity_source":"authenticated-session-only","ignored_identity_query":["user_id"],"optional_query":["page","size","status"],"allowed_status":["pending","approved","rejected"],"pagination":{"default_page":1,"default_size":20,"maximum_size":100,"order":"id-desc"}}
+  },
+  "forbidden_response_fields": ["owner_id","user_id","user_name","reviewed_by","internal_code"],
+  "forbidden_capabilities": ["create-club","create-review","join-review","member-management","role-management","leave","dissolve","payment","withdraw","refund","subscription","family","charity","federation"],
+  "environment_authorization": {"frontend":false,"backend":false,"test_environment":false,"production":false,"real_data":false}
+}
