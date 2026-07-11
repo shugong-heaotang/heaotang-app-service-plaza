@@ -19,6 +19,16 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 | SP-H026 | 模块内部依赖 v2 | 平台合同给模块 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | 验证完成，待受控集成 | v1/v2 按 contract_version 路由；五维 readiness 与局部阻塞 |
 | SP-H027 | 健康大管家 V1.0 需求策划 | 文档任务派发 | 平台集成负责人 | 健康大管家负责人 | 2026-07-11 | 正式派发，待模块 G0 | 独立于旧咨询切片；仅文档和治理证据，可推送 Draft PR |
 | SP-H028 | 俱乐部 category 权威筛选 | 平台合同、后端与环境给模块 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | 后端与环境 Go，待模块吸收复核 | D-CA-003 Accepted；实现/集成 47ef91bb；SC general、PC charity |
+| SP-H029 | 俱乐部联盟 CA-H1 | 页面壳需求与实现派发 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | 正式通知已下达，待工作树激活 | 独立首页；零四类业务 API；环境 UAT 后置独立授权 |
+
+## SP-H029：俱乐部联盟 CA-H1 页面壳正式派发
+
+- 上游：`SP-H025` H0 Full Go。
+- 通知：`CA-H1-TASK-20260711-001`。
+- 模块工作项：`AIW-20260711-CLUB-ALLIANCE-H1-HOMEPAGE`。
+- 目标：独立 `/services/club-alliance` 首页、统一 action adapter、确定性 query、状态/权限/生命周期/遥测和响应式。
+- 边界：selector 继续 `executable=false`；禁止四类业务 API、后端、deploy、production。
+- 环境门禁：模块本地 Go 后，平台另行授权测试环境部署与真实浏览器 UAT。
 
 ## SP-H028：俱乐部 category 权威筛选
 
