@@ -810,7 +810,7 @@
       "title": "健康大管家 V1.0 PDCAR 需求策划文档归档与 GitHub 发布",
       "owner": "Health Manager module agent",
       "owner_role": "健康大管家负责人",
-      "status": "active",
+      "status": "handoff-ready",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-v1-requirements",
       "branch": "codex/health-manager-v1-requirements",
@@ -819,14 +819,14 @@
         "docs/project-management/modules/health-manager/health-manager-v1-requirements-and-development-plan.md",
         "docs/project-management/modules/health-manager/health-manager-v1-docs-receipt.md",
         "docs/project-management/modules/health-manager/health-manager-v1-docs-handoff.md",
-        "contracts/modules/health-manager/development-checklists",
-        "contracts/modules/health-manager/governance-exams",
-        "contracts/modules/health-manager/implementation-records"
+        "contracts/modules/health-manager/development-checklists/2026-07-11-health-v1-requirements-docs.json",
+        "contracts/modules/health-manager/governance-exams/2026-07-11-health-v1-requirements-docs-attempt-1.json",
+        "contracts/modules/health-manager/implementation-records/2026-07-11-health-v1-requirements-docs.json"
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
       "migration_note": "只允许 V1.0 PDCAR 正式文档与治理证据；允许 commit/push/Draft PR，禁止业务实现。",
-      "handoff_record": null
+      "handoff_record": "https://github.com/shugong-heaotang/heaotang-app-service-plaza/pull/1"
     },
     {
       "work_id": "AIW-20260711-CLUB-CATEGORY-AUTHORITY-GOVERNANCE",
