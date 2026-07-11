@@ -201,4 +201,40 @@ describe("resolveClubAllianceQuery", () => {
       "CAH1_ACTION_TARGET_INVALID",
     );
   });
+
+  it("maps the upstream management target to the management adjunct", () => {
+    const { categories, management } = deriveClubAllianceActions(cloneActions());
+    const query = new URL(management.target, "https://heaotang.invalid").search;
+
+    expect(resolveClubAllianceQuery(query, categories, management)).toEqual({
+      mode: "focused",
+      selected_action_id: "club-manage",
+    });
+  });
+
+  it.each([
+    ["blank", "?view=%20", "CAH0_QUERY_BLANK"],
+    ["unknown", "?view=unknown", "CAH0_QUERY_UNKNOWN"],
+    ["repeated", "?view=manage&view=manage", "CAH0_QUERY_AMBIGUOUS"],
+    ["mixed", "?view=manage&category=公益俱乐部", "CAH0_QUERY_AMBIGUOUS"],
+  ] as const)("fails a %s management query closed", (_kind, query, errorId) => {
+    const { categories, management } = deriveClubAllianceActions(cloneActions());
+    expectContractError(
+      () => resolveClubAllianceQuery(query, categories, management),
+      errorId,
+    );
+  });
+
+  it("fails management query resolution closed when the target is not unique", () => {
+    const actions = cloneActions().map((action) =>
+      action.action_id === "club-manage"
+        ? { ...action, target: "/services/club-alliance" }
+        : action,
+    );
+    const { categories, management } = deriveClubAllianceActions(actions);
+    expectContractError(
+      () => resolveClubAllianceQuery("?view=manage", categories, management),
+      "CAH1_ACTION_TARGET_INVALID",
+    );
+  });
 });

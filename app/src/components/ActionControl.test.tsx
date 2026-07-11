@@ -1,5 +1,5 @@
 import { fireEvent, render, screen } from "@testing-library/react";
-import { MemoryRouter } from "react-router-dom";
+import { MemoryRouter, useLocation } from "react-router-dom";
 import { describe, expect, it, vi } from "vitest";
 import type { ServiceAction } from "../domain/serviceActions";
 import { ActionControl } from "./ActionControl";
@@ -19,6 +19,10 @@ const createAction = (
   return_target: "/services",
   telemetry_event: `test.${lifecycleStatus}`,
 });
+
+function CurrentLocation() {
+  return <output aria-label="current location">{useLocation().pathname}</output>;
+}
 
 describe("标准动作控件", () => {
   it.each(["planned", "maintenance", "offline"] as const)(
@@ -100,5 +104,38 @@ describe("标准动作控件", () => {
       telemetry_event: "test.active",
     });
     window.removeEventListener("heaotang:action-access-required", listener);
+  });
+
+  it("内部入口权限预检失败时阻止默认导航并保持失败关闭", () => {
+    const shared = createAction("active");
+    shared.access = { auth_mode: "shared_session", required_scopes: ["club:manage"] };
+    render(
+      <MemoryRouter initialEntries={["/origin"]}>
+        <ActionControl action={shared} session={{ authenticated: true, scopes: [] }} />
+        <CurrentLocation />
+      </MemoryRouter>,
+    );
+
+    fireEvent.click(screen.getByRole("link", { name: "active" }));
+
+    expect(screen.getByLabelText("current location")).toHaveTextContent("/origin");
+  });
+
+  it("内部入口权限通过时仍按合同目标导航", () => {
+    const shared = createAction("active");
+    shared.access = { auth_mode: "shared_session", required_scopes: ["club:manage"] };
+    render(
+      <MemoryRouter initialEntries={["/origin"]}>
+        <ActionControl
+          action={shared}
+          session={{ authenticated: true, scopes: ["club:manage"] }}
+        />
+        <CurrentLocation />
+      </MemoryRouter>,
+    );
+
+    fireEvent.click(screen.getByRole("link", { name: "active" }));
+
+    expect(screen.getByLabelText("current location")).toHaveTextContent("/target/active");
   });
 });

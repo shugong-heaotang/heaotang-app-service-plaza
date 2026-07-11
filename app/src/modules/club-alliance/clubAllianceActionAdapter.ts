@@ -88,6 +88,31 @@ const validateCategoryTargets = (categories: readonly ServiceAction[]) => {
   });
 };
 
+const managementViewFromTarget = (management: ServiceAction) => {
+  let target: URL;
+  try {
+    target = new URL(management.target, "https://heaotang.invalid");
+  } catch {
+    throw new ClubAllianceHomepageContractError(
+      "CAH1_ACTION_TARGET_INVALID",
+      `俱乐部联盟动作 ${management.action_id} 的 target 无法解析`,
+    );
+  }
+
+  const views = target.searchParams.getAll("view");
+  if (
+    views.length !== 1 ||
+    views[0].trim() === "" ||
+    target.searchParams.has("category")
+  ) {
+    throw new ClubAllianceHomepageContractError(
+      "CAH1_ACTION_TARGET_INVALID",
+      `俱乐部联盟动作 ${management.action_id} 缺少唯一 management view target`,
+    );
+  }
+  return views[0];
+};
+
 export const deriveClubAllianceActions = (
   actions: readonly ServiceAction[],
 ): ClubAllianceActionView => {
@@ -110,34 +135,81 @@ export const deriveClubAllianceActions = (
   // an unusable link merely because the current URL has no category query.
   validateCategoryTargets(categories);
 
+  const management = requireUniqueAction(actions, clubAllianceManagementActionId);
+
   return {
     categories,
-    management: requireUniqueAction(actions, clubAllianceManagementActionId),
+    management,
   };
 };
 
 export type ClubAllianceQuerySelection =
   | { mode: "home"; selected_action_id: null }
-  | { mode: "focused"; selected_action_id: ClubAllianceCategoryActionId };
+  | {
+      mode: "focused";
+      selected_action_id:
+        | ClubAllianceCategoryActionId
+        | typeof clubAllianceManagementActionId;
+    };
 
 export const resolveClubAllianceQuery = (
   search: string | URLSearchParams,
   categories: readonly ServiceAction[],
+  management?: ServiceAction,
 ): ClubAllianceQuerySelection => {
   const params =
     typeof search === "string"
       ? new URLSearchParams(search.startsWith("?") ? search.slice(1) : search)
       : search;
   const requestedCategories = params.getAll("category");
+  const requestedViews = params.getAll("view");
+  const unsupportedKeys = [...params.keys()].filter(
+    (key) => key !== "category" && key !== "view",
+  );
 
-  if (requestedCategories.length === 0) {
+  if (
+    requestedCategories.length === 0 &&
+    requestedViews.length === 0 &&
+    unsupportedKeys.length === 0
+  ) {
     return { mode: "home", selected_action_id: null };
   }
-  if (requestedCategories.length > 1) {
+  if (
+    unsupportedKeys.length > 0 ||
+    requestedCategories.length > 1 ||
+    requestedViews.length > 1 ||
+    (requestedCategories.length > 0 && requestedViews.length > 0)
+  ) {
     throw new ClubAllianceHomepageContractError(
       "CAH0_QUERY_AMBIGUOUS",
-      "category 参数必须唯一",
+      "俱乐部联盟选择参数必须唯一且不能混用",
     );
+  }
+
+  if (requestedViews.length === 1) {
+    if (!management) {
+      throw new ClubAllianceHomepageContractError(
+        "CAH1_ACTION_MISSING",
+        "俱乐部联盟管理动作未提供给查询解析器",
+      );
+    }
+    const requestedView = requestedViews[0];
+    if (requestedView.trim() === "") {
+      throw new ClubAllianceHomepageContractError(
+        "CAH0_QUERY_BLANK",
+        "view 参数不能为空",
+      );
+    }
+    if (requestedView !== managementViewFromTarget(management)) {
+      throw new ClubAllianceHomepageContractError(
+        "CAH0_QUERY_UNKNOWN",
+        `未知俱乐部管理视图：${requestedView}`,
+      );
+    }
+    return {
+      mode: "focused",
+      selected_action_id: clubAllianceManagementActionId,
+    };
   }
 
   const requestedCategory = requestedCategories[0];

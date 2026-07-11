@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { MouseEvent, ReactNode } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { useActionRuntime } from "../auth/ActionRuntimeContext";
 import { isEnabledAction, type ServiceAction } from "../domain/serviceActions";
@@ -121,7 +121,10 @@ export function ActionControl({
     );
   }
 
-  const notifyAccessRequirement = () => {
+  const notifyAccessRequirement = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (!accessDecision.allowed && accessDecision.reason === "scope_required") {
+      event.preventDefault();
+    }
     reportDecision();
     if (!accessDecision.allowed) reportAccessRequirement(action, accessDecision);
   };
