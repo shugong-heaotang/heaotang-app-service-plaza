@@ -1043,7 +1043,7 @@
       "title": "健康大管家 MVP-90 M0 合同与合成一致性正式派发",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-m0-dispatch",
       "branch": "codex/health-mvp90-m0-dispatch",
@@ -1072,11 +1072,11 @@
       "title": "健康大管家 MVP-90 M0 合同与合成一致性",
       "owner": "Health Manager module agent",
       "owner_role": "健康大管家负责人",
-      "status": "planned",
+      "status": "active",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-m0",
       "branch": "codex/health-manager-mvp90-m0",
-      "base_commit": "6dc126f5812795d5fc4624906828de3de2ac77a1",
+      "base_commit": "3c092fccb148f76e3c288d99ba3ac69274ca8563",
       "allowed_paths": [
         "docs/project-management/modules/health-manager/README.md",
         "docs/project-management/modules/health-manager/health-manager-mvp90-m0-requirements.md",
@@ -1100,7 +1100,7 @@
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
-      "migration_note": "已从 6dc126f 预创建干净专用工作树。自动激活条件：CA-H1 M4 integrated 且平台 M0 派发 checklist/exam/notice/IR 受控集成；激活时必须更新到最终权威 base 并再次核验 clean。M0 不授权前端、后端、API、数据库、环境、部署、生产、真实健康数据或资金操作。",
+      "migration_note": "平台派发 R2 检查单 26/26、考试 100、通知、IR、v2 内部依赖与 SP-H032 已受控集成至 3c092fc；模块专用工作树已快进至同一 base，HEAD/merge-base 一致且 clean 后正式激活。M0 不授权前端、后端、API、数据库、环境、部署、生产、真实健康数据或资金操作。",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h032健康大管家-mvp-90-m0-合同与合成一致性派发"
     },
     {
