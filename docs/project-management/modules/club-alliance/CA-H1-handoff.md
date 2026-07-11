@@ -78,3 +78,15 @@
 ### 请求平台验收
 
 请平台独立复核精确路由、单一 adapter、八态、ActionControl 复用、网络 allowlist/denylist、响应式/可访问性和变更范围；M2 Go 后再进入 H1-M3。
+
+## H1-M2 平台 No-Go 与 R1 根因修复
+
+- 平台对 `1e7d46d335e5dc26ea9c5894b8a940a63fc02f1e` 独立复核后暂判 No-Go：无 query 首页的 catalog 派生未验证四分类 target，原负例只覆盖 query resolve；allowed ActionControl 也缺少模块级 `activated` 遥测断言。
+- 根因：`categoryFromTarget()` 只在 `resolveClubAllianceQuery()` 有 category query 时调用，`deriveClubAllianceActions()` 在 home/Service Plaza 渲染前仅验证数量与 scope，导致错误 target 可泄漏为不可用链接。
+- R1 修复在派生阶段验证每个分类 target 必须可解析、仅含一个非空 category，并强制不同 action 的 category 一对一；缺失、空白、重复、多值、不可解析和跨 action 重复映射统一稳定失败关闭为 `CAH1_ACTION_TARGET_INVALID`。
+- 首页无 query 与 Service Plaza 均新增完整负例矩阵；Service Plaza 错误面保留稳定 error ID，且错误目录不渲染俱乐部链接。
+- 新增 allowed 公益入口点击断言，证明复用 `ActionControl` 上报 `activated/none`；既有拒绝路径继续证明 `blocked/authentication_required`。
+- 首次 R1 检查单使用了非合同固定 attestation，试卷虽答题 100 但不能授权实现；两份快照已原样保留在各自 `invalidated/` 子目录，未改写为通过。
+- R2 current checklist：`28/28`、当前 SHA mismatch `0`；考试 `EX-20260711-CLUB-ALLIANCE-H1-M2-R2-1` score `100`；实施记录 `IR-20260711-CLUB-ALLIANCE-H1-M2-R2`。
+- 定向：3 files、43 tests；全量：18 files、136 tests；production 与 test-server build 均通过。
+- 当前结论：M2 R2 模块复验通过，等待平台重新独立验收；M3、业务、后端、部署和生产仍未启动。

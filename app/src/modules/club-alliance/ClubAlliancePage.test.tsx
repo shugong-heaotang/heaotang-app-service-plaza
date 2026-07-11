@@ -141,6 +141,27 @@ describe("ClubAllianceRoute exact eight-state shell", () => {
     });
   });
 
+  it("reuses ActionControl activated telemetry for an allowed category", async () => {
+    const user = userEvent.setup();
+    renderRoute(
+      "/services/club-alliance",
+      repositoryWith(
+        actionWith("public-benefit-club", {
+          access: { auth_mode: "anonymous", required_scopes: [] },
+        }),
+      ),
+    );
+
+    await user.click(await screen.findByRole("link", { name: "公益俱乐部" }));
+    await waitFor(() => {
+      expect(reportActionEvent).toHaveBeenCalledWith(
+        expect.objectContaining({ action_id: "public-benefit-club" }),
+        "activated",
+        "none",
+      );
+    });
+  });
+
   it("renders focused for an allowed category and exposes exact selected_action_id", async () => {
     const actions = actionWith("public-benefit-club", {
       access: { auth_mode: "anonymous", required_scopes: [] },
@@ -187,6 +208,43 @@ describe("ClubAllianceRoute exact eight-state shell", () => {
   it("fails invalid query closed with a stable language-neutral error id", async () => {
     renderRoute("/services/club-alliance?category=%20");
     expect(await screen.findByText("CAH0_QUERY_BLANK")).toBeInTheDocument();
+    expect(document.querySelector('[data-page-state="error"]')).toBeInTheDocument();
+  });
+
+  it.each([
+    ["missing", "/services/club-alliance"],
+    ["blank", "/services/club-alliance?category=%20"],
+    ["repeated", "/services/club-alliance?category=公益俱乐部&category=公益俱乐部"],
+    ["multiple", "/services/club-alliance?category=公益俱乐部&category=自建俱乐部"],
+    ["malformed", "http://["],
+  ])("fails the no-query home state closed for a %s category target", async (_kind, target) => {
+    renderRoute(
+      "/services/club-alliance",
+      repositoryWith(actionWith("public-benefit-club", { target })),
+    );
+
+    expect(await screen.findByText("CAH1_ACTION_TARGET_INVALID")).toBeInTheDocument();
+    expect(document.querySelector('[data-page-state="error"]')).toBeInTheDocument();
+    expect(document.querySelector('[data-page-state="home"]')).not.toBeInTheDocument();
+  });
+
+  it("fails the no-query home state closed when two actions map to one category", async () => {
+    const actions = cloneActions();
+    const publicBenefit = actions.find(
+      (action) => action.action_id === "public-benefit-club",
+    ) as ServiceAction;
+    renderRoute(
+      "/services/club-alliance",
+      repositoryWith(
+        actions.map((action) =>
+          action.action_id === "self-created-club"
+            ? { ...action, target: publicBenefit.target }
+            : action,
+        ),
+      ),
+    );
+
+    expect(await screen.findByText("CAH1_ACTION_TARGET_INVALID")).toBeInTheDocument();
     expect(document.querySelector('[data-page-state="error"]')).toBeInTheDocument();
   });
 

@@ -12,6 +12,7 @@ import {
   type ServiceCatalogRepository,
 } from "../infrastructure/serviceCatalogRepository";
 import { deriveClubAllianceActions } from "../modules/club-alliance/clubAllianceActionAdapter";
+import { ClubAllianceHomepageContractError } from "../modules/club-alliance/clubAllianceHomepageContract";
 
 const iconClassByService: Record<string, string> = {
   "activity-plaza": "activity",
@@ -78,7 +79,13 @@ export function ServicePlazaPage({
     } catch (loadError) {
       setCatalog(null);
       setActions(null);
-      setError(loadError instanceof Error ? loadError.message : "服务目录加载失败");
+      setError(
+        loadError instanceof ClubAllianceHomepageContractError
+          ? `${loadError.errorId}: ${loadError.message}`
+          : loadError instanceof Error
+            ? loadError.message
+            : "服务目录加载失败",
+      );
     }
   }, [repository]);
 
