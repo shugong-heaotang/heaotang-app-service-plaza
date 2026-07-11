@@ -43,7 +43,7 @@
 | 768×900 | 768/768 | 2 列，各 340px | 无横向滚动，Pass |
 | 1280×900 | 1280/1280 | 有界 2 列，各约 300px | 无横向滚动，Pass |
 
-焦点证据：顶部返回链接获得真实 `focus-visible`，computed outline 为 `rgba(15, 118, 110, 0.32) solid 3px`。浏览器控制层没有可靠发送 Enter；唯一 locator 的真实 click 已成功进入公益俱乐部 guest `unauthorized` 状态，URL 带唯一 category，页面显示 `authentication_required`。当前不得把自动化单测替代为完整环境键盘 UAT。
+焦点证据：顶部和主体返回链接均可获得真实 `focus-visible`，computed outline 为 `rgba(15, 118, 110, 0.32) solid 3px`。浏览器控制层对 Shift+Tab 的两种组合键编码均未移动焦点；公益链接 `press('Enter')` 返回后 URL 仍为首页，未取得产品导航结果。两项保持“浏览器控制通道未验证”，不判 Pass，也不判产品 No-Go；当前不得把自动化单测替代为完整环境键盘 UAT。
 
 ## Query 与失败关闭
 
@@ -70,6 +70,18 @@
 - `feature-flags` 属于 `ActionRuntimeProvider` 公共层既有请求，单列记录，不算模块新增请求。
 - 同一时间窗未出现 club search/create/join/review/member/payment/charity/federation 请求。
 - 浏览器控制层 `ab.chatgpt.com` Statsig 请求不是测试应用请求，服务器访问日志中不存在，不纳入 APP 证据。
+
+### 2026-07-11 导航与网络增量证据
+
+- 刷新：直达自建 category 后页面为 `unauthorized / authentication_required`；执行真实 reload 后 URL 完全保持，稳定原因与标题各唯一出现一次，Pass。
+- 浏览器后退：从上述 category 状态执行 back，回到无 query `/app/service-plaza/services/club-alliance/`，且“选择俱乐部服务”标题唯一出现，Pass。
+- 顶部返回：唯一 `返回服务广场` 链接跳转到 `/app/service-plaza/services`，Pass。
+- 主体返回：唯一 `← 返回服务广场` 链接跳转到 `/app/service-plaza/services`，Pass。
+- Shift+Tab：底部返回链接已显示 3px focus-visible，但 Playwright `Shift+Tab`、DOM/CUA `SHIFT+TAB` 均未改变 activeElement，记录为控制通道未验证。
+- Enter：唯一公益入口 `press('Enter')` 未报产品错误但 URL 保持首页；前一次调用曾遇 webview attach 超时。为避免重复遥测事件，不继续重试，记录为控制通道未验证。
+- Nginx 最近俱乐部 Referer 窗口聚合：`catalog GET 200=30`、`actions GET 200=30`、APP 全局 `feature-flags GET 200=38`、`action-events POST 200=6`。
+- 同一窗口业务 denylist 计数为 0；未出现 club search/create/join/review/member/payment/charity/federation API。
+- Nginx 只记录方法、路径、状态码聚合；数据库事件证据只保存 action_id、telemetry_event、outcome、reason、时间及 user_id 为 null/non-null，不保存 IP、手机号、OTP、JWT、完整 user_id 或敏感业务正文。
 
 ### 动作遥测阻断事实
 
@@ -102,7 +114,7 @@
 ## 尚未关闭
 
 1. `CA-H1-M4-B001` 已关闭；保留上述 exact commit、部署、双审与 guest blocked 证据。
-2. 单步完成 Enter、Shift+Tab、刷新、浏览器后退和两个返回入口。
+2. 刷新、浏览器后退和两个返回入口已 Pass；Enter、Shift+Tab 因浏览器控制通道不能稳定触发而保持未验证，最终门禁前需换稳定真实键盘通道复测。
 3. 使用批准的合成测试账号验证登录允许和登录但缺 `club:manage`；不得注入 shell token或在报告记录 OTP/JWT。
 4. 四分类 guest blocked 已完成；仍需取得登录 activated 与缺 `club:manage` blocked 的真实环境证据，并确认载荷无 OTP/JWT/完整个人标识/敏感业务数据。
 5. 八态由 143/143 全量与 56/56 定向自动化证明；环境只记录安全、自然可重复状态，不新增人工状态切换器，不把未构造的 maintenance/offline 冒充截图通过。
