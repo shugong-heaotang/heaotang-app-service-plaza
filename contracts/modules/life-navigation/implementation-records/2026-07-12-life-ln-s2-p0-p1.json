@@ -1,0 +1,107 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-LIFE-LN-S2-P0-P1-R2",
+  "title": "生命导航 LN-S2 P0/P1 Base Contract",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "在不冻结业务语义、不执行 selector 的前提下，形成生命导航维度注册表、窄目录、申请 selector、稳定错误和合成一致性的 P0/P1 Base Contract。",
+  "governance_checklist": "contracts/modules/life-navigation/development-checklists/2026-07-12-life-ln-s2-p0-p1-r2.json",
+  "governance_exam": "contracts/modules/life-navigation/governance-exams/2026-07-12-life-ln-s2-p0-p1-r2-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md",
+    "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json",
+    "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md",
+    "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md",
+    "docs/project-management/modules/life-navigation/README.md",
+    "docs/project-management/notices/2026-07-10-life-navigation-first-phase-task-order.md",
+    "docs/project-management/modules/life-navigation-first-slice-contract-v1.md",
+    "contracts/foundation/module-dependencies/life-navigation.v1.json",
+    "contracts/modules/life-navigation/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-life-ln-s2-task-order.md",
+    "docs/project-management/modules/life-navigation/LN-S2-requirements.md",
+    "docs/project-management/modules/life-navigation/LN-S2-decisions.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.identity-api",
+    "foundation.authorization-idempotency",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/module-internal-dependencies.v2.schema.json",
+    "contracts/modules/life-navigation/internal-dependencies.v1.json",
+    "contracts/modules/life-navigation/dimension-guided-application/dimension-registry.v1.json",
+    "contracts/modules/life-navigation/dimension-guided-application/dimension-directory.v1.json",
+    "contracts/modules/life-navigation/dimension-guided-application/application-dimension-selector.v1.json",
+    "contracts/modules/life-navigation/dimension-guided-application/error-catalog.v1.json"
+  ],
+  "decisions": [
+    "docs/project-management/modules/life-navigation/LN-S2-decisions.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/modules/life-navigation/README.md",
+    "docs/project-management/modules/life-navigation/LN-S2-requirements.md",
+    "docs/project-management/modules/life-navigation/LN-S2-decisions.md",
+    "docs/project-management/modules/life-navigation/LN-S2-receipt.md",
+    "docs/project-management/modules/life-navigation/LN-S2-handoff.md",
+    "docs/project-management/modules/life-navigation/LN-S2-conformance-report.md",
+    "contracts/modules/life-navigation/internal-dependencies.v1.json",
+    "contracts/modules/life-navigation/dimension-guided-application",
+    "contracts/modules/life-navigation/development-checklists",
+    "contracts/modules/life-navigation/governance-exams",
+    "contracts/modules/life-navigation/implementation-records"
+  ],
+  "verification": [
+    "scripts/Test-AgentDevelopmentPreflight.ps1",
+    "scripts/validate_development_checklists.py",
+    "scripts/validate_governance_exams.py",
+    "scripts/validate_module_internal_dependencies.py",
+    "Draft202012Validator for four LN-S2 contract pairs",
+    "contracts/modules/life-navigation/dimension-guided-application/test_life_dimension_contracts.py",
+    "scripts/validate_implementation_records.py",
+    "scripts/validate_agent_collaboration.py",
+    "scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/modules/life-navigation/development-checklists/2026-07-12-life-ln-s2-p0-p1-r2.json",
+    "contracts/modules/life-navigation/governance-exams/2026-07-12-life-ln-s2-p0-p1-r2-attempt-1.json",
+    "docs/project-management/modules/life-navigation/LN-S2-conformance-report.md",
+    "docs/project-management/modules/life-navigation/LN-S2-handoff.md"
+  ],
+  "premises": [
+    "D-LN-S2-001 remains Pending and no candidate dimension is authoritative or executable",
+    "legacy yun remains unmapped until the project owner decides compatibility and migration",
+    "application-history identity, idempotency, ownership and isolation evidence remains valid",
+    "the server will be the sole authority for future dimension selection",
+    "frontend, backend, environment, deployment and production remain separately authorized"
+  ],
+  "implementation_mode": "ai-assisted"
+}

@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/life-navigation/error-catalog.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "contract_status", "authoritative_business_contract", "errors"],
+  "properties": {
+    "contract_version": {"const": "life-navigation.dimension-errors.v1"},
+    "contract_status": {"const": "base-contract"},
+    "authoritative_business_contract": {"const": false},
+    "errors": {
+      "type": "array",
+      "minItems": 12,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["error_id", "severity", "failure_mode"],
+        "properties": {
+          "error_id": {"type": "string", "pattern": "^LN_[A-Z0-9_]+$"},
+          "severity": {"const": "blocker"},
+          "failure_mode": {"const": "fail-closed"}
+        }
+      }
+    }
+  }
+}

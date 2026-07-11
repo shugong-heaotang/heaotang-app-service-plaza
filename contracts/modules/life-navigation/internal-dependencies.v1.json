@@ -1,87 +1,144 @@
 {
-  "contract_version": "module-internal-dependencies.v1",
+  "contract_version": "module-internal-dependencies.v2",
   "module_id": "life-navigation",
   "module_version": "v1",
-  "slice_id": "application-history",
-  "development_readiness": "go",
-  "acceptance_readiness": "go",
+  "slice_id": "ln-s2-dimension-guided-application",
+  "readiness": {
+    "governance": "go",
+    "development": "partial-go",
+    "acceptance": "pending",
+    "release": "pending",
+    "operations": "pending"
+  },
   "dependencies": [
     {
-      "dependency_id": "entry.contract",
-      "kind": "interface",
-      "description": "服务入口、返回路径和主动作稳定",
+      "dependency_id": "governance.entry",
+      "kind": "governance",
+      "description": "正式通知、active 工作项、独立工作树、当前检查单31/31、考试100与签收已完成",
       "status": "verified",
       "required_for_slice": true,
       "depends_on": [],
-      "contracts": ["contracts/service-plaza/service-plaza-actions.v1.json"],
-      "evidence": ["docs/project-management/service-plaza/foundation-acceptance-2026-07-10.md"],
-      "unresolved": []
+      "contracts": ["docs/project-management/notices/2026-07-12-life-ln-s2-task-order.md"],
+      "evidence": [
+        "contracts/modules/life-navigation/development-checklists/2026-07-12-life-ln-s2-p0-p1.json",
+        "contracts/modules/life-navigation/governance-exams/2026-07-12-life-ln-s2-p0-p1-attempt-1.json",
+        "docs/project-management/modules/life-navigation/LN-S2-receipt.md"
+      ],
+      "unresolved": [],
+      "owner": "生命导航二负责人",
+      "blocks": [],
+      "does_not_block": ["dimension.registry", "dimension.directory", "application.selector", "ln-s2.conformance"]
     },
     {
-      "dependency_id": "records.data",
-      "kind": "data",
-      "description": "申请记录归属、类型、标题、备注和创建时间模型",
-      "status": "verified",
-      "required_for_slice": true,
-      "depends_on": ["entry.contract"],
-      "contracts": ["docs/project-management/modules/life-navigation-first-slice-contract-v1.md"],
-      "evidence": ["C:/Users/shugo/Documents/heaotang-main/backend-go/plugins/life-navigation-plugin/service.go"],
-      "unresolved": []
-    },
-    {
-      "dependency_id": "records.api",
+      "dependency_id": "legacy.application-history",
       "kind": "interface",
-      "description": "本人申请 POST/GET v1 接口和稳定错误语义",
+      "description": "旧 application-history Go 只提供身份、幂等、历史和跨用户隔离继承事实，不证明 LN-S2 Go",
       "status": "verified",
-      "required_for_slice": true,
-      "depends_on": ["records.data"],
+      "required_for_slice": false,
+      "depends_on": [],
       "contracts": ["docs/project-management/modules/life-navigation-first-slice-contract-v1.md"],
-      "evidence": ["docs/project-management/service-plaza/api-acceptance-2026-07-10-foundation.json"],
-      "unresolved": []
+      "evidence": ["docs/project-management/modules/life-navigation/LN-M4-001-handoff.md"],
+      "unresolved": [],
+      "owner": "生命导航二负责人",
+      "blocks": [],
+      "does_not_block": ["dimension.registry", "dimension.directory", "application.selector", "ln-s2.conformance"]
     },
     {
-      "dependency_id": "records.ownership",
-      "kind": "policy",
-      "description": "用户身份来自会话且只能读取本人记录",
-      "status": "verified",
+      "dependency_id": "dimension.decision",
+      "kind": "decision",
+      "description": "稳定维度集合、版本、active、authority、配置失败和旧 yun 兼容尚未由项目负责人冻结",
+      "status": "blocked-local",
       "required_for_slice": true,
-      "depends_on": ["records.data"],
-      "contracts": ["docs/project-management/modules/life-navigation-first-slice-contract-v1.md"],
-      "evidence": ["C:/Users/shugo/Documents/heaotang-main/backend-go/plugins/life-navigation-plugin/service_test.go"],
-      "unresolved": []
+      "depends_on": [],
+      "contracts": ["docs/project-management/modules/life-navigation/LN-S2-decisions.md"],
+      "evidence": [],
+      "unresolved": ["D-LN-S2-001 Pending；待项目负责人书面裁决"],
+      "owner": "项目负责人",
+      "blocks": ["可执行 dimension selector", "前端编码", "后端编码", "环境验收"],
+      "does_not_block": ["dimension.registry", "dimension.directory", "application.selector", "ln-s2.conformance", "ln-s2.handoff"]
     },
     {
-      "dependency_id": "records.idempotency",
-      "kind": "policy",
-      "description": "首次、重放、异载荷冲突和日限额顺序固定",
-      "status": "verified",
+      "dependency_id": "dimension.registry",
+      "kind": "contract",
+      "description": "版本化维度注册表 Base Contract；Pending 阶段只允许候选元数据，禁止 executable mapping",
+      "status": "standardized",
       "required_for_slice": true,
-      "depends_on": ["records.api"],
-      "contracts": ["docs/project-management/modules/life-navigation-first-slice-contract-v1.md"],
-      "evidence": ["docs/project-management/service-plaza/api-acceptance-2026-07-10-foundation.json"],
-      "unresolved": []
+      "depends_on": ["governance.entry"],
+      "contracts": [
+        "contracts/modules/life-navigation/dimension-guided-application/dimension-registry.v1.json",
+        "contracts/modules/life-navigation/dimension-guided-application/dimension-registry.v1.schema.json"
+      ],
+      "evidence": ["docs/project-management/modules/life-navigation/LN-S2-conformance-report.md"],
+      "unresolved": ["registry_frozen=false", "decision_status=pending", "executable=false"],
+      "owner": "生命导航二负责人",
+      "blocks": ["可执行 dimension selector"],
+      "does_not_block": ["dimension.directory", "application.selector", "ln-s2.conformance"]
     },
     {
-      "dependency_id": "history.ui",
-      "kind": "workflow",
-      "description": "提交后展示本人最近申请及空、加载、错误和限额状态",
-      "status": "verified",
+      "dependency_id": "dimension.directory",
+      "kind": "contract",
+      "description": "GET dimensions 窄字段 Base Contract，不泄漏评分、问题、动作或路由实现",
+      "status": "standardized",
       "required_for_slice": true,
-      "depends_on": ["records.api", "records.ownership", "records.idempotency"],
-      "contracts": ["docs/project-management/modules/life-navigation-first-slice-contract-v1.md"],
-      "evidence": ["docs/project-management/modules/life-navigation/acceptance/LN-M4-001-frontend-uat.md"],
-      "unresolved": []
+      "depends_on": ["governance.entry", "dimension.registry"],
+      "contracts": [
+        "contracts/modules/life-navigation/dimension-guided-application/dimension-directory.v1.json",
+        "contracts/modules/life-navigation/dimension-guided-application/dimension-directory.v1.schema.json"
+      ],
+      "evidence": ["docs/project-management/modules/life-navigation/LN-S2-conformance-report.md"],
+      "unresolved": ["现有宽接口与默认回退尚未获得后端实现授权"],
+      "owner": "生命导航二负责人",
+      "blocks": ["可执行目录", "后端实现"],
+      "does_not_block": ["application.selector", "ln-s2.conformance"]
     },
     {
-      "dependency_id": "compliance.boundary",
-      "kind": "policy",
-      "description": "不作确定性预测且不替代专业意见",
-      "status": "verified",
+      "dependency_id": "application.selector",
+      "kind": "contract",
+      "description": "申请维度服务端权威 selector Base Contract；当前强制 executable=false",
+      "status": "standardized",
       "required_for_slice": true,
-      "depends_on": ["entry.contract"],
-      "contracts": ["docs/project-management/modules/life-navigation-first-slice-contract-v1.md"],
-      "evidence": ["docs/project-management/modules/life-navigation-first-slice-contract-v1.md", "docs/project-management/modules/life-navigation/acceptance/LN-M4-001-frontend-uat.md"],
-      "unresolved": []
+      "depends_on": ["governance.entry", "dimension.registry", "dimension.decision"],
+      "contracts": [
+        "contracts/modules/life-navigation/dimension-guided-application/application-dimension-selector.v1.json",
+        "contracts/modules/life-navigation/dimension-guided-application/application-dimension-selector.v1.schema.json",
+        "contracts/modules/life-navigation/dimension-guided-application/error-catalog.v1.json"
+      ],
+      "evidence": ["docs/project-management/modules/life-navigation/LN-S2-conformance-report.md"],
+      "unresolved": ["旧 yun mapping_target=null", "D-LN-S2-001 Pending"],
+      "owner": "生命导航二负责人",
+      "blocks": ["可执行 selector conformance", "前端编码", "后端编码"],
+      "does_not_block": ["P0/P1 Schema 结构和失败关闭负例", "ln-s2.handoff"]
+    },
+    {
+      "dependency_id": "ln-s2.conformance",
+      "kind": "acceptance",
+      "description": "P0/P1 Schema、Pending 元数据、窄目录、固定 seed 与失败关闭用例；不执行 selector",
+      "status": "test-verified",
+      "required_for_slice": true,
+      "depends_on": ["governance.entry", "dimension.registry", "dimension.directory", "application.selector"],
+      "contracts": [
+        "contracts/modules/life-navigation/dimension-guided-application/fixtures/cases.v1.json",
+        "contracts/modules/life-navigation/dimension-guided-application/test_life_dimension_contracts.py"
+      ],
+      "evidence": ["docs/project-management/modules/life-navigation/LN-S2-conformance-report.md"],
+      "unresolved": ["可执行 selector 用例后置到 D-LN-S2-001 Accepted"],
+      "owner": "生命导航二负责人",
+      "blocks": [],
+      "does_not_block": ["dimension.decision", "ln-s2.handoff"]
+    },
+    {
+      "dependency_id": "ln-s2.handoff",
+      "kind": "handoff",
+      "description": "P0/P1 需求、决策、合同、Schema、conformance、IR 和平台验收交接",
+      "status": "implemented",
+      "required_for_slice": true,
+      "depends_on": ["governance.entry", "dimension.registry", "dimension.directory", "application.selector", "ln-s2.conformance"],
+      "contracts": ["docs/project-management/modules/life-navigation/LN-S2-handoff.md"],
+      "evidence": ["contracts/modules/life-navigation/implementation-records/2026-07-12-life-ln-s2-p0-p1.json"],
+      "unresolved": ["等待平台独立复核与项目负责人 D-LN-S2-001 裁决"],
+      "owner": "生命导航二负责人",
+      "blocks": ["LN-S2-PLATFORM-ACCEPTANCE"],
+      "does_not_block": []
     }
   ]
 }

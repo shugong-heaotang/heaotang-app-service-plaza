@@ -1,0 +1,57 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/life-navigation/application-dimension-selector.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "contract_status", "authoritative_business_contract", "operation", "selector", "record_reference", "legacy_yun", "non_goals"],
+  "properties": {
+    "contract_version": {"const": "life-navigation.application-dimension-selector.v1"},
+    "contract_status": {"const": "base-contract"},
+    "authoritative_business_contract": {"const": false},
+    "operation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "path", "record_type"],
+      "properties": {
+        "method": {"const": "POST"},
+        "path": {"const": "/api/v1/life-nav/records"},
+        "record_type": {"const": "application"}
+      }
+    },
+    "selector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["authority", "decision_status", "registry_frozen", "executable", "required_fields", "validation_order", "failure_mode"],
+      "properties": {
+        "authority": {"const": "server"},
+        "decision_status": {"const": "pending"},
+        "registry_frozen": {"const": false},
+        "executable": {"const": false},
+        "required_fields": {"const": ["dimension_id", "dimension_version"]},
+        "validation_order": {"const": ["required", "known", "decision", "active", "version", "executable"]},
+        "failure_mode": {"const": "fail-closed"}
+      }
+    },
+    "record_reference": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["persist_dimension_id", "persist_dimension_version", "unknown_historical_label_policy"],
+      "properties": {
+        "persist_dimension_id": {"const": true},
+        "persist_dimension_version": {"const": true},
+        "unknown_historical_label_policy": {"const": "show-stable-id-and-unresolved-status"}
+      }
+    },
+    "legacy_yun": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["decision_status", "executable", "mapping_target"],
+      "properties": {
+        "decision_status": {"const": "pending"},
+        "executable": {"const": false},
+        "mapping_target": {"type": "null"}
+      }
+    },
+    "non_goals": {"type": "array", "minItems": 8, "uniqueItems": true, "items": {"type": "string"}}
+  }
+}

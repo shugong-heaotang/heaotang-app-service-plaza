@@ -1,0 +1,30 @@
+{
+  "contract_version": "life-navigation.application-dimension-selector.v1",
+  "contract_status": "base-contract",
+  "authoritative_business_contract": false,
+  "operation": {
+    "method": "POST",
+    "path": "/api/v1/life-nav/records",
+    "record_type": "application"
+  },
+  "selector": {
+    "authority": "server",
+    "decision_status": "pending",
+    "registry_frozen": false,
+    "executable": false,
+    "required_fields": ["dimension_id", "dimension_version"],
+    "validation_order": ["required", "known", "decision", "active", "version", "executable"],
+    "failure_mode": "fail-closed"
+  },
+  "record_reference": {
+    "persist_dimension_id": true,
+    "persist_dimension_version": true,
+    "unknown_historical_label_policy": "show-stable-id-and-unresolved-status"
+  },
+  "legacy_yun": {
+    "decision_status": "pending",
+    "executable": false,
+    "mapping_target": null
+  },
+  "non_goals": ["assessment", "scoring", "prediction", "ai_advice", "professional_conclusion", "pricing", "transaction", "downstream_service"]
+}
