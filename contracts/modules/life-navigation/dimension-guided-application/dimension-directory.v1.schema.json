@@ -1,0 +1,42 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/life-navigation/dimension-directory.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "contract_status", "authoritative_business_contract", "method", "path", "registry_ref", "registry_frozen", "decision_status", "executable", "allowed_item_fields", "selection_policy", "base_response", "forbidden_fields"],
+  "properties": {
+    "contract_version": {"const": "life-navigation.dimension-directory.v1"},
+    "contract_status": {"const": "base-contract"},
+    "authoritative_business_contract": {"const": false},
+    "method": {"const": "GET"},
+    "path": {"const": "/api/v1/life-nav/dimensions"},
+    "registry_ref": {"const": "dimension-registry.v1.json"},
+    "registry_frozen": {"const": false},
+    "decision_status": {"const": "pending"},
+    "executable": {"const": false},
+    "allowed_item_fields": {"const": ["dimension_id", "dimension_version", "label", "sort_order"]},
+    "selection_policy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["requires_registry_frozen", "requires_decision_status", "requires_active", "requires_executable", "failure_mode"],
+      "properties": {
+        "requires_registry_frozen": {"const": true},
+        "requires_decision_status": {"const": "accepted"},
+        "requires_active": {"const": true},
+        "requires_executable": {"const": true},
+        "failure_mode": {"const": "fail-closed"}
+      }
+    },
+    "base_response": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["availability", "items", "error_id"],
+      "properties": {
+        "availability": {"const": "unavailable"},
+        "items": {"type": "array", "maxItems": 0},
+        "error_id": {"const": "LN_DIMENSION_REGISTRY_NOT_FROZEN"}
+      }
+    },
+    "forbidden_fields": {"type": "array", "minItems": 7, "uniqueItems": true, "items": {"type": "string"}}
+  }
+}

@@ -1,0 +1,19 @@
+{
+  "contract_version": "life-navigation.dimension-errors.v1",
+  "contract_status": "base-contract",
+  "authoritative_business_contract": false,
+  "errors": [
+    {"error_id": "LN_DIMENSION_REQUIRED", "severity": "blocker", "failure_mode": "fail-closed"},
+    {"error_id": "LN_DIMENSION_UNKNOWN", "severity": "blocker", "failure_mode": "fail-closed"},
+    {"error_id": "LN_DIMENSION_DECISION_PENDING", "severity": "blocker", "failure_mode": "fail-closed"},
+    {"error_id": "LN_DIMENSION_INACTIVE", "severity": "blocker", "failure_mode": "fail-closed"},
+    {"error_id": "LN_DIMENSION_VERSION_INCOMPATIBLE", "severity": "blocker", "failure_mode": "fail-closed"},
+    {"error_id": "LN_LEGACY_DIMENSION_DECISION_PENDING", "severity": "blocker", "failure_mode": "fail-closed"},
+    {"error_id": "LN_DIMENSION_REGISTRY_NOT_FROZEN", "severity": "blocker", "failure_mode": "fail-closed"},
+    {"error_id": "LN_DIMENSION_REGISTRY_INVALID", "severity": "blocker", "failure_mode": "fail-closed"},
+    {"error_id": "LN_DIMENSION_REGISTRY_MISSING", "severity": "blocker", "failure_mode": "fail-closed"},
+    {"error_id": "LN_DIMENSION_REGISTRY_READ_FAILED", "severity": "blocker", "failure_mode": "fail-closed"},
+    {"error_id": "LN_DIMENSION_DUPLICATE_ID", "severity": "blocker", "failure_mode": "fail-closed"},
+    {"error_id": "LN_DIMENSION_DUPLICATE_SORT_ORDER", "severity": "blocker", "failure_mode": "fail-closed"}
+  ]
+}
