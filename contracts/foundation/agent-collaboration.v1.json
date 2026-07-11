@@ -1255,7 +1255,7 @@
       "title": "生命导航 LN-S2 维度引导申请 P0/P1 正式派发",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "active",
+      "status": "integrated",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-life-ln-s2-dispatch",
       "branch": "codex/life-ln-s2-dispatch",
@@ -1280,11 +1280,11 @@
       "title": "生命导航 LN-S2 维度引导申请 P0/P1 标准",
       "owner": "Life Navigation 2 module agent",
       "owner_role": "生命导航二负责人",
-      "status": "planned",
+      "status": "active",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-life-ln-s2-p0-p1",
       "branch": "codex/life-navigation-ln-s2-p0-p1",
-      "base_commit": "7d261d8276c4d72883598f72a8dbaac8a48837b1",
+      "base_commit": "efc07aeddbe5e8681ae26385ca1395029408daab",
       "allowed_paths": [
         "docs/project-management/modules/life-navigation/README.md",
         "docs/project-management/modules/life-navigation/LN-S2-requirements.md",
@@ -1309,7 +1309,7 @@
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
-      "migration_note": "已从 7d261d8 预创建专用干净工作树；平台派发受控集成后必须快进至 final integration HEAD 并再次核验 clean，再单独激活。P0 决策前保持 registry_frozen=false、executable=false，旧 yun mapping_target=null。",
+      "migration_note": "平台派发 checklist 26/26、考试100、通知、IR与 SP-H033 已受控集成至 efc07ae；模块专用工作树已快进至同一 base，HEAD/merge-base 一致且 clean 后正式激活。P0 决策前保持 registry_frozen=false、executable=false，旧 yun mapping_target=null。",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h033生命导航-ln-s2-p0p1-正式派发"
     }
   ]
