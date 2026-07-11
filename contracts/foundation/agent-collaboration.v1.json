@@ -1020,7 +1020,7 @@
       "title": "健康大管家 MVP-90 开发 PRD V1.0 文档",
       "owner": "Health Manager module agent",
       "owner_role": "健康大管家负责人",
-      "status": "active",
+      "status": "handoff-ready",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-prd",
       "branch": "codex/health-manager-mvp90-prd",
@@ -1035,7 +1035,7 @@
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
-      "migration_note": "正式派发提交 0f35057 已受控集成；模块工作树实际快进至包含通知与 SP-H031 的 3399b90，HEAD 与 base 一致且 clean 后激活。仅文档，不授权业务代码。",
+      "migration_note": "正式派发提交 0f35057 已受控集成；模块工作树实际快进至包含通知与 SP-H031 的 3399b90，HEAD 与 base 一致且 clean 后激活。MVP-90 PRD C5 已获 Document Handoff Ready，模块状态收口提交 fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c 已推送；Draft PR #2 保持未合并。仅文档，不授权 M0、业务代码、接口、Schema、环境、真实健康数据或资金操作。",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h031健康大管家-mvp-90-prd-独立派发"
     },
     {
