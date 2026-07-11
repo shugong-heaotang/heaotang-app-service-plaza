@@ -1049,7 +1049,6 @@
       "branch": "codex/club-alliance-h1-m4-acceptance",
       "base_commit": "91547b3db4a8a92537ff19193f2e2a6740318ccd",
       "allowed_paths": [
-        "contracts/foundation/agent-collaboration.v1.json",
         "contracts/foundation/development-checklists/2026-07-11-club-h1-m4-acceptance.json",
         "contracts/foundation/governance-exams/2026-07-11-club-h1-m4-acceptance-attempt-1.json",
         "contracts/foundation/implementation-records/2026-07-11-club-h1-m4-acceptance.json",
@@ -1061,6 +1060,53 @@
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
       "migration_note": "M3 Local Go 后独立执行测试环境前端部署、备份/回滚、真实浏览器多视口/键盘/网络/八态 UAT；禁止业务代码、后端、production、真实资金与不可逆操作。",
+      "handoff_record": null
+    },
+    {
+      "work_id": "AIW-20260711-ACTION-TELEMETRY-CONFIG-GOVERNANCE",
+      "title": "动作遥测功能开关双人审批公共依赖治理",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-action-telemetry-config-governance",
+      "branch": "codex/action-telemetry-config-governance",
+      "base_commit": "25c2686999274b144d2abae9f6f4833e261a0879",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/business-variables.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-action-telemetry-config-governance.json",
+        "contracts/foundation/governance-exams/2026-07-11-action-telemetry-config-governance-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-action-telemetry-config-governance.json",
+        "docs/decisions/0020-action-telemetry-business-variable.md",
+        "docs/project-management/notices/2026-07-11-action-telemetry-config-task-order.md",
+        "docs/project-management/service-plaza/action-telemetry-config-governance-2026-07-11.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "关闭 CA-H1-M4-B001：复用 businessconfig 双人提案/审核，新增 boolean 权威变量并使旧 feature flag 表降为兼容证据；禁止直接 SQL 或恢复单管理员写入口。",
+      "handoff_record": null
+    },
+    {
+      "work_id": "AIW-20260711-ACTION-TELEMETRY-BUSINESSCONFIG-BACKEND",
+      "title": "动作遥测 boolean 业务变量与 service-plaza 适配",
+      "owner": "Backend platform agent",
+      "owner_role": "后端平台负责人",
+      "status": "planned",
+      "repository_root": "C:/Users/shugo/Documents/heaotang-main",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-action-telemetry-businessconfig",
+      "branch": "codex/action-telemetry-businessconfig",
+      "base_commit": "47ef91bb5ca6774c40f6c4301ba3f25e224a4bd9",
+      "allowed_paths": [
+        "backend-go/internal/businessconfig/businessconfig.go",
+        "backend-go/internal/businessconfig/businessconfig_test.go",
+        "backend-go/plugins/config-plugin/plugin_test.go",
+        "backend-go/plugins/service-plaza-plugin/infrastructure.go",
+        "backend-go/plugins/service-plaza-plugin/infrastructure_test.go"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "预登记；待平台合同/通知受控集成后激活。新增 boolean kind 与 service-plaza.action-telemetry.enabled，读取失败关闭；复用既有 maker-checker/idempotency/audit，禁止新增第二套审批。",
       "handoff_record": null
     }
   ]
