@@ -592,3 +592,17 @@ Handoff 运行规则见 `handoff-operating-mechanism.md`。首轮具体表单见
 - 兼容性：历史 v1 实例继续使用 v1 Schema；validator 按实例 `contract_version` 路由，未知版本失败关闭。
 - 能力：五维 readiness、owner、blocks、does_not_block、扩展 kind/status。
 - 实现记录：`IR-20260711-MODULE-INTERNAL-DEPENDENCIES-V2`
+
+## SP-H035 俱乐部联盟 H2 会员首页需求变更与派发
+
+- 日期：2026-07-12
+- 提交方：项目负责人 / 平台集成负责人
+- 接收方：俱乐部联盟负责人
+- 工作项：AIW-20260712-CLUB-MEMBER-HOME-DISPATCH；后续 AIW-20260712-CLUB-MEMBER-HOME-H2
+- 基线：6149504
+- 已完成：确认 H1 保留为技术底座；冻结“会员工作台在上、联盟探索在下”双层首页；确认联盟管理公益/家庭/自建三类俱乐部，友联体为 club-federation 关系；拆分 H2-M0 需求合同、M1 页面壳、M2 真实接入、M3 分身份 UAT。
+- 未完成：H2-M0 机器合同、页面实现、真实 API 接入、测试环境部署和浏览器 UAT。
+- blocks：H2-M1 及后续等待 CA-SC 当前合同、后端与前端受控集成，并从新的 exact integration base 激活无重叠工作树。
+- does_not_block：CA-SC 按原任务继续；H2-M0 纯需求、Schema、fixtures 和 conformance 可在独立范围派发。
+- 门禁：本派发检查单 current、随机治理考试 100、IR/协作登记/UTF-8/差异门禁通过后方可集成；H2 预登记不得被当作开发 Go。
+- 结论：需求变更 Accepted；H2 页面实现 Planned，未授权业务代码、后端、部署、生产或真实数据。
