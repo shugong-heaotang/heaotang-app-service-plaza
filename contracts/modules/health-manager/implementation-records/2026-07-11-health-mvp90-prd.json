@@ -4,7 +4,7 @@
   "title": "健康大管家 MVP-90 开发 PRD V1.0",
   "date": "2026-07-11",
   "status": "implemented",
-  "objective": "将 HM-R0 产品宪法压缩为 8 个会员页面、5 个管理页面和最小 PDCAR 的 MVP-90 开发 PRD；在 C1—C3 基线之上完成 C4 的产品、专业、法律/隐私、安全、运营/商业和平台联合决策登记，使每项均为 Accepted、Exact revision 或 Pending with owner，并保持未决事项失败关闭。",
+  "objective": "将 HM-R0 产品宪法压缩为 8 个会员页面、5 个管理页面和最小 PDCAR 的 MVP-90 开发 PRD；完成 C0—C5 的范围、对象/状态、责任、安全验收、联合决策、全量追踪、最终 Handoff 和后续最小业务切片建议，同时保持所有未会签事项 Pending 和业务 No-Go。",
   "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-11-health-mvp90-prd.json",
   "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-11-health-mvp90-prd-attempt-1.json",
   "governance_inputs": [
@@ -98,9 +98,11 @@
     "PRD-C1 was independently reviewed by the platform integration owner at exact HEAD deb55880ab466c478441f0229e929cc57c6a2fba and accepted without revision",
     "PRD-C2 was independently reviewed by the platform integration owner at exact HEAD 146158e820866ff32abfb6797dd4e0ed9af90fa8 and accepted for C3 documentation work",
     "PRD-C3 was independently reviewed by the platform integration owner at exact HEAD edb698b898b5708c06eba7a0dd186303d4bb4f06 and accepted for C4 documentation work",
+    "PRD-C4 was independently reviewed by the platform integration owner at exact HEAD c5225db4d5985e0c0c5f770cdda42c9378459466 and accepted for C5 documentation work",
     "PRD-C2 defines product semantics only and does not authorize or define business code, APIs, database schema, environments or real-data processing",
     "PRD-C3 evidence locations are logical future deliverable types and do not claim that tests, APIs, environments or real-data trials already exist",
     "PRD-C4 Accepted entries are limited to documented product and governance principles; professional, legal, privacy, operational, commercial and environment decisions remain Pending unless an authorized owner signs them",
+    "The recommended HM-MVP90-M0-CONTRACTS-AND-SYNTHETIC-CONFORMANCE slice is a planning recommendation only and requires a new formal work item before any contract, schema, test or code change",
     "This work item authorizes documentation only and excludes code, interfaces, Schema, environments, deployment, production, real health data and funds"
   ],
   "implementation_mode": "ai-assisted"

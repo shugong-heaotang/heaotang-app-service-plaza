@@ -7,8 +7,8 @@
 - 接收人：服务广场平台集成负责人、和奥堂医生集团专业负责人及联合评审角色
 - 日期：2026-07-11
 - 分支：`codex/health-manager-mvp90-prd`
-- 当前阶段：PRD-C4 工作稿
-- 当前结论：C0、C1、C2、C3 Go；C4 已形成首稿，待平台检查点评审；业务实现 No-Go。
+- 当前阶段：PRD-C5 Review Candidate
+- 当前结论：C0、C1、C2、C3、C4 Go；C5 已形成最终验收候选，待平台文档验收；业务实现 No-Go。
 
 ## 已完成
 
@@ -31,6 +31,10 @@
 17. C4 已建立产品、专业、法律/隐私、安全、运营/商业和平台六个决策域，逐项限定 Accepted 或 Pending with owner。
 18. 每个 Pending 均记录主责、必要会签、所需证据、失败关闭影响和下一检查点；当前没有开放的 Exact revision，但没有把 Pending 解释为已解决。
 19. C4 已提供正式会签回执格式，并明确文档 Go 不等于专业会签、HM-R0 冻结、合并或业务授权。
+20. 平台独立复核 exact HEAD `c5225db4d5985e0c0c5f770cdda42c9378459466`，正式裁定 C4 Go，并授权进入 C5。
+21. C5 已完成通知书逐项追踪、全量完成/未完成审计、不可替代门禁和最终 Handoff 摘要。
+22. C5 建议首个后续切片为 `HM-MVP90-M0-CONTRACTS-AND-SYNTHETIC-CONFORMANCE`，先建立对象、状态、权限和15场景机器基线，但明确不构成授权。
+23. C5 给出 M0→M1合成纵切→M2风险接管→M3管理端→M4环境验收→跌倒专项的连续路线，不以合同切片替代最终产品。
 
 ## 养老跌倒预防结论
 
@@ -48,7 +52,7 @@
 
 ## 未完成
 
-- PRD-C4 平台检查点评审及 PRD-C5；
+- PRD-C5 平台最终文档验收和受控集成决定；
 - 联合决策表中所有 Pending 的专业、法律、隐私、安全、运营和商业正式会签；
 - 最终 implementation-record、全文验证和平台文档验收。
 
@@ -70,4 +74,4 @@
 
 ## 下一检查点
 
-提交 PRD-C4 短检查点，请平台裁定 Go 或 exact revision；在平台 C4 Go 前不进入 C5。任何修订只在六条允许路径内处理，并保留所有专业与商业 Pending。
+提交 PRD-C5 最终文档验收，请平台裁定 Document Handoff Ready、Exact revision 或 Pending with owner。任何修订只在六条允许路径内处理，并保留所有专业与商业 Pending；C5 Go 不自动授权 M0 或业务实现。
