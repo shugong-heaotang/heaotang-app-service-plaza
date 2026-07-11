@@ -1,0 +1,408 @@
+{
+  "contract_version": "health-manager.mvp90.synthetic-fixtures.v1",
+  "generator": {
+    "generator_id": "heaotang-deterministic-fixture",
+    "version": "v1",
+    "algorithm": "python-stdlib-hashlib-sha256",
+    "seed": "HEAOTANG-HM-MVP90-M0-20260712-V1"
+  },
+  "fixtures": [
+    {
+      "scenario_id": "MVP-A001",
+      "fixture_id": "S01-ADULT-BASELINE",
+      "synthetic": true,
+      "environment": "non-production",
+      "generator_version": "heaotang-deterministic-fixture-v1",
+      "seed": "HEAOTANG-HM-MVP90-M0-20260712-V1",
+      "destruction_policy": "delete-fixtures-after-authorized-test-slice-retention",
+      "inputs": {
+        "synthetic_member_ref": "SYN-MEMBER-e05a051e557035eb",
+        "synthetic_object_ref": "SYN-OBJECT-a67958eca67a7998",
+        "synthetic_correlation_id": "SYN-CORR-ebf853a7ffc9e6f4",
+        "trigger_code": "SYNTHETIC_A001",
+        "display_marker": "合成验收数据"
+      },
+      "expected_outcomes": [
+        "PDCAR_TRACE_COMPLETE",
+        "ONE_CURRENT_PLAN",
+        "NEXT_STEP_VISIBLE"
+      ],
+      "forbidden_outcomes": [
+        "MEDICAL_CONCLUSION",
+        "UNCONFIRMED_PLAN_ACTIVE"
+      ],
+      "canonical_sha256": "0b4797b34cf8e19d47face60f730e5c892f17c27c6094de6a080f40940055ede"
+    },
+    {
+      "scenario_id": "MVP-A002",
+      "fixture_id": "S02-MISSING-CRITICAL",
+      "synthetic": true,
+      "environment": "non-production",
+      "generator_version": "heaotang-deterministic-fixture-v1",
+      "seed": "HEAOTANG-HM-MVP90-M0-20260712-V1",
+      "destruction_policy": "delete-fixtures-after-authorized-test-slice-retention",
+      "inputs": {
+        "synthetic_member_ref": "SYN-MEMBER-2bc90c8e64d0ae00",
+        "synthetic_object_ref": "SYN-OBJECT-e4263872fd7fa746",
+        "synthetic_correlation_id": "SYN-CORR-2c94f3555ec3c8fc",
+        "trigger_code": "SYNTHETIC_A002",
+        "display_marker": "合成验收数据"
+      },
+      "expected_outcomes": [
+        "MISSING_INFORMATION_VISIBLE",
+        "NO_ACTIVE_PLAN",
+        "HANDOFF_OR_SUPPLEMENT_ROUTE"
+      ],
+      "forbidden_outcomes": [
+        "DETERMINISTIC_PROFILE",
+        "MISSING_DATA_DEFAULT"
+      ],
+      "canonical_sha256": "d58fb541f6406c7c823b679603f43b306a3c36e77cbc5b3c2031efac8be1e01f"
+    },
+    {
+      "scenario_id": "MVP-A003",
+      "fixture_id": "S03-URGENT-RULE",
+      "synthetic": true,
+      "environment": "non-production",
+      "generator_version": "heaotang-deterministic-fixture-v1",
+      "seed": "HEAOTANG-HM-MVP90-M0-20260712-V1",
+      "destruction_policy": "delete-fixtures-after-authorized-test-slice-retention",
+      "inputs": {
+        "synthetic_member_ref": "SYN-MEMBER-9c971d4bbd3fda5a",
+        "synthetic_object_ref": "SYN-OBJECT-6eb1f2c3ec508625",
+        "synthetic_correlation_id": "SYN-CORR-56500af98bba53ba",
+        "trigger_code": "SYNTHETIC_A003",
+        "display_marker": "合成验收数据"
+      },
+      "expected_outcomes": [
+        "NORMAL_PLAN_STOPPED",
+        "EMERGENCY_GUIDANCE_VISIBLE",
+        "RISK_AND_HANDOFF_SEPARATE"
+      ],
+      "forbidden_outcomes": [
+        "AI_RISK_CLOSE",
+        "NORMAL_PLAN_CONTINUE"
+      ],
+      "canonical_sha256": "0109eede7b8984c1f6349ae29369a57b2e97c2c275a7f9a1e73ddb5e14475740"
+    },
+    {
+      "scenario_id": "MVP-A004",
+      "fixture_id": "S04-TASK-DISCOMFORT",
+      "synthetic": true,
+      "environment": "non-production",
+      "generator_version": "heaotang-deterministic-fixture-v1",
+      "seed": "HEAOTANG-HM-MVP90-M0-20260712-V1",
+      "destruction_policy": "delete-fixtures-after-authorized-test-slice-retention",
+      "inputs": {
+        "synthetic_member_ref": "SYN-MEMBER-16dc74a025fa256c",
+        "synthetic_object_ref": "SYN-OBJECT-0de29f2910b7f84b",
+        "synthetic_correlation_id": "SYN-CORR-c0f1e59e5fffdbb2",
+        "trigger_code": "SYNTHETIC_A004",
+        "display_marker": "合成验收数据"
+      },
+      "expected_outcomes": [
+        "TASK_PAUSED_FOR_DISCOMFORT",
+        "ORIGINAL_FEEDBACK_PRESERVED",
+        "HANDOFF_CREATED"
+      ],
+      "forbidden_outcomes": [
+        "CONTINUE_ENCOURAGEMENT",
+        "AI_SUMMARY_OVERWRITE"
+      ],
+      "canonical_sha256": "af3de120a8186d9ed9c6879a1c5e3c23db75c8b77ec6f72644b4ee3310d46f44"
+    },
+    {
+      "scenario_id": "MVP-A005",
+      "fixture_id": "S05-EXECUTION-BARRIER",
+      "synthetic": true,
+      "environment": "non-production",
+      "generator_version": "heaotang-deterministic-fixture-v1",
+      "seed": "HEAOTANG-HM-MVP90-M0-20260712-V1",
+      "destruction_policy": "delete-fixtures-after-authorized-test-slice-retention",
+      "inputs": {
+        "synthetic_member_ref": "SYN-MEMBER-8573aac5ed7b6824",
+        "synthetic_object_ref": "SYN-OBJECT-7f5e63a8776deb1a",
+        "synthetic_correlation_id": "SYN-CORR-dd1879b82f80d4ff",
+        "trigger_code": "SYNTHETIC_A005",
+        "display_marker": "合成验收数据"
+      },
+      "expected_outcomes": [
+        "BARRIER_SUMMARY_CREATED",
+        "ADVANCE_DRAFT_PENDING_CONFIRMATION",
+        "OLD_PLAN_TRACEABLE"
+      ],
+      "forbidden_outcomes": [
+        "MEMBER_PENALTY",
+        "OLD_PLAN_OVERWRITE"
+      ],
+      "canonical_sha256": "a320f447243a997920b16b6d7e3c20e58d3a345544cc12717eadbc1d383e94ad"
+    },
+    {
+      "scenario_id": "MVP-A006",
+      "fixture_id": "S06-AI-BOUNDARY",
+      "synthetic": true,
+      "environment": "non-production",
+      "generator_version": "heaotang-deterministic-fixture-v1",
+      "seed": "HEAOTANG-HM-MVP90-M0-20260712-V1",
+      "destruction_policy": "delete-fixtures-after-authorized-test-slice-retention",
+      "inputs": {
+        "synthetic_member_ref": "SYN-MEMBER-64a1d6c427652685",
+        "synthetic_object_ref": "SYN-OBJECT-9c72283e06e16c22",
+        "synthetic_correlation_id": "SYN-CORR-078f09a897261f68",
+        "trigger_code": "SYNTHETIC_A006",
+        "display_marker": "合成验收数据"
+      },
+      "expected_outcomes": [
+        "BOUNDARY_EXPLAINED",
+        "HANDOFF_CREATED",
+        "REDACTED_BLOCK_AUDIT"
+      ],
+      "forbidden_outcomes": [
+        "DIAGNOSIS",
+        "PRESCRIPTION",
+        "MEDICATION_CHANGE",
+        "OUTCOME_GUARANTEE"
+      ],
+      "canonical_sha256": "200ee5f67d7837d64798dc0dd3cee9e1c3ef6b8ae8846a24d0750bafb79ba772"
+    },
+    {
+      "scenario_id": "MVP-A007",
+      "fixture_id": "S07-AI-OUTAGE",
+      "synthetic": true,
+      "environment": "non-production",
+      "generator_version": "heaotang-deterministic-fixture-v1",
+      "seed": "HEAOTANG-HM-MVP90-M0-20260712-V1",
+      "destruction_policy": "delete-fixtures-after-authorized-test-slice-retention",
+      "inputs": {
+        "synthetic_member_ref": "SYN-MEMBER-a3a42b5d03313747",
+        "synthetic_object_ref": "SYN-OBJECT-56781cf9f7a06763",
+        "synthetic_correlation_id": "SYN-CORR-e6443590a9e42b6d",
+        "trigger_code": "SYNTHETIC_A007",
+        "display_marker": "合成验收数据"
+      },
+      "expected_outcomes": [
+        "CONFIRMED_PLAN_STILL_VISIBLE",
+        "FEEDBACK_AVAILABLE",
+        "HUMAN_CONTACT_AVAILABLE",
+        "NEW_DRAFT_AFTER_RECOVERY"
+      ],
+      "forbidden_outcomes": [
+        "HALF_ACTIVE_PLAN",
+        "FABRICATED_ADVICE",
+        "HUMAN_RECORD_OVERWRITE"
+      ],
+      "canonical_sha256": "85ed598675b2f79696af0b48249a3accead4e1f95f4bed3cc9f70ebb65819e75"
+    },
+    {
+      "scenario_id": "MVP-A008",
+      "fixture_id": "S08-CONSENT-WITHDRAWAL",
+      "synthetic": true,
+      "environment": "non-production",
+      "generator_version": "heaotang-deterministic-fixture-v1",
+      "seed": "HEAOTANG-HM-MVP90-M0-20260712-V1",
+      "destruction_policy": "delete-fixtures-after-authorized-test-slice-retention",
+      "inputs": {
+        "synthetic_member_ref": "SYN-MEMBER-cea049225fbcb140",
+        "synthetic_object_ref": "SYN-OBJECT-99d5f230aa2826b4",
+        "synthetic_correlation_id": "SYN-CORR-a0d564d709598ee6",
+        "trigger_code": "SYNTHETIC_A008",
+        "display_marker": "合成验收数据"
+      },
+      "expected_outcomes": [
+        "NEW_PROCESSING_DENIED",
+        "IMPACT_VISIBLE",
+        "HISTORY_POLICY_PENDING"
+      ],
+      "forbidden_outcomes": [
+        "CONSENT_REUSE",
+        "UNAUTHORIZED_SHARING",
+        "UNAPPROVED_DELETION"
+      ],
+      "canonical_sha256": "1bb70484ec1ab00992219e2319d92254a37f6b5c8a6785a7cb0f76435f965032"
+    },
+    {
+      "scenario_id": "MVP-A009",
+      "fixture_id": "S09-NO-RELATIONSHIP",
+      "synthetic": true,
+      "environment": "non-production",
+      "generator_version": "heaotang-deterministic-fixture-v1",
+      "seed": "HEAOTANG-HM-MVP90-M0-20260712-V1",
+      "destruction_policy": "delete-fixtures-after-authorized-test-slice-retention",
+      "inputs": {
+        "synthetic_member_ref": "SYN-MEMBER-559c1deb8c706d12",
+        "synthetic_object_ref": "SYN-OBJECT-54e1f9000ba6c5d6",
+        "synthetic_correlation_id": "SYN-CORR-d4cb0e6a111db3e3",
+        "trigger_code": "SYNTHETIC_A009",
+        "display_marker": "合成验收数据"
+      },
+      "expected_outcomes": [
+        "SERVER_ACCESS_DENIED",
+        "OBJECT_EXISTENCE_NOT_DISCLOSED",
+        "DENIAL_AUDITED"
+      ],
+      "forbidden_outcomes": [
+        "CROSS_MEMBER_DATA",
+        "FRONTEND_ONLY_AUTHORIZATION"
+      ],
+      "canonical_sha256": "3b2b5f473ebcfeccb71efa3a5d86abf5d729ac17e978c5ae579d6d6bf6531742"
+    },
+    {
+      "scenario_id": "MVP-A010",
+      "fixture_id": "S10-CAPACITY-LIMIT",
+      "synthetic": true,
+      "environment": "non-production",
+      "generator_version": "heaotang-deterministic-fixture-v1",
+      "seed": "HEAOTANG-HM-MVP90-M0-20260712-V1",
+      "destruction_policy": "delete-fixtures-after-authorized-test-slice-retention",
+      "inputs": {
+        "synthetic_member_ref": "SYN-MEMBER-a4eec2cfbf7d5918",
+        "synthetic_object_ref": "SYN-OBJECT-52c8c176b570a289",
+        "synthetic_correlation_id": "SYN-CORR-400921873f8b4465",
+        "trigger_code": "SYNTHETIC_A010",
+        "display_marker": "合成验收数据"
+      },
+      "expected_outcomes": [
+        "NEW_ASSIGNMENT_DENIED",
+        "DISPATCH_REQUIRED",
+        "EXISTING_RISK_PRESERVED"
+      ],
+      "forbidden_outcomes": [
+        "HARDCODED_CAPACITY",
+        "FALSE_TAKEOVER"
+      ],
+      "canonical_sha256": "06951e953d97e2229445443be3b1116e5dabc03547b90493f431ddce10dad5e5"
+    },
+    {
+      "scenario_id": "MVP-A011",
+      "fixture_id": "S11-INVALID-GOVERNANCE",
+      "synthetic": true,
+      "environment": "non-production",
+      "generator_version": "heaotang-deterministic-fixture-v1",
+      "seed": "HEAOTANG-HM-MVP90-M0-20260712-V1",
+      "destruction_policy": "delete-fixtures-after-authorized-test-slice-retention",
+      "inputs": {
+        "synthetic_member_ref": "SYN-MEMBER-a00b48fa566854ee",
+        "synthetic_object_ref": "SYN-OBJECT-2e68d552a63bae92",
+        "synthetic_correlation_id": "SYN-CORR-ca12a3e21ffdabcd",
+        "trigger_code": "SYNTHETIC_A011",
+        "display_marker": "合成验收数据"
+      },
+      "expected_outcomes": [
+        "NEW_PLAN_ACTIVATION_DENIED",
+        "STABLE_FAILURE_REASON",
+        "OLD_CONFIRMED_PLAN_READ_ONLY"
+      ],
+      "forbidden_outcomes": [
+        "EXPIRED_TEMPLATE_USE",
+        "UNREVIEWED_TEMPLATE_USE",
+        "SAME_PERSON_APPROVAL"
+      ],
+      "canonical_sha256": "5033068761d5a888d52c14a811774ab08a5b1916c652d730286f731ca13be39f"
+    },
+    {
+      "scenario_id": "MVP-A012",
+      "fixture_id": "S12-IDEMPOTENT-RETRY",
+      "synthetic": true,
+      "environment": "non-production",
+      "generator_version": "heaotang-deterministic-fixture-v1",
+      "seed": "HEAOTANG-HM-MVP90-M0-20260712-V1",
+      "destruction_policy": "delete-fixtures-after-authorized-test-slice-retention",
+      "inputs": {
+        "synthetic_member_ref": "SYN-MEMBER-6321c3c4208f52ba",
+        "synthetic_object_ref": "SYN-OBJECT-7527a3ff645eea0c",
+        "synthetic_correlation_id": "SYN-CORR-7a7dfe65ce2a29db",
+        "trigger_code": "SYNTHETIC_A012",
+        "display_marker": "合成验收数据"
+      },
+      "expected_outcomes": [
+        "SAME_PAYLOAD_SAME_RESULT",
+        "CONFLICTING_PAYLOAD_REJECTED",
+        "ONE_PRIMARY_AUDIT_EVENT"
+      ],
+      "forbidden_outcomes": [
+        "DUPLICATE_OBJECT",
+        "DUPLICATE_NOTIFICATION"
+      ],
+      "canonical_sha256": "931b54572e48d04785a5da0db3256e8ddbdfa693c0399a864e50ef2f592c3ed0"
+    },
+    {
+      "scenario_id": "MVP-A013",
+      "fixture_id": "S13-MESSAGE-FAILURE",
+      "synthetic": true,
+      "environment": "non-production",
+      "generator_version": "heaotang-deterministic-fixture-v1",
+      "seed": "HEAOTANG-HM-MVP90-M0-20260712-V1",
+      "destruction_policy": "delete-fixtures-after-authorized-test-slice-retention",
+      "inputs": {
+        "synthetic_member_ref": "SYN-MEMBER-70bbcc3af512554d",
+        "synthetic_object_ref": "SYN-OBJECT-9109d1976e2f7ef9",
+        "synthetic_correlation_id": "SYN-CORR-6707844f7faa738a",
+        "trigger_code": "SYNTHETIC_A013",
+        "display_marker": "合成验收数据"
+      },
+      "expected_outcomes": [
+        "SENT_DELIVERED_REPLIED_RESOLVED_SEPARATE",
+        "RETRY_OR_ESCALATION_PENDING",
+        "UNREACHABLE_VISIBLE"
+      ],
+      "forbidden_outcomes": [
+        "SENT_AS_RESOLVED",
+        "UNREACHABLE_AS_RESOLVED"
+      ],
+      "canonical_sha256": "6e82bcc840ab8f52bbeaca1cd4b7d25c0c782d8971cc4a3fa519cebb82b72a18"
+    },
+    {
+      "scenario_id": "MVP-A014",
+      "fixture_id": "S14-DATA-CORRECTION",
+      "synthetic": true,
+      "environment": "non-production",
+      "generator_version": "heaotang-deterministic-fixture-v1",
+      "seed": "HEAOTANG-HM-MVP90-M0-20260712-V1",
+      "destruction_policy": "delete-fixtures-after-authorized-test-slice-retention",
+      "inputs": {
+        "synthetic_member_ref": "SYN-MEMBER-052a84ec0e1e1ef9",
+        "synthetic_object_ref": "SYN-OBJECT-3255e8a412de17e1",
+        "synthetic_correlation_id": "SYN-CORR-13861e13704f9451",
+        "trigger_code": "SYNTHETIC_A014",
+        "display_marker": "合成验收数据"
+      },
+      "expected_outcomes": [
+        "ORIGINAL_SOURCE_PRESERVED",
+        "NEW_CURRENT_VERSION",
+        "IMPACT_REVIEW_PENDING"
+      ],
+      "forbidden_outcomes": [
+        "SILENT_HISTORY_OVERWRITE",
+        "SILENT_PROFESSIONAL_OPINION_CHANGE"
+      ],
+      "canonical_sha256": "707dc8dca4d55c2fcb686ce126830f53f6c32f5c77ec12b8e742c89403638a5e"
+    },
+    {
+      "scenario_id": "MVP-A015",
+      "fixture_id": "S15-SAFE-EXIT",
+      "synthetic": true,
+      "environment": "non-production",
+      "generator_version": "heaotang-deterministic-fixture-v1",
+      "seed": "HEAOTANG-HM-MVP90-M0-20260712-V1",
+      "destruction_policy": "delete-fixtures-after-authorized-test-slice-retention",
+      "inputs": {
+        "synthetic_member_ref": "SYN-MEMBER-d93571f95f115911",
+        "synthetic_object_ref": "SYN-OBJECT-cb456f1526641f77",
+        "synthetic_correlation_id": "SYN-CORR-98488c21591e540c",
+        "trigger_code": "SYNTHETIC_A015",
+        "display_marker": "合成验收数据"
+      },
+      "expected_outcomes": [
+        "ORDINARY_TASKS_STOPPED",
+        "OPEN_RISK_HANDOFF_PRESERVED",
+        "DATA_RIGHTS_PENDING_NOTICE"
+      ],
+      "forbidden_outcomes": [
+        "FORCED_RENEWAL",
+        "OPEN_RISK_DELETION",
+        "UNAPPROVED_DATA_DELETION"
+      ],
+      "canonical_sha256": "ddba34b5ba76686cb5ec861c698fc70a4c02d45f609505481da96632ebfcf109"
+    }
+  ]
+}

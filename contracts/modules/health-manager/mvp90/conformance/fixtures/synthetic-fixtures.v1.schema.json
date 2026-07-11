@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/health-manager/mvp90/conformance/fixtures/synthetic-fixtures.v1.schema.json",
+  "title": "Health Manager MVP-90 deterministic synthetic fixtures v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "generator", "fixtures"],
+  "properties": {
+    "contract_version": {"const": "health-manager.mvp90.synthetic-fixtures.v1"},
+    "generator": {
+      "type": "object", "additionalProperties": false,
+      "required": ["generator_id", "version", "algorithm", "seed"],
+      "properties": {
+        "generator_id": {"const": "heaotang-deterministic-fixture"},
+        "version": {"const": "v1"},
+        "algorithm": {"const": "python-stdlib-hashlib-sha256"},
+        "seed": {"const": "HEAOTANG-HM-MVP90-M0-20260712-V1"}
+      }
+    },
+    "fixtures": {"type": "array", "minItems": 15, "maxItems": 15, "items": {"$ref": "#/$defs/fixture"}}
+  },
+  "$defs": {
+    "fixture": {
+      "type": "object", "additionalProperties": false,
+      "required": ["scenario_id", "fixture_id", "synthetic", "environment", "generator_version", "seed", "destruction_policy", "inputs", "expected_outcomes", "forbidden_outcomes", "canonical_sha256"],
+      "properties": {
+        "scenario_id": {"pattern": "^MVP-A0(0[1-9]|1[0-5])$"},
+        "fixture_id": {"pattern": "^S(0[1-9]|1[0-5])-[A-Z0-9-]+$"},
+        "synthetic": {"const": true},
+        "environment": {"const": "non-production"},
+        "generator_version": {"const": "heaotang-deterministic-fixture-v1"},
+        "seed": {"const": "HEAOTANG-HM-MVP90-M0-20260712-V1"},
+        "destruction_policy": {"const": "delete-fixtures-after-authorized-test-slice-retention"},
+        "inputs": {
+          "type": "object", "additionalProperties": false,
+          "required": ["synthetic_member_ref", "synthetic_object_ref", "synthetic_correlation_id", "trigger_code", "display_marker"],
+          "properties": {
+            "synthetic_member_ref": {"pattern": "^SYN-MEMBER-[0-9a-f]{16}$"},
+            "synthetic_object_ref": {"pattern": "^SYN-OBJECT-[0-9a-f]{16}$"},
+            "synthetic_correlation_id": {"pattern": "^SYN-CORR-[0-9a-f]{16}$"},
+            "trigger_code": {"pattern": "^SYNTHETIC_[A-Z0-9_]+$"},
+            "display_marker": {"const": "合成验收数据"}
+          }
+        },
+        "expected_outcomes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"pattern": "^[A-Z][A-Z0-9_]+$"}},
+        "forbidden_outcomes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"pattern": "^[A-Z][A-Z0-9_]+$"}},
+        "canonical_sha256": {"pattern": "^[0-9a-f]{64}$"}
+      }
+    }
+  }
+}

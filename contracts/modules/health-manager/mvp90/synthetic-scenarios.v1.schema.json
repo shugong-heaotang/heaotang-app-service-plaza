@@ -1,0 +1,45 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/health-manager/mvp90/synthetic-scenarios.v1.schema.json",
+  "title": "Health Manager MVP-90 synthetic scenario catalog v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "module_id", "generator", "scenarios"],
+  "properties": {
+    "contract_version": {"const": "health-manager.mvp90.synthetic-scenarios.v1"},
+    "module_id": {"const": "health-manager"},
+    "generator": {"$ref": "#/$defs/generator"},
+    "scenarios": {"type": "array", "minItems": 15, "maxItems": 15, "items": {"$ref": "#/$defs/scenario"}}
+  },
+  "$defs": {
+    "generator": {
+      "type": "object", "additionalProperties": false,
+      "required": ["generator_id", "version", "algorithm", "seed", "synthetic", "environment", "destruction_policy"],
+      "properties": {
+        "generator_id": {"const": "heaotang-deterministic-fixture"},
+        "version": {"const": "v1"},
+        "algorithm": {"const": "python-stdlib-hashlib-sha256"},
+        "seed": {"const": "HEAOTANG-HM-MVP90-M0-20260712-V1"},
+        "synthetic": {"const": true},
+        "environment": {"const": "non-production"},
+        "destruction_policy": {"const": "delete-fixtures-after-authorized-test-slice-retention"}
+      }
+    },
+    "scenario": {
+      "type": "object", "additionalProperties": false,
+      "required": ["scenario_id", "fixture_id", "title_zh", "primary_owner", "contract_refs", "expected_outcomes", "forbidden_outcomes", "required_evidence", "config_refs", "fixture_ref"],
+      "properties": {
+        "scenario_id": {"pattern": "^MVP-A0(0[1-9]|1[0-5])$"},
+        "fixture_id": {"pattern": "^S(0[1-9]|1[0-5])-[A-Z0-9-]+$"},
+        "title_zh": {"type": "string", "minLength": 2},
+        "primary_owner": {"type": "string", "minLength": 1},
+        "contract_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "expected_outcomes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"pattern": "^[A-Z][A-Z0-9_]+$"}},
+        "forbidden_outcomes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"pattern": "^[A-Z][A-Z0-9_]+$"}},
+        "required_evidence": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "config_refs": {"type": "array", "uniqueItems": true, "items": {"pattern": "^config://[a-z0-9._/-]+$"}},
+        "fixture_ref": {"pattern": "^contracts/modules/health-manager/mvp90/conformance/fixtures/mvp90-synthetic-fixtures.v1.json#/fixtures/[0-9]+$"}
+      }
+    }
+  }
+}
