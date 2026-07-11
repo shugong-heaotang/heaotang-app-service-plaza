@@ -990,6 +990,53 @@
       "preexisting_changes_acknowledged": false,
       "migration_note": "提交5c3aa59已受控集成：UTC日自然重置后真实浏览器登录、合成提交、即时历史、刷新持久和返回路径全部通过；未重新部署、未修改业务代码、未记录OTP/JWT。",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h030-生命导航-m4-浏览器验收收口"
+    },
+    {
+      "work_id": "AIW-20260711-HEALTH-MVP90-PRD-DISPATCH",
+      "title": "健康大管家 MVP-90 PRD 独立文档派发治理",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-prd-dispatch",
+      "branch": "codex/health-mvp90-prd-dispatch",
+      "base_commit": "75ccf2e04e1bf5ca6c2ebfbb24c87c68a7597d28",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-health-mvp90-prd-dispatch.json",
+        "contracts/foundation/governance-exams/2026-07-11-health-mvp90-prd-dispatch-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-health-mvp90-prd-dispatch.json",
+        "docs/project-management/notices/2026-07-11-health-manager-mvp90-prd-task-order.md",
+        "docs/project-management/service-plaza/health-mvp90-prd-dispatch-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "独立派发仅文档 MVP-90 PRD；HM-R0 Technical Go 但 Professional Freeze Pending，禁止把专业 Pending 改为 Accepted，禁止业务代码、接口、Schema、环境、真实健康数据与资金操作。",
+      "handoff_record": null
+    },
+    {
+      "work_id": "AIW-20260711-HEALTH-MVP90-PRD-DOCS",
+      "title": "健康大管家 MVP-90 开发 PRD V1.0 文档",
+      "owner": "Health Manager module agent",
+      "owner_role": "健康大管家负责人",
+      "status": "planned",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-prd",
+      "branch": "codex/health-manager-mvp90-prd",
+      "base_commit": "75ccf2e04e1bf5ca6c2ebfbb24c87c68a7597d28",
+      "allowed_paths": [
+        "docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md",
+        "docs/project-management/modules/health-manager/health-manager-mvp90-prd-receipt.md",
+        "docs/project-management/modules/health-manager/health-manager-mvp90-prd-handoff.md",
+        "contracts/modules/health-manager/development-checklists/2026-07-11-health-mvp90-prd.json",
+        "contracts/modules/health-manager/governance-exams/2026-07-11-health-mvp90-prd-attempt-1.json",
+        "contracts/modules/health-manager/implementation-records/2026-07-11-health-mvp90-prd.json"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "预登记；待平台派发提交受控集成后，从包含正式通知的权威基线创建并核验专用工作树，再转 active。仅文档，不授权业务代码。",
+      "handoff_record": null
     }
   ]
 }
