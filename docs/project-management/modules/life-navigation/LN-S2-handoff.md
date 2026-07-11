@@ -6,7 +6,9 @@
 - platform_handoff：`SP-H033`
 - work_id：`AIW-20260712-LIFE-LN-S2-P0-P1`
 - branch：`codex/life-navigation-ln-s2-p0-p1`
-- status：`checkpoint submitted; platform review pending`
+- status：`platform accepted and controlled integration completed`
+- module_commit：`93ae058f1ba53a958937e78d1270ebbae3d938a7`
+- integration_commit：`47f4e7c1adb63d42a9dcca825b24362c7d8dc7ea`（平台权威受控集成提交）
 
 ## 已完成
 
@@ -24,6 +26,7 @@
 - development：Partial Go，仅 P0/P1 Base Contract
 - acceptance / release / operations：Pending
 - final：`Base Contract Go / Executable No-Go`
+- platform_review：Go；模块 `93ae058f1ba53a958937e78d1270ebbae3d938a7` 已受控集成至 `47f4e7c1adb63d42a9dcca825b24362c7d8dc7ea`
 
 ## 验证命令与结果
 
@@ -45,4 +48,4 @@
 
 ## 下一授权
 
-平台先独立复跑合同和治理门禁；随后把一个会改变长期语义的 P0 推荐包提交项目负责人。未 Accepted 前不得授权 executable selector、前后端编码、环境或部署。
+平台独立复跑与受控集成已经完成。下一步只提交一个会改变长期语义的 `D-LN-S2-001` 推荐包给项目负责人；未 Accepted 前不得授权 executable selector、前后端编码、环境或部署。
