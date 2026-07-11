@@ -2,10 +2,10 @@
 
 ## 当前裁定
 
-- 状态：`No-Go`。
-- 原因：部署、目录、视口、query 失败关闭、guest 点击和部分键盘焦点证据已经通过；测试环境权威功能开关 `action_telemetry=false`，且功能开关双人审批写流程尚未接入，导致任务书要求的真实 activated/blocked 事件无法生成。登录允许、登录缺 `club:manage`、完整导航/刷新/后退/返回仍未全部完成。部署成功不等于 M4 Go。
+- 状态：`In Progress / No-Go`。
+- 原因：`CA-H1-M4-B001` 已完成根因修复、双人审批、测试环境部署并取得 guest blocked 真实事件；登录允许、登录缺 `club:manage`、其余合法 category、完整键盘与导航证据仍未全部完成。部署成功和单类事件通过不等于 M4 Go。
 - 产品 Blocker：未发现页面实现 Blocker。
-- 平台 Blocker：`CA-H1-M4-B001`，动作遥测功能开关缺少可用的 maker-checker 配置流程；禁止直接改数据库或恢复旧单管理员写入口。
+- 平台 Blocker：`CA-H1-M4-B001` 已 resolved；根因修复和环境启用均使用版本化 business variable 与不同管理员提案/审核，未直接改数据库、未恢复旧单管理员入口。
 - 验收通道问题：应用内浏览器控制层向 `ab.chatgpt.com` 发送自身 Statsig 请求时多次 10 秒超时；页面 DOM 与测试服务器访问日志仍正常。该流量不是和奥堂 APP 请求，不计入模块或 APP 网络面。
 
 ## 环境与部署
@@ -77,9 +77,19 @@
 - 直接修改 SQLite、复活旧单人入口或伪造 action-events 均违反 ADR 0011，本验收不采用。
 - 关闭条件：平台实现并验收功能开关 proposal/review/version/audit 的双人流程；使用两个独立测试管理员在测试环境启用 telemetry；随后复测 guest blocked、登录 activated、缺 `club:manage` blocked，并通过管理 API/只读数据库验证字段白名单与脱敏 user_id。
 
+### 2026-07-11 B001 关闭与 guest blocked 增量证据
+
+- 后端实现及后端集成提交：`c4319c206add11f92d763b13b63be8ab2e47679e`；APP 治理证据提交：`ee8dec915ed890ed9fdc732fa6eacb1c3902ed3e`。
+- 测试环境备份：`/root/heaotang-backups/20260711-143203.tar.gz`；部署二进制 SHA-256：`584105eb6846e086ea2a77acc89f207c4a1955e2f30a035273922fdd34ab1889`；部署后 `/ready`、`db=true`、`plugins=24`、actions=20 通过。
+- 关键配置使用两个不同合成管理员完成 `true → false → true` 版本化提案/审核；同人审核返回 403；报告未保存手机号、OTP、JWT 或完整 user_id；当前公开 `action_telemetry=true`。
+- 页面单步：从无 query 首页点击唯一“公益俱乐部”入口，URL 变为唯一公益 category，页面显示“需要登录或相应权限”，稳定原因 `authentication_required`。
+- Nginx：`2026-07-11 16:43:16 +0800` 出现真实浏览器 `POST /api/v1/service-plaza/action-events`，HTTP 200，Referer 为公益 category 页面。
+- 数据库只读交叉：最新记录为 `public-benefit-club / service_plaza.public_benefit_club.open / blocked / authentication_required / user_id=null`，UTC 时间 `2026-07-11 08:43:16`。
+- 结论：guest blocked 遥测项 Pass；B001 resolved。该证据不替代登录 activated、缺 `club:manage` blocked 或其余 M4 项。
+
 ## 尚未关闭
 
-1. 先关闭 `CA-H1-M4-B001`；未关闭前 M4 保持 No-Go。
+1. `CA-H1-M4-B001` 已关闭；保留上述 exact commit、部署、双审与 guest blocked 证据。
 2. 单步完成 Enter、Shift+Tab、刷新、浏览器后退和两个返回入口。
 3. 使用批准的合成测试账号验证登录允许和登录但缺 `club:manage`；不得注入 shell token或在报告记录 OTP/JWT。
 4. 取得真实环境 activated/blocked 遥测证据，并确认载荷无 OTP/JWT/完整个人标识/敏感业务数据。
