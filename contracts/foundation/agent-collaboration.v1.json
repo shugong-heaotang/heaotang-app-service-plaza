@@ -1449,6 +1449,63 @@
       "preexisting_changes_acknowledged": true,
       "migration_note": "预登记；合同与后端门禁 Go 后从最终集成基线创建工作树并转 active。只新增 SC 专属路由/adapter/page/tests，不修改 CoreServicePage、submissionRepository、ServicePlazaPage、父 action adapter/contract、ActionControl 或其他三类业务。",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h034-ca-sc自建俱乐部首个会员侧闭环"
+    },
+    {
+      "work_id": "AIW-20260712-CLUB-MEMBER-HOME-DISPATCH",
+      "title": "俱乐部联盟 H2 会员首页需求变更与正式派发",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-member-home-dispatch",
+      "branch": "codex/club-member-home-dispatch",
+      "base_commit": "6149504959ea779102022d6b6e172fe0999dcaec",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-12-club-member-home-dispatch.json",
+        "contracts/foundation/governance-exams/2026-07-12-club-member-home-dispatch-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-12-club-member-home-dispatch.json",
+        "docs/project-management/notices/2026-07-12-club-member-home-h2-task-order.md",
+        "docs/project-management/service-plaza/club-member-home-dispatch-2026-07-12.md",
+        "docs/project-management/service-plaza/handoff-log.md",
+        "contracts/foundation/development-checklists/2026-07-12-club-member-home-dispatch-r2.json",
+        "contracts/foundation/governance-exams/2026-07-12-club-member-home-dispatch-r2-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-12-club-member-home-dispatch-r2.json",
+        "contracts/foundation/development-checklists/2026-07-12-club-member-home-dispatch-r3.json",
+        "contracts/foundation/governance-exams/2026-07-12-club-member-home-dispatch-r3-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-12-club-member-home-dispatch-r3.json"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "从权威 integration 6149504 创建独立干净工作树；本检查点只冻结双层会员首页需求并派发 H2-M0 至 M3。H2 页面实现等待 CA-SC 当前切片受控集成，禁止重叠修改 ClubAlliancePage。",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h035俱乐部联盟-h2-会员首页需求变更与派发"
+    },
+    {
+      "work_id": "AIW-20260712-CLUB-MEMBER-HOME-H2",
+      "title": "俱乐部联盟 H2 会员工作台双层首页",
+      "owner": "Club Alliance module agent",
+      "owner_role": "俱乐部联盟负责人",
+      "status": "planned",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-club-member-home-h2",
+      "branch": "codex/club-member-home-h2",
+      "base_commit": "6149504959ea779102022d6b6e172fe0999dcaec",
+      "allowed_paths": [
+        "docs/project-management/modules/club-alliance/member-home",
+        "contracts/modules/club-alliance/member-home",
+        "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-h2*.json",
+        "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-h2*.json",
+        "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-h2*.json",
+        "app/src/modules/club-alliance/ClubAllianceRoute.tsx",
+        "app/src/modules/club-alliance/ClubAlliancePage.tsx",
+        "app/src/modules/club-alliance/ClubAlliancePage.css",
+        "app/src/modules/club-alliance/ClubAlliancePage.test.tsx",
+        "app/src/modules/club-alliance/member-home"
+      ],
+      "started_with_clean_worktree": false,
+      "preexisting_changes_acknowledged": true,
+      "migration_note": "预登记连续 H2；当前只允许后续独立派发 H2-M0。不得创建或激活页面工作树，直到 CA-SC 合同、后端和前端受控集成，并以新的 exact integration commit 更新 base、确认范围无重叠和 worktree clean。",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h035俱乐部联盟-h2-会员首页需求变更与派发"
     }
   ]
 }

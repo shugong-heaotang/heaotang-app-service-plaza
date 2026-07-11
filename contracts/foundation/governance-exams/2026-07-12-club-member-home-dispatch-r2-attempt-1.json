@@ -1,0 +1,70 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260712-CLUB-MEMBER-HOME-DISPATCH-R2-1",
+    "record_id":  "IR-20260712-CLUB-MEMBER-HOME-DISPATCH-R2",
+    "actor":  "Codex platform integration agent",
+    "attempt_number":  1,
+    "status":  "passed",
+    "generated_at":  "2026-07-11T23:11:31.7548767Z",
+    "completed_at":  "2026-07-11T23:11:48.8847692Z",
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  100,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "a5db9ef44414b457d8bec993538b1023800ed36bca7cd70c07ba64025fe243ac",
+    "checklist_path":  "contracts/foundation/development-checklists/2026-07-12-club-member-home-dispatch-r2.json",
+    "checklist_sha256":  "2fe48b6cf8c9d85234c8a642151d98738a814d560432d5f9f96d2ececabfca07",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-009",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0010-ai-implementation-records-required.md"
+                      },
+                      {
+                          "question_id":  "GQ-007",
+                          "selected_option":  "A",
+                          "correct":  true,
+                          "source_path":  "AGENTS.md"
+                      },
+                      {
+                          "question_id":  "GQ-004",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+                      },
+                      {
+                          "question_id":  "GQ-008",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0007-stable-foundation-variable-business.md"
+                      },
+                      {
+                          "question_id":  "GQ-015",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "contracts/foundation/engineering-standards.v1.json"
+                      },
+                      {
+                          "question_id":  "GQ-001",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "CONSTRAINTS.md"
+                      },
+                      {
+                          "question_id":  "GQ-005",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+                      },
+                      {
+                          "question_id":  "GQ-016",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0013-mandatory-ai-development-entrypoint.md"
+                      }
+                  ],
+    "remediation_sources":  [
+
+                            ]
+}
