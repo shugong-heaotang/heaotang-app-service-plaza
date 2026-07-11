@@ -1095,8 +1095,11 @@
         "contracts/modules/health-manager/mvp90/conformance/fixtures/",
         "contracts/modules/health-manager/mvp90/conformance/test_health_mvp90_contracts.py",
         "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m0.json",
+        "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m0-r2.json",
         "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m0-attempt-1.json",
-        "contracts/modules/health-manager/implementation-records/2026-07-12-health-mvp90-m0.json"
+        "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m0-r2-attempt-1.json",
+        "contracts/modules/health-manager/implementation-records/2026-07-12-health-mvp90-m0.json",
+        "contracts/modules/health-manager/implementation-records/2026-07-12-health-mvp90-m0-r2.json"
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
@@ -1304,13 +1307,38 @@
         "contracts/modules/life-navigation/dimension-guided-application/fixtures/cases.v1.json",
         "contracts/modules/life-navigation/dimension-guided-application/test_life_dimension_contracts.py",
         "contracts/modules/life-navigation/development-checklists/2026-07-12-life-ln-s2-p0-p1.json",
+        "contracts/modules/life-navigation/development-checklists/2026-07-12-life-ln-s2-p0-p1-r2.json",
         "contracts/modules/life-navigation/governance-exams/2026-07-12-life-ln-s2-p0-p1-attempt-1.json",
+        "contracts/modules/life-navigation/governance-exams/2026-07-12-life-ln-s2-p0-p1-r2-attempt-1.json",
         "contracts/modules/life-navigation/implementation-records/2026-07-12-life-ln-s2-p0-p1.json"
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
       "migration_note": "平台派发 checklist 26/26、考试100、通知、IR与 SP-H033 已受控集成至 efc07ae；模块专用工作树已快进至同一 base，HEAD/merge-base 一致且 clean 后正式激活。P0 决策前保持 registry_frozen=false、executable=false，旧 yun mapping_target=null。",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h033生命导航-ln-s2-p0p1-正式派发"
+    },
+    {
+      "work_id": "AIW-20260712-HEALTH-MVP90-M0-R2-GOVERNANCE",
+      "title": "健康大管家 MVP-90 M0 最终 current 治理快照扩权",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-m0-r2-governance",
+      "branch": "codex/health-mvp90-m0-r2-governance",
+      "base_commit": "9d37d05111f61894e19736ef085ecd48d0648c96",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/recurring-issues.v1.json",
+        "contracts/foundation/development-checklists/2026-07-12-health-mvp90-m0-r2-governance.json",
+        "contracts/foundation/governance-exams/2026-07-12-health-mvp90-m0-r2-governance-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-12-health-mvp90-m0-r2-governance.json",
+        "docs/project-management/service-plaza/governance-current-snapshot-self-reference-2026-07-12.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "模块最终成果会更新必读 internal-dependencies.v1.json，使原 FC/exam 成为不可修改历史快照；本工作项仅扩展 R2 checklist/exam/IR 精确路径，不修改旧快照、不放宽业务范围。",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h032健康大管家-mvp-90-m0-合同与合成一致性派发"
     }
   ]
 }
