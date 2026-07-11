@@ -4,7 +4,7 @@
   "title": "CA-SC 自建俱乐部详情边界与本人状态后端闭环",
   "date": "2026-07-12",
   "status": "implemented",
-  "objective": "在后端 exact 三文件范围内完成 SC 详情失败关闭、稳定错误、join 幂等响应和本人状态安全投影，并保留 shared-session 与 family 容量隔离。",
+  "objective": "在后端 exact 三文件范围内用专用优先路由完成 SC 详情失败关闭、稳定错误、join 幂等响应和本人状态安全投影，同时恢复共享详情并保留 shared-session 与 family 容量隔离。",
   "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-club-sc-first-closure-backend.json",
   "governance_exam": "contracts/foundation/governance-exams/2026-07-12-club-sc-first-closure-backend-attempt-1.json",
   "governance_inputs": [
@@ -27,8 +27,8 @@
   "contracts": ["contracts/modules/club-alliance/self-created/self-created-club.v1.json","contracts/modules/club-alliance/self-created/error-catalog.v1.json"],
   "decisions": ["docs/decisions/0019-club-category-authoritative-filter.md","docs/project-management/service-plaza/club-sc-backend-implementation-2026-07-12.md"],
   "changed_areas": ["backend-go/plugins/club-plugin/plugin.go","backend-go/plugins/club-plugin/service.go","backend-go/plugins/club-plugin/service_test.go"],
-  "verification": ["go test targeted six CA-SC tests","go test ./plugins/club-plugin -count=1","go vet ./plugins/club-plugin","go test ./...","go vet ./...","gofmt","git diff --check"],
+  "verification": ["go test targeted seven CA-SC tests","go test ./plugins/club-plugin -count=1","go vet ./plugins/club-plugin","go test ./...","go vet ./...","gofmt","git diff --check"],
   "evidence": ["contracts/foundation/development-checklists/2026-07-12-club-sc-first-closure-backend.json","contracts/foundation/governance-exams/2026-07-12-club-sc-first-closure-backend-attempt-1.json","docs/project-management/service-plaza/club-sc-backend-implementation-2026-07-12.md"],
-  "premises": ["backend exact commit is b0ca6b7735287b22c90f84565cadbad67f710102","APP contract correction is required before Contract Go or frontend activation","route Auth:true remains unchanged","non-SC and inactive resources are hidden as CLUB_NOT_FOUND","CLUB_DETAIL_UNAVAILABLE and CLUB_JOIN_UNAVAILABLE are internal 500 errors","no backend deployment or environment acceptance was authorized"],
+  "premises": ["backend exact HEAD is d98f0601a45c4328ca5b14eac7fbea43c52c04a7","APP contract and frontend must adopt /api/v1/clubs/self-created/:id before Contract Go or T0","shared and SC routes both remain Auth:true","generic /api/v1/clubs/:id remains available to family and charity","non-SC and inactive resources are hidden only on the SC route as CLUB_NOT_FOUND","CLUB_DETAIL_UNAVAILABLE and CLUB_JOIN_UNAVAILABLE are internal 500 errors","no backend deployment or environment acceptance was authorized"],
   "implementation_mode": "ai-assisted"
 }
