@@ -1,0 +1,101 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-CLUB-ALLIANCE-H1-M3",
+  "title": "俱乐部联盟 CA-H1 M3 自动化与本地完成性检查",
+  "date": "2026-07-11",
+  "status": "verified",
+  "objective": "在 M2 页面壳实现通过平台验收后，以任务书逐项覆盖审计补齐键盘与 aria、生命周期不提升、直达重挂载、允许/拒绝网络边界及四档响应式本地合同，并保持零业务 API 边界。",
+  "governance_checklist": "contracts/modules/club-alliance/development-checklists/2026-07-11-club-alliance-h1-m3.json",
+  "governance_exam": "contracts/modules/club-alliance/governance-exams/2026-07-11-club-alliance-h1-m3-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md",
+    "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json",
+    "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md",
+    "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md",
+    "contracts/foundation/module-dependencies/club-alliance.v1.json",
+    "contracts/modules/club-alliance/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-11-club-alliance-h1-task-order.md",
+    "contracts/modules/club-alliance/homepage.v1.json",
+    "docs/project-management/service-plaza/handoff-log.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.service-action-contracts",
+    "foundation.observability-config",
+    "foundation.app-shell-adapter"
+  ],
+  "contracts": [
+    "contracts/service-plaza/service-plaza-actions.v1.json",
+    "contracts/modules/club-alliance/homepage.v1.json",
+    "app/src/modules/club-alliance/clubAllianceHomepageContract.ts",
+    "app/src/modules/club-alliance/clubAllianceActionAdapter.ts",
+    "app/src/modules/club-alliance/ClubAlliancePage.css"
+  ],
+  "decisions": [
+    "docs/project-management/modules/club-alliance/CA-F0-H0-decisions.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "app/src/modules/club-alliance/ClubAlliancePage.css",
+    "app/src/modules/club-alliance/ClubAlliancePage.test.tsx",
+    "contracts/modules/club-alliance/development-checklists",
+    "contracts/modules/club-alliance/governance-exams",
+    "contracts/modules/club-alliance/implementation-records",
+    "docs/project-management/modules/club-alliance/CA-H1-handoff.md"
+  ],
+  "verification": [
+    "npm test -- --run src/modules/club-alliance/clubAllianceHomepageContract.test.ts src/modules/club-alliance/clubAllianceActionAdapter.test.ts src/modules/club-alliance/ClubAlliancePage.test.tsx src/pages/ServicePlazaPage.action.test.tsx src/App.test.tsx",
+    "npm test",
+    "npm run build",
+    "npm run build:test-server",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-ServicePlazaContracts.ps1",
+    "python -X utf8 scripts/validate_development_checklists.py",
+    "python -X utf8 scripts/validate_governance_exams.py",
+    "python -X utf8 scripts/validate_implementation_records.py",
+    "python -X utf8 scripts/validate_agent_collaboration.py",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/modules/club-alliance/development-checklists/2026-07-11-club-alliance-h1-m3.json",
+    "contracts/modules/club-alliance/governance-exams/2026-07-11-club-alliance-h1-m3-attempt-1.json",
+    "app/src/modules/club-alliance/ClubAlliancePage.test.tsx",
+    "app/src/modules/club-alliance/ClubAlliancePage.css",
+    "docs/project-management/modules/club-alliance/CA-H1-handoff.md"
+  ],
+  "premises": [
+    "SP-H029 records H1-M2 R2 Go at authoritative integration HEAD d96affc",
+    "M3 proves local automation and completion only; browser layout, real session, runtime telemetry and deployed network evidence remain M4 UAT",
+    "catalog/actions remain the only network reads initiated by the H1 route for both allowed and denied selections",
+    "ActionControl and the platform evaluator remain authoritative and are not modified",
+    "M3 does not authorize child-project business APIs, backend, Schema, deployment or production"
+  ],
+  "implementation_mode": "ai-assisted"
+}
