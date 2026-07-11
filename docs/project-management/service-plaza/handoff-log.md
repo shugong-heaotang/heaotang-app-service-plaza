@@ -22,6 +22,19 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 | SP-H029 | 俱乐部联盟 CA-H1 | 页面壳需求、实现与 M4 环境验收 | 平台集成负责人 | 俱乐部联盟负责人、验收 Agent | 2026-07-12 | H1 M4 Go | B001/B002、登录角色、四分类、导航、denylist 和人工真实 Enter/Shift+Tab 全部通过 |
 | SP-H030 | 生命导航二 M4 | 浏览器主链路最终验收 | 平台集成负责人 | 生命导航二负责人、验收 Agent | 2026-07-11 | M4 Go | 真实登录、合成提交、即时历史、刷新持久、返回服务广场通过 |
 | SP-H031 | 健康大管家 MVP-90 | PRD 独立文档派发 | 平台集成负责人 | 健康大管家负责人 | 2026-07-11 | 正式派发，待最终激活 | Technical Go / Professional Freeze Pending；仅文档，不授权实现 |
+| SP-H032 | 健康大管家 MVP-90 M0 | 合同与合成一致性正式派发 | 平台集成负责人 | 健康大管家负责人 | 2026-07-12 | 平台派发完成，待模块激活签收 | 16 对象、6 状态机、6 角色、15 合成场景；禁止业务代码和真实健康数据 |
+
+## SP-H032：健康大管家 MVP-90 M0 合同与合成一致性派发
+
+- 通知：`HM-MVP90-M0-TASK-20260712-001`。
+- 平台工作项：`AIW-20260711-HEALTH-MVP90-M0-DISPATCH`；模块工作项：`AIW-20260711-HEALTH-MVP90-M0-CONTRACTS`。
+- 权威输入：PRD 分支 `codex/health-manager-mvp90-prd`，exact commit `fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c`；C5 仅为 Document Handoff Ready。
+- 范围：16 个语义对象、6 组状态机、6 类角色动作、`MVP-A001` 至 `MVP-A015` 的合成 fixtures、Schema 与 conformance。
+- 治理：R2 current checklist 26/26、SHA mismatch 0；随机考试 score 100；首次通过快照因最终 allowed paths 变化只保留为历史，不授权本派发。
+- 依赖：旧 personal-consultation-inbox 事实保留；内部依赖在原路径升级 v2，governance=pending、development=partial-go，27 项专业等决定保持 blocked-local。
+- 合成数据：显式 synthetic、固定 seed/version、可重放、可销毁；允许固定版本 Faker 等批准工具；禁止真实健康数据、手机号、身份证、OTP、JWT 或 cookie。
+- 边界：禁止前端、后端、API、数据库、环境、部署、生产、收费和专业 Pending 提前 Accepted。
+- 激活：本派发受控集成后，把模块工作树快进至 final integration HEAD 并核验 clean；再以独立 activation commit 将模块工作项转 active，模块自行完成 current checklist、考试 100、receipt 后开始 M0。
 
 ## SP-H031：健康大管家 MVP-90 PRD 独立派发
 
