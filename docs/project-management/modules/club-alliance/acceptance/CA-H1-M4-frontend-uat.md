@@ -2,11 +2,11 @@
 
 ## 当前裁定
 
-- 状态：`In Progress / No-Go`。
-- 原因：`CA-H1-M4-B001` 与 `CA-H1-M4-B002` 均已完成根因修复、部署和环境关闭证据；唯一未关闭项为真实环境 Enter 与 Shift+Tab 键盘 UAT。部署成功、自动化和焦点样式证据不能替代真实按键结果。
+- 状态：`Pass / M4 Go`。
+- 原因：`CA-H1-M4-B001` 与 `CA-H1-M4-B002` 均已完成根因修复、部署和环境关闭证据；项目负责人于 2026-07-12 在真实 Chrome 页面完成 Shift+Tab 焦点回退与“← 返回服务广场”Enter 激活，并明确回执“两项都正常”。
 - 产品 Blocker：无。B002 的点击不导航、`blocked/scope_required/user_id=non-null` 事件和 direct `?view=manage` 的 `unauthorized/scope_required` 页面已三方一致。
 - 平台 Blocker：`CA-H1-M4-B001` 已 resolved；根因修复和环境启用均使用版本化 business variable 与不同管理员提案/审核，未直接改数据库、未恢复旧单管理员入口。
-- 验收通道问题：应用内浏览器的 locator、DOM/CUA 和 CUA 键盘通道均能让目标链接取得 `focus-visible`，但未触发 Shift+Tab 焦点移动或 Enter 默认导航；Windows 原生通道连续两次因无法高置信确认 Chrome 当前 URL而被安全策略停止。该问题归类为控制通道证据缺口，不推断为产品失败，也不降低门禁。
+- 验收通道问题：自动化通道的历史限制已由独立人工真实键盘回执关闭；未使用脚本 click、合成 KeyboardEvent 或降低门禁替代真实按键。
 
 ## 环境与部署
 
@@ -53,7 +53,7 @@
 | 768×900 | 768/768 | 2 列，各 340px | 无横向滚动，Pass |
 | 1280×900 | 1280/1280 | 有界 2 列，各约 300px | 无横向滚动，Pass |
 
-焦点证据：顶部和主体返回链接均可获得真实 `focus-visible`，computed outline 为 `rgba(15, 118, 110, 0.32) solid 3px`。浏览器控制层对 Shift+Tab 的两种组合键编码均未移动焦点；公益链接 `press('Enter')` 返回后 URL 仍为首页，未取得产品导航结果。两项保持“浏览器控制通道未验证”，不判 Pass，也不判产品 No-Go；当前不得把自动化单测替代为完整环境键盘 UAT。
+焦点证据：顶部和主体返回链接均可获得真实 `focus-visible`，computed outline 为 `rgba(15, 118, 110, 0.32) solid 3px`。自动化控制层未能产生可信默认键盘行为；项目负责人随后在真实 Chrome 页面完成独立人工 Shift+Tab 与 Enter 复测并回执两项正常，最终判定 Pass。
 
 ## Query 与失败关闭
 
@@ -87,8 +87,8 @@
 - 浏览器后退：从上述 category 状态执行 back，回到无 query `/app/service-plaza/services/club-alliance/`，且“选择俱乐部服务”标题唯一出现，Pass。
 - 顶部返回：唯一 `返回服务广场` 链接跳转到 `/app/service-plaza/services`，Pass。
 - 主体返回：唯一 `← 返回服务广场` 链接跳转到 `/app/service-plaza/services`，Pass。
-- Shift+Tab：底部返回链接已显示 3px focus-visible，但 Playwright `Shift+Tab`、DOM/CUA `SHIFT+TAB` 均未改变 activeElement，记录为控制通道未验证。
-- Enter：唯一公益入口 `press('Enter')` 未报产品错误但 URL 保持首页；前一次调用曾遇 webview attach 超时。为避免重复遥测事件，不继续重试，记录为控制通道未验证。
+- Shift+Tab：底部返回链接已显示 3px focus-visible；自动化控制层结果不可信，最终由项目负责人人工复测确认焦点正常回退，Pass。
+- Enter：自动化控制层结果不可信，最终由项目负责人在“← 返回服务广场”上按 Enter 并确认返回服务广场，Pass。
 - Nginx 最近俱乐部 Referer 窗口聚合：`catalog GET 200=30`、`actions GET 200=30`、APP 全局 `feature-flags GET 200=38`、`action-events POST 200=6`。
 - 同一窗口业务 denylist 计数为 0；未出现 club search/create/join/review/member/payment/charity/federation API。
 - Nginx 只记录方法、路径、状态码聚合；数据库事件证据只保存 action_id、telemetry_event、outcome、reason、时间及 user_id 为 null/non-null，不保存 IP、手机号、OTP、JWT、完整 user_id 或敏感业务正文。
@@ -124,11 +124,11 @@
 ## 尚未关闭
 
 1. `CA-H1-M4-B001` 已关闭；保留上述 exact commit、部署、双审与 guest blocked 证据。
-2. 刷新、浏览器后退和两个返回入口已 Pass；Enter、Shift+Tab 因受支持的自动化键盘通道未产生浏览器默认行为、Windows 通道又被 URL 安全校验停止而保持未验证。最终门禁需要人工在已知测试 URL 上执行一次 Shift+Tab 和一次 Enter，并记录前后焦点/URL。
+2. 刷新、浏览器后退和两个返回入口已 Pass；项目负责人已在已知测试 URL 完成人工 Shift+Tab 与 Enter 复测并回执两项正常，真实键盘门禁关闭。
 3. 合成登录、四分类 activated、管理 blocked/scope_required，以及 B002 修复后的点击不导航、direct view `unauthorized/scope_required` 与三方事件均已完成；B002 已关闭。
 4. 四分类 guest blocked 与登录 activated/管理 blocked 遥测均已完成，载荷未保存 OTP/JWT/完整个人标识/敏感业务数据。
 5. 八态由 143/143 全量与 56/56 定向自动化证明；环境只记录安全、自然可重复状态，不新增人工状态切换器，不把未构造的 maintenance/offline 冒充截图通过。
-6. 人工真实键盘证据完成后才能把 verdict 改为 Pass；该项未验证时维持 No-Go。
+6. 所有 M4 必需环境项已关闭，最终 verdict 为 `Pass / M4 Go`。
 
 ## 登录角色证据根因与正式解阻方案
 
@@ -141,7 +141,7 @@
 - 最小授权：允许对已批准且容量通过的 candidate B 执行且仅执行一次 send-code；OTP 仅通过一次性非仓库通道进入同一浏览器，登录成功/过期后立即销毁，不在消息、命令、报告或 Git 中出现。不得换号、清计数、改限流、注入 JWT/shell token。
 - 登录后的唯一验收动作：四分类各一次，预期 `activated / none / user_id=non-null`；管理中心一次，预期 `blocked / scope_required / user_id=non-null`。每项由页面、Nginx action-events POST 和管理查询/只读数据库三方交叉；不执行业务 API。
 - does_not_block：部署、备份、ready/health、四视口、query 正反例、四分类 guest、刷新、后退、双返回、allowlist/denylist、自动化八态和本地总门禁均已完成，不需重复。
-- 当前仍禁止申请新 OTP；在最小授权明确前，登录角色两项保持 Pending，M4 继续 No-Go。
+- 历史 Pending 已关闭：仅一次授权 send-code 后完成登录角色取证，未重复申请 OTP；详细结果见下一节。
 
 ## 2026-07-11 合成普通会员登录与权限取证
 
@@ -167,7 +167,7 @@
 - 部署后 guest direct `?view=manage` 已在真实 DOM 显示 `authentication_required` 与管理中心不可访问，证明登录承接路径未因 B002 修复而回归；这不替代已登录缺 scope 的 `scope_required` 复验。
 - 合法已登录且缺 `club:manage` 的合成普通会员会话已复验：点击管理中心不导航；同一时间窗 Nginx `POST action-events` 200；权威只读事件为 `blocked/scope_required/user_id=non-null`。
 - direct `?view=manage` 页面为 `unauthorized/scope_required`，并显示缺少 `club:manage`；direct view 不额外伪造动作事件。
-- B002 状态为 `Verified / Closed`。M4 继续 `In Progress / No-Go` 的唯一原因是 Enter、Shift+Tab 真实键盘证据尚未取得。
+- B002 状态为 `Verified / Closed`。人工真实键盘证据已取得，M4 为 `Pass / Go`。
 
 ## RI-BROWSER-UAT-KEYBOARD-CONTROL 根因记录
 
@@ -180,6 +180,6 @@
 - blocks：M4 Full Go、M4 工作项 integrated、健康 M0 自动激活。
 - does_not_block：B001/B002 关闭、部署/回滚、query、导航点击、响应式、权限、遥测、denylist、健康与生命导航仓库外正式化包准备。
 - rejected_workaround：禁止用自动化单测、脚本 `element.click()`、合成 KeyboardEvent、弱化任务书或风险接受替代真实环境键盘证据。
-- systemic_fix：由人工在 Chrome 已知俱乐部首页执行一次 Shift+Tab 和一次 Enter；记录起始 URL、焦点名称、focus-visible、结束 URL，不输入账号或敏感数据。平台随后只读复核并更新最终 verdict。
+- systemic_fix：由项目负责人在 Chrome 已知俱乐部首页执行一次 Shift+Tab 和一次 Enter；确认焦点正常回退，且“← 返回服务广场”Enter 后返回服务广场。未输入账号或敏感数据。
 - security_note：早期一次宽 DOM 读取在瞬时工具输出中暴露了合成测试身份标识；未写入仓库、报告或消息，之后全部改用定向脱敏读取。最终报告只允许 `user_id=null/non-null`。
-- verdict：`Fail for evidence completion / no product verdict`；next_authorization：人工真实键盘 UAT 回执。
+- verdict：`Closed / Pass`；evidence_source：项目负责人 2026-07-12 明确回执“两项都正常”；next_authorization：平台完成 M4 状态收口并释放下游治理路径。

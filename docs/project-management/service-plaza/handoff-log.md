@@ -19,7 +19,7 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 | SP-H026 | 模块内部依赖 v2 | 平台合同给模块 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | 验证完成，待受控集成 | v1/v2 按 contract_version 路由；五维 readiness 与局部阻塞 |
 | SP-H027 | 健康大管家 V1.0 需求策划 | 文档任务派发 | 平台集成负责人 | 健康大管家负责人 | 2026-07-11 | 正式派发，待模块 G0 | 独立于旧咨询切片；仅文档和治理证据，可推送 Draft PR |
 | SP-H028 | 俱乐部 category 权威筛选 | 平台合同、后端与环境给模块 | 平台集成负责人 | 俱乐部联盟负责人 | 2026-07-11 | 后端与环境 Go，待模块吸收复核 | D-CA-003 Accepted；实现/集成 47ef91bb；SC general、PC charity |
-| SP-H029 | 俱乐部联盟 CA-H1 | 页面壳需求、实现与 M4 环境验收 | 平台集成负责人 | 俱乐部联盟负责人、验收 Agent | 2026-07-12 | H1 M3 Go；M4 In Progress / No-Go | B001/B002、登录角色、四分类、导航和 denylist 已验；仅人工真实 Enter/Shift+Tab 证据待关闭 |
+| SP-H029 | 俱乐部联盟 CA-H1 | 页面壳需求、实现与 M4 环境验收 | 平台集成负责人 | 俱乐部联盟负责人、验收 Agent | 2026-07-12 | H1 M4 Go | B001/B002、登录角色、四分类、导航、denylist 和人工真实 Enter/Shift+Tab 全部通过 |
 | SP-H030 | 生命导航二 M4 | 浏览器主链路最终验收 | 平台集成负责人 | 生命导航二负责人、验收 Agent | 2026-07-11 | M4 Go | 真实登录、合成提交、即时历史、刷新持久、返回服务广场通过 |
 | SP-H031 | 健康大管家 MVP-90 | PRD 独立文档派发 | 平台集成负责人 | 健康大管家负责人 | 2026-07-11 | 正式派发，待最终激活 | Technical Go / Professional Freeze Pending；仅文档，不授权实现 |
 
@@ -50,7 +50,7 @@ Handoff 是服务广场项目的强制交接机制。每个板块从一个阶段
 - 边界：selector 继续 `executable=false`；禁止四类业务 API、后端、deploy、production。
 - 环境门禁：模块本地 Go 后，平台另行授权测试环境部署与真实浏览器 UAT。
 - M4 增量：部署、备份、回滚目标、四视口、query 负例、四分类 guest `blocked/authentication_required/user_id=null`、refresh/back/上下两个返回和 Nginx denylist=0 已取得真实证据。
-- M4 当前未完成：仅 Enter/Shift+Tab 真实环境键盘证据。合法合成登录、四分类 activated、缺 `club:manage` 的 `blocked/scope_required`、B002 修复后点击不导航和 direct `unauthorized/scope_required` 均已完成。应用内键盘通道未产生默认行为，Windows 原生通道因无法高置信确认 Chrome URL 被安全策略停止；该项是证据 Blocker，不是产品失败结论。M4 不得判 Go。
+- M4 已完成：合法合成登录、四分类 activated、缺 `club:manage` 的 `blocked/scope_required`、B002 修复后点击不导航、direct `unauthorized/scope_required`，以及项目负责人人工真实 Enter/Shift+Tab 回执全部通过。自动化键盘通道的历史限制已由独立人工证据关闭，M4 Go。
 - 登录根因：无可接管的合法已登录标签；candidate B 容量门禁通过且权威关系证明没有 `club:manage`。等待一次 send-code 的最小明确授权后即可同时完成 activated 与 scope_required 三方取证，禁止换号、清计数、改限流或注入 token。
 - 最小授权结果：仅一次 send-code 后登录成功；四分类 activated 与管理 blocked/scope_required 事件三方证据完成。`CA-H1-M4-B002` 已经独立修复、集成、部署并复测关闭；当前不再是产品 Blocker。
 
