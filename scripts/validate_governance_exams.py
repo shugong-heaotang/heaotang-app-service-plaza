@@ -139,9 +139,12 @@ def validate(schema_path: Path, bank_schema_path: Path, bank_path: Path, attempt
                     errors.append(f"{current_path}: retry must explicitly reference the immediately preceding failed attempt")
                 rereads = attempt.get("remediation_rereads", [])
                 reread_paths = [item.get("source_path", "").replace("\\", "/") for item in rereads]
+                presentation_nonces = [item.get("presentation_nonce", "") for item in rereads]
                 required_paths = [str(item).replace("\\", "/") for item in previous.get("remediation_sources", [])]
                 if len(reread_paths) != len(set(reread_paths)):
                     errors.append(f"{current_path}: remediation_rereads contains duplicate source_path")
+                if len(presentation_nonces) != len(set(presentation_nonces)):
+                    errors.append(f"{current_path}: remediation_rereads contains duplicate presentation_nonce")
                 if set(reread_paths) != set(required_paths) or len(reread_paths) != len(required_paths):
                     errors.append(f"{current_path}: remediation_rereads must exactly match previous remediation_sources")
                 try:
@@ -154,20 +157,28 @@ def validate(schema_path: Path, bank_schema_path: Path, bank_path: Path, attempt
                     source_value = reread.get("source_path", "")
                     if reread.get("confirmed_by") != attempt.get("actor"):
                         errors.append(f"{current_path}: remediation confirmation actor mismatch for {source_value}")
-                    if reread.get("confirmation_method") != "explicit-source-path":
+                    if reread.get("confirmation_method") != "interactive-path-nonce-after-full-output":
                         errors.append(f"{current_path}: remediation confirmation method is invalid for {source_value}")
                     source_path = resolve_repository_path(project_root, source_value) if source_value else None
                     if source_path is None or not source_path.is_file():
                         errors.append(f"{current_path}: missing or unsafe remediation source {source_value}")
-                    elif digest(source_path) != reread.get("source_sha256"):
+                    elif (
+                        digest(source_path) != reread.get("source_sha256")
+                        or reread.get("presentation_sha256") != reread.get("source_sha256")
+                    ):
                         errors.append(f"{current_path}: remediation source hash mismatch for {source_value}")
                     try:
-                        reread_at = parse_timestamp(reread.get("reread_at", ""))
+                        presented_at = parse_timestamp(reread.get("presented_at", ""))
+                        confirmed_at = parse_timestamp(reread.get("confirmed_at", ""))
                     except (TypeError, ValueError):
-                        errors.append(f"{current_path}: invalid reread_at for {source_value}")
+                        errors.append(f"{current_path}: invalid presentation or confirmation timestamp for {source_value}")
                         continue
-                    if failed_at is not None and retry_at is not None and not (failed_at <= reread_at <= retry_at):
-                        errors.append(f"{current_path}: reread_at must be between previous completion and retry generation")
+                    if failed_at is not None and retry_at is not None and not (
+                        failed_at <= presented_at <= confirmed_at <= retry_at
+                    ):
+                        errors.append(
+                            f"{current_path}: presentation and confirmation must occur in order after failure and before retry generation"
+                        )
     return errors
 
 

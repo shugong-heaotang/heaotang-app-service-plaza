@@ -51,6 +51,6 @@
 
 ## Verdict
 
-- 当前：R1 source `a8106033` 因静默自动重读证据被独立复核 No-Go；R2 source `f61f0eed` 因新 checklist/IR 文件末尾空行被真实 diff 门禁拒绝，历史保留但最终树不再包含其快照；R3 以全新 checklist/exam/IR 完成显式展示/确认修复，等待独立复核与受控集成。
+- 当前：R1 source `a8106033` 因静默自动重读证据被独立复核 No-Go；R2 source `f61f0eed` 因新 JSON 末尾空行被 diff 门禁拒绝；R3 source `406b5f30` 因确认参数可在全文展示前预传而被独立复核 No-Go。三者 Git 历史保留，最终树由 R4 的“全文展示→路径+nonce交互确认→记录时间/SHA”强制顺序证据取代。
 - unresolved_risk：Project Brain 需在新权威基线生成 M1-R4；首试100不人为制造 retry。
 - next_authorization：平台集成后通知 Project Brain 重新生成当前治理证据。

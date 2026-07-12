@@ -1,13 +1,13 @@
 
 {
     "contract_version":  "implementation-record.v1",
-    "record_id":  "IR-20260712-GOVERNANCE-EXAM-RETRY-EVIDENCE-R3",
-    "title":  "治理考试重试补课全文展示与明确确认根因修复",
+    "record_id":  "IR-20260712-GOVERNANCE-EXAM-RETRY-EVIDENCE-R4",
+    "title":  "治理考试重试全文展示后交互确认根因修复",
     "date":  "2026-07-12",
     "status":  "verified",
-    "objective":  "消除首轮静默自动读取即可生成补课证据的缺陷，使attempt_number大于1只能在全文展示并明确确认失败试卷全部补课来源后生成可验证证据。",
-    "governance_checklist":  "contracts/foundation/development-checklists/2026-07-12-governance-exam-retry-evidence-r3.json",
-    "governance_exam":  "contracts/foundation/governance-exams/2026-07-12-governance-exam-retry-evidence-r3-attempt-1.json",
+    "objective":  "强制attempt_number大于1的补课证据按全文展示、路径加nonce交互确认、记录确认时间和当前哈希的顺序生成，禁止静默代读或预先确认。",
+    "governance_checklist":  "contracts/foundation/development-checklists/2026-07-12-governance-exam-retry-evidence-r4.json",
+    "governance_exam":  "contracts/foundation/governance-exams/2026-07-12-governance-exam-retry-evidence-r4-attempt-1.json",
     "governance_inputs":  [
                               "AGENTS.md",
                               "README.md",
@@ -41,17 +41,18 @@
                           "scripts/validate_governance_exams.py",
                           "scripts/tests/test_validate_governance_exams.py",
                           "docs/project-management/service-plaza/governance-exam-retry-evidence-2026-07-12.md",
-                          "contracts/foundation/development-checklists/2026-07-12-governance-exam-retry-evidence-r3.json",
-                          "contracts/foundation/governance-exams/2026-07-12-governance-exam-retry-evidence-r3-attempt-1.json",
-                          "contracts/foundation/implementation-records/2026-07-12-governance-exam-retry-evidence-r3.json"
+                          "contracts/foundation/development-checklists/2026-07-12-governance-exam-retry-evidence-r4.json",
+                          "contracts/foundation/governance-exams/2026-07-12-governance-exam-retry-evidence-r4-attempt-1.json",
+                          "contracts/foundation/implementation-records/2026-07-12-governance-exam-retry-evidence-r4.json"
                       ],
     "verification":  [
                          "scripts/Test-AgentDevelopmentPreflight.ps1: ready",
-                         "IR-20260712-GOVERNANCE-EXAM-RETRY-EVIDENCE-R3 checklist: 26/26 completed and current",
-                         "EX-20260712-GOVERNANCE-EXAM-RETRY-EVIDENCE-R3-1: score 100",
+                         "IR-20260712-GOVERNANCE-EXAM-RETRY-EVIDENCE-R4 checklist: 26/26 completed and current",
+                         "EX-20260712-GOVERNANCE-EXAM-RETRY-EVIDENCE-R4-1: score 100",
                          "python -X utf8 -m unittest scripts.tests.test_validate_governance_exams",
-                         "manual retry without confirmations: rejected before output creation",
-                         "manual failed attempt1 to passed attempt2: full remediation contents presented; exact source confirmations and previous path/SHA persisted",
+                         "retry with closed standard input: full first remediation source presented, confirmation rejected, no retry output created",
+                         "validator positive fixture: presentation path/hash/nonce/time precedes interactive confirmation and retry generation",
+                         "validator negative fixtures: missing/duplicate/stale/wrong actor/wrong method/pre-confirmation/late confirmation/nonconsecutive all rejected",
                          "scripts/validate_governance_exams.py full repository gate",
                          "scripts/validate_development_checklists.py",
                          "scripts/validate_implementation_records.py",
@@ -61,8 +62,8 @@
                          "git diff --check"
                      ],
     "evidence":  [
-                     "contracts/foundation/development-checklists/2026-07-12-governance-exam-retry-evidence-r3.json",
-                     "contracts/foundation/governance-exams/2026-07-12-governance-exam-retry-evidence-r3-attempt-1.json",
+                     "contracts/foundation/development-checklists/2026-07-12-governance-exam-retry-evidence-r4.json",
+                     "contracts/foundation/governance-exams/2026-07-12-governance-exam-retry-evidence-r4-attempt-1.json",
                      "docs/project-management/service-plaza/governance-exam-retry-evidence-2026-07-12.md",
                      "scripts/tests/test_validate_governance_exams.py"
                  ],
@@ -73,7 +74,9 @@
                      "Project Brain R4若首试100无需人为制造retry",
                      "首轮a8106033因静默自动重读证据被独立复核No-Go且不得作为集成结论",
                      "显式确认必须精确覆盖失败试卷全部remediation_sources且不能增加来源",
-                     "R2 f61f0eed因新JSON文件末尾空行被diff门禁拒绝；R2 Git历史保留，最终树由不可变R3取代"
+                     "R2 f61f0eed因新JSON文件末尾空行被diff门禁拒绝；R2 Git历史保留，最终树由不可变R3取代",
+                     "R3 406b5f30因可预先传入确认列表被独立复核No-Go；R3 Git历史保留，最终树由不可变R4取代",
+                     "交互式路径加nonce确认只能在生成器完整输出对应来源后读取并记录confirmed_at"
                  ],
     "implementation_mode":  "ai-assisted"
 }
