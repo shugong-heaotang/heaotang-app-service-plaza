@@ -56,3 +56,20 @@
 | result | `Blocked / Conditional No-Go`。 |
 | root cause | 测试账号 UTC 日 OTP 额度不足；不是 APP、后端、fixture 或浏览器控制通道产品失败。 |
 | next action | 等待服务端 UTC 日自然重置后，重新核对四个合成身份各一次容量；再按一次一动作建立会话并采集认证态 DOM 证据。禁止用仅三身份结果替代四身份结论。 |
+
+## 追加：UTC 重试前复核
+
+- case_id：`CMH-M3-BR-CAPACITY-006`
+- time：`2026-07-13 06:18 +08:00` / `2026-07-12T22:18Z`
+- precondition：四身份一次会话矩阵；只读额度查询；未读取或记录验证码、Cookie、JWT、完整账号标识。
+- action：分别核对四个合成身份在测试服务器 SQLite UTC 日的剩余验证码容量。
+- secrets：`none-recorded`
+
+| 字段 | 证据 |
+| --- | --- |
+| actual | 新会员剩余 `0`；家庭、多俱乐部、管理身份各剩余 `1`。服务端 UTC 日期仍为 `2026-07-12`。 |
+| mutation | `0`；未发送验证码、未创建会话、未重跑 fixture、未部署。 |
+| expected | 四个身份均至少保留一次容量后，才可启动完整认证态 DOM 矩阵。 |
+| result | `Blocked / Conditional No-Go`。 |
+| root cause | 测试账号 UTC 日额度尚未自然重置；不是 APP、后端、fixture 或浏览器控制通道的产品故障。 |
+| next action | 服务端 UTC 日期自然切换后，再次执行同一只读容量检查；只有四身份均可用且具备本轮明确测试授权时，才一次一身份发送验证码并逐动作采集页面证据。 |

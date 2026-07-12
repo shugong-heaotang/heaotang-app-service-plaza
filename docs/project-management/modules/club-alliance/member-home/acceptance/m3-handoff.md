@@ -155,3 +155,11 @@
 当前 verdict：`Conditional No-Go — synthetic data and authentication evidence passed; authenticated member-home browser DOM remains control-channel Unverified.`
 
 四账号本轮一次发送授权已经用完，不得再次发送。下一轮必须等待 UTC 日自然重置和新的明确授权，并先解决应用内浏览器控制稳定性；不重复部署，不使用真实资料。
+
+## 13. 2026-07-13 UTC 重试前状态
+
+- 只读复核时间：`2026-07-12T22:18Z`；服务端 SQLite UTC 日期仍为 `2026-07-12`。
+- 新会员 OTP 剩余为 0；其余三种合成身份各剩余为 1。未发送验证码、未建立会话、未重跑 fixture 或部署。
+- 结论不变：四身份认证态 member-home DOM 证据仍未取得，当前为 `Conditional No-Go`；三身份可用额度不能替代四身份验收。
+- 根因：测试账号 UTC 日容量尚未自然重置，属于测试执行前置条件，不是产品故障。
+- 最早下一动作：自然 UTC 日切换后先重新只读核对四身份额度；随后仅在本轮明确授权下，以“一身份、一验证码、一浏览器动作”的方式恢复认证态取证。left/suspended/maintenance 继续保持 Unsupported/Unverified。
