@@ -2108,6 +2108,26 @@
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m0.md"
                        },
                        {
+                           "work_id":  "AIW-20260712-PROTECTION-MALL-M0-EVIDENCE-REMEDIATION",
+                           "title":  "保障商城 M0 CP1 R1 失效证据平台归档",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-m0-evidence-remediation",
+                           "branch":  "codex/protection-mall-m0-evidence-remediation",
+                           "base_commit":  "b0c729cc01e8f267a4bcbf8f86b39baa68d0fb39",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/invalidated-snapshots/protection-mall-m0-cp1-r1/",
+                                                 "docs/project-management/notices/2026-07-12-protection-mall-m0-evidence-remediation-task-order.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "仅从 immutable source commit 6bce98f 归档原 CP1 checklist、原 attempt-1 和 README manifest；禁止 cherry-pick、接管旧脏工作树、修改商城合同或激活 M1。",
+                           "handoff_record":  "contracts/foundation/invalidated-snapshots/protection-mall-m0-cp1-r1/README.md"
+                       },
+                       {
                            "work_id":  "AIW-20260712-HEALTH-MVP90-M1-P2-DISPATCH",
                            "title":  "健康大管家 MVP-90 M1 P2 合成运行内核规划与派发",
                            "owner":  "Codex platform integration agent",
@@ -2376,7 +2396,7 @@
                            "title":  "治理考试重试前序失败与补课重读证据根因修复",
                            "owner":  "Platform governance tooling agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-governance-exam-retry-evidence",
                            "branch":  "codex/governance-exam-retry-evidence",
