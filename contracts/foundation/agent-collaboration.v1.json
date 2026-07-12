@@ -2216,7 +2216,7 @@
                            "title":  "NOVA M2 人脉四工具与结果 callback 版本化契约会签",
                            "owner":  "NOVA tool contract signoff agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-nova-m2-people-tools-contract",
                            "branch":  "codex/nova-m2-people-tools-contract",
@@ -2237,7 +2237,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "只形成 member_search、connection_draft、connection_send、connection_status 与 server callback 的 JSON/Schema/error/fixtures/tests/会签结论；必须拒绝 legacy network unsafe 写路由，不实现业务、不发送消息、不触碰真实数据。",
+                           "migration_note":  "R1 source fd6c7ad 因输出对象未严格白名单、19负例只计数未执行被独立复核 No-Go，未单独集成；corrected R2 source 96037a8d76e8b9a756d57f6ccd8738118ef2a5cc 经独立复核 Contract Package Go，并以最终状态 squash integration b1ff166 进入权威基线。R2 checklist26/26、exam100、Python13/13、strict PII output schema、27/27结构化负例、总合同/UTF8/diff通过。exact四工具+server callback、trusted identity/tenant/resource/confirmation/idempotency/audit/errors/legacy denylist已冻结，全部executable=false。人脉Owner证据已另行 integrated；M2仍等待provider实现、迁移与环境安全验收，禁止真实搜索/消息/数据。",
                            "handoff_record":  "docs/project-management/notices/2026-07-12-nova-m2-people-tools-task-order.md"
                        }
                    ]
