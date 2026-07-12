@@ -3,8 +3,9 @@
   [string]$Operation = "Plan",
   [string]$Server = "root@47.94.159.60",
   [string]$DatabasePath = "/root/heaotang-acceptance/runtime/data/heao.db",
+  [string]$LocalDatabasePath = "",
   [string]$Seed = "HEAOTANG-CMH-M3-20260712-V1",
-  [ValidateSet("Baseline", "PartialError", "CriticalError")]
+  [ValidateSet("Baseline", "PartialError", "CriticalError", "ApplicationPending", "ApplicationRejected", "DissolvedClub")]
   [string]$Scenario = "Baseline",
   [string]$RunId = ("club-member-home-m3-" + (Get-Date -Format "yyyyMMdd-HHmmss") + "-" + ([Guid]::NewGuid().ToString("N").Substring(0, 8)))
 )
@@ -12,7 +13,14 @@
 $ErrorActionPreference = "Stop"
 . (Join-Path $PSScriptRoot "Initialize-PowerShellUtf8.ps1") -Quiet
 
-if ($Server -ne "root@47.94.159.60" -or $DatabasePath -ne "/root/heaotang-acceptance/runtime/data/heao.db") {
+$localMode = -not [string]::IsNullOrWhiteSpace($LocalDatabasePath)
+if ($localMode) {
+  $localRoot = [IO.Path]::GetFullPath((Join-Path ([IO.Path]::GetTempPath()) "heaotang-cmh-m3-fixture-tests"))
+  $localPath = [IO.Path]::GetFullPath($LocalDatabasePath)
+  if (-not $localPath.StartsWith($localRoot + [IO.Path]::DirectorySeparatorChar, [StringComparison]::OrdinalIgnoreCase) -or [IO.Path]::GetExtension($localPath) -ne ".db") {
+    throw "Local fixture database must be a .db file under the dedicated temporary test directory."
+  }
+} elseif ($Server -ne "root@47.94.159.60" -or $DatabasePath -ne "/root/heaotang-acceptance/runtime/data/heao.db") {
   throw "Fixture operations are restricted to the approved test environment."
 }
 if ($Seed -ne "HEAOTANG-CMH-M3-20260712-V1") {
@@ -31,12 +39,14 @@ $identityDefinitions = @(
 )
 if ($Scenario -eq "PartialError") { $identityDefinitions[1].expected_state = "partial-error" }
 if ($Scenario -eq "CriticalError") { $identityDefinitions[3].expected_state = "error" }
+if ($Scenario -eq "DissolvedClub") { $identityDefinitions[0].expected_state = "ready-lifecycle" }
 $clubCodes = @(
   "$fixturePrefix-FAMILY",
   "$fixturePrefix-GENERAL",
   "$fixturePrefix-CHARITY",
   "$fixturePrefix-MANAGER",
-  "$fixturePrefix-CRITICAL-HEALTH"
+  "$fixturePrefix-CRITICAL-HEALTH",
+  "$fixturePrefix-DISSOLVED"
 )
 
 function Quote-Sql([string]$Value) {
@@ -45,6 +55,27 @@ function Quote-Sql([string]$Value) {
 
 function Invoke-RemoteSql {
   param([Parameter(Mandatory = $true)][string]$Sql)
+  if ($localMode) {
+    $startInfo = New-Object System.Diagnostics.ProcessStartInfo
+    $startInfo.FileName = "python.exe"
+    $startInfo.Arguments = '-X utf8 -c "import os,sqlite3,sys; sql=sys.stdin.read(); con=sqlite3.connect(os.environ[''CMH_LOCAL_DB'']); stripped=sql.lstrip(); cur=con.execute(sql) if stripped.upper().startswith(''SELECT'') else None; print(''\n''.join(''|''.join('''' if v is None else str(v) for v in row) for row in cur.fetchall())) if cur is not None else con.executescript(sql); con.commit(); con.close()"'
+    $startInfo.EnvironmentVariables["CMH_LOCAL_DB"] = $localPath
+    $startInfo.UseShellExecute = $false
+    $startInfo.CreateNoWindow = $true
+    $startInfo.RedirectStandardInput = $true
+    $startInfo.RedirectStandardOutput = $true
+    $startInfo.RedirectStandardError = $true
+    $process = New-Object System.Diagnostics.Process
+    $process.StartInfo = $startInfo
+    [void]$process.Start()
+    $process.StandardInput.Write($Sql)
+    $process.StandardInput.Close()
+    $stdout = $process.StandardOutput.ReadToEnd()
+    $stderr = $process.StandardError.ReadToEnd()
+    $process.WaitForExit()
+    if ($process.ExitCode -ne 0) { throw "Local isolated fixture SQL failed: $($stderr.Trim())" }
+    return $stdout.Trim()
+  }
   $startInfo = New-Object System.Diagnostics.ProcessStartInfo
   $startInfo.FileName = "ssh.exe"
   $startInfo.Arguments = "-o BatchMode=yes -o ConnectTimeout=10 $Server sqlite3 -batch -noheader $DatabasePath"
@@ -124,17 +155,37 @@ if ($Operation -eq "Plan") {
   $manifest.operation = "plan"
   $manifest.expected = [ordered]@{
     identity_count = 4
-    club_count = 5
-    membership_count = $(if ($Scenario -eq "CriticalError") { 5 } else { 4 })
+    club_count = $(if ($Scenario -eq "DissolvedClub") { 6 } else { 5 })
+    membership_count = $(if ($Scenario -in @("CriticalError", "DissolvedClub")) { 5 } else { 4 })
+    application_count = $(if ($Scenario -in @("ApplicationPending", "ApplicationRejected")) { 1 } else { 0 })
     task_count = $(if ($Scenario -eq "PartialError") { 2 } else { 1 })
     partial_error = $(if ($Scenario -eq "PartialError") { "run-owned-empty-title-family-task-active" } else { "run-owned-empty-title-family-task-inactive" })
     critical_error = $(if ($Scenario -eq "CriticalError") { "run-owned-standard-health-club-active" } else { "run-owned-standard-health-club-inactive" })
+    application_status = $(if ($Scenario -eq "ApplicationPending") { "pending" } elseif ($Scenario -eq "ApplicationRejected") { "rejected" } else { "none" })
+    dissolved_club = $(if ($Scenario -eq "DissolvedClub") { "run-owned-dissolved-club-active" } else { "run-owned-dissolved-club-inactive" })
   }
   $manifest | ConvertTo-Json -Depth 8
   exit 0
 }
 
 if ($Operation -eq "RestoreVerify") {
+  if ($localMode) {
+    $restoreStart = New-Object System.Diagnostics.ProcessStartInfo
+    $restoreStart.FileName = "python.exe"
+    $restoreStart.Arguments = '-X utf8 -c "import hashlib,os,sqlite3,tempfile; source=sqlite3.connect(os.environ[''CMH_LOCAL_DB'']); restored_path=os.environ[''CMH_LOCAL_DB'']+''.restored''; restored=sqlite3.connect(restored_path); source.backup(restored); integrity=restored.execute(''PRAGMA integrity_check'').fetchone()[0]; count=restored.execute(\"SELECT COUNT(*) FROM sqlite_master WHERE type IN (''table'',''index'',''trigger'',''view'')\").fetchone()[0]; source_dump=''\n''.join(source.iterdump()).encode(); restored_dump=''\n''.join(restored.iterdump()).encode(); print(f''{integrity}|{count}|{hashlib.sha256(source_dump).hexdigest()}|{hashlib.sha256(restored_dump).hexdigest()}''); source.close(); restored.close(); os.remove(restored_path)"'
+    $restoreStart.EnvironmentVariables["CMH_LOCAL_DB"] = $localPath
+    $restoreStart.UseShellExecute = $false
+    $restoreStart.CreateNoWindow = $true
+    $restoreStart.RedirectStandardOutput = $true
+    $restoreStart.RedirectStandardError = $true
+    $restoreProcess = New-Object System.Diagnostics.Process
+    $restoreProcess.StartInfo = $restoreStart
+    [void]$restoreProcess.Start()
+    $restoreResult = $restoreProcess.StandardOutput.ReadToEnd().Trim()
+    $restoreError = $restoreProcess.StandardError.ReadToEnd()
+    $restoreProcess.WaitForExit()
+    if ($restoreProcess.ExitCode -ne 0) { throw "Local restore verification failed: $($restoreError.Trim())" }
+  } else {
   $restoreScript = @'
 set -eu
 backup="/tmp/__RUN__-backup.db"
@@ -151,6 +202,7 @@ printf '%s|%s|%s|%s\n' "$integrity" "$schema_count" "$backup_dump_hash" "$restor
 '@
   $restoreScript = $restoreScript.Replace("__RUN__", $RunId).Replace("__DB__", $DatabasePath)
   $restoreResult = Invoke-RemoteShell -Script $restoreScript
+  }
   $parts = $restoreResult -split '\|', 4
   if ($parts.Count -ne 4 -or $parts[0] -ne "ok" -or [int]$parts[1] -le 0 -or $parts[2] -ne $parts[3]) {
     throw "Database backup/restore integrity comparison failed."
@@ -163,6 +215,7 @@ printf '%s|%s|%s|%s\n' "$integrity" "$schema_count" "$backup_dump_hash" "$restor
     schema_object_count = [int]$parts[1]
     dump_sha256_match = $true
     temporary_files_removed = $true
+    local_isolated_mode = $localMode
   }
   $manifest | ConvertTo-Json -Depth 8
   exit 0
@@ -173,6 +226,7 @@ function Get-RunCounts {
 SELECT
   (SELECT COUNT(*) FROM clubs WHERE code IN ($quotedCodes)) || '|' ||
   (SELECT COUNT(*) FROM club_members WHERE club_id IN (SELECT id FROM clubs WHERE code IN ($quotedCodes))) || '|' ||
+  (SELECT COUNT(*) FROM club_join_applications WHERE club_id IN (SELECT id FROM clubs WHERE code IN ($quotedCodes))) || '|' ||
   (SELECT COUNT(*) FROM family_tasks WHERE club_id IN (SELECT id FROM clubs WHERE code IN ($quotedCodes))) || '|' ||
   (SELECT COUNT(*) FROM activities WHERE club_id IN (SELECT id FROM clubs WHERE code IN ($quotedCodes))) || '|' ||
   (SELECT COUNT(*) FROM activity_registrations WHERE activity_id IN (SELECT id FROM activities WHERE club_id IN (SELECT id FROM clubs WHERE code IN ($quotedCodes)))) || '|' ||
@@ -180,16 +234,17 @@ SELECT
   (SELECT COUNT(*) FROM notifications WHERE ref_type='club_member_home_m3_fixture' AND ref_id=$(Quote-Sql $RunId));
 "@
   $raw = Invoke-RemoteSql -Sql $countsSql
-  $parts = $raw -split '\|', 7
-  if ($parts.Count -ne 7) { throw "Unexpected fixture count row." }
+  $parts = $raw -split '\|', 8
+  if ($parts.Count -ne 8) { throw "Unexpected fixture count row." }
   return [ordered]@{
     clubs = [int]$parts[0]
     memberships = [int]$parts[1]
-    tasks = [int]$parts[2]
-    activities = [int]$parts[3]
-    registrations = [int]$parts[4]
-    announcements = [int]$parts[5]
-    notifications = [int]$parts[6]
+    applications = [int]$parts[2]
+    tasks = [int]$parts[3]
+    activities = [int]$parts[4]
+    registrations = [int]$parts[5]
+    announcements = [int]$parts[6]
+    notifications = [int]$parts[7]
   }
 }
 
@@ -202,6 +257,7 @@ DELETE FROM activities WHERE club_id IN (SELECT id FROM clubs WHERE code IN ($qu
 DELETE FROM club_announcements WHERE club_id IN (SELECT id FROM clubs WHERE code IN ($quotedCodes));
 DELETE FROM family_tasks WHERE club_id IN (SELECT id FROM clubs WHERE code IN ($quotedCodes));
 DELETE FROM club_member_roles WHERE club_id IN (SELECT id FROM clubs WHERE code IN ($quotedCodes));
+DELETE FROM club_join_applications WHERE club_id IN (SELECT id FROM clubs WHERE code IN ($quotedCodes));
 DELETE FROM club_members WHERE club_id IN (SELECT id FROM clubs WHERE code IN ($quotedCodes));
 DELETE FROM notifications WHERE ref_type='club_member_home_m3_fixture' AND ref_id=$(Quote-Sql $RunId);
 DELETE FROM clubs WHERE code IN ($quotedCodes);
@@ -251,6 +307,23 @@ INSERT INTO club_members (club_id,user_id,role) VALUES
   ((SELECT id FROM clubs WHERE code=$(Quote-Sql $clubCodes[4])),(SELECT id FROM users WHERE phone='19900009994'),'director');
 "@
   }
+  $applicationSql = ""
+  if ($Scenario -in @("ApplicationPending", "ApplicationRejected")) {
+    $applicationStatus = if ($Scenario -eq "ApplicationPending") { "pending" } else { "rejected" }
+    $applicationSql = @"
+INSERT INTO club_join_applications (club_id,user_id,message,status,review_note,reviewed_by,reviewed_at) VALUES
+  ((SELECT id FROM clubs WHERE code=$(Quote-Sql $clubCodes[1])),(SELECT id FROM users WHERE phone='19900009991'),'synthetic-only',$(Quote-Sql $applicationStatus),'synthetic-only',0,$(if ($applicationStatus -eq 'rejected') { "datetime('now')" } else { 'NULL' }));
+"@
+  }
+  $dissolvedClubSql = ""
+  if ($Scenario -eq "DissolvedClub") {
+    $dissolvedClubSql = @"
+INSERT INTO clubs (code,name,type,category,status,owner_id,city,intro,member_count) VALUES
+  ($(Quote-Sql $clubCodes[5]),'M3 synthetic dissolved club','standard','general','dissolved',(SELECT id FROM users WHERE phone='19900009994'),'Test City',$(Quote-Sql ("synthetic run " + $RunId)),1);
+INSERT INTO club_members (club_id,user_id,role) VALUES
+  ((SELECT id FROM clubs WHERE code=$(Quote-Sql $clubCodes[5])),(SELECT id FROM users WHERE phone='19900009991'),'member');
+"@
+  }
 
   $applySql = @"
 BEGIN IMMEDIATE;
@@ -266,6 +339,7 @@ INSERT INTO clubs (code,name,type,category,status,owner_id,city,intro,member_cou
   ($(Quote-Sql $clubCodes[2]),'M3 synthetic public-benefit club','standard','charity','active',(SELECT id FROM users WHERE phone='19900009994'),'Beijing',$(Quote-Sql ("synthetic run " + $RunId)),1),
   ($(Quote-Sql $clubCodes[3]),'M3 synthetic managed club','standard','general','active',(SELECT id FROM users WHERE phone='19900009994'),'Chengdu',$(Quote-Sql ("synthetic run " + $RunId)),1),
   ($(Quote-Sql $clubCodes[4]),'M3 synthetic critical-error club','standard','health','active',(SELECT id FROM users WHERE phone='19900009994'),'Shenzhen',$(Quote-Sql ("synthetic run " + $RunId)),0);
+$dissolvedClubSql
 
 INSERT INTO club_members (club_id,user_id,role) VALUES
   ((SELECT id FROM clubs WHERE code=$(Quote-Sql $clubCodes[0])),(SELECT id FROM users WHERE phone='19900009992'),'member'),
@@ -277,6 +351,7 @@ INSERT INTO family_tasks (club_id,title,owner_user_id,status,due_date,review_not
   ((SELECT id FROM clubs WHERE code=$(Quote-Sql $clubCodes[0])),'M3 synthetic family task',(SELECT id FROM users WHERE phone='19900009992'),'todo',date('now'),$(Quote-Sql $RunId));
 $partialErrorSql
 $criticalErrorSql
+$applicationSql
 
 INSERT INTO activities (club_id,code,title,start_time,end_time,status,created_by) VALUES
   ((SELECT id FROM clubs WHERE code=$(Quote-Sql $clubCodes[0])),$(Quote-Sql ($fixturePrefix + '-ACT-FAMILY')),'M3 synthetic family activity',datetime('now','+1 day'),datetime('now','+1 day','+2 hours'),'published',(SELECT id FROM users WHERE phone='19900009994')),
@@ -302,8 +377,9 @@ COMMIT;
 
 $counts = Get-RunCounts
 $expectedCounts = [ordered]@{
-  clubs = 5
-  memberships = $(if ($Scenario -eq "CriticalError") { 5 } else { 4 })
+  clubs = $(if ($Scenario -eq "DissolvedClub") { 6 } else { 5 })
+  memberships = $(if ($Scenario -in @("CriticalError", "DissolvedClub")) { 5 } else { 4 })
+  applications = $(if ($Scenario -in @("ApplicationPending", "ApplicationRejected")) { 1 } else { 0 })
   tasks = $(if ($Scenario -eq "PartialError") { 2 } else { 1 })
   activities = 2
   registrations = 2
@@ -322,6 +398,22 @@ if ([int]$criticalMembership -ne $expectedCriticalMembership) {
   throw "Critical-error membership does not match the selected fixture scenario."
 }
 
+$applicationStatus = Invoke-RemoteSql -Sql "SELECT COALESCE(MAX(status),'') FROM club_join_applications WHERE club_id IN (SELECT id FROM clubs WHERE code IN ($quotedCodes)) AND user_id=(SELECT id FROM users WHERE phone='19900009991');"
+$expectedApplicationStatus = if ($Scenario -eq "ApplicationPending") { "pending" } elseif ($Scenario -eq "ApplicationRejected") { "rejected" } else { "" }
+if ($applicationStatus -ne $expectedApplicationStatus) {
+  throw "Application-history fixture status does not match the selected scenario."
+}
+$applicationIdentityMemberships = Invoke-RemoteSql -Sql "SELECT COUNT(*) FROM club_members WHERE user_id=(SELECT id FROM users WHERE phone='19900009991') AND club_id IN (SELECT id FROM clubs WHERE code IN ($quotedCodes)) AND club_id!=(SELECT id FROM clubs WHERE code=$(Quote-Sql $clubCodes[5]));"
+if ([int]$applicationIdentityMemberships -ne 0) {
+  throw "Application-history identity must not become a current member."
+}
+
+$dissolvedProjection = Invoke-RemoteSql -Sql "SELECT COUNT(*) FROM clubs c JOIN club_members cm ON cm.club_id=c.id JOIN users u ON u.id=cm.user_id WHERE c.code=$(Quote-Sql $clubCodes[5]) AND c.status='dissolved' AND u.phone='19900009991';"
+$expectedDissolvedProjection = $(if ($Scenario -eq "DissolvedClub") { 1 } else { 0 })
+if ([int]$dissolvedProjection -ne $expectedDissolvedProjection) {
+  throw "Dissolved-club fixture does not preserve the authoritative club lifecycle status."
+}
+
 $manifest.operation = $Operation.ToLowerInvariant()
 $manifest.applied = $true
 $manifest.counts = $counts
@@ -337,5 +429,17 @@ $manifest.critical_error = [ordered]@{
   membership_active = ($Scenario -eq "CriticalError")
   identity = "manager"
   stable_error_id = "CMH_CLUB_CLASSIFICATION_INVALID"
+}
+$manifest.application_history = [ordered]@{
+  active = ($Scenario -in @("ApplicationPending", "ApplicationRejected"))
+  status = $expectedApplicationStatus
+  identity = "new-member"
+  current_membership_count = 0
+}
+$manifest.club_lifecycle = [ordered]@{
+  active = ($Scenario -eq "DissolvedClub")
+  club_status = $(if ($Scenario -eq "DissolvedClub") { "dissolved" } else { "" })
+  identity = "new-member"
+  membership_status_expected = $(if ($Scenario -eq "DissolvedClub") { "active" } else { "" })
 }
 $manifest | ConvertTo-Json -Depth 8

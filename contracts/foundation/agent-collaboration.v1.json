@@ -1842,7 +1842,7 @@
                            "title":  "H2 M3 申请历史与俱乐部生命周期合成 fixture 扩展",
                            "owner":  "H2 fixture extension agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-member-home-m3-fixture-extension",
                            "branch":  "codex/club-member-home-m3-fixture-extension",
@@ -1857,7 +1857,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "只把已批准设计转为可回滚的 ApplicationPending、ApplicationRejected 与 DissolvedClub 三个显式场景；先离线 Plan 和隔离数据库验证。禁止真实资料、生产、OTP、业务代码、Schema、直接数据库捷径，以及伪造 left/suspended。",
+                           "migration_note":  "source 28e6bb7 经平台精确路径与门禁复核，以 1c8e064 受控集成。ApplicationPending、ApplicationRejected、DissolvedClub 三个显式场景均在专用临时 SQLite 完成 Apply/Inspect/Cleanup remaining=0 与 RestoreVerify dump SHA 一致；测试服务器 mutations=0、OTP=0、secrets=false。left/suspended 继续 Unsupported/Unverified，未伪造。",
                            "handoff_record":  "docs/project-management/modules/club-alliance/member-home/acceptance/m3-fixture-extension-handoff.md"
                        },
                        {
@@ -1940,12 +1940,15 @@
                                                  "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md",
                                                  "docs/project-management/service-plaza/handoff-log.md",
                                                  "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-m3-acceptance*.json",
+                                                 "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-m3-synthetic-data-design*.json",
                                                  "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-m3-acceptance*.json",
-                                                 "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-m3-acceptance*.json"
+                                                 "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-m3-synthetic-data-design*.json",
+                                                 "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-m3-acceptance*.json",
+                                                 "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-m3-synthetic-data-design*.json"
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "从 combined local Go APP 37c6c3a / backend e4126590 创建独立验收工作树，clean。只允许测试环境可回滚部署、现有 fixture 的 Plan/Apply/Inspect/Cleanup/RestoreVerify、四合成身份、浏览器/网络/DB脱敏证据和最终恢复；禁止代码/Schema修改、生产、真实会员、真实资金、直接DB捷径和未授权OTP重复申请。",
+                           "migration_note":  "阶段审计 source 7839abd 及历史环境证据已受控集成至 APP ee46172。pending/rejected/dissolved 合成资料在本地与测试服务器均完成独立 RunId Apply/Inspect/Cleanup remaining=0 和 RestoreVerify；浏览器通道恢复、冻结 asset hash/health/无凭据 DOM 已验证。当前唯一可行动阻塞为四合成身份浏览器会话：四账号容量 ready，但发送测试 OTP 连续三轮未获用户明确授权，禁止擅自触发。left/suspended 与 maintenance 继续 Unsupported/Unverified，不冒充 Full Go。",
                            "handoff_record":  "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md"
                        },
                        {

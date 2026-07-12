@@ -632,3 +632,15 @@ Handoff 运行规则见 `handoff-operating-mechanism.md`。首轮具体表单见
 - environment evidence：`docs/project-management/modules/club-alliance/self-created/acceptance/`
 - governance：R2 remediation checklist 28/28 current；exam 100；IR verified；source `89264aaa0b6965055aa469446c895d976ccd222a`，首个 integration `9691c6a613cfe11d4075be0cfc789eb58fecf9a5`。
 - verified：安全 DTO、唯一 run、幂等/关联清理、数据库恢复、刷新 DOM、列表隔离、详情/加入/本人状态、响应式、Tab focus、制品回滚和 ready 均有证据；环境 Enter 仍诚实标记为控制通道 Unverified。
+
+## SP-H037：H2 会员首页 M3 测试环境验收检查点
+
+- 日期：2026-07-12
+- work item：`AIW-20260712-CLUB-MEMBER-HOME-M3-ACCEPTANCE`
+- target：APP `37c6c3aa65b9a1332732d552063d6e06a2d7643a` / backend `e41265905815082433e040412f3dd6b6b33dfede`
+- governance：current checklist 28/28；exam attempt 1=100。
+- deployed：binary SHA `f5abea4d24230625c271ac0721ccd2837c291dfe5ad9fcc477465945354c30ec`；asset `assets/index-DCYGiKy4.js` SHA `ce2a254c66d46505260ef89f52c9acda0c0707a24a96d0f392cdfe42adaa3de7`；备份、rollback、health/ready 均已验证。
+- verified：四身份 baseline API、401、user_id 400、club_status/membership_status active 分层、PartialError=`CMH_TASKS_UNAVAILABLE`、CriticalError=422 `CMH_CLUB_CLASSIFICATION_INVALID`；三轮 Cleanup=0；隔离 RestoreVerify 和最终恢复通过。
+- unverified：浏览器控制实例不可用，故浏览器动作、DOM、五 viewport、真实键盘和 offline 未验证；maintenance 无安全自然条件；pending/rejected、left/suspended、dissolved 缺已批准 fixture。
+- verdict：`No-Go / API and recovery passed, Full Go not reached`。部署 hash 未漂移时禁止重复部署；后续只补浏览器矩阵和经批准的 lifecycle/history fixture。
+- evidence：`docs/project-management/modules/club-alliance/member-home/acceptance/m3/2026-07-12-environment-acceptance.md`。

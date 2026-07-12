@@ -2,10 +2,10 @@
 
 - checkpoint：`H2-M3`
 - owner：Club Alliance acceptance agent
-- status：`Authorized / deployment pending`
-- current verdict：`No-Go before deployment`
+- status：`Environment executed / evidence incomplete`
+- current verdict：`No-Go — API/recovery passed; browser and lifecycle coverage Unverified`
 - plan：`docs/project-management/modules/club-alliance/member-home/acceptance/m3-plan.md`
-- implementation record：`IR-20260712-CLUB-MEMBER-HOME-H2-M3`（draft）
+- implementation record：`IR-20260712-CLUB-MEMBER-HOME-M3-ACCEPTANCE`（implemented）
 
 ## 0. 会员状态合同纠正检查点
 
@@ -106,4 +106,40 @@
 
 四身份、八态、三层业务状态、五档 viewport、真实键盘、路由/DOM/网络/权限/遥测/服务端关联全部达到计划要求；聚合 API 和页面必须分别证明 club_status、membership_status，且申请历史不串入当前列表；所有 Blocker/Major 关闭；证据无秘密；环境恢复并通过基准 smoke 后，才可把 draft IR 更新为 verified/deployed 并形成 H2-M3 Full Go。
 
-当前尚缺前后端状态字段迁移、combined commit、部署资产、四身份会话、环境状态触发和现场三方证据，因此结论保持 Authorized / deployment pending、No-Go before deployment。
+以上为部署前历史判断；本轮环境执行后的 current 结论以下一节为准。
+
+## 9. 2026-07-12 测试环境执行结论
+
+目标 APP `37c6c3aa65b9a1332732d552063d6e06a2d7643a`（含 `4a9b42e`）和 backend `e41265905815082433e040412f3dd6b6b33dfede` 已完成可回滚测试环境部署。部署后 binary SHA-256 为 `f5abea4d24230625c271ac0721ccd2837c291dfe5ad9fcc477465945354c30ec`，入口资产为 `assets/index-DCYGiKy4.js`、SHA-256 `ce2a254c66d46505260ef89f52c9acda0c0707a24a96d0f392cdfe42adaa3de7`；health/ready、备份和回滚目标均已冻结。
+
+三个唯一 RunId 的 Baseline、PartialError、CriticalError 均完成 Plan → Apply → Inspect → Cleanup，Cleanup 内置检查均为 0；真实 API 已证明四身份 empty/ready、普通与管理权限、active club/membership 分层、401 unauthorized、`CMH_TASKS_UNAVAILABLE` 局部错误和权威 422 `CMH_CLUB_CLASSIFICATION_INVALID`。关窗 RestoreVerify integrity/dump SHA 通过，live DB 未替换，最终 fixture 残留为 0。
+
+浏览器运行时无可用实例，故 direct/reload/back/return、DOM、viewport、真实键盘、offline 和浏览器网络证据保持 control-channel Unverified；maintenance 无安全自然条件，按授权保持 Unverified；pending/rejected、left/suspended、dissolved 缺已批准 fixture，禁止直接 DB 捷径，环境状态覆盖亦保持 Unverified。完整证据见 `acceptance/m3/2026-07-12-environment-acceptance.md`。因此本检查点仍为 No-Go，不得宣称 H2-M3 Full Go；若部署 hash 未漂移，下一轮不得重复部署，只补浏览器矩阵和经批准的 lifecycle/history fixture。
+
+## 10. Browser handoff 接续结果
+
+主协调线程提供了精确 handoff URL/title，但 2026-07-12 12:05 Asia/Shanghai 接续时 in-app Browser backend 返回 `Browser is not available: iab`，随后唯一一次可用类型检查返回空列表 `[]`。因此无法调用 `browser.user.openTabs()`、无法 claim 精确标签，也无法读取 URL/title/DOM/page-state。接续全程未重部署、未重跑 fixture、未请求 OTP、未调用业务 API、未读取 token/cookie/完整身份；也没有改用 Chrome、Computer Use、静态 DOM 或既有 API 伪装浏览器证据。
+
+当前 verdict 不变：`No-Go — API/recovery passed; browser and lifecycle coverage Unverified`。这是 automation/control-channel blocker，不是产品失败；Statsig 初始化 timeout 按插件统计控制通道噪声处理。下一轮仅在 in-app Browser backend 恢复后，从 exact URL/title claim 开始补无会话与四合成身份逐动作 UAT，禁止重复任何已完成上游。
+
+### 2026-07-12 15:57 浏览器恢复更新
+
+应用内浏览器已恢复并成功读取目标 URL、title、DOM、viewport 与静态资产，因此原“浏览器 backend 不可用”阻塞关闭。当前无凭据直达显示标准俱乐部首页，heading 为“俱乐部联盟 / 选择俱乐部服务”，`data-member-home-state` 数量为 0；这不足以证明会员首页或 unauthorized 状态通过。
+
+现场重新下载 `index-DCYGiKy4.js`，SHA-256=`ce2a254c66d46505260ef89f52c9acda0c0707a24a96d0f392cdfe42adaa3de7`，与冻结 M3 制品一致；`/ready`=200，health status=ok、数据库连接正常。源码合同确认会员首页只在 `authenticated + empty query` 时加载，因此无凭据显示标准首页不是部署漂移。
+
+下一阻塞精确收敛为合成身份浏览器会话：须先重新核对 OTP UTC 日容量，再按已批准身份逐个建立会话；禁止重复申请、读取或记录验证码/JWT/Cookie。未具备会话前不执行 fixture、不重复部署。证据见 `acceptance/m3/2026-07-12-browser-resume.md`。
+
+### 2026-07-12 16:01 合成资料测试服执行
+
+四个合成账号 UTC 日容量重新核对均为 `capacity_ready=true`、`secrets_read=false`。在不请求 OTP、不建立会话的前提下，已用 integration `1c8e064` 对 `ApplicationPending`、`ApplicationRejected`、`DissolvedClub` 三个场景逐场执行 Plan/Apply/Inspect/Cleanup/RestoreVerify。
+
+三场 Inspect 均符合设计：pending/rejected 各一条且不产生目标新会员当前关系；dissolved 明确保留 `club_status=dissolved`。每场 Cleanup 后 run-owned remaining=0、users_deleted=0；RestoreVerify integrity=ok、dump SHA match。测试资料能力与可逆性 Go，测试服务器已恢复。证据见 `acceptance/m3/2026-07-12-synthetic-lifecycle-execution.md`。
+
+当前仅剩浏览器合成身份会话和页面矩阵；数据库层通过不得冒充页面通过。`left/suspended` 继续 Unsupported/Unverified，需要独立后端合同与模型。
+
+## 11. 最小合成资料接续
+
+已新增 `acceptance/m3/synthetic-data-design.md`，将缺失状态收敛为两个可安全执行的资料组：加入申请 `pending/rejected` 与俱乐部生命周期 `dissolved`。它们只使用 run-owned 合成记录、独立 RunId 和可恢复清理，不需要真实会员资料。
+
+`left/suspended` 当前不能仅靠 fixture 可信构造：数据库没有会员关系状态/历史字段，会员首页后端仍将 `membership_status` 固定投影为 `active`。两项保持 `Unsupported/Unverified`，需要独立后端合同与数据模型工作项；禁止直接改库、复用 role 或用 club status 冒充。该缺口不阻塞先完成 pending/rejected 与 dissolved 的 API/数据库证据，但继续阻止 H2-M3 Full Go。
