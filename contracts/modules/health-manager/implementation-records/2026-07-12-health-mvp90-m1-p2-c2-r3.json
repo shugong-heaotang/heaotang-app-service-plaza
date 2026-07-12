@@ -1,0 +1,106 @@
+{
+    "contract_version":  "implementation-record.v1",
+    "record_id":  "IR-20260712-HEALTH-MVP90-M1-P2-C2-R3",
+    "title":  "健康大管家 MVP-90 M1 P2-C2 确定性内存 Reference Runner 最终治理快照",
+    "date":  "2026-07-12",
+    "status":  "implemented",
+    "objective":  "完成P2-C2确定性内存reference runner，并在内部依赖kind纠正为现行Schema支持的contract后，以新的R3 current检查单、考试和IR形成最终可复核证据；R2保持历史。",
+    "governance_checklist":  "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p2-c2-r3.json",
+    "governance_exam":  "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p2-c2-r3-attempt-1.json",
+    "governance_inputs":  [
+                              "contracts/foundation/governance-reading-list.v1.json",
+                              "AGENTS.md",
+                              "README.md",
+                              "CONSTRAINTS.md",
+                              "docs/project-management/service-plaza/project-status-one-page.md",
+                              "docs/project-management/dependency-driven-master-plan-v1.md",
+                              "contracts/foundation/foundation-capabilities.v1.json",
+                              "contracts/foundation/engineering-standards.v1.json",
+                              "contracts/foundation/recurring-issues.v1.json",
+                              "contracts/foundation/agent-collaboration.v1.json",
+                              "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+                              "docs/project-management/recursive-project-governance-v1.md",
+                              "docs/project-management/foundation-dependency-standard-v1.md",
+                              "docs/project-management/module-internal-dependency-standard-v1.md",
+                              "docs/decisions/0007-stable-foundation-variable-business.md",
+                              "docs/decisions/0008-versioned-business-variables.md",
+                              "docs/decisions/0009-approved-toolchain-per-layer.md",
+                              "docs/decisions/0010-ai-implementation-records-required.md",
+                              "docs/decisions/0011-two-person-config-approval.md",
+                              "docs/decisions/0012-two-strike-root-cause-rule.md",
+                              "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+                              "docs/decisions/0014-ai-development-flight-checklist.md",
+                              "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+                              "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+                              "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+                              "docs/decisions/0018-recursive-project-governance.md",
+                              "contracts/foundation/module-dependencies/health-manager.v1.json",
+                              "contracts/modules/health-manager/internal-dependencies.v1.json"
+                          ],
+    "requirement_sources":  [
+                                "docs/project-management/notices/2026-07-12-health-manager-mvp90-m1-p2-task-order.md",
+                                "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-requirements.md",
+                                "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md",
+                                "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-handoff.md"
+                            ],
+    "capabilities":  [
+                         "foundation.ai-engineering-traceability",
+                         "foundation.governance-certification",
+                         "foundation.authorization-idempotency",
+                         "foundation.contract-tooling"
+                     ],
+    "contracts":  [
+                      "contracts/modules/health-manager/mvp90-m1/conformance/synthetic_pdcar_reference.py",
+                      "contracts/modules/health-manager/mvp90-m1/synthetic-replay-plan.v1.json",
+                      "contracts/modules/health-manager/mvp90-m1/synthetic-replay-plan.v1.schema.json",
+                      "contracts/modules/health-manager/mvp90/state-machines.v1.json",
+                      "contracts/modules/health-manager/mvp90-m1/security-authorization.v1.json"
+                  ],
+    "decisions":  [
+                      "docs/decisions/0009-approved-toolchain-per-layer.md",
+                      "docs/decisions/0010-ai-implementation-records-required.md",
+                      "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+                      "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+                  ],
+    "changed_areas":  [
+                          "contracts/modules/health-manager/internal-dependencies.v1.json",
+                          "contracts/modules/health-manager/mvp90-m1/conformance/synthetic_pdcar_reference.py",
+                          "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_p2_replay.py",
+                          "contracts/modules/health-manager/development-checklists",
+                          "contracts/modules/health-manager/governance-exams",
+                          "contracts/modules/health-manager/implementation-records",
+                          "docs/project-management/modules/health-manager"
+                      ],
+    "verification":  [
+                         "A001 eleven-event contiguous deterministic replay",
+                         "canonical trace hash equality across independent runners and idempotent replay",
+                         "same key same complete payload returns original result without duplicate commit",
+                         "same key changed payload or event semantics returns HM_IDEMPOTENCY_CONFLICT",
+                         "state and version conflict leave state audit trace and idempotency unchanged",
+                         "audit failure rolls back current event resource version trace audit and idempotency",
+                         "AI plan activation professional classification and direct risk close rejection",
+                         "non-first plan activation cannot initialize missing prior state",
+                         "unknown and forbidden transitions return stable errors",
+                         "runner source has no network database clock or random imports",
+                         "P2 thirteen-test suite and P1 eleven-test regression",
+                         "R2 checklist exam IR internal dependency collaboration total contracts UTF-8 diff scope and sensitive-pattern gates"
+                     ],
+    "evidence":  [
+                     "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p2-c2-r3.json",
+                     "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p2-c2-r3-attempt-1.json",
+                     "contracts/modules/health-manager/mvp90-m1/conformance/synthetic_pdcar_reference.py",
+                     "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_p2_replay.py",
+                     "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md",
+                     "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-handoff.md"
+                 ],
+    "premises":  [
+                     "C2 R2 remains an immutable historical snapshot before dependency kind correction",
+                     "P2-C1 corrected source 4ee6ccb is integrated as squash 40a042b with authoritative evidence HEAD 5004cdc",
+                     "module branch synchronized through merge commit 2f138b3843839f39e9015562bf61e18bb31d23cd",
+                     "runner is reference evidence only and remains executable=false",
+                     "all inputs are injected versioned contracts and synthetic events",
+                     "negative fixture package and fifteen-scenario final matrix require P2-C2 Go before C3",
+                     "C4-L02-L04 global C4-H06 production identity shared implementation real data environment charging and production remain No-Go"
+                 ],
+    "implementation_mode":  "ai-assisted"
+}

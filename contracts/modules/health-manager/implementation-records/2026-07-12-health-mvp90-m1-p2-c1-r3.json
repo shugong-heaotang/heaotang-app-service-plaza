@@ -1,0 +1,82 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-HEALTH-MVP90-M1-P2-C1-R3",
+  "title": "健康大管家 MVP-90 M1 P2-C1 动作语义与源指针根因修订",
+  "date": "2026-07-12",
+  "status": "implemented",
+  "objective": "关闭P2-C1 action语义混同根因：分离状态迁移命令、安全授权动作与审计期望，逐事件验证actor/resource/effect/prerequisite，真实解引用场景与fixture指针，并锁定25事件及全局唯一性。",
+  "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p2-c1-r3.json",
+  "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p2-c1-r3-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json", "AGENTS.md", "README.md", "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md", "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json", "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json", "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md", "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md", "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md", "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md", "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md", "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md", "docs/decisions/0018-recursive-project-governance.md",
+    "contracts/foundation/module-dependencies/health-manager.v1.json", "contracts/modules/health-manager/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-health-manager-mvp90-m1-p2-task-order.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-requirements.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-handoff.md"
+  ],
+  "capabilities": ["foundation.ai-engineering-traceability", "foundation.governance-certification", "foundation.authorization-idempotency", "foundation.contract-tooling"],
+  "contracts": [
+    "contracts/modules/health-manager/mvp90-m1/synthetic-replay-plan.v1.json",
+    "contracts/modules/health-manager/mvp90-m1/synthetic-replay-plan.v1.schema.json",
+    "contracts/modules/health-manager/mvp90-m1/vertical-slice.v1.json",
+    "contracts/modules/health-manager/mvp90/state-machines.v1.json",
+    "contracts/modules/health-manager/mvp90-m1/security-authorization.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "changed_areas": [
+    "contracts/modules/health-manager/internal-dependencies.v1.json",
+    "contracts/modules/health-manager/mvp90-m1/synthetic-replay-plan.v1.json",
+    "contracts/modules/health-manager/mvp90-m1/synthetic-replay-plan.v1.schema.json",
+    "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_p2_replay.py",
+    "contracts/modules/health-manager/development-checklists",
+    "contracts/modules/health-manager/governance-exams",
+    "contracts/modules/health-manager/implementation-records",
+    "docs/project-management/modules/health-manager"
+  ],
+  "verification": [
+    "Draft 2020-12 schema locks 15 scenarios and exactly 25 events",
+    "event_id idempotency key and payload_ref global uniqueness",
+    "scenario and fixture JSON Pointer real dereference",
+    "authorization action actor resource effect prerequisite cross-check",
+    "state transition actor from to trigger cross-check",
+    "audit metadata as business write rejection",
+    "extra duplicate wrong-pointer reordered-source wrong-action-resource negative mutations",
+    "P2-C1 five-test suite and P1 eleven-test regression",
+    "checklist exam IR internal-dependency collaboration total-contract UTF-8 diff scope and sensitive-pattern gates"
+  ],
+  "evidence": [
+    "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p2-c1-r3.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p2-c1-r3-attempt-1.json",
+    "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_p2_replay.py",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-handoff.md"
+  ],
+  "premises": [
+    "fedaeab remains an unintegrated historical source and R2 remains immutable",
+    "state-machine transitions are commands while C4-S04 actions are authorization categories and must not be conflated",
+    "audit expectation never grants business-write authority",
+    "all inputs and outputs remain synthetic_only=true and executable=false",
+    "P2-C2 remains blocked until platform independently accepts this R3 checkpoint",
+    "C4-L02-L04 global C4-H06 production identity shared implementation environment real data charging and production remain No-Go"
+  ],
+  "implementation_mode": "ai-assisted"
+}

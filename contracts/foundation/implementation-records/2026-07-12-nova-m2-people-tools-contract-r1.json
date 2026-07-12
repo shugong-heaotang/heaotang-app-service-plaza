@@ -1,0 +1,80 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-NOVA-M2-PEOPLE-TOOLS-CONTRACT-R1",
+  "title": "NOVA M2 人脉四工具与结果 callback 版本化契约会签",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "在不代写人脉业务、不使用真实会员数据和不发送真实消息的前提下，标准化 member_search、connection_draft、connection_send、connection_status 与服务端结果 callback 的身份、tenant、资源权限、可见字段、确认、幂等、审计、错误、回流和兼容边界。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-nova-m2-people-tools-contract-r1.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-nova-m2-people-tools-contract-r1-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-nova-m2-people-tools-task-order.md",
+    "docs/project-management/service-plaza/nova-m2-people-tools-dispatch-2026-07-12.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.contract-tooling",
+    "foundation.authorization-idempotency"
+  ],
+  "contracts": [
+    "contracts/service-plaza/nova/nova-people-tools.v1.json",
+    "contracts/service-plaza/nova/nova-people-tools.v1.schema.json",
+    "contracts/service-plaza/nova/nova-people-tool-errors.v1.json",
+    "contracts/service-plaza/nova/nova-people-tool-errors.v1.schema.json",
+    "contracts/service-plaza/nova/nova-connection-callback.v1.json",
+    "contracts/service-plaza/nova/nova-connection-callback.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md",
+    "docs/project-management/modules/nova/m2-people-tools-signoff.md"
+  ],
+  "changed_areas": [
+    "contracts/service-plaza/nova/",
+    "docs/project-management/modules/nova/m2-people-tools-signoff.md",
+    "contracts/foundation/development-checklists/2026-07-12-nova-m2-people-tools-contract-r1.json",
+    "contracts/foundation/governance-exams/2026-07-12-nova-m2-people-tools-contract-r1-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-12-nova-m2-people-tools-contract-r1.json"
+  ],
+  "verification": [
+    "scripts/Test-AgentDevelopmentPreflight.ps1: ready",
+    "FC-20260712-NOVA-M2-PEOPLE-TOOLS-CONTRACT-R1: 26/26 completed",
+    "EX-20260712-NOVA-M2-PEOPLE-TOOLS-CONTRACT-R1-1: score 100",
+    "python -X utf8 -m unittest contracts/service-plaza/nova/test_nova_people_tools.py -v: 11/11 passed",
+    "scripts/validate_development_checklists.py",
+    "scripts/validate_governance_exams.py",
+    "scripts/validate_implementation_records.py",
+    "scripts/validate_agent_collaboration.py",
+    "scripts/Test-ServicePlazaContracts.ps1",
+    "scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/service-plaza/nova/fixtures/m2/positive-invocations.v1.json",
+    "contracts/service-plaza/nova/fixtures/m2/negative-cases.v1.json",
+    "contracts/service-plaza/nova/test_nova_people_tools.py",
+    "docs/project-management/modules/nova/m2-people-tools-signoff.md",
+    "contracts/foundation/development-checklists/2026-07-12-nova-m2-people-tools-contract-r1.json",
+    "contracts/foundation/governance-exams/2026-07-12-nova-m2-people-tools-contract-r1-attempt-1.json"
+  ],
+  "premises": [
+    "人脉 canonical 实现与唯一 Owner 的独立裁决仍为 pending",
+    "本检查点只证明版本化契约和合成一致性，不证明 provider、后端、环境或真实用户可用",
+    "NOVA 不得直接调用 legacy network unsafe write routes，也不得拥有 canonical connection state",
+    "任何 actor tenant confirmation idempotency resource permission 或 callback identity 门禁缺失都必须失败关闭",
+    "本工作项不访问真实会员数据，不发送真实消息，不修改后端或数据库"
+  ],
+  "implementation_mode": "ai-assisted"
+}

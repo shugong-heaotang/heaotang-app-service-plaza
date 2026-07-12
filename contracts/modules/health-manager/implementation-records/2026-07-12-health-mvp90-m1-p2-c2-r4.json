@@ -1,0 +1,72 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-HEALTH-MVP90-M1-P2-C2-R4",
+  "title": "健康大管家 MVP-90 M1 P2-C2 权威事件绑定与完整载荷幂等修订",
+  "date": "2026-07-12",
+  "status": "implemented",
+  "objective": "关闭调用方篡改权威拒绝语义及幂等摘要遗漏 expectation 的根因，使首次执行完整绑定 replay plan，并让同键完整载荷变化稳定冲突。",
+  "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p2-c2-r4.json",
+  "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p2-c2-r4-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/module-dependencies/health-manager.v1.json",
+    "contracts/modules/health-manager/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-health-manager-mvp90-m1-p2-task-order.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-requirements.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.authorization-idempotency",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/modules/health-manager/mvp90-m1/conformance/synthetic_pdcar_reference.py",
+    "contracts/modules/health-manager/mvp90-m1/synthetic-replay-plan.v1.json",
+    "contracts/modules/health-manager/mvp90-m1/security-authorization.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "changed_areas": [
+    "contracts/modules/health-manager/internal-dependencies.v1.json",
+    "contracts/modules/health-manager/mvp90-m1/conformance/synthetic_pdcar_reference.py",
+    "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_p2_replay.py",
+    "contracts/modules/health-manager/development-checklists",
+    "contracts/modules/health-manager/governance-exams",
+    "contracts/modules/health-manager/implementation-records",
+    "docs/project-management/modules/health-manager"
+  ],
+  "verification": [
+    "scenario_id plus event_id binds the first candidate to the exact authoritative replay-plan event",
+    "schema-valid deny-to-allow mutations for risk authorization cross-member and version boundaries are rejected",
+    "idempotency digest excludes only the key and detects a legal expectation change",
+    "every new failure leaves resource audit trace and idempotency stores unchanged",
+    "P2 fifteen-test suite and P1 eleven-test regression pass",
+    "runner retains zero file network database clock random browser and model runtime dependencies"
+  ],
+  "evidence": [
+    "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p2-c2-r4.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p2-c2-r4-attempt-1.json",
+    "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_p2_replay.py",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-handoff.md"
+  ],
+  "premises": [
+    "P2-C1 remains integrated at squash 40a042b with authoritative evidence HEAD 5004cdc",
+    "P2-C2 source d351d351 is an immutable unintegrated Exact revision snapshot",
+    "R2 and R3 governance evidence remain historical and are not modified",
+    "runner remains development-only synthetic_only true and executable false",
+    "P2-C3 shared implementation environment real data charging and production remain unauthorized"
+  ],
+  "implementation_mode": "ai-assisted"
+}

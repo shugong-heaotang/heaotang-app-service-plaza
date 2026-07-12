@@ -1,0 +1,113 @@
+{
+  "contract_version": "module-internal-dependencies.v2",
+  "module_id": "network",
+  "module_version": "v1",
+  "slice_id": "canonical-owner-decision",
+  "readiness": {
+    "governance": "go",
+    "development": "no-go",
+    "acceptance": "pending",
+    "release": "pending",
+    "operations": "pending"
+  },
+  "dependencies": [
+    {
+      "dependency_id": "governance.entry",
+      "kind": "governance",
+      "description": "唯一 Owner、独立分支工作树、current checklist 与 100 分考试已完成",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": [],
+      "contracts": ["docs/project-management/notices/2026-07-12-nova-m2-people-tools-task-order.md"],
+      "evidence": ["contracts/modules/network/development-checklists/2026-07-12-network-canonical-owner-r1.json", "contracts/modules/network/governance-exams/2026-07-12-network-canonical-owner-r1-attempt-1.json", "docs/project-management/modules/network/task-receipt.md"],
+      "unresolved": [],
+      "owner": "People Network module owner",
+      "blocks": ["canonical.decision"],
+      "does_not_block": ["只读代码事实盘点"]
+    },
+    {
+      "dependency_id": "canonical.decision",
+      "kind": "decision",
+      "description": "network 加固搜索读投影、social introduction_requests canonical 写侧目标、统一 facade 和 legacy 禁用边界",
+      "status": "accepted",
+      "required_for_slice": true,
+      "depends_on": ["governance.entry"],
+      "contracts": ["docs/project-management/modules/network/canonical-implementation-decision.md"],
+      "evidence": ["docs/project-management/modules/network/migration-disable-plan.md"],
+      "unresolved": [],
+      "owner": "People Network module owner",
+      "blocks": ["facade.contract", "migration.plan"],
+      "does_not_block": ["NOVA 工具契约独立设计"]
+    },
+    {
+      "dependency_id": "facade.contract",
+      "kind": "contract",
+      "description": "四工具与 callback 的 server identity、tenant、权限、确认、幂等、审计和错误合同",
+      "status": "pending",
+      "required_for_slice": true,
+      "depends_on": ["canonical.decision"],
+      "contracts": [],
+      "evidence": [],
+      "unresolved": ["等待 NOVA tool contract signoff agent 独立提交和平台验收"],
+      "owner": "NOVA tool contract signoff agent",
+      "blocks": ["facade.implementation", "nova.m2"],
+      "does_not_block": ["canonical Owner 决策验收"]
+    },
+    {
+      "dependency_id": "legacy.network-writes",
+      "kind": "interface",
+      "description": "network introductions/referral/status 写路径存在身份伪造和资源授权缺口，禁止 NOVA 和新调用方",
+      "status": "forbidden",
+      "required_for_slice": false,
+      "depends_on": ["canonical.decision"],
+      "contracts": [],
+      "evidence": ["docs/project-management/modules/network/canonical-implementation-decision.md"],
+      "unresolved": ["实际 410 禁用与调用方迁移尚未实施"],
+      "owner": "People Network module owner",
+      "blocks": ["nova.m2"],
+      "does_not_block": ["独立 facade 合同设计"]
+    },
+    {
+      "dependency_id": "canonical.write-hardening",
+      "kind": "interface",
+      "description": "social 写侧须补 tenant、确认票据、幂等、RowsAffected、审计和 outbox 才可执行",
+      "status": "code-present-unverified",
+      "required_for_slice": true,
+      "depends_on": ["canonical.decision", "facade.contract"],
+      "contracts": [],
+      "evidence": ["docs/project-management/modules/network/canonical-implementation-decision.md"],
+      "unresolved": ["未实现 tenant、confirmation、idempotency、audit、outbox"],
+      "owner": "后端人脉实现负责人（待平台派发）",
+      "blocks": ["migration.plan", "nova.m2"],
+      "does_not_block": ["Owner 决策和工具合同会签"]
+    },
+    {
+      "dependency_id": "migration.plan",
+      "kind": "workflow",
+      "description": "盘点、冻结、dry-run、quarantine、单向切换、Sunset/410 和恢复计划",
+      "status": "standardized",
+      "required_for_slice": true,
+      "depends_on": ["canonical.decision"],
+      "contracts": ["docs/project-management/modules/network/migration-disable-plan.md"],
+      "evidence": [],
+      "unresolved": ["未执行真实盘点、迁移或恢复演练"],
+      "owner": "People Network module owner 与平台数据迁移负责人",
+      "blocks": ["nova.m2"],
+      "does_not_block": ["facade 合同和实现独立推进"]
+    },
+    {
+      "dependency_id": "nova.m2",
+      "kind": "acceptance",
+      "description": "NOVA M2 人脉工具可执行门禁",
+      "status": "blocked-local",
+      "required_for_slice": false,
+      "depends_on": ["facade.contract", "canonical.write-hardening", "migration.plan"],
+      "contracts": [],
+      "evidence": [],
+      "unresolved": ["工具合同、实现、迁移 dry-run、环境 UAT 均未 Go"],
+      "owner": "平台集成负责人",
+      "blocks": ["NOVA M2 executable=true"],
+      "does_not_block": ["其他不依赖人脉工具的 NOVA 只读工作"]
+    }
+  ]
+}

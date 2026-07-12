@@ -1,0 +1,104 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/health-manager/mvp90-m1/synthetic-replay-plan.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "module_id", "slice_id", "scope", "seed", "synthetic_only", "executable", "source_contracts", "replay_invariants", "scenarios"],
+  "properties": {
+    "contract_version": {"const": "health-manager.mvp90-m1.synthetic-replay-plan.v1"},
+    "module_id": {"const": "health-manager"},
+    "slice_id": {"const": "HM-MVP90-M1-P2"},
+    "scope": {"const": "adult synthetic-member deterministic PDCAR replay only"},
+    "seed": {"const": "heaotang-health-mvp90-m1-fixed-seed-v1"},
+    "synthetic_only": {"const": true},
+    "executable": {"const": false},
+    "source_contracts": {
+      "type": "object", "additionalProperties": false,
+      "required": ["vertical_slice", "state_machines", "role_actions", "security_authorization", "professional_boundaries", "scenarios", "fixtures"],
+      "properties": {
+        "vertical_slice": {"const": "contracts/modules/health-manager/mvp90-m1/vertical-slice.v1.json"},
+        "state_machines": {"const": "contracts/modules/health-manager/mvp90/state-machines.v1.json"},
+        "role_actions": {"const": "contracts/modules/health-manager/mvp90/role-actions.v1.json"},
+        "security_authorization": {"const": "contracts/modules/health-manager/mvp90-m1/security-authorization.v1.json"},
+        "professional_boundaries": {"const": "contracts/modules/health-manager/mvp90-m1/professional-boundaries.v1.json"},
+        "scenarios": {"const": "contracts/modules/health-manager/mvp90-m1/synthetic-pdcar-scenarios.v1.json"},
+        "fixtures": {"const": "contracts/modules/health-manager/mvp90-m1/conformance/fixtures/synthetic-pdcar-fixtures.v1.json"}
+      }
+    },
+    "replay_invariants": {
+      "type": "object", "additionalProperties": false,
+      "required": ["network_calls", "database_calls", "filesystem_writes", "system_clock_reads", "random_reads", "real_identity_records", "real_health_records", "canonical_hash_algorithm", "audit_failure_policy", "same_key_same_payload", "same_key_different_payload"],
+      "properties": {
+        "network_calls": {"const": 0}, "database_calls": {"const": 0}, "filesystem_writes": {"const": 0},
+        "system_clock_reads": {"const": 0}, "random_reads": {"const": 0}, "real_identity_records": {"const": 0}, "real_health_records": {"const": 0},
+        "canonical_hash_algorithm": {"const": "sha256-rfc8785-compatible-json-v1"},
+        "audit_failure_policy": {"const": "rollback_state_version_and_event"},
+        "same_key_same_payload": {"const": "return_original_result"},
+        "same_key_different_payload": {"const": "HM_IDEMPOTENCY_CONFLICT"}
+      }
+    },
+    "scenarios": {
+      "type": "array", "minItems": 15, "maxItems": 15,
+      "items": {"$ref": "#/$defs/scenario"},
+      "allOf": [
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A001"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A002"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A003"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A004"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A005"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A006"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A007"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A008"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A009"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A010"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A011"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A012"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A013"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A014"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A015"}},"required":["scenario_id"]},"minContains":1,"maxContains":1}
+      ]
+    }
+  },
+  "$defs": {
+    "scenario": {
+      "type": "object", "additionalProperties": false,
+      "required": ["scenario_id", "fixture_id", "scenario_source_ref", "fixture_source_ref", "required_step_refs", "events"],
+      "allOf": [
+        {
+          "if": {"properties": {"scenario_id": {"const": "MVP-A001"}}, "required": ["scenario_id"]},
+          "then": {"properties": {"events": {"minItems": 11, "maxItems": 11}}},
+          "else": {"properties": {"events": {"minItems": 1, "maxItems": 1}}}
+        }
+      ],
+      "properties": {
+        "scenario_id": {"enum": ["MVP-A001","MVP-A002","MVP-A003","MVP-A004","MVP-A005","MVP-A006","MVP-A007","MVP-A008","MVP-A009","MVP-A010","MVP-A011","MVP-A012","MVP-A013","MVP-A014","MVP-A015"]},
+        "fixture_id": {"pattern": "^HMM1-F(00[1-9]|01[0-5])$"},
+        "scenario_source_ref": {"pattern": "^contracts/modules/health-manager/mvp90-m1/synthetic-pdcar-scenarios\\.v1\\.json#/scenarios/(?:[0-9]|1[0-4])$"},
+        "fixture_source_ref": {"pattern": "^contracts/modules/health-manager/mvp90-m1/conformance/fixtures/synthetic-pdcar-fixtures\\.v1\\.json#/fixtures/(?:[0-9]|1[0-4])$"},
+        "required_step_refs": {"type":"array","minItems":1,"uniqueItems":true,"items":{"enum":["M1-S01","M1-S02","M1-S03","M1-S04","M1-S05","M1-S06","M1-S07","M1-S08","M1-S09","M1-S10"]}},
+        "events": {"type":"array","minItems":1,"items":{"$ref":"#/$defs/event"}}
+      }
+    },
+    "event": {
+      "type": "object", "additionalProperties": false,
+      "required": ["event_id", "step_id", "actor_role", "authorization_action_id", "transition_ref", "resource_ref", "expected_from", "expected_to", "expected_version", "idempotency", "denial_expectation", "audit_expectation"],
+      "anyOf": [
+        {"properties": {"authorization_action_id": {"type": "string"}}, "required": ["authorization_action_id"]},
+        {"properties": {"transition_ref": {"type": "string"}}, "required": ["transition_ref"]}
+      ],
+      "properties": {
+        "event_id": {"pattern":"^A(00[1-9]|01[0-5])-E(0[1-9]|1[0-9])$"},
+        "step_id": {"enum":["M1-S01","M1-S02","M1-S03","M1-S04","M1-S05","M1-S06","M1-S07","M1-S08","M1-S09","M1-S10"]},
+        "actor_role": {"enum":["member","ai","health_manager","professional","platform"]},
+        "authorization_action_id": {"type":["string","null"],"enum":[null,"consent.read_self","consent.grant_change_withdraw","member.read_self_pdcar","member.submit_source_or_feedback","member.confirm_plan_version","manager.read_assigned_minimum","manager.review_ordinary_pdcar","professional.review_referred_minimum","support.read_technical_metadata","security.audit_metadata","ai.read_minimum_context_and_draft"]},
+        "transition_ref": {"type":["string","null"],"pattern":"^(health-management-entry|health-plan-version|health-task|risk-event|human-handoff|consent-grant):[^:]+->[^:]+:[A-Z0-9_]+$"},
+        "resource_ref": {"type":"string","minLength":3},
+        "expected_from": {"type":"string","minLength":1}, "expected_to": {"type":"string","minLength":1},
+        "expected_version": {"type":"object","additionalProperties":false,"required":["before","after"],"properties":{"before":{"type":"integer","minimum":0},"after":{"type":"integer","minimum":0}}},
+        "idempotency": {"type":"object","additionalProperties":false,"required":["key","payload_ref","expectation"],"properties":{"key":{"type":"string","minLength":8},"payload_ref":{"type":"string","minLength":3},"expectation":{"enum":["new_result","return_original_result","conflict_preserve_original"]}}},
+        "denial_expectation": {"type":"object","additionalProperties":false,"required":["outcome","condition","error_id"],"properties":{"outcome":{"enum":["allow","deny"]},"condition":{"type":["string","null"]},"error_id":{"type":["string","null"]}}},
+        "audit_expectation": {"type":"object","additionalProperties":false,"required":["required","outcome"],"properties":{"required":{"const":true},"outcome":{"enum":["append_one","preserve_original","rollback_all"]}}}
+      }
+    }
+  }
+}
