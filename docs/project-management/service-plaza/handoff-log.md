@@ -610,6 +610,13 @@ Handoff 运行规则见 `handoff-operating-mechanism.md`。首轮具体表单见
 - 门禁：本派发检查单 current、随机治理考试 100、IR/协作登记/UTF-8/差异门禁通过后方可集成；H2 预登记不得被当作开发 Go。
 - 结论：需求变更 Accepted；H2 页面实现 Planned，未授权业务代码、后端、部署、生产或真实数据。
 
+### H2 membership / fixture 前置收口（2026-07-12）
+
+- membership Contract Go：source `f7bce50ed33bab7de000352b2aa503a82d0a6dd1`，integration `953dd5241efcf62c3ca45f55761f260d1da8e1b6`；R2 checklist 28/28、exam100、15/15。
+- fixture Capability Go：source `98075d2767ec5d1a6f241087e0047973927904f7`，integration `e275cdbf52f2536cf68672172a7c046d50cceb9f`；只证明静态/Plan 安全能力，未执行环境写入。
+- R1 EOF 缺陷不复制到当前树；canonical manifest 引用 immutable `ae75d071` 的 original paths、Git blob 和 SHA，最终范围 `git diff --check` 通过。
+- M3 Entry 仍 No-Go：前后端尚需按 `club_status` / `membership_status` 分层完成独立实现和 combined local Go，随后才能另行授权可回滚部署与四身份 UAT。
+
 ## SP-H036：CA-SC 自建俱乐部测试环境 T0 验收派发
 
 - from / to：平台集成负责人 / CA-SC T0 验收负责人

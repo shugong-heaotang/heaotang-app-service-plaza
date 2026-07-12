@@ -1549,7 +1549,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "M2 前后端已集成；M3 Entry 仍为 No-Go。原宽范围工作项暂停为 planned，由独立 membership contract correction 与 fixture capability 工作项先关闭状态语义和可重复合成数据前置；不得在前置完成前执行四身份 UAT。",
+                           "migration_note":  "M1 页面壳与 M2 初版前后端已集成；membership R2 合同与 fixture capability 现已独立复核并进入权威基线。M3 Entry 仍为 No-Go，下一门禁是前后端按 club_status/membership_status 分层完成独立 remediation 与 combined local Go；在此之前不得部署或执行四身份 UAT。",
                            "handoff_record":  "docs/project-management/service-plaza/handoff-log.md#sp-h035俱乐部联盟-h2-会员首页需求变更与派发"
                        },
                        {
@@ -1791,7 +1791,7 @@
                            "title":  "H2 会员关系状态语义合同纠正",
                            "owner":  "H2 membership contract agent",
                            "owner_role":  "独立合同负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-member-home-membership-contract",
                            "branch":  "codex/club-member-home-membership-contract",
@@ -1811,7 +1811,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "已从权威 APP integration bd1100f740567c67a7fb37d69c16ad1605fc469a 创建独立 branch/worktree。R1 checklist 尾部多一个空白行且考试 SHA 已绑定，禁止原地修改；最小扩权仅允许原字节 R1 checklist/exam 迁入专属 invalidated-snapshots/r1，再从当前输入生成干净 R2 与新考试。只纠正 membership/application/club lifecycle 状态分层，不修改业务代码、后端、部署或环境。",
+                           "migration_note":  "最终 source f7bce50ed33bab7de000352b2aa503a82d0a6dd1 经独立复核 Contract Go，以 squash integration 953dd5241efcf62c3ca45f55761f260d1da8e1b6 进入权威基线。R1 原字节由 immutable commit ae75d071 的 original paths/blob/SHA 与 canonical manifest 审计；R2 checklist28/28、exam100、15/15、full diff clean。未授权实现或环境。",
                            "handoff_record":  "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md"
                        },
                        {
@@ -1819,7 +1819,7 @@
                            "title":  "H2 M3 四身份 fixture 安全能力",
                            "owner":  "H2 fixture platform agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-member-home-m3-fixture",
                            "branch":  "codex/club-member-home-m3-fixture",
@@ -1834,7 +1834,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "已从权威 APP integration bd1100f740567c67a7fb37d69c16ad1605fc469a 创建独立 branch/worktree，HEAD/base/merge-base 一致且 clean。首检查点仅实现 unique RunId、Plan/Apply/Inspect/Cleanup/RestoreVerify、四合成身份和脱敏关联。partial-error 使用 run-owned title='' family_task；critical error 使用 run-owned standard/health club；unauthorized 用自然失效会话、offline 用浏览器离线。maintenance 保持 Unverified；禁止 runtime fault-control、query switch、共享服务破坏、共享 TestAccountOtp 和 SC scripts 修改。",
+                           "migration_note":  "source 98075d2767ec5d1a6f241087e0047973927904f7 经独立复核 Fixture Capability Go，并以 e275cdbf52f2536cf68672172a7c046d50cceb9f 受控集成。静态/Plan mutations=0、OTP=0、secrets=0；远端 Apply/Cleanup/RestoreVerify 和四身份 UAT 未授权。standard/health 的真实稳定码为 CMH_CLUB_CLASSIFICATION_INVALID，原 CMH_DATA_UNAVAILABLE 假设已纠正。",
                            "handoff_record":  "docs/project-management/modules/club-alliance/member-home/acceptance/m3-fixture-handoff.md"
                        }
                    ]

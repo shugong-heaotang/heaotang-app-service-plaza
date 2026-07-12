@@ -5,8 +5,9 @@
 - owner：H2 fixture platform agent
 - branch：`codex/club-member-home-m3-fixture`
 - base / merge-base：`bd1100f740567c67a7fb37d69c16ad1605fc469a`
-- status：`Implementation ready / environment execution not authorized`
+- status：`Capability integrated / environment execution not authorized`
 - verdict：`Fixture capability Go; M3 Entry remains No-Go`
+- source / integration：`98075d2767ec5d1a6f241087e0047973927904f7` / `e275cdbf52f2536cf68672172a7c046d50cceb9f`
 
 ## 1. 本检查点成果
 
@@ -35,7 +36,7 @@ RunId 必须匹配 `club-member-home-m3-YYYYMMDD-HHmmss-8hex`。相同 RunId 已
 | --- | --- | --- |
 | `Baseline` | 四身份正常关系；critical club 存在但未挂载 | empty/ready 基线 |
 | `PartialError` | family club 下增加 run-owned `title=''` 的 `family_tasks` | `family-member` 得到 `CMH_TASKS_UNAVAILABLE`，关键 club 数据保留 |
-| `CriticalError` | manager 额外挂载 run-owned `type=standard/category=health` club | 聚合失败关闭，当前后端稳定码为 `CMH_CLUB_CLASSIFICATION_INVALID` |
+| `CriticalError` | manager 额外挂载 run-owned `type=standard/category=health` club | 聚合失败关闭，后端权威映射为 422 `CMH_CLUB_CLASSIFICATION_INVALID`；原 `CMH_DATA_UNAVAILABLE` 建议不符合实现事实，已由平台独立复核校正 |
 
 这里的 Scenario 只选择可清理的数据库 fixture，不是前端 query switch、运行时 fault-control 或共享服务破坏。每轮执行后必须先 Cleanup 并 Inspect 为零，再进入下一 RunId。
 

@@ -48,7 +48,7 @@
 
 | 输入 | 当前事实 | 判断 |
 | --- | --- | --- |
-| APP integration | `e275cdbf52f2536cf68672172a7c046d50cceb9f` | 当前权威基线已包含 SC R4 与 H2 M3 fixture capability；membership R2 尚待集成 |
+| APP integration | `953dd5241efcf62c3ca45f55761f260d1da8e1b6` | 当前权威基线已包含 SC R4、H2 M3 fixture capability 与 membership R2 Contract Go |
 | H2 frontend | `e06d5c6`，全量 `215/215` 与生产构建通过 | 本地/集成门禁已通过，不替代环境证据 |
 | Backend integration | H2 M2 `97d8bfc5`；当前 combined backend `98426ff83a1218080019faa377c152a81ecca437` | 本地/集成门禁已通过，不替代环境证据 |
 | SC safe DTO | backend `98426ff8` 与 APP 治理证据均已 integrated，测试环境 ready | 已关闭，不再是 H2 blocker |
