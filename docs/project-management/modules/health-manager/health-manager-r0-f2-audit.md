@@ -1,10 +1,10 @@
 # 健康大管家 HM-R0 F2 专业与责任边界审计
 
 - 工作项：`AIW-20260713-HEALTH-R0-F2-AUDIT`
-- 检查点：`F2-0`
+- 检查点：`F2-FRESH-01 closeout`
 - 权威激活 HEAD：`e947d70498fbd9e1731d83d71c2aa64645c98a29`
-- 审计性质：只读证据索引与新鲜度基线
-- 当前结论：`F2-0 implemented / awaiting independent platform review`
+- 审计性质：F1 权威状态新鲜度局部收口
+- 当前结论：`F2-FRESH-01 implemented / awaiting independent platform review`
 - 可执行：`false`
 
 ## 1. 任务理解
@@ -22,9 +22,11 @@ F2 只形成专业与责任边界的审计结论和缺口，不实现业务。�
 
 ## 3. 新鲜度发现
 
-### F2-FRESH-01：F1 checkpoint 文案仍是历史候选状态
+### F2-FRESH-01：已关闭本地新鲜度缺陷，等待平台独立复核
 
-`hm-r0-formal-freeze.v1.json` 和人类可读决定仍保留 `F1-candidate-awaiting-independent-platform-review` / “candidate awaiting review” 文案，而权威 registry 已证明 F1 accepted/integrated。该问题不改变 27 项专业状态，也不授权真实活动；它阻塞 F2 最终 Handoff 的单一当前真相，需在 F2-1/F2-2 中同步 JSON、Schema 与人类可读决定，并用负例阻止回退到候选状态。
+`hm-r0-formal-freeze.v1.json`、Schema 和人类可读决定已同步为 `F1-accepted-integrated-for-development-planning`，并精确引用 F1 source `384436c7...`、source merge `fb1b8820...`、acceptance evidence `1af9032e...`、authoritative integration `034e46be...` 以及平台验收报告。该修订没有改变 27 项专业状态、分类、owner 或 `executable=false`，也不授权任何真实活动。
+
+Schema 正例通过；候选状态回退、缺少 F1 证据、Pending 擅升、分类漂移、executable、production identity、auto-merge、P3、F3 提前收口及 C4-T06 重新加入 F1 缺失证据共 10 类负例全部拒绝。
 
 ## 4. 27 项现有证据索引
 
@@ -56,7 +58,7 @@ F2 只形成专业与责任边界的审计结论和缺口，不实现业务。�
 | C4-T03 | Pending with owner | blocks-development | 平台集成负责人 | 2 | pending-no-new-owner-evidence | 共享业务实现精确任务书；前后端/API/DB allowed paths；接口与两层依赖门禁 | 独立共享业务实现工作项 |
 | C4-T04 | Pending with owner | blocks-real-data-environment | 平台与运维负责人 | 2 | pending-no-new-owner-evidence | 目标架构；压测；恢复演练；容量模型 | 环境与发布准备独立工作项 |
 | C4-T05 | Pending with owner | blocks-real-data-environment | 平台发布负责人 | 2 | pending-no-new-owner-evidence | 环境隔离；备份；回滚；验收；生产授权 | 部署与生产独立工作项 |
-| C4-T06 | Exact revision | does-not-block-synthetic | 平台集成负责人 | 4 | exact-revision-open | 平台对本 F1 候选的独立复核与受控集成；PR #1/#2 的单独处置决定 | R0-F3 PR 处置、变更控制与最终 Handoff |
+| C4-T06 | Exact revision | does-not-block-synthetic | 平台集成负责人 | 7 | exact-revision-open-pr-only | PR #1/#2 的单独处置决定 | R0-F3 PR 处置、变更控制与最终 Handoff |
 
 ## 5. F2-0 不作出的结论
 
@@ -67,4 +69,4 @@ F2 只形成专业与责任边界的审计结论和缺口，不实现业务。�
 
 ## 6. 下一检查点
 
-F2-1 形成六类审计矩阵与 `hm-r0-f2-audit.v1` JSON/Schema，并同步关闭 F2-FRESH-01；每项必须保留 owner、evidence、missing evidence、blocks、does_not_block、next checkpoint 和 review trigger。
+本短检查点提交后停止编辑，等待平台对 F2-FRESH-01 的独立复核。完整 F2-1 六类矩阵、F3/P3 和任何业务或真实活动仍需另行授权。
