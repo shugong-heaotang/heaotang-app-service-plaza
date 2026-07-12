@@ -35,8 +35,8 @@
     "docs/decisions/0017-readme-course-and-random-governance-exam.md"
   ],
   "changed_areas": [
-    "backend-go/plugins/mall-plugin/domain_m1.go@5368cc3d",
-    "backend-go/plugins/mall-plugin/domain_m1_test.go@5368cc3d",
+    "backend-go/plugins/mall-plugin/domain_m1.go@ba99dd42f34873d8f368fcd72b352661088a4b02",
+    "backend-go/plugins/mall-plugin/domain_m1_test.go@ba99dd42f34873d8f368fcd72b352661088a4b02",
     "docs/project-management/modules/protection-mall/m1-domain-backend-evidence.md",
     "docs/project-management/modules/protection-mall/handoff-m1-domain.md",
     "contracts/modules/protection-mall/implementation-records/2026-07-13-protection-mall-m1-domain-evidence.json"
@@ -44,10 +44,12 @@
   "verification": [
     "preflight ready",
     "governance exam 100",
-    "go test -race ./plugins/mall-plugin passed",
+    "go test ./plugins/mall-plugin -run TestM1|TestAllStateMachines|TestBenefit|TestConcurrent|TestCompensation -count=1 passed",
+    "go test -race ./plugins/mall-plugin -run TestConcurrent|TestCompensation|TestBenefit -count=1 passed",
     "go test ./... passed",
     "go vet ./... passed",
-    "gofmt, diff check and scoped secret scan passed"
+    "validate_m1_contracts.py: 3 contracts and 11 synthetic cases passed",
+    "gofmt -d, diff check and scoped secret scan passed"
   ],
   "evidence": [
     "docs/project-management/modules/protection-mall/m1-domain-backend-evidence.md",
