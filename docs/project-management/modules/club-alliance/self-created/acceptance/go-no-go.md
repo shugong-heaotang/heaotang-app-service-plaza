@@ -1,16 +1,19 @@
 # CA-SC T0 Go / No-Go
 
-当前结论：**No-Go / Independent Review Remediation**。
+当前技术结论：**R4 Remediation Complete / Integration Pending**。
 
-已完成：合同、前后端实现、确定性 fixture、自动化、真实 HTTP、核心浏览器主链、响应式、Nginx/DB 脱敏证据、前后端失败注入回滚。
+## 原独立复核问题关闭
 
-独立复核确认既有环境证据中的列表隔离、详情、加入、本人状态、响应式、Tab/focus-visible/ARIA、前后端制品回滚和测试环境 ready 结果可保留，但以下 Blocker/Major 尚未关闭，不能宣称 T0 Go：
+1. **列表安全 DTO：关闭。** 后端 `98426ff83a1218080019faa377c152a81ecca437` 已部署；列表精确白名单 7 字段，禁止字段 0，定向、全量 Go tests 与 `go vet` 通过。
+2. **刷新 DOM：关闭。** 真实 reload 后 URL、heading、认证状态和主导航同时存在。**Enter 保留为控制通道 Unverified**：现有 in-app/原生通道不能可靠传递，已按证据规则停止扩大尝试；真实鼠标点击、Tab/focus/ARIA 与自动化 Enter 回归可保留，但不得写成环境 Enter Pass。
+3. **数据库恢复：关闭。** SQLite 在线备份已恢复到隔离临时库，完整性检查 ok、schema 400、dump SHA 匹配、临时文件清除、在线库未变。
+4. **唯一 run 与幂等清理：关闭。** `club-sc-t0-20260712-100100` 创建 10 条混合数据，API/并发/跨用户通过；清理后 clubs/applications/members/idempotency keys 全为 0，数据库 ready。
 
-1. 部署版本的列表接口直接序列化完整 `Club`，与合同字段白名单及 `owner_id` 禁止字段冲突；现有 API 脚本未验证字段最小化。
-2. 浏览器 Enter 仍为控制通道 Unverified；刷新只取得 HTTP 200，未取得刷新后 DOM。
-3. 回滚证据缺少数据库安全恢复与完整性演练。
-4. fixture 清理未证明删除本轮 `api_idempotency_keys`，且固定日期前缀不满足唯一 run 标识。
+## 当前门禁
 
-关闭动作：独立后端工作项输出列表安全 DTO 并补服务端回归；T0 工作项升级唯一 run fixture、幂等键清理、数据库恢复演练和真实浏览器刷新/键盘证据。全部通过后重新生成 current checklist、100 分考试、IR、独立复核和受控集成。
+- 产品与安全证据：Go（限 CA-SC T0）。
+- 浏览器：Conditional Pass；唯一保留项为 Enter 控制通道 Unverified，非产品 No-Go。
+- 发布：No-Go；尚未授权生产或真实数据。
+- 集成：Pending；完成 final current checklist、100 分考试、IR、独立复核、Handoff 与受控集成后方可将工作项标记 integrated。
 
-在以上问题关闭前不得宣称 T0 Go，也不得将本结论扩大为创建、审核、成员管理、资金、生产或其他俱乐部子项目授权。
+创建俱乐部、后台审核、成员管理、真实资金、生产环境及其他俱乐部子项目不在本结论范围。

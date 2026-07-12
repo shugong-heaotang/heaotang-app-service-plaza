@@ -3,9 +3,9 @@
 - from：平台集成负责人（CA-SC T0 验收执行）
 - to：服务广场权威集成基线
 - date：2026-07-12
-- work item：`AIW-20260712-CLUB-SC-T0-ACCEPTANCE`
-- status：Independent Review No-Go / remediation active
-- upstream APP / backend：`2c4b295e6fd625a2df24957f7b8becbc28ad1dcf` / `a998812cf44dc449d85b726706d4ae2573179860`
+- work item：`AIW-20260712-CLUB-SC-T0-REMEDIATION`
+- status：R4 remediation complete / controlled integration pending
+- upstream APP / backend：`2c4b295e6fd625a2df24957f7b8becbc28ad1dcf` / `98426ff83a1218080019faa377c152a81ecca437`
 - latest historical checklist：`FC-20260712-CLUB-SC-T0-ACCEPTANCE-R3`（28/28；修复改动后不再 current）
 - latest historical exam：`EX-20260712-CLUB-SC-T0-ACCEPTANCE-R3-1`（100）
 - latest historical IR：`IR-20260712-CLUB-SC-T0-ACCEPTANCE-R3`
@@ -44,10 +44,19 @@
 - 数据库恢复演练、刷新后 DOM 和环境 Enter 证据尚未关闭。
 - R3 作为历史检查点保留；修复完成后必须生成 R4 current checklist、100 分考试和新 IR。
 
+## R4 根因关闭（2026-07-12）
+
+- 后端安全 DTO 实现提交 `df0575a05c8f75d927d079dc8c662e2cd25b9e55` 已经独立复核，并受控集成为 backend `98426ff83a1218080019faa377c152a81ecca437`；定向、全量 Go tests 与 `go vet` 通过。
+- 测试环境部署 binary SHA-256 `fec7bcbb58d6186d9c384b1b837479f592d978c145ce09c46e002763d9c565f1`；部署前远端备份 `/root/heaotang-backups/20260712-095800.tar.gz`，本地备份 SHA-256 `2b24a9d07588eace04ae4bbfa448e6a9ace23da0ddd064c0f90945acf8306f1f`；ready/db 均通过。
+- 唯一 run `club-sc-t0-20260712-100100` 完成 10 条混合数据验收。search total=5 且零串类；列表/详情字段白名单通过、禁止字段 0；加入首次/重放/冲突、并发单 pending、跨用户隔离通过。
+- cleanup 后 run-owned clubs、applications、members、`api_idempotency_keys` 均为 0；SQLite 在线备份已恢复到隔离临时库，完整性 ok、schema 400、dump SHA 匹配、在线库未变。
+- 真实刷新 DOM 同时证明 URL、heading、认证状态和主导航。Enter 经现有 in-app 与 Windows 原生控制通道仍不能可靠传递，依规则停止扩大尝试并保留为 control-channel Unverified；这不是环境 Enter Pass，也不是产品 No-Go。
+- 治理时序偏差已透明记录：数据库恢复证据曾在 remediation R1 检查单/考试前写入；发现后立即停止后续实现，完成 preflight、R1 逐项阅读和 100 分考试后才继续。未在考试前修改业务代码，不删除历史快照。
+
 ## 未完成/禁止推断
 
-上述 Blocker/Major、R4 治理、再次独立复核和受控集成均未关闭。创建、审核、成员管理、资金、生产与真实数据仍未授权；既有部署和局部通过证据不代表 T0 Go。
+原四项 Blocker/Major 已关闭；最终 current checklist、100 分考试、IR、再次独立复核与受控集成仍是最后门禁。创建、审核、成员管理、资金、生产与真实数据仍未授权。
 
 ## 请求
 
-先完成安全 DTO、唯一 run/幂等清理、数据库恢复与真实浏览器证据，再由平台独立复跑并关闭 SP-H036。
+请平台独立复跑最终门禁并受控集成；集成完成后关闭 SP-H036 和三个 remediation/safe-DTO 工作项。
