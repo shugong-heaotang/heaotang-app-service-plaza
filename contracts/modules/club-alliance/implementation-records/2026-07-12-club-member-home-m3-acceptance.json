@@ -52,11 +52,16 @@
     "three unique RunId Plan Apply Inspect Cleanup sequences",
     "four-identity and error-scenario authenticated API acceptance",
     "two isolated RestoreVerify runs",
-    "in-app Browser handoff resume: requested iab backend unavailable and browser type list empty; no page action executed",
+    "three lifecycle/history fixture Plan Apply Inspect Cleanup RestoreVerify sequences with remaining zero",
+    "in-app Browser channel recovered; target URL title DOM viewport and deployed asset hash observed",
+    "four synthetic identities OTP capacity ready without reading secrets",
     "Test-TextEncoding.ps1 and git diff --check"
   ],
   "evidence": [
     "docs/project-management/modules/club-alliance/member-home/acceptance/m3/2026-07-12-environment-acceptance.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3/2026-07-12-browser-resume.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3/2026-07-12-synthetic-lifecycle-execution.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3/2026-07-12-stage-audit.md",
     "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md"
   ],
   "premises": [
@@ -64,9 +69,9 @@
     "No OTP JWT cookie Authorization full phone or full user identifier is persisted",
     "Each fixture scenario has a unique RunId and Cleanup proves all run-owned records are zero",
     "Maintenance remains Unverified because no approved natural condition exists",
-    "Browser evidence remains Unverified because the handed-off in-app Browser backend was unavailable and the documented one-time browser type check returned an empty list",
-    "The browser resume attempt did not redeploy rerun fixtures request OTP call business APIs read session secrets or substitute another browser surface",
-    "Lifecycle and history states remain Unverified because the approved fixture does not construct them and direct database shortcuts are forbidden",
+    "Browser control is restored and unauthenticated baseline evidence is recorded; authenticated four-identity browser evidence remains pending explicit OTP-send authorization",
+    "Application pending and rejected plus dissolved club lifecycle fixtures are verified locally and on the approved test server with complete cleanup",
+    "Left and suspended remain unsupported because no authoritative membership history or status model exists",
     "This record is implemented rather than verified because Full Go conditions are not met"
   ],
   "implementation_mode": "ai-assisted"
