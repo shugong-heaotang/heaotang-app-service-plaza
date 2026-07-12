@@ -1,0 +1,85 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/schemas/nova-api-contract.v1.schema.json",
+  "title": "NOVA public API contract v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "base_path", "endpoints", "security", "confirmation", "idempotency", "audit", "error_model", "compatibility"],
+  "properties": {
+    "contract_version": {"const": "nova-api-contract.v1"},
+    "base_path": {"const": "/api/nova"},
+    "endpoints": {
+      "type": "array",
+      "minItems": 7,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["method", "path", "operation", "write", "confirmation_policy"],
+        "properties": {
+          "method": {"enum": ["GET", "POST"]},
+          "path": {"type": "string", "pattern": "^/api/nova/"},
+          "operation": {"type": "string", "minLength": 1},
+          "write": {"type": "boolean"},
+          "confirmation_policy": {"enum": ["never", "policy_required", "always"]}
+        }
+      }
+    },
+    "security": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["identity_source", "tenant_source", "authorization_enforced_by", "model_may_expand_scope"],
+      "properties": {
+        "identity_source": {"const": "trusted_server_context"},
+        "tenant_source": {"const": "trusted_server_context"},
+        "authorization_enforced_by": {"const": "server"},
+        "model_may_expand_scope": {"const": false}
+      }
+    },
+    "confirmation": {
+      "type": "object",
+      "required": ["required_for", "binds"],
+      "properties": {
+        "required_for": {"type": "array", "minItems": 5, "items": {"type": "string"}},
+        "binds": {"type": "array", "minItems": 6, "items": {"type": "string"}}
+      }
+    },
+    "idempotency": {
+      "type": "object",
+      "required": ["header", "same_key_same_payload", "same_key_different_payload", "recovery_rule"],
+      "properties": {
+        "header": {"const": "Idempotency-Key"},
+        "same_key_same_payload": {"const": "safe_replay"},
+        "same_key_different_payload": {"const": "conflict"},
+        "recovery_rule": {"const": "no_duplicate_side_effect"}
+      }
+    },
+    "audit": {
+      "type": "object",
+      "required": ["required_fields", "redaction_required"],
+      "properties": {
+        "required_fields": {"type": "array", "minItems": 5, "items": {"type": "string"}},
+        "redaction_required": {"const": true}
+      }
+    },
+    "error_model": {
+      "type": "object",
+      "required": ["required_fields", "waiting_confirmation_is_state"],
+      "properties": {
+        "required_fields": {"type": "array", "minItems": 5, "items": {"type": "string"}},
+        "waiting_confirmation_is_state": {"const": true}
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "required": ["legacy_endpoints", "additive_changes", "breaking_changes", "runtime_owner", "platform_owner"],
+      "properties": {
+        "legacy_endpoints": {"type": "array", "minItems": 2, "items": {"type": "string"}},
+        "additive_changes": {"const": "compatible_minor"},
+        "breaking_changes": {"const": "new_major_and_platform_signoff"},
+        "runtime_owner": {"const": "Nova + AI module owner"},
+        "platform_owner": {"const": "platform integration owner"}
+      }
+    }
+  }
+}
