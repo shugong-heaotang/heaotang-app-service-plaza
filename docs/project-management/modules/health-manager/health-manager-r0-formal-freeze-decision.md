@@ -3,7 +3,9 @@
 - freeze_id：`HM-R0`
 - 产品版本：`V1.0`
 - 唯一冻结状态：**Accepted for development planning**
-- F1 检查点状态：`candidate / awaiting independent platform review`
+- F1 检查点状态：`Accepted / integrated for development planning`
+- F1 证据：source `384436c719396d0a0105f448716ef37aa8ba7ab8`；source merge `fb1b882091209897d9f618659ce02733d670b53e`；acceptance evidence `1af9032e6fdb2b9faaf5070003e8d2ea3abcba48`；authoritative integration `034e46beae3dd30d5616c873d596e9c591c8d797`
+- 平台验收报告：`docs/project-management/service-plaza/health-r0-f1-acceptance-2026-07-13.md`
 - 生效范围：产品宪法、MVP-90需求拆解、独立后续工作项规划
 - 可执行：`false`
 - 当前不授权：业务代码、共享前后端、API、数据库、环境、真实身份、真实会员/健康数据、医疗服务、收费、资金、部署、生产和 P3
@@ -14,7 +16,7 @@
 
 HM-R0 / V1.0 Final Candidate 可以作为后续需求拆解、合同设计和独立开发任务规划的上位产品宪法。该冻结只说明产品定位、PDCAR 核心、AI+健康管理师+医生三层责任、健康计划核心对象以及安全失败关闭原则可以继续作为开发规划依据。
 
-“Accepted for development planning”不等于专业政策全部完成，不等于真实会员服务可运行，也不等于 PR、业务实现、环境、收费或生产获批。F1 文件由模块提交后仍需平台独立复核；平台 Go 前工作项不得标为 integrated。
+“Accepted for development planning”不等于专业政策全部完成，不等于真实会员服务可运行，也不等于 PR、业务实现、环境、收费或生产获批。F1 已由平台独立复核并受控集成；该事实只关闭 F1 复核缺失，不改变任何 Pending、Exact revision、PR 处置或真实活动门禁。
 
 ## 2. 分类定义与数量
 
@@ -54,7 +56,7 @@ HM-R0 / V1.0 Final Candidate 可以作为后续需求拆解、合同设计和独
 | C4-T03 | Pending with owner | blocks-development | 平台集成负责人 | 共享业务实现精确任务书；前后端/API/DB allowed paths；接口与两层依赖门禁 | 独立共享业务实现工作项 |
 | C4-T04 | Pending with owner | blocks-real-data-environment | 平台与运维负责人 | 目标架构；压测；恢复演练；容量模型 | 环境与发布准备独立工作项 |
 | C4-T05 | Pending with owner | blocks-real-data-environment | 平台发布负责人 | 环境隔离；备份；回滚；验收；生产授权 | 部署与生产独立工作项 |
-| C4-T06 | Exact revision | does-not-block-synthetic | 平台集成负责人 | 平台对本 F1 候选的独立复核与受控集成；PR #1/#2 的单独处置决定 | R0-F3 PR 处置、变更控制与最终 Handoff |
+| C4-T06 | Exact revision | does-not-block-synthetic | 平台集成负责人 | F1 已独立复核并受控集成；仍缺 PR #1/#2 的单独处置决定 | R0-F3 PR 处置、变更控制与最终 Handoff |
 
 ## 4. 已提升为 Accepted 的窄范围决定
 
@@ -73,6 +75,8 @@ HM-R0 / V1.0 Final Candidate 可以作为后续需求拆解、合同设计和独
 > HM-R0 母文档可冻结为 Accepted for development planning；Draft PR #1 与 PR #2 是否更新或合并继续由平台单独裁决，当前均保持 Draft。
 
 原因是产品规划冻结、GitHub 合并和业务授权具有不同责任人、证据和风险，不能由一个布尔状态互相替代。该修订需在 R0-F3 由平台复核 PR 元数据与差异后收口。
+
+F1 开发规划冻结已完成独立复核与受控集成，因此 C4-T06 不再缺少 F1 平台复核证据；该项继续保持 `Exact revision`，唯一未闭合内容是 Draft PR #1/#2 的单独处置。任何 F3、PR 合并或业务授权仍不得由 F1 状态自动推导。
 
 ## 6. 失效与复审触发
 

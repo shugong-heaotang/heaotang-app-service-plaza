@@ -11,6 +11,7 @@
     "source_candidate",
     "decision_status",
     "checkpoint_status",
+    "f1_acceptance",
     "development_planning_only",
     "executable",
     "identity_authority_production",
@@ -42,7 +43,10 @@
       "const": "Accepted for development planning"
     },
     "checkpoint_status": {
-      "const": "F1-candidate-awaiting-independent-platform-review"
+      "const": "F1-accepted-integrated-for-development-planning"
+    },
+    "f1_acceptance": {
+      "$ref": "#/$defs/f1Acceptance"
     },
     "development_planning_only": {
       "const": true
@@ -1587,10 +1591,12 @@
                   "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-T06",
                   "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md",
                   "git:ce9a4c75fb2ea9d7eed46bc4c27c1fa4b3488887:docs/project-management/modules/health-manager/health-manager-v1-requirements-and-development-plan.md#27.0",
-                  "git:ce9a4c75fb2ea9d7eed46bc4c27c1fa4b3488887:docs/project-management/modules/health-manager/health-manager-v1-docs-handoff.md"
+                  "git:ce9a4c75fb2ea9d7eed46bc4c27c1fa4b3488887:docs/project-management/modules/health-manager/health-manager-v1-docs-handoff.md",
+                  "git:384436c719396d0a0105f448716ef37aa8ba7ab8:contracts/modules/health-manager/hm-r0-formal-freeze.v1.json",
+                  "git:fb1b882091209897d9f618659ce02733d670b53e:contracts/modules/health-manager/hm-r0-formal-freeze.v1.json",
+                  "git:034e46beae3dd30d5616c873d596e9c591c8d797:docs/project-management/service-plaza/health-r0-f1-acceptance-2026-07-13.md"
                 ],
                 "missing_evidence": [
-                  "平台对本 F1 候选的独立复核与受控集成",
                   "PR #1/#2 的单独处置决定"
                 ],
                 "next_checkpoint": "R0-F3 PR 处置、变更控制与最终 Handoff",
@@ -1600,13 +1606,13 @@
                   "rationale": "开发规划冻结与 GitHub 合并是不同权限和不同证据门禁，不能捆绑为一个布尔状态。",
                   "owner": "平台集成负责人",
                   "revalidation_conditions": [
-                    "F1/F2/F3 独立复核完成",
+                    "R0-F3 对 PR #1/#2 处置作出独立裁决",
                     "PR 元数据与差异单独复核",
                     "不得扩大为业务、环境或生产授权"
                   ]
                 },
                 "blocks": [
-                  "F3 最终收口前的 integrated 状态",
+                  "R0-F3 的 PR #1/#2 单独处置收口",
                   "PR #1/#2 合并"
                 ],
                 "does_not_block": [
@@ -1639,6 +1645,38 @@
     }
   },
   "$defs": {
+    "f1Acceptance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "status",
+        "source",
+        "source_merge",
+        "acceptance_evidence",
+        "authoritative_integration",
+        "acceptance_report"
+      ],
+      "properties": {
+        "status": {
+          "const": "Accepted for development planning"
+        },
+        "source": {
+          "const": "384436c719396d0a0105f448716ef37aa8ba7ab8"
+        },
+        "source_merge": {
+          "const": "fb1b882091209897d9f618659ce02733d670b53e"
+        },
+        "acceptance_evidence": {
+          "const": "1af9032e6fdb2b9faaf5070003e8d2ea3abcba48"
+        },
+        "authoritative_integration": {
+          "const": "034e46beae3dd30d5616c873d596e9c591c8d797"
+        },
+        "acceptance_report": {
+          "const": "docs/project-management/service-plaza/health-r0-f1-acceptance-2026-07-13.md"
+        }
+      }
+    },
     "sourceCandidate": {
       "type": "object",
       "additionalProperties": false,
