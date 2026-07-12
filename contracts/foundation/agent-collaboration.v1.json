@@ -2092,7 +2092,7 @@
                            "title":  "保障商城持续开发启动与 M0 接入契约冻结",
                            "owner":  "Protection Mall module lead agent",
                            "owner_role":  "商城板块唯一负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-m0",
                            "branch":  "codex/protection-mall-m0",
@@ -2574,6 +2574,48 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "M0 R3 Go 后激活的合同与离线合成一致性首切片。source 9dc3092 经平台会签和 APP 总架构独立验收 Go，以 b27d75e 受控集成；3份合同、11项合成案例、current checklist、exam100、IR、registry、UTF-8与diff通过。只冻结商品责任、五状态机及 mall.api.v1 安全合同；运行时代码、数据库、支付、真实资金、部署和真实数据继续 No-Go。",
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m1.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-PROTECTION-MALL-M1-DOMAIN-BACKEND",
+                           "title":  "保障商城 M1 Go纯领域状态机与授权幂等核",
+                           "owner":  "Protection Mall backend agent",
+                           "owner_role":  "商城后端负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/和奥堂总后端",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-m1-domain-backend",
+                           "branch":  "codex/protection-mall-m1-domain-backend",
+                           "base_commit":  "e41265905815082433e040412f3dd6b6b33dfede",
+                           "allowed_paths":  [
+                                                 "backend-go/plugins/mall-plugin/domain_m1.go",
+                                                 "backend-go/plugins/mall-plugin/domain_m1_test.go"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "仅实现未挂路由的Go纯领域责任、五状态机、scope/归属、幂等和稳定错误；仅内存及单元测试，禁止DB、网络、支付、真实数据、路由和部署。",
+                           "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m1-domain.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-PROTECTION-MALL-M1-DOMAIN-EVIDENCE",
+                           "title":  "保障商城 M1 Go领域核APP治理与跨仓库证据",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-m1-domain-evidence",
+                           "branch":  "codex/protection-mall-m1-domain-evidence",
+                           "base_commit":  "7a3f254bebe18f37a7b85163b096f37b68612900",
+                           "allowed_paths":  [
+                                                 "docs/project-management/notices/2026-07-12-protection-mall-m1-domain-kernel-task-order.md",
+                                                 "docs/project-management/modules/protection-mall/handoff-m1-domain.md",
+                                                 "docs/project-management/modules/protection-mall/m1-domain-backend-evidence.md",
+                                                 "contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m1-domain-evidence*.json",
+                                                 "contracts/modules/protection-mall/governance-exams/2026-07-12-protection-mall-m1-domain-evidence*.json",
+                                                 "contracts/modules/protection-mall/implementation-records/2026-07-12-protection-mall-m1-domain-evidence*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "只保存task order、模块治理证据、Handoff和后端exact commit/test映射；不得写后端代码或业务运行时。",
+                           "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m1-domain.md"
                        }
                    ]
 }
