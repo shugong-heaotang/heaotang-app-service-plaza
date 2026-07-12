@@ -57,6 +57,7 @@ def validate_source_closure(plan, documents=None):
     for scenario in plan["scenarios"]:
         scenario_source = resolve_pointer(scenario["scenario_source_ref"], documents)
         fixture_source = resolve_pointer(scenario["fixture_source_ref"], documents)
+        professional_source = resolve_pointer(scenario_source["review_source_ref"], documents)
         if scenario_source["scenario_id"] != scenario["scenario_id"]:
             raise AssertionError("scenario pointer does not resolve to the declared scenario_id")
         if scenario_source["fixture_id"] != scenario["fixture_id"]:
@@ -65,6 +66,36 @@ def validate_source_closure(plan, documents=None):
             raise AssertionError("fixture pointer does not resolve to the declared pair")
         if scenario["required_step_refs"] != scenario_source["required_step_refs"]:
             raise AssertionError("required steps drift from the signed scenario source")
+        if not fixture_source["expected_result"]:
+            raise AssertionError("fixture expected_result is missing")
+        if scenario_source["safe_outcome"] != professional_source["proposed_safe_outcome"]:
+            raise AssertionError("scenario safe outcome drifts from the signed professional source")
+
+        events_by_resource = {}
+        for event in scenario["events"]:
+            events_by_resource.setdefault(event["resource_ref"], []).append(event)
+        for resource_events in events_by_resource.values():
+            for previous, current in zip(resource_events, resource_events[1:]):
+                if previous["expected_to"] != current["expected_from"]:
+                    raise AssertionError("same-resource state sequence is discontinuous")
+                if previous["expected_version"]["after"] != current["expected_version"]["before"]:
+                    raise AssertionError("same-resource version sequence is discontinuous")
+
+        resource_types = {event["resource_ref"].split(":", 1)[0] for event in scenario["events"]}
+        if fixture_source["expected_result"] == "pdcar_loop_recorded":
+            if not {"RiskEvent", "HumanHandoff"}.isdisjoint(resource_types):
+                raise AssertionError("normal PDCAR fixture cannot emit risk or handoff resources")
+            if "无专业触发" not in scenario_source["safe_outcome"]:
+                raise AssertionError("normal PDCAR profile is not closed by the signed safe outcome")
+            task_events = [event for event in scenario["events"] if event["resource_ref"].startswith("HealthTask:")]
+            if not task_events or task_events[-1]["expected_to"] != "recorded":
+                raise AssertionError("normal PDCAR task chain does not end in recorded")
+        if fixture_source["expected_result"] == "emergency_handoff_open":
+            expected = "risk-event:triage_pending->emergency:CLASSIFY_EMERGENCY"
+            if [event["transition_ref"] for event in scenario["events"]] != [expected]:
+                raise AssertionError("emergency fixture does not use the signed emergency classification profile")
+            if "紧急" not in scenario_source["safe_outcome"] or "风险开放" not in scenario_source["safe_outcome"]:
+                raise AssertionError("emergency fixture is not closed by the signed safe outcome")
 
         for event in scenario["events"]:
             event_ids.append(event["event_id"])
@@ -196,6 +227,19 @@ class SyntheticReplayPlanContractTests(unittest.TestCase):
         audit_as_write = copy.deepcopy(self.plan)
         audit_as_write["scenarios"][0]["events"][10]["authorization_action_id"] = "security.audit_metadata"
         mutations.append(audit_as_write)
+        discontinuous_state = copy.deepcopy(self.plan)
+        discontinuous_state["scenarios"][0]["events"][6]["expected_from"] = "pending"
+        mutations.append(discontinuous_state)
+        discontinuous_version = copy.deepcopy(self.plan)
+        discontinuous_version["scenarios"][0]["events"][6]["expected_version"]["before"] = 9
+        mutations.append(discontinuous_version)
+        normal_with_risk = copy.deepcopy(self.plan)
+        normal_with_risk["scenarios"][0]["events"][10]["resource_ref"] = "RiskEvent:syn-member-001:r1"
+        mutations.append(normal_with_risk)
+        wrong_emergency_profile = copy.deepcopy(self.plan)
+        wrong_emergency_profile["scenarios"][2]["events"][0]["transition_ref"] = "risk-event:triage_pending->professional:CLASSIFY_PROFESSIONAL"
+        wrong_emergency_profile["scenarios"][2]["events"][0]["expected_to"] = "professional"
+        mutations.append(wrong_emergency_profile)
         for mutated in mutations:
             with self.assertRaises(AssertionError):
                 validate_source_closure(mutated)

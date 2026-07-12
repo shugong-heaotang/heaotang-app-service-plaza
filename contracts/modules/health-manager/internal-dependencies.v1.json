@@ -322,7 +322,7 @@
     {
       "dependency_id": "m1.p2-replay-plan",
       "kind": "contract",
-      "description": "15/15 场景的确定性事件计划，覆盖10步、6状态机；状态迁移命令与可选安全授权动作分离，授权动作逐项校验actor/resource/effect/prerequisite，审计只作为独立期望，所有输出仍synthetic_only=true、executable=false",
+      "description": "15/15场景、exact25事件的确定性计划；同资源状态与版本连续，normal PDCAR不生成风险/转人工事件，紧急场景由签署结果闭包至专业风险分类；迁移命令、可选安全授权动作与审计期望分离，所有输出仍synthetic_only=true、executable=false",
       "status": "implemented",
       "required_for_slice": true,
       "depends_on": ["m1.p2-governance-entry", "m1.vertical-slice-contract", "m1.synthetic-scenarios-contract", "m1.security-authorization"],
@@ -334,7 +334,7 @@
         "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_p2_replay.py",
         "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md"
       ],
-      "unresolved": ["P2-C1 Exact revision 已修复，等待平台对R3独立复核"],
+      "unresolved": ["P2-C1第二次Exact revision已修复，等待平台对R4独立复核"],
       "owner": "健康大管家负责人",
       "blocks": ["P2-C2 reference runner"],
       "does_not_block": ["真实数据、共享实现、环境、收费和生产继续 No-Go"]

@@ -24,6 +24,9 @@
 - 25 个首版事件均能解析到步骤、授权动作、状态机迁移或拒绝规则；授权动作必须逐项匹配 actor、resource、effect 和 prerequisite；
 - 事件总数固定为25，event_id、幂等键和 payload_ref 全局唯一；
 - scenario/fixture JSON Pointer 必须真正解引用到同一 ID，不接受只比较指针字符串；
+- 同一场景、同一资源的后续事件必须满足 `previous.to=current.from` 与 `previous.version.after=current.version.before`；
+- `pdcar_loop_recorded` 正常场景不得创建 `RiskEvent` 或 `HumanHandoff`；`emergency_handoff_open` 必须使用权威专业紧急分类迁移；
+- fixture `expected_result`、P1 scenario `safe_outcome` 与真人签署的 `proposed_safe_outcome` 必须真实解引用并一致；
 - 10 个步骤、6 个状态机均有覆盖；
 - P1 原 11 项 conformance 保持通过；
 - current checklist、考试、IR、UTF-8、diff/scope 和敏感模式门禁通过。

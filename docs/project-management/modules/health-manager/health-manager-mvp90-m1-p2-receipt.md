@@ -33,3 +33,13 @@
 - 最终治理：使用新的 R3 current checklist、考试和 IR，R2 保持历史。
 
 R3 current：checklist 28/28，exam 100，IR=`IR-20260712-HEALTH-MVP90-M1-P2-C1-R3`。
+
+## R4 连续性与场景语义修订
+
+- 未集成 source：`ab74ac84c400f5d02d784fb8317d45a93eb50e58`；
+- A001任务状态/版本已连续，RiskEvent/HumanHandoff为0；
+- A003由专业人员执行紧急风险分类，闭包fixture expected_result与签署safe outcome；
+- 新门禁拒绝状态断裂、版本断裂、normal-with-risk和错误紧急profile；
+- 最终治理改用R4 current checklist、考试和IR，R2/R3均保留历史。
+
+R4 current：checklist 28/28，exam 100，IR=`IR-20260712-HEALTH-MVP90-M1-P2-C1-R4`。

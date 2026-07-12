@@ -22,6 +22,14 @@
 4. scenario/fixture pointer 真实解引用到目标 ID；上游数组反转必须失败。
 5. 固定 exactly 25 events，并锁定 event_id、idempotency key、payload_ref 全局唯一。
 
+## R4 连续性与场景语义修订
+
+1. 保留未集成 source `ab74ac84c400f5d02d784fb8317d45a93eb50e58` 与R3历史。
+2. A001仍为11事件、全局仍为25事件；任务链改为 `pending→in_progress→completed→pending_check→recorded`，版本0→4连续。
+3. A001移除RiskEvent/HumanHandoff；其 fixture expected_result=`pdcar_loop_recorded`，签署结果“无专业触发”得到机器约束。
+4. A003按 fixture `emergency_handoff_open` 和签署紧急结果使用 `risk-event:triage_pending→emergency:CLASSIFY_EMERGENCY`，professional actor，version1→2。
+5. A002继续覆盖health-management-entry，A013继续覆盖human-handoff，全局6状态机不靠正常场景造风险占位。
+
 ## 未完成且未授权
 
 - reference runner、负向 fixture 包、canonical trace hash；
