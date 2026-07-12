@@ -2564,6 +2564,35 @@
                            "handoff_record":  "docs/project-management/service-plaza/health-r0-f2-freshness-acceptance-2026-07-13.md"
                        },
                        {
+                           "work_id":  "AIW-20260713-PLATFORM-INTEGRATION-FRESHNESS-GATE-R2",
+                           "title":  "平台集成分支第二次分叉根因修复与推送新鲜度门禁",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/platform-integration-freshness-gate-r2",
+                           "branch":  "codex/platform-integration-freshness-gate-r2",
+                           "base_commit":  "6f4f9048458b4458cb163b148cce924991bf81fc",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/recurring-issues.v1.json",
+                                                 "contracts/foundation/integration-push-policy.v1.json",
+                                                 "contracts/foundation/integration-push-policy.v1.schema.json",
+                                                 "contracts/foundation/development-checklists/2026-07-13-platform-integration-freshness-gate-r2*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-13-platform-integration-freshness-gate-r2*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-13-platform-integration-freshness-gate-r2*.json",
+                                                 "scripts/Test-IntegrationPushFreshness.ps1",
+                                                 "scripts/validate_integration_push_policy.py",
+                                                 "scripts/tests/test_integration_push_freshness.py",
+                                                 "docs/project-management/notices/2026-07-13-platform-integration-freshness-gate-task-order.md",
+                                                 "docs/project-management/service-plaza/platform-integration-freshness-gate-2026-07-13.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "第二次出现同类integration分叉：远端健康权威6f4f904与本地activity bb9e717共同基线e947d70，remote-only6/local-only1。先完成证据、recurring issue、版本化策略和共享freshness gate；current checklist/exam100及独立复核前禁止调和和推送。第三次复发升级ADR/CONSTRAINTS和全依赖审计。",
+                           "handoff_record":  "docs/project-management/service-plaza/platform-integration-freshness-gate-2026-07-13.md"
+                       },
+                       {
                            "work_id":  "AIW-20260712-PROJECT-BRAIN-INTEGRATION-RECONCILIATION",
                            "title":  "Project Brain 分叉集成与 R5 治理证据受控收口",
                            "owner":  "Codex platform integration agent",
