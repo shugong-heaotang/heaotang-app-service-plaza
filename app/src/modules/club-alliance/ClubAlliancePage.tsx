@@ -9,6 +9,7 @@ import {
   selfCreatedClubActionId,
   selfCreatedClubRootRoute,
 } from "./self-created/selfCreatedClubContract";
+import { MemberHomeShell, type MemberHomeModel } from "./member-home";
 import "./ClubAlliancePage.css";
 
 type BaseReadyModel = { actions: readonly ServiceAction[] };
@@ -17,6 +18,7 @@ export type ClubAlliancePageModel =
   | { status: "loading" }
   | { status: "empty" }
   | { status: "error"; message: string; errorId?: string }
+  | (BaseReadyModel & { status: "member-home"; memberHome: MemberHomeModel })
   | (BaseReadyModel & {
       status: "home";
       categories: readonly ServiceAction[];
@@ -133,6 +135,14 @@ export function ClubAlliancePage({ model, onRetry }: ClubAlliancePageProps) {
           <p>{model.selected.label}{maintenance ? "正在维护，请稍后再试。" : "当前不再提供访问。"}</p>
           <Link to={clubAllianceRootRoute}>返回俱乐部联盟首页</Link>
         </StatePanel>
+      </AppFrame>
+    );
+  }
+
+  if (model.status === "member-home") {
+    return (
+      <AppFrame title="俱乐部联盟" backAction={backAction} actions={model.actions}>
+        <MemberHomeShell model={model.memberHome} />
       </AppFrame>
     );
   }

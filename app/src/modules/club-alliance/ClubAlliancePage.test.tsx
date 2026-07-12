@@ -5,15 +5,16 @@ import { afterEach, describe, expect, it, vi } from "vitest";
 import { ActionRuntimeProvider } from "../../auth/ActionRuntimeContext";
 import { AuthProvider } from "../../auth/AuthContext";
 import { serviceActionContractVersion, type ServiceAction } from "../../domain/serviceActions";
-import { servicePlazaContractVersion, type ServiceCatalog } from "../../domain/serviceCatalog";
+import type { ServiceCatalog } from "../../domain/serviceCatalog";
 import {
   mockActions,
   mockServiceCatalogRepository,
   realServiceCatalogRepository,
   type ServiceCatalogRepository,
 } from "../../infrastructure/serviceCatalogRepository";
-import { reportActionEvent } from "../../infrastructure/actionTelemetry";
+import { ApiError } from "../../infrastructure/apiClient";
 import { ClubAllianceRoute } from "./ClubAllianceRoute";
+import type { ExploreEntry, MemberHomeModel } from "./member-home";
 import clubAllianceCss from "./ClubAlliancePage.css?inline";
 
 vi.mock("../../infrastructure/actionTelemetry", () => ({
@@ -40,10 +41,11 @@ const repositoryWith = (
 const renderRoute = (
   route = "/services/club-alliance",
   repository: ServiceCatalogRepository = mockServiceCatalogRepository,
+  memberHomeLoader?: (explore: readonly ExploreEntry[], signal?: AbortSignal) => Promise<MemberHomeModel>,
 ) =>
   render(
     <MemoryRouter initialEntries={[route]}>
-      <ClubAllianceRoute repository={repository} />
+      <ClubAllianceRoute repository={repository} memberHomeLoader={memberHomeLoader} />
     </MemoryRouter>,
   );
 
@@ -51,6 +53,7 @@ const renderAuthenticatedRoute = (
   route: string,
   scopes: readonly string[],
   repository: ServiceCatalogRepository = mockServiceCatalogRepository,
+  memberHomeLoader?: (explore: readonly ExploreEntry[], signal?: AbortSignal) => Promise<MemberHomeModel>,
 ) => {
   sessionStorage.setItem("heaotang_access_token", "synthetic-test-token");
   sessionStorage.setItem(
@@ -61,7 +64,7 @@ const renderAuthenticatedRoute = (
     <MemoryRouter initialEntries={[route]}>
       <AuthProvider>
         <ActionRuntimeProvider>
-          <ClubAllianceRoute repository={repository} />
+          <ClubAllianceRoute repository={repository} memberHomeLoader={memberHomeLoader} />
         </ActionRuntimeProvider>
       </AuthProvider>
     </MemoryRouter>,
@@ -131,107 +134,68 @@ describe("ClubAllianceRoute exact eight-state shell", () => {
     expect(await screen.findByText("catalog unavailable")).toBeInTheDocument();
     expect(screen.getByRole("alert")).toHaveAttribute("data-page-state", "error");
     await user.click(screen.getByRole("button", { name: "重新加载" }));
-    expect(await screen.findByRole("heading", { name: "选择俱乐部服务" })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "登录后查看会员首页" })).toBeInTheDocument();
     expect(attempts).toBe(2);
   });
 
-  it("renders home from the shared adapter with four entries and one adjunct", async () => {
-    renderRoute();
-    expect(await screen.findByRole("heading", { name: "选择俱乐部服务" })).toBeInTheDocument();
-    expect(document.querySelector('[data-page-state="home"]')).toBeInTheDocument();
-    const categoryRegion = screen.getByRole("region", { name: "俱乐部联盟四类入口" });
-    expect(categoryRegion.querySelectorAll("[data-action-id]")).toHaveLength(4);
-    expect(categoryRegion.querySelector('[data-action-id="club-manage"]')).not.toBeInTheDocument();
-    expect(screen.getByLabelText("俱乐部联盟管理附属入口")).toHaveTextContent("管理中心");
-    expect(screen.getByRole("link", { name: "公益俱乐部" })).toHaveAttribute(
-      "data-access-state",
-      "authentication_required",
-    );
-    expect(
-      Array.from(categoryRegion.querySelectorAll<HTMLAnchorElement>("a")).map((link) => link.href),
-    ).toEqual([
-      expect.stringContaining("/services/club-alliance?category=%E5%85%AC%E7%9B%8A%E4%BF%B1%E4%B9%90%E9%83%A8"),
-      expect.stringContaining("/services/club-alliance?category=%E8%87%AA%E5%BB%BA%E4%BF%B1%E4%B9%90%E9%83%A8"),
-      expect.stringContaining("/services/club-alliance?category=%E5%AE%B6%E5%BA%AD%E4%BF%B1%E4%B9%90%E9%83%A8"),
-      expect.stringContaining("/services/club-alliance?category=%E4%BF%B1%E4%B9%90%E9%83%A8%E5%8F%8B%E8%81%94%E4%BD%93"),
+  it("renders the authenticated member home from real loader data and catalog exploration", async () => {
+    const loader = vi.fn(async (explore: readonly ExploreEntry[]): Promise<MemberHomeModel> => ({
+      state: "ready", displayName: "合成会员", joinedClubCount: 1, pendingTaskCount: 0,
+      unreadCount: 0, clubs: [], tasks: [], activities: [], feed: [], canManage: false, explore,
+    }));
+    renderAuthenticatedRoute("/services/club-alliance", [], mockServiceCatalogRepository, loader);
+    expect(await screen.findByRole("heading", { name: "合成会员，您好" })).toBeInTheDocument();
+    expect(document.querySelector('[data-member-home-state="ready"]')).toBeInTheDocument();
+    expect(loader).toHaveBeenCalledTimes(1);
+    expect(loader.mock.calls[0][0].map((entry) => entry.actionId)).toEqual([
+      "public-benefit-club", "self-created-club", "family-club", "club-federation",
     ]);
-    expect(screen.getByRole("link", { name: "管理中心" })).toHaveAttribute(
-      "data-access-state",
-      "authentication_required",
-    );
-    expect(screen.getByRole("link", { name: "管理中心" })).toHaveAttribute(
-      "data-telemetry-event",
-      "service_plaza.club_manage.open",
-    );
+    const exploreRegion = screen.getByRole("region", { name: "探索更多" });
+    expect(exploreRegion.querySelector("nav")?.querySelectorAll("[data-action-id]")).toHaveLength(4);
+    expect(screen.queryByRole("link", { name: "管理中心" })).not.toBeInTheDocument();
   });
 
-  it("keeps the home shell keyboard reachable and exposes state semantics", async () => {
-    const user = userEvent.setup();
-    renderRoute();
-
-    const back = await screen.findByRole("link", { name: "返回服务广场" });
-    const publicBenefit = screen.getByRole("link", { name: "公益俱乐部" });
-    await user.tab();
-    expect(back).toHaveFocus();
-    await user.tab();
-    expect(publicBenefit).toHaveFocus();
-    await user.keyboard("{Enter}");
-
-    expect(await screen.findByText("需要登录或相应权限")).toBeInTheDocument();
-    expect(document.querySelector('[data-page-state="unauthorized"]')).toBeInTheDocument();
+  it("does not call the member API for a guest", async () => {
+    const loader = vi.fn<() => Promise<MemberHomeModel>>();
+    renderRoute("/services/club-alliance", mockServiceCatalogRepository, loader);
+    expect(await screen.findByRole("heading", { name: "登录后查看会员首页" })).toBeInTheDocument();
+    expect(document.querySelector('[data-member-home-state="unauthorized"]')).toBeInTheDocument();
+    expect(loader).not.toHaveBeenCalled();
   });
 
-  it.each(["planned", "maintenance", "offline"] as const)(
-    "does not elevate a %s category into an enabled home action",
-    async (lifecycle) => {
-      renderRoute(
-        "/services/club-alliance",
-        repositoryWith(actionWith("family-club", { lifecycle_status: lifecycle })),
-      );
-
-      expect(await screen.findByRole("button", { name: "家庭俱乐部" })).toBeDisabled();
-      expect(screen.getByText(lifecycle)).toBeInTheDocument();
-    },
-  );
-
-  it("reuses ActionControl lifecycle and telemetry behavior", async () => {
-    const user = userEvent.setup();
-    renderRoute(
-      "/services/club-alliance",
-      repositoryWith(actionWith("family-club", { lifecycle_status: "maintenance" })),
-    );
-    const maintenanceEntry = await screen.findByRole("button", { name: "家庭俱乐部" });
-    expect(maintenanceEntry).toBeDisabled();
-
-    await user.click(screen.getByRole("link", { name: "公益俱乐部" }));
-    await waitFor(() => {
-      expect(reportActionEvent).toHaveBeenCalledWith(
-        expect.objectContaining({ action_id: "public-benefit-club" }),
-        "blocked",
-        "authentication_required",
-      );
+  it.each([
+    ["loading", "正在加载会员首页"],
+    ["empty", "您好"],
+    ["partial-error", "您好"],
+    ["error", "会员首页暂时无法使用"],
+    ["unauthorized", "登录后查看会员首页"],
+    ["maintenance", "会员首页维护中"],
+    ["offline", "会员首页暂未开放"],
+  ] as const)("maps member loader state %s", async (state, heading) => {
+    const loader = async (): Promise<MemberHomeModel> => ({
+      state, clubs: [], tasks: [], activities: [], sectionErrors: state === "partial-error" ? { tasks: "待办暂时无法读取" } : undefined,
     });
+    renderAuthenticatedRoute("/services/club-alliance", [], mockServiceCatalogRepository, loader);
+    expect(await screen.findByRole("heading", { name: heading })).toBeInTheDocument();
+    expect(document.querySelector(`[data-member-home-state="${state}"]`)).toBeInTheDocument();
   });
 
-  it("reuses ActionControl activated telemetry for an allowed category", async () => {
-    const user = userEvent.setup();
-    renderRoute(
-      "/services/club-alliance",
-      repositoryWith(
-        actionWith("public-benefit-club", {
-          access: { auth_mode: "anonymous", required_scopes: [] },
-        }),
-      ),
-    );
+  it.each([
+    [new ApiError("auth", 401, "CMH_AUTH_REQUIRED"), "unauthorized"],
+    [new ApiError("maintenance", 503, "CMH_MAINTENANCE"), "maintenance"],
+    [new ApiError("offline", 410, "CMH_OFFLINE"), "offline"],
+    [new ApiError("network", 0, "NETWORK_ERROR"), "offline"],
+    [new ApiError("contract", 200, "CMH_CONTRACT_INVALID"), "error"],
+  ] as const)("fails loader error into %s", async (error, state) => {
+    renderAuthenticatedRoute("/services/club-alliance", [], mockServiceCatalogRepository, async () => { throw error; });
+    await waitFor(() => expect(document.querySelector(`[data-member-home-state="${state}"]`)).toBeInTheDocument());
+  });
 
-    await user.click(await screen.findByRole("link", { name: "公益俱乐部" }));
-    await waitFor(() => {
-      expect(reportActionEvent).toHaveBeenCalledWith(
-        expect.objectContaining({ action_id: "public-benefit-club" }),
-        "activated",
-        "none",
-      );
-    });
+  it("shows management only when backend can_manage is true", async () => {
+    renderAuthenticatedRoute("/services/club-alliance", [], mockServiceCatalogRepository, async () => ({
+      state: "empty", clubs: [], tasks: [], activities: [], canManage: true,
+    }));
+    expect(await screen.findByRole("link", { name: "管理中心" })).toHaveAttribute("href", "/services/club-alliance?view=manage");
   });
 
   it("renders focused for an allowed category and exposes exact selected_action_id", async () => {
@@ -287,22 +251,6 @@ describe("ClubAllianceRoute exact eight-state shell", () => {
     expect(await screen.findByText("selected_action_id=club-manage")).toBeInTheDocument();
     expect(document.querySelector('[data-page-state="focused"]')).toBeInTheDocument();
     expect(screen.getByRole("region", { name: "俱乐部联盟四类入口" })).toBeInTheDocument();
-  });
-
-  it("reports a blocked management click without changing the home URL state", async () => {
-    const user = userEvent.setup();
-    renderAuthenticatedRoute("/services/club-alliance", []);
-    await user.click(await screen.findByRole("link", { name: "管理中心" }));
-
-    expect(screen.getByRole("heading", { name: "选择俱乐部服务" })).toBeInTheDocument();
-    expect(document.querySelector('[data-page-state="home"]')).toBeInTheDocument();
-    await waitFor(() => {
-      expect(reportActionEvent).toHaveBeenCalledWith(
-        expect.objectContaining({ action_id: "club-manage" }),
-        "blocked",
-        "scope_required",
-      );
-    });
   });
 
   it.each([
@@ -386,8 +334,8 @@ describe("ClubAllianceRoute exact eight-state shell", () => {
     expect(await screen.findByText("service-plaza-return-target")).toBeInTheDocument();
 
     await router.navigate("/services/club-alliance");
-    await screen.findByRole("heading", { name: "选择俱乐部服务" });
-    await user.click(screen.getByRole("link", { name: "← 返回服务广场" }));
+    await screen.findByRole("heading", { name: "登录后查看会员首页" });
+    await user.click(screen.getByRole("link", { name: "返回服务广场" }));
     expect(await screen.findByText("service-plaza-return-target")).toBeInTheDocument();
   });
 
@@ -448,7 +396,6 @@ describe("ClubAllianceRoute network boundary", () => {
   });
 
   it("allows only catalog/actions reads and denies all club business endpoints", async () => {
-    const user = userEvent.setup();
     const catalog = await mockServiceCatalogRepository.getCatalog();
     const actions = await mockServiceCatalogRepository.getActions();
     const fetchMock = vi.spyOn(globalThis, "fetch").mockImplementation(async (input) => {
@@ -458,8 +405,7 @@ describe("ClubAllianceRoute network boundary", () => {
       throw new Error(`Club Alliance H1 made a denied request: ${url}`);
     });
 
-    renderRoute("/services/club-alliance", realServiceCatalogRepository);
-    await user.click(await screen.findByRole("link", { name: "公益俱乐部" }));
+    renderRoute("/services/club-alliance?category=公益俱乐部", realServiceCatalogRepository);
     expect(await screen.findByText("需要登录或相应权限")).toBeInTheDocument();
     expect(document.querySelector('[data-page-state="unauthorized"]')).toBeInTheDocument();
 
@@ -491,7 +437,7 @@ describe("ClubAllianceRoute network boundary", () => {
       throw new Error(`Club Alliance H1 made a denied request: ${url}`);
     });
 
-    renderRoute("/services/club-alliance", realServiceCatalogRepository);
+    renderRoute("/services/club-alliance?category=公益俱乐部", realServiceCatalogRepository);
     await user.click(await screen.findByRole("link", { name: "公益俱乐部" }));
     expect(await screen.findByText("selected_action_id=public-benefit-club")).toBeInTheDocument();
     expect(fetchMock.mock.calls.map(([input]) => requestUrl(input))).toEqual([
