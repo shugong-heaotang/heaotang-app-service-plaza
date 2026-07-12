@@ -2546,7 +2546,7 @@
                            "title":  "健康大管家 HM-R0 F2-FRESH-01 独立验收与受控集成",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "handoff-ready",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/health-r0-f2-freshness-acceptance",
                            "branch":  "codex/health-r0-f2-freshness-acceptance",
@@ -2560,7 +2560,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "F2-FRESH-01 source 66cc6cb9独立复核Go并以58c3a7cd受控合并；F1五类权威证据完整，C4-T06仍Exact revision且只剩PR处置，27项和10类负例门禁通过。平台验收证据已形成，等待最终registry closeout后转integrated；不得宣称完整F2 Go，不授权F2-1/F3/P3或任何代码/真实活动。",
+                           "migration_note":  "F2-FRESH-01 source 66cc6cb9独立复核Go并以58c3a7cd受控合并；验收证据fee48e60已进入权威远端。F1五类权威证据完整，C4-T06仍Exact revision且只剩PR处置，27项和10类负例门禁通过。平台验收工作项收口integrated；模块保持handoff-ready等待是否另行授权完整F2-1。不得宣称完整F2 Go，不授权F2-1/F3/P3或任何代码/真实活动。",
                            "handoff_record":  "docs/project-management/service-plaza/health-r0-f2-freshness-acceptance-2026-07-13.md"
                        },
                        {
