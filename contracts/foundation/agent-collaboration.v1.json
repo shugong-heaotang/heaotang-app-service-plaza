@@ -1540,13 +1540,16 @@
                                                  "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-h2-m2*.json",
                                                  "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-h2-m2*.json",
                                                  "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-h2-m2*.json",
+                                                 "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-h2-m3*.json",
+                                                 "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-h2-m3*.json",
+                                                 "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-h2-m3*.json",
                                                  "app/src/modules/club-alliance/ClubAlliancePage.tsx",
                                                  "app/src/modules/club-alliance/ClubAllianceRoute.tsx",
                                                  "app/src/modules/club-alliance/ClubAlliancePage.test.tsx"
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "M0/M1/M2 adapter 已受控集成；CA-SC 路径已释放，现授权 H1 兼容的正式入口挂载。后端由独立 Git 根工作项实现，部署与 UAT 仍需 M3 证据。",
+                           "migration_note":  "M2 前端已在 APP integration e06d5c6 完成 guest-H1/member-H2 边界修正，全量 215/215 与 build 通过；后端已集成至 97d8bfc5。现仅扩展同一工作项的 M3 治理证据路径，授权测试环境可回滚部署与四身份 UAT；禁止生产、真实会员、真实资金及未授权业务扩张。",
                            "handoff_record":  "docs/project-management/service-plaza/handoff-log.md#sp-h035俱乐部联盟-h2-会员首页需求变更与派发"
                        },
                        {
@@ -1691,7 +1694,7 @@
                            "title":  "CA-SC 自建俱乐部确定性合成数据与测试环境 T0 验收",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-sc-t0-acceptance",
                            "branch":  "codex/club-sc-t0-acceptance",
@@ -1712,7 +1715,35 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "从已含 T0 正式任务书的权威 integration 246c483 创建独立 branch/worktree；创建时 HEAD=base=merge-base 且 clean。固定 seed 为 HEAOTANG-CA-SC-20260712-V1，仅授权测试环境可回滚合成数据、部署与验收。",
+                           "migration_note":  "从已含 T0 正式任务书的权威 integration 246c483 创建独立 branch/worktree；创建时 HEAD=base=merge-base 且 clean。首次检查点 65a7d1a 经独立审查判定 No-Go；纠正提交 0b0dd2d 和集成提交 4b15dc9 已把过度提升状态降级并登记四项根因。该验收工作项以 No-Go/Remediation 证据完整收口，不代表 T0 Go；后续由三个独立修复工作项继续，原工作项释放共享 registry 路径。",
+                           "handoff_record":  "docs/project-management/service-plaza/handoff-log.md#sp-h036ca-sc自建俱乐部测试环境-t0-验收派发"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-CLUB-SC-T0-REMEDIATION",
+                           "title":  "CA-SC T0 唯一 run、数据库恢复与浏览器证据修复",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-sc-t0-remediation",
+                           "branch":  "codex/club-sc-t0-remediation",
+                           "base_commit":  "bdf58bf1a1f30886e346452572ec369c24ed2702",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/development-checklists/2026-07-12-club-sc-t0-remediation*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-club-sc-t0-remediation*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-club-sc-t0-remediation*.json",
+                                                 "contracts/modules/club-alliance/internal-dependencies.v1.json",
+                                                 "docs/project-management/modules/club-alliance/self-created/internal-dependencies.v1.json",
+                                                 "docs/project-management/modules/club-alliance/self-created/CA-SC-handoff.md",
+                                                 "docs/project-management/modules/club-alliance/self-created/acceptance/",
+                                                 "docs/project-management/service-plaza/handoff-log.md",
+                                                 "scripts/Manage-ClubSelfCreatedT0Fixture.ps1",
+                                                 "scripts/Invoke-ClubSelfCreatedT0Acceptance.ps1",
+                                                 "scripts/Test-ClubSelfCreatedT0Safety.ps1"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "从已含 No-Go 纠正证据的权威 APP integration bdf58bf 创建独立 branch/worktree，HEAD/base/merge-base 一致且 clean。只关闭唯一 run、api_idempotency_keys 精确清理、隔离数据库恢复、刷新 DOM/环境键盘及最终 R4 证据；不拥有 agent-collaboration 路径，不修改后端、H2 或 Project Brain。",
                            "handoff_record":  "docs/project-management/service-plaza/handoff-log.md#sp-h036ca-sc自建俱乐部测试环境-t0-验收派发"
                        },
                        {
