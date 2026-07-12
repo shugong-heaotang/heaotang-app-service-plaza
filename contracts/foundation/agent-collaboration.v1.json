@@ -93,6 +93,26 @@
       "preexisting_changes_acknowledged": true,
       "migration_note": "Repository-correct replacement for AIW-20260712-NOVA-M1-RUNTIME; registration alone does not authorize M1 implementation or approve APP public contracts.",
       "handoff_record": "C:/Users/shugo/Documents/worktrees/heaotang-nova-phase5-m1-runtime/docs/project-management/modules/nova/m0-handoff.md"
+    },
+    {
+      "work_id": "AIW-20260712-NOVA-API-CONTRACT-SIGNOFF",
+      "title": "APP 公共 /api/nova v1 契约边界会签",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/项目最高负责人/worktrees/heaotang-nova-api-contract-signoff",
+      "branch": "codex/nova-api-contract-signoff",
+      "base_commit": "02b67882f0895e130c1d90e94926a042312bafc1",
+      "allowed_paths": [
+        "contracts/service-plaza/nova",
+        "docs/project-management/service-plaza/nova-api-contract-signoff.md",
+        "tests/contracts/nova"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "Independent protected-path signoff only; does not authorize platform implementation of the NOVA runtime.",
+      "handoff_record": null
     }
   ]
 }
