@@ -121,3 +121,9 @@
 主协调线程提供了精确 handoff URL/title，但 2026-07-12 12:05 Asia/Shanghai 接续时 in-app Browser backend 返回 `Browser is not available: iab`，随后唯一一次可用类型检查返回空列表 `[]`。因此无法调用 `browser.user.openTabs()`、无法 claim 精确标签，也无法读取 URL/title/DOM/page-state。接续全程未重部署、未重跑 fixture、未请求 OTP、未调用业务 API、未读取 token/cookie/完整身份；也没有改用 Chrome、Computer Use、静态 DOM 或既有 API 伪装浏览器证据。
 
 当前 verdict 不变：`No-Go — API/recovery passed; browser and lifecycle coverage Unverified`。这是 automation/control-channel blocker，不是产品失败；Statsig 初始化 timeout 按插件统计控制通道噪声处理。下一轮仅在 in-app Browser backend 恢复后，从 exact URL/title claim 开始补无会话与四合成身份逐动作 UAT，禁止重复任何已完成上游。
+
+## 11. 最小合成资料接续
+
+已新增 `acceptance/m3/synthetic-data-design.md`，将缺失状态收敛为两个可安全执行的资料组：加入申请 `pending/rejected` 与俱乐部生命周期 `dissolved`。它们只使用 run-owned 合成记录、独立 RunId 和可恢复清理，不需要真实会员资料。
+
+`left/suspended` 当前不能仅靠 fixture 可信构造：数据库没有会员关系状态/历史字段，会员首页后端仍将 `membership_status` 固定投影为 `active`。两项保持 `Unsupported/Unverified`，需要独立后端合同与数据模型工作项；禁止直接改库、复用 role 或用 club status 冒充。该缺口不阻塞先完成 pending/rejected 与 dissolved 的 API/数据库证据，但继续阻止 H2-M3 Full Go。
