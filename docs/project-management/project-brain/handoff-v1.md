@@ -1,11 +1,30 @@
-# Project Brain v1 M1-R3 Handoff
+# Project Brain v1 M2-CP1 Handoff
 
 日期：2026-07-12
 提交角色：Project Brain M1-R3 实施 Agent
 接收角色：Project Brain 项目负责人（独立复核）
 work_id：`AIW-20260712-PROJECT-BRAIN-V1`
-record_id：`IR-20260712-PROJECT-BRAIN-V1-M1-R3`
-结论：R3 整改完成；项目负责人独立复验通过，M1-CP1 正式 Go，M2-CP1 已精确授权。
+record_id：`IR-20260712-PROJECT-BRAIN-V1-M2`
+结论：M2 实现、自动化测试与全量仓库门禁完成；提交独立复验，M3 仍未授权。
+
+## M2 实现结果
+
+- `scripts/build_project_brain.py`：只读聚合、Draft 2020-12 输入验证、路径逃逸拒绝、范围/工作树冲突、完成真实性、角色分离、新鲜度和重复权威审计。
+- `scripts/validate_project_brain.py`：严格验证 snapshot/audit 顶层合约、finding 字段、失败关闭和禁止输出字段。
+- `scripts/tests/test_project_brain.py`：10 项正负向测试，覆盖路径、安全、冲突、角色、集成证据、来源过期、SC T0 语义、输入不可变和原子写入。
+- 正式生成物：`contracts/project-brain/generated/project-brain.snapshot.json` 与 `project-brain.audit.json`。
+
+## M2 治理与验证证据
+
+- checklist：`contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m2.json`，26/26 current；Project Brain 17 项 overlay 已另行全文复核并记录于实施依据。
+- exam：`contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m2-attempt-1.json`，attempt 1，100 分。
+- 单元测试：10/10 passed。
+- 全量合同：passed；UTF-8：932 files passed；`git diff --check`：passed。
+- 正式构建 exit `1`：审计准确发现 3 个 `PB-INTEGRATED-EVIDENCE` error 和 7 个 `PB-WORK-NEXT` warning；输出 verdict 为 `no-go`，验证器 exit `0`。未修改其他工作项来制造 Go。
+
+## 下一授权
+
+请求独立复核 M2 的代码、测试、生成合约和失败关闭语义。只有 M2 独立验收 Go 后，才扩展 `app/src/modules/project-brain/`、`App.tsx`、`App.test.tsx` 的 M3 精确范围。
 
 ## 独立复验结论
 

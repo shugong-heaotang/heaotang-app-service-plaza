@@ -1,0 +1,352 @@
+{
+  "contract_version": "project-brain.snapshot.v1",
+  "generated_at": "2026-07-12T11:52:06.730119Z",
+  "source_commit": "35ef5795c9c5a82949932ddd0f257d08e5bfc526",
+  "overall_verdict": "no-go",
+  "source_freshness": "current",
+  "modules": [
+    {
+      "module_id": "platform-foundation",
+      "name": "平台公共底座",
+      "product_purpose": "提供身份、权限、可靠写入、遥测和治理等公共能力",
+      "owner_role": "平台集成负责人",
+      "parent_module": null,
+      "dependencies": [],
+      "phase": "foundation-operations",
+      "status": "active",
+      "development_status": "go",
+      "acceptance_status": "partial-go",
+      "source_path": "contracts/foundation/foundation-capabilities.v1.json",
+      "json_pointer": "/capabilities/0/status",
+      "source_updated_at": "2026-07-12T00:00:00+08:00",
+      "next_checkpoint": "继续关闭活动平台工作项并保持公共契约兼容"
+    },
+    {
+      "module_id": "service-plaza",
+      "name": "服务广场",
+      "product_purpose": "承载三大核心服务与常用服务统一入口",
+      "owner_role": "平台集成负责人",
+      "parent_module": null,
+      "dependencies": [
+        "platform-foundation"
+      ],
+      "phase": "cross-module-acceptance",
+      "status": "active",
+      "development_status": "go",
+      "acceptance_status": "partial-go",
+      "source_path": "docs/project-management/service-plaza/project-status-one-page.md",
+      "source_field": "三大板块第一切片并行",
+      "source_updated_at": "2026-07-12T00:00:00+08:00",
+      "next_checkpoint": "完成三大板块主链路与第一阶段综合验收"
+    },
+    {
+      "module_id": "life-navigation",
+      "name": "生命导航",
+      "product_purpose": "为用户提供生命事务导航与申请主链路",
+      "owner_role": "生命导航板块负责人",
+      "parent_module": "service-plaza",
+      "dependencies": [
+        "platform-foundation",
+        "service-plaza"
+      ],
+      "phase": "LN-S2 P0/P1",
+      "status": "active",
+      "development_status": "partial-go",
+      "acceptance_status": "partial-go",
+      "source_path": "docs/project-management/modules/life-navigation/README.md",
+      "source_field": "development：Partial Go（P0/P1 Base Contract；Executable No-Go）",
+      "source_updated_at": "2026-07-12T00:00:00+08:00",
+      "next_checkpoint": "按模块权威状态推进当前最小切片"
+    },
+    {
+      "module_id": "club-alliance",
+      "name": "俱乐部联盟",
+      "product_purpose": "支持俱乐部发现、加入、会员主页与自治协作",
+      "owner_role": "俱乐部联盟板块负责人",
+      "parent_module": "service-plaza",
+      "dependencies": [
+        "platform-foundation",
+        "service-plaza"
+      ],
+      "phase": "H1 and self-created acceptance",
+      "status": "active",
+      "development_status": "active",
+      "acceptance_status": "no-go",
+      "source_path": "contracts/modules/club-alliance/internal-dependencies.v1.json",
+      "json_pointer": "/dependencies/16/status",
+      "source_updated_at": "2026-07-12T00:00:00+08:00",
+      "next_checkpoint": "完成活动验收和会员主页切片交接"
+    },
+    {
+      "module_id": "health-manager",
+      "name": "健康大管家",
+      "product_purpose": "提供健康咨询与 MVP90 健康管理协作能力",
+      "owner_role": "健康大管家板块负责人",
+      "parent_module": "service-plaza",
+      "dependencies": [
+        "platform-foundation",
+        "service-plaza"
+      ],
+      "phase": "MVP90 M0",
+      "status": "active",
+      "development_status": "active",
+      "acceptance_status": "pending",
+      "source_path": "contracts/modules/health-manager/internal-dependencies.v1.json",
+      "json_pointer": "/dependencies/8/status",
+      "source_updated_at": "2026-07-12T00:00:00+08:00",
+      "next_checkpoint": "等待平台独立复核与 M0 Go/No-Go"
+    },
+    {
+      "module_id": "nova-ai",
+      "name": "Nova AI",
+      "product_purpose": "作为规划中的 AI 辅助入口，当前不声明运行时完成度",
+      "owner_role": "Nova AI 板块负责人（待指定）",
+      "parent_module": null,
+      "dependencies": [
+        "platform-foundation"
+      ],
+      "phase": "requirements placeholder",
+      "status": "planned",
+      "development_status": "unknown",
+      "acceptance_status": "unknown",
+      "source_path": "docs/project-management/project-brain/requirements-v1.md",
+      "source_field": "首批模块：平台基础、服务广场、生命导航、俱乐部联盟、健康大管家、Nova AI。",
+      "source_updated_at": "2026-07-12T00:00:00+08:00",
+      "next_checkpoint": "由项目负责人派发专用工作项后再建立权威状态来源"
+    }
+  ],
+  "work_summary": {
+    "active": 7,
+    "handoff-ready": 2,
+    "integrated": 61
+  },
+  "active_work": [
+    {
+      "work_id": "AIW-20260711-HEALTH-PLATFORM-SAFETY-BACKEND",
+      "title": "健康接口输入缓存与 AI 失败关闭后端实现",
+      "owner_role": "平台后端负责人",
+      "status": "active",
+      "branch": "codex/health-manager-platform-safety",
+      "handoff_record": "docs/project-management/service-plaza/health-platform-safety-2026-07-11.md"
+    },
+    {
+      "work_id": "AIW-20260711-HEALTH-V1-REQUIREMENTS-DOCS",
+      "title": "健康大管家 V1.0 PDCAR 需求策划文档归档与 GitHub 发布",
+      "owner_role": "健康大管家负责人",
+      "status": "handoff-ready",
+      "branch": "codex/health-manager-v1-requirements",
+      "handoff_record": "https://github.com/shugong-heaotang/heaotang-app-service-plaza/pull/1"
+    },
+    {
+      "work_id": "AIW-20260711-HEALTH-MVP90-PRD-DOCS",
+      "title": "健康大管家 MVP-90 开发 PRD V1.0 文档",
+      "owner_role": "健康大管家负责人",
+      "status": "handoff-ready",
+      "branch": "codex/health-manager-mvp90-prd",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h031健康大管家-mvp-90-prd-独立派发"
+    },
+    {
+      "work_id": "AIW-20260711-ACTION-TELEMETRY-BUSINESSCONFIG-BACKEND",
+      "title": "动作遥测 boolean 业务变量与 service-plaza 适配",
+      "owner_role": "后端平台负责人",
+      "status": "active",
+      "branch": "codex/action-telemetry-businessconfig",
+      "handoff_record": null
+    },
+    {
+      "work_id": "AIW-20260712-CLUB-MEMBER-HOME-H2",
+      "title": "俱乐部联盟 H2 会员工作台双层首页",
+      "owner_role": "俱乐部联盟负责人",
+      "status": "active",
+      "branch": "codex/club-member-home-h2",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h035俱乐部联盟-h2-会员首页需求变更与派发"
+    },
+    {
+      "work_id": "AIW-20260712-CLUB-SC-T0-REMEDIATION",
+      "title": "CA-SC T0 唯一 run、数据库恢复与浏览器证据修复",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "branch": "codex/club-sc-t0-remediation",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h036ca-sc自建俱乐部测试环境-t0-验收派发"
+    },
+    {
+      "work_id": "AIW-20260712-CLUB-SC-LIST-SAFE-DTO-BACKEND",
+      "title": "CA-SC 自建俱乐部列表安全 DTO 根因修复",
+      "owner_role": "平台后端负责人",
+      "status": "active",
+      "branch": "codex/club-sc-list-safe-dto-backend",
+      "handoff_record": "docs/project-management/service-plaza/club-sc-list-safe-dto-2026-07-12.md"
+    },
+    {
+      "work_id": "AIW-20260712-CLUB-SC-LIST-SAFE-DTO-EVIDENCE",
+      "title": "CA-SC 自建俱乐部列表安全 DTO 治理与证据",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "branch": "codex/club-sc-list-safe-dto-evidence",
+      "handoff_record": "docs/project-management/service-plaza/club-sc-list-safe-dto-2026-07-12.md"
+    },
+    {
+      "work_id": "AIW-20260712-PROJECT-BRAIN-V1",
+      "title": "Project Brain v1 统一知识入口、权威事实模型与只读驾驶舱",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "branch": "codex/project-brain-v1",
+      "handoff_record": "docs/project-management/project-brain/handoff-v1.md"
+    }
+  ],
+  "pending_decisions": [],
+  "risks": [
+    {
+      "risk_id": "PB-RISK-001",
+      "title": "多个状态文件形成相互矛盾的权威来源",
+      "category": "governance",
+      "status": "open",
+      "probability": "high",
+      "impact": "high",
+      "owner_role": "平台集成负责人",
+      "mitigation": "一个事实只登记一个权威来源；驾驶舱仅聚合",
+      "escalation_at": "2026-07-13T18:00:00+08:00",
+      "related_work_ids": [
+        "AIW-20260712-PROJECT-BRAIN-V1"
+      ],
+      "source_path": "docs/project-management/project-brain/requirements-v1.md",
+      "source_field": "核心原则/一个事实只有一个权威来源"
+    },
+    {
+      "risk_id": "PB-RISK-002",
+      "title": "将敏感项目字段暴露到前端快照",
+      "category": "security",
+      "status": "mitigating",
+      "probability": "medium",
+      "impact": "critical",
+      "owner_role": "安全验收角色",
+      "mitigation": "采用允许字段清单、敏感数据测试和只读静态快照",
+      "escalation_at": "2026-07-31T18:00:00+08:00",
+      "related_work_ids": [
+        "AIW-20260712-PROJECT-BRAIN-V1"
+      ],
+      "source_path": "docs/project-management/project-brain/architecture-v1.md",
+      "source_field": "安全边界"
+    },
+    {
+      "risk_id": "PB-RISK-003",
+      "title": "Project Brain 与活动模块修改范围发生冲突",
+      "category": "delivery",
+      "status": "open",
+      "probability": "high",
+      "impact": "high",
+      "owner_role": "Project Brain 交付负责人",
+      "mitigation": "专用工作树、分段允许路径和平台受控集成",
+      "escalation_at": "2026-07-13T18:00:00+08:00",
+      "related_work_ids": [
+        "AIW-20260712-PROJECT-BRAIN-V1"
+      ],
+      "source_path": "docs/project-management/project-brain/delivery-plan-v1.md",
+      "source_field": "建议工作项边界"
+    }
+  ],
+  "acceptance_queue": [
+    {
+      "work_id": "AIW-20260711-HEALTH-V1-REQUIREMENTS-DOCS",
+      "title": "健康大管家 V1.0 PDCAR 需求策划文档归档与 GitHub 发布",
+      "owner_role": "健康大管家负责人",
+      "status": "handoff-ready",
+      "branch": "codex/health-manager-v1-requirements",
+      "handoff_record": "https://github.com/shugong-heaotang/heaotang-app-service-plaza/pull/1"
+    },
+    {
+      "work_id": "AIW-20260711-HEALTH-MVP90-PRD-DOCS",
+      "title": "健康大管家 MVP-90 开发 PRD V1.0 文档",
+      "owner_role": "健康大管家负责人",
+      "status": "handoff-ready",
+      "branch": "codex/health-manager-mvp90-prd",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h031健康大管家-mvp-90-prd-独立派发"
+    }
+  ],
+  "recent_integrations": [
+    {
+      "work_id": "AIW-20260712-CLUB-SC-FIRST-CLOSURE-BACKEND",
+      "title": "CA-SC 自建俱乐部详情边界与本人状态后端闭环",
+      "owner_role": "平台后端负责人",
+      "status": "integrated",
+      "branch": "codex/club-sc-first-closure-backend",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h034-ca-sc自建俱乐部首个会员侧闭环"
+    },
+    {
+      "work_id": "AIW-20260712-CLUB-SC-FIRST-CLOSURE-BACKEND-EVIDENCE",
+      "title": "CA-SC 自建俱乐部后端实现治理与证据",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "branch": "codex/club-sc-first-closure-backend-evidence",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h034-ca-sc自建俱乐部首个会员侧闭环"
+    },
+    {
+      "work_id": "AIW-20260712-CLUB-SC-FIRST-CLOSURE-FRONTEND",
+      "title": "CA-SC 自建俱乐部会员侧列表详情加入与本人状态页面",
+      "owner_role": "俱乐部联盟自建俱乐部前端负责人",
+      "status": "integrated",
+      "branch": "codex/club-sc-first-closure-frontend",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h034-ca-sc自建俱乐部首个会员侧闭环"
+    },
+    {
+      "work_id": "AIW-20260712-CLUB-MEMBER-HOME-DISPATCH",
+      "title": "俱乐部联盟 H2 会员首页需求变更与正式派发",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "branch": "codex/club-member-home-dispatch",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h035俱乐部联盟-h2-会员首页需求变更与派发"
+    },
+    {
+      "work_id": "AIW-20260712-CLUB-MEMBER-HOME-M1-DISPATCH",
+      "title": "俱乐部联盟 H2-M1 独立页面壳派发",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "branch": "codex/club-member-home-m1-dispatch",
+      "handoff_record": "docs/project-management/notices/2026-07-12-club-member-home-m1-task-order.md"
+    },
+    {
+      "work_id": "AIW-20260712-CLUB-SC-T0-PREREQUISITES",
+      "title": "CA-SC 测试环境验收前合同勘误与深链打包根因修复",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "branch": "codex/club-sc-t0-prerequisites",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h034-ca-sc自建俱乐部首个会员侧闭环"
+    },
+    {
+      "work_id": "AIW-20260712-CLUB-SC-T0-ACCEPTANCE-DISPATCH",
+      "title": "CA-SC 自建俱乐部测试环境 T0 验收正式派发",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "branch": "codex/club-sc-t0-acceptance-dispatch",
+      "handoff_record": "docs/project-management/notices/2026-07-12-club-sc-t0-acceptance-task-order.md"
+    },
+    {
+      "work_id": "AIW-20260712-CLUB-MEMBER-HOME-M2-DISPATCH-R4",
+      "title": "俱乐部联盟 H2-M2 后端聚合与正式入口派发",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "branch": "codex/club-member-home-m2-dispatch",
+      "handoff_record": "docs/project-management/notices/2026-07-12-club-member-home-m2-runtime-task-order.md"
+    },
+    {
+      "work_id": "AIW-20260712-CLUB-MEMBER-HOME-BACKEND",
+      "title": "俱乐部联盟 H2 会员首页聚合接口",
+      "owner_role": "俱乐部联盟后端负责人",
+      "status": "integrated",
+      "branch": "codex/club-member-home-backend",
+      "handoff_record": "docs/project-management/modules/club-alliance/member-home/handoff-m2-backend.md"
+    },
+    {
+      "work_id": "AIW-20260712-CLUB-SC-T0-ACCEPTANCE",
+      "title": "CA-SC 自建俱乐部确定性合成数据与测试环境 T0 验收",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "branch": "codex/club-sc-t0-acceptance",
+      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h036ca-sc自建俱乐部测试环境-t0-验收派发"
+    }
+  ],
+  "audit_summary": {
+    "error": 3,
+    "warning": 7
+  }
+}
