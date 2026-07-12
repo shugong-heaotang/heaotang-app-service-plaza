@@ -1,0 +1,27 @@
+{
+  "contract_version": "club-sc-t0-db-evidence.v1",
+  "captured_at": "2026-07-12T00:52:00Z",
+  "environment": "test",
+  "database_mode": "sqlite",
+  "fixture_clubs": 10,
+  "active_standard_general_clubs": 5,
+  "join_applications": 2,
+  "distinct_synthetic_applicants": 2,
+  "assertions": {
+    "fixture_count_exact": true,
+    "self_created_partition_exact": true,
+    "single_pending_per_user_club": true,
+    "cross_user_records_distinct": true
+  },
+  "identity_evidence": "count-only",
+  "cleanup": {
+    "executed_at": "2026-07-12T01:08:00Z",
+    "fixture_clubs": 0,
+    "fixture_join_applications": 0,
+    "fixture_members": 0,
+    "ready": "ready",
+    "database_ready": true
+  },
+  "secrets_recorded": false,
+  "status": "pass"
+}

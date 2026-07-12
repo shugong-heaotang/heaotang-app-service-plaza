@@ -1,0 +1,32 @@
+{
+  "contract_version": "club-sc-t0-deployment-evidence.v1",
+  "environment": "test",
+  "base_url": "https://heaotang.cn",
+  "app_source_commit": "2c4b295e6fd625a2df24957f7b8becbc28ad1dcf",
+  "backend_source_commit": "a998812cf44dc449d85b726706d4ae2573179860",
+  "backend": {
+    "deployed_binary_sha256": "9edd8cf44f04b80e8d8adf821b41e551052a733a40d78ad764e6de2757778136",
+    "remote_backup": "/root/heaotang-backups/20260712-081106.tar.gz",
+    "local_backup": "D:/Backup/heaotang-test-server/20260712-081106/test-server-state.tar.gz"
+  },
+  "frontend": {
+    "asset": "assets/index-6r_HRkaO.js",
+    "asset_sha256": "bfe4d9848d52ce4fac6d92edc3668bd78a20c7ca853301976fc6013d52038e99",
+    "index_sha256": "0e17ffbdf4749bed712c7eab4c2a97644ff0a16c9d4a90b8ecaaeef38faa8bf7",
+    "remote_backup": "/root/heaotang-backups/20260712-081215.tar.gz",
+    "local_backup": "D:/Backup/heaotang-test-server/20260712-081215/test-server-state.tar.gz",
+    "rollback_target": "/var/www/heaotang/app/service-plaza.rollback-20260712-081213"
+  },
+  "post_deploy": {
+    "health": "ok",
+    "ready": "ready",
+    "database_ready": true,
+    "plugins": 24,
+    "catalog_services": 9,
+    "page_actions": 20,
+    "public_asset_verified": true
+  },
+  "secrets_rotated": false,
+  "secrets_persisted": false,
+  "production": false
+}

@@ -1,0 +1,23 @@
+{
+  "contract_version": "club-sc-t0-rollback-evidence.v1",
+  "environment": "test",
+  "backend": {
+    "executed_at": "2026-07-12T00:49:37.3645628Z",
+    "expected_failure_observed": true,
+    "original_binary_restored": true,
+    "binary_sha256": "9edd8cf44f04b80e8d8adf821b41e551052a733a40d78ad764e6de2757778136",
+    "ready": true,
+    "database_ready": true
+  },
+  "frontend": {
+    "executed_at": "2026-07-12T00:50:50.6688477Z",
+    "expected_failure_observed": true,
+    "original_frontend_restored": true,
+    "index_sha256": "0e17ffbdf4749bed712c7eab4c2a97644ff0a16c9d4a90b8ecaaeef38faa8bf7",
+    "asset_sha256": "bfe4d9848d52ce4fac6d92edc3668bd78a20c7ca853301976fc6013d52038e99",
+    "ready": true,
+    "page_status": 200
+  },
+  "result": "pass",
+  "secrets_persisted": false
+}

@@ -1,0 +1,35 @@
+{
+    "contract_version":  "club-sc-t0-api-results.v1",
+    "run_id":  "club-sc-t0-20260712-081308",
+    "executed_at":  "2026-07-12T00:13:14.0172301Z",
+    "base_url":  "https://heaotang.cn",
+    "fixture_seed":  "HEAOTANG-CA-SC-20260712-V1",
+    "checks":  {
+                   "ready":  200,
+                   "unauthenticated_search":  401,
+                   "search":  {
+                                  "status":  200,
+                                  "total":  5,
+                                  "zero_crossover":  true
+                              },
+                   "detail":  {
+                                  "status":  200,
+                                  "non_sc_status":  404,
+                                  "safe_dto":  true
+                              },
+                   "join":  {
+                                "first":  201,
+                                "replay":  200,
+                                "conflict":  409,
+                                "same_application":  true
+                            },
+                   "concurrency":  {
+                                       "responses":  2,
+                                       "single_pending":  true
+                                   },
+                   "cross_user_isolation":  true
+               },
+    "user_identity_recorded":  "non-null-only",
+    "secrets_persisted":  false,
+    "production_mutations":  0
+}

@@ -1,0 +1,31 @@
+{
+  "contract_version": "club-sc-t0-fixture.v1",
+  "captured_at": "2026-07-12T00:48:00Z",
+  "seed": "HEAOTANG-CA-SC-20260712-V1",
+  "fixture_prefix": "T0-SC-20260712",
+  "environment": "test",
+  "club_count": 10,
+  "expected_self_created_active": 5,
+  "synthetic_accounts": 2,
+  "semantic_matrix": {
+    "standard_general_active": 5,
+    "standard_charity_active": 1,
+    "family_general_active": 1,
+    "direct_general_active": 1,
+    "standard_health_active": 1,
+    "standard_general_inactive": 1
+  },
+  "self_created_ids": [45, 46, 47, 48, 49],
+  "non_self_created_ids": [50, 52, 51, 53, 54],
+  "real_data": false,
+  "secrets_persisted": false,
+  "cleanup_selector": "fixture code prefix only",
+  "cleanup": {
+    "executed_at": "2026-07-12T01:08:00Z",
+    "remaining_clubs": 0,
+    "remaining_join_applications": 0,
+    "remaining_members": 0,
+    "database_ready": true
+  },
+  "status": "cleaned"
+}

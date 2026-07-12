@@ -224,16 +224,30 @@
     {
       "dependency_id": "sc.p0p1-handoff",
       "kind": "handoff",
-      "description": "CA-SC P0/P1 合同检查点等待平台独立验收",
-      "status": "implemented",
+      "description": "CA-SC 首个会员侧闭环合同、实现和测试环境验收交接",
+      "status": "verified",
       "required_for_slice": false,
       "depends_on": ["sc.p0p1-conformance"],
       "contracts": ["docs/project-management/modules/club-alliance/self-created/CA-SC-handoff.md"],
       "evidence": ["docs/project-management/modules/club-alliance/self-created/CA-SC-handoff.md"],
-      "unresolved": ["platform independent acceptance pending"],
-      "owner": "俱乐部联盟自建俱乐部负责人",
-      "blocks": ["sc.backend-activation"],
-      "does_not_block": ["sc.backend-planning", "CA-FC", "CA-PC", "CA-UF"]
+      "unresolved": ["controlled integration pending"],
+      "owner": "平台集成负责人",
+      "blocks": ["sc.integration"],
+      "does_not_block": ["CA-FC", "CA-PC", "CA-UF"]
+    },
+    {
+      "dependency_id": "sc.t0-environment",
+      "kind": "acceptance",
+      "description": "CA-SC fixed-seed API/browser/backup/rollback/cleanup test-environment evidence",
+      "status": "test-verified",
+      "required_for_slice": false,
+      "depends_on": ["sc.p0p1-contract", "sc.p0p1-conformance", "sc.p0p1-handoff"],
+      "contracts": ["docs/project-management/notices/2026-07-12-club-sc-t0-acceptance-task-order.md"],
+      "evidence": ["docs/project-management/modules/club-alliance/self-created/acceptance/go-no-go.md"],
+      "unresolved": [],
+      "owner": "平台集成负责人",
+      "blocks": ["sc.integration"],
+      "does_not_block": ["CA-FC", "CA-PC", "CA-UF"]
     }
   ]
 }
