@@ -29,7 +29,7 @@
       "development_status": "go",
       "acceptance_status": "partial-go",
       "source_path": "docs/project-management/service-plaza/project-status-one-page.md",
-      "source_field": "当前结论/三大板块第一切片并行",
+      "source_field": "三大板块第一切片并行",
       "source_updated_at": "2026-07-12T00:00:00+08:00",
       "next_checkpoint": "完成三大板块主链路与第一阶段综合验收"
     },
@@ -45,7 +45,7 @@
       "development_status": "partial-go",
       "acceptance_status": "partial-go",
       "source_path": "docs/project-management/modules/life-navigation/README.md",
-      "source_field": "当前项目基线/development",
+      "source_field": "development：Partial Go（P0/P1 Base Contract；Executable No-Go）",
       "source_updated_at": "2026-07-12T00:00:00+08:00",
       "next_checkpoint": "按模块权威状态推进当前最小切片"
     },
@@ -93,7 +93,7 @@
       "development_status": "unknown",
       "acceptance_status": "unknown",
       "source_path": "docs/project-management/project-brain/requirements-v1.md",
-      "source_field": "PB-F03/首批模块",
+      "source_field": "首批模块：平台基础、服务广场、生命导航、俱乐部联盟、健康大管家、Nova AI。",
       "source_updated_at": "2026-07-12T00:00:00+08:00",
       "next_checkpoint": "由项目负责人派发专用工作项后再建立权威状态来源"
     }

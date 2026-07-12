@@ -15,6 +15,7 @@ record_id：`IR-20260712-PROJECT-BRAIN-V1-M1-R3`
 - 清除 `delivery-plan-v1.md` 2 处与本 Handoff 原 5 处 trailing whitespace；建立证据真实性根因闭环。
 - 补齐模块、决策、风险和知识四类最小字段与首批数据；Schema 对实际字段完整声明并拒绝额外 item 字段。
 - 模块来源改为机器可解析 JSON Pointer 或 Markdown 精确字段；Nova 以 PB-F03 为来源并标记 `planned/unknown`。
+- 复验退回后追加修正：移除 Markdown source_field 的合成路径写法，六个模块均以完整字段逐字匹配或 JSON Pointer 实值解析；12cd0aef 的宽松末级词检查不再作为通过证据。
 - `PROJECT-BRAIN.md` 将生成审计标为 M2 待实现、内部路由标为 M3 待实现。
 - 旧 R2 文件未修改；未修改 `scripts/`、`app/` 或任何 SC remediation 路径。
 

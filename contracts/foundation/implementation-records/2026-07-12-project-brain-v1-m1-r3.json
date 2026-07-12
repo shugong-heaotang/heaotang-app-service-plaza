@@ -56,7 +56,7 @@
     "EX-20260712-PROJECT-BRAIN-V1-M1-R3-1: failed score 50; immutable",
     "EX-20260712-PROJECT-BRAIN-V1-M1-R3-2: passed score 100 after remediation reread and PreviousAttemptPath generation",
     "four Project Brain catalogs validate against Draft 2020-12 schemas",
-    "all module JSON Pointers resolve and all Markdown source fields match exact source text",
+    "all six module sources resolve: JSON Pointers reach concrete values and each complete Markdown source_field occurs verbatim in its source file after 12cd0aef review correction",
     "git diff --check f31f67f1613b7c97c9f46969d7c3eb59cdc0e46c: pass before commit",
     "old R2 evidence blobs match e982bedaf91ecd914a029ac9a7c561663d179b2a",
     "allowed-scope audit: no scripts, app, or SC remediation changes"
