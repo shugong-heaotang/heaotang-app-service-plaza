@@ -1,0 +1,65 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-HEALTH-R0-FORMAL-FREEZE-DISPATCH",
+  "title": "健康大管家 HM-R0 开发阶段正式冻结派发",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "建立独立、范围精确且不外推生产权限的 HM-R0 Accepted for development planning 文档冻结工作项。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-health-r0-formal-freeze-dispatch.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-health-r0-formal-freeze-dispatch-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.ai-engineering-traceability"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklists/2026-07-12-health-r0-formal-freeze-dispatch.json",
+    "contracts/foundation/governance-exams/2026-07-12-health-r0-formal-freeze-dispatch-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-12-health-r0-formal-freeze-dispatch.json",
+    "docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md",
+    "docs/project-management/service-plaza/health-r0-formal-freeze-dispatch-2026-07-12.md"
+  ],
+  "verification": [
+    "scripts/Test-AgentDevelopmentPreflight.ps1: ready",
+    "dispatch checklist: 26/26 completed and current",
+    "governance exam: score 100",
+    "scripts/validate_agent_collaboration.py",
+    "scripts/validate_development_checklists.py",
+    "scripts/validate_governance_exams.py",
+    "scripts/validate_implementation_records.py",
+    "scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/foundation/development-checklists/2026-07-12-health-r0-formal-freeze-dispatch.json",
+    "contracts/foundation/governance-exams/2026-07-12-health-r0-formal-freeze-dispatch-attempt-1.json",
+    "docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md",
+    "docs/project-management/service-plaza/health-r0-formal-freeze-dispatch-2026-07-12.md"
+  ],
+  "premises": [
+    "开发规划冻结不等于生产医疗授权或真实数据授权",
+    "PR #1 和 PR #2 的合并是独立受控决定",
+    "模块激活必须基于包含正式通知的最终权威基线和干净专用工作树"
+  ],
+  "implementation_mode": "ai-assisted"
+}
