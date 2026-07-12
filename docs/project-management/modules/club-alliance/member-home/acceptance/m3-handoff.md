@@ -143,3 +143,15 @@
 已新增 `acceptance/m3/synthetic-data-design.md`，将缺失状态收敛为两个可安全执行的资料组：加入申请 `pending/rejected` 与俱乐部生命周期 `dissolved`。它们只使用 run-owned 合成记录、独立 RunId 和可恢复清理，不需要真实会员资料。
 
 `left/suspended` 当前不能仅靠 fixture 可信构造：数据库没有会员关系状态/历史字段，会员首页后端仍将 `membership_status` 固定投影为 `active`。两项保持 `Unsupported/Unverified`，需要独立后端合同与数据模型工作项；禁止直接改库、复用 role 或用 club status 冒充。该缺口不阻塞先完成 pending/rejected 与 dissolved 的 API/数据库证据，但继续阻止 H2-M3 Full Go。
+
+## 12. 四身份浏览器认证授权执行
+
+用户已明确允许四个合成账号各发送一次测试验证码，执行严格遵守一次上限。new-member 的验证码在浏览器重连期间自然过期且未消费；family-member、multi-club-member、manager 的最新验证码均被服务端消费，证明三条认证请求成功。
+
+应用内浏览器在登录后 member-home DOM 取证阶段持续发生 control-channel 重置：无法稳定保留登录标签和 sessionStorage，因而没有取得四身份 direct/reload/back/return、DOM marker、权限入口、viewport、真实键盘和浏览器网络证据。不得用 Auth Pass、既有 API 或组件测试冒充 Page Pass。
+
+本轮 Baseline fixture 已 Cleanup：remaining=0、users_deleted=0；RestoreVerify integrity=ok、dump SHA match；最终 ready=200、health=ok，系统剪贴板清空，临时内存传输辅助已删除。完整证据见 `acceptance/m3/2026-07-12-four-identity-browser-attempt.md`。
+
+当前 verdict：`Conditional No-Go — synthetic data and authentication evidence passed; authenticated member-home browser DOM remains control-channel Unverified.`
+
+四账号本轮一次发送授权已经用完，不得再次发送。下一轮必须等待 UTC 日自然重置和新的明确授权，并先解决应用内浏览器控制稳定性；不重复部署，不使用真实资料。
