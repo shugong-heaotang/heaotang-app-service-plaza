@@ -2370,6 +2370,34 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "只对临时或明确测试DB实施Plan/Apply/Inspect/Cleanup/RestoreVerify，覆盖unknown tenant quarantine、禁双写、单向迁移、Sunset/410 successor合同与不重开unsafe writes的回滚；禁止后端路由修改、生产和真实消息。",
                            "handoff_record":  "docs/project-management/modules/network/migration-drill-handoff.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-GOVERNANCE-EXAM-RETRY-EVIDENCE",
+                           "title":  "治理考试重试前序失败与补课重读证据根因修复",
+                           "owner":  "Platform governance tooling agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-governance-exam-retry-evidence",
+                           "branch":  "codex/governance-exam-retry-evidence",
+                           "base_commit":  "37a4178833ff5253ea849eaf8b40fa20aa2e33f8",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/governance-exam.v1.schema.json",
+                                                 "contracts/foundation/recurring-issues.v1.json",
+                                                 "scripts/New-AgentGovernanceExam.ps1",
+                                                 "scripts/Submit-AgentGovernanceExam.ps1",
+                                                 "scripts/validate_governance_exams.py",
+                                                 "scripts/tests/test_validate_governance_exams.py",
+                                                 "contracts/foundation/development-checklists/2026-07-12-governance-exam-retry-evidence*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-governance-exam-retry-evidence*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-governance-exam-retry-evidence*.json",
+                                                 "docs/project-management/service-plaza/governance-exam-retry-evidence-2026-07-12.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "Project Brain M1-R3 暴露共享治理考试重试证据不可复现：attempt>1 未持久化 previous_attempt_path/SHA 与补课重读证据。只修公共考试Schema、生成/提交脚本、validator与回归；旧考试快照不可修改，Project Brain文件不在范围内。",
+                           "handoff_record":  "docs/project-management/service-plaza/governance-exam-retry-evidence-2026-07-12.md"
                        }
                    ]
 }
