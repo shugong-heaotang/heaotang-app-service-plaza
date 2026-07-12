@@ -2100,24 +2100,36 @@
                            "allowed_paths":  [
                                                  "docs/project-management/notices/2026-07-12-protection-mall-m0-task-order.md",
                                                  "docs/project-management/modules/protection-mall/",
-                                                 "contracts/modules/protection-mall/",
-                                                 "contracts/foundation/development-checklists/2026-07-12-protection-mall-m0*.json",
-                                                 "contracts/foundation/governance-exams/2026-07-12-protection-mall-m0*.json",
-                                                 "contracts/foundation/implementation-records/2026-07-12-protection-mall-m0*.json"
+                                                 "contracts/modules/protection-mall/"
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "risk_level":  "high",
-                           "updated_at":  "2026-07-12T14:20:00+08:00",
-                           "target_date":  "2026-07-12T18:00:00+08:00",
-                           "status_expires_at":  "2026-07-12T16:30:00+08:00",
-                           "next_checkpoint":  "M0-CP1 来源只读盘点、迁移矩阵、接入卡与 mall.api.v1 契约冻结提案",
-                           "reviewer_role":  "平台集成负责人",
-                           "approver_role":  "APP 总架构独立验收 Agent",
-                           "migration_note":  "商城提前启动持续开发但不提前上线。M0 仅授权治理准入、受控迁移审计、服务广场接入卡和 mall.api.v1 契约冻结；本地商城既存未提交修改只读盘点，禁止整体 git add、覆盖、复制 Git 历史或强推。M0-CP1 Go 前不得编辑业务代码。",
-                           "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m0.md",
-                           "blocks":  ["保障商城 M1 业务实现激活"],
-                           "does_not_block":  ["其他模块非重叠开发", "商城本地来源只读盘点", "商城 2.0-3.0 非执行性设计"]
+                           "migration_note":  "商城提前启动持续开发但不提前上线。风险级别 high；M0-CP1 为来源只读盘点、迁移矩阵、接入卡与 mall.api.v1 契约冻结提案。M0 仅授权模块目录内治理证据、受控迁移审计、服务广场接入卡和契约冻结；本地商城既存未提交修改只读盘点，禁止整体 git add、覆盖、复制 Git 历史或强推。M0-CP1 Go 前不得编辑业务代码。平台集成负责人复核，APP 总架构独立验收 Agent 批准；阻塞商城 M1 激活，不阻塞其他模块非重叠开发和商城来源只读盘点。",
+                           "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m0.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-HEALTH-MVP90-M1-P2-DISPATCH",
+                           "title":  "健康大管家 MVP-90 M1 P2 合成运行内核规划与派发",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-m1-p2-dispatch",
+                           "branch":  "codex/health-mvp90-m1-p2-dispatch",
+                           "base_commit":  "de31a235b9679698b9de4e33faa6ab980e0461f6",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-12-health-mvp90-m1-p2-dispatch*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-health-mvp90-m1-p2-dispatch*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-health-mvp90-m1-p2-dispatch*.json",
+                                                 "contracts/foundation/invalidated-snapshots/health-mvp90-m1-p2-dispatch/",
+                                                 "docs/project-management/notices/2026-07-12-health-manager-mvp90-m1-p2-task-order.md",
+                                                 "docs/project-management/service-plaza/health-mvp90-m1-p2-dispatch-2026-07-12.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "只读差距审计与正式派发进行中；本工作项只负责确定 P2 最小目标、两层依赖、精确范围和模块工作项，不实现运行内核，不修改共享前端、后端、API、数据库或环境。",
+                           "handoff_record":  "docs/project-management/service-plaza/health-mvp90-m1-p2-dispatch-2026-07-12.md"
                        }
                    ]
 }
