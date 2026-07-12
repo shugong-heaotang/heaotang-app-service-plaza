@@ -2151,6 +2151,30 @@
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m0.md"
                        },
                        {
+                           "work_id":  "AIW-20260712-PROTECTION-MALL-M1-CONTRACTS",
+                           "title":  "保障商城 M1 责任边界、状态机与 mall.api.v1 合同首切片",
+                           "owner":  "Protection Mall module lead agent",
+                           "owner_role":  "商城板块唯一负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-m1-contracts",
+                           "branch":  "codex/protection-mall-m1-contracts",
+                           "base_commit":  "1ee2fed8157884b12615e2ef5a4aee0235b7780b",
+                           "allowed_paths":  [
+                                                 "docs/project-management/notices/2026-07-12-protection-mall-m1-contracts-task-order.md",
+                                                 "docs/project-management/modules/protection-mall/m1-contracts.md",
+                                                 "docs/project-management/modules/protection-mall/handoff-m1.md",
+                                                 "contracts/modules/protection-mall/m1/",
+                                                 "contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m1-contracts*.json",
+                                                 "contracts/modules/protection-mall/governance-exams/2026-07-12-protection-mall-m1-contracts*.json",
+                                                 "contracts/modules/protection-mall/implementation-records/2026-07-12-protection-mall-m1-contracts*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "M0 R3 Go 后激活的合同与离线合成一致性首切片。只冻结商品责任、库存/订单/履约/售后/权益回滚状态机及 mall.api.v1 信封、ID、真实scope来源、幂等、审计和兼容门禁；禁止运行时代码、数据库、支付、真实资金、部署和真实数据。",
+                           "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m1.md"
+                       },
+                       {
                            "work_id":  "AIW-20260712-HEALTH-MVP90-M1-P2-DISPATCH",
                            "title":  "健康大管家 MVP-90 M1 P2 合成运行内核规划与派发",
                            "owner":  "Codex platform integration agent",
