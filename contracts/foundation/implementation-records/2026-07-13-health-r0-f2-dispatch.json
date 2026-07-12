@@ -1,0 +1,62 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-HEALTH-R0-F2-DISPATCH",
+  "title": "健康大管家 HM-R0 F2 专业与责任边界审计派发",
+  "date": "2026-07-13",
+  "status": "verified",
+  "objective": "在不提升 Pending 和不授权真实活动的前提下，派发 HM-R0 F2 六类证据审计。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-13-health-r0-f2-dispatch.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-13-health-r0-f2-dispatch-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md",
+    "docs/project-management/notices/2026-07-13-health-r0-f2-audit-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.ai-engineering-traceability"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/modules/health-manager/hm-r0-formal-freeze.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklists/2026-07-13-health-r0-f2-dispatch.json",
+    "contracts/foundation/governance-exams/2026-07-13-health-r0-f2-dispatch-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-13-health-r0-f2-dispatch.json",
+    "docs/project-management/notices/2026-07-13-health-r0-f2-audit-task-order.md",
+    "docs/project-management/service-plaza/health-r0-f2-dispatch-2026-07-13.md"
+  ],
+  "verification": [
+    "platform divergence reconciliation integrated before F2 dispatch",
+    "preflight ready",
+    "dispatch checklist 26/26 current",
+    "governance exam 100",
+    "collaboration/checklist/exam/IR/Service Plaza contracts/UTF-8/diff pass"
+  ],
+  "evidence": [
+    "docs/project-management/notices/2026-07-13-health-r0-f2-audit-task-order.md",
+    "docs/project-management/service-plaza/health-r0-f2-dispatch-2026-07-13.md"
+  ],
+  "premises": [
+    "F2 audits Pending decisions but cannot promote them without new owner evidence",
+    "F2 remains document and machine-contract only",
+    "F3/P3 and all real activities require separate authorization"
+  ],
+  "implementation_mode": "ai-assisted"
+}
