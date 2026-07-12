@@ -2159,7 +2159,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "从已含 P2 正式任务书的 APP 4556c5b 创建独立 branch/worktree；HEAD=base=merge-base 且 clean 后正式激活。只实现 Python/JSON 的内存确定性合成重放，源合同与输出继续 executable=false；禁止共享前端、后端、API、DB、环境、真实数据、收费和生产。",
+                           "migration_note":  "从已含 P2 正式任务书的 APP 4556c5b 创建独立 branch/worktree并激活。P2-C1 初版 fedaeab 因 action语义混用被No-Go，R3 ab74ac8 因正常场景重放不连续再次No-Go；corrected R4 source 4ee6ccb67b3320c6fbc387abe340b5f8c2a8bd10 经独立复核 C1 Go，以最终状态 squash integration 40a042b 进入权威基线。15场景/25事件、A001连续重放、A003紧急风险闭包、6状态机、pointer/source/action语义和负例已冻结；reference runner与negative fixture尚未实现，P2-C2仍blocked。所有源/输出继续 synthetic_only=true、executable=false；禁止共享前端、后端、API、DB、环境、真实数据、收费和生产。",
                            "handoff_record":  "docs/project-management/notices/2026-07-12-health-manager-mvp90-m1-p2-task-order.md"
                        },
                        {
