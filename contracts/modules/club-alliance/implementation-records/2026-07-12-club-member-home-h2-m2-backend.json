@@ -1,10 +1,10 @@
 {
   "contract_version": "implementation-record.v1",
   "record_id": "IR-20260712-CLUB-MEMBER-HOME-H2-M2-BACKEND",
-  "title": "俱乐部联盟 H2-M2 会员首页后端授权",
+  "title": "俱乐部联盟 H2-M2 会员首页后端实现与独立复核",
   "date": "2026-07-12",
-  "status": "draft",
-  "objective": "authorize authenticated self-only aggregate endpoint",
+  "status": "verified",
+  "objective": "implement and independently verify the authenticated self-only aggregate endpoint",
   "governance_checklist": "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-h2-m2-backend.json",
   "governance_exam": "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-h2-m2-backend-attempt-1.json",
   "governance_inputs": [
@@ -38,11 +38,13 @@
     "docs/project-management/modules/club-alliance/member-home/handoff-m2-backend.md"
   ],
   "verification": [
-    "python -X utf8 scripts/validate_development_checklists.py",
-    "python -X utf8 scripts/validate_governance_exams.py",
-    "python -X utf8 scripts/validate_implementation_records.py",
-    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-TextEncoding.ps1",
-    "git diff --check"
+    "PASS: implementation commit 9d87240d3b95819d3c6dedb39042193ee0622e33",
+    "PASS: backend controlled integration 97d8bfc5d1396f7907b1e76dfcb7c333a2913436",
+    "PASS: independent targeted MemberHome tests 10/10, including custom-role positive and negative authorization cases",
+    "PASS: independent go test ./...",
+    "PASS: independent go vet ./...",
+    "PASS: independent git diff --check",
+    "PENDING: test-environment deployment and M3 role-based UAT"
   ],
   "evidence": [
     "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-h2-m2-backend.json",
@@ -50,11 +52,11 @@
     "docs/project-management/modules/club-alliance/member-home/handoff-m2-backend.md"
   ],
   "premises": [
-    "Authorization timing deviation: after the 100-point exam but before the H2 owner governance commit, the backend actor formed an uncommitted diff in the three authorized backend files and ran six targeted tests.",
-    "The backend actor stopped; the uncommitted backend state is preserved for inspection, with no full test, deployment, commit, registry change, or out-of-scope edit claimed.",
-    "This record remains draft/authorized and does not classify the backend business implementation as implemented or verified.",
-    "Formal implementation Go requires the platform integration owner to re-dispatch after this governance evidence is integrated.",
-    "Backend changes remain limited to member_home.go, member_home_test.go, and plugin.go; SC registry, APP registry, schema, other plugins, and frontend remain forbidden."
+    "Historical timing deviation is retained: the backend actor initially formed an uncommitted three-file diff after the 100-point exam but before formal implementation Go, then stopped with the state preserved for review.",
+    "The preserved implementation was subsequently independently reviewed, the P1 custom-role authorization gap was fixed with positive and negative cases, and the result was committed and controllably integrated.",
+    "Verified means repository implementation and independent Go gates passed; the endpoint is not marked deployed.",
+    "Real-environment source-table population and semantic coverage remain a deployment risk: repository tests do not prove that test-server member, application, role, activity, task, and feed sources contain the four required UAT identities and relationships.",
+    "M3 deployment and new-member, family-member, multi-club-member, and director/admin browser UAT remain pending."
   ],
   "implementation_mode": "ai-assisted"
 }
