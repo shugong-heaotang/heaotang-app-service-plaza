@@ -52,6 +52,7 @@
     "three unique RunId Plan Apply Inspect Cleanup sequences",
     "four-identity and error-scenario authenticated API acceptance",
     "two isolated RestoreVerify runs",
+    "in-app Browser handoff resume: requested iab backend unavailable and browser type list empty; no page action executed",
     "Test-TextEncoding.ps1 and git diff --check"
   ],
   "evidence": [
@@ -63,7 +64,8 @@
     "No OTP JWT cookie Authorization full phone or full user identifier is persisted",
     "Each fixture scenario has a unique RunId and Cleanup proves all run-owned records are zero",
     "Maintenance remains Unverified because no approved natural condition exists",
-    "Browser evidence remains Unverified because no browser instance was available",
+    "Browser evidence remains Unverified because the handed-off in-app Browser backend was unavailable and the documented one-time browser type check returned an empty list",
+    "The browser resume attempt did not redeploy rerun fixtures request OTP call business APIs read session secrets or substitute another browser surface",
     "Lifecycle and history states remain Unverified because the approved fixture does not construct them and direct database shortcuts are forbidden",
     "This record is implemented rather than verified because Full Go conditions are not met"
   ],

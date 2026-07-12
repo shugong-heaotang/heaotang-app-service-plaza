@@ -78,3 +78,14 @@ RunId：`club-member-home-m3-20260712-115300-9ac043de`。
 环境没有获批的 maintenance 自然条件，按任务要求保持 `Unverified`，没有制造开关。pending/rejected 申请历史、left/suspended 会员历史和 dissolved 俱乐部生命周期也没有由本次已批准 fixture 提供安全构造机制；禁止直接 DB 业务捷径，因此环境覆盖保持 `Unverified`。API 已真实覆盖 ready、empty、partial-error、critical error 和 unauthorized；offline 因浏览器不可用为 `Unverified`。
 
 最终结论为 No-Go，而不是 Full Go。已关闭部署、真实 API、局部错误、权威 422、清理和恢复风险；剩余阻塞是可见浏览器控制通道，以及缺少已批准的 lifecycle/history fixture。重测必须复用当前已部署 hash（若未漂移则禁止重复部署），恢复浏览器后只补浏览器矩阵；状态历史需另行批准最小 fixture 扩展，不能直接改库。
+
+## 9. In-app Browser handoff 接续记录
+
+主协调线程已 handoff 现有标签，声明 URL 为 `https://heaotang.cn/app/service-plaza/services/club-alliance/`、title 为 `和奥堂 - 服务广场`。2026-07-12 12:05 Asia/Shanghai 接续时严格复用当前部署、fixture/API、cleanup 和 RestoreVerify 证据；没有重新部署、重复 fixture、请求 OTP、调用业务 API 或读取会话秘密。
+
+| case_id | environment | execution | precondition | action | expected | actual | network | telemetry | server_correlation | secrets | result | root_cause | next_action |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| CMH-M3-BR-HANDOFF-001 | base URL `https://heaotang.cn`; APP `37c6c3aa65b9a1332732d552063d6e06a2d7643a`; asset `assets/index-DCYGiKy4.js` / `ce2a254c66d46505260ef89f52c9acda0c0707a24a96d0f392cdfe42adaa3de7`; backend `e41265905815082433e040412f3dd6b6b33dfede` | `CMH-M3-BR-RESUME-001`; recorded 2026-07-12T04:05:18Z | session class intended: handed-off in-app Browser tab; exact declared URL/title above | connect to the explicitly required in-app Browser backend | backend available, then call `browser.user.openTabs()` and claim exact URL/title | control runtime returned exact error `Browser is not available: iab`; no tab object, URL, title, DOM or page state was read | no browser/page request executed; Statsig was not evaluated as product traffic | none observed | no new server query; retained prior API/recovery evidence only | none-recorded | Blocked | automation/control-channel | restore the handed-off in-app Browser backend, then retry only exact-tab discovery; do not redeploy or rerun upstream |
+| CMH-M3-BR-HANDOFF-002 | same frozen environment and deployment hash | `CMH-M3-BR-RESUME-002`; 2026-07-12T04:05:18Z | browser runtime initialized; requested in-app backend still unavailable | perform the single documented browser-backend availability check | available browser types include `iab` | `agent.browsers.list()` returned `[]` | no browser/page request executed | none observed | none | none-recorded | Blocked | automation/control-channel | stop browser UAT and preserve Browser Unverified; do not substitute Chrome, Computer Use, static DOM or API evidence |
+
+由于 backend 列表为空，无法执行 `browser.user.openTabs()`，更不能以精确 URL/title `claimTab`。因此“第一步只读保存 URL/title/DOM/page-state”本身仍是 `Unverified`，且没有任何无会话或四合成身份的浏览器动作被执行。该结果只证明控制通道不可用，不证明页面或产品失败；已知 Statsig 初始化 timeout 属插件统计控制通道噪声，也不得升级为产品缺陷。

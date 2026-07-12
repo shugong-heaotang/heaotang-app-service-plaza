@@ -115,3 +115,9 @@
 三个唯一 RunId 的 Baseline、PartialError、CriticalError 均完成 Plan → Apply → Inspect → Cleanup，Cleanup 内置检查均为 0；真实 API 已证明四身份 empty/ready、普通与管理权限、active club/membership 分层、401 unauthorized、`CMH_TASKS_UNAVAILABLE` 局部错误和权威 422 `CMH_CLUB_CLASSIFICATION_INVALID`。关窗 RestoreVerify integrity/dump SHA 通过，live DB 未替换，最终 fixture 残留为 0。
 
 浏览器运行时无可用实例，故 direct/reload/back/return、DOM、viewport、真实键盘、offline 和浏览器网络证据保持 control-channel Unverified；maintenance 无安全自然条件，按授权保持 Unverified；pending/rejected、left/suspended、dissolved 缺已批准 fixture，禁止直接 DB 捷径，环境状态覆盖亦保持 Unverified。完整证据见 `acceptance/m3/2026-07-12-environment-acceptance.md`。因此本检查点仍为 No-Go，不得宣称 H2-M3 Full Go；若部署 hash 未漂移，下一轮不得重复部署，只补浏览器矩阵和经批准的 lifecycle/history fixture。
+
+## 10. Browser handoff 接续结果
+
+主协调线程提供了精确 handoff URL/title，但 2026-07-12 12:05 Asia/Shanghai 接续时 in-app Browser backend 返回 `Browser is not available: iab`，随后唯一一次可用类型检查返回空列表 `[]`。因此无法调用 `browser.user.openTabs()`、无法 claim 精确标签，也无法读取 URL/title/DOM/page-state。接续全程未重部署、未重跑 fixture、未请求 OTP、未调用业务 API、未读取 token/cookie/完整身份；也没有改用 Chrome、Computer Use、静态 DOM 或既有 API 伪装浏览器证据。
+
+当前 verdict 不变：`No-Go — API/recovery passed; browser and lifecycle coverage Unverified`。这是 automation/control-channel blocker，不是产品失败；Statsig 初始化 timeout 按插件统计控制通道噪声处理。下一轮仅在 in-app Browser backend 恢复后，从 exact URL/title claim 开始补无会话与四合成身份逐动作 UAT，禁止重复任何已完成上游。
