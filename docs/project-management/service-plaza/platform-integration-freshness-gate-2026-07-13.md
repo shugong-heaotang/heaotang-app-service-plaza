@@ -44,8 +44,15 @@
 - policy validation: Draft 2020-12 Schema + stable error IDs + fail-closed semantic validator。
 - positive tests: fresh candidate ready；lease-protected push 成功并验证远端。
 - negative tests: stale expected、diverged candidate、behind candidate、dirty worktree、non-codex branch 全部拒绝。
-- regression: 8/8 unittest 通过；policy、recurring issue、collaboration、checklist、exam、IR、Service Plaza 总合同全部通过；UTF-8 检查 1261 files 通过；`git diff --check` 与敏感凭据模式扫描通过。
+- regression: 8/8 unittest 通过；policy、recurring issue、collaboration、checklist、exam、IR、Service Plaza 总合同全部通过；R3 最终树 UTF-8 检查 1264 files 通过；`git diff --check` 与敏感凭据模式扫描通过。
 - third recurrence: 立即建立 ADR、更新 CONSTRAINTS，并对全部 integration/deploy/push 消费方执行审计。
+
+## Independent review exact revision closeout
+
+- first review source: `057a5b6f41085fe654480528471d5aa465dd0788`。
+- exact revision: 原 R2 checklist/exam 保留原字节；其记录的 `recurring-issues.v1.json` 与 `agent-collaboration.v1.json` SHA 在最终状态更新后已不再 current，不作为最终准入证明。
+- final certification: 新建 R3 checklist，最终 26 项逐项重读且 current SHA 匹配；R3 exam attempt 1 score=100；R3 IR 单独引用最终证据。
+- unchanged stop line: R3 独立复核 Go 前仍不执行 `bb9e717` 与权威远端的真实调和或推送。
 
 ## Verdict
 
