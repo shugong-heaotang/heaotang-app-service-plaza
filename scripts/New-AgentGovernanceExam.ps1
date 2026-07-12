@@ -13,6 +13,21 @@ $root = Split-Path $PSScriptRoot -Parent
 $bankPath = Join-Path $root "contracts\foundation\governance-exam-bank.v1.json"
 $readingListPath = Join-Path $root "contracts\foundation\governance-reading-list.v1.json"
 $resolvedChecklist = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($ChecklistPath)
+$resolvedRoot = [IO.Path]::GetFullPath($root).TrimEnd([IO.Path]::DirectorySeparatorChar, [IO.Path]::AltDirectorySeparatorChar)
+
+function Resolve-RepositoryEvidencePath([string]$PathValue, [string]$Label) {
+  $resolved = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($PathValue)
+  $full = [IO.Path]::GetFullPath($resolved)
+  $prefix = $resolvedRoot + [IO.Path]::DirectorySeparatorChar
+  if (-not $full.StartsWith($prefix, [StringComparison]::OrdinalIgnoreCase)) {
+    throw "$Label must stay inside the repository: $PathValue"
+  }
+  return $full
+}
+
+function Get-RepositoryRelativePath([string]$FullPath) {
+  return $FullPath.Substring($resolvedRoot.Length + 1).Replace('\', '/')
+}
 
 if (-not (Test-Path -LiteralPath $resolvedChecklist)) { throw "Completed flight checklist not found: $ChecklistPath" }
 $checklistBytes = [IO.File]::ReadAllBytes($resolvedChecklist)
@@ -48,11 +63,32 @@ foreach ($item in $checklist.items) {
   $currentHash = (Get-FileHash -LiteralPath $source -Algorithm SHA256).Hash.ToLowerInvariant()
   if ($currentHash -ne [string]$item.sha256) { throw "Checklist input changed and must be reread: $($item.path)" }
 }
+$previousAttemptRelative = $null
+$previousAttemptHash = $null
+$remediationRereads = @()
 if ($AttemptNumber -gt 1) {
   if (-not $PreviousAttemptPath) { throw "A retry must reference the previous failed attempt." }
-  $previous = Get-Content -LiteralPath $PreviousAttemptPath -Raw -Encoding UTF8 | ConvertFrom-Json
+  $resolvedPrevious = Resolve-RepositoryEvidencePath $PreviousAttemptPath "Previous attempt"
+  if (-not (Test-Path -LiteralPath $resolvedPrevious)) { throw "Previous failed attempt not found: $PreviousAttemptPath" }
+  $previous = Get-Content -LiteralPath $resolvedPrevious -Raw -Encoding UTF8 | ConvertFrom-Json
   if ($previous.record_id -ne $RecordId -or $previous.status -ne "failed" -or [int]$previous.attempt_number -ne ($AttemptNumber - 1)) {
     throw "Previous attempt must be the immediately preceding failed exam for this record."
+  }
+  if (-not $previous.completed_at) { throw "Previous failed attempt must have completed_at evidence." }
+  $requiredRemediation = @($previous.remediation_sources | Select-Object -Unique)
+  if ($requiredRemediation.Count -eq 0) { throw "Previous failed attempt must list remediation_sources." }
+  if ($requiredRemediation.Count -ne @($previous.remediation_sources).Count) { throw "Previous remediation_sources must be unique." }
+  $previousAttemptRelative = Get-RepositoryRelativePath $resolvedPrevious
+  $previousAttemptHash = (Get-FileHash -LiteralPath $resolvedPrevious -Algorithm SHA256).Hash.ToLowerInvariant()
+  foreach ($sourcePath in $requiredRemediation) {
+    $resolvedSource = Resolve-RepositoryEvidencePath (Join-Path $root ([string]$sourcePath)) "Remediation source"
+    if (-not (Test-Path -LiteralPath $resolvedSource)) { throw "Remediation source not found: $sourcePath" }
+    $null = Get-Content -LiteralPath $resolvedSource -Raw -Encoding UTF8
+    $remediationRereads += [ordered]@{
+      source_path = ([string]$sourcePath).Replace('\', '/')
+      reread_at = [DateTime]::UtcNow.ToString("o")
+      source_sha256 = (Get-FileHash -LiteralPath $resolvedSource -Algorithm SHA256).Hash.ToLowerInvariant()
+    }
   }
 }
 $bank = Get-Content -LiteralPath $bankPath -Raw -Encoding UTF8 | ConvertFrom-Json
@@ -77,6 +113,11 @@ $attempt = [ordered]@{
   checklist_sha256 = (Get-FileHash -LiteralPath $resolvedChecklist -Algorithm SHA256).Hash.ToLowerInvariant()
   responses = @($selected | ForEach-Object { [ordered]@{ question_id = $_.question_id; selected_option = $null; correct = $null; source_path = $_.source_path } })
   remediation_sources = @()
+}
+if ($AttemptNumber -gt 1) {
+  $attempt["previous_attempt_path"] = $previousAttemptRelative
+  $attempt["previous_attempt_sha256"] = $previousAttemptHash
+  $attempt["remediation_rereads"] = @($remediationRereads)
 }
 $target = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($OutputPath)
 $directory = Split-Path $target -Parent
