@@ -1,0 +1,78 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-CLUB-MEMBER-HOME-M3-ACCEPTANCE",
+  "title": "俱乐部联盟 H2-M3 测试环境四身份验收",
+  "date": "2026-07-12",
+  "status": "implemented",
+  "objective": "在批准测试环境对 H2 会员首页执行可回滚部署、四合成身份真实 API、局部与关键错误、逐场景清理和隔离恢复验收，并诚实保留浏览器和生命周期未验证项。",
+  "governance_checklist": "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-m3-acceptance.json",
+  "governance_exam": "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-m3-acceptance-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md",
+    "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/modules/club-alliance/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-plan.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-fixture-handoff.md"
+  ],
+  "capabilities": [
+    "foundation.governance-certification",
+    "foundation.authorization-idempotency",
+    "foundation.delivery-recovery",
+    "foundation.app-shell-adapter"
+  ],
+  "contracts": [
+    "contracts/modules/club-alliance/member-home/member-home.v1.json",
+    "scripts/Manage-ClubMemberHomeM3Fixture.ps1"
+  ],
+  "decisions": [
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3/2026-07-12-environment-acceptance.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md",
+    "docs/project-management/service-plaza/handoff-log.md",
+    "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-m3-acceptance.json",
+    "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-m3-acceptance-attempt-1.json",
+    "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-m3-acceptance.json"
+  ],
+  "verification": [
+    "Test-AgentDevelopmentPreflight.ps1 ready",
+    "frontend 225/225 and test-server build",
+    "backend targeted and full go test plus go vet",
+    "Test-ClubMemberHomeM3FixtureSafety.ps1",
+    "three unique RunId Plan Apply Inspect Cleanup sequences",
+    "four-identity and error-scenario authenticated API acceptance",
+    "two isolated RestoreVerify runs",
+    "three lifecycle/history fixture Plan Apply Inspect Cleanup RestoreVerify sequences with remaining zero",
+    "in-app Browser channel recovered; target URL title DOM viewport and deployed asset hash observed",
+    "four synthetic identities OTP capacity ready without reading secrets",
+    "Test-TextEncoding.ps1 and git diff --check"
+  ],
+  "evidence": [
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3/2026-07-12-environment-acceptance.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3/2026-07-12-browser-resume.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3/2026-07-12-synthetic-lifecycle-execution.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3/2026-07-12-stage-audit.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md"
+  ],
+  "premises": [
+    "Only the approved test environment and four synthetic identities were used",
+    "No OTP JWT cookie Authorization full phone or full user identifier is persisted",
+    "Each fixture scenario has a unique RunId and Cleanup proves all run-owned records are zero",
+    "Maintenance remains Unverified because no approved natural condition exists",
+    "Browser control is restored and unauthenticated baseline evidence is recorded; authenticated four-identity browser evidence remains pending explicit OTP-send authorization",
+    "Application pending and rejected plus dissolved club lifecycle fixtures are verified locally and on the approved test server with complete cleanup",
+    "Left and suspended remain unsupported because no authoritative membership history or status model exists",
+    "This record is implemented rather than verified because Full Go conditions are not met"
+  ],
+  "implementation_mode": "ai-assisted"
+}
