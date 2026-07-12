@@ -1,0 +1,76 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-PROTECTION-MALL-M0-R3-CORRECTION",
+  "title": "保障商城 M0 R3 模块依赖与证据纠正",
+  "date": "2026-07-12",
+  "status": "implemented",
+  "objective": "在新的干净工作树中重建保障商城 v2 内部依赖、模块级治理证据、README 和 Handoff，关闭旧工作项混写 foundation 受保护证据的所有权缺口。",
+  "governance_checklist": "contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m0-r3-correction.json",
+  "governance_exam": "contracts/modules/protection-mall/governance-exams/2026-07-12-protection-mall-m0-r3-correction-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-protection-mall-m0-task-order.md",
+    "docs/project-management/modules/protection-mall/商城会员店方案吸收与1.0服务广场接入收口方案.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.identity-api",
+    "foundation.authorization-idempotency",
+    "foundation.contract-tooling",
+    "foundation.business-variables"
+  ],
+  "contracts": [
+    "contracts/modules/protection-mall/internal-dependencies.v2.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0011-two-person-config-approval.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/modules/protection-mall/internal-dependencies.v2.json",
+    "contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m0-r3-correction.json",
+    "contracts/modules/protection-mall/governance-exams/2026-07-12-protection-mall-m0-r3-correction-attempt-1.json",
+    "contracts/modules/protection-mall/implementation-records/2026-07-12-protection-mall-m0-r3-correction.json",
+    "docs/project-management/modules/protection-mall/README.md",
+    "docs/project-management/modules/protection-mall/handoff-m0.md"
+  ],
+  "verification": [
+    "scripts/Test-AgentDevelopmentPreflight.ps1: ready",
+    "EX-20260712-PROTECTION-MALL-M0-R3-CORRECTION-1: score 100",
+    "validate_module_internal_dependencies.py",
+    "validate_development_checklists.py --require-current",
+    "validate_governance_exams.py",
+    "validate_implementation_records.py",
+    "validate_agent_collaboration.py",
+    "Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m0-r3-correction.json",
+    "contracts/modules/protection-mall/governance-exams/2026-07-12-protection-mall-m0-r3-correction-attempt-1.json",
+    "contracts/modules/protection-mall/internal-dependencies.v2.json",
+    "docs/project-management/modules/protection-mall/handoff-m0.md"
+  ],
+  "premises": [
+    "旧6bce98f与旧脏工作树不是正式基线且不得被直接接管",
+    "本R3只纠正M0合同与模块证据，不授权商城业务代码",
+    "服务广场冻结入口仍由平台集成负责人拥有",
+    "M1必须等待本检查点平台会签和独立验收Go后另立工作项",
+    "支付安全、资金状态机、回调验签和对账未Go时不得上线"
+  ],
+  "implementation_mode": "ai-assisted"
+}
