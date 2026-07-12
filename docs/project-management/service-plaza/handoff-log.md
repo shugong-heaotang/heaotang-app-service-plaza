@@ -619,4 +619,7 @@ Handoff 运行规则见 `handoff-operating-mechanism.md`。首轮具体表单见
 - scope：固定 seed 合成数据、测试环境部署、真实 API/浏览器 UAT、备份恢复、回滚和脱敏证据。
 - forbidden：生产、真实数据、真实资金、创建、审核、成员管理及其他俱乐部子项目业务。
 - activation：派发提交集成后，从最终 integration HEAD 创建干净工作树并登记 active；聊天不替代仓库证据。
-- status：Dispatch Go；Environment Go pending。
+- status：Independent Review No-Go；列表安全 DTO、唯一 run/幂等清理、数据库恢复和浏览器刷新/Enter 正在根因修复。
+- environment evidence：`docs/project-management/modules/club-alliance/self-created/acceptance/`
+- governance：`FC-20260712-CLUB-SC-T0-ACCEPTANCE-R3` 28/28；`EX-20260712-CLUB-SC-T0-ACCEPTANCE-R3-1` 100；`IR-20260712-CLUB-SC-T0-ACCEPTANCE-R3`。
+- verified：列表隔离、详情/加入/本人状态、响应式、Tab focus、制品回滚和 ready 证据保留；不得把未关闭项合并宣称为 T0 Go。

@@ -1,0 +1,40 @@
+{
+  "contract_version": "club-sc-t0-network-evidence.v1",
+  "captured_at": "2026-07-12T00:52:00Z",
+  "environment": "test",
+  "window": "2026-07-12 08:13-08:38 +08:00",
+  "api_acceptance": {
+    "unauthenticated_search": {"method": "GET", "status": 401},
+    "authenticated_search": {"method": "GET", "status": 200},
+    "safe_detail": {"method": "GET", "status": 200},
+    "non_self_created_detail": {"method": "GET", "status": 404},
+    "join_first": {"method": "POST", "status": 201},
+    "join_replay": {"method": "POST", "status": 200},
+    "join_conflict": {"method": "POST", "status": 409},
+    "my_applications": {"method": "GET", "status": 200}
+  },
+  "browser": {
+    "search": {"time": "2026-07-12T08:28:35+08:00", "status": 200},
+    "detail": {"time": "2026-07-12T08:30:15+08:00", "status": 200},
+    "join_replay": {"time": "2026-07-12T08:35:37+08:00", "status": 200},
+    "my_applications": {"time": "2026-07-12T08:37:22+08:00", "status": 200},
+    "refresh_my_applications": {"time": "2026-07-12T08:38:31+08:00", "status": 200}
+  },
+  "module_allowlist": [
+    "GET /api/v1/clubs/search?type=standard&category=general",
+    "GET /api/v1/clubs/self-created/:id",
+    "POST /api/v1/clubs/:id/join",
+    "GET /api/v1/clubs/join-applications/my"
+  ],
+  "app_global_baseline": [
+    "GET /api/v1/service-plaza/feature-flags",
+    "GET /api/v1/service-plaza/catalog",
+    "GET /api/v1/service-plaza/actions"
+  ],
+  "forbidden_business_requests": 0,
+  "forbidden_patterns": ["create", "review", "members", "roles", "payment", "charity-write", "federation-write"],
+  "control_layer_noise": "ab.chatgpt.com Statsig timeout; excluded from APP evidence",
+  "identifiers_redacted": true,
+  "secrets_recorded": false,
+  "result": "pass"
+}
