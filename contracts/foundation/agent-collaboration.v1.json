@@ -53,7 +53,7 @@
       "title": "NOVA 第五阶段 M1 任务运行时与跨模块工具契约",
       "owner": "Codex platform integration agent",
       "owner_role": "平台集成负责人",
-      "status": "active",
+      "status": "cancelled",
       "repository_root": "C:/Users/shugo/Documents/APP系统",
       "workspace_path": "C:/Users/shugo/Documents/项目最高负责人/worktrees/heaotang-nova-m1-dispatch",
       "branch": "codex/nova-m1-dispatch",
@@ -68,8 +68,31 @@
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
-      "migration_note": null,
+      "migration_note": "Superseded by the repository-correct NOVA Phase 5 M1 work item AIW-20260712-NOVA-PHASE5-M1-RUNTIME; historical dispatch is retained but no longer authorizes work.",
       "handoff_record": null
+    },
+    {
+      "work_id": "AIW-20260712-NOVA-PHASE5-M1-RUNTIME",
+      "title": "NOVA 第五阶段 M1 可恢复任务运行时与统一工具网关",
+      "owner": "Codex Nova + AI agent",
+      "owner_role": "Nova + AI 板块负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/NOVA +AI",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-nova-phase5-m1-runtime",
+      "branch": "codex/nova-phase5-m1-runtime",
+      "base_commit": "b2cada9e82ea3e1be26970fa5137f98b950b81f2",
+      "allowed_paths": [
+        "contracts/modules/nova",
+        "docs/Nova+AI第五阶段开发任务书.md",
+        "docs/Nova+AI第五阶段需求输入说明书.md",
+        "docs/project-management/modules/nova",
+        "nova_ai",
+        "tests"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": true,
+      "migration_note": "Repository-correct replacement for AIW-20260712-NOVA-M1-RUNTIME; registration alone does not authorize M1 implementation or approve APP public contracts.",
+      "handoff_record": "C:/Users/shugo/Documents/worktrees/heaotang-nova-phase5-m1-runtime/docs/project-management/modules/nova/m0-handoff.md"
     }
   ]
 }
