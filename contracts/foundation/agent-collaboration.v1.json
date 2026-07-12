@@ -1522,7 +1522,7 @@
                            "title":  "俱乐部联盟 H2 会员工作台双层首页",
                            "owner":  "Club Alliance module agent",
                            "owner_role":  "俱乐部联盟负责人",
-                           "status":  "active",
+                           "status":  "planned",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-member-home-h2",
                            "branch":  "codex/club-member-home-h2",
@@ -1549,7 +1549,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "M2 前端已在 APP integration e06d5c6 完成 guest-H1/member-H2 边界修正，全量 215/215 与 build 通过；后端已集成至 97d8bfc5。现仅扩展同一工作项的 M3 治理证据路径，授权测试环境可回滚部署与四身份 UAT；禁止生产、真实会员、真实资金及未授权业务扩张。",
+                           "migration_note":  "M2 前后端已集成；M3 Entry 仍为 No-Go。原宽范围工作项暂停为 planned，由独立 membership contract correction 与 fixture capability 工作项先关闭状态语义和可重复合成数据前置；不得在前置完成前执行四身份 UAT。",
                            "handoff_record":  "docs/project-management/service-plaza/handoff-log.md#sp-h035俱乐部联盟-h2-会员首页需求变更与派发"
                        },
                        {
@@ -1785,6 +1785,56 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "治理证据 feafa96a95ba45a6e8f4cb3982fd9cd2101cbf6f 已受控集成至 APP 10045723913e760e2219d8931e22689609f1cd0e；current checklist、exam100、IR、后端 exact commit/test 与根因报告通过。",
                            "handoff_record":  "docs/project-management/service-plaza/club-sc-list-safe-dto-2026-07-12.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-CLUB-MEMBER-HOME-MEMBERSHIP-CONTRACT",
+                           "title":  "H2 会员关系状态语义合同纠正",
+                           "owner":  "H2 membership contract agent",
+                           "owner_role":  "独立合同负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-member-home-membership-contract",
+                           "branch":  "codex/club-member-home-membership-contract",
+                           "base_commit":  "bd1100f740567c67a7fb37d69c16ad1605fc469a",
+                           "allowed_paths":  [
+                                                 "contracts/modules/club-alliance/member-home/member-home.v1.json",
+                                                 "contracts/modules/club-alliance/member-home/member-home.v1.schema.json",
+                                                 "contracts/modules/club-alliance/member-home/fixtures/cases.v1.json",
+                                                 "contracts/modules/club-alliance/member-home/test_member_home_contracts.py",
+                                                 "docs/project-management/modules/club-alliance/member-home/requirements.md",
+                                                 "docs/project-management/modules/club-alliance/member-home/acceptance/m3-plan.md",
+                                                 "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md",
+                                                 "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-membership-contract*.json",
+                                                 "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-membership-contract*.json",
+                                                 "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-membership-contract*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "已从权威 APP integration bd1100f740567c67a7fb37d69c16ad1605fc469a 创建独立 branch/worktree，HEAD/base/merge-base 一致且 clean。只纠正 membership/application/club lifecycle 状态分层：pending/rejected 为申请历史，left 为历史关系，suspended 为可选会员停权，dissolved 为 club lifecycle。首检查点只做文档、合同、fixtures/conformance，不修改业务代码、后端、部署或环境。",
+                           "handoff_record":  "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-CLUB-MEMBER-HOME-M3-FIXTURE",
+                           "title":  "H2 M3 四身份 fixture 安全能力",
+                           "owner":  "H2 fixture platform agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-member-home-m3-fixture",
+                           "branch":  "codex/club-member-home-m3-fixture",
+                           "base_commit":  "bd1100f740567c67a7fb37d69c16ad1605fc469a",
+                           "allowed_paths":  [
+                                                 "scripts/Manage-ClubMemberHomeM3Fixture.ps1",
+                                                 "scripts/Test-ClubMemberHomeM3FixtureSafety.ps1",
+                                                 "docs/project-management/modules/club-alliance/member-home/acceptance/m3-fixture-handoff.md",
+                                                 "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-m3-fixture*.json",
+                                                 "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-m3-fixture*.json",
+                                                 "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-m3-fixture*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "已从权威 APP integration bd1100f740567c67a7fb37d69c16ad1605fc469a 创建独立 branch/worktree，HEAD/base/merge-base 一致且 clean。首检查点仅实现 unique RunId、Plan/Apply/Inspect/Cleanup/RestoreVerify、四合成身份和脱敏关联。partial-error 使用 run-owned title='' family_task；critical error 使用 run-owned standard/health club；unauthorized 用自然失效会话、offline 用浏览器离线。maintenance 保持 Unverified；禁止 runtime fault-control、query switch、共享服务破坏、共享 TestAccountOtp 和 SC scripts 修改。",
+                           "handoff_record":  "docs/project-management/modules/club-alliance/member-home/acceptance/m3-fixture-handoff.md"
                        }
                    ]
 }
