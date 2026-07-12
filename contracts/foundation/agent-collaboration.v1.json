@@ -2239,6 +2239,29 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "R1 source fd6c7ad 因输出对象未严格白名单、19负例只计数未执行被独立复核 No-Go，未单独集成；corrected R2 source 96037a8d76e8b9a756d57f6ccd8738118ef2a5cc 经独立复核 Contract Package Go，并以最终状态 squash integration b1ff166 进入权威基线。R2 checklist26/26、exam100、Python13/13、strict PII output schema、27/27结构化负例、总合同/UTF8/diff通过。exact四工具+server callback、trusted identity/tenant/resource/confirmation/idempotency/audit/errors/legacy denylist已冻结，全部executable=false。人脉Owner证据已另行 integrated；M2仍等待provider实现、迁移与环境安全验收，禁止真实搜索/消息/数据。",
                            "handoff_record":  "docs/project-management/notices/2026-07-12-nova-m2-people-tools-task-order.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-NOVA-M2-PROVIDER-DISPATCH",
+                           "title":  "NOVA M2 三包 Provider 与迁移演练正式派发",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-nova-m2-provider-dispatch",
+                           "branch":  "codex/nova-m2-provider-dispatch",
+                           "base_commit":  "5004cdc45e21604817f809d3b9babe783f0ac40b",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-12-nova-m2-provider-dispatch*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-nova-m2-provider-dispatch*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-nova-m2-provider-dispatch*.json",
+                                                 "docs/project-management/notices/2026-07-12-nova-m2-provider-task-order.md",
+                                                 "docs/project-management/service-plaza/nova-m2-provider-dispatch-2026-07-12.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "基于已 integrated 的 canonical Owner 与四工具契约，派发 network read、social write、migration/disable drill 三包；两个后端包各使用独立 APP companion evidence item，避免跨 Git 根伪路径。三包与环境安全验收全部 Go 前 M2保持No-Go。",
+                           "handoff_record":  "docs/project-management/service-plaza/nova-m2-provider-dispatch-2026-07-12.md"
                        }
                    ]
 }
