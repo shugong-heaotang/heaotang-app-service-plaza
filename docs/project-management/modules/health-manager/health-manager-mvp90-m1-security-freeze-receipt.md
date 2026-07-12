@@ -22,6 +22,22 @@
 - exam：`contracts/modules/health-manager/governance-exams/2026-07-12-health-m1-security-freeze-attempt-1.json`，score 100
 - implementation record：`contracts/modules/health-manager/implementation-records/2026-07-12-health-m1-security-freeze.json`
 
+## Exact revision 负向变异证据
+
+命令：以 Python 3 `jsonschema.Draft202012Validator` 读取 `security-authorization.v1.json` 和 `security-authorization.v1.schema.json`，对深拷贝合同依次执行下列六项变异并调用 `iter_errors`；任一负例无错误或 valid 有错误即非零退出。
+
+结果：
+
+- `valid`：ACCEPT
+- `remove_ai_action`：REJECT
+- `remove AuditEvent + duplicate resource`：REJECT
+- `replace professional dependency`：REJECT
+- `unknown subject reference`：REJECT
+- `unknown resource reference`：REJECT
+- `remove cross_member denial`：REJECT
+
+Schema 现对 subjects 7、resources 12、actions 11、denials 15、threats 10、premises 6 使用精确数量、稳定 ID 白名单和逐 ID 唯一性约束；action subject/resource 引用与三项稳定 external dependency ID 同样失败关闭。decision 记录具体 decision maker，并以 work item、thread 和 owner role 三个引用追溯授权来源。
+
 ## 未完成和阻塞
 
 - C4-H01 与 M1 窄模板专业会签仍由专业负责人完成。
