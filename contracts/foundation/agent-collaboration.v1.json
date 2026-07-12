@@ -2469,6 +2469,28 @@
                            "handoff_record":  "docs/project-management/service-plaza/health-r0-f1-acceptance-2026-07-13.md"
                        },
                        {
+                           "work_id":  "AIW-20260713-PLATFORM-INTEGRATION-DIVERGENCE-RECONCILIATION",
+                           "title":  "平台本地商城链与远端健康权威链分叉调和",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/platform-integration-divergence-reconciliation",
+                           "branch":  "codex/platform-integration-divergence-reconciliation",
+                           "base_commit":  "034e46beae3dd30d5616c873d596e9c591c8d797",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-13-platform-integration-divergence-reconciliation*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-13-platform-integration-divergence-reconciliation*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-13-platform-integration-divergence-reconciliation*.json",
+                                                 "docs/project-management/service-plaza/platform-integration-divergence-reconciliation-2026-07-13.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "调和远端权威034e46b的健康F1链与本地未推送7d638e3的商城M1链；共同基线cd2bbae，仅registry重叠。禁止覆盖任一链，必须逐项合并registry差异并保留精确父提交、验证和回滚证据。",
+                           "handoff_record":  "docs/project-management/service-plaza/platform-integration-divergence-reconciliation-2026-07-13.md"
+                       },
+                       {
                            "work_id":  "AIW-20260712-PROJECT-BRAIN-INTEGRATION-RECONCILIATION",
                            "title":  "Project Brain 分叉集成与 R5 治理证据受控收口",
                            "owner":  "Codex platform integration agent",
