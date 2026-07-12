@@ -7,6 +7,26 @@
 - plan：`docs/project-management/modules/club-alliance/member-home/acceptance/m3-plan.md`
 - implementation record：`IR-20260712-CLUB-MEMBER-HOME-H2-M3`（draft）
 
+## 0. 会员状态合同纠正检查点
+
+本 Handoff 已吸收独立合同工作项 AIW-20260712-CLUB-MEMBER-HOME-MEMBERSHIP-CONTRACT 的语义纠正：
+
+- pending/rejected 是 club-join-application 申请历史，不是 membership；
+- left 是 club-membership 历史关系，不进入当前“我的俱乐部”；
+- suspended 是可选会员停权，只有服务端正式支持并验收后才可作为当前受限关系；
+- dissolved 是 club 生命周期，不是 membership；
+- 机器合同要求当前记录分离 club_status 与 membership_status，禁止含义不明的单一 status。
+
+本检查点只纠正文档、合同、Schema、合成 fixture 和 conformance。现有前后端实现与测试环境尚未因此自动满足新合同，故 M3 仍为 No-Go before deployment。
+
+合同检查点证据：
+
+- checklist：contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-membership-contract-r1.json（28/28 completed）；
+- exam：contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-membership-contract-r1-attempt-1.json（100 / passed）；
+- implementation record：IR-20260712-CLUB-MEMBER-HOME-MEMBERSHIP-CONTRACT-R1；
+- conformance：15/15 passed；
+- 结论：Contract Go / Implementation and Environment No-Go。
+
 ## 1. 已授权范围
 
 本检查点只授权在批准的联合窗口中执行可回滚测试环境部署和四身份浏览器 UAT。授权对象为新会员、家庭俱乐部普通会员、多俱乐部会员、理事或管理员；证据覆盖 route、DOM、网络 allow/deny、权限、遥测、服务端关联、响应式和键盘。
@@ -54,7 +74,7 @@
 - 多俱乐部会员：active `standard/general` 与 `standard/charity`；证明摘要计数、权威排序和本人归属。
 - 理事或管理员：scope 由权威 owner/特权关系派生；只有该身份 `can_manage=true`。
 
-另以独立可恢复数据覆盖 `pending/rejected/left/suspended/dissolved`，核对显示、动作和服务端原始状态。这五类关系状态不等同于页面 `maintenance/offline`。
+另以独立可恢复数据按实体覆盖申请历史 pending/rejected、会员历史 left、可选会员停权 suspended、俱乐部生命周期 dissolved。申请历史不得计入当前 membership；历史关系不得出现在当前列表；解散必须通过独立 club_status 表达。这些业务状态也不等同于页面 maintenance/offline。
 
 ## 6. 八态和浏览器证据
 
@@ -73,6 +93,6 @@
 
 ## 8. Full Go 条件
 
-四身份、八态、五种附加关系状态、五档 viewport、真实键盘、路由/DOM/网络/权限/遥测/服务端关联全部达到计划要求；所有 Blocker/Major 关闭；证据无秘密；环境恢复并通过基准 smoke 后，才可把 draft IR 更新为 verified/deployed 并形成 H2-M3 Full Go。
+四身份、八态、三层业务状态、五档 viewport、真实键盘、路由/DOM/网络/权限/遥测/服务端关联全部达到计划要求；聚合 API 和页面必须分别证明 club_status、membership_status，且申请历史不串入当前列表；所有 Blocker/Major 关闭；证据无秘密；环境恢复并通过基准 smoke 后，才可把 draft IR 更新为 verified/deployed 并形成 H2-M3 Full Go。
 
-当前尚缺 combined commit、部署资产、四身份会话、环境状态触发和现场三方证据，因此结论保持 `Authorized / deployment pending`、`No-Go before deployment`。
+当前尚缺前后端状态字段迁移、combined commit、部署资产、四身份会话、环境状态触发和现场三方证据，因此结论保持 Authorized / deployment pending、No-Go before deployment。

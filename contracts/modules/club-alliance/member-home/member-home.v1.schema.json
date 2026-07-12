@@ -1,1 +1,257 @@
-{"$schema":"https://json-schema.org/draft/2020-12/schema","type":"object","required":["contract_version","route","auth_mode","layout_order","sections","degradation","states","membership_states","sorting","management","forbidden_response_fields","forbidden_capabilities"],"properties":{"contract_version":{"const":"club-member-home.v1"},"route":{"const":"/services/club-alliance"},"auth_mode":{"const":"shared_session"},"layout_order":{"const":["member-summary","my-clubs","today-tasks","recent-activities","alliance-feed","explore-more"]},"sections":{"type":"object","required":["member-summary","my-clubs","today-tasks","recent-activities","alliance-feed","explore-more"],"additionalProperties":false,"properties":{"member-summary":{"$ref":"#/$defs/section"},"my-clubs":{"$ref":"#/$defs/section"},"today-tasks":{"$ref":"#/$defs/section"},"recent-activities":{"$ref":"#/$defs/section"},"alliance-feed":{"$ref":"#/$defs/section"},"explore-more":{"$ref":"#/$defs/section"}}},"degradation":{"type":"object"},"states":{"type":"array","minItems":8,"uniqueItems":true},"membership_states":{"type":"array","minItems":6,"uniqueItems":true},"sorting":{"type":"object"},"management":{"type":"object","required":["action_id","required_scope","hidden_for_ordinary_member"]},"forbidden_response_fields":{"type":"array","minItems":6,"uniqueItems":true},"forbidden_capabilities":{"type":"array","minItems":7,"uniqueItems":true}},"additionalProperties":false,"$defs":{"section":{"type":"object","required":["criticality","source","readiness","privacy"],"properties":{"criticality":{"enum":["critical","important","optional"]},"source":{"type":"string","minLength":1},"readiness":{"enum":["verified","code-present-unverified","gap"]},"privacy":{"enum":["public","authenticated","self-only"]},"fields":{"type":"array","uniqueItems":true},"action_ids":{"type":"array","uniqueItems":true}},"additionalProperties":false}}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": [
+    "contract_version",
+    "route",
+    "auth_mode",
+    "layout_order",
+    "sections",
+    "degradation",
+    "states",
+    "relationship_state_model",
+    "sorting",
+    "management",
+    "forbidden_response_fields",
+    "forbidden_capabilities"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "club-member-home.v1"
+    },
+    "route": {
+      "const": "/services/club-alliance"
+    },
+    "auth_mode": {
+      "const": "shared_session"
+    },
+    "layout_order": {
+      "const": [
+        "member-summary",
+        "my-clubs",
+        "today-tasks",
+        "recent-activities",
+        "alliance-feed",
+        "explore-more"
+      ]
+    },
+    "sections": {
+      "type": "object",
+      "required": [
+        "member-summary",
+        "my-clubs",
+        "today-tasks",
+        "recent-activities",
+        "alliance-feed",
+        "explore-more"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "member-summary": {
+          "$ref": "#/$defs/section"
+        },
+        "my-clubs": {
+          "$ref": "#/$defs/section"
+        },
+        "today-tasks": {
+          "$ref": "#/$defs/section"
+        },
+        "recent-activities": {
+          "$ref": "#/$defs/section"
+        },
+        "alliance-feed": {
+          "$ref": "#/$defs/section"
+        },
+        "explore-more": {
+          "$ref": "#/$defs/section"
+        }
+      }
+    },
+    "degradation": {
+      "type": "object"
+    },
+    "states": {
+      "const": [
+        "loading",
+        "ready",
+        "empty",
+        "partial-error",
+        "error",
+        "unauthorized",
+        "maintenance",
+        "offline"
+      ]
+    },
+    "relationship_state_model": {
+      "$ref": "#/$defs/relationshipStateModel"
+    },
+    "sorting": {
+      "type": "object"
+    },
+    "management": {
+      "type": "object",
+      "required": [
+        "action_id",
+        "required_scope",
+        "hidden_for_ordinary_member"
+      ]
+    },
+    "forbidden_response_fields": {
+      "type": "array",
+      "minItems": 6,
+      "uniqueItems": true
+    },
+    "forbidden_capabilities": {
+      "type": "array",
+      "minItems": 7,
+      "uniqueItems": true
+    }
+  },
+  "additionalProperties": false,
+  "$defs": {
+    "section": {
+      "type": "object",
+      "required": [
+        "criticality",
+        "source",
+        "readiness",
+        "privacy"
+      ],
+      "properties": {
+        "criticality": {
+          "enum": [
+            "critical",
+            "important",
+            "optional"
+          ]
+        },
+        "source": {
+          "type": "string",
+          "minLength": 1
+        },
+        "readiness": {
+          "enum": [
+            "verified",
+            "code-present-unverified",
+            "gap"
+          ]
+        },
+        "privacy": {
+          "enum": [
+            "public",
+            "authenticated",
+            "self-only"
+          ]
+        },
+        "fields": {
+          "type": "array",
+          "uniqueItems": true
+        },
+        "action_ids": {
+          "type": "array",
+          "uniqueItems": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "stateDomain": {
+      "type": "object",
+      "additionalProperties": false
+    },
+    "relationshipStateModel": {
+      "type": "object",
+      "required": [
+        "application_history",
+        "membership",
+        "club_lifecycle"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "application_history": {
+          "type": "object",
+          "required": [
+            "entity",
+            "states",
+            "counts_as_current_membership"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "entity": {
+              "const": "club-join-application"
+            },
+            "states": {
+              "const": [
+                "pending",
+                "rejected"
+              ]
+            },
+            "counts_as_current_membership": {
+              "const": false
+            }
+          }
+        },
+        "membership": {
+          "type": "object",
+          "required": [
+            "entity",
+            "states",
+            "current_states",
+            "history_states",
+            "optional_states"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "entity": {
+              "const": "club-membership"
+            },
+            "states": {
+              "const": [
+                "active",
+                "left",
+                "suspended"
+              ]
+            },
+            "current_states": {
+              "const": [
+                "active",
+                "suspended"
+              ]
+            },
+            "history_states": {
+              "const": [
+                "left"
+              ]
+            },
+            "optional_states": {
+              "const": [
+                "suspended"
+              ]
+            }
+          }
+        },
+        "club_lifecycle": {
+          "type": "object",
+          "required": [
+            "entity",
+            "states",
+            "not_a_membership_state"
+          ],
+          "additionalProperties": false,
+          "properties": {
+            "entity": {
+              "const": "club"
+            },
+            "states": {
+              "const": [
+                "dissolved"
+              ]
+            },
+            "not_a_membership_state": {
+              "const": true
+            }
+          }
+        }
+      }
+    }
+  }
+}
