@@ -2136,7 +2136,7 @@
                            "title":  "健康大管家 MVP-90 M1 P2 确定性合成 PDCAR 重放",
                            "owner":  "Health Manager module agent",
                            "owner_role":  "健康大管家负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-m1-p2-synthetic-replay",
                            "branch":  "codex/health-manager-mvp90-m1-p2-synthetic-replay",
@@ -2159,8 +2159,8 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "从已含 P2 正式任务书的 APP 4556c5b 创建独立 branch/worktree并激活。P2-C1 初版 fedaeab 因 action语义混用被No-Go，R3 ab74ac8 因正常场景重放不连续再次No-Go；corrected R4 source 4ee6ccb67b3320c6fbc387abe340b5f8c2a8bd10 经独立复核 C1 Go，以最终状态 squash integration 40a042b 进入权威基线。15场景/25事件、A001连续重放、A003紧急风险闭包、6状态机、pointer/source/action语义和负例已冻结；reference runner与negative fixture尚未实现，P2-C2仍blocked。所有源/输出继续 synthetic_only=true、executable=false；禁止共享前端、后端、API、DB、环境、真实数据、收费和生产。",
-                           "handoff_record":  "docs/project-management/notices/2026-07-12-health-manager-mvp90-m1-p2-task-order.md"
+                           "migration_note":  "P2 synthetic 已完成并受控集成：C1 source 4ee6ccb67b3320c6fbc387abe340b5f8c2a8bd10 / integration 40a042b；C2 corrected source a2e8424c6c4f2cc3e52b7ad0782968ca9d693267 / integration 4c195d07c21c8ce6944ecca91f69d9f83e6893e7；C3 source abb4f20dc52679327f596f39a1676652010cc90c / integration 5069d17661853aeae01b06c23c64335a84028f35；C4 freshness corrected source 84f546e8dfbfab7b17b4c2f501c6b1dc18c90795 / integration c286a0152575c42d5666618b91a10ab72d97a83e。最终 P2 19/19、P1 11/11、15+15矩阵、三项根因关闭、总合同与UTF-8门禁通过，结论为 P2 synthetic Go。该结论仅证明synthetic_only=true、executable=false的合成合同、reference runner与conformance；共享前端、后端、API、DB、环境、真实数据、收费、资金、release、operations和生产继续No-Go。",
+                           "handoff_record":  "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-handoff.md"
                        },
                        {
                            "work_id":  "AIW-20260712-NOVA-M2-PEOPLE-TOOLS-DISPATCH",
