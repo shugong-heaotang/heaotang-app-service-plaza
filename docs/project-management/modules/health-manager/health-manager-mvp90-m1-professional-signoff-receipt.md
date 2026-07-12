@@ -3,11 +3,19 @@
 - work_id：`AIW-20260712-HEALTH-M1-PROFESSIONAL-SIGNOFF`
 - packet：`health-manager-mvp90-m1-professional-decision-packet.md`
 - signer role：和奥堂医生集团专业负责人
-- receipt status：`Pending with owner`
+- receipt status：`C4-H01, M1-LIFESTYLE-TEMPLATE and MVP-A001-A015 Accepted recorded; platform final review pending`
 - executable：`false`
-- decision maker：待真实专业负责人填写
-- decision date：待真实专业负责人填写
-- signature / written confirmation reference：待真实专业负责人填写
+- C4-H01 decision maker：张树功，和奥堂医生集团医疗总监 / HM-MVP90-M1 开发阶段专业审核人
+- C4-H01 decision date：2026-07-12
+- C4-H01 signature / written confirmation reference：`thread:019f4e00-b3be-7742-a76d-c9439c68245e/item-637`
+- M1-LIFESTYLE-TEMPLATE decision maker/reviewer：张树功
+- M1-LIFESTYLE-TEMPLATE decision date：2026-07-12
+- M1-LIFESTYLE-TEMPLATE signed version：`v1-proposed`
+- M1-LIFESTYLE-TEMPLATE effective / expires：2026-07-12 / 2026-10-10
+- M1-LIFESTYLE-TEMPLATE signature reference：`thread:019f4e00-b3be-7742-a76d-c9439c68245e/item-645`
+- MVP-A001—A015 decision maker：张树功
+- MVP-A001—A015 decision date：2026-07-12
+- MVP-A001—A015 signature reference：`thread:019f4e00-b3be-7742-a76d-c9439c68245e/item-656`
 
 ## 当前结论
 
@@ -15,12 +23,14 @@ Decision packet、三份 JSON 与三份 Schema 已形成 Proposed 材料；协�
 
 平台独立复核对首版提交 `dbd4f10c8c5caf663453e2207dc3c56046789620` 给出 `Exact revision`，该提交未被接受或集成。内容覆盖与 Pending 口径通过，但机器签署门禁必须收紧。本回执记录的是整改后的 Package Ready 候选，不是 Package Accepted。
 
-真实专业负责人尚未回执，因此：
+张树功已在紧邻权威材料完整送达后直接回复：“确认 C4-H01，按上述17项职责边界 Accepted。”平台已裁定其为 `Provisional Verified / development-only` 专业审核人。因此：
 
-- `C4-H01`：`Pending with owner`；owner=和奥堂医生集团专业负责人。
-- `M1-LIFESTYLE-TEMPLATE`：`Pending with owner`；owner=和奥堂医生集团专业负责人。
-- `MVP-A001`—`MVP-A015` 专业复核：15/15 `Pending with owner`。
+- `C4-H01`：`Accepted` 已忠实录入；material/version=`health-manager.mvp90-m1.c4-h01-action-boundary-decision.v1 / v1-proposed`；scope 仅为成年合成会员 M1 PDCAR 纵切；`executable=false`，等待平台复核和联合门禁。
+- `M1-LIFESTYLE-TEMPLATE`：`Accepted` 已忠实录入；content_author=`Health professional signoff coordinator`、independent reviewer=`张树功`、signed version=`v1-proposed`、有效期 2026-07-12 至 2026-10-10；`executable=false`，全量 C4-H06 继续 Pending。
+- `MVP-A001`—`MVP-A015` 专业复核：15/15 `Accepted`，overall=`Accepted`，`executable=false`；范围扩大、安全事件、规则或专业前提变化时重新审核。
 - HM-MVP90-M1 模块工作项继续 `planned`；不得生成 executable professional policy。
+
+本次 C4-H01 Accepted 不外推到模板、15 场景、全量 C4-H06、真实身份/健康数据、医疗服务、诊断、处方、真实风险处置、环境、部署、收费、资金、外部合作或生产。上述真实活动仍要求正式任命/组织受控渠道核验，`identity_authority_production=Pending`。
 
 ## 请真实 signer 回填
 
@@ -45,4 +55,4 @@ Decision packet、三份 JSON 与三份 Schema 已形成 Proposed 材料；协�
 
 验证命令使用 Python UTF-8、`jsonschema.Draft202012Validator` 与 `FormatChecker` 加载三份 Schema/实例，分别执行合法 Accepted 构造及负向变异；结果为 `valid ACCEPT=3; negative REJECT=8`。
 
-本整改未改变 R2 checklist/exam；真实专业 signer 仍未回执，本回执继续 `Pending with owner`、`executable=false`。
+本整改未改变既有 R2 checklist/exam。三项均已收到真人 development-only 回执并录入；整个 M1 仍 `executable=false`、planned，等待平台最终复核与独立 activation 决定。
