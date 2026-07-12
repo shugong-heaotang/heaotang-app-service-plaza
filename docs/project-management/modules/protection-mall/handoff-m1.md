@@ -1,6 +1,6 @@
 # 保障商城 M1-CP1 Handoff
 
-状态：待平台会签与独立验收
+状态：Go / 已平台会签、独立验收并受控集成
 
 work_id：`AIW-20260712-PROTECTION-MALL-M1-CONTRACTS`
 
@@ -22,6 +22,10 @@ work_id：`AIW-20260712-PROTECTION-MALL-M1-CONTRACTS`
 
 未连接数据库、网络、支付或真实数据；未编辑前后端业务代码。M1-CP1 Go不自动授权实现、部署或上线。
 
+## 验收与集成
+
+Exact source `9dc3092e53cfbb6d04f6857554bf718eb16aeb67` 已通过平台会签和APP总架构独立验收Go，并以integration `b27d75e6faee5df545eabdcc387aa6b293e448c9`受控集成。
+
 ## 下一步
 
-等待平台会签与APP总架构独立验收；通过后由最高负责人另立精确实现工作项。
+M1-CP1合同首切片已Go，但不自动授权实现。后续业务实现、数据库、支付、部署和真实数据必须分别建立精确工作项并重新完成准入与独立验收。
