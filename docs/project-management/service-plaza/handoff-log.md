@@ -615,7 +615,9 @@ Handoff 运行规则见 `handoff-operating-mechanism.md`。首轮具体表单见
 - membership Contract Go：source `f7bce50ed33bab7de000352b2aa503a82d0a6dd1`，integration `953dd5241efcf62c3ca45f55761f260d1da8e1b6`；R2 checklist 28/28、exam100、15/15。
 - fixture Capability Go：source `98075d2767ec5d1a6f241087e0047973927904f7`，integration `e275cdbf52f2536cf68672172a7c046d50cceb9f`；只证明静态/Plan 安全能力，未执行环境写入。
 - R1 EOF 缺陷不复制到当前树；canonical manifest 引用 immutable `ae75d071` 的 original paths、Git blob 和 SHA，最终范围 `git diff --check` 通过。
-- M3 Entry 仍 No-Go：前后端尚需按 `club_status` / `membership_status` 分层完成独立实现和 combined local Go，随后才能另行授权可回滚部署与四身份 UAT。
+- 原 M3 Entry 状态字段 blocker 已由前后端分层 remediation 与 combined local Go 关闭；环境执行仍需独立 acceptance 工作项。
+- M2 状态分层 remediation 已关闭：frontend source `bba486a20872908675142fd73d95208861982672` / APP integration `4a9b42ee9be3655deda13603c5a2bf55a8eeb121`；backend source `49227de982d0dc417542652823449a454d380ac2` / backend integration `e41265905815082433e040412f3dd6b6b33dfede`。
+- Combined local Go 已达到；测试环境部署和四身份 UAT 仍须建立独立 M3 acceptance 工作项，不由本地 Go 自动授权。
 
 ## SP-H036：CA-SC 自建俱乐部测试环境 T0 验收派发
 

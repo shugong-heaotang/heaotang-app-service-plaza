@@ -48,9 +48,9 @@
 
 | 输入 | 当前事实 | 判断 |
 | --- | --- | --- |
-| APP integration | `953dd5241efcf62c3ca45f55761f260d1da8e1b6` | 当前权威基线已包含 SC R4、H2 M3 fixture capability 与 membership R2 Contract Go |
-| H2 frontend | `e06d5c6`，全量 `215/215` 与生产构建通过 | 本地/集成门禁已通过，不替代环境证据 |
-| Backend integration | H2 M2 `97d8bfc5`；当前 combined backend `98426ff83a1218080019faa377c152a81ecca437` | 本地/集成门禁已通过，不替代环境证据 |
+| APP integration | `4a9b42ee9be3655deda13603c5a2bf55a8eeb121` | membership R2、fixture capability 与状态分层前端已集成；225/225、双build、总合同通过 |
+| H2 frontend | source `bba486a20872908675142fd73d95208861982672` | `club_status` / `membership_status` 严格解析和旧 status 失败关闭已独立复核 Go |
+| Backend integration | `e41265905815082433e040412f3dd6b6b33dfede` | 状态分层 DTO 已集成；定向/全量 Go tests 与 vet 通过 |
 | SC safe DTO | backend `98426ff8` 与 APP 治理证据均已 integrated，测试环境 ready | 已关闭，不再是 H2 blocker |
 | M3 governance | membership R2 checklist completed/exam100；fixture capability 已独立复核并集成 | 允许准备；仍未授权环境执行 |
 
