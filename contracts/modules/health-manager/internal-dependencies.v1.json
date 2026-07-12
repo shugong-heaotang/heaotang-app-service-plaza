@@ -292,9 +292,9 @@
       "depends_on": ["m1.vertical-slice-contract", "m1.professional-boundaries-contract", "m1.synthetic-scenarios-contract"],
       "contracts": ["docs/project-management/modules/health-manager/health-manager-mvp90-m1-handoff.md"],
       "evidence": [
-        "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p1-r2.json",
-        "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p1-r2-attempt-1.json",
-        "contracts/modules/health-manager/implementation-records/2026-07-12-health-mvp90-m1-p1.json",
+        "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p1-r3.json",
+        "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p1-r3-attempt-1.json",
+        "contracts/modules/health-manager/implementation-records/2026-07-12-health-mvp90-m1-p1-r3.json",
         "docs/project-management/modules/health-manager/health-manager-mvp90-m1-conformance-report.md"
       ],
       "unresolved": ["等待平台独立复核 M1-P1"],

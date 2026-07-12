@@ -38,7 +38,7 @@
 - `professional-boundaries.v1` JSON/Schema：17 个精确专业动作边界；
 - `synthetic-pdcar-scenarios.v1` JSON/Schema：15 个精确场景；
 - 固定 seed 的 15 个合成夹具；
-- 8 项本地 conformance 与缺失 ID、范围逃逸、提前 executable 的负向验证。
+- 11 项本地 conformance：除缺失 ID、范围逃逸、提前 executable 外，新增专业语义漂移、错误源指针和 fixture 重复/引用负例。
 
 ## P1 请求平台复核
 

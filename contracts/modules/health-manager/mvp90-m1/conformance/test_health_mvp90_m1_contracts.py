@@ -20,6 +20,56 @@ def validate(instance, schema):
     return list(Draft202012Validator(schema, format_checker=FormatChecker()).iter_errors(instance))
 
 
+def resolve_ref(ref: str):
+    path_text, pointer = ref.split("#", 1)
+    value = load(ROOT / path_text)
+    for token in pointer.lstrip("/").split("/") if pointer else []:
+        token = token.replace("~1", "/").replace("~0", "~")
+        value = value[int(token)] if isinstance(value, list) else value[token]
+    return value
+
+
+def assert_boundary_consistency(contract, signed_decision):
+    signed_by_id = {item["action_id"]: item for item in signed_decision["actions"]}
+    for boundary in contract["boundaries"]:
+        source = resolve_ref(contract["source_decision"] + boundary["source_pointer"])
+        assert source["action_id"] == boundary["action_id"]
+        assert source == signed_by_id[boundary["action_id"]]
+        assert source["ai"]["proposed_decision"] == boundary["ai"]
+        assert source["health_manager"]["proposed_decision"] == boundary["health_manager"]
+        assert source["doctor"]["proposed_decision"] == boundary["professional"]
+        assert source["fail_closed_result"] == boundary["fail_closed"]
+        assert source["transfer_escalation_responsibility"] == boundary["transfer_owner"]
+
+
+def assert_scenario_consistency(contract):
+    for scenario in contract["scenarios"]:
+        review = resolve_ref(scenario["review_source_ref"])
+        m0 = resolve_ref(scenario["m0_source_ref"])
+        assert review["scenario_id"] == scenario["scenario_id"]
+        assert m0["scenario_id"] == scenario["scenario_id"]
+        assert review["decision_status"] == scenario["professional_status"] == "Accepted"
+        assert review["title_zh"] == scenario["title_zh"]
+        assert review["proposed_safe_outcome"] == scenario["safe_outcome"]
+        assert review["proposed_forbidden_outcome"] == scenario["forbidden_outcome"]
+        assert review["stop_or_transfer_condition"] == scenario["stop_or_transfer"]
+
+
+def assert_fixture_consistency(fixtures):
+    records = fixtures["fixtures"]
+    assert len(records) == 15
+    expected_numbers = range(1, 16)
+    expected_fixture_ids = {f"HMM1-F{i:03d}" for i in expected_numbers}
+    expected_scenario_ids = {f"MVP-A{i:03d}" for i in expected_numbers}
+    expected_members = {f"syn-member-{i:03d}" for i in expected_numbers}
+    expected_requests = {f"syn-request-{i:03d}" for i in expected_numbers}
+    assert {x["fixture_id"] for x in records} == expected_fixture_ids
+    assert {x["scenario_id"] for x in records} == expected_scenario_ids
+    assert {x["member_ref"] for x in records} == expected_members
+    assert {x["request_ref"] for x in records} == expected_requests
+    assert all(len({x[field] for x in records}) == 15 for field in ("fixture_id", "scenario_id", "member_ref", "request_ref"))
+
+
 class HealthMvp90M1ContractsTest(unittest.TestCase):
     @classmethod
     def setUpClass(cls):
@@ -32,6 +82,7 @@ class HealthMvp90M1ContractsTest(unittest.TestCase):
         cls.security = load(M1 / "security-authorization.v1.json")
         cls.security_schema = load(M1 / "security-authorization.v1.schema.json")
         cls.fixtures = load(M1 / "conformance/fixtures/synthetic-pdcar-fixtures.v1.json")
+        cls.fixtures_schema = load(M1 / "conformance/fixtures/synthetic-pdcar-fixtures.v1.schema.json")
         cls.objects = load(M0 / "object-model.v1.json")
         cls.states = load(M0 / "state-machines.v1.json")
         cls.roles = load(M0 / "role-actions.v1.json")
@@ -46,6 +97,7 @@ class HealthMvp90M1ContractsTest(unittest.TestCase):
             (self.boundaries, self.boundaries_schema),
             (self.scenarios, self.scenarios_schema),
             (self.security, self.security_schema),
+            (self.fixtures, self.fixtures_schema),
         ):
             self.assertEqual([], validate(instance, schema))
 
@@ -78,17 +130,13 @@ class HealthMvp90M1ContractsTest(unittest.TestCase):
             self.assertLessEqual(set(step["professional_boundary_refs"]), boundary_ids)
 
     def test_professional_boundaries_are_faithful_to_signed_decision(self):
-        signed = {x["action_id"]: x for x in self.c4["actions"]}
-        for boundary in self.boundaries["boundaries"]:
-            source = signed[boundary["action_id"]]
-            self.assertEqual(source["ai"]["proposed_decision"], boundary["ai"])
-            self.assertEqual(source["health_manager"]["proposed_decision"], boundary["health_manager"])
-            self.assertEqual(source["doctor"]["proposed_decision"], boundary["professional"])
+        assert_boundary_consistency(self.boundaries, self.c4)
         self.assertEqual("Accepted", self.c4["decision_status"])
         self.assertEqual("Accepted", self.template["decision_status"])
         self.assertFalse(self.template["executable"])
 
     def test_scenarios_align_with_m0_and_professional_review(self):
+        assert_scenario_consistency(self.scenarios)
         m0 = {x["scenario_id"]: x for x in self.m0_scenarios["scenarios"]}
         professional = {x["scenario_id"]: x for x in self.professional_scenarios["scenarios"]}
         denial_ids = {x["condition"] for x in self.security["server_denial_matrix"]}
@@ -105,6 +153,7 @@ class HealthMvp90M1ContractsTest(unittest.TestCase):
     def test_fixed_seed_fixtures_are_synthetic_and_complete(self):
         self.assertTrue(self.fixtures["synthetic_only"])
         self.assertEqual(self.scenarios["seed"], self.fixtures["seed"])
+        assert_fixture_consistency(self.fixtures)
         scenario_fixture = {x["scenario_id"]: x["fixture_id"] for x in self.scenarios["scenarios"]}
         for fixture in self.fixtures["fixtures"]:
             self.assertEqual(scenario_fixture[fixture["scenario_id"]], fixture["fixture_id"])
@@ -140,6 +189,40 @@ class HealthMvp90M1ContractsTest(unittest.TestCase):
         mutations.append((executable, self.vertical_schema))
         for instance, schema in mutations:
             self.assertTrue(validate(instance, schema))
+
+    def test_boundary_semantic_drift_and_bad_pointer_are_rejected(self):
+        for field in ("fail_closed", "transfer_owner"):
+            mutation = copy.deepcopy(self.boundaries)
+            mutation["boundaries"][0][field] += " 漂移"
+            with self.assertRaises(AssertionError):
+                assert_boundary_consistency(mutation, self.c4)
+        mutation = copy.deepcopy(self.boundaries)
+        mutation["boundaries"][0]["source_pointer"] = "#/actions/1"
+        with self.assertRaises(AssertionError):
+            assert_boundary_consistency(mutation, self.c4)
+
+    def test_scenario_semantic_drift_and_bad_pointers_are_rejected(self):
+        for field in ("safe_outcome", "forbidden_outcome", "stop_or_transfer"):
+            mutation = copy.deepcopy(self.scenarios)
+            mutation["scenarios"][0][field] += " 漂移"
+            with self.assertRaises(AssertionError):
+                assert_scenario_consistency(mutation)
+        for field in ("review_source_ref", "m0_source_ref"):
+            mutation = copy.deepcopy(self.scenarios)
+            mutation["scenarios"][0][field] = mutation["scenarios"][1][field]
+            with self.assertRaises(AssertionError):
+                assert_scenario_consistency(mutation)
+
+    def test_fixture_duplicate_and_reference_mutations_are_rejected(self):
+        duplicate = copy.deepcopy(self.fixtures)
+        duplicate["fixtures"][-1] = copy.deepcopy(duplicate["fixtures"][0])
+        self.assertTrue(validate(duplicate, self.fixtures_schema))
+        with self.assertRaises(AssertionError):
+            assert_fixture_consistency(duplicate)
+        duplicate_member = copy.deepcopy(self.fixtures)
+        duplicate_member["fixtures"][-1]["member_ref"] = duplicate_member["fixtures"][0]["member_ref"]
+        with self.assertRaises(AssertionError):
+            assert_fixture_consistency(duplicate_member)
 
 
 if __name__ == "__main__":

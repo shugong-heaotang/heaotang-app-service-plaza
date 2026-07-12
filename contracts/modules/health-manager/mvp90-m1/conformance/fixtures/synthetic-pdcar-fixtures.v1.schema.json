@@ -1,0 +1,36 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://heaotang.cn/contracts/modules/health-manager/mvp90-m1/conformance/fixtures/synthetic-pdcar-fixtures.v1.schema.json",
+  "$defs":{
+    "fixtureId":{"enum":["HMM1-F001","HMM1-F002","HMM1-F003","HMM1-F004","HMM1-F005","HMM1-F006","HMM1-F007","HMM1-F008","HMM1-F009","HMM1-F010","HMM1-F011","HMM1-F012","HMM1-F013","HMM1-F014","HMM1-F015"]},
+    "scenarioId":{"enum":["MVP-A001","MVP-A002","MVP-A003","MVP-A004","MVP-A005","MVP-A006","MVP-A007","MVP-A008","MVP-A009","MVP-A010","MVP-A011","MVP-A012","MVP-A013","MVP-A014","MVP-A015"]}
+  },
+  "type":"object","additionalProperties":false,
+  "required":["contract_version","seed","synthetic_only","fixtures"],
+  "properties":{
+    "contract_version":{"const":"health-manager.mvp90-m1.synthetic-pdcar-fixtures.v1"},
+    "seed":{"const":"HM-MVP90-M1-P1-20260712"},
+    "synthetic_only":{"const":true},
+    "fixtures":{
+      "type":"array","minItems":15,"maxItems":15,
+      "items":{"type":"object","additionalProperties":false,"required":["fixture_id","scenario_id","member_ref","request_ref","input_flags","expected_result"],"properties":{"fixture_id":{"$ref":"#/$defs/fixtureId"},"scenario_id":{"$ref":"#/$defs/scenarioId"},"member_ref":{"type":"string","pattern":"^syn-member-(?:00[1-9]|01[0-5])$"},"request_ref":{"type":"string","pattern":"^syn-request-(?:00[1-9]|01[0-5])$"},"input_flags":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","minLength":1}},"expected_result":{"type":"string","minLength":1}}},
+      "allOf":[
+        {"contains":{"properties":{"fixture_id":{"const":"HMM1-F001"},"scenario_id":{"const":"MVP-A001"}},"required":["fixture_id","scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"fixture_id":{"const":"HMM1-F002"},"scenario_id":{"const":"MVP-A002"}},"required":["fixture_id","scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"fixture_id":{"const":"HMM1-F003"},"scenario_id":{"const":"MVP-A003"}},"required":["fixture_id","scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"fixture_id":{"const":"HMM1-F004"},"scenario_id":{"const":"MVP-A004"}},"required":["fixture_id","scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"fixture_id":{"const":"HMM1-F005"},"scenario_id":{"const":"MVP-A005"}},"required":["fixture_id","scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"fixture_id":{"const":"HMM1-F006"},"scenario_id":{"const":"MVP-A006"}},"required":["fixture_id","scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"fixture_id":{"const":"HMM1-F007"},"scenario_id":{"const":"MVP-A007"}},"required":["fixture_id","scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"fixture_id":{"const":"HMM1-F008"},"scenario_id":{"const":"MVP-A008"}},"required":["fixture_id","scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"fixture_id":{"const":"HMM1-F009"},"scenario_id":{"const":"MVP-A009"}},"required":["fixture_id","scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"fixture_id":{"const":"HMM1-F010"},"scenario_id":{"const":"MVP-A010"}},"required":["fixture_id","scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"fixture_id":{"const":"HMM1-F011"},"scenario_id":{"const":"MVP-A011"}},"required":["fixture_id","scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"fixture_id":{"const":"HMM1-F012"},"scenario_id":{"const":"MVP-A012"}},"required":["fixture_id","scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"fixture_id":{"const":"HMM1-F013"},"scenario_id":{"const":"MVP-A013"}},"required":["fixture_id","scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"fixture_id":{"const":"HMM1-F014"},"scenario_id":{"const":"MVP-A014"}},"required":["fixture_id","scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"fixture_id":{"const":"HMM1-F015"},"scenario_id":{"const":"MVP-A015"}},"required":["fixture_id","scenario_id"]},"minContains":1,"maxContains":1}
+      ]
+    }
+  }
+}

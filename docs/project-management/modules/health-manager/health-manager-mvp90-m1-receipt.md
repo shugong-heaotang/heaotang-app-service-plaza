@@ -60,6 +60,7 @@
 - 专业边界：17/17，与 C4-H01 三角色决策逐项一致；
 - 场景：MVP-A001—A015 15/15，与 M0 和真人专业复核逐项一致；
 - 夹具：15/15 固定 seed 合成记录；
-- conformance：8 tests PASS；
-- 最终 current checklist：`2026-07-12-health-mvp90-m1-p1-r2.json`；
-- 最终 current exam：`2026-07-12-health-mvp90-m1-p1-r2-attempt-1.json`，score 100。
+- conformance：11 tests PASS；
+- P1 R2：平台 Exact revision 的历史缺陷快照，保持不改写；
+- 最终 current checklist：`2026-07-12-health-mvp90-m1-p1-r3.json`；
+- 最终 current exam：`2026-07-12-health-mvp90-m1-p1-r3-attempt-1.json`，score 100。
