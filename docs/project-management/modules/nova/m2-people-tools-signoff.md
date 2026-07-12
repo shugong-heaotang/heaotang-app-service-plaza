@@ -4,7 +4,7 @@
 - notice：`NOVA-M2-PEOPLE-TOOLS-TASK-20260712-001`
 - 日期：2026-07-12
 - 会签范围：四项 NOVA 工具与服务端结果 callback 的版本化合同
-- 契约包结论：`Contract Package Go`
+- 契约包结论：`Exact Revision Complete / Platform Re-review Pending`
 - M2 总结论：`No-Go`
 - executable：`false`
 
@@ -56,12 +56,21 @@
 合成一致性覆盖：
 
 - 四工具与 callback 正例 5/5；
-- 身份伪造、tenant 串流、字段越权、确认票据、幂等、资源权限、callback 身份/冲突、legacy route 和安全重放负例 19/19；
-- Python conformance 11/11；
+- 身份伪造、tenant 串流、字段越权、未请求字段、确认票据、幂等、资源权限、callback 身份/冲突、legacy route、敏感输出和安全重放负例 27/27；
+- Python conformance 13/13；
 - error catalog 稳定错误 26/26；
-- current checklist 26/26，随机治理考试 100 分。
+- R2 current checklist 26/26，R2 随机治理考试 100 分。
 
-## 5. 可证伪前提与复审触发
+## 5. Exact revision 根因关闭
+
+平台首次独立复核对提交 `fd6c7ad588ef8f019e0b3a779487f22b547822f7` 给出 No-Go，R1 检查单、考试和 IR 保持不可变。本 R2 关闭两项根因：
+
+1. `member_search.items` 与 `connection_status.result_summary` 原先接受任意 object，且 draft preview/manifest 没有机器白名单。R2 为三处建立 `additionalProperties=false`、稳定字段集合和请求条件一致性检查，并增加 phone、email、government_id、private_notes、raw_health_text、draft manifest/preview 负例；
+2. R1 的 19 条负例只检查数量和 error_id 是否存在，没有执行 target/condition。R2 发布严格负例 Fixture Schema、结构化 mutation 和逐项 evaluator；unknown target、unknown rule、wrong target、wrong error 均必须失败。
+
+问题模式登记为 `NOVA-M2-CONTRACT-NEGATIVE-FIXTURE-NONEXECUTABLE`，当前为首次发现；若同类“负例仅计数不执行”再次出现，必须登记 recurring issue 并升级系统性门禁。
+
+## 6. 可证伪前提与复审触发
 
 前提：
 
@@ -79,6 +88,6 @@
 - 新增可见字段、事件类型、必填字段或改变既有语义；
 - 发现真实数据、凭据或真实消息进入本合同测试。
 
-## 6. 下一门禁
+## 7. 下一门禁
 
-平台只有在独立人脉 Owner 裁决 Accepted、迁移/禁用方案可验证，并由 provider 实现通过后端、测试环境和安全验收后，才可评估 M2 的下一阶段。聊天确认、代码存在或本次 Contract Package Go 均不能替代上述证据。
+平台只有在本 R2 独立复核通过、人脉 Owner 裁决 Accepted、迁移/禁用方案可验证，并由 provider 实现通过后端、测试环境和安全验收后，才可评估 M2 的下一阶段。聊天确认、代码存在或本次契约修复均不能替代上述证据。

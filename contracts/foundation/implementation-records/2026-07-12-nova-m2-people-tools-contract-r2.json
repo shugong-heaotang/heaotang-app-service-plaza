@@ -1,0 +1,91 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-NOVA-M2-PEOPLE-TOOLS-CONTRACT-R2",
+  "title": "NOVA M2 人脉工具输出白名单与可执行负例 Exact revision",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "关闭平台独立复核发现的任意 object 敏感字段泄漏与负例只计数不执行根因，建立严格输出白名单、结构化 mutation fixtures、稳定错误映射和防伪负例。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-nova-m2-people-tools-contract-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-nova-m2-people-tools-contract-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-nova-m2-people-tools-task-order.md",
+    "docs/project-management/modules/nova/m2-people-tools-signoff.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.contract-tooling",
+    "foundation.authorization-idempotency"
+  ],
+  "contracts": [
+    "contracts/service-plaza/nova/nova-people-tools.v1.json",
+    "contracts/service-plaza/nova/nova-people-tools.v1.schema.json",
+    "contracts/service-plaza/nova/nova-people-tool-errors.v1.json",
+    "contracts/service-plaza/nova/nova-people-tool-errors.v1.schema.json",
+    "contracts/service-plaza/nova/nova-connection-callback.v1.json",
+    "contracts/service-plaza/nova/nova-connection-callback.v1.schema.json",
+    "contracts/service-plaza/nova/fixtures/m2/negative-cases.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/project-management/modules/nova/m2-people-tools-signoff.md"
+  ],
+  "changed_areas": [
+    "contracts/service-plaza/nova/nova-people-tools.v1.json",
+    "contracts/service-plaza/nova/nova-people-tool-errors.v1.json",
+    "contracts/service-plaza/nova/fixtures/m2/positive-invocations.v1.json",
+    "contracts/service-plaza/nova/fixtures/m2/negative-cases.v1.json",
+    "contracts/service-plaza/nova/fixtures/m2/negative-cases.v1.schema.json",
+    "contracts/service-plaza/nova/test_nova_people_tools.py",
+    "docs/project-management/modules/nova/m2-people-tools-signoff.md",
+    "contracts/foundation/development-checklists/2026-07-12-nova-m2-people-tools-contract-r2.json",
+    "contracts/foundation/governance-exams/2026-07-12-nova-m2-people-tools-contract-r2-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-12-nova-m2-people-tools-contract-r2.json"
+  ],
+  "verification": [
+    "scripts/Test-AgentDevelopmentPreflight.ps1: ready",
+    "FC-20260712-NOVA-M2-PEOPLE-TOOLS-CONTRACT-R2: 26/26 completed",
+    "EX-20260712-NOVA-M2-PEOPLE-TOOLS-CONTRACT-R2-1: score 100",
+    "python -X utf8 -m unittest contracts/service-plaza/nova/test_nova_people_tools.py -v: 13/13 passed",
+    "27/27 structured negative fixtures executed with exact result mapping",
+    "unknown target unknown rule wrong target and wrong error all rejected",
+    "scripts/validate_development_checklists.py",
+    "scripts/validate_governance_exams.py",
+    "scripts/validate_implementation_records.py",
+    "scripts/validate_agent_collaboration.py",
+    "scripts/Test-ServicePlazaContracts.ps1",
+    "scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/service-plaza/nova/fixtures/m2/positive-invocations.v1.json",
+    "contracts/service-plaza/nova/fixtures/m2/negative-cases.v1.json",
+    "contracts/service-plaza/nova/fixtures/m2/negative-cases.v1.schema.json",
+    "contracts/service-plaza/nova/test_nova_people_tools.py",
+    "docs/project-management/modules/nova/m2-people-tools-signoff.md",
+    "contracts/foundation/development-checklists/2026-07-12-nova-m2-people-tools-contract-r2.json",
+    "contracts/foundation/governance-exams/2026-07-12-nova-m2-people-tools-contract-r2-attempt-1.json"
+  ],
+  "premises": [
+    "R1 提交 fd6c7ad 的治理快照和 IR 保持不可变，R2 是独立 current 证据链",
+    "输出字段名白名单与请求条件一致性必须由机器检查，不能只依靠 redacted_fields 文档",
+    "负例必须实际执行结构化 mutation 并验证 target condition 和稳定 error mapping",
+    "unknown target unknown rule wrong target 和 wrong error 必须失败，不能依赖 case_id 或描述文本推断",
+    "canonical Owner 依赖虽已独立处理但 provider 实现仍未授权，所有合同继续 executable=false，M2 继续 No-Go",
+    "本修复不访问真实数据、不发送消息、不修改 registry 或业务代码"
+  ],
+  "implementation_mode": "ai-assisted"
+}
