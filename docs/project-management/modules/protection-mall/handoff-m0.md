@@ -1,8 +1,10 @@
 # 保障商城 M0 Handoff
 
-状态：Active / M0-CP1 待执行  
-work_id：`AIW-20260712-PROTECTION-MALL-M0`  
-base：`de31a235b9679698b9de4e33faa6ab980e0461f6`
+状态：Active / R3 correction 待平台会签与独立验收
+
+work_id：`AIW-20260712-PROTECTION-MALL-M0-R3-CORRECTION`
+
+activation HEAD：`b27713d10cd35e846fb1f9252e47dc7ea75845f6`
 
 ## 已完成
 
@@ -10,14 +12,37 @@ base：`de31a235b9679698b9de4e33faa6ab980e0461f6`
 - 商城专用分支、独立工作树、负责人、允许路径和独立验收角色已指定。
 - 服务广场预留入口五项固定值已写入任务书。
 - 本地商城建议稿已纳入 M0 官方留存范围。
+- 平台已将无效 R1 证据按原始 SHA 不可变归档，并把模块证据所有权移回 `contracts/modules/protection-mall/`。
+- 新干净工作树完成 current checklist 和 100 分治理考试。
+- `internal-dependencies.v2` 已从权威基线逐项重建，五维 readiness 为 governance=go、development=partial-go、acceptance/release/operations=no-go。
+- README 与同 record_id 模块实施记录已重建。
 
 ## 当前检查点
 
-完成来源只读盘点、迁移矩阵、商城接入卡和 `mall.api.v1` 契约冻结提案；完成准入 checklist 与 100 分治理考试后请求平台会签。
+请求平台复核 v2 依赖合同、模块证据路径和冻结入口；请求 APP 总架构独立验收 Agent 给出 R3 Go/No-Go。
+
+## R3证据
+
+- checklist：`contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m0-r3-correction.json`
+- exam：`contracts/modules/protection-mall/governance-exams/2026-07-12-protection-mall-m0-r3-correction-attempt-1.json`，100 分
+- implementation record：`contracts/modules/protection-mall/implementation-records/2026-07-12-protection-mall-m0-r3-correction.json`
+
+## 旧成果处置
+
+- `6bce98f` 不集成、不 cherry-pick，仅为失败历史和只读差异来源。
+- 旧工作树未提交候选保持封存，不暂存、不提交、不reset、不移动。
+- R1/R2 foundation 证据由平台治理工作项处置；本模块不修改受保护归档。
+
+## Readiness
+
+- governance：Go
+- development：Partial Go，仅允许M0合同与证据纠正
+- acceptance、release、operations：No-Go
+- M1：No-Go，尚无业务代码授权
 
 ## 禁止事项
 
-不得整体暂存本地商城工作区，不得覆盖或强推不同历史，不得自行修改服务广场受保护协议，不得部署、接入真实支付或处理真实会员数据。
+不得整体暂存本地商城工作区，不得覆盖或强推不同历史，不得自行修改服务广场受保护协议，不得部署、接入真实支付或处理真实会员数据。不得把本R3解释为M1或上线授权。
 
 ## 下一授权
 

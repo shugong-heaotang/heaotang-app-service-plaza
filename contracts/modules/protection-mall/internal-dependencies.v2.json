@@ -1,0 +1,113 @@
+{
+  "contract_version": "module-internal-dependencies.v2",
+  "module_id": "protection-mall",
+  "module_version": "v1",
+  "slice_id": "m0-r3-correction",
+  "readiness": {
+    "governance": "go",
+    "development": "partial-go",
+    "acceptance": "no-go",
+    "release": "no-go",
+    "operations": "no-go"
+  },
+  "dependencies": [
+    {
+      "dependency_id": "pm.governance-entry",
+      "kind": "governance",
+      "description": "R3 active work item, isolated clean worktree, current module checklist, 100-point exam and same-record implementation evidence",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": [],
+      "contracts": ["docs/project-management/notices/2026-07-12-protection-mall-m0-task-order.md"],
+      "evidence": ["contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m0-r3-correction.json", "contracts/modules/protection-mall/governance-exams/2026-07-12-protection-mall-m0-r3-correction-attempt-1.json"],
+      "unresolved": ["platform signoff and independent M0 acceptance pending"],
+      "owner": "商城板块唯一负责人",
+      "blocks": ["pm.m1-activation"],
+      "does_not_block": ["pm.source-boundary", "pm.service-boundary", "pm.api-boundary"]
+    },
+    {
+      "dependency_id": "pm.source-boundary",
+      "kind": "governance",
+      "description": "Legacy mall workspace remains untrusted read-only input; immutable invalidated evidence is owned by the platform evidence work item",
+      "status": "accepted",
+      "required_for_slice": true,
+      "depends_on": ["pm.governance-entry"],
+      "contracts": ["docs/project-management/modules/protection-mall/handoff-m0.md"],
+      "evidence": ["docs/project-management/modules/protection-mall/handoff-m0.md"],
+      "unresolved": [],
+      "owner": "商城板块唯一负责人",
+      "blocks": ["pm.controlled-migration"],
+      "does_not_block": ["pm.service-boundary", "pm.api-boundary"]
+    },
+    {
+      "dependency_id": "pm.service-boundary",
+      "kind": "interface",
+      "description": "Service Plaza entry remains protection-mall at /services/protection-mall with shared session, /services return, fixed telemetry and planned lifecycle",
+      "status": "standardized",
+      "required_for_slice": true,
+      "depends_on": ["pm.governance-entry"],
+      "contracts": ["docs/project-management/notices/2026-07-12-protection-mall-m0-task-order.md"],
+      "evidence": ["docs/project-management/modules/protection-mall/handoff-m0.md"],
+      "unresolved": ["lifecycle may change only through a later platform-owned signoff"],
+      "owner": "平台集成负责人",
+      "blocks": ["pm.m1-activation"],
+      "does_not_block": ["pm.source-boundary", "pm.api-boundary"]
+    },
+    {
+      "dependency_id": "pm.api-boundary",
+      "kind": "contract",
+      "description": "mall.api.v1 must use the platform envelope, request and correlation IDs, real authorization sources, atomic idempotency, redacted audit, fail-closed configuration and compatible evolution",
+      "status": "standardized",
+      "required_for_slice": true,
+      "depends_on": ["pm.governance-entry", "pm.service-boundary"],
+      "contracts": ["docs/project-management/modules/protection-mall/商城会员店方案吸收与1.0服务广场接入收口方案.md"],
+      "evidence": ["docs/project-management/modules/protection-mall/handoff-m0.md"],
+      "unresolved": ["concrete scope names require platform authorization-source signoff in M1"],
+      "owner": "商城板块唯一负责人",
+      "blocks": ["pm.m1-activation"],
+      "does_not_block": ["pm.source-boundary"]
+    },
+    {
+      "dependency_id": "pm.domain-state-machines",
+      "kind": "workflow",
+      "description": "Product responsibility, inventory, order, fulfillment, after-sale and assurance-benefit rollback state machines",
+      "status": "draft",
+      "required_for_slice": false,
+      "depends_on": ["pm.api-boundary"],
+      "contracts": ["docs/project-management/modules/protection-mall/商城会员店方案吸收与1.0服务广场接入收口方案.md"],
+      "evidence": [],
+      "unresolved": ["M1 domain contract, conformance cases and code work item are not authorized"],
+      "owner": "商城板块唯一负责人",
+      "blocks": ["pm.m1-business-code", "pm.acceptance"],
+      "does_not_block": ["pm.m0-r3-signoff"]
+    },
+    {
+      "dependency_id": "pm.payment-security",
+      "kind": "acceptance",
+      "description": "Payment security, fund state machine, callback signature verification, replay protection and reconciliation",
+      "status": "pending",
+      "required_for_slice": false,
+      "depends_on": ["pm.domain-state-machines"],
+      "contracts": ["docs/project-management/notices/2026-07-12-protection-mall-m0-task-order.md"],
+      "evidence": [],
+      "unresolved": ["independent payment and finance acceptance work items are required"],
+      "owner": "平台安全与财务负责人",
+      "blocks": ["pm.real-payment", "pm.release", "pm.operations"],
+      "does_not_block": ["pm.m0-r3-signoff", "pm.non-payment-design"]
+    },
+    {
+      "dependency_id": "pm.final-handoff",
+      "kind": "handoff",
+      "description": "R3 correction must receive platform signoff and independent architecture acceptance before M1 activation",
+      "status": "implemented",
+      "required_for_slice": false,
+      "depends_on": ["pm.governance-entry", "pm.source-boundary", "pm.service-boundary", "pm.api-boundary"],
+      "contracts": ["docs/project-management/modules/protection-mall/handoff-m0.md"],
+      "evidence": ["contracts/modules/protection-mall/implementation-records/2026-07-12-protection-mall-m0-r3-correction.json"],
+      "unresolved": ["platform signoff pending", "independent architecture acceptance pending"],
+      "owner": "商城板块唯一负责人",
+      "blocks": ["pm.m1-activation"],
+      "does_not_block": ["other-module-non-overlapping-work"]
+    }
+  ]
+}
