@@ -42,7 +42,8 @@ export function ClubAllianceRoute({ repository = serviceCatalogRepository, membe
   const [catalogState, setCatalogState] = useState<CatalogState>({ status: "loading" });
   const [memberHome, setMemberHome] = useState<MemberHomeModel>({ state: "loading" });
   const retry = useCallback(() => setRequestVersion((current) => current + 1), []);
-  const isMemberHome = new URLSearchParams(location.search).size === 0;
+  const isEmptyQuery = new URLSearchParams(location.search).size === 0;
+  const shouldLoadMemberHome = isEmptyQuery && runtime.session.authenticated;
 
   useEffect(() => {
     let active = true;
@@ -62,16 +63,12 @@ export function ClubAllianceRoute({ repository = serviceCatalogRepository, membe
   }, [repository, requestVersion]);
 
   useEffect(() => {
-    if (!isMemberHome || catalogState.status !== "ready") return;
+    if (!shouldLoadMemberHome || catalogState.status !== "ready") return;
     let active = true;
     const controller = new AbortController();
     try {
       const view = deriveClubAllianceActions(catalogState.actions);
       const explore = view.categories.map((action) => ({ actionId: action.action_id, label: action.label, href: action.target }));
-      if (!runtime.session.authenticated) {
-        setMemberHome({ state: "unauthorized", message: "请先完成登录。", explore });
-        return () => controller.abort();
-      }
       setMemberHome({ state: "loading", explore });
       void memberHomeLoader(explore, controller.signal)
         .then((model) => { if (active) setMemberHome(model); })
@@ -80,13 +77,13 @@ export function ClubAllianceRoute({ repository = serviceCatalogRepository, membe
       setMemberHome(memberHomeFailure(reason));
     }
     return () => { active = false; controller.abort(); };
-  }, [catalogState, isMemberHome, memberHomeLoader, requestVersion, runtime.session.authenticated]);
+  }, [catalogState, memberHomeLoader, requestVersion, shouldLoadMemberHome]);
 
   const model = useMemo<ClubAlliancePageModel>(() => {
     if (catalogState.status !== "ready") return catalogState;
     try {
       const view = deriveClubAllianceActions(catalogState.actions);
-      if (isMemberHome) return { status: "member-home", actions: catalogState.actions, memberHome };
+      if (shouldLoadMemberHome) return { status: "member-home", actions: catalogState.actions, memberHome };
       const selection = resolveClubAllianceQuery(location.search, view.categories, view.management);
       if (selection.mode === "home") return { status: "home", actions: catalogState.actions, categories: view.categories, management: view.management };
       const selected = selection.selected_action_id === view.management.action_id
@@ -101,7 +98,7 @@ export function ClubAllianceRoute({ repository = serviceCatalogRepository, membe
     } catch (reason) {
       return errorState(reason);
     }
-  }, [catalogState, isMemberHome, location.search, memberHome, runtime.session]);
+  }, [catalogState, location.search, memberHome, runtime.session, shouldLoadMemberHome]);
 
   return <ClubAlliancePage model={model} onRetry={retry} />;
 }
