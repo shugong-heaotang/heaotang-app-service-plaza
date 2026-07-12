@@ -1,7 +1,7 @@
 {
   "contract_version": "project-brain.snapshot.v1",
-  "generated_at": "2026-07-12T11:54:17.208635Z",
-  "source_commit": "b393151c6aa873c9cace5822613261fd25df6710",
+  "generated_at": "2026-07-12T14:08:20.170532Z",
+  "source_commit": "7a3f254bebe18f37a7b85163b096f37b68612900",
   "overall_verdict": "no-go",
   "source_freshness": "current",
   "modules": [
@@ -118,17 +118,10 @@
   "work_summary": {
     "active": 7,
     "handoff-ready": 2,
-    "integrated": 61
+    "integrated": 87,
+    "planned": 2
   },
   "active_work": [
-    {
-      "work_id": "AIW-20260711-HEALTH-PLATFORM-SAFETY-BACKEND",
-      "title": "健康接口输入缓存与 AI 失败关闭后端实现",
-      "owner_role": "平台后端负责人",
-      "status": "active",
-      "branch": "codex/health-manager-platform-safety",
-      "handoff_record": "docs/project-management/service-plaza/health-platform-safety-2026-07-11.md"
-    },
     {
       "work_id": "AIW-20260711-HEALTH-V1-REQUIREMENTS-DOCS",
       "title": "健康大管家 V1.0 PDCAR 需求策划文档归档与 GitHub 发布",
@@ -157,41 +150,65 @@
       "work_id": "AIW-20260712-CLUB-MEMBER-HOME-H2",
       "title": "俱乐部联盟 H2 会员工作台双层首页",
       "owner_role": "俱乐部联盟负责人",
-      "status": "active",
+      "status": "planned",
       "branch": "codex/club-member-home-h2",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h035俱乐部联盟-h2-会员首页需求变更与派发"
     },
     {
-      "work_id": "AIW-20260712-CLUB-SC-T0-REMEDIATION",
-      "title": "CA-SC T0 唯一 run、数据库恢复与浏览器证据修复",
+      "work_id": "AIW-20260712-CLUB-MEMBER-HOME-M3-ACCEPTANCE",
+      "title": "H2 会员首页测试环境四身份验收",
       "owner_role": "平台集成负责人",
       "status": "active",
-      "branch": "codex/club-sc-t0-remediation",
-      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h036ca-sc自建俱乐部测试环境-t0-验收派发"
+      "branch": "codex/club-member-home-m3-acceptance",
+      "handoff_record": "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md"
     },
     {
-      "work_id": "AIW-20260712-CLUB-SC-LIST-SAFE-DTO-BACKEND",
-      "title": "CA-SC 自建俱乐部列表安全 DTO 根因修复",
+      "work_id": "AIW-20260712-PROTECTION-MALL-M0",
+      "title": "保障商城持续开发启动与 M0 接入契约冻结",
+      "owner_role": "商城板块唯一负责人",
+      "status": "planned",
+      "branch": "codex/protection-mall-m0",
+      "handoff_record": "docs/project-management/modules/protection-mall/handoff-m0.md"
+    },
+    {
+      "work_id": "AIW-20260712-NOVA-M2-NETWORK-READ-PROVIDER-BACKEND",
+      "title": "NOVA M2 member_search Network 读侧 Provider",
       "owner_role": "平台后端负责人",
       "status": "active",
-      "branch": "codex/club-sc-list-safe-dto-backend",
-      "handoff_record": "docs/project-management/service-plaza/club-sc-list-safe-dto-2026-07-12.md"
+      "branch": "codex/nova-m2-network-read-provider",
+      "handoff_record": "docs/project-management/modules/network/network-read-provider-handoff.md"
     },
     {
-      "work_id": "AIW-20260712-CLUB-SC-LIST-SAFE-DTO-EVIDENCE",
-      "title": "CA-SC 自建俱乐部列表安全 DTO 治理与证据",
+      "work_id": "AIW-20260712-NOVA-M2-NETWORK-READ-PROVIDER-EVIDENCE",
+      "title": "NOVA M2 Network 读侧 Provider 跨仓治理证据",
       "owner_role": "平台集成负责人",
       "status": "active",
-      "branch": "codex/club-sc-list-safe-dto-evidence",
-      "handoff_record": "docs/project-management/service-plaza/club-sc-list-safe-dto-2026-07-12.md"
+      "branch": "codex/nova-m2-network-read-provider-evidence",
+      "handoff_record": "docs/project-management/modules/network/network-read-provider-handoff.md"
     },
     {
-      "work_id": "AIW-20260712-PROJECT-BRAIN-V1",
-      "title": "Project Brain v1 统一知识入口、权威事实模型与只读驾驶舱",
+      "work_id": "AIW-20260712-NOVA-M2-SOCIAL-WRITE-PROVIDER-BACKEND",
+      "title": "NOVA M2 connection draft/send/status Social 写侧 Provider",
+      "owner_role": "平台后端负责人",
+      "status": "active",
+      "branch": "codex/nova-m2-social-write-provider",
+      "handoff_record": "docs/project-management/modules/network/social-write-provider-handoff.md"
+    },
+    {
+      "work_id": "AIW-20260712-NOVA-M2-SOCIAL-WRITE-PROVIDER-EVIDENCE",
+      "title": "NOVA M2 Social 写侧 Provider 跨仓治理证据",
       "owner_role": "平台集成负责人",
       "status": "active",
-      "branch": "codex/project-brain-v1",
-      "handoff_record": "docs/project-management/project-brain/handoff-v1.md"
+      "branch": "codex/nova-m2-social-write-provider-evidence",
+      "handoff_record": "docs/project-management/modules/network/social-write-provider-handoff.md"
+    },
+    {
+      "work_id": "AIW-20260712-NOVA-M2-MIGRATION-DISABLE-DRILL",
+      "title": "NOVA M2 introductions 单向迁移与 legacy 禁用演练",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "branch": "codex/nova-m2-migration-disable-drill",
+      "handoff_record": "docs/project-management/modules/network/migration-drill-handoff.md"
     }
   ],
   "pending_decisions": [],
@@ -265,88 +282,88 @@
   ],
   "recent_integrations": [
     {
-      "work_id": "AIW-20260712-CLUB-SC-FIRST-CLOSURE-BACKEND",
-      "title": "CA-SC 自建俱乐部详情边界与本人状态后端闭环",
-      "owner_role": "平台后端负责人",
+      "work_id": "AIW-20260712-PROTECTION-MALL-M0-R3-CORRECTION",
+      "title": "保障商城 M0 R3 模块证据与依赖纠正",
+      "owner_role": "商城板块唯一负责人",
       "status": "integrated",
-      "branch": "codex/club-sc-first-closure-backend",
-      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h034-ca-sc自建俱乐部首个会员侧闭环"
+      "branch": "codex/protection-mall-m0-r3-correction",
+      "handoff_record": "docs/project-management/modules/protection-mall/handoff-m0.md"
     },
     {
-      "work_id": "AIW-20260712-CLUB-SC-FIRST-CLOSURE-BACKEND-EVIDENCE",
-      "title": "CA-SC 自建俱乐部后端实现治理与证据",
+      "work_id": "AIW-20260712-PROTECTION-MALL-M1-CONTRACTS",
+      "title": "保障商城 M1 责任边界、状态机与 mall.api.v1 合同首切片",
+      "owner_role": "商城板块唯一负责人",
+      "status": "integrated",
+      "branch": "codex/protection-mall-m1-contracts",
+      "handoff_record": "docs/project-management/modules/protection-mall/handoff-m1.md"
+    },
+    {
+      "work_id": "AIW-20260712-HEALTH-MVP90-M1-P2-DISPATCH",
+      "title": "健康大管家 MVP-90 M1 P2 合成运行内核规划与派发",
       "owner_role": "平台集成负责人",
       "status": "integrated",
-      "branch": "codex/club-sc-first-closure-backend-evidence",
-      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h034-ca-sc自建俱乐部首个会员侧闭环"
+      "branch": "codex/health-mvp90-m1-p2-dispatch",
+      "handoff_record": "docs/project-management/service-plaza/health-mvp90-m1-p2-dispatch-2026-07-12.md"
     },
     {
-      "work_id": "AIW-20260712-CLUB-SC-FIRST-CLOSURE-FRONTEND",
-      "title": "CA-SC 自建俱乐部会员侧列表详情加入与本人状态页面",
-      "owner_role": "俱乐部联盟自建俱乐部前端负责人",
+      "work_id": "AIW-20260712-HEALTH-MVP90-M1-P2-SYNTHETIC-REPLAY",
+      "title": "健康大管家 MVP-90 M1 P2 确定性合成 PDCAR 重放",
+      "owner_role": "健康大管家负责人",
       "status": "integrated",
-      "branch": "codex/club-sc-first-closure-frontend",
-      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h034-ca-sc自建俱乐部首个会员侧闭环"
+      "branch": "codex/health-manager-mvp90-m1-p2-synthetic-replay",
+      "handoff_record": "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-handoff.md"
     },
     {
-      "work_id": "AIW-20260712-CLUB-MEMBER-HOME-DISPATCH",
-      "title": "俱乐部联盟 H2 会员首页需求变更与正式派发",
+      "work_id": "AIW-20260712-NOVA-M2-PEOPLE-TOOLS-DISPATCH",
+      "title": "NOVA M2 人脉 Owner 与四工具契约平台派发",
       "owner_role": "平台集成负责人",
       "status": "integrated",
-      "branch": "codex/club-member-home-dispatch",
-      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h035俱乐部联盟-h2-会员首页需求变更与派发"
+      "branch": "codex/nova-m2-people-tools-dispatch",
+      "handoff_record": "docs/project-management/service-plaza/nova-m2-people-tools-dispatch-2026-07-12.md"
     },
     {
-      "work_id": "AIW-20260712-CLUB-MEMBER-HOME-M1-DISPATCH",
-      "title": "俱乐部联盟 H2-M1 独立页面壳派发",
+      "work_id": "AIW-20260712-NETWORK-CANONICAL-OWNER-DECISION",
+      "title": "人脉 canonical 实现、唯一 Owner 与 legacy 迁移禁用裁决",
+      "owner_role": "人脉板块唯一负责人",
+      "status": "integrated",
+      "branch": "codex/network-canonical-owner-decision",
+      "handoff_record": "docs/project-management/notices/2026-07-12-nova-m2-people-tools-task-order.md"
+    },
+    {
+      "work_id": "AIW-20260712-NOVA-M2-PEOPLE-TOOLS-CONTRACT",
+      "title": "NOVA M2 人脉四工具与结果 callback 版本化契约会签",
       "owner_role": "平台集成负责人",
       "status": "integrated",
-      "branch": "codex/club-member-home-m1-dispatch",
-      "handoff_record": "docs/project-management/notices/2026-07-12-club-member-home-m1-task-order.md"
+      "branch": "codex/nova-m2-people-tools-contract",
+      "handoff_record": "docs/project-management/notices/2026-07-12-nova-m2-people-tools-task-order.md"
     },
     {
-      "work_id": "AIW-20260712-CLUB-SC-T0-PREREQUISITES",
-      "title": "CA-SC 测试环境验收前合同勘误与深链打包根因修复",
+      "work_id": "AIW-20260712-NOVA-M2-PROVIDER-DISPATCH",
+      "title": "NOVA M2 三包 Provider 与迁移演练正式派发",
       "owner_role": "平台集成负责人",
       "status": "integrated",
-      "branch": "codex/club-sc-t0-prerequisites",
-      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h034-ca-sc自建俱乐部首个会员侧闭环"
+      "branch": "codex/nova-m2-provider-dispatch",
+      "handoff_record": "docs/project-management/service-plaza/nova-m2-provider-dispatch-2026-07-12.md"
     },
     {
-      "work_id": "AIW-20260712-CLUB-SC-T0-ACCEPTANCE-DISPATCH",
-      "title": "CA-SC 自建俱乐部测试环境 T0 验收正式派发",
+      "work_id": "AIW-20260712-GOVERNANCE-EXAM-RETRY-EVIDENCE",
+      "title": "治理考试重试前序失败与补课重读证据根因修复",
       "owner_role": "平台集成负责人",
       "status": "integrated",
-      "branch": "codex/club-sc-t0-acceptance-dispatch",
-      "handoff_record": "docs/project-management/notices/2026-07-12-club-sc-t0-acceptance-task-order.md"
+      "branch": "codex/governance-exam-retry-evidence",
+      "handoff_record": "docs/project-management/service-plaza/governance-exam-retry-evidence-2026-07-12.md"
     },
     {
-      "work_id": "AIW-20260712-CLUB-MEMBER-HOME-M2-DISPATCH-R4",
-      "title": "俱乐部联盟 H2-M2 后端聚合与正式入口派发",
+      "work_id": "AIW-20260712-PROJECT-BRAIN-V1",
+      "title": "Project Brain v1 统一知识入口、权威事实模型与只读驾驶舱",
       "owner_role": "平台集成负责人",
       "status": "integrated",
-      "branch": "codex/club-member-home-m2-dispatch",
-      "handoff_record": "docs/project-management/notices/2026-07-12-club-member-home-m2-runtime-task-order.md"
-    },
-    {
-      "work_id": "AIW-20260712-CLUB-MEMBER-HOME-BACKEND",
-      "title": "俱乐部联盟 H2 会员首页聚合接口",
-      "owner_role": "俱乐部联盟后端负责人",
-      "status": "integrated",
-      "branch": "codex/club-member-home-backend",
-      "handoff_record": "docs/project-management/modules/club-alliance/member-home/handoff-m2-backend.md"
-    },
-    {
-      "work_id": "AIW-20260712-CLUB-SC-T0-ACCEPTANCE",
-      "title": "CA-SC 自建俱乐部确定性合成数据与测试环境 T0 验收",
-      "owner_role": "平台集成负责人",
-      "status": "integrated",
-      "branch": "codex/club-sc-t0-acceptance",
-      "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h036ca-sc自建俱乐部测试环境-t0-验收派发"
+      "branch": "codex/project-brain-v1",
+      "handoff_record": "docs/project-management/project-brain/handoff-v1.md"
     }
   ],
   "audit_summary": {
-    "error": 3,
+    "error": 4,
     "warning": 7
   }
 }

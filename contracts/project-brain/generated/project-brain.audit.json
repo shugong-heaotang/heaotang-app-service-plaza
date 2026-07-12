@@ -1,7 +1,7 @@
 {
   "contract_version": "project-brain.audit.v1",
-  "generated_at": "2026-07-12T11:54:17.208635Z",
-  "source_commit": "b393151c6aa873c9cace5822613261fd25df6710",
+  "generated_at": "2026-07-12T14:08:20.170532Z",
+  "source_commit": "7a3f254bebe18f37a7b85163b096f37b68612900",
   "verdict": "no-go",
   "errors": [
     {
@@ -27,17 +27,17 @@
       "subject_id": "AIW-20260711-ACTION-TELEMETRY-BUSINESSCONFIG-EVIDENCE",
       "source_path": "contracts/foundation/agent-collaboration.v1.json",
       "message": "integrated work lacks a Handoff reference"
+    },
+    {
+      "rule_id": "PB-SCOPE-CONFLICT",
+      "severity": "error",
+      "subject_type": "work-pair",
+      "subject_id": "AIW-20260712-CLUB-MEMBER-HOME-H2|AIW-20260712-CLUB-MEMBER-HOME-M3-ACCEPTANCE",
+      "source_path": "contracts/foundation/agent-collaboration.v1.json",
+      "message": "active allowed paths overlap"
     }
   ],
   "warnings": [
-    {
-      "rule_id": "PB-WORK-NEXT",
-      "severity": "warning",
-      "subject_type": "work-item",
-      "subject_id": "AIW-20260711-HEALTH-PLATFORM-SAFETY-BACKEND",
-      "source_path": "contracts/foundation/agent-collaboration.v1.json",
-      "message": "active work lacks an explicit next checkpoint"
-    },
     {
       "rule_id": "PB-WORK-NEXT",
       "severity": "warning",
@@ -50,7 +50,7 @@
       "rule_id": "PB-WORK-NEXT",
       "severity": "warning",
       "subject_type": "work-item",
-      "subject_id": "AIW-20260712-CLUB-MEMBER-HOME-H2",
+      "subject_id": "AIW-20260712-CLUB-MEMBER-HOME-M3-ACCEPTANCE",
       "source_path": "contracts/foundation/agent-collaboration.v1.json",
       "message": "active work lacks an explicit next checkpoint"
     },
@@ -58,7 +58,7 @@
       "rule_id": "PB-WORK-NEXT",
       "severity": "warning",
       "subject_type": "work-item",
-      "subject_id": "AIW-20260712-CLUB-SC-T0-REMEDIATION",
+      "subject_id": "AIW-20260712-NOVA-M2-NETWORK-READ-PROVIDER-BACKEND",
       "source_path": "contracts/foundation/agent-collaboration.v1.json",
       "message": "active work lacks an explicit next checkpoint"
     },
@@ -66,7 +66,7 @@
       "rule_id": "PB-WORK-NEXT",
       "severity": "warning",
       "subject_type": "work-item",
-      "subject_id": "AIW-20260712-CLUB-SC-LIST-SAFE-DTO-BACKEND",
+      "subject_id": "AIW-20260712-NOVA-M2-NETWORK-READ-PROVIDER-EVIDENCE",
       "source_path": "contracts/foundation/agent-collaboration.v1.json",
       "message": "active work lacks an explicit next checkpoint"
     },
@@ -74,7 +74,7 @@
       "rule_id": "PB-WORK-NEXT",
       "severity": "warning",
       "subject_type": "work-item",
-      "subject_id": "AIW-20260712-CLUB-SC-LIST-SAFE-DTO-EVIDENCE",
+      "subject_id": "AIW-20260712-NOVA-M2-SOCIAL-WRITE-PROVIDER-BACKEND",
       "source_path": "contracts/foundation/agent-collaboration.v1.json",
       "message": "active work lacks an explicit next checkpoint"
     },
@@ -82,7 +82,15 @@
       "rule_id": "PB-WORK-NEXT",
       "severity": "warning",
       "subject_type": "work-item",
-      "subject_id": "AIW-20260712-PROJECT-BRAIN-V1",
+      "subject_id": "AIW-20260712-NOVA-M2-SOCIAL-WRITE-PROVIDER-EVIDENCE",
+      "source_path": "contracts/foundation/agent-collaboration.v1.json",
+      "message": "active work lacks an explicit next checkpoint"
+    },
+    {
+      "rule_id": "PB-WORK-NEXT",
+      "severity": "warning",
+      "subject_type": "work-item",
+      "subject_id": "AIW-20260712-NOVA-M2-MIGRATION-DISABLE-DRILL",
       "source_path": "contracts/foundation/agent-collaboration.v1.json",
       "message": "active work lacks an explicit next checkpoint"
     }
@@ -90,6 +98,7 @@
   "unknowns": [],
   "rule_summary": {
     "PB-INTEGRATED-EVIDENCE": 3,
+    "PB-SCOPE-CONFLICT": 1,
     "PB-WORK-NEXT": 7
   }
 }

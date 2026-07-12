@@ -2504,7 +2504,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "M1-M4 实现与验收证据已提交至 bfdc31a。Python 10/10、前端 221/221、双模式构建、生产零快照资产、桌面/360px 浏览器 UAT、安全扫描、全量合同、UTF-8 与范围门禁通过。当前进入 handoff-ready，等待最终 R2 current 治理快照、独立验收与受控集成；生产发布不授权。",
+                           "migration_note":  "Project Brain v1 已由 merge commit 57e798f8447e4eaf66bc810606fc70f961a41fc1 受控集成。M1-R4 在最新集成 HEAD 采用新 retry 证据合约：旧 attempt 2 与依赖 IR 原样移入 invalidated snapshots，新 checklist current、attempt 1 100 分；Python、前端、双模式构建、生产零快照、桌面/360px UAT、安全、全量合同与 UTF-8 均通过。生产发布不授权。",
                            "handoff_record":  "docs/project-management/project-brain/handoff-v1.md"
                        }
                    ]
