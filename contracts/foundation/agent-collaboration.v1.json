@@ -2473,7 +2473,7 @@
                            "title":  "平台本地商城链与远端健康权威链分叉调和",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "handoff-ready",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/platform-integration-divergence-reconciliation",
                            "branch":  "codex/platform-integration-divergence-reconciliation",
@@ -2487,7 +2487,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "远端健康权威034e46b与本地商城7d638e3共同基线cd2bbae；远端独有5提交、本地独有6提交，仅registry重叠。三方合并保留两条父历史，健康F1维持handoff-ready/acceptance integrated，商城M0与M1工作项维持integrated；平台checklist26/26、exam100，根因/回滚/预防门禁已落盘。等待最终远端推送与本地集成工作树同步后转integrated。",
+                           "migration_note":  "远端健康权威034e46b与本地商城7d638e3共同基线cd2bbae；远端独有5提交、本地独有6提交，仅registry重叠。调和合并6188cd2保留两条父历史并已推送；健康F1维持handoff-ready/acceptance integrated，商城M0与M1工作项维持integrated；平台checklist26/26、exam100，根因/回滚/预防门禁已落盘。原本地集成工作树已从7d638e3安全快进至6188cd2且clean，本工作项收口integrated。",
                            "handoff_record":  "docs/project-management/service-plaza/platform-integration-divergence-reconciliation-2026-07-13.md"
                        },
                        {
