@@ -1,0 +1,226 @@
+{
+  "contract_version": "nova-people-tools.v1",
+  "module_id": "nova",
+  "stage": "M2",
+  "status": "standardized",
+  "executable": false,
+  "canonical_dependency": {
+    "work_id": "AIW-20260712-NETWORK-CANONICAL-OWNER-DECISION",
+    "required_status": "accepted",
+    "current_status": "pending",
+    "facade_authority": "people_connection_facade",
+    "legacy_route_authority": "forbidden_for_nova",
+    "forbidden_routes": [
+      "POST /api/v1/network/introductions",
+      "PUT /api/v1/network/introductions/{id}",
+      "POST /api/v1/network/referral"
+    ]
+  },
+  "security": {
+    "identity_source": "trusted_server_context",
+    "tenant_source": "trusted_server_context",
+    "authorization_enforced_by": "server",
+    "request_may_supply_actor_or_tenant": false,
+    "model_may_expand_scope": false
+  },
+  "tools": [
+    {
+      "tool_id": "member_search",
+      "tool_version": "v1",
+      "owner_role": "People Network module owner",
+      "classification": "read",
+      "transport": {
+        "kind": "platform_operation",
+        "provider_operation": "people.member_search",
+        "legacy_endpoint_allowed": false
+      },
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["query", "requested_field_ids", "limit"],
+        "properties": {
+          "query": {"type": "string", "minLength": 1, "maxLength": 200},
+          "capability_filters": {"type": "array", "maxItems": 10, "items": {"type": "string", "maxLength": 64}, "uniqueItems": true},
+          "location_band": {"type": "string", "maxLength": 64},
+          "requested_field_ids": {"type": "array", "minItems": 1, "maxItems": 8, "items": {"enum": ["display_name", "verified_capabilities", "location_band", "match_reasons", "evidence_refs"]}, "uniqueItems": true},
+          "cursor": {"type": ["string", "null"], "maxLength": 256},
+          "limit": {"type": "integer", "minimum": 1, "maximum": 20}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["items", "next_cursor", "policy_version"],
+        "properties": {
+          "items": {"type": "array", "items": {"type": "object"}},
+          "next_cursor": {"type": ["string", "null"]},
+          "policy_version": {"type": "string"}
+        }
+      },
+      "authn": "authenticated_member_or_authorized_operator",
+      "required_permissions": ["network:member:search"],
+      "tenant_source": "trusted_server_context",
+      "resource_policy": [
+        "candidate belongs to the trusted tenant context",
+        "candidate permits discovery and each requested field",
+        "server filters every result before model exposure"
+      ],
+      "visible_fields": ["candidate_ref", "display_name", "verified_capabilities", "location_band", "match_reasons", "evidence_refs", "visibility_policy_version"],
+      "redacted_fields": ["phone", "email", "government_id", "raw_health_text", "private_notes", "exact_address", "unapproved_free_text"],
+      "confirmation": {"policy": "never", "ticket_required": false, "binds": []},
+      "idempotency": {"required": false, "key_source": "none", "same_key_same_payload": "not_applicable", "same_key_different_payload": "not_applicable"},
+      "audit": {"required_fields": ["trace_id", "actor", "tenant_id", "tool_id", "tool_version", "requested_field_ids", "result_count", "outcome", "event_time"], "sensitive_handling": "hash_or_redacted_summary"},
+      "error_ids": ["NOVA_TOOL_CONTEXT_MISSING", "NOVA_TOOL_TENANT_MISMATCH", "NOVA_TOOL_FORBIDDEN", "NOVA_MEMBER_QUERY_INVALID", "NOVA_MEMBER_FIELD_FORBIDDEN", "NOVA_TOOL_DEPENDENCY_UNAVAILABLE", "NOVA_RATE_LIMITED", "NOVA_INTERNAL_ERROR"],
+      "compatibility": {"additive_optional_fields": "compatible_minor", "new_required_fields_or_changed_meaning": "new_major_and_platform_signoff", "unknown_fields": "reject"},
+      "executable": false
+    },
+    {
+      "tool_id": "connection_draft",
+      "tool_version": "v1",
+      "owner_role": "People Network module owner",
+      "classification": "draft",
+      "transport": {
+        "kind": "platform_operation",
+        "provider_operation": "people.connection_draft",
+        "legacy_endpoint_allowed": false
+      },
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["candidate_ref", "goal", "disclosure_field_ids"],
+        "properties": {
+          "candidate_ref": {"type": "string", "pattern": "^candidate:[A-Za-z0-9_-]{8,128}$"},
+          "goal": {"type": "string", "minLength": 1, "maxLength": 500},
+          "disclosure_field_ids": {"type": "array", "minItems": 1, "maxItems": 8, "items": {"enum": ["display_name", "verified_capabilities", "location_band", "connection_goal", "contact_preference"]}, "uniqueItems": true}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["draft_id", "draft_version", "preview", "disclosure_manifest", "disclosure_hash", "expires_at", "confirmation_required"],
+        "properties": {
+          "draft_id": {"type": "string"},
+          "draft_version": {"type": "integer", "minimum": 1},
+          "preview": {"type": "string"},
+          "disclosure_manifest": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "disclosure_hash": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+          "expires_at": {"type": "string", "format": "date-time"},
+          "confirmation_required": {"const": true}
+        }
+      },
+      "authn": "authenticated_member_or_authorized_operator",
+      "required_permissions": ["network:connection:draft"],
+      "tenant_source": "trusted_server_context",
+      "resource_policy": [
+        "candidate_ref resolves inside the trusted tenant context",
+        "target still permits introductions",
+        "draft is bound to actor tenant target and trace",
+        "draft creation produces no external message"
+      ],
+      "visible_fields": ["draft_id", "draft_version", "preview", "disclosure_manifest", "disclosure_hash", "expires_at", "confirmation_required"],
+      "redacted_fields": ["target_internal_id", "phone", "email", "government_id", "raw_health_text", "private_notes"],
+      "confirmation": {"policy": "preview_only", "ticket_required": false, "binds": []},
+      "idempotency": {"required": false, "key_source": "none", "same_key_same_payload": "not_applicable", "same_key_different_payload": "not_applicable"},
+      "audit": {"required_fields": ["trace_id", "actor", "tenant_id", "tool_id", "tool_version", "candidate_ref", "draft_id", "draft_version", "disclosure_hash", "outcome", "event_time"], "sensitive_handling": "hash_or_redacted_summary"},
+      "error_ids": ["NOVA_TOOL_CONTEXT_MISSING", "NOVA_TOOL_TENANT_MISMATCH", "NOVA_TOOL_FORBIDDEN", "NOVA_TOOL_RESOURCE_FORBIDDEN", "NOVA_CONNECTION_TARGET_UNAVAILABLE", "NOVA_CONNECTION_DRAFT_INVALID", "NOVA_TOOL_DEPENDENCY_UNAVAILABLE", "NOVA_RATE_LIMITED", "NOVA_INTERNAL_ERROR"],
+      "compatibility": {"additive_optional_fields": "compatible_minor", "new_required_fields_or_changed_meaning": "new_major_and_platform_signoff", "unknown_fields": "reject"},
+      "executable": false
+    },
+    {
+      "tool_id": "connection_send",
+      "tool_version": "v1",
+      "owner_role": "People Network module owner",
+      "classification": "external_effect",
+      "transport": {
+        "kind": "platform_operation",
+        "provider_operation": "people.connection_send",
+        "legacy_endpoint_allowed": false
+      },
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["draft_id", "draft_version", "confirmation_ticket"],
+        "properties": {
+          "draft_id": {"type": "string", "pattern": "^draft:[A-Za-z0-9_-]{8,128}$"},
+          "draft_version": {"type": "integer", "minimum": 1},
+          "confirmation_ticket": {"type": "string", "pattern": "^confirm:[A-Za-z0-9_-]{16,256}$"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["request_id", "status", "status_url", "replayed"],
+        "properties": {
+          "request_id": {"type": "string"},
+          "status": {"const": "pending"},
+          "status_url": {"type": "string"},
+          "replayed": {"type": "boolean"}
+        }
+      },
+      "authn": "authenticated_member_or_authorized_operator",
+      "required_permissions": ["network:connection:send"],
+      "tenant_source": "trusted_server_context",
+      "resource_policy": [
+        "draft owner equals trusted actor",
+        "draft tenant equals trusted tenant",
+        "draft target version disclosure hash and expiry still match",
+        "target still permits introductions",
+        "request body cannot override actor tenant target or message"
+      ],
+      "visible_fields": ["request_id", "status", "status_url", "replayed"],
+      "redacted_fields": ["confirmation_secret", "idempotency_raw_key", "target_internal_id", "message_body", "phone", "email"],
+      "confirmation": {"policy": "always", "ticket_required": true, "binds": ["actor", "tenant", "action", "target", "draft_id", "draft_version", "disclosure_hash", "impact", "trace_id", "expires_at"]},
+      "idempotency": {"required": true, "key_source": "Idempotency-Key", "same_key_same_payload": "safe_replay", "same_key_different_payload": "conflict"},
+      "audit": {"required_fields": ["trace_id", "actor", "tenant_id", "tool_id", "tool_version", "request_id", "draft_id", "draft_version", "disclosure_hash", "confirmation_ticket_ref", "idempotency_hash", "outcome", "event_time"], "sensitive_handling": "hash_or_redacted_summary"},
+      "error_ids": ["NOVA_TOOL_CONTEXT_MISSING", "NOVA_TOOL_TENANT_MISMATCH", "NOVA_TOOL_FORBIDDEN", "NOVA_TOOL_RESOURCE_FORBIDDEN", "NOVA_CONFIRMATION_REQUIRED", "NOVA_CONFIRMATION_INVALID", "NOVA_CONFIRMATION_EXPIRED", "NOVA_CONFIRMATION_BINDING_MISMATCH", "NOVA_IDEMPOTENCY_KEY_REQUIRED", "NOVA_IDEMPOTENCY_KEY_INVALID", "NOVA_IDEMPOTENCY_PAYLOAD_CONFLICT", "NOVA_CONNECTION_DRAFT_INVALID", "NOVA_CONNECTION_DRAFT_STALE", "NOVA_CONNECTION_TARGET_UNAVAILABLE", "NOVA_CONNECTION_ALREADY_EXISTS", "NOVA_CONNECTION_COOLDOWN_ACTIVE", "NOVA_CONNECTION_STATE_CONFLICT", "NOVA_TOOL_DEPENDENCY_UNAVAILABLE", "NOVA_RATE_LIMITED", "NOVA_INTERNAL_ERROR"],
+      "compatibility": {"additive_optional_fields": "compatible_minor", "new_required_fields_or_changed_meaning": "new_major_and_platform_signoff", "unknown_fields": "reject"},
+      "executable": false
+    },
+    {
+      "tool_id": "connection_status",
+      "tool_version": "v1",
+      "owner_role": "People Network module owner",
+      "classification": "read",
+      "transport": {
+        "kind": "platform_operation",
+        "provider_operation": "people.connection_status",
+        "legacy_endpoint_allowed": false
+      },
+      "input_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["request_id"],
+        "properties": {
+          "request_id": {"type": "string", "pattern": "^connection:[A-Za-z0-9_-]{8,128}$"}
+        }
+      },
+      "output_schema": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["request_id", "status", "result_summary", "updated_at"],
+        "properties": {
+          "request_id": {"type": "string"},
+          "status": {"enum": ["pending", "accepted", "rejected", "canceled", "expired", "contacted", "cooperation_started", "cooperation_completed", "no_result"]},
+          "result_summary": {"type": ["object", "null"]},
+          "updated_at": {"type": "string", "format": "date-time"}
+        }
+      },
+      "authn": "participant_or_authorized_operator",
+      "required_permissions": ["network:connection:read"],
+      "tenant_source": "trusted_server_context",
+      "resource_policy": [
+        "request belongs to trusted tenant",
+        "actor is sender recipient or explicitly authorized operator",
+        "response is filtered for the actor role and current visibility policy"
+      ],
+      "visible_fields": ["request_id", "status", "result_summary", "updated_at"],
+      "redacted_fields": ["other_party_internal_id", "phone", "email", "private_notes", "raw_message", "audit_principal"],
+      "confirmation": {"policy": "never", "ticket_required": false, "binds": []},
+      "idempotency": {"required": false, "key_source": "none", "same_key_same_payload": "not_applicable", "same_key_different_payload": "not_applicable"},
+      "audit": {"required_fields": ["trace_id", "actor", "tenant_id", "tool_id", "tool_version", "request_id", "outcome", "event_time"], "sensitive_handling": "hash_or_redacted_summary"},
+      "error_ids": ["NOVA_TOOL_CONTEXT_MISSING", "NOVA_TOOL_TENANT_MISMATCH", "NOVA_TOOL_FORBIDDEN", "NOVA_TOOL_RESOURCE_FORBIDDEN", "NOVA_CONNECTION_NOT_FOUND", "NOVA_TOOL_DEPENDENCY_UNAVAILABLE", "NOVA_RATE_LIMITED", "NOVA_INTERNAL_ERROR"],
+      "compatibility": {"additive_optional_fields": "compatible_minor", "new_required_fields_or_changed_meaning": "new_major_and_platform_signoff", "unknown_fields": "reject"},
+      "executable": false
+    }
+  ]
+}

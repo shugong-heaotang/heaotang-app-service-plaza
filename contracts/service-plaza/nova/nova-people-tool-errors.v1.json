@@ -1,0 +1,36 @@
+{
+  "contract_version": "nova-people-tool-errors.v1",
+  "envelope": {
+    "required_fields": ["error_id", "message_key", "trace_id", "retryable", "details"],
+    "details_policy": "allowlist_only",
+    "sensitive_values_forbidden": true
+  },
+  "errors": [
+    {"error_id": "NOVA_TOOL_CONTEXT_MISSING", "category": "context", "severity": "blocker", "http_status": 401, "retryable": false, "message_key": "nova.tool.context_missing", "applies_to": ["member_search", "connection_draft", "connection_send", "connection_status"]},
+    {"error_id": "NOVA_TOOL_TENANT_MISMATCH", "category": "tenant", "severity": "blocker", "http_status": 403, "retryable": false, "message_key": "nova.tool.tenant_mismatch", "applies_to": ["member_search", "connection_draft", "connection_send", "connection_status", "connection_result_callback"]},
+    {"error_id": "NOVA_TOOL_FORBIDDEN", "category": "permission", "severity": "blocker", "http_status": 403, "retryable": false, "message_key": "nova.tool.forbidden", "applies_to": ["member_search", "connection_draft", "connection_send", "connection_status"]},
+    {"error_id": "NOVA_TOOL_RESOURCE_FORBIDDEN", "category": "permission", "severity": "blocker", "http_status": 403, "retryable": false, "message_key": "nova.tool.resource_forbidden", "applies_to": ["connection_draft", "connection_send", "connection_status"]},
+    {"error_id": "NOVA_MEMBER_QUERY_INVALID", "category": "validation", "severity": "major", "http_status": 400, "retryable": false, "message_key": "nova.member.query_invalid", "applies_to": ["member_search"]},
+    {"error_id": "NOVA_MEMBER_FIELD_FORBIDDEN", "category": "visibility", "severity": "blocker", "http_status": 403, "retryable": false, "message_key": "nova.member.field_forbidden", "applies_to": ["member_search"]},
+    {"error_id": "NOVA_CONFIRMATION_REQUIRED", "category": "confirmation", "severity": "blocker", "http_status": 409, "retryable": false, "message_key": "nova.confirmation.required", "applies_to": ["connection_send"]},
+    {"error_id": "NOVA_CONFIRMATION_INVALID", "category": "confirmation", "severity": "blocker", "http_status": 400, "retryable": false, "message_key": "nova.confirmation.invalid", "applies_to": ["connection_send"]},
+    {"error_id": "NOVA_CONFIRMATION_EXPIRED", "category": "confirmation", "severity": "blocker", "http_status": 409, "retryable": false, "message_key": "nova.confirmation.expired", "applies_to": ["connection_send"]},
+    {"error_id": "NOVA_CONFIRMATION_BINDING_MISMATCH", "category": "confirmation", "severity": "blocker", "http_status": 409, "retryable": false, "message_key": "nova.confirmation.binding_mismatch", "applies_to": ["connection_send"]},
+    {"error_id": "NOVA_IDEMPOTENCY_KEY_REQUIRED", "category": "idempotency", "severity": "blocker", "http_status": 400, "retryable": false, "message_key": "nova.idempotency.key_required", "applies_to": ["connection_send"]},
+    {"error_id": "NOVA_IDEMPOTENCY_KEY_INVALID", "category": "idempotency", "severity": "blocker", "http_status": 400, "retryable": false, "message_key": "nova.idempotency.key_invalid", "applies_to": ["connection_send"]},
+    {"error_id": "NOVA_IDEMPOTENCY_PAYLOAD_CONFLICT", "category": "idempotency", "severity": "blocker", "http_status": 409, "retryable": false, "message_key": "nova.idempotency.payload_conflict", "applies_to": ["connection_send"]},
+    {"error_id": "NOVA_CONNECTION_DRAFT_INVALID", "category": "draft", "severity": "major", "http_status": 400, "retryable": false, "message_key": "nova.connection.draft_invalid", "applies_to": ["connection_draft", "connection_send"]},
+    {"error_id": "NOVA_CONNECTION_DRAFT_STALE", "category": "draft", "severity": "blocker", "http_status": 409, "retryable": false, "message_key": "nova.connection.draft_stale", "applies_to": ["connection_send"]},
+    {"error_id": "NOVA_CONNECTION_TARGET_UNAVAILABLE", "category": "resource", "severity": "blocker", "http_status": 409, "retryable": false, "message_key": "nova.connection.target_unavailable", "applies_to": ["connection_draft", "connection_send"]},
+    {"error_id": "NOVA_CONNECTION_ALREADY_EXISTS", "category": "state", "severity": "major", "http_status": 409, "retryable": false, "message_key": "nova.connection.already_exists", "applies_to": ["connection_send"]},
+    {"error_id": "NOVA_CONNECTION_COOLDOWN_ACTIVE", "category": "state", "severity": "major", "http_status": 409, "retryable": true, "message_key": "nova.connection.cooldown_active", "applies_to": ["connection_send"]},
+    {"error_id": "NOVA_CONNECTION_NOT_FOUND", "category": "resource", "severity": "major", "http_status": 404, "retryable": false, "message_key": "nova.connection.not_found", "applies_to": ["connection_status"]},
+    {"error_id": "NOVA_CONNECTION_STATE_CONFLICT", "category": "state", "severity": "blocker", "http_status": 409, "retryable": false, "message_key": "nova.connection.state_conflict", "applies_to": ["connection_send", "connection_result_callback"]},
+    {"error_id": "NOVA_CALLBACK_UNAUTHORIZED", "category": "callback", "severity": "blocker", "http_status": 403, "retryable": false, "message_key": "nova.callback.unauthorized", "applies_to": ["connection_result_callback"]},
+    {"error_id": "NOVA_CALLBACK_TENANT_MISMATCH", "category": "callback", "severity": "blocker", "http_status": 403, "retryable": false, "message_key": "nova.callback.tenant_mismatch", "applies_to": ["connection_result_callback"]},
+    {"error_id": "NOVA_CALLBACK_EVENT_CONFLICT", "category": "callback", "severity": "blocker", "http_status": 409, "retryable": false, "message_key": "nova.callback.event_conflict", "applies_to": ["connection_result_callback"]},
+    {"error_id": "NOVA_TOOL_DEPENDENCY_UNAVAILABLE", "category": "dependency", "severity": "major", "http_status": 503, "retryable": true, "message_key": "nova.tool.dependency_unavailable", "applies_to": ["member_search", "connection_draft", "connection_send", "connection_status", "connection_result_callback"]},
+    {"error_id": "NOVA_RATE_LIMITED", "category": "rate_limit", "severity": "major", "http_status": 429, "retryable": true, "message_key": "nova.rate_limited", "applies_to": ["member_search", "connection_draft", "connection_send", "connection_status", "connection_result_callback"]},
+    {"error_id": "NOVA_INTERNAL_ERROR", "category": "internal", "severity": "blocker", "http_status": 500, "retryable": false, "message_key": "nova.internal_error", "applies_to": ["member_search", "connection_draft", "connection_send", "connection_status", "connection_result_callback"]}
+  ]
+}

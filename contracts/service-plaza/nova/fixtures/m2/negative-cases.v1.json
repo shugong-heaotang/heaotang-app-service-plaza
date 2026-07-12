@@ -1,0 +1,25 @@
+{
+  "contract_version": "nova-people-tools-negative-fixtures.v1",
+  "synthetic_only": true,
+  "cases": [
+    {"case_id": "NPM2-N001", "target": "member_search", "condition": "actor supplied by request body", "expected_error_id": "NOVA_TOOL_CONTEXT_MISSING"},
+    {"case_id": "NPM2-N002", "target": "member_search", "condition": "request tenant differs from trusted context", "expected_error_id": "NOVA_TOOL_TENANT_MISMATCH"},
+    {"case_id": "NPM2-N003", "target": "member_search", "condition": "candidate belongs to another tenant", "expected_error_id": "NOVA_TOOL_TENANT_MISMATCH"},
+    {"case_id": "NPM2-N004", "target": "member_search", "condition": "requested field is phone", "expected_error_id": "NOVA_MEMBER_FIELD_FORBIDDEN"},
+    {"case_id": "NPM2-N005", "target": "connection_draft", "condition": "target opted out of introductions", "expected_error_id": "NOVA_CONNECTION_TARGET_UNAVAILABLE"},
+    {"case_id": "NPM2-N006", "target": "connection_send", "condition": "draft target differs from confirmation target", "expected_error_id": "NOVA_CONFIRMATION_BINDING_MISMATCH"},
+    {"case_id": "NPM2-N007", "target": "connection_send", "condition": "draft version changed after confirmation", "expected_error_id": "NOVA_CONNECTION_DRAFT_STALE"},
+    {"case_id": "NPM2-N008", "target": "connection_send", "condition": "confirmation ticket missing", "expected_error_id": "NOVA_CONFIRMATION_REQUIRED"},
+    {"case_id": "NPM2-N009", "target": "connection_send", "condition": "confirmation ticket expired", "expected_error_id": "NOVA_CONFIRMATION_EXPIRED"},
+    {"case_id": "NPM2-N010", "target": "connection_send", "condition": "Idempotency-Key missing", "expected_error_id": "NOVA_IDEMPOTENCY_KEY_REQUIRED"},
+    {"case_id": "NPM2-N011", "target": "connection_send", "condition": "same idempotency key with different payload", "expected_error_id": "NOVA_IDEMPOTENCY_PAYLOAD_CONFLICT"},
+    {"case_id": "NPM2-N012", "target": "connection_status", "condition": "actor is not a participant or authorized operator", "expected_error_id": "NOVA_TOOL_RESOURCE_FORBIDDEN"},
+    {"case_id": "NPM2-N013", "target": "connection_result_callback", "condition": "caller is not people_connection_outbox", "expected_error_id": "NOVA_CALLBACK_UNAUTHORIZED"},
+    {"case_id": "NPM2-N014", "target": "connection_result_callback", "condition": "callback tenant differs from trusted service context", "expected_error_id": "NOVA_CALLBACK_TENANT_MISMATCH"},
+    {"case_id": "NPM2-N015", "target": "connection_result_callback", "condition": "same event_id with different payload hash", "expected_error_id": "NOVA_CALLBACK_EVENT_CONFLICT"},
+    {"case_id": "NPM2-N016", "target": "connection_result_callback", "condition": "event transition is invalid", "expected_error_id": "NOVA_CONNECTION_STATE_CONFLICT"},
+    {"case_id": "NPM2-N017", "target": "contract", "condition": "tool maps to POST /api/v1/network/introductions", "expected_error_id": "NOVA_TOOL_FORBIDDEN"},
+    {"case_id": "NPM2-N018", "target": "contract", "condition": "tool output exposes full phone or private notes", "expected_error_id": "NOVA_MEMBER_FIELD_FORBIDDEN"},
+    {"case_id": "NPM2-N019", "target": "connection_result_callback", "condition": "same event_id and same payload replay", "expected_outcome": "safe_replay"}
+  ]
+}

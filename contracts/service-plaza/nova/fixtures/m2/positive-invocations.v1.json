@@ -1,0 +1,41 @@
+{
+  "contract_version": "nova-people-tools-positive-fixtures.v1",
+  "synthetic_only": true,
+  "cases": [
+    {
+      "case_id": "NPM2-P001",
+      "target": "member_search",
+      "trusted_context": {"actor_ref": "synthetic-actor-a", "tenant_ref": "synthetic-tenant-a"},
+      "input": {"query": "合成能力样例", "capability_filters": ["synthetic-capability"], "location_band": "synthetic-region", "requested_field_ids": ["display_name", "verified_capabilities", "match_reasons"], "cursor": null, "limit": 5},
+      "output": {"items": [{"candidate_ref": "candidate:syn_00000001", "display_name": "合成候选人甲", "verified_capabilities": ["synthetic-capability"], "match_reasons": ["合成规则匹配"], "visibility_policy_version": "synthetic-v1"}], "next_cursor": null, "policy_version": "synthetic-v1"}
+    },
+    {
+      "case_id": "NPM2-P002",
+      "target": "connection_draft",
+      "trusted_context": {"actor_ref": "synthetic-actor-a", "tenant_ref": "synthetic-tenant-a"},
+      "input": {"candidate_ref": "candidate:syn_00000001", "goal": "合成引荐目标", "disclosure_field_ids": ["display_name", "verified_capabilities", "connection_goal"]},
+      "output": {"draft_id": "draft:syn_00000001", "draft_version": 1, "preview": "合成引荐预览，不会发送。", "disclosure_manifest": ["display_name", "verified_capabilities", "connection_goal"], "disclosure_hash": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", "expires_at": "2026-07-13T00:00:00Z", "confirmation_required": true}
+    },
+    {
+      "case_id": "NPM2-P003",
+      "target": "connection_send",
+      "trusted_context": {"actor_ref": "synthetic-actor-a", "tenant_ref": "synthetic-tenant-a", "idempotency_key_ref": "synthetic-key-hash"},
+      "input": {"draft_id": "draft:syn_00000001", "draft_version": 1, "confirmation_ticket": "confirm:synthetic_ticket_00000001"},
+      "output": {"request_id": "connection:syn_00000001", "status": "pending", "status_url": "/api/nova/tools/connection_status/connection:syn_00000001", "replayed": false}
+    },
+    {
+      "case_id": "NPM2-P004",
+      "target": "connection_status",
+      "trusted_context": {"actor_ref": "synthetic-actor-a", "tenant_ref": "synthetic-tenant-a"},
+      "input": {"request_id": "connection:syn_00000001"},
+      "output": {"request_id": "connection:syn_00000001", "status": "accepted", "result_summary": {"result_code": "accepted"}, "updated_at": "2026-07-12T12:00:00Z"}
+    },
+    {
+      "case_id": "NPM2-P005",
+      "target": "connection_result_callback",
+      "trusted_context": {"server_principal_role": "people_connection_outbox", "tenant_ref": "synthetic-tenant-a"},
+      "input": {"event_id": "event:syn_00000001", "event_version": "v1", "request_id": "connection:syn_00000001", "event_type": "request_accepted", "occurred_at": "2026-07-12T12:00:00Z", "trace_id": "trace-synthetic-0001", "payload_hash": "sha256:bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb", "result_summary": {"result_code": "accepted", "note_present": false}},
+      "output": {"accepted": true, "replayed": false}
+    }
+  ]
+}
