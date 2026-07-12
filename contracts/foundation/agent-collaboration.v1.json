@@ -1625,7 +1625,7 @@
                            "title":  "CA-SC 自建俱乐部测试环境 T0 验收正式派发",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-sc-t0-acceptance-dispatch",
                            "branch":  "codex/club-sc-t0-acceptance-dispatch",
@@ -1685,6 +1685,35 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "严格本人范围聚合端点；不修改数据库 schema、不接受 user_id、不改其他插件。",
                            "handoff_record":  "docs/project-management/modules/club-alliance/member-home/handoff-m2-backend.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-CLUB-SC-T0-ACCEPTANCE",
+                           "title":  "CA-SC 自建俱乐部确定性合成数据与测试环境 T0 验收",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-sc-t0-acceptance",
+                           "branch":  "codex/club-sc-t0-acceptance",
+                           "base_commit":  "246c483b3a5c5181325c5dc4da0d4bfdc29d5ca0",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-12-club-sc-t0-acceptance*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-club-sc-t0-acceptance*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-club-sc-t0-acceptance*.json",
+                                                 "contracts/modules/club-alliance/internal-dependencies.v1.json",
+                                                 "docs/project-management/modules/club-alliance/self-created/internal-dependencies.v1.json",
+                                                 "docs/project-management/modules/club-alliance/self-created/CA-SC-handoff.md",
+                                                 "docs/project-management/modules/club-alliance/self-created/acceptance/",
+                                                 "docs/project-management/service-plaza/handoff-log.md",
+                                                 "scripts/Manage-ClubSelfCreatedT0Fixture.ps1",
+                                                 "scripts/Invoke-ClubSelfCreatedT0Acceptance.ps1",
+                                                 "scripts/Test-ClubSelfCreatedT0Safety.ps1"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "从已含 T0 正式任务书的权威 integration 246c483 创建独立 branch/worktree；创建时 HEAD=base=merge-base 且 clean。固定 seed 为 HEAOTANG-CA-SC-20260712-V1，仅授权测试环境可回滚合成数据、部署与验收。",
+                           "handoff_record":  "docs/project-management/service-plaza/handoff-log.md#sp-h036ca-sc自建俱乐部测试环境-t0-验收派发"
                        }
                    ]
 }
