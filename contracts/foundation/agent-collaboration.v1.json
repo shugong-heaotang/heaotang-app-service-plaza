@@ -2190,7 +2190,7 @@
                            "title":  "人脉 canonical 实现、唯一 Owner 与 legacy 迁移禁用裁决",
                            "owner":  "People Network module owner",
                            "owner_role":  "人脉板块唯一负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-network-canonical-owner-decision",
                            "branch":  "codex/network-canonical-owner-decision",
@@ -2208,7 +2208,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "只作 canonical owner、读写职责、双事实源迁移/禁用和兼容裁决；禁止修改 network/social/backend/db，禁止真实数据和真实消息。默认提案为 network 加固搜索读侧、social canonical 写侧、NOVA 只走 facade；必须由本 owner 形成可证伪决策。",
+                           "migration_note":  "source 45fa39facde97b2ef1f7598dedb37ed0a31064c8 经独立复核 Go，以 7b07895 受控集成。People Network module owner 为唯一领域 Owner；network 仅待加固搜索读投影，social introduction_requests 仅 canonical 写侧目标候选，NOVA 只走 facade；legacy network introductions/referral/status 对 NOVA forbidden。迁移采用 unknown tenant quarantine、禁止双写、单向切换、Sunset/410 和不重开 unsafe writes 的回滚。governance=go、development=no-go、M2=blocked-local；未改后端或真实数据。",
                            "handoff_record":  "docs/project-management/notices/2026-07-12-nova-m2-people-tools-task-order.md"
                        },
                        {
