@@ -1,0 +1,64 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-PROTECTION-MALL-M1-DOMAIN-EVIDENCE",
+  "title": "保障商城 M1 Go 纯领域核与跨仓库证据",
+  "date": "2026-07-13",
+  "status": "verified",
+  "objective": "实现并验证未挂路由的责任边界、五类状态机、可信授权、资源归属、原子幂等和补偿失败关闭纯领域核。",
+  "governance_checklist": "contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m1-domain-evidence.json",
+  "governance_exam": "contracts/modules/protection-mall/governance-exams/2026-07-12-protection-mall-m1-domain-evidence-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-protection-mall-m1-domain-kernel-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.identity-api",
+    "foundation.authorization-idempotency",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/modules/protection-mall/m1/responsibility.v1.json",
+    "contracts/modules/protection-mall/m1/state-machines.v1.json",
+    "contracts/modules/protection-mall/m1/api-security.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md"
+  ],
+  "changed_areas": [
+    "backend-go/plugins/mall-plugin/domain_m1.go@ba99dd42f34873d8f368fcd72b352661088a4b02",
+    "backend-go/plugins/mall-plugin/domain_m1_test.go@ba99dd42f34873d8f368fcd72b352661088a4b02",
+    "docs/project-management/modules/protection-mall/m1-domain-backend-evidence.md",
+    "docs/project-management/modules/protection-mall/handoff-m1-domain.md",
+    "contracts/modules/protection-mall/implementation-records/2026-07-13-protection-mall-m1-domain-evidence.json"
+  ],
+  "verification": [
+    "preflight ready",
+    "governance exam 100",
+    "go test ./plugins/mall-plugin -run TestM1|TestAllStateMachines|TestBenefit|TestConcurrent|TestCompensation -count=1 passed",
+    "go test -race ./plugins/mall-plugin -run TestConcurrent|TestCompensation|TestBenefit -count=1 passed",
+    "go test ./... passed",
+    "go vet ./... passed",
+    "validate_m1_contracts.py: 3 contracts and 11 synthetic cases passed",
+    "gofmt -d, diff check and scoped secret scan passed"
+  ],
+  "evidence": [
+    "docs/project-management/modules/protection-mall/m1-domain-backend-evidence.md",
+    "docs/project-management/modules/protection-mall/handoff-m1-domain.md"
+  ],
+  "premises": [
+    "本切片只授权未挂路由的内存纯领域核",
+    "数据库网络支付真实资金部署和真实数据继续 No-Go",
+    "后续运行时接线必须另立精确工作项并独立验收"
+  ],
+  "implementation_mode": "ai-assisted"
+}
