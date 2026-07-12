@@ -1,0 +1,39 @@
+{
+  "contract_version": "health-manager.mvp90-m1.p2-c3-matrix.v1",
+  "synthetic_only": true,
+  "executable": false,
+  "positive_cases": [
+    {"scenario_id":"MVP-A001","expected_outcome":"applied","expected_error_id":null,"expected_result_count":11,"expected_trace_hash":"1ff03e7d2a2d6ddc612a42e7c3bc2489a6836542ce2c96aca3edf10be71d5b0c"},
+    {"scenario_id":"MVP-A002","expected_outcome":"denied","expected_error_id":"HM_INFORMATION_INSUFFICIENT","expected_result_count":1,"expected_trace_hash":"9b5e748d4682031c51210421ac5d57b480df0ad472131775ca462d7b5f0b6a0c"},
+    {"scenario_id":"MVP-A003","expected_outcome":"denied","expected_error_id":"HM_HUMAN_REVIEW_REQUIRED","expected_result_count":1,"expected_trace_hash":"e9ddc3e3caca36e0c53f09bb1f420f95811671a5c91920f83e333cc653d08456"},
+    {"scenario_id":"MVP-A004","expected_outcome":"denied","expected_error_id":"HM_HUMAN_REVIEW_REQUIRED","expected_result_count":1,"expected_trace_hash":"aad57064ec8fc8e95bb8064e782e7823458ba53fea5a3f179fd8e4165573dab8"},
+    {"scenario_id":"MVP-A005","expected_outcome":"denied","expected_error_id":"HM_HUMAN_REVIEW_REQUIRED","expected_result_count":1,"expected_trace_hash":"908ec23dcaa759ca9345c1edb33a1141d34341f3a1ebf16f10a5fccf695c199d"},
+    {"scenario_id":"MVP-A006","expected_outcome":"denied","expected_error_id":"HM_AI_RUNTIME_NOT_AUTHORIZED","expected_result_count":1,"expected_trace_hash":"10dde8fccfc7059b02d92d3c69c24cac6ea60dd11939cd8afb43e045f6b22dca"},
+    {"scenario_id":"MVP-A007","expected_outcome":"denied","expected_error_id":"HM_AI_RUNTIME_NOT_AUTHORIZED","expected_result_count":1,"expected_trace_hash":"2c357b33405b856e61ea12836c5947ab8d518830475b091f52b4110706ae4caa"},
+    {"scenario_id":"MVP-A008","expected_outcome":"denied","expected_error_id":"HM_AUTHORIZATION_NOT_ACTIVE","expected_result_count":1,"expected_trace_hash":"c2451371e67dcfad951c55a3d8cf752a76fbba6e2229a76112562759cd6ae4e3"},
+    {"scenario_id":"MVP-A009","expected_outcome":"denied","expected_error_id":"HM_RESOURCE_NOT_FOUND","expected_result_count":1,"expected_trace_hash":"0ea8bcf79e9ca7ab263773e6716250fd1ef0fca47f051239289406b56a36aee2"},
+    {"scenario_id":"MVP-A010","expected_outcome":"denied","expected_error_id":"HM_SERVICE_RELATIONSHIP_REQUIRED","expected_result_count":1,"expected_trace_hash":"5071350effacf925292be5589fd988cac6b880eaf0e73f8421c17051581ba3e3"},
+    {"scenario_id":"MVP-A011","expected_outcome":"denied","expected_error_id":"HM_TEMPLATE_NOT_EXECUTABLE","expected_result_count":1,"expected_trace_hash":"abfc764fd9d33a78a8841d659a8b8d39e0ab4412cb53cb34fed2a15d2dc6a002"},
+    {"scenario_id":"MVP-A012","expected_outcome":"denied","expected_error_id":"HM_IDEMPOTENCY_CONFLICT","expected_result_count":1,"expected_trace_hash":"55df258cc3317b5aa459e0a6c0b5b22240881ba735c4cf593d798d6c7a8ab13b"},
+    {"scenario_id":"MVP-A013","expected_outcome":"denied","expected_error_id":"HM_HUMAN_REVIEW_REQUIRED","expected_result_count":1,"expected_trace_hash":"b3e3a0b6903a2d8685d2a3036ae70e8351bf1ab3ab1126982acae996de3c5eb1"},
+    {"scenario_id":"MVP-A014","expected_outcome":"denied","expected_error_id":"HM_VERSION_CONFLICT","expected_result_count":1,"expected_trace_hash":"c75e3ff94b44c8d8b535580fcfafa06fb78d231b61e27bfb126d0855729a72a0"},
+    {"scenario_id":"MVP-A015","expected_outcome":"denied","expected_error_id":"HM_AUTHORIZATION_NOT_ACTIVE","expected_result_count":1,"expected_trace_hash":"f4dd4d80ffda37190f605059a5480083bdc9f4729772f6e72b1ff2996076d4f9"}
+  ],
+  "negative_cases": [
+    {"case_id":"NEG-A001","scenario_id":"MVP-A001","event_id":"A001-E01","operation":{"kind":"audit_failure"},"expected_error_id":"HM_AUDIT_WRITE_REQUIRED","assert_no_side_effects":true},
+    {"case_id":"NEG-A002","scenario_id":"MVP-A002","event_id":"A002-E01","operation":{"kind":"event_patch","json_pointer":"/denial_expectation","replacement":{"outcome":"allow","condition":null,"error_id":null}},"expected_error_id":"HM_P2_ACTION_NOT_AUTHORIZED","assert_no_side_effects":true},
+    {"case_id":"NEG-A003","scenario_id":"MVP-A003","event_id":"A003-E01","operation":{"kind":"event_patch","json_pointer":"/actor_role","replacement":"ai"},"expected_error_id":"HM_AI_RUNTIME_NOT_AUTHORIZED","assert_no_side_effects":true},
+    {"case_id":"NEG-A004","scenario_id":"MVP-A004","event_id":"A004-E01","operation":{"kind":"event_patch","json_pointer":"/transition_ref","replacement":"health-task:pending->completed:SKIP_TASK"},"expected_error_id":"HM_P2_UNKNOWN_TRANSITION","assert_no_side_effects":true},
+    {"case_id":"NEG-A005","scenario_id":"MVP-A005","event_id":"A005-E01","operation":{"kind":"event_patch","json_pointer":"/denial_expectation","replacement":{"outcome":"allow","condition":null,"error_id":null}},"expected_error_id":"HM_P2_ACTION_NOT_AUTHORIZED","assert_no_side_effects":true},
+    {"case_id":"NEG-A006","scenario_id":"MVP-A006","event_id":"A006-E01","operation":{"kind":"event_patch","json_pointer":"/authorization_action_id","replacement":"manager.review_ordinary_pdcar"},"expected_error_id":"HM_AI_RUNTIME_NOT_AUTHORIZED","assert_no_side_effects":true},
+    {"case_id":"NEG-A007","scenario_id":"MVP-A007","event_id":"A007-E01","operation":{"kind":"event_patch","json_pointer":"/audit_expectation/required","replacement":false},"expected_error_id":"HM_P2_ACTION_NOT_AUTHORIZED","assert_no_side_effects":true},
+    {"case_id":"NEG-A008","scenario_id":"MVP-A008","event_id":"A008-E01","operation":{"kind":"event_patch","json_pointer":"/denial_expectation","replacement":{"outcome":"allow","condition":null,"error_id":null}},"expected_error_id":"HM_P2_ACTION_NOT_AUTHORIZED","assert_no_side_effects":true},
+    {"case_id":"NEG-A009","scenario_id":"MVP-A009","event_id":"A009-E01","operation":{"kind":"event_patch","json_pointer":"/denial_expectation","replacement":{"outcome":"allow","condition":null,"error_id":null}},"expected_error_id":"HM_P2_ACTION_NOT_AUTHORIZED","assert_no_side_effects":true},
+    {"case_id":"NEG-A010","scenario_id":"MVP-A010","event_id":"A010-E01","operation":{"kind":"event_patch","json_pointer":"/actor_role","replacement":"member"},"expected_error_id":"HM_P2_ACTOR_NOT_AUTHORIZED","assert_no_side_effects":true},
+    {"case_id":"NEG-A011","scenario_id":"MVP-A011","event_id":"A011-E01","operation":{"kind":"event_patch","json_pointer":"/resource_ref","replacement":"HealthPlanVersion:syn-member-other:v1"},"expected_error_id":"HM_P2_ACTION_NOT_AUTHORIZED","assert_no_side_effects":true},
+    {"case_id":"NEG-A012","scenario_id":"MVP-A012","event_id":"A012-E01","operation":{"kind":"idempotency_replay_patch","json_pointer":"/idempotency/expectation","replacement":"return_original_result"},"expected_error_id":"HM_IDEMPOTENCY_CONFLICT","assert_no_side_effects":true},
+    {"case_id":"NEG-A013","scenario_id":"MVP-A013","event_id":"A013-E01","operation":{"kind":"event_patch","json_pointer":"/denial_expectation","replacement":{"outcome":"allow","condition":null,"error_id":null}},"expected_error_id":"HM_P2_ACTION_NOT_AUTHORIZED","assert_no_side_effects":true},
+    {"case_id":"NEG-A014","scenario_id":"MVP-A014","event_id":"A014-E01","operation":{"kind":"seed_version_conflict","seed_state":"active","seed_version":99},"expected_error_id":"HM_VERSION_CONFLICT","assert_no_side_effects":true},
+    {"case_id":"NEG-A015","scenario_id":"MVP-A015","event_id":"A015-E01","operation":{"kind":"event_patch","json_pointer":"/denial_expectation","replacement":{"outcome":"allow","condition":null,"error_id":null}},"expected_error_id":"HM_P2_ACTION_NOT_AUTHORIZED","assert_no_side_effects":true}
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/health-manager/mvp90-m1/p2-c3-matrix.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "synthetic_only", "executable", "positive_cases", "negative_cases"],
+  "properties": {
+    "contract_version": {"const": "health-manager.mvp90-m1.p2-c3-matrix.v1"},
+    "synthetic_only": {"const": true},
+    "executable": {"const": false},
+    "positive_cases": {
+      "type": "array", "minItems": 15, "maxItems": 15,
+      "items": {"$ref": "#/$defs/positive"},
+      "allOf": [
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A001"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A002"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A003"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A004"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A005"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A006"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A007"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A008"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A009"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A010"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A011"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A012"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A013"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A014"}},"required":["scenario_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"scenario_id":{"const":"MVP-A015"}},"required":["scenario_id"]},"minContains":1,"maxContains":1}
+      ]
+    },
+    "negative_cases": {
+      "type": "array", "minItems": 15, "maxItems": 15,
+      "items": {"$ref": "#/$defs/negative"},
+      "allOf": [
+        {"contains":{"properties":{"case_id":{"const":"NEG-A001"}},"required":["case_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"case_id":{"const":"NEG-A002"}},"required":["case_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"case_id":{"const":"NEG-A003"}},"required":["case_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"case_id":{"const":"NEG-A004"}},"required":["case_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"case_id":{"const":"NEG-A005"}},"required":["case_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"case_id":{"const":"NEG-A006"}},"required":["case_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"case_id":{"const":"NEG-A007"}},"required":["case_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"case_id":{"const":"NEG-A008"}},"required":["case_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"case_id":{"const":"NEG-A009"}},"required":["case_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"case_id":{"const":"NEG-A010"}},"required":["case_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"case_id":{"const":"NEG-A011"}},"required":["case_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"case_id":{"const":"NEG-A012"}},"required":["case_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"case_id":{"const":"NEG-A013"}},"required":["case_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"case_id":{"const":"NEG-A014"}},"required":["case_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"case_id":{"const":"NEG-A015"}},"required":["case_id"]},"minContains":1,"maxContains":1}
+      ]
+    }
+  },
+  "$defs": {
+    "scenarioId": {"type":"string","enum":["MVP-A001","MVP-A002","MVP-A003","MVP-A004","MVP-A005","MVP-A006","MVP-A007","MVP-A008","MVP-A009","MVP-A010","MVP-A011","MVP-A012","MVP-A013","MVP-A014","MVP-A015"]},
+    "positive": {
+      "type":"object","additionalProperties":false,
+      "required":["scenario_id","expected_outcome","expected_error_id","expected_result_count","expected_trace_hash"],
+      "properties":{
+        "scenario_id":{"$ref":"#/$defs/scenarioId"},
+        "expected_outcome":{"enum":["applied","denied"]},
+        "expected_error_id":{"type":["string","null"]},
+        "expected_result_count":{"type":"integer","minimum":1},
+        "expected_trace_hash":{"type":"string","pattern":"^[0-9a-f]{64}$"}
+      }
+    },
+    "operation": {
+      "oneOf":[
+        {"type":"object","additionalProperties":false,"required":["kind"],"properties":{"kind":{"const":"audit_failure"}}},
+        {"type":"object","additionalProperties":false,"required":["kind","json_pointer","replacement"],"properties":{"kind":{"enum":["event_patch","idempotency_replay_patch"]},"json_pointer":{"type":"string","pattern":"^/"},"replacement":{}}},
+        {"type":"object","additionalProperties":false,"required":["kind","seed_state","seed_version"],"properties":{"kind":{"const":"seed_version_conflict"},"seed_state":{"type":"string","minLength":1},"seed_version":{"type":"integer","minimum":0}}}
+      ]
+    },
+    "negative": {
+      "type":"object","additionalProperties":false,
+      "required":["case_id","scenario_id","event_id","operation","expected_error_id","assert_no_side_effects"],
+      "properties":{
+        "case_id":{"type":"string","pattern":"^NEG-A0(0[1-9]|1[0-5])$"},
+        "scenario_id":{"$ref":"#/$defs/scenarioId"},
+        "event_id":{"type":"string","pattern":"^A0(0[1-9]|1[0-5])-E[0-9]{2}$"},
+        "operation":{"$ref":"#/$defs/operation"},
+        "expected_error_id":{"type":"string","minLength":1},
+        "assert_no_side_effects":{"const":true}
+      }
+    }
+  }
+}

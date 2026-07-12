@@ -91,3 +91,20 @@ P2-C1已由平台独立验收Go，squash integration=`40a042b`，authoritative e
 - positive/regression：修订后 P2 15项与 P1 11项通过；零文件、网络、DB、clock、random、browser、model依赖保持。
 - security/data/release impact：关闭本地参考运行器的安全语义绕过；仍仅合成数据且 executable=false，不产生环境或发布影响。
 - verdict：corrected candidate 等待平台独立复核；未获 C2 Go 前不进入 C3。
+
+## P2-C3 合成矩阵结论
+
+| 检查项 | 结果 |
+| --- | --- |
+| 正例 exact set | MVP-A001—A015，15/15 PASS |
+| 负例 exact set | NEG-A001—A015，15/15 PASS |
+| 正例隔离重放 | outcome/error/result count 15/15 与冻结矩阵一致 |
+| canonical trace hash | 15/15 两次隔离运行一致并匹配冻结值 |
+| 负例稳定错误 | 15/15 与矩阵 expected_error_id 一致 |
+| 负例无副作用 | resource/audit/trace/idempotency 15/15 全部不变 |
+| Schema 负例 | 缺项、重复ID、提升executable、取消synthetic全部REJECT |
+| 零外部运行时入口 | file/network/API/DB/clock/random/browser/storage/real-data=0 |
+| 输出边界 | synthetic_only=true / executable=false |
+| 回归 | P2 19/19、P1 11/11 PASS |
+
+C3矩阵只冻结本地合成验证结果，不改变专业源、隐私法律Pending、共享实现和真实活动No-Go。当前结论为ready for independent review；未获C3 Go前不进入P2-C4。

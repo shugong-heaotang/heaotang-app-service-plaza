@@ -4,7 +4,7 @@
 - 提交方：健康大管家负责人
 - 接收方：平台集成负责人
 - 日期：2026-07-12
-- 状态：`P2-C1 Go / P2-C2 Exact revision corrected candidate ready for independent review`
+- 状态：`P2-C1 Go / P2-C2 integrated / P2-C3 ready for independent review`
 
 ## 已完成
 
@@ -55,3 +55,20 @@
 5. 根因 `HM-M1-P2-C2-CALLER-CONTROLLED-SAFETY-SEMANTICS` 已写入 conformance report。
 
 请平台独立复跑P2-C2 runner语义、15项P2测试、P1 11项回归、治理和范围门禁。获得C2 Go前不进入P2-C3。
+
+## P2-C2 集成与 C3 授权
+
+1. C2 corrected source `a2e8424c...` 已受控集成为 `4c195d07c21c8ce6944ecca91f69d9f83e6893e7`。
+2. 模块分支同步 merge=`63e5f03c9570c1dfd13e8af045e3c8343066f84d`，merge-base精确为`4c195d07...`。
+3. 平台已在原work item与原allowed paths内授权C3，仅限合成矩阵、hash与零外部依赖证据。
+
+## P2-C3 新增成果
+
+1. `synthetic-replay-negative-cases.v1.json` 同时冻结15个正例结果/hash与15个负例。
+2. 对应Schema锁定exact set、synthetic/executable常量、操作类型和失败关闭断言。
+3. 15个正例逐项验证outcome/error/result count及两次隔离运行hash一致。
+4. 15个负例逐项验证稳定错误、committed=false，并证明resource/audit/trace/idempotency无副作用。
+5. runner零文件、网络、API、DB、clock、random、browser、storage与真实数据入口。
+6. P2测试19项、P1回归11项通过。
+
+请平台独立复核C3矩阵、Schema、30项回归、治理、范围和No-Go。获得C3 Go前不进入P2-C4。

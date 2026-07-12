@@ -21,6 +21,8 @@ from .synthetic_pdcar_reference import (
 ROOT = Path(__file__).resolve().parents[5]
 PLAN_REL = "contracts/modules/health-manager/mvp90-m1/synthetic-replay-plan.v1.json"
 SCHEMA_REL = "contracts/modules/health-manager/mvp90-m1/synthetic-replay-plan.v1.schema.json"
+MATRIX_REL = "contracts/modules/health-manager/mvp90-m1/conformance/fixtures/synthetic-replay-negative-cases.v1.json"
+MATRIX_SCHEMA_REL = "contracts/modules/health-manager/mvp90-m1/conformance/fixtures/synthetic-replay-negative-cases.v1.schema.json"
 SUBJECT_BY_ACTOR = {
     "member": "adult_member_self",
     "ai": "ai_runtime",
@@ -37,6 +39,18 @@ def split_transition(reference: str):
     machine, state_change, event = reference.split(":")
     source, target = state_change.split("->")
     return machine, source, target, event
+
+
+def replace_pointer(document, pointer, replacement):
+    tokens = [token.replace("~1", "/").replace("~0", "~") for token in pointer.lstrip("/").split("/")]
+    target = document
+    for token in tokens[:-1]:
+        target = target[int(token)] if isinstance(target, list) else target[token]
+    final = tokens[-1]
+    if isinstance(target, list):
+        target[int(final)] = copy.deepcopy(replacement)
+    else:
+        target[final] = copy.deepcopy(replacement)
 
 
 def resolve_pointer(reference: str, documents=None):
@@ -180,6 +194,8 @@ class SyntheticReplayPlanContractTests(unittest.TestCase):
     def setUpClass(cls):
         cls.plan = load(PLAN_REL)
         cls.schema = load(SCHEMA_REL)
+        cls.matrix = load(MATRIX_REL)
+        cls.matrix_schema = load(MATRIX_SCHEMA_REL)
 
     def test_plan_schema_exact_sets_and_source_closure(self):
         Draft202012Validator(self.schema).validate(self.plan)
@@ -473,6 +489,108 @@ class SyntheticReplayPlanContractTests(unittest.TestCase):
                 imported_roots.add(node.module.split(".", 1)[0])
         self.assertTrue(imported_roots.isdisjoint({"socket", "requests", "sqlite3", "time", "random", "pathlib", "os"}))
         self.assertNotIn("open(", source)
+
+    def test_c3_matrix_schema_exact_sets_and_failure_closed_constants(self):
+        Draft202012Validator(self.matrix_schema).validate(self.matrix)
+        self.assertEqual(
+            {item["scenario_id"] for item in self.matrix["positive_cases"]},
+            {f"MVP-A{i:03d}" for i in range(1, 16)},
+        )
+        self.assertEqual(
+            {item["case_id"] for item in self.matrix["negative_cases"]},
+            {f"NEG-A{i:03d}" for i in range(1, 16)},
+        )
+        self.assertEqual(
+            {(item["case_id"], item["scenario_id"]) for item in self.matrix["negative_cases"]},
+            {(f"NEG-A{i:03d}", f"MVP-A{i:03d}") for i in range(1, 16)},
+        )
+        validator = Draft202012Validator(self.matrix_schema)
+        mutations = []
+        missing = copy.deepcopy(self.matrix)
+        missing["negative_cases"].pop()
+        mutations.append(missing)
+        duplicate = copy.deepcopy(self.matrix)
+        duplicate["negative_cases"][14] = copy.deepcopy(duplicate["negative_cases"][0])
+        mutations.append(duplicate)
+        promoted = copy.deepcopy(self.matrix)
+        promoted["executable"] = True
+        mutations.append(promoted)
+        real_data = copy.deepcopy(self.matrix)
+        real_data["synthetic_only"] = False
+        mutations.append(real_data)
+        for mutated in mutations:
+            self.assertTrue(list(validator.iter_errors(mutated)))
+
+    def test_c3_fifteen_positive_results_and_hashes_are_exact_and_deterministic(self):
+        for expected in self.matrix["positive_cases"]:
+            with self.subTest(scenario_id=expected["scenario_id"]):
+                first = self.new_runner().replay_scenario(expected["scenario_id"])
+                second = self.new_runner().replay_scenario(expected["scenario_id"])
+                self.assertEqual(first["outcome"], expected["expected_outcome"])
+                self.assertEqual(first["error_id"], expected["expected_error_id"])
+                self.assertEqual(len(first["results"]), expected["expected_result_count"])
+                self.assertEqual(first["trace_hash"], expected["expected_trace_hash"])
+                self.assertEqual(second["trace_hash"], expected["expected_trace_hash"])
+                self.assertTrue(first["synthetic_only"])
+                self.assertFalse(first["executable"])
+
+    def test_c3_fifteen_negative_cases_fail_without_any_side_effect(self):
+        scenarios = {item["scenario_id"]: item for item in self.plan["scenarios"]}
+        for case in self.matrix["negative_cases"]:
+            with self.subTest(case_id=case["case_id"]):
+                runner = self.new_runner()
+                event = copy.deepcopy(
+                    next(item for item in scenarios[case["scenario_id"]]["events"] if item["event_id"] == case["event_id"])
+                )
+                operation = case["operation"]
+                kwargs = {}
+                if operation["kind"] == "idempotency_replay_patch":
+                    first = runner.execute_event(case["scenario_id"], event)
+                    self.assertTrue(first["committed"])
+                    replace_pointer(event, operation["json_pointer"], operation["replacement"])
+                elif operation["kind"] == "event_patch":
+                    replace_pointer(event, operation["json_pointer"], operation["replacement"])
+                elif operation["kind"] == "seed_version_conflict":
+                    runner.seed_resource(event["resource_ref"], operation["seed_state"], operation["seed_version"])
+                elif operation["kind"] == "audit_failure":
+                    kwargs["audit_write_succeeds"] = False
+                else:
+                    self.fail(f"unknown negative operation: {operation['kind']}")
+                resources_before = runner.resources
+                audit_before = runner.audit_events
+                trace_before = runner.trace_events
+                idempotency_before = runner.idempotency_records
+                result = runner.execute_event(case["scenario_id"], event, **kwargs)
+                self.assertEqual(result["error_id"], case["expected_error_id"])
+                self.assertFalse(result["committed"])
+                self.assertTrue(result["synthetic_only"])
+                self.assertFalse(result["executable"])
+                self.assertEqual(runner.resources, resources_before)
+                self.assertEqual(runner.audit_events, audit_before)
+                self.assertEqual(runner.trace_events, trace_before)
+                self.assertEqual(runner.idempotency_records, idempotency_before)
+
+    def test_c3_runner_has_zero_external_and_real_data_runtime_surface(self):
+        source = (Path(__file__).parent / "synthetic_pdcar_reference.py").read_text(encoding="utf-8")
+        tree = ast.parse(source)
+        imported_roots = set()
+        for node in ast.walk(tree):
+            if isinstance(node, ast.Import):
+                imported_roots.update(alias.name.split(".", 1)[0] for alias in node.names)
+            elif isinstance(node, ast.ImportFrom) and node.module:
+                imported_roots.add(node.module.split(".", 1)[0])
+        forbidden_imports = {
+            "aiohttp", "datetime", "http", "os", "pathlib", "random", "requests", "socket",
+            "sqlite3", "subprocess", "time", "urllib", "webbrowser",
+        }
+        self.assertTrue(imported_roots.isdisjoint(forbidden_imports))
+        for forbidden_text in (
+            "open(", "localStorage", "sessionStorage", "fetch(", "http://", "https://",
+            "member_phone", "identity_card", "real_health_data",
+        ):
+            self.assertNotIn(forbidden_text, source)
+        self.assertTrue(self.matrix["synthetic_only"])
+        self.assertFalse(self.matrix["executable"])
 
 
 if __name__ == "__main__":
