@@ -67,13 +67,13 @@
     "C:/Users/shugo/.cache/codex-runtimes/codex-primary-runtime/dependencies/python/python.exe -X utf8 contracts/modules/club-alliance/member-home/test_member_home_contracts.py",
     "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-ServicePlazaContracts.ps1",
     "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-TextEncoding.ps1",
-    "git diff --check"
+    "git diff --check d4ac576e0114b2bc86b440661aabc511cda8e921..HEAD",
+    "git show ae75d071f9a7c58e9354ad8eb6f41f69d6c09ad9:<original_path> plus SHA-256 and Git blob verification for immutable R1 evidence"
   ],
   "evidence": [
     "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-membership-contract-r2.json",
     "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-membership-contract-r2-attempt-1.json",
-    "contracts/modules/club-alliance/invalidated-snapshots/member-home-membership-contract/r1/checklist-r1.json",
-    "contracts/modules/club-alliance/invalidated-snapshots/member-home-membership-contract/r1/exam-r1-attempt-1.json",
+    "contracts/modules/club-alliance/invalidated-snapshots/member-home-membership-contract/r1/manifest.json",
     "contracts/modules/club-alliance/member-home/test_member_home_contracts.py",
     "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md"
   ],
@@ -82,7 +82,7 @@
     "left describes historical club membership and must not appear in the current my-clubs list",
     "suspended is optional and cannot be emitted until a dedicated backend implementation and acceptance checkpoint supports it",
     "dissolved describes club lifecycle and must not be encoded as membership status",
-    "the R1 checklist and exam were byte-preserved under invalidated-snapshots because an EOF blank-line defect could not be repaired without invalidating the graded SHA",
+    "the R1 checklist and exam remain byte-preserved at their original paths in immutable Git commit ae75d071; the current tree keeps a canonical manifest rather than copying the known EOF defect",
     "the R2 checklist and exam are current, clean and independently bind the final contract artifacts",
     "this checkpoint does not authorize or claim frontend, backend, deployment, environment, or production completion"
   ],

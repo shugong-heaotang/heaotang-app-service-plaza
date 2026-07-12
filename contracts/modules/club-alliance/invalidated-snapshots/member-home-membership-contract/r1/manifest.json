@@ -1,0 +1,28 @@
+{
+  "contract_version": "governance-snapshot-invalidation.v1",
+  "record_id": "IR-20260712-CLUB-MEMBER-HOME-MEMBERSHIP-CONTRACT-R1",
+  "status": "invalidated",
+  "source_commit": "ae75d071f9a7c58e9354ad8eb6f41f69d6c09ad9",
+  "artifacts": [
+    {
+      "kind": "development-checklist",
+      "original_path": "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-membership-contract-r1.json",
+      "git_blob_oid": "3ff0502acc17cb12a32db2c539142a95d4f30155",
+      "sha256": "8cea0d38c65590d54f060bd8b76be80d75a2397ad8f3e924b35000f87d64008b"
+    },
+    {
+      "kind": "governance-exam",
+      "original_path": "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-membership-contract-r1-attempt-1.json",
+      "git_blob_oid": "a6e1381fe39b6641ef96732f284431932f13896f",
+      "sha256": "e6deb3de77cbfa0413ca6c75d244b0b22315c9baf954e5c7ed774d0b36e9b2db"
+    }
+  ],
+  "invalid_reason": "The graded R1 checklist contains an extra blank line at EOF; changing its bytes would invalidate the exam-bound SHA.",
+  "superseded_by": {
+    "record_id": "IR-20260712-CLUB-MEMBER-HOME-MEMBERSHIP-CONTRACT-R2",
+    "checklist": "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-membership-contract-r2.json",
+    "exam": "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-membership-contract-r2-attempt-1.json"
+  },
+  "decision": "Preserve the original bytes at their original paths in immutable Git commit history; keep only this canonical manifest in the current tree so active diff gates remain strict.",
+  "checked_at": "2026-07-12T02:56:00Z"
+}

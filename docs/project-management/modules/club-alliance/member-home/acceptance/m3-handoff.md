@@ -33,10 +33,10 @@
 - causal chain：初始 checklist 由官方脚本生成；勾选时采用“删除后完整重建文件”的补丁，补丁生成器在已有 LF 之后又添加空行；attempt-1 随后以该字节快照的 SHA 出题并通过，因而不得原地删空行或改写试卷。
 - preserved checklist SHA-256：8cea0d38c65590d54f060bd8b76be80d75a2397ad8f3e924b35000f87d64008b。
 - preserved exam SHA-256：e6deb3de77cbfa0413ca6c75d244b0b22315c9baf954e5c7ed774d0b36e9b2db。
-- isolation：两份 R1 原字节快照已迁入 contracts/modules/club-alliance/invalidated-snapshots/member-home-membership-contract/r1/；迁移前后 SHA 完全一致。
+- preservation：两份 R1 原字节仍位于不可变 Git 提交 `ae75d071f9a7c58e9354ad8eb6f41f69d6c09ad9` 的原历史路径；当前树不复制带缺陷字节，只保存 `invalidated-snapshots/member-home-membership-contract/r1/manifest.json`，记录 source commit、original path、Git blob OID、SHA、失效原因和 R2 替代关系。
 - blocks：R1 不再作为 current checklist/exam，也不能支撑最终实现记录或 Contract Go。
 - does_not_block：已完成的状态分层合同、Schema、fixtures、15 个 conformance 测试及其内容审查；它们由新的 R2 current checklist、随机考试和 IR 重新收口。
-- prevention：R2 勾选采用精确 JSON 更新并在考试前运行 diff --check；任何快照格式缺陷都先隔离原字节，再生成新记录，禁止篡改已评分证据。
+- prevention：R2 勾选采用精确 JSON 更新并在考试前运行 diff --check；任何快照格式缺陷都以不可变 Git 对象和规范 manifest 留证，再生成新记录，禁止篡改或复制缺陷字节到当前树。
 
 ## 1. 已授权范围
 
@@ -48,11 +48,11 @@
 
 | 输入 | 当前事实 | 判断 |
 | --- | --- | --- |
-| APP integration | `f31f67f` | 候选联合部署基线，部署前必须冻结完整 SHA |
+| APP integration | `e275cdbf52f2536cf68672172a7c046d50cceb9f` | 当前权威基线已包含 SC R4 与 H2 M3 fixture capability；membership R2 尚待集成 |
 | H2 frontend | `e06d5c6`，全量 `215/215` 与生产构建通过 | 本地/集成门禁已通过，不替代环境证据 |
-| Backend integration | `97d8bfc5`，定向 `10/10`、Go 全量 test 与 vet 通过 | 本地/集成门禁已通过，不替代环境证据 |
-| SC safe DTO | combined remediation/deployment coordination pending | 当前部署 Blocker |
-| M3 governance | checklist completed；exam `100 / passed` | 允许准备，未解除部署 Blocker |
+| Backend integration | H2 M2 `97d8bfc5`；当前 combined backend `98426ff83a1218080019faa377c152a81ecca437` | 本地/集成门禁已通过，不替代环境证据 |
+| SC safe DTO | backend `98426ff8` 与 APP 治理证据均已 integrated，测试环境 ready | 已关闭，不再是 H2 blocker |
+| M3 governance | membership R2 checklist completed/exam100；fixture capability 已独立复核并集成 | 允许准备；仍未授权环境执行 |
 
 最终 combined commit、部署资产哈希、后端二进制哈希和数据库模式尚待部署负责人在窗口开始前冻结。
 
@@ -60,7 +60,7 @@
 
 只有以下条件全部满足才可开始部署：
 
-1. SC safe DTO remediation 已独立验证并进入确定的 combined frontend/backend commit。
+1. membership 状态字段实现已按 R2 合同独立完成、测试并受控集成。
 2. 目标前后端完整 SHA、构建资产、数据库模式、base URL 和允许变更范围已冻结。
 3. 部署负责人确认备份、自动回滚、人工回滚、恢复责任人和关窗标准。
 4. 四个脱敏合成身份、权威关系数据和 OTP 独立会话容量已准备；`capacity_ready=true`。
