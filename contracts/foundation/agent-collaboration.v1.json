@@ -2086,6 +2086,38 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "C4-S04 技术安全冻结 source e68b1a0fbe295ba61452d824b0db7dc57cc1f341 经平台独立复核 Accepted，并受控集成至 APP e547190000cf6337274452336789ac4d3ca88320。valid ACCEPT，原六项负向变异及重复 subject/threat/premise ID 均 REJECT；checklist current SHA mismatch0、exam100、总合同、IR、UTF-8、diff、scope、敏感扫描通过。合同仍 executable=false；C4-H01、M1 窄模板和隐私/法律依赖继续 Pending，不自动激活 M1。",
                            "handoff_record":  "docs/project-management/modules/health-manager/health-manager-mvp90-m1-security-freeze-receipt.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-PROTECTION-MALL-M0",
+                           "title":  "保障商城持续开发启动与 M0 接入契约冻结",
+                           "owner":  "Protection Mall module lead agent",
+                           "owner_role":  "商城板块唯一负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-m0",
+                           "branch":  "codex/protection-mall-m0",
+                           "base_commit":  "de31a235b9679698b9de4e33faa6ab980e0461f6",
+                           "allowed_paths":  [
+                                                 "docs/project-management/notices/2026-07-12-protection-mall-m0-task-order.md",
+                                                 "docs/project-management/modules/protection-mall/",
+                                                 "contracts/modules/protection-mall/",
+                                                 "contracts/foundation/development-checklists/2026-07-12-protection-mall-m0*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-protection-mall-m0*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-protection-mall-m0*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "risk_level":  "high",
+                           "updated_at":  "2026-07-12T14:20:00+08:00",
+                           "target_date":  "2026-07-12T18:00:00+08:00",
+                           "status_expires_at":  "2026-07-12T16:30:00+08:00",
+                           "next_checkpoint":  "M0-CP1 来源只读盘点、迁移矩阵、接入卡与 mall.api.v1 契约冻结提案",
+                           "reviewer_role":  "平台集成负责人",
+                           "approver_role":  "APP 总架构独立验收 Agent",
+                           "migration_note":  "商城提前启动持续开发但不提前上线。M0 仅授权治理准入、受控迁移审计、服务广场接入卡和 mall.api.v1 契约冻结；本地商城既存未提交修改只读盘点，禁止整体 git add、覆盖、复制 Git 历史或强推。M0-CP1 Go 前不得编辑业务代码。",
+                           "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m0.md",
+                           "blocks":  ["保障商城 M1 业务实现激活"],
+                           "does_not_block":  ["其他模块非重叠开发", "商城本地来源只读盘点", "商城 2.0-3.0 非执行性设计"]
                        }
                    ]
 }
