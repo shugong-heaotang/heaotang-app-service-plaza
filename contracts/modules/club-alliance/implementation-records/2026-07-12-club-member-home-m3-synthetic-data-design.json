@@ -1,0 +1,57 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-CLUB-MEMBER-HOME-M3-SYNTHETIC-DATA-DESIGN",
+  "title": "H2-M3 最小合成测试资料设计",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "在不使用真实资料和不直接修改数据库结构的前提下，设计可回滚的申请历史与俱乐部生命周期合成测试资料，并明确当前无法由 fixture 可信覆盖的会员关系状态。",
+  "governance_checklist": "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-m3-synthetic-data-design.json",
+  "governance_exam": "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-m3-synthetic-data-design-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "docs/project-management/modules/club-alliance/README.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-plan.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-fixture-handoff.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md"
+  ],
+  "capabilities": [
+    "foundation.identity-api",
+    "foundation.authorization-idempotency"
+  ],
+  "contracts": [
+    "contracts/modules/club-alliance/member-home/member-home.v1.json"
+  ],
+  "decisions": [
+    "docs/project-management/modules/club-alliance/member-home/decisions.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3/synthetic-data-design.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md",
+    "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-m3-synthetic-data-design.json",
+    "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-m3-synthetic-data-design-attempt-1.json",
+    "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-m3-synthetic-data-design.json"
+  ],
+  "verification": [
+    "governance exam score 100",
+    "backend schema inspection: club_join_applications supports pending/rejected",
+    "backend projection inspection: club_status is sourced from clubs.status",
+    "backend projection inspection: membership_status is currently fixed to active",
+    "scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3/synthetic-data-design.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md"
+  ],
+  "premises": [
+    "Only synthetic test identities and run-owned records are permitted",
+    "No real member, health, family, payment, OTP, token or cookie data is used",
+    "left and suspended remain unsupported until an authoritative membership history/status model exists",
+    "Environment execution requires a separate fixture-extension checkpoint"
+  ],
+  "implementation_mode": "ai-assisted"
+}
