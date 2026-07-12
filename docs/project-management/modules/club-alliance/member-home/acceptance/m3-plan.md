@@ -28,7 +28,7 @@
 | 多俱乐部会员 | 至少 2 个 active membership：`standard/general` 自建和 `standard/charity` 公益；至少 1 条本人活动；服务端排序可核对 | `ready`；摘要计数、两类俱乐部及顺序与权威数据一致 | `can_manage=false`；不得看到其他会员资源 |
 | 理事/管理员 | 至少 1 个 active membership；`member_role=director` 或权威 owner/特权关系；scope 必须由服务端关系派生 | `ready`；会员数据正常展示 | `can_manage=true`；仅此身份显示管理附属入口 |
 
-另建独立、可恢复的测试记录覆盖 `pending`、`rejected`、`left`、`suspended`、`dissolved`。这些是会员/俱乐部关系状态，不得用页面 `maintenance/offline` 代替；每项都要核对显示文案、可用动作和服务端原始状态。
+另建独立、可恢复的测试记录按实体覆盖三类状态：加入申请历史 pending/rejected，会员关系历史 left，可选会员停权 suspended，以及俱乐部生命周期 dissolved。其中 pending/rejected 不得计入当前 membership，left 不得出现在当前“我的俱乐部”，suspended 只有在服务端明确支持时才可作为受限当前关系，dissolved 必须作为独立 club_status，不能伪装为会员关系状态。每项都要核对显示文案、可用动作和服务端原始实体；也不得用页面 maintenance/offline 代替。
 
 ## 3. 每身份统一证据流程
 
@@ -93,7 +93,7 @@ denylist：非当前动作触发的 club search/create/join/review/member/paymen
 | 页面态 | 测试环境证明方法 | 禁止替代 |
 | --- | --- | --- |
 | loading | 真实聚合请求 pending 时捕获 `loading` marker 和加载文案，随后在同一链路转入最终态；可使用浏览器节流或已批准代理延迟 | 只用组件测试截图 |
-| ready | 家庭、多俱乐部、管理员身份取得真实 200，并由 DOM、API 和权威数据三方一致证明 | 静态 fixture |
+| ready | 家庭、多俱乐部、管理员身份取得真实 200，并由 DOM、API 和权威数据三方一致证明；当前俱乐部记录必须分离 club_status 与 membership_status | 静态 fixture |
 | empty | 新会员真实 200 合法空集合，权威查询证明 0 关系/任务/活动，DOM 显示 empty | `catch -> []` 或删除真实数据 |
 | partial-error | 使用既有、可审计且可恢复的测试环境机制，使非关键 tasks/activities/feed 返回稳定 section error，同时 my-clubs 保持可用 | 新增页面 runtime switcher、伪造空数组 |
 | error | 在批准故障窗口让关键聚合或 my-clubs 依赖返回稳定错误，证明页面 alert、API 失败和服务端错误一致，随后恢复 | 把浏览器超时当产品错误 |
@@ -137,7 +137,8 @@ denylist：非当前动作触发的 club search/create/join/review/member/paymen
 - 联合部署窗口、备份、回滚和责任人已确认；
 - 部署后 health/ready、asset、登录、聚合 API smoke 全部通过；
 - 四个脱敏合成身份与权威数据已准备，OTP 容量满足全部独立会话；
-- `pending/rejected/left/suspended/dissolved` 数据和八态触发/恢复方案已批准；
+- 三层状态数据和八态触发/恢复方案已批准：申请历史 pending/rejected、会员关系 active/left/suspended、俱乐部生命周期 dissolved；
+- 聚合 API、前端 adapter 和页面已停止使用含义不明的单一 status，并通过状态域负向回归；
 - Nginx/API/只读 DB 的服务端关联渠道可用；
 - exact deployed commits、assets 和允许变更范围已冻结。
 
@@ -145,7 +146,7 @@ denylist：非当前动作触发的 club search/create/join/review/member/paymen
 
 ### 7.2 Full Go
 
-四身份的 direct、reload、back、return，route/DOM/network allow-deny/permission/server correlation，五个 viewport、真实键盘，以及会员关系状态均通过；八态按本计划取得真实环境证据或任务书明确接受的证据层级；不存在未关闭 Blocker/Major；证据无秘密；测试环境完成恢复并复验 health/ready 和基准 smoke。任一核心接口未调用、异常 401/5xx、跨用户数据、scope 错误、runtime mock/catch-empty、版本不明或缺真实浏览器证据，均为 No-Go。
+四身份的 direct、reload、back、return，route/DOM/network allow-deny/permission/server correlation，五个 viewport、真实键盘，以及三层业务状态均通过；八态按本计划取得真实环境证据或任务书明确接受的证据层级；不存在未关闭 Blocker/Major；证据无秘密；测试环境完成恢复并复验 health/ready 和基准 smoke。任一核心接口未调用、状态域串流、单一 status 仍无法判定属于 club 或 membership、异常 401/5xx、跨用户数据、scope 错误、runtime mock/catch-empty、版本不明或缺真实浏览器证据，均为 No-Go。
 
 ## 8. 环境恢复与关窗
 
@@ -160,7 +161,7 @@ denylist：非当前动作触发的 club search/create/join/review/member/paymen
 1. SC safe DTO remediation 尚未关闭；联合部署窗口未批准。
 2. 尚无 H2 测试环境 deployed commit、asset hash 和聚合接口现场响应。
 3. 四身份账号、OTP 容量和权威数据尚未冻结为本轮证据。
-4. `pending/rejected/left/suspended/dissolved` 的测试环境记录尚未提供。
+4. 三层状态的测试环境记录尚未提供；现有实现对 club_status / membership_status 的分离也尚未形成环境证据。
 5. partial-error、error、maintenance、offline 的安全触发与恢复方案尚未提供。
 6. 服务端 correlation 的查询入口、字段和证据责任人尚未冻结。
 

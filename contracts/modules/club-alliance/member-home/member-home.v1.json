@@ -1,1 +1,180 @@
-{"contract_version":"club-member-home.v1","route":"/services/club-alliance","auth_mode":"shared_session","layout_order":["member-summary","my-clubs","today-tasks","recent-activities","alliance-feed","explore-more"],"sections":{"member-summary":{"criticality":"critical","source":"member-home-aggregate","readiness":"gap","fields":["display_name","joined_club_count","pending_task_count","unread_count"],"privacy":"self-only"},"my-clubs":{"criticality":"critical","source":"GET /api/v1/clubs/my","readiness":"code-present-unverified","fields":["club_id","name","type","category","status","member_role","next_action"],"privacy":"self-only"},"today-tasks":{"criticality":"important","source":"member-home-tasks","readiness":"gap","fields":["task_id","source_kind","title","due_at","priority","target"],"privacy":"self-only"},"recent-activities":{"criticality":"important","source":"member-home-activities","readiness":"gap","fields":["activity_id","club_id","title","start_at","participation_status","target"],"privacy":"self-only"},"alliance-feed":{"criticality":"optional","source":"member-home-feed","readiness":"gap","fields":["item_id","source_kind","title","published_at","target"],"privacy":"authenticated"},"explore-more":{"criticality":"critical","source":"service-plaza.action.v1","readiness":"verified","action_ids":["public-benefit-club","self-created-club","family-club","club-federation"],"privacy":"authenticated"}},"degradation":{"critical_failure":"page-error","important_failure":"section-error","optional_failure":"hide-or-empty","forbid_empty_array_fallback":true,"forbid_runtime_mock":true},"states":["loading","ready","empty","partial-error","error","unauthorized","maintenance","offline"],"membership_states":["active","pending","rejected","left","suspended","dissolved"],"sorting":{"sections":"contract-order","my_clubs":"server-authoritative","tasks":"priority-then-due-at","activities":"start-at-ascending","feed":"published-at-descending","explore":"upstream-sort-order"},"management":{"action_id":"club-manage","placement":"secondary","required_scope":"club:manage","hidden_for_ordinary_member":true},"forbidden_response_fields":["phone","id_card","health_detail","family_private_record","payment_account","raw_token"],"forbidden_capabilities":["create-club","join-review","member-management","payment","refund","withdraw","subscription","production-write"]}
+{
+  "contract_version": "club-member-home.v1",
+  "route": "/services/club-alliance",
+  "auth_mode": "shared_session",
+  "layout_order": [
+    "member-summary",
+    "my-clubs",
+    "today-tasks",
+    "recent-activities",
+    "alliance-feed",
+    "explore-more"
+  ],
+  "sections": {
+    "member-summary": {
+      "criticality": "critical",
+      "source": "member-home-aggregate",
+      "readiness": "gap",
+      "fields": [
+        "display_name",
+        "joined_club_count",
+        "pending_task_count",
+        "unread_count"
+      ],
+      "privacy": "self-only"
+    },
+    "my-clubs": {
+      "criticality": "critical",
+      "source": "GET /api/v1/clubs/my",
+      "readiness": "code-present-unverified",
+      "fields": [
+        "club_id",
+        "name",
+        "type",
+        "category",
+        "club_status",
+        "membership_status",
+        "member_role",
+        "next_action"
+      ],
+      "privacy": "self-only"
+    },
+    "today-tasks": {
+      "criticality": "important",
+      "source": "member-home-tasks",
+      "readiness": "gap",
+      "fields": [
+        "task_id",
+        "source_kind",
+        "title",
+        "due_at",
+        "priority",
+        "target"
+      ],
+      "privacy": "self-only"
+    },
+    "recent-activities": {
+      "criticality": "important",
+      "source": "member-home-activities",
+      "readiness": "gap",
+      "fields": [
+        "activity_id",
+        "club_id",
+        "title",
+        "start_at",
+        "participation_status",
+        "target"
+      ],
+      "privacy": "self-only"
+    },
+    "alliance-feed": {
+      "criticality": "optional",
+      "source": "member-home-feed",
+      "readiness": "gap",
+      "fields": [
+        "item_id",
+        "source_kind",
+        "title",
+        "published_at",
+        "target"
+      ],
+      "privacy": "authenticated"
+    },
+    "explore-more": {
+      "criticality": "critical",
+      "source": "service-plaza.action.v1",
+      "readiness": "verified",
+      "action_ids": [
+        "public-benefit-club",
+        "self-created-club",
+        "family-club",
+        "club-federation"
+      ],
+      "privacy": "authenticated"
+    }
+  },
+  "degradation": {
+    "critical_failure": "page-error",
+    "important_failure": "section-error",
+    "optional_failure": "hide-or-empty",
+    "forbid_empty_array_fallback": true,
+    "forbid_runtime_mock": true
+  },
+  "states": [
+    "loading",
+    "ready",
+    "empty",
+    "partial-error",
+    "error",
+    "unauthorized",
+    "maintenance",
+    "offline"
+  ],
+  "relationship_state_model": {
+    "application_history": {
+      "entity": "club-join-application",
+      "states": [
+        "pending",
+        "rejected"
+      ],
+      "counts_as_current_membership": false
+    },
+    "membership": {
+      "entity": "club-membership",
+      "states": [
+        "active",
+        "left",
+        "suspended"
+      ],
+      "current_states": [
+        "active",
+        "suspended"
+      ],
+      "history_states": [
+        "left"
+      ],
+      "optional_states": [
+        "suspended"
+      ]
+    },
+    "club_lifecycle": {
+      "entity": "club",
+      "states": [
+        "dissolved"
+      ],
+      "not_a_membership_state": true
+    }
+  },
+  "sorting": {
+    "sections": "contract-order",
+    "my_clubs": "server-authoritative",
+    "tasks": "priority-then-due-at",
+    "activities": "start-at-ascending",
+    "feed": "published-at-descending",
+    "explore": "upstream-sort-order"
+  },
+  "management": {
+    "action_id": "club-manage",
+    "placement": "secondary",
+    "required_scope": "club:manage",
+    "hidden_for_ordinary_member": true
+  },
+  "forbidden_response_fields": [
+    "phone",
+    "id_card",
+    "health_detail",
+    "family_private_record",
+    "payment_account",
+    "raw_token"
+  ],
+  "forbidden_capabilities": [
+    "create-club",
+    "join-review",
+    "member-management",
+    "payment",
+    "refund",
+    "withdraw",
+    "subscription",
+    "production-write"
+  ]
+}

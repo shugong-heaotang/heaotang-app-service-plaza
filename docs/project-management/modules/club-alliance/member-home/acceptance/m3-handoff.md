@@ -7,6 +7,37 @@
 - plan：`docs/project-management/modules/club-alliance/member-home/acceptance/m3-plan.md`
 - implementation record：`IR-20260712-CLUB-MEMBER-HOME-H2-M3`（draft）
 
+## 0. 会员状态合同纠正检查点
+
+本 Handoff 已吸收独立合同工作项 AIW-20260712-CLUB-MEMBER-HOME-MEMBERSHIP-CONTRACT 的语义纠正：
+
+- pending/rejected 是 club-join-application 申请历史，不是 membership；
+- left 是 club-membership 历史关系，不进入当前“我的俱乐部”；
+- suspended 是可选会员停权，只有服务端正式支持并验收后才可作为当前受限关系；
+- dissolved 是 club 生命周期，不是 membership；
+- 机器合同要求当前记录分离 club_status 与 membership_status，禁止含义不明的单一 status。
+
+本检查点只纠正文档、合同、Schema、合成 fixture 和 conformance。现有前后端实现与测试环境尚未因此自动满足新合同，故 M3 仍为 No-Go before deployment。
+
+合同检查点证据：
+
+- current checklist：contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-membership-contract-r2.json（28/28 completed）；
+- current exam：contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-membership-contract-r2-attempt-1.json（100 / passed）；
+- implementation record：IR-20260712-CLUB-MEMBER-HOME-MEMBERSHIP-CONTRACT-R2；
+- conformance：15/15 passed；
+- 结论：Contract Go / Implementation and Environment No-Go。
+
+### R1 快照格式根因与隔离
+
+- symptom：R1 checklist 在完成勾选时被 apply_patch 写成两个结尾换行，Git staged diff 报 new blank line at EOF；合同、Schema 与 conformance 内容本身未受影响。
+- causal chain：初始 checklist 由官方脚本生成；勾选时采用“删除后完整重建文件”的补丁，补丁生成器在已有 LF 之后又添加空行；attempt-1 随后以该字节快照的 SHA 出题并通过，因而不得原地删空行或改写试卷。
+- preserved checklist SHA-256：8cea0d38c65590d54f060bd8b76be80d75a2397ad8f3e924b35000f87d64008b。
+- preserved exam SHA-256：e6deb3de77cbfa0413ca6c75d244b0b22315c9baf954e5c7ed774d0b36e9b2db。
+- preservation：两份 R1 原字节仍位于不可变 Git 提交 `ae75d071f9a7c58e9354ad8eb6f41f69d6c09ad9` 的原历史路径；当前树不复制带缺陷字节，只保存 `invalidated-snapshots/member-home-membership-contract/r1/manifest.json`，记录 source commit、original path、Git blob OID、SHA、失效原因和 R2 替代关系。
+- blocks：R1 不再作为 current checklist/exam，也不能支撑最终实现记录或 Contract Go。
+- does_not_block：已完成的状态分层合同、Schema、fixtures、15 个 conformance 测试及其内容审查；它们由新的 R2 current checklist、随机考试和 IR 重新收口。
+- prevention：R2 勾选采用精确 JSON 更新并在考试前运行 diff --check；任何快照格式缺陷都以不可变 Git 对象和规范 manifest 留证，再生成新记录，禁止篡改或复制缺陷字节到当前树。
+
 ## 1. 已授权范围
 
 本检查点只授权在批准的联合窗口中执行可回滚测试环境部署和四身份浏览器 UAT。授权对象为新会员、家庭俱乐部普通会员、多俱乐部会员、理事或管理员；证据覆盖 route、DOM、网络 allow/deny、权限、遥测、服务端关联、响应式和键盘。
@@ -17,11 +48,11 @@
 
 | 输入 | 当前事实 | 判断 |
 | --- | --- | --- |
-| APP integration | `f31f67f` | 候选联合部署基线，部署前必须冻结完整 SHA |
+| APP integration | `e275cdbf52f2536cf68672172a7c046d50cceb9f` | 当前权威基线已包含 SC R4 与 H2 M3 fixture capability；membership R2 尚待集成 |
 | H2 frontend | `e06d5c6`，全量 `215/215` 与生产构建通过 | 本地/集成门禁已通过，不替代环境证据 |
-| Backend integration | `97d8bfc5`，定向 `10/10`、Go 全量 test 与 vet 通过 | 本地/集成门禁已通过，不替代环境证据 |
-| SC safe DTO | combined remediation/deployment coordination pending | 当前部署 Blocker |
-| M3 governance | checklist completed；exam `100 / passed` | 允许准备，未解除部署 Blocker |
+| Backend integration | H2 M2 `97d8bfc5`；当前 combined backend `98426ff83a1218080019faa377c152a81ecca437` | 本地/集成门禁已通过，不替代环境证据 |
+| SC safe DTO | backend `98426ff8` 与 APP 治理证据均已 integrated，测试环境 ready | 已关闭，不再是 H2 blocker |
+| M3 governance | membership R2 checklist completed/exam100；fixture capability 已独立复核并集成 | 允许准备；仍未授权环境执行 |
 
 最终 combined commit、部署资产哈希、后端二进制哈希和数据库模式尚待部署负责人在窗口开始前冻结。
 
@@ -29,7 +60,7 @@
 
 只有以下条件全部满足才可开始部署：
 
-1. SC safe DTO remediation 已独立验证并进入确定的 combined frontend/backend commit。
+1. membership 状态字段实现已按 R2 合同独立完成、测试并受控集成。
 2. 目标前后端完整 SHA、构建资产、数据库模式、base URL 和允许变更范围已冻结。
 3. 部署负责人确认备份、自动回滚、人工回滚、恢复责任人和关窗标准。
 4. 四个脱敏合成身份、权威关系数据和 OTP 独立会话容量已准备；`capacity_ready=true`。
@@ -54,7 +85,7 @@
 - 多俱乐部会员：active `standard/general` 与 `standard/charity`；证明摘要计数、权威排序和本人归属。
 - 理事或管理员：scope 由权威 owner/特权关系派生；只有该身份 `can_manage=true`。
 
-另以独立可恢复数据覆盖 `pending/rejected/left/suspended/dissolved`，核对显示、动作和服务端原始状态。这五类关系状态不等同于页面 `maintenance/offline`。
+另以独立可恢复数据按实体覆盖申请历史 pending/rejected、会员历史 left、可选会员停权 suspended、俱乐部生命周期 dissolved。申请历史不得计入当前 membership；历史关系不得出现在当前列表；解散必须通过独立 club_status 表达。这些业务状态也不等同于页面 maintenance/offline。
 
 ## 6. 八态和浏览器证据
 
@@ -73,6 +104,6 @@
 
 ## 8. Full Go 条件
 
-四身份、八态、五种附加关系状态、五档 viewport、真实键盘、路由/DOM/网络/权限/遥测/服务端关联全部达到计划要求；所有 Blocker/Major 关闭；证据无秘密；环境恢复并通过基准 smoke 后，才可把 draft IR 更新为 verified/deployed 并形成 H2-M3 Full Go。
+四身份、八态、三层业务状态、五档 viewport、真实键盘、路由/DOM/网络/权限/遥测/服务端关联全部达到计划要求；聚合 API 和页面必须分别证明 club_status、membership_status，且申请历史不串入当前列表；所有 Blocker/Major 关闭；证据无秘密；环境恢复并通过基准 smoke 后，才可把 draft IR 更新为 verified/deployed 并形成 H2-M3 Full Go。
 
-当前尚缺 combined commit、部署资产、四身份会话、环境状态触发和现场三方证据，因此结论保持 `Authorized / deployment pending`、`No-Go before deployment`。
+当前尚缺前后端状态字段迁移、combined commit、部署资产、四身份会话、环境状态触发和现场三方证据，因此结论保持 Authorized / deployment pending、No-Go before deployment。

@@ -22,9 +22,19 @@
 - `club:manage` 只控制附属管理入口；前端隐藏不能替代服务端授权。
 - 局部错误不得用空数组伪装成功；运行时不得回退到 mock。
 
-## 状态
+## 状态分层
 
-页面八态为 loading/ready/empty/partial-error/error/unauthorized/maintenance/offline。会员关系至少覆盖 active/pending/rejected/left/suspended/dissolved。关键“我的俱乐部”失败进入页面错误；待办或活动失败保留其他已证实区域并显示局部错误；推荐失败可隐藏。
+页面八态为 loading/ready/empty/partial-error/error/unauthorized/maintenance/offline。业务状态必须按权威实体分层，禁止继续把六个值合并为一组 membership_states：
+
+| 状态域 | 权威实体 | 状态 | 首页语义 |
+| --- | --- | --- | --- |
+| 申请历史 | club-join-application | pending、rejected | 只说明曾提交或被拒绝；不计入当前 membership，不得出现在“我的俱乐部”当前关系列表 |
+| 会员关系 | club-membership | active、left、suspended | active 为有效关系；left 只进入历史关系；suspended 是可选的会员停权状态，只有服务端正式支持后才能作为当前受限关系返回 |
+| 俱乐部生命周期 | club | dissolved | 说明俱乐部实体已解散，不是会员关系状态；若保留历史关系，必须同时返回独立的 club_status=dissolved 与 membership_status=left |
+
+“我的俱乐部”DTO 必须把 club_status 与 membership_status 分开，禁止继续使用含义不明的单一 status。当前关系列表只允许 membership_status=active，以及在后端正式实现并验收后可选的 suspended；pending/rejected/left/dissolved 不得伪装成当前会员关系。关键“我的俱乐部”失败进入页面错误；待办或活动失败保留其他已证实区域并显示局部错误；推荐失败可隐藏。
+
+本检查点只冻结合同。现有前后端若仍返回或消费单一 status，必须在独立实现工作项中迁移并通过兼容性回归；本文件不能作为已经实现或测试环境已通过的证据。
 
 ## 排序
 
