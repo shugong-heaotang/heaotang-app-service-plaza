@@ -1836,6 +1836,71 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "source 98075d2767ec5d1a6f241087e0047973927904f7 经独立复核 Fixture Capability Go，并以 e275cdbf52f2536cf68672172a7c046d50cceb9f 受控集成。静态/Plan mutations=0、OTP=0、secrets=0；远端 Apply/Cleanup/RestoreVerify 和四身份 UAT 未授权。standard/health 的真实稳定码为 CMH_CLUB_CLASSIFICATION_INVALID，原 CMH_DATA_UNAVAILABLE 假设已纠正。",
                            "handoff_record":  "docs/project-management/modules/club-alliance/member-home/acceptance/m3-fixture-handoff.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-CLUB-MEMBER-HOME-STATE-FRONTEND",
+                           "title":  "H2 会员首页 club/membership 状态分层前端修复",
+                           "owner":  "H2 frontend state agent",
+                           "owner_role":  "俱乐部联盟负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-member-home-state-frontend",
+                           "branch":  "codex/club-member-home-state-frontend",
+                           "base_commit":  "3fc48afbbe934d9ec31d4a9c958c0dab01290031",
+                           "allowed_paths":  [
+                                                 "app/src/modules/club-alliance/member-home/MemberHomeShell.tsx",
+                                                 "app/src/modules/club-alliance/member-home/MemberHomeShell.test.tsx",
+                                                 "app/src/modules/club-alliance/member-home/memberHomeApi.ts",
+                                                 "app/src/modules/club-alliance/member-home/memberHomeApi.test.ts",
+                                                 "docs/project-management/modules/club-alliance/member-home/handoff-m2-state-frontend.md",
+                                                 "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-state-frontend*.json",
+                                                 "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-state-frontend*.json",
+                                                 "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-state-frontend*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "从 authoritative APP 3fc48af 创建，HEAD/base/merge-base 一致且 clean。只把 MemberClub/API 解析和显示从旧 status 迁移到 club_status + membership_status，严格拒绝旧扁平响应和申请历史串入；禁止路由、后端、部署、环境和业务扩张。",
+                           "handoff_record":  "docs/project-management/modules/club-alliance/member-home/handoff-m2-state-frontend.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-CLUB-MEMBER-HOME-STATE-BACKEND",
+                           "title":  "H2 会员首页 club/membership 状态分层后端修复",
+                           "owner":  "H2 backend state agent",
+                           "owner_role":  "平台后端负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/heaotang-main",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-member-home-state-backend",
+                           "branch":  "codex/club-member-home-state-backend",
+                           "base_commit":  "98426ff83a1218080019faa377c152a81ecca437",
+                           "allowed_paths":  [
+                                                 "backend-go/plugins/club-plugin/member_home.go",
+                                                 "backend-go/plugins/club-plugin/member_home_test.go"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "从 backend integration 98426ff 创建，HEAD/base/merge-base 一致且 clean。只将聚合 DTO 分离 club_status/membership_status，并验证 application pending/rejected、membership left 与 club dissolved 不进入当前列表；禁止路由、数据库迁移、其他插件、部署和环境。",
+                           "handoff_record":  "docs/project-management/modules/club-alliance/member-home/handoff-m2-state-backend.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-CLUB-MEMBER-HOME-STATE-BACKEND-EVIDENCE",
+                           "title":  "H2 状态分层后端治理与证据",
+                           "owner":  "H2 backend state agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-member-home-state-backend-evidence",
+                           "branch":  "codex/club-member-home-state-backend-evidence",
+                           "base_commit":  "3fc48afbbe934d9ec31d4a9c958c0dab01290031",
+                           "allowed_paths":  [
+                                                 "docs/project-management/modules/club-alliance/member-home/handoff-m2-state-backend.md",
+                                                 "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-state-backend*.json",
+                                                 "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-state-backend*.json",
+                                                 "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-state-backend*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "与独立 backend item 同一 owner/切片；仅保存 current checklist、exam100、IR、exact backend commit/tests 和 Handoff，不复制后端源码，不授权部署或环境。",
+                           "handoff_record":  "docs/project-management/modules/club-alliance/member-home/handoff-m2-state-backend.md"
                        }
                    ]
 }
