@@ -1,0 +1,60 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-HEALTH-MVP90-M1-P0-R3",
+  "title": "健康大管家 MVP-90 M1 P0 准入证据与两层依赖同步",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "把 M1 development-only activation、C4-H01、窄模板、15 场景与 C4-S04 的 Accepted 证据同步到安全合同和内部依赖，同时保持隐私法律及所有真实活动失败关闭。",
+  "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p0-r3.json",
+  "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p0-r3-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json", "AGENTS.md", "README.md", "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md", "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json", "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json", "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md", "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md", "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md", "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md", "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md", "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md", "docs/decisions/0018-recursive-project-governance.md",
+    "contracts/foundation/module-dependencies/health-manager.v1.json", "contracts/modules/health-manager/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-health-manager-mvp90-m1-task-order.md",
+    "docs/project-management/service-plaza/health-mvp90-m1-readiness-2026-07-12.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-requirements.md"
+  ],
+  "capabilities": ["foundation.ai-engineering-traceability", "foundation.governance-certification", "foundation.authorization-idempotency", "foundation.contract-tooling"],
+  "contracts": [
+    "contracts/modules/health-manager/internal-dependencies.v1.json",
+    "contracts/modules/health-manager/mvp90-m1/security-authorization.v1.json",
+    "contracts/modules/health-manager/mvp90-m1/security-authorization.v1.schema.json"
+  ],
+  "decisions": ["docs/decisions/0014-ai-development-flight-checklist.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"],
+  "changed_areas": ["contracts/modules/health-manager/internal-dependencies.v1.json", "contracts/modules/health-manager/mvp90-m1/security-authorization.v1.json", "contracts/modules/health-manager/mvp90-m1/security-authorization.v1.schema.json", "contracts/modules/health-manager/development-checklists", "contracts/modules/health-manager/governance-exams", "contracts/modules/health-manager/implementation-records", "docs/project-management/modules/health-manager"],
+  "verification": [
+    "Draft 2020-12 security authorization Schema valid and negative mutations rejected",
+    "validate_module_internal_dependencies.py",
+    "validate_development_checklists.py", "validate_governance_exams.py", "validate_implementation_records.py",
+    "validate_agent_collaboration.py", "Test-ServicePlazaContracts.ps1", "Test-TextEncoding.ps1",
+    "git diff --check", "allowed-path scope scan", "sensitive-pattern scan"
+  ],
+  "evidence": [
+    "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p0-r3.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p0-r3-attempt-1.json",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-receipt.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-handoff.md"
+  ],
+  "premises": [
+    "M1 scope is adult synthetic-member development only",
+    "C4-H01, narrow lifestyle template and MVP-A001-A015 are Accepted but non-executable",
+    "C4-S04 is Accepted and integrated but remains non-executable",
+    "C4-L02-L04, full C4-H06 and production identity remain Pending",
+    "P0 does not authorize P1/P2 contracts, shared code, environment, real data, charging or production",
+    "Platform independent P0 review is required before P1"
+  ],
+  "implementation_mode": "ai-assisted"
+}
