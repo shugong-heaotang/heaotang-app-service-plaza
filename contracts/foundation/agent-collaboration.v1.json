@@ -1714,6 +1714,46 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "从已含 T0 正式任务书的权威 integration 246c483 创建独立 branch/worktree；创建时 HEAD=base=merge-base 且 clean。固定 seed 为 HEAOTANG-CA-SC-20260712-V1，仅授权测试环境可回滚合成数据、部署与验收。",
                            "handoff_record":  "docs/project-management/service-plaza/handoff-log.md#sp-h036ca-sc自建俱乐部测试环境-t0-验收派发"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-CLUB-SC-LIST-SAFE-DTO-BACKEND",
+                           "title":  "CA-SC 自建俱乐部列表安全 DTO 根因修复",
+                           "owner":  "Club backend agent",
+                           "owner_role":  "平台后端负责人",
+                           "status":  "planned",
+                           "repository_root":  "C:/Users/shugo/Documents/heaotang-main",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-sc-list-safe-dto-backend",
+                           "branch":  "codex/club-sc-list-safe-dto-backend",
+                           "base_commit":  "97d8bfc5d1396f7907b1e76dfcb7c333a2913436",
+                           "allowed_paths":  [
+                                                 "backend-go/plugins/club-plugin/plugin.go",
+                                                 "backend-go/plugins/club-plugin/service_test.go"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "独立复核发现 search handler 直接序列化完整 Club，违反 CA-SC list.allowed_item_fields 和 owner_id 禁止字段。只允许新增列表安全 DTO 投影与 HTTP 字段白名单/禁字段回归；不得修改查询语义、数据库、其他俱乐部能力或部署。正式 activation 前不得编码。",
+                           "handoff_record":  "docs/project-management/service-plaza/club-sc-list-safe-dto-2026-07-12.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-CLUB-SC-LIST-SAFE-DTO-EVIDENCE",
+                           "title":  "CA-SC 自建俱乐部列表安全 DTO 治理与证据",
+                           "owner":  "Club backend agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "planned",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-sc-list-safe-dto-evidence",
+                           "branch":  "codex/club-sc-list-safe-dto-evidence",
+                           "base_commit":  "90621e26da5ea8bac78a96e63fd0a62493e623f1",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/development-checklists/2026-07-12-club-sc-list-safe-dto.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-club-sc-list-safe-dto-attempt-1.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-club-sc-list-safe-dto.json",
+                                                 "docs/project-management/service-plaza/club-sc-list-safe-dto-2026-07-12.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "与独立后端 Git 根使用同一 owner/切片；只保存 current checklist、100 分考试、IR、exact backend commit/test 证据和根因报告，不复制后端源码。正式 activation 前不得写入。",
+                           "handoff_record":  "docs/project-management/service-plaza/club-sc-list-safe-dto-2026-07-12.md"
                        }
                    ]
 }

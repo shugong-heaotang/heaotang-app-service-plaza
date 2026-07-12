@@ -12,12 +12,13 @@ $fixture = Get-Content -LiteralPath $fixturePath -Raw -Encoding UTF8
 $acceptance = Get-Content -LiteralPath $acceptancePath -Raw -Encoding UTF8
 
 $fixtureRequired = @(
-  'ValidateSet("Plan", "Apply", "Inspect", "Cleanup")',
+  'ValidateSet("Plan", "Apply", "Inspect", "Cleanup", "RestoreVerify")',
   'HEAOTANG-CA-SC-20260712-V1',
   'root@47.94.159.60',
   '/root/heaotang-acceptance/runtime/data/heao.db',
   'BEGIN IMMEDIATE;',
   'DELETE FROM club_join_applications',
+  'DELETE FROM api_idempotency_keys',
   'DELETE FROM clubs WHERE code IN',
   'real_data = $false',
   'secrets_persisted = $false'
@@ -36,7 +37,10 @@ $acceptanceRequired = @(
   'IDEMPOTENCY_KEY_REUSED',
   'Cross-user application isolation failed.',
   'secrets_persisted=$false',
-  'production_mutations=0'
+  'production_mutations=0',
+  'Assert-ExactFields',
+  'Assert-NoForbiddenFields',
+  'FixtureRunId'
 )
 foreach ($pattern in $acceptanceRequired) { if (-not $acceptance.Contains($pattern)) { throw "Acceptance safety invariant missing: $pattern" } }
 

@@ -19,13 +19,14 @@
   "non_self_created_ids": [50, 52, 51, 53, 54],
   "real_data": false,
   "secrets_persisted": false,
-  "cleanup_selector": "fixture code prefix only",
+  "cleanup_selector": "historical fixed prefix only; superseded by unique run selector",
   "cleanup": {
     "executed_at": "2026-07-12T01:08:00Z",
     "remaining_clubs": 0,
     "remaining_join_applications": 0,
     "remaining_members": 0,
+    "remaining_idempotency_keys": null,
     "database_ready": true
   },
-  "status": "cleaned"
+  "status": "historical-cleanup-incomplete"
 }

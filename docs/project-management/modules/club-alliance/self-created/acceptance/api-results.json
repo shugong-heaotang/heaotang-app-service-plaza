@@ -10,7 +10,9 @@
                    "search":  {
                                   "status":  200,
                                   "total":  5,
-                                  "zero_crossover":  true
+                                  "zero_crossover":  true,
+                                  "exact_field_whitelist":  false,
+                                  "forbidden_fields":  "not-asserted"
                               },
                    "detail":  {
                                   "status":  200,
@@ -31,5 +33,6 @@
                },
     "user_identity_recorded":  "non-null-only",
     "secrets_persisted":  false,
-    "production_mutations":  0
+    "production_mutations":  0,
+    "status":  "no-go-pending-list-safe-dto"
 }

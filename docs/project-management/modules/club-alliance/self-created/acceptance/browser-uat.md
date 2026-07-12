@@ -5,7 +5,7 @@
 - asset：`assets/index-6r_HRkaO.js`（SHA-256 `bfe4d9848d52ce4fac6d92edc3668bd78a20c7ca853301976fc6013d52038e99`）
 - fixture：`HEAOTANG-CA-SC-20260712-V1`
 - secrets：none-recorded
-- 当前 verdict：`Pass`（环境 Enter 注入另列为控制通道限制）
+- 当前 verdict：`No-Go / remediation`（保留已通过项；刷新 DOM 与环境 Enter 尚未验证）
 
 | case_id | session | action | actual | server correlation | result |
 | --- | --- | --- | --- | --- | --- |
@@ -14,7 +14,7 @@
 | SC-B03 | synthetic member | 打开详情 45 | 显示名称、简介、城市、成员数和创建时间 | detail 08:30:15 200 | Pass |
 | SC-B04 | synthetic member | 提交加入申请 | 页面显示“申请已提交”；因 API 验收已创建同载荷，浏览器为幂等重放 | join 08:35:37 200 | Pass |
 | SC-B05 | synthetic member | 打开本人申请 | 显示当前 run pending 申请并可返回详情 | my-applications 08:37:22 200 | Pass |
-| SC-B06 | synthetic member | 刷新本人申请深链 | URL 保持；服务端再次返回 my-applications 200；刷新后 DOM 读取受控制通道超时 | my-applications 08:38:31 200 | Pass（HTTP/路由） |
+| SC-B06 | synthetic member | 刷新本人申请深链 | URL 保持；服务端再次返回 my-applications 200；刷新后 DOM 读取受控制通道超时 | my-applications 08:38:31 200 | Unverified（DOM pending） |
 | SC-B07 | guest | 浏览器后退 | 从联盟聚焦页返回 `/self-created/`，heading=`自建俱乐部` | no business mutation | Pass |
 | SC-B08 | guest | 顶部返回俱乐部联盟 | 到达联盟页并保持自建聚焦 + `authentication_required` | no business mutation | Pass |
 | SC-B09 | guest | 底部返回俱乐部联盟 | 默认自动化点击落在拉伸框几何中心未触发；只读 `elementFromPoint` 定位可见文字区域后真实坐标点击成功 | no business mutation | Pass |
@@ -31,5 +31,5 @@
 
 ## 完成边界
 
-- 环境已覆盖 Tab、focus-visible、heading/status/ARIA；Enter 控制通道限制由自动化与原生链接点击证据补充，但不写成环境 Enter Pass。
+- 环境已覆盖 Tab、focus-visible、heading/status/ARIA；Enter 控制通道限制和刷新 DOM 都保持 Unverified，关闭前不得写成浏览器 UAT Pass。
 - fixture cleanup 证据记录在 `db-evidence.json`，不改变本报告已取得的浏览器事实。
