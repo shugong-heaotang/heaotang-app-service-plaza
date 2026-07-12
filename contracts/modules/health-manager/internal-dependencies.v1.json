@@ -286,8 +286,8 @@
     {
       "dependency_id": "m1.p1-handoff",
       "kind": "handoff",
-      "description": "M1-P1 纵切、专业边界、15 场景、固定 seed 合成夹具与 conformance 的短检查点交接",
-      "status": "implemented",
+      "description": "M1-P1 纵切、专业边界、15 场景、固定 seed 合成夹具与 conformance 已由平台独立验收 P1 Go，并受控集成至 8d6fe1d5fd45a005abf950651b8ddfb23dfbc306",
+      "status": "verified",
       "required_for_slice": true,
       "depends_on": ["m1.vertical-slice-contract", "m1.professional-boundaries-contract", "m1.synthetic-scenarios-contract"],
       "contracts": ["docs/project-management/modules/health-manager/health-manager-mvp90-m1-handoff.md"],
@@ -297,10 +297,10 @@
         "contracts/modules/health-manager/implementation-records/2026-07-12-health-mvp90-m1-p1-r3.json",
         "docs/project-management/modules/health-manager/health-manager-mvp90-m1-conformance-report.md"
       ],
-      "unresolved": ["等待平台独立复核 M1-P1"],
+      "unresolved": [],
       "owner": "健康大管家负责人",
-      "blocks": ["M1-P2 或共享实现工作项评估"],
-      "does_not_block": []
+      "blocks": [],
+      "does_not_block": ["平台另行评估 M1-P2 或共享实现独立工作项"]
     }
   ]
 }

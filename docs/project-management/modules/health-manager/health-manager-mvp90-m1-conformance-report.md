@@ -3,7 +3,7 @@
 - 日期：2026-07-12
 - 范围：成年合成会员 PDCAR 合同
 - 数据：固定 seed 合成数据，不含真实身份或真实健康数据
-- 结论：11 tests PASS；P1 Exact revision 已完成，等待平台独立复核
+- 结论：11 tests PASS；P1 Go；controlled integration `8d6fe1d5fd45a005abf950651b8ddfb23dfbc306`
 
 ## 数量与追踪
 
@@ -94,9 +94,9 @@ python -X utf8 contracts/modules/health-manager/mvp90-m1/conformance/test_health
 ### Recurrence action and verdict
 
 - first：模块内登记并建立本地防复发门禁；未修改平台受保护 recurring registry。
-- verdict：Pass candidate，等待平台独立复核。
+- verdict：Pass；平台已独立复核并裁定 P1 Go。
 - unresolved_risk：共享实现、隐私法律、真实数据和生产仍未授权。
-- next_authorization：平台 P1 Go。
+- next_authorization：平台另行派发 P2 或共享实现工作项。
 
 ## 未证明事项
 

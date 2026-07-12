@@ -4,7 +4,7 @@
 - 提交方：健康大管家负责人
 - 接收方：平台集成负责人
 - 日期：2026-07-12
-- 结论：`P1 handoff ready / independent review pending`
+- 结论：`P1 Go / controlled integration 8d6fe1d5fd45a005abf950651b8ddfb23dfbc306`
 
 ## 已完成
 
@@ -40,6 +40,6 @@
 - 固定 seed 的 15 个合成夹具；
 - 11 项本地 conformance：除缺失 ID、范围逃逸、提前 executable 外，新增专业语义漂移、错误源指针和 fixture 重复/引用负例。
 
-## P1 请求平台复核
+## P1 平台复核结果
 
-请平台独立复跑 Schema 与 conformance，核对三组 exact ID、跨合同引用、专业决策忠实性、合成数据边界、R2 current 治理链和 allowed paths。P1 Go 前不进入后续检查点。
+平台已独立复跑 Schema 与 conformance，并确认三组 exact ID、跨合同引用、专业决策忠实性、合成数据边界、R3 current 治理链和 allowed paths 全部通过。P1 已 Go；P2 或共享实现必须另行派发。
