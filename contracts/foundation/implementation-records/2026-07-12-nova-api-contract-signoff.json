@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-NOVA-API-CONTRACT-SIGNOFF",
+  "title": "APP 公共 /api/nova v1 契约边界会签",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "形成并验证 NOVA M1 可依赖的版本、权限、确认、幂等、审计、错误和兼容公共边界。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-nova-api-contract-signoff.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-nova-api-contract-signoff-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/governance-reading-list.v1.json"],
+  "requirement_sources": ["docs/project-management/service-plaza/nova-api-contract-signoff.md"],
+  "capabilities": ["foundation.identity-api", "foundation.authorization-idempotency", "foundation.contract-tooling"],
+  "contracts": ["contracts/service-plaza/nova/nova-api-contract.v1.schema.json", "contracts/service-plaza/nova/nova-api-contract.v1.json"],
+  "decisions": ["docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"],
+  "changed_areas": ["contracts/service-plaza/nova", "tests/contracts/nova", "docs/project-management/service-plaza/nova-api-contract-signoff.md"],
+  "verification": ["python -X utf8 -m unittest discover -s tests/contracts/nova -v", "scripts/validate_agent_collaboration.py", "scripts/Test-TextEncoding.ps1"],
+  "evidence": ["tests/contracts/nova/test_nova_api_contract.py", "docs/project-management/service-plaza/nova-api-contract-signoff.md"],
+  "premises": ["NOVA 板块实现运行时，平台只维护公共契约", "M1 不授权 M2 真实人脉闭环"],
+  "implementation_mode": "ai-assisted"
+}

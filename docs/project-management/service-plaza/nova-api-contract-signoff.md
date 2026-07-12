@@ -21,3 +21,13 @@ NOVA 板块负责人实现运行时和兼容适配；平台集成负责人维护
 - 自动测试：`tests/contracts/nova/test_nova_api_contract.py`
 
 本会签满足 `NOVA-M0-001 Conditional Go` 的条件 2，但是否最终激活 M1 仍由项目最高负责人结合条件 1 证据裁决。
+
+## 治理闭环
+
+- 当前检查单：`FC-20260712-NOVA-API-CONTRACT-SIGNOFF`，26 项 completed。
+- 随机考试：`EX-20260712-NOVA-API-CONTRACT-SIGNOFF-1`，第一次 8/8、100 分。
+- 实现记录：`IR-20260712-NOVA-API-CONTRACT-SIGNOFF`。
+- `blocks`：无；两项 Conditional Go 激活条件均已有权威证据。
+- `does_not_block`：M2 人脉真实闭环仍按后续独立检查点推进，不属于本次 M1 授权。
+
+平台会签最终结论：`Go`。NOVA 板块可在已登记允许路径内启动 M1；不得修改 APP 受保护契约，不得提前实现 M2。
