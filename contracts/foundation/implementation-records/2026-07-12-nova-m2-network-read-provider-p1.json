@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-NOVA-M2-NETWORK-READ-PROVIDER-P1",
+  "title": "NOVA M2 member_search Network read provider P1",
+  "date": "2026-07-13",
+  "status": "implemented",
+  "objective": "Implement an unrouted in-memory member_search provider core with trusted server identity and tenant context, field and resource policy enforcement, opt-out filtering, rate-limit decisions, required audit fields, stable errors, and fail-closed output validation.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-nova-m2-network-read-provider-p1.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-nova-m2-network-read-provider-p1-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-12-nova-m2-provider-task-order.md", "contracts/service-plaza/nova/nova-people-tools.v1.json", "contracts/service-plaza/nova/nova-people-tool-errors.v1.json"],
+  "capabilities": ["foundation.identity-api", "foundation.authorization-idempotency", "foundation.contract-tooling", "foundation.observability-config"],
+  "contracts": ["contracts/service-plaza/nova/nova-people-tools.v1.json", "contracts/service-plaza/nova/nova-people-tool-errors.v1.json"],
+  "decisions": ["docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md", "docs/project-management/modules/network/canonical-implementation-decision.md"],
+  "changed_areas": ["backend-go/plugins/network-plugin/nova_member_search_provider.go", "backend-go/plugins/network-plugin/nova_member_search_provider_test.go"],
+  "verification": ["Test-AgentDevelopmentPreflight.ps1: ready", "current checklist: completed 26/26, SHA256 248B5DE48B4BED2353E4C732A3C8DE84D59AE8ECCB1992842E6719FEAD49D313", "governance exam attempt 1: passed 100, SHA256 880B19B5309D30A798A706D57E48A70BF3B9C26BB253D7B22CD1A90F93D8C50A", "backend source commit: f6ba650c44230bb9ff2b2322e276d0bc1ae89e21", "gofmt -d: no diff", "go test ./plugins/network-plugin -run TestNovaMemberSearchProvider -count=1: passed", "go test ./...: passed", "go vet ./...: passed", "go test -race ./plugins/network-plugin -run TestNovaMemberSearchProvider -count=1: passed", "secret and forbidden-scope scans: no findings", "git diff --check: passed"],
+  "evidence": ["contracts/foundation/development-checklists/2026-07-12-nova-m2-network-read-provider-p1.json", "contracts/foundation/governance-exams/2026-07-12-nova-m2-network-read-provider-p1-attempt-1.json", "docs/project-management/modules/network/network-read-provider-handoff.md"],
+  "premises": ["The provider remains unrouted and non-executable until independent acceptance and controlled integration.", "Candidate source, visibility policy, rate limiter, opaque reference encoder, and audit sink are server-owned interfaces.", "M2 deployment, real search, real messages, production, and legacy writes remain No-Go."],
+  "implementation_mode": "ai-assisted"
+}
