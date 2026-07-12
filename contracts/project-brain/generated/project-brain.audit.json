@@ -1,7 +1,7 @@
 {
   "contract_version": "project-brain.audit.v1",
-  "generated_at": "2026-07-12T11:52:06.730119Z",
-  "source_commit": "35ef5795c9c5a82949932ddd0f257d08e5bfc526",
+  "generated_at": "2026-07-12T11:54:17.208635Z",
+  "source_commit": "b393151c6aa873c9cace5822613261fd25df6710",
   "verdict": "no-go",
   "errors": [
     {
