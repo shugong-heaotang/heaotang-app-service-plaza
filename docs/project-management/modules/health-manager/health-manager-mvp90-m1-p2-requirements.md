@@ -64,3 +64,7 @@ P2-C3只补齐合成验收证据：
 6. P2与P1回归、治理、内部依赖、总合同、UTF-8、diff/scope和敏感信息门禁全部通过。
 
 C3仍不产生共享实现、环境、真实数据或可上线能力；通过后只可进入任务书的P2-C4模块Handoff。
+
+## C4 收口要求
+
+P2-C4不修改runner、matrix、Schema或测试，只汇总C1—C3的source/integration、测试、根因关闭、未决风险和No-Go，形成模块Handoff并申请平台最终P2 synthetic Go/No-Go。即使P2最终Go，也只证明合成重放合同与验证内核，不代表业务实现、环境或发布就绪。

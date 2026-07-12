@@ -1,8 +1,10 @@
 # 健康大管家 MVP-90 M1 P2 Conformance Report
 
-## P2-C1 结论
+## 当前 C4 状态
 
-当前结论：`P2-C1 Go / P2-C2 Exact revision corrected candidate ready for independent review`。
+唯一当前结论：`P2-C1/C2/C3 integrated / P2-C4 freshness revision corrected candidate ready for final independent review`。以下C1—C3段落均为带时间语义的历史检查点快照；第“P2-C4总体证据索引”为当前收口真相源。
+
+## P2-C1 历史检查点快照（当时状态）
 
 | 检查项 | 结果 |
 | --- | --- |
@@ -38,7 +40,7 @@
 - prevention gate：exactly25、event/key/payload 唯一、真实 JSON Pointer 解引用、action-resource/actor/effect/prerequisite 和 audit-as-write 拒绝。
 - positive/regression：P2-C1 5项测试与 P1 11项回归；负例覆盖 extra、duplicate、wrong pointer、upstream reorder、wrong action-resource 和 audit-as-write。
 - blocks：P2-C2；does_not_block：其他已授权且不依赖本计划的项目。
-- verdict：等待平台独立复核；未获 Go 前保持只读。
+- 当时 verdict：等待平台独立复核、未获Go前保持只读；后续C1已Go并受控集成，见C4总体证据索引。
 
 ## 根因闭环：HM-M1-P2-C1-NORMAL-REPLAY-DISCONTINUITY
 
@@ -52,13 +54,13 @@
 - systemic fix：A001 保持11事件，以 `in_progress→completed→pending_check→recorded` 替换风险/转人工占位；A003 按 `emergency_handoff_open` 与签署结果使用 `triage_pending→emergency:CLASSIFY_EMERGENCY`，A013继续覆盖 human-handoff。
 - prevention gate：同资源状态/版本连续；A001拒绝RiskEvent/HumanHandoff且任务终态必须recorded；A003迁移、actor、fixture expected_result和签署safe outcome闭包；不连续状态/版本、normal-with-risk、wrong-emergency-profile负例均拒绝。
 - security/data/release impact：零；所有数据仍合成，未进入环境、真实数据或生产。
-- verdict：等待平台R4独立复核；未获 Go 前不进入P2-C2。
+- 当时 verdict：等待平台R4独立复核、未获Go前不进入P2-C2；后续R4已Go并受控集成，见C4总体证据索引。
 
 ## 后续检查点
 
 P2-C1已由平台独立验收Go，squash integration=`40a042b`，authoritative evidence HEAD=`5004cdc`。
 
-## P2-C2 Reference Runner
+## P2-C2 Reference Runner（历史检查点快照）
 
 | 检查项 | 结果 |
 | --- | --- |
@@ -74,7 +76,7 @@ P2-C1已由平台独立验收Go，squash integration=`40a042b`，authoritative e
 | 网络/DB/clock/random导入 | 0 |
 | runner输出边界 | synthetic_only=true / executable=false |
 
-当前runner只接受注入合同和合成事件，不自行读取文件或连接任何外部系统。负向fixture包、15场景最终执行矩阵和完整零调用证据保留给P2-C3。
+当时runner只接受注入合同和合成事件，不自行读取文件或连接任何外部系统；负向fixture包、15场景最终执行矩阵和完整零调用证据当时保留给P2-C3，现已由C3完成并受控集成。
 
 ## 根因闭环：HM-M1-P2-C2-CALLER-CONTROLLED-SAFETY-SEMANTICS
 
@@ -90,9 +92,9 @@ P2-C1已由平台独立验收Go，squash integration=`40a042b`，authoritative e
 - prevention gate：Schema 合法 deny→allow、跨会员、撤权、风险、版本冲突与 expectation 变化全部拒绝；每个失败断言 resource/audit/trace/idempotency 不变。
 - positive/regression：修订后 P2 15项与 P1 11项通过；零文件、网络、DB、clock、random、browser、model依赖保持。
 - security/data/release impact：关闭本地参考运行器的安全语义绕过；仍仅合成数据且 executable=false，不产生环境或发布影响。
-- verdict：corrected candidate 等待平台独立复核；未获 C2 Go 前不进入 C3。
+- 当时 verdict：corrected candidate等待平台独立复核、未获C2 Go前不进入C3；后续C2已Go并受控集成，见C4总体证据索引。
 
-## P2-C3 合成矩阵结论
+## P2-C3 合成矩阵结论（历史检查点快照）
 
 | 检查项 | 结果 |
 | --- | --- |
@@ -107,4 +109,14 @@ P2-C1已由平台独立验收Go，squash integration=`40a042b`，authoritative e
 | 输出边界 | synthetic_only=true / executable=false |
 | 回归 | P2 19/19、P1 11/11 PASS |
 
-C3矩阵只冻结本地合成验证结果，不改变专业源、隐私法律Pending、共享实现和真实活动No-Go。当前结论为ready for independent review；未获C3 Go前不进入P2-C4。
+C3矩阵只冻结本地合成验证结果，不改变专业源、隐私法律Pending、共享实现和真实活动No-Go。当时结论为ready for independent review、未获C3 Go前不进入P2-C4；后续C3已Go并受控集成。
+
+## P2-C4 总体证据索引
+
+| 检查点 | 最终 source | controlled integration | 结论 |
+| --- | --- | --- | --- |
+| C1 replay plan | `4ee6ccb67b3320c6fbc387abe340b5f8c2a8bd10` | `40a042b`；authoritative evidence `5004cdc` | Go / integrated |
+| C2 reference runner | `a2e8424c6c4f2cc3e52b7ad0782968ca9d693267` | `4c195d07c21c8ce6944ecca91f69d9f83e6893e7` | Go / integrated |
+| C3 15+15 matrix | `abb4f20dc52679327f596f39a1676652010cc90c` | `5069d17661853aeae01b06c23c64335a84028f35` | Go / integrated |
+
+最终回归：P2 19/19、P1 11/11。C1关闭action语义混同与正常重放不连续；C2关闭调用方控制安全语义与幂等摘要不完整；C3持续覆盖上述门禁并冻结15+15证据。未决项只有P2之外的隐私法律、全量专业边界、production identity、共享实现、环境与真实活动，不阻塞本地合成P2收口，也不得被本收口提升状态。
