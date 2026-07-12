@@ -134,7 +134,7 @@ describe("ClubAllianceRoute exact eight-state shell", () => {
     expect(await screen.findByText("catalog unavailable")).toBeInTheDocument();
     expect(screen.getByRole("alert")).toHaveAttribute("data-page-state", "error");
     await user.click(screen.getByRole("button", { name: "重新加载" }));
-    expect(await screen.findByRole("heading", { name: "登录后查看会员首页" })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "选择俱乐部服务" })).toBeInTheDocument();
     expect(attempts).toBe(2);
   });
 
@@ -155,11 +155,13 @@ describe("ClubAllianceRoute exact eight-state shell", () => {
     expect(screen.queryByRole("link", { name: "管理中心" })).not.toBeInTheDocument();
   });
 
-  it("does not call the member API for a guest", async () => {
+  it("keeps guest empty-query on H1 home without calling the member API", async () => {
     const loader = vi.fn<() => Promise<MemberHomeModel>>();
     renderRoute("/services/club-alliance", mockServiceCatalogRepository, loader);
-    expect(await screen.findByRole("heading", { name: "登录后查看会员首页" })).toBeInTheDocument();
-    expect(document.querySelector('[data-member-home-state="unauthorized"]')).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "选择俱乐部服务" })).toBeInTheDocument();
+    expect(document.querySelector('[data-page-state="home"]')).toBeInTheDocument();
+    expect(document.querySelector('[data-member-home-state]')).not.toBeInTheDocument();
+    expect(screen.getByRole("region", { name: "俱乐部联盟四类入口" }).querySelectorAll("[data-action-id]")).toHaveLength(4);
     expect(loader).not.toHaveBeenCalled();
   });
 
@@ -334,7 +336,7 @@ describe("ClubAllianceRoute exact eight-state shell", () => {
     expect(await screen.findByText("service-plaza-return-target")).toBeInTheDocument();
 
     await router.navigate("/services/club-alliance");
-    await screen.findByRole("heading", { name: "登录后查看会员首页" });
+    await screen.findByRole("heading", { name: "选择俱乐部服务" });
     await user.click(screen.getByRole("link", { name: "返回服务广场" }));
     expect(await screen.findByText("service-plaza-return-target")).toBeInTheDocument();
   });
