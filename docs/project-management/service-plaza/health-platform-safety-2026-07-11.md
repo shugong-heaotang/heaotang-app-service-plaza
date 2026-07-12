@@ -4,8 +4,9 @@
 - 后端工作项：`AIW-20260711-HEALTH-PLATFORM-SAFETY-BACKEND`
 - 实现记录：`IR-20260711-HEALTH-PLATFORM-SAFETY-R3`
 - 后端分支：`codex/health-manager-platform-safety`
-- 后端提交：`e361a8ac3f1b93dced567dbb9a3fb6c98156f555`
-- 当前结论：本地实现与全量测试 Go；测试环境部署未执行，状态为 implemented
+- 后端实现提交：`e361a8ac792d1caaa15241062be904a266bf83ea`
+- 后端权威集成：`e41265905815082433e040412f3dd6b6b33dfede`
+- 当前结论：代码实现已受控集成；`go test -count=1 ./plugins/health-plugin` 与 `go vet ./plugins/health-plugin` 独立复核通过。测试环境部署未执行，环境状态仍为 No-Go
 
 ## 安全发现
 
@@ -37,7 +38,7 @@
 
 ## 未关闭项
 
-1. 为避免改变生命导航二 M4 已部署制品，本提交暂不部署；测试环境仍需备份后部署并执行 HTTP 级验证。
+1. 本实现已经进入后端权威集成基线，但尚未部署测试环境；环境验收仍需独立备份、部署和 HTTP 级验证。代码集成不得冒充环境 Go。
 2. POST/GET 可展示 DTO 与敏感字段最小化尚未冻结。
 3. 结构化日志、遥测、截图和报告的端到端敏感正文排除证据尚未完成。
 4. `app/src/modules/health-manager` 平台路由挂载工作项尚未实施。
