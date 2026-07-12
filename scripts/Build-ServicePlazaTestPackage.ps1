@@ -49,6 +49,8 @@ $routeDirectories = @(
   "services",
   "services/life-navigation",
   "services/club-alliance",
+  "services/club-alliance/self-created",
+  "services/club-alliance/self-created/applications",
   "services/health-manager"
 )
 
