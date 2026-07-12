@@ -7,13 +7,30 @@
 - branch：`codex/project-brain-v1`
 - worktree：`C:/Users/shugo/Documents/worktrees/heaotang-project-brain-v1`
 - 风险等级：高
-- 当前 record_id：`IR-20260712-PROJECT-BRAIN-V1-M1-R3`
+- 当前 record_id：`IR-20260712-PROJECT-BRAIN-V1-M2`
 
 ## 目标
 
 建立全 APP 统一知识入口、权威事实模型、自动治理检查和项目负责人只读驾驶舱。现有预集成成果是迁入基础，不得无理由重写。
 
-## 当前授权：M1-CP1
+## M1 独立复验结论：Go
+
+Project Brain 项目负责人已对 commit `b33068018a7db7097225952ce0f7ec480e2bc251` 完成独立复验：完整基线 `f31f67f..HEAD` diff 门禁、preflight、当前 checklist、100 分考试、四类 Draft 2020-12 Schema、六个模块精确来源、UTF-8 与 allowed scope 均通过。M1-CP1 正式 Go。
+
+## 当前授权：M2-CP1
+
+只实现只读聚合器、治理审计和失败关闭生成输出：
+
+- `scripts/build_project_brain.py`
+- `scripts/validate_project_brain.py`
+- `scripts/tests/test_project_brain.py`
+- `contracts/project-brain/generated/project-brain.snapshot.json`
+- `contracts/project-brain/generated/project-brain.audit.json`
+- 同一 record_id 的 M2 checklist、exam、implementation record 与 Handoff
+
+M2 必须保持 registry 为任务状态唯一权威来源；只复制白名单字段；拒绝路径逃逸和敏感字段；任一 error 时结论为 `no-go` 且进程非零。M2 独立复核 Go 前不得修改 `app/`、现有路由或生产配置。
+
+## 已完成授权：M1-CP1
 
 只迁入：
 

@@ -1801,15 +1801,21 @@
                                                  "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m1*.json",
                                                  "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1*.json",
                                                  "contracts/foundation/implementation-records/2026-07-12-project-brain-v1-m1*.json",
+                                                 "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m2*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m2*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-project-brain-v1-m2*.json",
                                                  "contracts/foundation/invalidated-snapshots/project-brain-v1-m1/",
                                                  "docs/project-management/notices/2026-07-12-project-brain-v1-task-order.md",
                                                  "PROJECT-BRAIN.md",
                                                  "docs/project-management/project-brain/",
-                                                 "contracts/project-brain/"
+                                                 "contracts/project-brain/",
+                                                 "scripts/build_project_brain.py",
+                                                 "scripts/validate_project_brain.py",
+                                                 "scripts/tests/test_project_brain.py"
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "最高负责人以权威 integration f31f67f 正式授权激活。首个检查点只迁入 M1 权威入口、项目文档和四类事实合约；M2 聚合审计、M3 React/路由、M4 安全/UAT/独立验收须在前一检查点 Go 后分段扩展 allowed_paths。SC T0 integrated 仅表示 No-Go/Remediation 证据收口，不代表 T0 Go；本工作项不得修改任何 SC remediation 文件。",
+                           "migration_note":  "M1-R3 已由 Project Brain 项目负责人独立复验为 Go：完整基线 diff、preflight、checklist、100 分考试、四类 Draft 2020-12 Schema、六个模块精确来源、UTF-8 与 allowed scope 均通过。现授权 M2-CP1 只读聚合器、治理审计、生成快照及对应治理证据；M3 React/路由与 M4 UAT/集成仍未授权。SC T0 integrated 不代表 T0 Go；本工作项不得修改任何 SC remediation 文件。",
                            "handoff_record":  "docs/project-management/project-brain/handoff-v1.md"
                        }
                    ]

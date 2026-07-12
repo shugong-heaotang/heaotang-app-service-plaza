@@ -5,7 +5,17 @@
 接收角色：Project Brain 项目负责人（独立复核）
 work_id：`AIW-20260712-PROJECT-BRAIN-V1`
 record_id：`IR-20260712-PROJECT-BRAIN-V1-M1-R3`
-结论：R3 整改完成并申请复验；M1 保持 No-Go，独立验收未给 Go 前不得提升。
+结论：R3 整改完成；项目负责人独立复验通过，M1-CP1 正式 Go，M2-CP1 已精确授权。
+
+## 独立复验结论
+
+- 复验 commit：`b33068018a7db7097225952ce0f7ec480e2bc251`
+- `git diff --check f31f67f1613b7c97c9f46969d7c3eb59cdc0e46c..HEAD`：通过。
+- preflight：`ready`；R3 checklist：`completed`、0 项遗漏；attempt 2：`passed`、100 分。
+- 四类 Project Brain 合约：Draft 2020-12 Schema 错误均为 0。
+- 六个模块来源：JSON Pointer 均解析到具体值，Markdown 完整字段均逐字存在。
+- UTF-8：925 个文件通过；allowed scope：未修改 `scripts/`、`app/` 或 SC remediation。
+- M1 verdict：`Go`。M2 仅按任务通知中的精确路径推进；M3/M4 保持未授权。
 
 ## 已完成
 
