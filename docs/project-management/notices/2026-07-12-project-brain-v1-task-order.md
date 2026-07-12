@@ -7,7 +7,7 @@
 - branch：`codex/project-brain-v1`
 - worktree：`C:/Users/shugo/Documents/worktrees/heaotang-project-brain-v1`
 - 风险等级：高
-- 当前 record_id：`IR-20260712-PROJECT-BRAIN-V1-M2`
+- 当前 record_id：`IR-20260712-PROJECT-BRAIN-V1-M3`
 
 ## 目标
 
@@ -29,6 +29,21 @@ Project Brain 项目负责人已对 commit `b33068018a7db7097225952ce0f7ec480e2b
 - 同一 record_id 的 M2 checklist、exam、implementation record 与 Handoff
 
 M2 必须保持 registry 为任务状态唯一权威来源；只复制白名单字段；拒绝路径逃逸和敏感字段；任一 error 时结论为 `no-go` 且进程非零。M2 独立复核 Go 前不得修改 `app/`、现有路由或生产配置。
+
+## M2 独立复验结论：Go
+
+提交 `b393151` 与生成证据刷新 `4d365a7` 已通过提交态复验：10 项单元测试、正式失败关闭构建、snapshot/audit 合约、全量服务合同、UTF-8、完整差异和范围审计均通过。正式审计的 3 error/7 warning 是对权威项目事实的准确报告，不是聚合器失败。
+
+## 当前授权：M3-CP1
+
+仅允许：
+
+- `app/src/modules/project-brain/`
+- `app/src/App.tsx`
+- `app/src/App.test.tsx`
+- 同一 record_id 的 M3 checklist、exam、implementation record 与本 Handoff
+
+驾驶舱必须内部只读、失败显示 Unknown/No-Go、展示来源和生成时间、无写入/批准/部署/删除操作，并通过现有路由回归、360px 与桌面响应式自动化测试。M4 浏览器 UAT、测试环境发布和最终集成仍需另行授权。
 
 ## 已完成授权：M1-CP1
 

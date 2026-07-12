@@ -1811,11 +1811,17 @@
                                                  "contracts/project-brain/",
                                                  "scripts/build_project_brain.py",
                                                  "scripts/validate_project_brain.py",
-                                                 "scripts/tests/test_project_brain.py"
+                                                 "scripts/tests/test_project_brain.py",
+                                                 "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m3*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m3*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-project-brain-v1-m3*.json",
+                                                 "app/src/modules/project-brain/",
+                                                 "app/src/App.tsx",
+                                                 "app/src/App.test.tsx"
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "M1-R3 已由 Project Brain 项目负责人独立复验为 Go：完整基线 diff、preflight、checklist、100 分考试、四类 Draft 2020-12 Schema、六个模块精确来源、UTF-8 与 allowed scope 均通过。现授权 M2-CP1 只读聚合器、治理审计、生成快照及对应治理证据；M3 React/路由与 M4 UAT/集成仍未授权。SC T0 integrated 不代表 T0 Go；本工作项不得修改任何 SC remediation 文件。",
+                           "migration_note":  "M1 与 M2 均已独立复验 Go。M2 commit b393151 及证据刷新 4d365a7 的完整差异、10 项单元测试、正式失败关闭构建、输出合约、全量合同、UTF-8 与 allowed scope 均通过；正式审计准确保留既有 3 error/7 warning，没有篡改其他模块事实。现授权 M3 内部只读驾驶舱、精确路由接线及治理证据；M4 UAT/最终集成仍未授权。",
                            "handoff_record":  "docs/project-management/project-brain/handoff-v1.md"
                        }
                    ]
