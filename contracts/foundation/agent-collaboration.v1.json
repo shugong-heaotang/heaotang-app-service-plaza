@@ -2404,7 +2404,7 @@
                            "title":  "健康大管家 HM-R0 开发阶段正式冻结派发",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r0-formal-freeze-dispatch",
                            "branch":  "codex/health-r0-formal-freeze-dispatch",
@@ -2419,7 +2419,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "仅派发HM-R0 Accepted for development planning文档与决策证据冻结。保持production identity、真实会员/健康数据、环境、医疗服务、收费、资金、部署和生产Pending/No-Go；PR#1/#2在模块正式激活前不修改，P3不自动激活。",
+                           "migration_note":  "派发 source 44592baf 已通过checklist26/26、exam100、IR、collaboration、UTF8和diff门禁，并以a4debc54受控集成。仅派发HM-R0 Accepted for development planning文档与决策证据冻结；production identity、真实会员/健康数据、环境、医疗服务、收费、资金、部署和生产保持Pending/No-Go，P3不自动激活。",
                            "handoff_record":  "docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
                        },
                        {
@@ -2427,11 +2427,11 @@
                            "title":  "健康大管家 HM-R0 Accepted for development planning 正式冻结",
                            "owner":  "Health Manager module agent",
                            "owner_role":  "健康大管家负责人",
-                           "status":  "planned",
+                           "status":  "active",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r0-formal-freeze",
                            "branch":  "codex/health-manager-r0-formal-freeze",
-                           "base_commit":  "ad5dd1a0a536f51ed60466178a810e6d293f6999",
+                           "base_commit":  "a4debc54ca65c14b7516fa6dc2acce3b4221ed29",
                            "allowed_paths":  [
                                                  "docs/project-management/modules/health-manager/health-manager-v1-requirements-and-development-plan.md",
                                                  "docs/project-management/modules/health-manager/health-manager-v1-docs-receipt.md",
@@ -2445,7 +2445,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "预登记，等待平台派发通知、治理证据和受控集成后同步到包含通知的最终基线，再核验专用工作树clean并转active。只冻结开发规划文档/决策证据，不授权业务代码、共享前后端、API/DB、环境、真实数据、收费、资金、部署、生产或P3。Draft PR#1/#2是否合并必须由本切片另行裁定，不能自动合并。",
+                           "migration_note":  "正式派发a4debc54进入权威基线后，专用工作树已fast-forward至同一HEAD，merge-base一致且clean，现正式激活。只冻结开发规划文档/决策证据，不授权业务代码、共享前后端、API/DB、环境、真实数据、收费、资金、部署、生产或P3。Draft PR#1/#2是否合并必须由本切片另行裁定，不能自动合并。",
                            "handoff_record":  "docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
                        }
                    ]
