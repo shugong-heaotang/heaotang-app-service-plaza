@@ -2763,6 +2763,25 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "只保存task order、模块治理证据、Handoff和后端exact commit/test映射；不得写后端代码或业务运行时。",
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m1-domain.md"
+                       },
+                       {
+                           "work_id": "AIW-20260713-ACTIVITY-V3-M0",
+                           "title": "活动板块 V3.0 M0 治理与设计合同化",
+                           "owner": "Activity V3 continuous development agent",
+                           "owner_role": "活动板块 V3.0 持续负责人",
+                           "status": "active",
+                           "repository_root": "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-activity-v3-m0",
+                           "branch": "codex/activity-v3-m0",
+                           "base_commit": "485601ce10ad4d3ac7d9db655465754ad5ac0032",
+                           "allowed_paths":  [
+                               "contracts/modules/activity/**",
+                               "docs/project-management/modules/activity/**"
+                           ],
+                           "started_with_clean_worktree": true,
+                           "preexisting_changes_acknowledged": false,
+                           "migration_note": "最高负责人仅批准 M0。需求基线 SHA-256=838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6。保护路径包括 app/src/**、后端业务实现、部署与生产配置、其他模块实现及其他工作项治理证据；禁止真实触达、验证码、支付和生产变更。blocks=M1、测试服部署和生产上线；does_not_block=版本化 mock-only 合同/schema/fixture/原型准备。独立验收负责人=APP 总架构独立验收 Agent（非活动实施、非临时平台激活代理）。激活后仅允许开始 current checklist。",
+                           "handoff_record": "docs/project-management/modules/activity/handoff-m0.md"
                        }
                    ]
 }
