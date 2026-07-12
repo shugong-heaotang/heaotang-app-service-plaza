@@ -41,3 +41,18 @@
 | control channel | 仍出现浏览器插件自身的 Statsig 初始化超时；页面 DOM 可读取，因此该噪声不计为 APP 请求或产品失败。 |
 | conclusion | 浏览器控制通道当前可用；认证态页面矩阵仍未验证。四个合成账号的本轮一次验证码授权已耗尽，不重复发送。 |
 | next action | 等待 UTC 日容量自然恢复并取得下一轮明确授权后，先重新核对容量，再按一次一账号建立会话；禁止重部署、重跑已完成 fixture 或记录任何验证码/会话秘密。 |
+
+## 追加：四身份 OTP 容量与环境复核
+
+- case_id：`CMH-M3-BR-CAPACITY-005`
+- time：`2026-07-13`（Asia/Shanghai；服务端 UTC 日计数仍为 2026-07-12）
+- mutation：0；未发送验证码、未建立会话、未重跑 fixture
+- secrets：`none-recorded`
+
+| 字段 | 证据 |
+| --- | --- |
+| OTP capacity | 新会员剩余 0，家庭/多俱乐部/管理三名合成身份各剩余 1；四身份一次会话矩阵不具备完整容量。 |
+| environment | `/ready`=200；`/health?json=1`=200，status=ok、db.connected=true、migrations=11、plugins=24。 |
+| result | `Blocked / Conditional No-Go`。 |
+| root cause | 测试账号 UTC 日 OTP 额度不足；不是 APP、后端、fixture 或浏览器控制通道产品失败。 |
+| next action | 等待服务端 UTC 日自然重置后，重新核对四个合成身份各一次容量；再按一次一动作建立会话并采集认证态 DOM 证据。禁止用仅三身份结果替代四身份结论。 |
