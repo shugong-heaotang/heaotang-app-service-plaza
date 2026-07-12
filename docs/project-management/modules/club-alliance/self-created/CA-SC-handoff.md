@@ -4,11 +4,11 @@
 - to：服务广场权威集成基线
 - date：2026-07-12
 - work item：`AIW-20260712-CLUB-SC-T0-ACCEPTANCE`
-- status：Environment Go / integration pending
+- status：Independent Review No-Go / remediation active
 - upstream APP / backend：`2c4b295e6fd625a2df24957f7b8becbc28ad1dcf` / `a998812cf44dc449d85b726706d4ae2573179860`
-- current checklist：`FC-20260712-CLUB-SC-T0-ACCEPTANCE-R3`（28/28）
-- current exam：`EX-20260712-CLUB-SC-T0-ACCEPTANCE-R3-1`（100）
-- current IR：`IR-20260712-CLUB-SC-T0-ACCEPTANCE-R3`
+- latest historical checklist：`FC-20260712-CLUB-SC-T0-ACCEPTANCE-R3`（28/28；修复改动后不再 current）
+- latest historical exam：`EX-20260712-CLUB-SC-T0-ACCEPTANCE-R3-1`（100）
+- latest historical IR：`IR-20260712-CLUB-SC-T0-ACCEPTANCE-R3`
 
 ## 完成
 
@@ -37,10 +37,17 @@
 - 后端与前端失败注入回滚均恢复原哈希，测试环境 ready；固定前缀 fixture、关联申请和成员已清理为 0。
 - current checklist `FC-20260712-CLUB-SC-T0-ACCEPTANCE-R3` 28/28；exam `EX-20260712-CLUB-SC-T0-ACCEPTANCE-R3-1` 100；IR `IR-20260712-CLUB-SC-T0-ACCEPTANCE-R3`。
 
+## 独立复核 No-Go（2026-07-12）
+
+- 列表响应未使用合同字段白名单安全 DTO，部署版本会序列化 `owner_id` 等禁止字段；已登记独立后端根因修复工作项。
+- fixture 必须升级为唯一 run，并在清理时精确删除本轮 `api_idempotency_keys`。
+- 数据库恢复演练、刷新后 DOM 和环境 Enter 证据尚未关闭。
+- R3 作为历史检查点保留；修复完成后必须生成 R4 current checklist、100 分考试和新 IR。
+
 ## 未完成/禁止推断
 
-只剩平台独立复核、GitHub 推送和受控集成。创建、审核、成员管理、资金、生产与真实数据仍未授权；Environment Go 不代表发布或运营 Go。
+上述 Blocker/Major、R4 治理、再次独立复核和受控集成均未关闭。创建、审核、成员管理、资金、生产与真实数据仍未授权；既有部署和局部通过证据不代表 T0 Go。
 
 ## 请求
 
-平台独立复跑自动化、内部依赖、治理、UTF-8、scope 与敏感扫描；通过后受控集成并关闭 SP-H036。
+先完成安全 DTO、唯一 run/幂等清理、数据库恢复与真实浏览器证据，再由平台独立复跑并关闭 SP-H036。

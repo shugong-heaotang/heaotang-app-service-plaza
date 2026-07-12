@@ -5,8 +5,8 @@
   "slice_id": "ca-sc-first-member-closure",
   "readiness": {
     "governance": "go",
-    "development": "go",
-    "acceptance": "go",
+    "development": "partial-go",
+    "acceptance": "partial-go",
     "release": "pending",
     "operations": "pending"
   },
@@ -85,12 +85,12 @@
       "dependency_id": "sc.environment",
       "kind": "acceptance",
       "description": "test environment API, browser, backup, rollback and cleanup evidence",
-      "status": "test-verified",
+      "status": "blocked-local",
       "required_for_slice": true,
       "depends_on": ["sc.backend", "sc.frontend"],
       "contracts": ["docs/project-management/notices/2026-07-12-club-sc-t0-acceptance-task-order.md"],
       "evidence": ["docs/project-management/modules/club-alliance/self-created/acceptance/go-no-go.md"],
-      "unresolved": [],
+      "unresolved": ["list response safe DTO", "browser refresh DOM and Enter", "database restore", "unique-run idempotency cleanup"],
       "owner": "平台集成负责人",
       "blocks": ["sc.handoff"],
       "does_not_block": ["CA-FC", "CA-PC", "CA-UF"]

@@ -18,6 +18,11 @@
     "ready": true,
     "page_status": 200
   },
-  "result": "pass",
+  "database": {
+    "restore_exercised": false,
+    "integrity_verified": false,
+    "status": "pending-remediation"
+  },
+  "result": "no-go-pending-database-restore",
   "secrets_persisted": false
 }

@@ -4,6 +4,7 @@
   [string]$IsolationPhone = "19900009993",
   [string]$Server = "root@47.94.159.60",
   [string]$OtpDatabasePath = "/root/heaotang-acceptance/runtime/data/heao.db",
+  [Parameter(Mandatory=$true)][string]$FixtureRunId,
   [string]$ReportPath = ""
 )
 
@@ -18,9 +19,12 @@ if ($BaseUrl.TrimEnd("/") -ne "https://heaotang.cn" -or $Server -ne "root@47.94.
 if ($Phone -notmatch '^1990000999[1-4]$' -or $IsolationPhone -notmatch '^1990000999[1-4]$' -or $Phone -eq $IsolationPhone) {
   throw "CA-SC T0 requires two distinct approved synthetic accounts."
 }
+if ($FixtureRunId -notmatch '^club-sc-t0-\d{8}-\d{6}$') {
+  throw "FixtureRunId must identify one approved unique T0 run."
+}
 
 $BaseUrl = $BaseUrl.TrimEnd("/")
-$runId = "club-sc-t0-" + (Get-Date -Format "yyyyMMdd-HHmmss")
+$runId = $FixtureRunId
 
 function Invoke-JsonRequest {
   param([string]$Method, [string]$Path, [object]$Body, [string]$BearerToken = "", [hashtable]$ExtraHeaders = @{})
@@ -53,6 +57,25 @@ function Invoke-JsonRequest {
 
 function Assert-Status($Response, [int[]]$Expected, [string]$Step) {
   if ($Expected -notcontains $Response.StatusCode) { throw "$Step returned HTTP $($Response.StatusCode); expected $($Expected -join '/')." }
+}
+
+function Assert-ExactFields($Value, [string[]]$AllowedFields, [string]$Step) {
+  $actual = @($Value.PSObject.Properties.Name | Sort-Object -Unique)
+  $expected = @($AllowedFields | Sort-Object -Unique)
+  $unexpected = @($actual | Where-Object { $expected -notcontains $_ })
+  $missing = @($expected | Where-Object { $actual -notcontains $_ })
+  if ($unexpected.Count -ne 0 -or $missing.Count -ne 0) {
+    throw "$Step response fields violate the contract."
+  }
+}
+
+function Assert-NoForbiddenFields($Value, [string]$Step) {
+  $json = $Value | ConvertTo-Json -Compress -Depth 12
+  foreach ($field in @("owner_id", "user_id", "user_name", "reviewed_by", "internal_code")) {
+    if ($json -match ('"' + [regex]::Escape($field) + '"\s*:')) {
+      throw "$Step exposed a forbidden response field."
+    }
+  }
 }
 
 function Assert-OtpCapacity([string]$TargetPhone) {
@@ -118,7 +141,7 @@ if ($ready.Payload.status -ne "ready" -or -not $ready.Payload.db) { throw "Test 
 $unauthorized = Invoke-JsonRequest -Method GET -Path "/api/v1/clubs/search?type=standard&category=general&page=1&size=20&q=T0" -Body $null
 Assert-Status $unauthorized @(401) "Unauthenticated SC search"
 
-$fixtureOutput = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot "Manage-ClubSelfCreatedT0Fixture.ps1") -Operation Inspect
+$fixtureOutput = & powershell.exe -NoProfile -ExecutionPolicy Bypass -File (Join-Path $PSScriptRoot "Manage-ClubSelfCreatedT0Fixture.ps1") -Operation Inspect -RunId $FixtureRunId
 if ($LASTEXITCODE -ne 0) { throw "Fixture inspection failed." }
 $fixture = $fixtureOutput | ConvertFrom-Json
 $fixtureOutput = $null
@@ -137,10 +160,16 @@ Assert-Status $search @(200) "SC authoritative search"
 $items = @($search.Payload.data.items)
 if ($items.Count -ne 5 -or [int]$search.Payload.data.total -ne 5) { throw "SC deterministic search did not return exactly five fixtures." }
 if (@($items | Where-Object { $_.type -ne "standard" -or $_.category -ne "general" -or $_.status -ne "active" }).Count -ne 0) { throw "SC search crossed a type/category/status boundary." }
+foreach ($item in $items) {
+  Assert-ExactFields $item @("id", "name", "intro", "city", "type", "category", "status") "SC search item"
+}
+Assert-NoForbiddenFields $search.Payload.data "SC search"
 
 $detail = Invoke-JsonRequest -Method GET -Path "/api/v1/clubs/self-created/$clubId" -Body $null -BearerToken $tokenA
 Assert-Status $detail @(200) "SC detail"
 if ($detail.Payload.data.type -ne "standard" -or $detail.Payload.data.category -ne "general" -or $detail.Payload.data.status -ne "active") { throw "SC detail boundary is invalid." }
+Assert-ExactFields $detail.Payload.data @("id", "name", "intro", "city", "type", "category", "status", "member_count", "created_at") "SC detail"
+Assert-NoForbiddenFields $detail.Payload.data "SC detail"
 $nonScDetail = Invoke-JsonRequest -Method GET -Path "/api/v1/clubs/self-created/$nonScId" -Body $null -BearerToken $tokenA
 Assert-Status $nonScDetail @(404) "Non-SC detail"
 if ($nonScDetail.Payload.code -ne "CLUB_NOT_FOUND") { throw "Non-SC detail did not fail closed with CLUB_NOT_FOUND." }
@@ -166,6 +195,10 @@ $myA = Invoke-JsonRequest -Method GET -Path "/api/v1/clubs/join-applications/my?
 $myB = Invoke-JsonRequest -Method GET -Path "/api/v1/clubs/join-applications/my?page=1&size=100" -Body $null -BearerToken $tokenB
 Assert-Status $myA @(200) "User A applications"
 Assert-Status $myB @(200) "User B applications"
+Assert-NoForbiddenFields $join.Payload.data "Join first"
+Assert-NoForbiddenFields $replay.Payload.data "Join replay"
+Assert-NoForbiddenFields $myA.Payload.data "User A applications"
+Assert-NoForbiddenFields $myB.Payload.data "User B applications"
 $idsA = @($myA.Payload.data.items | ForEach-Object { [int64]$_.id })
 $idsB = @($myB.Payload.data.items | ForEach-Object { [int64]$_.id })
 if ($idsA -notcontains $applicationId -or $idsA -contains $concurrentIds[0] -or $idsB -notcontains $concurrentIds[0] -or $idsB -contains $applicationId) { throw "Cross-user application isolation failed." }
@@ -181,8 +214,8 @@ $report = [ordered]@{
   base_url=$BaseUrl
   fixture_seed=$fixture.seed
   checks=[ordered]@{
-    ready=200; unauthenticated_search=401; search=[ordered]@{ status=200; total=5; zero_crossover=$true }
-    detail=[ordered]@{ status=200; non_sc_status=404; safe_dto=$true }
+    ready=200; unauthenticated_search=401; search=[ordered]@{ status=200; total=5; zero_crossover=$true; exact_field_whitelist=$true; forbidden_fields=0 }
+    detail=[ordered]@{ status=200; non_sc_status=404; exact_field_whitelist=$true; forbidden_fields=0 }
     join=[ordered]@{ first=201; replay=200; conflict=409; same_application=$true }
     concurrency=[ordered]@{ responses=$concurrent.Count; single_pending=$true }
     cross_user_isolation=$true

@@ -19,9 +19,10 @@
     "fixture_clubs": 0,
     "fixture_join_applications": 0,
     "fixture_members": 0,
+    "fixture_idempotency_keys": null,
     "ready": "ready",
     "database_ready": true
   },
   "secrets_recorded": false,
-  "status": "pass"
+  "status": "no-go-pending-idempotency-cleanup"
 }
