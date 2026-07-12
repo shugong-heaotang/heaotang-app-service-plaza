@@ -2491,6 +2491,29 @@
                            "handoff_record":  "docs/project-management/service-plaza/platform-integration-divergence-reconciliation-2026-07-13.md"
                        },
                        {
+                           "work_id":  "AIW-20260713-HEALTH-R0-F2-DISPATCH",
+                           "title":  "健康大管家 HM-R0 F2 专业与责任边界审计派发",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/health-r0-f2-dispatch",
+                           "branch":  "codex/health-r0-f2-dispatch",
+                           "base_commit":  "656ad0654b09cf7b58e91fcf5a8ff75adbc4a475",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-13-health-r0-f2-dispatch*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-13-health-r0-f2-dispatch*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-13-health-r0-f2-dispatch*.json",
+                                                 "docs/project-management/notices/2026-07-13-health-r0-f2-audit-task-order.md",
+                                                 "docs/project-management/service-plaza/health-r0-f2-dispatch-2026-07-13.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "仅派发R0-F2文档、机器合同和证据审计；逐项审计专业边界、风险升级、管理师准入监督容量、数据权利特殊人群、15风险底线与责任主体。Pending无新owner证据不得提升，executable保持false；F3/P3及所有业务、真实活动继续No-Go。",
+                           "handoff_record":  "docs/project-management/notices/2026-07-13-health-r0-f2-audit-task-order.md"
+                       },
+                       {
                            "work_id":  "AIW-20260712-PROJECT-BRAIN-INTEGRATION-RECONCILIATION",
                            "title":  "Project Brain 分叉集成与 R5 治理证据受控收口",
                            "owner":  "Codex platform integration agent",
