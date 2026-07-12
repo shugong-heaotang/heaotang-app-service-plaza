@@ -2112,7 +2112,7 @@
                            "title":  "健康大管家 MVP-90 M1 P2 合成运行内核规划与派发",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-m1-p2-dispatch",
                            "branch":  "codex/health-mvp90-m1-p2-dispatch",
@@ -2128,8 +2128,39 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "只读差距审计与正式派发进行中；本工作项只负责确定 P2 最小目标、两层依赖、精确范围和模块工作项，不实现运行内核，不修改共享前端、后端、API、数据库或环境。",
+                           "migration_note":  "派发 source 118e76355ff5dd0bcfae43a45258c6cde74934db 已受控集成至 APP 4556c5b0359ebc70694e1a218d651244d6d28b89；R2 checklist 28/28、exam100、IR、协作、总合同、UTF-8 和 diff 通过。R1 的 FC-prefixed record_id 被机器门禁拒绝，原字节保存在 invalidated-snapshots，未改写试卷。只派发确定性合成重放，不授权共享前端、后端、API、数据库或环境。",
                            "handoff_record":  "docs/project-management/service-plaza/health-mvp90-m1-p2-dispatch-2026-07-12.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-HEALTH-MVP90-M1-P2-SYNTHETIC-REPLAY",
+                           "title":  "健康大管家 MVP-90 M1 P2 确定性合成 PDCAR 重放",
+                           "owner":  "Health Manager module agent",
+                           "owner_role":  "健康大管家负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-m1-p2-synthetic-replay",
+                           "branch":  "codex/health-manager-mvp90-m1-p2-synthetic-replay",
+                           "base_commit":  "4556c5b0359ebc70694e1a218d651244d6d28b89",
+                           "allowed_paths":  [
+                                                 "contracts/modules/health-manager/internal-dependencies.v1.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/synthetic-replay-plan.v1.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/synthetic-replay-plan.v1.schema.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/conformance/synthetic_pdcar_reference.py",
+                                                 "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_p2_replay.py",
+                                                 "contracts/modules/health-manager/mvp90-m1/conformance/fixtures/synthetic-replay-negative-cases.v1.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/conformance/fixtures/synthetic-replay-negative-cases.v1.schema.json",
+                                                 "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-requirements.md",
+                                                 "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-receipt.md",
+                                                 "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md",
+                                                 "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-handoff.md",
+                                                 "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p2*.json",
+                                                 "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p2*.json",
+                                                 "contracts/modules/health-manager/implementation-records/2026-07-12-health-mvp90-m1-p2*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "从已含 P2 正式任务书的 APP 4556c5b 创建独立 branch/worktree；HEAD=base=merge-base 且 clean 后正式激活。只实现 Python/JSON 的内存确定性合成重放，源合同与输出继续 executable=false；禁止共享前端、后端、API、DB、环境、真实数据、收费和生产。",
+                           "handoff_record":  "docs/project-management/notices/2026-07-12-health-manager-mvp90-m1-p2-task-order.md"
                        }
                    ]
 }
