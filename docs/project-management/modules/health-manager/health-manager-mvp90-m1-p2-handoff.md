@@ -1,10 +1,10 @@
 # 健康大管家 MVP-90 M1 P2 Handoff
 
-- checkpoint：`P2-C2`
+- checkpoint：`P2-C4 final module handoff`
 - 提交方：健康大管家负责人
 - 接收方：平台集成负责人
 - 日期：2026-07-12
-- 状态：`P2-C1 Go / P2-C2 integrated / P2-C3 ready for independent review`
+- 状态：`P2-C1/C2/C3 integrated / P2-C4 ready for final independent review`
 
 ## 已完成
 
@@ -72,3 +72,41 @@
 6. P2测试19项、P1回归11项通过。
 
 请平台独立复核C3矩阵、Schema、30项回归、治理、范围和No-Go。获得C3 Go前不进入P2-C4。
+
+## P2-C4 最终交接
+
+### 已集成证据
+
+| 阶段 | source | integration |
+| --- | --- | --- |
+| C1 | `4ee6ccb67b3320c6fbc387abe340b5f8c2a8bd10` | `40a042b`；evidence HEAD `5004cdc` |
+| C2 | `a2e8424c6c4f2cc3e52b7ad0782968ca9d693267` | `4c195d07c21c8ce6944ecca91f69d9f83e6893e7` |
+| C3 | `abb4f20dc52679327f596f39a1676652010cc90c` | `5069d17661853aeae01b06c23c64335a84028f35` |
+
+模块C4同步merge=`0efd48a957458a9d9b120c5d475832f986b34baa`，merge-base=`5069d17661853aeae01b06c23c64335a84028f35`。
+
+### 最终验证
+
+- P2 19/19、P1 11/11；
+- 15正例结果/hash与15负例零副作用矩阵；
+- current checklist 28/28、exam100、IR、内部依赖、协作、总合同、UTF-8、diff/scope、敏感扫描；
+- 所有输出 `synthetic_only=true`、`executable=false`；
+- runner零文件、网络、API、DB、clock、random、browser、storage、model和真实数据入口。
+
+### 根因关闭
+
+1. `HM-M1-P2-C1-ACTION-SEMANTIC-CONFLATION`：迁移、授权和审计语义分离；
+2. `HM-M1-P2-C1-NORMAL-REPLAY-DISCONTINUITY`：A001连续至recorded，风险覆盖移至签署闭包场景；
+3. `HM-M1-P2-C2-CALLER-CONTROLLED-SAFETY-SEMANTICS`：权威事件完整绑定，幂等摘要只排除key。
+
+### 未决风险与 No-Go
+
+- `C4-L02-L04`、全量`C4-H06`、production identity仍Pending；
+- 共享前端/后端/API/DB、环境、部署、真实会员/健康数据、收费、资金和生产未授权；
+- P2 synthetic Go不得描述为可上线健康大管家产品。
+
+### 接收与请求
+
+- 接收人：平台集成负责人；
+- 请求：独立复跑P2 19项、P1 11项、治理与范围门禁，裁定P2 synthetic Go/No-Go并决定最终受控集成；
+- 本模块提交C4短检查点后停止，不自行启动后续共享实现。

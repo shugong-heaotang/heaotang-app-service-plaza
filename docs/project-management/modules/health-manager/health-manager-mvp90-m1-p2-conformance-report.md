@@ -108,3 +108,13 @@ P2-C1已由平台独立验收Go，squash integration=`40a042b`，authoritative e
 | 回归 | P2 19/19、P1 11/11 PASS |
 
 C3矩阵只冻结本地合成验证结果，不改变专业源、隐私法律Pending、共享实现和真实活动No-Go。当前结论为ready for independent review；未获C3 Go前不进入P2-C4。
+
+## P2-C4 总体证据索引
+
+| 检查点 | 最终 source | controlled integration | 结论 |
+| --- | --- | --- | --- |
+| C1 replay plan | `4ee6ccb67b3320c6fbc387abe340b5f8c2a8bd10` | `40a042b`；authoritative evidence `5004cdc` | Go / integrated |
+| C2 reference runner | `a2e8424c6c4f2cc3e52b7ad0782968ca9d693267` | `4c195d07c21c8ce6944ecca91f69d9f83e6893e7` | Go / integrated |
+| C3 15+15 matrix | `abb4f20dc52679327f596f39a1676652010cc90c` | `5069d17661853aeae01b06c23c64335a84028f35` | Go / integrated |
+
+最终回归：P2 19/19、P1 11/11。C1关闭action语义混同与正常重放不连续；C2关闭调用方控制安全语义与幂等摘要不完整；C3持续覆盖上述门禁并冻结15+15证据。未决项只有P2之外的隐私法律、全量专业边界、production identity、共享实现、环境与真实活动，不阻塞本地合成P2收口，也不得被本收口提升状态。

@@ -382,7 +382,7 @@
       "dependency_id": "m1.p2-c3-matrix",
       "kind": "acceptance",
       "description": "15/15正例冻结outcome/error/result count/canonical hash；15/15负例逐项证明稳定拒绝且resource/audit/trace/idempotency无副作用；零外部运行时入口",
-      "status": "implemented",
+      "status": "test-verified",
       "required_for_slice": true,
       "depends_on": ["m1.p2-reference-runner"],
       "contracts": [
@@ -393,10 +393,27 @@
         "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_p2_replay.py",
         "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md"
       ],
-      "unresolved": ["等待平台独立复核P2-C3"],
+      "unresolved": [],
       "owner": "健康大管家负责人",
-      "blocks": ["P2-C4模块Handoff"],
+      "blocks": ["m1.p2-c4-handoff"],
       "does_not_block": ["其他模块独立工作；共享实现、环境、真实数据、收费和生产继续No-Go"]
+    },
+    {
+      "dependency_id": "m1.p2-c4-handoff",
+      "kind": "handoff",
+      "description": "汇总C1-C3 source/integration、19+11回归、15+15矩阵、三项根因关闭、未决风险与No-Go的P2模块最终交接",
+      "status": "implemented",
+      "required_for_slice": true,
+      "depends_on": ["m1.p2-c3-matrix"],
+      "contracts": ["docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-handoff.md"],
+      "evidence": [
+        "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md",
+        "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-receipt.md"
+      ],
+      "unresolved": ["等待平台独立P2 synthetic Go/No-Go与最终受控集成"],
+      "owner": "健康大管家负责人",
+      "blocks": ["P2 work item closeout"],
+      "does_not_block": ["其他模块独立工作；业务实现、环境、release和operations继续Pending/No-Go"]
     }
   ]
 }

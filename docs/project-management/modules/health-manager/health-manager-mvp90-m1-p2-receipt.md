@@ -2,7 +2,7 @@
 
 - work_id：`AIW-20260712-HEALTH-MVP90-M1-P2-SYNTHETIC-REPLAY`
 - owner：健康大管家负责人
-- 状态：`P2-C1 Go / P2-C2 integrated / P2-C3 ready for independent review`
+- 状态：`P2-C1/C2/C3 integrated / P2-C4 ready for final independent review`
 - activation HEAD：`15ce1053e1a9173e5a000655167f7d69acac5bcd`
 - registered base：`4556c5b0359ebc70694e1a218d651244d6d28b89`
 
@@ -80,3 +80,19 @@ R4 current：checklist 28/28，exam 100，IR=`IR-20260712-HEALTH-MVP90-M1-P2-C1-
 - 每个负例证明resource/audit/trace/idempotency无副作用；
 - P2测试19项、P1回归11项通过；零外部依赖证据通过；
 - 状态：等待平台独立复核，未获C3 Go不进入P2-C4。
+
+## P2-C3 平台集成
+
+- source：`abb4f20dc52679327f596f39a1676652010cc90c`；
+- controlled integration / authoritative HEAD：`5069d17661853aeae01b06c23c64335a84028f35`；
+- verdict：C3 Go并已集成，平台授权进入C4收口；
+- 集成后回归：P2 19/19、P1 11/11、总合同和UTF-8 1096通过。
+
+## P2-C4
+
+- 模块同步merge：`0efd48a957458a9d9b120c5d475832f986b34baa`，merge-base=`5069d176...`，同步后clean；
+- C1/C2/C3 source与integration证据已汇总；
+- 三项根因均有修复、预防门禁和回归证据；
+- 合成合同、runner与C3矩阵的内部依赖提升至已有证据支持的test-verified；
+- release与operations仍Pending，全部真实活动与共享实现No-Go保持；
+- 接收人：平台集成负责人；请求最终P2 synthetic Go/No-Go。
