@@ -122,6 +122,12 @@
 
 当前 verdict 不变：`No-Go — API/recovery passed; browser and lifecycle coverage Unverified`。这是 automation/control-channel blocker，不是产品失败；Statsig 初始化 timeout 按插件统计控制通道噪声处理。下一轮仅在 in-app Browser backend 恢复后，从 exact URL/title claim 开始补无会话与四合成身份逐动作 UAT，禁止重复任何已完成上游。
 
+### 2026-07-12 15:57 浏览器恢复更新
+
+应用内浏览器已恢复并成功读取目标 URL、title、DOM、viewport 与静态资产，因此原“浏览器 backend 不可用”阻塞关闭。当前无凭据直达显示标准俱乐部首页，heading 为“俱乐部联盟 / 选择俱乐部服务”，`data-member-home-state` 数量为 0；这不足以证明会员首页或 unauthorized 状态通过。
+
+阻塞已转化为部署路由/会话进入条件核对：先确认 `index-DCYGiKy4.js` 是否仍是批准 M3 制品及会员首页的合法进入条件，再决定是否启用合成身份。未核对前不请求 OTP、不读取会话秘密、不执行 fixture、不重复部署。证据见 `acceptance/m3/2026-07-12-browser-resume.md`。
+
 ## 11. 最小合成资料接续
 
 已新增 `acceptance/m3/synthetic-data-design.md`，将缺失状态收敛为两个可安全执行的资料组：加入申请 `pending/rejected` 与俱乐部生命周期 `dissolved`。它们只使用 run-owned 合成记录、独立 RunId 和可恢复清理，不需要真实会员资料。
