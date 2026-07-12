@@ -2,7 +2,15 @@ import type { ReactNode } from "react";
 import "./MemberHomeShell.css";
 
 export type MemberHomeState = "loading" | "ready" | "empty" | "partial-error" | "error" | "unauthorized" | "maintenance" | "offline";
-export type MemberClub = { clubId: string; name: string; kind: "公益俱乐部" | "自建俱乐部" | "家庭俱乐部"; role: string; status: string; href: string };
+export type MemberClub = {
+  clubId: string;
+  name: string;
+  kind: "公益俱乐部" | "自建俱乐部" | "家庭俱乐部";
+  role: string;
+  clubStatus: "active";
+  membershipStatus: "active" | "suspended";
+  href: string;
+};
 export type MemberTask = { taskId: string; title: string; context: string; href: string };
 export type MemberActivity = { activityId: string; title: string; timeLabel: string; href: string };
 export type ExploreEntry = { actionId: string; label: string; href: string };
@@ -17,6 +25,8 @@ const State = ({ state, title, children }: { state: MemberHomeState; title: stri
 );
 const Section = ({ title, label, children }: { title: string; label: string; children: ReactNode }) => <section className="member-home-section" aria-label={label}><h3>{title}</h3>{children}</section>;
 const Empty = ({ children }: { children: ReactNode }) => <p className="member-home-empty">{children}</p>;
+const clubStatusLabel: Record<MemberClub["clubStatus"], string> = { active: "俱乐部正常" };
+const membershipStatusLabel: Record<MemberClub["membershipStatus"], string> = { active: "会员有效", suspended: "会员停权" };
 
 export function MemberHomeShell({ model }: { model: MemberHomeModel }) {
   if (model.state === "loading") return <State state="loading" title="正在加载会员首页"><p>正在读取您的俱乐部与会员事项…</p></State>;
@@ -32,7 +42,7 @@ export function MemberHomeShell({ model }: { model: MemberHomeModel }) {
       <dl><div><dt>我的俱乐部</dt><dd>{model.joinedClubCount ?? clubs.length}</dd></div><div><dt>今日待办</dt><dd>{model.pendingTaskCount ?? 0}</dd></div><div><dt>未读消息</dt><dd>{model.unreadCount ?? 0}</dd></div></dl>
     </header>
     <Section title="我的俱乐部" label="我的俱乐部">
-      {clubs.length ? <div className="member-home-list">{clubs.map(c => <article key={c.clubId}><div><strong>{c.name}</strong><p>{c.kind} · {c.role} · {c.status}</p></div><a href={c.href}>进入</a></article>)}</div> : <Empty>您还没有加入俱乐部，可以从下方探索。</Empty>}
+      {clubs.length ? <div className="member-home-list">{clubs.map(c => <article key={c.clubId}><div><strong>{c.name}</strong><p>{c.kind} · {c.role} · {clubStatusLabel[c.clubStatus]} · {membershipStatusLabel[c.membershipStatus]}</p></div><a href={c.href}>进入</a></article>)}</div> : <Empty>您还没有加入俱乐部，可以从下方探索。</Empty>}
     </Section>
     <div className="member-home-columns">
       <Section title="今日待办" label="今日待办">{model.sectionErrors?.tasks ? <p role="alert">{model.sectionErrors.tasks}</p> : model.tasks?.length ? <ul>{model.tasks.map(t => <li key={t.taskId}><a href={t.href}>{t.title}</a><span>{t.context}</span></li>)}</ul> : <Empty>今天暂无待办。</Empty>}</Section>

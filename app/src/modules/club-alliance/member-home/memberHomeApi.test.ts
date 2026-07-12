@@ -13,7 +13,7 @@ const payload = {
   joined_club_count: 1,
   pending_task_count: 1,
   unread_count: 0,
-  clubs: [{ club_id: "c1", name: "合成俱乐部", kind: "自建俱乐部", member_role: "成员", status: "正常", target: "/clubs/c1" }],
+  clubs: [{ club_id: "c1", name: "合成俱乐部", kind: "自建俱乐部", member_role: "成员", club_status: "active", membership_status: "active", target: "/clubs/c1" }],
   tasks: [{ task_id: "t1", title: "查看申请", context: "待处理", target: "/tasks/t1" }],
   activities: [],
   feed: [],
@@ -26,7 +26,7 @@ describe("memberHomeApi", () => {
   it("maps strict data and uses backend can_manage", () => {
     const model = mapMemberHomePayload({ ...payload, can_manage: true }, explore);
     expect(model).toMatchObject({ state: "ready", canManage: true });
-    expect(model.clubs?.[0].clubId).toBe("c1");
+    expect(model.clubs?.[0]).toMatchObject({ clubId: "c1", clubStatus: "active", membershipStatus: "active" });
     expect(model.explore).toEqual(explore);
   });
 
@@ -43,6 +43,14 @@ describe("memberHomeApi", () => {
     { ...payload, joined_club_count: -1 },
     { ...payload, can_manage: "yes" },
     { ...payload, clubs: [{ ...payload.clubs[0], kind: "友联体" }] },
+    { ...payload, clubs: [{ ...payload.clubs[0], status: "正常" }] },
+    { ...payload, clubs: [{ ...payload.clubs[0], club_status: undefined }] },
+    { ...payload, clubs: [{ ...payload.clubs[0], membership_status: undefined }] },
+    { ...payload, clubs: [{ ...payload.clubs[0], membership_status: "pending" }] },
+    { ...payload, clubs: [{ ...payload.clubs[0], membership_status: "rejected" }] },
+    { ...payload, clubs: [{ ...payload.clubs[0], membership_status: "left" }] },
+    { ...payload, clubs: [{ ...payload.clubs[0], membership_status: "dissolved" }] },
+    { ...payload, clubs: [{ ...payload.clubs[0], club_status: "dissolved" }] },
     { ...payload, section_errors: { unknown: "CMH_UNKNOWN" } },
     { ...payload, section_errors: { tasks: 503 } },
   ])("fails malformed data closed", (data) => {
@@ -50,6 +58,11 @@ describe("memberHomeApi", () => {
     try { mapMemberHomePayload(data, explore); } catch (error) {
       expect((error as ApiError).code).toBe("CMH_CONTRACT_INVALID");
     }
+  });
+
+  it("keeps optional suspended membership distinct from club lifecycle", () => {
+    const model = mapMemberHomePayload({ ...payload, clubs: [{ ...payload.clubs[0], membership_status: "suspended" }] }, explore);
+    expect(model.clubs?.[0]).toMatchObject({ clubStatus: "active", membershipStatus: "suspended" });
   });
 
   it("uses one authenticated strict endpoint", async () => {
