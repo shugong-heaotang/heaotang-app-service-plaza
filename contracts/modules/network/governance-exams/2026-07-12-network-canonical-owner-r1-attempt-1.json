@@ -1,0 +1,70 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260712-NETWORK-CANONICAL-OWNER-DECISION-R1-1",
+    "record_id":  "IR-20260712-NETWORK-CANONICAL-OWNER-DECISION-R1",
+    "actor":  "People Network module owner",
+    "attempt_number":  1,
+    "status":  "passed",
+    "generated_at":  "2026-07-12T09:28:15.1284398Z",
+    "completed_at":  "2026-07-12T09:28:20.4148509Z",
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  100,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "a5db9ef44414b457d8bec993538b1023800ed36bca7cd70c07ba64025fe243ac",
+    "checklist_path":  "contracts/modules/network/development-checklists/2026-07-12-network-canonical-owner-r1.json",
+    "checklist_sha256":  "dacb7ffd020dc501f4bf9fbc233030f0ab3885a9c1a7ce8547a02eeed21b2293",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-007",
+                          "selected_option":  "A",
+                          "correct":  true,
+                          "source_path":  "AGENTS.md"
+                      },
+                      {
+                          "question_id":  "GQ-010",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0012-two-strike-root-cause-rule.md"
+                      },
+                      {
+                          "question_id":  "GQ-016",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0013-mandatory-ai-development-entrypoint.md"
+                      },
+                      {
+                          "question_id":  "GQ-004",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+                      },
+                      {
+                          "question_id":  "GQ-008",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0007-stable-foundation-variable-business.md"
+                      },
+                      {
+                          "question_id":  "GQ-014",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "contracts/foundation/recurring-issues.v1.json"
+                      },
+                      {
+                          "question_id":  "GQ-001",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "CONSTRAINTS.md"
+                      },
+                      {
+                          "question_id":  "GQ-005",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+                      }
+                  ],
+    "remediation_sources":  [
+
+                            ]
+}

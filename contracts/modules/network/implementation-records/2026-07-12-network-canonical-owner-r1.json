@@ -1,0 +1,77 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-NETWORK-CANONICAL-OWNER-DECISION-R1",
+  "title": "人脉 canonical Owner、读写边界与 legacy 迁移禁用裁决",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "在不修改业务代码或真实数据的前提下，确定唯一人脉 Owner、canonical 读写职责、统一 facade 边界及可回滚的 legacy 迁移禁用顺序。",
+  "governance_checklist": "contracts/modules/network/development-checklists/2026-07-12-network-canonical-owner-r1.json",
+  "governance_exam": "contracts/modules/network/governance-exams/2026-07-12-network-canonical-owner-r1-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-12-nova-m2-people-tools-task-order.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-nova-m2-people-tools-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.identity-api",
+    "foundation.authorization-idempotency",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/modules/network/internal-dependencies.v1.json"
+  ],
+  "decisions": [
+    "docs/project-management/modules/network/canonical-implementation-decision.md",
+    "docs/project-management/modules/network/migration-disable-plan.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/modules/network/README.md",
+    "docs/project-management/modules/network/canonical-implementation-decision.md",
+    "docs/project-management/modules/network/migration-disable-plan.md",
+    "docs/project-management/modules/network/task-receipt.md",
+    "docs/project-management/modules/network/handoff.md",
+    "contracts/modules/network/internal-dependencies.v1.json",
+    "contracts/modules/network/development-checklists/2026-07-12-network-canonical-owner-r1.json",
+    "contracts/modules/network/governance-exams/2026-07-12-network-canonical-owner-r1-attempt-1.json",
+    "contracts/modules/network/implementation-records/2026-07-12-network-canonical-owner-r1.json"
+  ],
+  "verification": [
+    "scripts/Test-AgentDevelopmentPreflight.ps1: ready",
+    "FC-20260712-NETWORK-CANONICAL-OWNER-DECISION-R1: 26/26 completed",
+    "EX-20260712-NETWORK-CANONICAL-OWNER-DECISION-R1-1: score 100",
+    "read-only network-plugin and social-plugin route/service audit",
+    "scripts/validate_module_internal_dependencies.py: pass",
+    "scripts/validate_development_checklists.py: pass",
+    "scripts/validate_governance_exams.py: pass",
+    "scripts/validate_implementation_records.py: pass",
+    "scripts/validate_agent_collaboration.py: pass",
+    "scripts/Test-TextEncoding.ps1: pass",
+    "git diff --check: pass"
+  ],
+  "evidence": [
+    "docs/project-management/modules/network/canonical-implementation-decision.md",
+    "docs/project-management/modules/network/migration-disable-plan.md",
+    "contracts/modules/network/internal-dependencies.v1.json",
+    "docs/project-management/modules/network/handoff.md"
+  ],
+  "premises": [
+    "social introduction_requests can be hardened without silently changing existing participant and status semantics",
+    "network discovery can be reduced to a tenant-aware minimal field projection",
+    "legacy unknown-tenant rows remain quarantined rather than being automatically assigned",
+    "a single facade and canonical outbox can prevent new dual writes",
+    "NOVA M2 remains No-Go until independent contract, implementation, migration and environment evidence all pass"
+  ],
+  "implementation_mode": "ai-assisted"
+}
