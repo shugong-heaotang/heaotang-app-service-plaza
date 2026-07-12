@@ -79,8 +79,12 @@
     "forbidden_alternatives":{"type":"array","minItems":5,"items":{"type":"string"},"uniqueItems":true},
     "external_dependencies": {
       "type":"array","minItems":3,"maxItems":3,
-      "items":{"type":"object","additionalProperties":false,"required":["decision_id","decision","owner","status","effect"],"properties":{"decision_id":{"$ref":"#/$defs/exactIds/externalDecision"},"decision":{"type":"string","minLength":1},"owner":{"type":"string","minLength":1},"status":{"const":"Pending with owner"},"effect":{"type":"string","minLength":1}}},
-      "allOf":[{"contains":{"properties":{"decision_id":{"const":"C4-H01"}},"required":["decision_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"decision_id":{"const":"M1-LIFESTYLE-TEMPLATE"}},"required":["decision_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"decision_id":{"const":"C4-L02-L04"}},"required":["decision_id"]},"minContains":1,"maxContains":1}]
+      "items":{"type":"object","additionalProperties":false,"required":["decision_id","decision","owner","status","effect","evidence_refs"],"properties":{"decision_id":{"$ref":"#/$defs/exactIds/externalDecision"},"decision":{"type":"string","minLength":1},"owner":{"type":"string","minLength":1},"status":{"enum":["Accepted","Pending with owner"]},"effect":{"type":"string","minLength":1},"evidence_refs":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","minLength":1}}}},
+      "allOf":[
+        {"contains":{"properties":{"decision_id":{"const":"C4-H01"},"status":{"const":"Accepted"},"evidence_refs":{"contains":{"const":"contracts/modules/health-manager/mvp90-m1/readiness/c4-h01-action-boundary-decision.v1.json"}}},"required":["decision_id","status","evidence_refs"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"decision_id":{"const":"M1-LIFESTYLE-TEMPLATE"},"status":{"const":"Accepted"},"evidence_refs":{"contains":{"const":"contracts/modules/health-manager/mvp90-m1/readiness/m1-lifestyle-template-signoff.v1.json"}}},"required":["decision_id","status","evidence_refs"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"decision_id":{"const":"C4-L02-L04"},"status":{"const":"Pending with owner"}},"required":["decision_id","status"]},"minContains":1,"maxContains":1}
+      ]
     }
   }
 }

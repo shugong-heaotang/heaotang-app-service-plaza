@@ -14,7 +14,7 @@
     "version": "v1",
     "status": "Accepted",
     "executable": false,
-    "non_executable_reason": "技术安全合同已冻结；C4-H01、M1 专业模板会签和隐私用途/保留决定仍由各自 owner 决定，且尚无业务实现授权。"
+    "non_executable_reason": "技术安全合同与 M1 开发阶段专业边界已冻结；隐私用途、保留、导出删除、AI 数据使用、生产身份及业务实现仍未授权。"
   },
   "default_policy": "deny",
   "subjects": [
@@ -95,8 +95,8 @@
   "review": {"scheduled_review_date":"2026-08-12","triggers":["new subject role or resource type","minor/proxy/real data/production scope","authorization or retention policy change","qualification source change","AI model/provider/tool/prompt policy change","template signing or approval change","new external processor","security incident or repeated denial anomaly","authorization bypass finding","audit durability architecture change"],"compatibility":"Additive actions require new negative tests; broader data, subjects, purposes or weaker denial is breaking and requires a new reviewed version.","migration":"Existing grants never inherit a broader purpose; new policy/template versions require explicit compatibility review and cannot retroactively authorize old data use."},
   "forbidden_alternatives": ["frontend-only hiding","administrator superuser bypass","invented future scope","postponed server authorization","implicit consent","AI self-authorization","reuse of withdrawn grant","fail-open on audit failure"],
   "external_dependencies": [
-    {"decision_id":"C4-H01","decision":"professional action boundary signoff","owner":"和奥堂医生集团专业负责人","status":"Pending with owner","effect":"blocks executable professional actions"},
-    {"decision_id":"M1-LIFESTYLE-TEMPLATE","decision":"M1 narrow lifestyle template professional signoff","owner":"和奥堂医生集团专业负责人","status":"Pending with owner","effect":"blocks executable template use"},
-    {"decision_id":"C4-L02-L04","decision":"privacy purpose, retention, export/deletion and AI data use","owner":"隐私与法律负责人","status":"Pending with owner","effect":"blocks real data and production use"}
+    {"decision_id":"C4-H01","decision":"professional action boundary signoff","owner":"和奥堂医生集团专业负责人","status":"Accepted","effect":"development-only professional boundaries accepted; contract remains non-executable","evidence_refs":["contracts/modules/health-manager/mvp90-m1/readiness/c4-h01-action-boundary-decision.v1.json","thread://019f4e00-b3be-7742-a76d-c9439c68245e/item-637","commit://90e52a69aff37ff52fe3d9d9989de2ed793d8901"]},
+    {"decision_id":"M1-LIFESTYLE-TEMPLATE","decision":"M1 narrow lifestyle template professional signoff","owner":"和奥堂医生集团专业负责人","status":"Accepted","effect":"v1-proposed accepted for adult synthetic-member development through 2026-10-10; contract remains non-executable","evidence_refs":["contracts/modules/health-manager/mvp90-m1/readiness/m1-lifestyle-template-signoff.v1.json","thread://019f4e00-b3be-7742-a76d-c9439c68245e/item-645","commit://90e52a69aff37ff52fe3d9d9989de2ed793d8901"]},
+    {"decision_id":"C4-L02-L04","decision":"privacy purpose, retention, export/deletion and AI data use","owner":"隐私与法律负责人","status":"Pending with owner","effect":"blocks real data and production use","evidence_refs":["docs/project-management/notices/2026-07-12-health-manager-mvp90-m1-task-order.md"]}
   ]
 }
