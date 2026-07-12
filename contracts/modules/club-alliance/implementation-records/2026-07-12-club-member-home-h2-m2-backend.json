@@ -50,9 +50,11 @@
     "docs/project-management/modules/club-alliance/member-home/handoff-m2-backend.md"
   ],
   "premises": [
-    "Backend business implementation has not started and this record only authorizes implementation.",
-    "Backend changes are limited to member_home.go, member_home_test.go, and plugin.go in the registered backend worktree.",
-    "The backend actor must not modify the SC registry, APP collaboration registry, database schema, other plugins, or frontend code."
+    "Authorization timing deviation: after the 100-point exam but before the H2 owner governance commit, the backend actor formed an uncommitted diff in the three authorized backend files and ran six targeted tests.",
+    "The backend actor stopped; the uncommitted backend state is preserved for inspection, with no full test, deployment, commit, registry change, or out-of-scope edit claimed.",
+    "This record remains draft/authorized and does not classify the backend business implementation as implemented or verified.",
+    "Formal implementation Go requires the platform integration owner to re-dispatch after this governance evidence is integrated.",
+    "Backend changes remain limited to member_home.go, member_home_test.go, and plugin.go; SC registry, APP registry, schema, other plugins, and frontend remain forbidden."
   ],
   "implementation_mode": "ai-assisted"
 }

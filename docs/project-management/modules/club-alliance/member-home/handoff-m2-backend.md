@@ -27,6 +27,14 @@
 - Backend actor governance exam：passed，100 分。
 - 本 IR 仅为 `draft` 授权记录，不代表业务实现或验证完成。
 
+## 授权时序偏差（现场保留）
+
+- Backend actor 在 exam 100 分后、H2 owner 本次治理提交完成前，误判业务已 Go。
+- 三个已授权后端文件已形成**未提交 diff**，并已运行定向 6 项；该结果只说明现场曾执行定向检查，不构成正式实现验收。
+- Actor 已停止；未提交状态原样保留供总负责人检查，没有全量 `go test ./...`、`go vet ./...`、部署、commit、registry 修改或越界修改声明。
+- 本 IR 继续为 `draft/authorized`，Handoff 继续为 `implementation pending`。
+- 正式 implementation Go 必须等本治理证据集成后，由总负责人重新派发；不得凭现场 diff 自动续做。
+
 ## 实现完成前必跑门禁
 
 - `gofmt` 覆盖全部修改的 Go 文件。
