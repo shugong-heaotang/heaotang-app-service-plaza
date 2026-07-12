@@ -2376,7 +2376,7 @@
                            "title":  "治理考试重试前序失败与补课重读证据根因修复",
                            "owner":  "Platform governance tooling agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-governance-exam-retry-evidence",
                            "branch":  "codex/governance-exam-retry-evidence",
@@ -2396,8 +2396,57 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "Project Brain M1-R3 暴露共享治理考试重试证据不可复现：attempt>1 未持久化 previous_attempt_path/SHA 与补课重读证据。只修公共考试Schema、生成/提交脚本、validator与回归；旧考试快照不可修改，Project Brain文件不在范围内。",
+                           "migration_note":  "R1 a8106033 静默代读、R2 f61f0eed EOF空白、R3 406b5f30 预确认、R4 34e3a139 未展示presented_at均按No-Go保留分支历史且未单独集成；最终R5 source 7fcfa7d1经独立复核Go，squash integration ad5dd1a0进入权威基线。retry现在强制path/hash/presented_at/nonce与全文展示后交互确认，再记录confirmed_at；R5 checklist26/26、exam100、3 tests及全仓门禁通过。Project Brain可从新基线生成R4，不得修改旧考试。",
                            "handoff_record":  "docs/project-management/service-plaza/governance-exam-retry-evidence-2026-07-12.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-HEALTH-R0-FORMAL-FREEZE-DISPATCH",
+                           "title":  "健康大管家 HM-R0 开发阶段正式冻结派发",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r0-formal-freeze-dispatch",
+                           "branch":  "codex/health-r0-formal-freeze-dispatch",
+                           "base_commit":  "ad5dd1a0a536f51ed60466178a810e6d293f6999",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-12-health-r0-formal-freeze-dispatch*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-health-r0-formal-freeze-dispatch*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-health-r0-formal-freeze-dispatch*.json",
+                                                 "docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md",
+                                                 "docs/project-management/service-plaza/health-r0-formal-freeze-dispatch-2026-07-12.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "仅派发HM-R0 Accepted for development planning文档与决策证据冻结。保持production identity、真实会员/健康数据、环境、医疗服务、收费、资金、部署和生产Pending/No-Go；PR#1/#2在模块正式激活前不修改，P3不自动激活。",
+                           "handoff_record":  "docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-HEALTH-R0-FORMAL-FREEZE",
+                           "title":  "健康大管家 HM-R0 Accepted for development planning 正式冻结",
+                           "owner":  "Health Manager module agent",
+                           "owner_role":  "健康大管家负责人",
+                           "status":  "planned",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r0-formal-freeze",
+                           "branch":  "codex/health-manager-r0-formal-freeze",
+                           "base_commit":  "ad5dd1a0a536f51ed60466178a810e6d293f6999",
+                           "allowed_paths":  [
+                                                 "docs/project-management/modules/health-manager/health-manager-v1-requirements-and-development-plan.md",
+                                                 "docs/project-management/modules/health-manager/health-manager-v1-docs-receipt.md",
+                                                 "docs/project-management/modules/health-manager/health-manager-v1-docs-handoff.md",
+                                                 "docs/project-management/modules/health-manager/health-manager-r0-formal-freeze-decision.md",
+                                                 "contracts/modules/health-manager/hm-r0-formal-freeze.v1.json",
+                                                 "contracts/modules/health-manager/hm-r0-formal-freeze.v1.schema.json",
+                                                 "contracts/modules/health-manager/development-checklists/2026-07-12-health-r0-formal-freeze*.json",
+                                                 "contracts/modules/health-manager/governance-exams/2026-07-12-health-r0-formal-freeze*.json",
+                                                 "contracts/modules/health-manager/implementation-records/2026-07-12-health-r0-formal-freeze*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "预登记，等待平台派发通知、治理证据和受控集成后同步到包含通知的最终基线，再核验专用工作树clean并转active。只冻结开发规划文档/决策证据，不授权业务代码、共享前后端、API/DB、环境、真实数据、收费、资金、部署、生产或P3。Draft PR#1/#2是否合并必须由本切片另行裁定，不能自动合并。",
+                           "handoff_record":  "docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
                        }
                    ]
 }
