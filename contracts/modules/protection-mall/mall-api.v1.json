@@ -1,0 +1,28 @@
+{
+  "contract_version": "mall.api.v1",
+  "status": "freeze-proposal",
+  "service_id": "protection-mall",
+  "service_entry": {
+    "route": "/services/protection-mall",
+    "return_target": "/services",
+    "auth_mode": "shared_session",
+    "lifecycle_status": "planned",
+    "telemetry_event": "service_plaza.protection_mall.open"
+  },
+  "response_envelope": {
+    "success_required": ["ok", "data", "meta"],
+    "failure_required": ["ok", "error", "meta"],
+    "meta_required": ["request_id", "correlation_id", "contract_version"]
+  },
+  "required_controls": [
+    "server_authorization_and_resource_ownership",
+    "atomic_idempotency_for_writes",
+    "structured_redacted_audit",
+    "typed_versioned_business_variables",
+    "fail_closed_required_configuration",
+    "backward_compatible_v1_evolution"
+  ],
+  "idempotent_operations": ["order.create", "payment.callback", "refund.create", "service.verify", "benefit.rollback", "withdrawal.create", "critical_review.decide"],
+  "release_blockers": ["payment_security", "fund_state_machine", "callback_signature_verification", "refund_reconciliation", "independent_acceptance"],
+  "non_goals": ["nova_personalized_recommendation", "cross_module_bundle_order", "graphrag", "deployment", "real_payment"]
+}
