@@ -1,0 +1,70 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260712-PROTECTION-MALL-M1-CONTRACTS-1",
+    "record_id":  "IR-20260712-PROTECTION-MALL-M1-CONTRACTS",
+    "actor":  "Protection Mall module lead agent",
+    "attempt_number":  1,
+    "status":  "passed",
+    "generated_at":  "2026-07-12T12:20:32.7028294Z",
+    "completed_at":  "2026-07-12T12:20:42.6092928Z",
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  100,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "a5db9ef44414b457d8bec993538b1023800ed36bca7cd70c07ba64025fe243ac",
+    "checklist_path":  "contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m1-contracts.json",
+    "checklist_sha256":  "693dda7450d6d8dc7f10b7c9ed7a38952424671dad80c9d6b0b2767bf13addac",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-002",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0008-versioned-business-variables.md"
+                      },
+                      {
+                          "question_id":  "GQ-010",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0012-two-strike-root-cause-rule.md"
+                      },
+                      {
+                          "question_id":  "GQ-016",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0013-mandatory-ai-development-entrypoint.md"
+                      },
+                      {
+                          "question_id":  "GQ-013",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0014-ai-development-flight-checklist.md"
+                      },
+                      {
+                          "question_id":  "GQ-014",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "contracts/foundation/recurring-issues.v1.json"
+                      },
+                      {
+                          "question_id":  "GQ-009",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0010-ai-implementation-records-required.md"
+                      },
+                      {
+                          "question_id":  "GQ-005",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+                      },
+                      {
+                          "question_id":  "GQ-012",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "contracts/foundation/agent-collaboration.v1.json"
+                      }
+                  ],
+    "remediation_sources":  [
+
+                            ]
+}
