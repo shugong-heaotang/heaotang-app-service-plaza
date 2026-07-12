@@ -1,0 +1,30 @@
+{
+  "contract_version":"health-manager.mvp90-m1.professional-boundaries.v1",
+  "module_id":"health-manager",
+  "scope":"HM-MVP90-M1 adult synthetic-member PDCAR only",
+  "source_decision":"contracts/modules/health-manager/mvp90-m1/readiness/c4-h01-action-boundary-decision.v1.json",
+  "source_version":"v1-proposed",
+  "decision_status":"Accepted",
+  "executable":false,
+  "boundaries":[
+    {"action_id":"DATA_ORGANIZATION","ai":"draft-only","health_manager":"allow","professional":"allow","fail_closed":"invalid authorization, relationship, source or purpose stops processing","transfer_owner":"AI to manager; manager to professional when professional meaning is requested","source_pointer":"#/actions/0"},
+    {"action_id":"ASSESSMENT_DRAFT","ai":"draft-only","health_manager":"review-required","professional":"review-required","fail_closed":"insufficient information or expired rule produces no determinate assessment","transfer_owner":"AI or manager transfers professional and emergency signals","source_pointer":"#/actions/1"},
+    {"action_id":"GOAL_PLAN_DRAFT","ai":"draft-only","health_manager":"review-required","professional":"review-required","fail_closed":"unapproved template, contraindication or missing data leaves no active plan","transfer_owner":"manager transfers contraindication or professional content","source_pointer":"#/actions/2"},
+    {"action_id":"PLAN_REVIEW_ACTIVATION","ai":"deny","health_manager":"review-required","professional":"review-required","fail_closed":"missing review, member confirmation, version or authorization prevents activation","transfer_owner":"manager obtains evidence or professional review","source_pointer":"#/actions/3"},
+    {"action_id":"TASK_EXPLANATION","ai":"allow","health_manager":"allow","professional":"allow","fail_closed":"inactive or mismatched task version stops explanation","transfer_owner":"professional questions or discomfort transfer to human review","source_pointer":"#/actions/4"},
+    {"action_id":"FEEDBACK_RECORDING","ai":"draft-only","health_manager":"allow","professional":"allow","fail_closed":"unknown source or subject is not merged into the record","transfer_owner":"discomfort and risk feedback transfers immediately","source_pointer":"#/actions/5"},
+    {"action_id":"PLAN_ADJUSTMENT","ai":"draft-only","health_manager":"review-required","professional":"review-required","fail_closed":"old version is immutable and a new version remains inactive without fresh review","transfer_owner":"contraindication, treatment or risk transfers to professional","source_pointer":"#/actions/6"},
+    {"action_id":"GROWTH_RECORDING","ai":"draft-only","health_manager":"allow","professional":"allow","fail_closed":"untraceable or out-of-purpose material is rejected","transfer_owner":"professional interpretation transfers to professional","source_pointer":"#/actions/7"},
+    {"action_id":"RISK_IDENTIFICATION","ai":"transfer-only","health_manager":"review-required","professional":"allow","fail_closed":"unresolved risk pauses ordinary flow and stays open","transfer_owner":"AI and manager initiate transfer; professional performs classification","source_pointer":"#/actions/8"},
+    {"action_id":"RISK_CLOSURE","ai":"deny","health_manager":"deny","professional":"review-required","fail_closed":"risk remains open without qualified takeover and complete review","transfer_owner":"manager tracks reachability; professional owns closure","source_pointer":"#/actions/9"},
+    {"action_id":"EMERGENCY_RESPONSE","ai":"transfer-only","health_manager":"transfer-only","professional":"review-required","fail_closed":"ordinary plan stops and emergency risk remains open","transfer_owner":"AI and manager route to emergency and professional channels","source_pointer":"#/actions/10"},
+    {"action_id":"DIAGNOSIS","ai":"deny","health_manager":"deny","professional":"review-required","fail_closed":"M1 produces no diagnosis","transfer_owner":"diagnostic requests transfer to formal medical service","source_pointer":"#/actions/11"},
+    {"action_id":"PRESCRIPTION","ai":"deny","health_manager":"deny","professional":"review-required","fail_closed":"M1 produces no prescription or medication change","transfer_owner":"medication requests transfer to authorized doctor or pharmacist","source_pointer":"#/actions/12"},
+    {"action_id":"TREATMENT_ADVICE","ai":"deny","health_manager":"deny","professional":"review-required","fail_closed":"M1 produces no treatment plan, rehabilitation prescription or efficacy promise","transfer_owner":"treatment requests transfer to qualified professional","source_pointer":"#/actions/13"},
+    {"action_id":"REFERRAL","ai":"transfer-only","health_manager":"allow","professional":"allow","fail_closed":"sent, delivered, replied, taken over and resolved remain separate states","transfer_owner":"initiator tracks until explicit qualified acceptance","source_pointer":"#/actions/14"},
+    {"action_id":"PROFESSIONAL_REVIEW","ai":"deny","health_manager":"transfer-only","professional":"allow","fail_closed":"professional content stays draft and risk stays open until qualified signature","transfer_owner":"manager supplies evidence; professional decides sign, revise or pending","source_pointer":"#/actions/15"},
+    {"action_id":"SAFE_RESUME_AUTHORIZATION","ai":"deny","health_manager":"review-required","professional":"allow","fail_closed":"ordinary tasks remain paused without professional conditions and member confirmation","transfer_owner":"manager implements and monitors professional recovery conditions","source_pointer":"#/actions/16"}
+  ],
+  "global_forbidden_outcomes":["AI diagnosis, prescription, treatment advice or efficacy promise","AI or manager independently activates a plan","AI or manager closes professional or emergency risk","sent or unreachable handoff is represented as resolved","narrow M1 acceptance is represented as global C4-H06 acceptance"],
+  "review_triggers":["scope expansion beyond M1","new population or template","safety incident or boundary escape","qualification, regulation or professional premise change","template expiry"]
+}

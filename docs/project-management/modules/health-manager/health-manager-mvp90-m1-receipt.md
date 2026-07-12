@@ -6,7 +6,14 @@
 - registered base：`4796e8fd1ad952e8788b51c0f72cf393466652fa`
 - activation HEAD：`cb3fd5548ab578327a81e70e06237f2daa1ffea3`
 - owner：健康大管家负责人
-- status：`M1-P0 handoff ready / platform review pending`
+- status：`M1-P1 handoff ready / platform review pending`
+
+## P0 平台结论
+
+- source：`cf65e700fab2763bf47eda4a9bfd9ac83656bf42`
+- controlled integration：`07791b9c2bd8310155726988846be8582d21293f`
+- verdict：`P0 Go`
+- P1 授权仍只限合同、Schema、合成 fixtures/conformance 与治理证据，不是业务编码 Go。
 
 ## 已确认授权
 
@@ -46,3 +53,13 @@
 ## 保持 No-Go
 
 全量 C4-H06、C4-L02-L04、production identity、真实会员、真实健康数据、共享前后端、API/Schema 实现、测试环境、部署、收费、资金与生产均未授权。
+
+## P1 成果
+
+- 纵切：10/10 步骤，P-D-C-A-R 全覆盖；
+- 专业边界：17/17，与 C4-H01 三角色决策逐项一致；
+- 场景：MVP-A001—A015 15/15，与 M0 和真人专业复核逐项一致；
+- 夹具：15/15 固定 seed 合成记录；
+- conformance：8 tests PASS；
+- 最终 current checklist：`2026-07-12-health-mvp90-m1-p1-r2.json`；
+- 最终 current exam：`2026-07-12-health-mvp90-m1-p1-r2-attempt-1.json`，score 100。

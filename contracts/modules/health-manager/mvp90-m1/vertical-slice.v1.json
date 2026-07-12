@@ -1,0 +1,36 @@
+{
+  "contract_version": "health-manager.mvp90-m1.vertical-slice.v1",
+  "module_id": "health-manager",
+  "slice_id": "health-mvp90-m1",
+  "scope": "adult synthetic-member PDCAR contract and conformance only",
+  "executable": false,
+  "prerequisite_refs": [
+    "contracts/modules/health-manager/mvp90/object-model.v1.json",
+    "contracts/modules/health-manager/mvp90/state-machines.v1.json",
+    "contracts/modules/health-manager/mvp90/role-actions.v1.json",
+    "contracts/modules/health-manager/mvp90-m1/security-authorization.v1.json",
+    "contracts/modules/health-manager/mvp90-m1/readiness/c4-h01-action-boundary-decision.v1.json",
+    "contracts/modules/health-manager/mvp90-m1/readiness/m1-lifestyle-template-signoff.v1.json"
+  ],
+  "steps": [
+    {"step_id":"M1-S01","sequence":1,"name_zh":"边界说明与最小授权","pdcar_phase":"P","object_refs":["MemberServiceRelationship","ConsentGrant"],"machine_transition_refs":["health-management-entry:not_started->boundary_read:READ_BOUNDARY","health-management-entry:boundary_read->consent_pending:REQUEST_MINIMUM_CONSENT","consent-grant:draft->confirmation_pending:REQUEST_CONFIRMATION"],"actor_roles":["member","platform"],"professional_boundary_refs":["DATA_ORGANIZATION"],"fail_closed_conditions":["unauthenticated","authorization_missing_withdrawn_or_expired"],"next_step_ids":["M1-S02"]},
+    {"step_id":"M1-S02","sequence":2,"name_zh":"档案与测评资料核对","pdcar_phase":"P","object_refs":["HealthProfileItem","AssessmentSession","ConsentGrant"],"machine_transition_refs":["health-management-entry:consent_pending->screening:CONFIRM_MINIMUM_CONSENT","health-management-entry:screening->continue_allowed:SCREENING_CLEAR","health-management-entry:screening->missing_information:SCREENING_INCOMPLETE"],"actor_roles":["member","ai","health_manager","platform"],"professional_boundary_refs":["DATA_ORGANIZATION","ASSESSMENT_DRAFT","RISK_IDENTIFICATION"],"fail_closed_conditions":["information_insufficient","risk_or_discomfort_block"],"next_step_ids":["M1-S03","M1-S08"]},
+    {"step_id":"M1-S03","sequence":3,"name_zh":"年度目标与计划草案","pdcar_phase":"P","object_refs":["HealthGoal","HealthPlan","HealthPlanVersion","TemplateVersion"],"machine_transition_refs":["health-plan-version:ai_draft->manager_review:SUBMIT_MANAGER_REVIEW"],"actor_roles":["member","ai","health_manager"],"professional_boundary_refs":["GOAL_PLAN_DRAFT"],"fail_closed_conditions":["template_unapproved_or_expired","information_insufficient"],"next_step_ids":["M1-S04"]},
+    {"step_id":"M1-S04","sequence":4,"name_zh":"管理师复核与必要专业转介","pdcar_phase":"P","object_refs":["HealthPlanVersion","HumanHandoff","ServiceRecord"],"machine_transition_refs":["health-plan-version:manager_review->member_confirmation:APPROVE_FOR_MEMBER","health-plan-version:manager_review->professional_review:REQUEST_PROFESSIONAL_REVIEW","health-plan-version:professional_review->member_confirmation:PROFESSIONAL_SIGN"],"actor_roles":["health_manager","professional"],"professional_boundary_refs":["PLAN_REVIEW_ACTIVATION","PROFESSIONAL_REVIEW","REFERRAL"],"fail_closed_conditions":["no_active_service_relationship","qualification_missing_or_expired","risk_or_discomfort_block"],"next_step_ids":["M1-S05","M1-S08"]},
+    {"step_id":"M1-S05","sequence":5,"name_zh":"会员确认计划版本","pdcar_phase":"P","object_refs":["HealthPlanVersion","ConsentGrant","AuditEvent"],"machine_transition_refs":["health-plan-version:member_confirmation->active:MEMBER_CONFIRM"],"actor_roles":["member","platform"],"professional_boundary_refs":["PLAN_REVIEW_ACTIVATION"],"fail_closed_conditions":["version_conflict","authorization_missing_withdrawn_or_expired","template_unapproved_or_expired","audit_write_failed"],"next_step_ids":["M1-S06"]},
+    {"step_id":"M1-S06","sequence":6,"name_zh":"每日任务执行与解释","pdcar_phase":"D","object_refs":["HealthTask","HealthPlanVersion"],"machine_transition_refs":["health-task:pending->in_progress:START_TASK","health-task:in_progress->completed:COMPLETE_TASK","health-task:in_progress->partially_completed:PARTIAL_COMPLETE","health-task:in_progress->deferred:DEFER_TASK","health-task:in_progress->unable:REPORT_UNABLE"],"actor_roles":["member","ai","health_manager"],"professional_boundary_refs":["TASK_EXPLANATION"],"fail_closed_conditions":["resource_state_conflict","risk_or_discomfort_block"],"next_step_ids":["M1-S07","M1-S08"]},
+    {"step_id":"M1-S07","sequence":7,"name_zh":"反馈与原始记录","pdcar_phase":"R","object_refs":["TaskFeedback","CommunicationRecord","AuditEvent"],"machine_transition_refs":["health-task:completed->pending_check:QUEUE_CHECK","health-task:partially_completed->pending_check:QUEUE_CHECK","health-task:deferred->pending_check:QUEUE_CHECK","health-task:unable->pending_check:QUEUE_CHECK"],"actor_roles":["member","ai","health_manager","platform"],"professional_boundary_refs":["FEEDBACK_RECORDING"],"fail_closed_conditions":["idempotency_key_same_key_different_payload","audit_write_failed"],"next_step_ids":["M1-S08"]},
+    {"step_id":"M1-S08","sequence":8,"name_zh":"检查复盘与风险转人工","pdcar_phase":"C","object_refs":["CheckRecord","RiskEvent","HumanHandoff","TaskFeedback"],"machine_transition_refs":["health-task:pending_check->recorded:RECORD_CHECK","health-task:pending_check->human_handoff:CHECK_NEEDS_HUMAN","risk-event:detected->triage_pending:QUEUE_TRIAGE","human-handoff:triggered->routing:ROUTE_HANDOFF"],"actor_roles":["health_manager","professional","platform"],"professional_boundary_refs":["RISK_IDENTIFICATION","REFERRAL","PROFESSIONAL_REVIEW"],"fail_closed_conditions":["risk_or_discomfort_block","qualification_missing_or_expired","audit_write_failed"],"next_step_ids":["M1-S09"]},
+    {"step_id":"M1-S09","sequence":9,"name_zh":"Advance与计划新版本","pdcar_phase":"A","object_refs":["HealthPlan","HealthPlanVersion","CheckRecord"],"machine_transition_refs":["health-plan-version:active->paused:PAUSE_PLAN","health-plan-version:paused->restored:RESTORE_PLAN","health-plan-version:restored->active:CONFIRM_RESTORED_PLAN","health-plan-version:active->replaced:ACTIVATE_NEW_VERSION"],"actor_roles":["member","ai","health_manager","professional","platform"],"professional_boundary_refs":["PLAN_ADJUSTMENT","SAFE_RESUME_AUTHORIZATION"],"fail_closed_conditions":["version_conflict","risk_or_discomfort_block","template_unapproved_or_expired"],"next_step_ids":["M1-S03","M1-S10"]},
+    {"step_id":"M1-S10","sequence":10,"name_zh":"成长与服务记录","pdcar_phase":"R","object_refs":["ServiceRecord","CheckRecord","TaskFeedback","AuditEvent"],"machine_transition_refs":[],"actor_roles":["ai","health_manager","professional","platform"],"professional_boundary_refs":["GROWTH_RECORDING"],"fail_closed_conditions":["authorization_missing_withdrawn_or_expired","audit_write_failed"],"next_step_ids":[]}
+  ],
+  "invariants": [
+    "AI output remains draft, explanation, recording or transfer support and never activates a plan",
+    "member confirmation is required before an ordinary plan version becomes active",
+    "professional or emergency risk remains open until qualified human review",
+    "source feedback is preserved and summaries never overwrite it",
+    "every protected transition uses exact version, authorization and durable audit",
+    "all records are synthetic and non-production"
+  ],
+  "pending_gates": ["C4-L02-L04","C4-H06-global","identity_authority_production","shared-frontend-backend","environment-deployment-production"]
+}

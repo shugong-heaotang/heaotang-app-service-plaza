@@ -1,0 +1,22 @@
+{
+  "contract_version":"health-manager.mvp90-m1.synthetic-pdcar-fixtures.v1",
+  "seed":"HM-MVP90-M1-P1-20260712",
+  "synthetic_only":true,
+  "fixtures":[
+    {"fixture_id":"HMM1-F001","scenario_id":"MVP-A001","member_ref":"syn-member-001","request_ref":"syn-request-001","input_flags":["consent_active","minimum_profile_complete","template_current","manager_reviewed","member_confirmed"],"expected_result":"pdcar_loop_recorded"},
+    {"fixture_id":"HMM1-F002","scenario_id":"MVP-A002","member_ref":"syn-member-002","request_ref":"syn-request-002","input_flags":["consent_active","minimum_profile_incomplete"],"expected_result":"missing_information"},
+    {"fixture_id":"HMM1-F003","scenario_id":"MVP-A003","member_ref":"syn-member-003","request_ref":"syn-request-003","input_flags":["consent_active","emergency_rule_triggered"],"expected_result":"emergency_handoff_open"},
+    {"fixture_id":"HMM1-F004","scenario_id":"MVP-A004","member_ref":"syn-member-004","request_ref":"syn-request-004","input_flags":["active_task","discomfort_reported"],"expected_result":"task_paused_handoff_open"},
+    {"fixture_id":"HMM1-F005","scenario_id":"MVP-A005","member_ref":"syn-member-005","request_ref":"syn-request-005","input_flags":["repeated_unable_feedback","no_emergency_signal"],"expected_result":"new_plan_draft_pending_review"},
+    {"fixture_id":"HMM1-F006","scenario_id":"MVP-A006","member_ref":"syn-member-006","request_ref":"syn-request-006","input_flags":["ai_treatment_request","tool_not_allowed"],"expected_result":"ai_refused_human_transfer"},
+    {"fixture_id":"HMM1-F007","scenario_id":"MVP-A007","member_ref":"syn-member-007","request_ref":"syn-request-007","input_flags":["ai_unavailable","confirmed_plan_exists"],"expected_result":"read_only_human_fallback"},
+    {"fixture_id":"HMM1-F008","scenario_id":"MVP-A008","member_ref":"syn-member-008","request_ref":"syn-request-008","input_flags":["consent_withdrawn","open_risk_false"],"expected_result":"new_processing_denied"},
+    {"fixture_id":"HMM1-F009","scenario_id":"MVP-A009","member_ref":"syn-member-009","request_ref":"syn-request-009","input_flags":["cross_member_reference","no_service_relationship"],"expected_result":"non_enumerating_denial"},
+    {"fixture_id":"HMM1-F010","scenario_id":"MVP-A010","member_ref":"syn-member-010","request_ref":"syn-request-010","input_flags":["manager_capacity_unavailable","open_risk_true"],"expected_result":"assignment_refused_risk_open"},
+    {"fixture_id":"HMM1-F011","scenario_id":"MVP-A011","member_ref":"syn-member-011","request_ref":"syn-request-011","input_flags":["template_expired","new_plan_activation_requested"],"expected_result":"template_not_executable"},
+    {"fixture_id":"HMM1-F012","scenario_id":"MVP-A012","member_ref":"syn-member-012","request_ref":"syn-request-012","input_flags":["same_idempotency_key","different_payload"],"expected_result":"idempotency_conflict"},
+    {"fixture_id":"HMM1-F013","scenario_id":"MVP-A013","member_ref":"syn-member-013","request_ref":"syn-request-013","input_flags":["handoff_sent","delivery_unconfirmed","risk_open"],"expected_result":"handoff_unreachable_not_resolved"},
+    {"fixture_id":"HMM1-F014","scenario_id":"MVP-A014","member_ref":"syn-member-014","request_ref":"syn-request-014","input_flags":["source_correction","active_plan_affected"],"expected_result":"new_version_review_pending"},
+    {"fixture_id":"HMM1-F015","scenario_id":"MVP-A015","member_ref":"syn-member-015","request_ref":"syn-request-015","input_flags":["service_end_requested","professional_risk_open"],"expected_result":"ordinary_tasks_stopped_risk_handoff_open"}
+  ]
+}
