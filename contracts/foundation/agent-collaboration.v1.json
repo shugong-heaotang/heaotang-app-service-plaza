@@ -1723,7 +1723,7 @@
                            "title":  "CA-SC T0 唯一 run、数据库恢复与浏览器证据修复",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-sc-t0-remediation",
                            "branch":  "codex/club-sc-t0-remediation",
@@ -1743,7 +1743,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "从已含 No-Go 纠正证据的权威 APP integration bdf58bf 创建独立 branch/worktree，HEAD/base/merge-base 一致且 clean。只关闭唯一 run、api_idempotency_keys 精确清理、隔离数据库恢复、刷新 DOM/环境键盘及最终 R4 证据；不拥有 agent-collaboration 路径，不修改后端、H2 或 Project Brain。",
+                           "migration_note":  "R4 source 89264aaa0b6965055aa469446c895d976ccd222a 经独立复核 Go，并以 9691c6a613cfe11d4075be0cfc789eb58fecf9a5 受控集成。安全 DTO、唯一 run、幂等与关联清理、隔离数据库恢复、刷新 DOM 均关闭；环境 Enter 保持 control-channel Unverified，未冒充 Pass。",
                            "handoff_record":  "docs/project-management/service-plaza/handoff-log.md#sp-h036ca-sc自建俱乐部测试环境-t0-验收派发"
                        },
                        {
@@ -1751,7 +1751,7 @@
                            "title":  "CA-SC 自建俱乐部列表安全 DTO 根因修复",
                            "owner":  "Club backend agent",
                            "owner_role":  "平台后端负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/heaotang-main",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-sc-list-safe-dto-backend",
                            "branch":  "codex/club-sc-list-safe-dto-backend",
@@ -1762,7 +1762,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "独立复核发现 search handler 直接序列化完整 Club，违反 CA-SC list.allowed_item_fields 和 owner_id 禁止字段。独立工作树已从 backend integration 97d8bfc5d1396f7907b1e76dfcb7c333a2913436 创建，HEAD/base/merge-base 一致且 clean 后正式激活；只允许新增列表安全 DTO 投影与 HTTP 字段白名单/禁字段回归，不得修改查询语义、数据库、其他俱乐部能力或部署。",
+                           "migration_note":  "实现 df0575a05c8f75d927d079dc8c662e2cd25b9e55 已独立复核并受控集成至 backend 98426ff83a1218080019faa377c152a81ecca437；定向、全量 Go tests 与 go vet 通过，测试环境 binary fec7bcbb58d6186d9c384b1b837479f592d978c145ce09c46e002763d9c565f1。",
                            "handoff_record":  "docs/project-management/service-plaza/club-sc-list-safe-dto-2026-07-12.md"
                        },
                        {
@@ -1770,7 +1770,7 @@
                            "title":  "CA-SC 自建俱乐部列表安全 DTO 治理与证据",
                            "owner":  "Club backend agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-sc-list-safe-dto-evidence",
                            "branch":  "codex/club-sc-list-safe-dto-evidence",
@@ -1783,7 +1783,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "与独立后端 Git 根使用同一 owner/切片；只保存 current checklist、100 分考试、IR、exact backend commit/test 证据和根因报告，不复制后端源码。工作树已快进至 4b15dc9eb14578987e28b2b204e96f452dd7da5f，HEAD/base/merge-base 一致且 clean 后正式激活。",
+                           "migration_note":  "治理证据 feafa96a95ba45a6e8f4cb3982fd9cd2101cbf6f 已受控集成至 APP 10045723913e760e2219d8931e22689609f1cd0e；current checklist、exam100、IR、后端 exact commit/test 与根因报告通过。",
                            "handoff_record":  "docs/project-management/service-plaza/club-sc-list-safe-dto-2026-07-12.md"
                        }
                    ]

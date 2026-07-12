@@ -619,7 +619,7 @@ Handoff 运行规则见 `handoff-operating-mechanism.md`。首轮具体表单见
 - scope：固定 seed 合成数据、测试环境部署、真实 API/浏览器 UAT、备份恢复、回滚和脱敏证据。
 - forbidden：生产、真实数据、真实资金、创建、审核、成员管理及其他俱乐部子项目业务。
 - activation：派发提交集成后，从最终 integration HEAD 创建干净工作树并登记 active；聊天不替代仓库证据。
-- status：R4 remediation complete / controlled integration pending；原四项根因已关闭，Enter 仅保留 control-channel Unverified。
+- status：CA-SC T0 Go / controlled integration complete；原四项根因已关闭，Enter 仅保留 control-channel Unverified。
 - environment evidence：`docs/project-management/modules/club-alliance/self-created/acceptance/`
-- governance：R1 remediation 检查单/考试 100 已完成；最终 current checklist/exam/IR 在集成前重建。
+- governance：R2 remediation checklist 28/28 current；exam 100；IR verified；source `89264aaa0b6965055aa469446c895d976ccd222a`，首个 integration `9691c6a613cfe11d4075be0cfc789eb58fecf9a5`。
 - verified：安全 DTO、唯一 run、幂等/关联清理、数据库恢复、刷新 DOM、列表隔离、详情/加入/本人状态、响应式、Tab focus、制品回滚和 ready 均有证据；环境 Enter 仍诚实标记为控制通道 Unverified。

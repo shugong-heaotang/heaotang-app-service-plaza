@@ -4,7 +4,7 @@
 - to：服务广场权威集成基线
 - date：2026-07-12
 - work item：`AIW-20260712-CLUB-SC-T0-REMEDIATION`
-- status：R4 remediation complete / controlled integration pending
+- status：CA-SC T0 Go / controlled integration complete
 - upstream APP / backend：`2c4b295e6fd625a2df24957f7b8becbc28ad1dcf` / `98426ff83a1218080019faa377c152a81ecca437`
 - latest historical checklist：`FC-20260712-CLUB-SC-T0-ACCEPTANCE-R3`（28/28；修复改动后不再 current）
 - latest historical exam：`EX-20260712-CLUB-SC-T0-ACCEPTANCE-R3-1`（100）
@@ -52,11 +52,13 @@
 - cleanup 后 run-owned clubs、applications、members、`api_idempotency_keys` 均为 0；SQLite 在线备份已恢复到隔离临时库，完整性 ok、schema 400、dump SHA 匹配、在线库未变。
 - 真实刷新 DOM 同时证明 URL、heading、认证状态和主导航。Enter 经现有 in-app 与 Windows 原生控制通道仍不能可靠传递，依规则停止扩大尝试并保留为 control-channel Unverified；这不是环境 Enter Pass，也不是产品 No-Go。
 - 治理时序偏差已透明记录：数据库恢复证据曾在 remediation R1 检查单/考试前写入；发现后立即停止后续实现，完成 preflight、R1 逐项阅读和 100 分考试后才继续。未在考试前修改业务代码，不删除历史快照。
+- 最终 R2 checklist `FC-20260712-CLUB-SC-T0-REMEDIATION-R2` 为 28/28 current；exam `EX-20260712-CLUB-SC-T0-REMEDIATION-R2-1` 为 100；IR `IR-20260712-CLUB-SC-T0-REMEDIATION-R2` 验证通过。
+- 独立复核结论：Go。source `89264aaa0b6965055aa469446c895d976ccd222a`；首个受控集成提交 `9691c6a613cfe11d4075be0cfc789eb58fecf9a5`。
 
 ## 未完成/禁止推断
 
-原四项 Blocker/Major 已关闭；最终 current checklist、100 分考试、IR、再次独立复核与受控集成仍是最后门禁。创建、审核、成员管理、资金、生产与真实数据仍未授权。
+原四项 Blocker/Major、最终 current checklist、100 分考试、IR、独立复核与受控集成均已关闭。创建、审核、成员管理、资金、生产与真实数据仍未授权；Release/Operations 与 H2 Entry 也不由本结论自动授权。
 
 ## 请求
 
-请平台独立复跑最终门禁并受控集成；集成完成后关闭 SP-H036 和三个 remediation/safe-DTO 工作项。
+SP-H036 已完成；后续切片必须建立新的独立工作项，不复用本 T0 授权。

@@ -1,6 +1,6 @@
 # CA-SC T0 Go / No-Go
 
-当前技术结论：**R4 Remediation Complete / Integration Pending**。
+当前结论：**CA-SC T0 Go / Controlled Integration Complete**。
 
 ## 原独立复核问题关闭
 
@@ -14,6 +14,6 @@
 - 产品与安全证据：Go（限 CA-SC T0）。
 - 浏览器：Conditional Pass；唯一保留项为 Enter 控制通道 Unverified，非产品 No-Go。
 - 发布：No-Go；尚未授权生产或真实数据。
-- 集成：Pending；完成 final current checklist、100 分考试、IR、独立复核、Handoff 与受控集成后方可将工作项标记 integrated。
+- 集成：Go；source `89264aaa0b6965055aa469446c895d976ccd222a` 经独立复核后受控集成为 `9691c6a613cfe11d4075be0cfc789eb58fecf9a5`，三个 SC remediation/safe-DTO 工作项已释放。
 
 创建俱乐部、后台审核、成员管理、真实资金、生产环境及其他俱乐部子项目不在本结论范围。
