@@ -4,6 +4,7 @@ import hashlib
 import json
 import sys
 from collections import defaultdict
+from datetime import datetime
 from pathlib import Path
 
 from jsonschema import Draft202012Validator
@@ -11,6 +12,22 @@ from jsonschema import Draft202012Validator
 
 def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes()).hexdigest()
+
+
+def parse_timestamp(value: str) -> datetime:
+    parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
+    if parsed.tzinfo is None:
+        raise ValueError("timestamp must include a timezone")
+    return parsed
+
+
+def resolve_repository_path(project_root: Path, value: str) -> Path | None:
+    candidate = (project_root / value.replace("\\", "/")).resolve()
+    try:
+        candidate.relative_to(project_root)
+    except ValueError:
+        return None
+    return candidate
 
 
 def validate(schema_path: Path, bank_schema_path: Path, bank_path: Path, attempts_dir: Path, project_root: Path) -> list[str]:
@@ -37,6 +54,8 @@ def validate(schema_path: Path, bank_schema_path: Path, bank_path: Path, attempt
     validator = Draft202012Validator(attempt_schema)
     seen_ids: set[str] = set()
     attempts_by_record: dict[str, dict[int, dict]] = defaultdict(dict)
+    paths_by_record: dict[str, dict[int, Path]] = defaultdict(dict)
+    scanned_attempts = {path.resolve() for path in files}
     current_bank_hash = digest(bank_path)
     for path in files:
         data = json.loads(path.read_text(encoding="utf-8"))
@@ -52,6 +71,7 @@ def validate(schema_path: Path, bank_schema_path: Path, bank_path: Path, attempt
         if number in attempts_by_record[record_id]:
             errors.append(f"{record_id}: duplicate attempt_number {number}")
         attempts_by_record[record_id][number] = data
+        paths_by_record[record_id][number] = path.resolve()
         if data.get("status") == "pending":
             errors.append(f"{path}: pending exam cannot pass the repository gate")
         if data.get("bank_sha256") != current_bank_hash:
@@ -96,9 +116,58 @@ def validate(schema_path: Path, bank_schema_path: Path, bank_path: Path, attempt
     for record_id, attempts in attempts_by_record.items():
         for number, attempt in attempts.items():
             if number > 1:
-                previous = attempts.get(number - 1)
-                if not previous or previous.get("status") != "failed":
-                    errors.append(f"{record_id}: attempt {number} must follow attempt {number - 1} with failed status")
+                current_path = paths_by_record[record_id][number]
+                previous_value = attempt.get("previous_attempt_path", "")
+                previous_path = resolve_repository_path(project_root, previous_value) if previous_value else None
+                if previous_path is None:
+                    errors.append(f"{current_path}: previous_attempt_path must stay inside the repository")
+                    continue
+                if previous_path not in scanned_attempts:
+                    errors.append(f"{current_path}: previous_attempt_path must reference a scanned attempt")
+                    continue
+                if digest(previous_path) != attempt.get("previous_attempt_sha256"):
+                    errors.append(f"{current_path}: previous attempt hash mismatch")
+                previous = json.loads(previous_path.read_text(encoding="utf-8"))
+                expected_previous = attempts.get(number - 1)
+                if (
+                    previous.get("record_id") != record_id
+                    or previous.get("attempt_number") != number - 1
+                    or previous.get("status") != "failed"
+                    or previous != expected_previous
+                    or paths_by_record[record_id].get(number - 1) != previous_path
+                ):
+                    errors.append(f"{current_path}: retry must explicitly reference the immediately preceding failed attempt")
+                rereads = attempt.get("remediation_rereads", [])
+                reread_paths = [item.get("source_path", "").replace("\\", "/") for item in rereads]
+                required_paths = [str(item).replace("\\", "/") for item in previous.get("remediation_sources", [])]
+                if len(reread_paths) != len(set(reread_paths)):
+                    errors.append(f"{current_path}: remediation_rereads contains duplicate source_path")
+                if set(reread_paths) != set(required_paths) or len(reread_paths) != len(required_paths):
+                    errors.append(f"{current_path}: remediation_rereads must exactly match previous remediation_sources")
+                try:
+                    failed_at = parse_timestamp(previous.get("completed_at", ""))
+                    retry_at = parse_timestamp(attempt.get("generated_at", ""))
+                except (TypeError, ValueError):
+                    errors.append(f"{current_path}: retry evidence timestamps must be valid date-time values")
+                    failed_at = retry_at = None
+                for reread in rereads:
+                    source_value = reread.get("source_path", "")
+                    if reread.get("confirmed_by") != attempt.get("actor"):
+                        errors.append(f"{current_path}: remediation confirmation actor mismatch for {source_value}")
+                    if reread.get("confirmation_method") != "explicit-source-path":
+                        errors.append(f"{current_path}: remediation confirmation method is invalid for {source_value}")
+                    source_path = resolve_repository_path(project_root, source_value) if source_value else None
+                    if source_path is None or not source_path.is_file():
+                        errors.append(f"{current_path}: missing or unsafe remediation source {source_value}")
+                    elif digest(source_path) != reread.get("source_sha256"):
+                        errors.append(f"{current_path}: remediation source hash mismatch for {source_value}")
+                    try:
+                        reread_at = parse_timestamp(reread.get("reread_at", ""))
+                    except (TypeError, ValueError):
+                        errors.append(f"{current_path}: invalid reread_at for {source_value}")
+                        continue
+                    if failed_at is not None and retry_at is not None and not (failed_at <= reread_at <= retry_at):
+                        errors.append(f"{current_path}: reread_at must be between previous completion and retry generation")
     return errors
 
 
