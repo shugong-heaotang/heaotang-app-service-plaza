@@ -1,0 +1,36 @@
+{
+  "contract_version": "integration-push-policy.v1",
+  "policy_id": "service-plaza-authoritative-integration",
+  "authority": {
+    "remote": "origin",
+    "branch": "codex/service-plaza-phase1-integration"
+  },
+  "candidate": {
+    "allowed_branch_prefix": "codex/",
+    "require_clean_worktree": true,
+    "require_remote_ancestor": true,
+    "max_behind_count": 0
+  },
+  "freshness": {
+    "fetch_before_validation": true,
+    "require_expected_remote_head": true,
+    "require_remote_head_unchanged_before_push": true,
+    "require_explicit_lease": true,
+    "forbid_unleased_force": true
+  },
+  "failure_mode": "fail-closed",
+  "third_recurrence_action": "ADR-CONSTRAINTS-AND-FULL-DEPENDENT-AUDIT",
+  "error_ids": [
+    "INTEGRATION_REPOSITORY_INVALID",
+    "INTEGRATION_WORKTREE_DIRTY",
+    "INTEGRATION_CANDIDATE_BRANCH_INVALID",
+    "INTEGRATION_EXPECTED_REMOTE_INVALID",
+    "INTEGRATION_REMOTE_UNAVAILABLE",
+    "INTEGRATION_REMOTE_HEAD_CHANGED",
+    "INTEGRATION_CANDIDATE_INVALID",
+    "INTEGRATION_REMOTE_NOT_ANCESTOR",
+    "INTEGRATION_CANDIDATE_BEHIND",
+    "INTEGRATION_LEASE_PUSH_FAILED",
+    "INTEGRATION_POST_PUSH_MISMATCH"
+  ]
+}

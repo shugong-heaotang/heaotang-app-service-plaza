@@ -2568,7 +2568,7 @@
                            "title":  "平台集成分支第二次分叉根因修复与推送新鲜度门禁",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "handoff-ready",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/platform-integration-freshness-gate-r2",
                            "branch":  "codex/platform-integration-freshness-gate-r2",
@@ -2589,7 +2589,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "第二次出现同类integration分叉：远端健康权威6f4f904与本地activity bb9e717共同基线e947d70，remote-only6/local-only1。先完成证据、recurring issue、版本化策略和共享freshness gate；current checklist/exam100及独立复核前禁止调和和推送。第三次复发升级ADR/CONSTRAINTS和全依赖审计。",
+                           "migration_note":  "第二次integration分叉已完成系统性门禁检查点：远端健康6f4f904与本地activity bb9e717共同基线e947d70，remote-only6/local-only1；recurring issue、版本化policy/Schema、PowerShell gate、validator与8项临时Git回归已落盘，checklist26/26、exam100。当前handoff-ready等待独立复核；复核Go前禁止真实调和和权威推送。第三次复发升级ADR/CONSTRAINTS和全依赖审计。",
                            "handoff_record":  "docs/project-management/service-plaza/platform-integration-freshness-gate-2026-07-13.md"
                        },
                        {

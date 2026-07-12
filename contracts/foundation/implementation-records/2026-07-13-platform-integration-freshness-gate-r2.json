@@ -1,0 +1,71 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-PLATFORM-INTEGRATION-FRESHNESS-GATE-R2",
+  "title": "平台集成分支第二次分叉根因修复与推送新鲜度门禁",
+  "date": "2026-07-13",
+  "status": "implemented",
+  "objective": "登记第二次分叉并建立失败关闭、带精确 lease 的共享权威推送门禁；独立复核前不调和真实分支。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-13-platform-integration-freshness-gate-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-13-platform-integration-freshness-gate-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-13-platform-integration-freshness-gate-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/integration-push-policy.v1.json",
+    "contracts/foundation/integration-push-policy.v1.schema.json",
+    "contracts/foundation/recurring-issues.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/integration-push-policy.v1.json",
+    "contracts/foundation/integration-push-policy.v1.schema.json",
+    "contracts/foundation/development-checklists/2026-07-13-platform-integration-freshness-gate-r2.json",
+    "contracts/foundation/governance-exams/2026-07-13-platform-integration-freshness-gate-r2-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-13-platform-integration-freshness-gate-r2.json",
+    "scripts/Test-IntegrationPushFreshness.ps1",
+    "scripts/validate_integration_push_policy.py",
+    "scripts/tests/test_integration_push_freshness.py",
+    "docs/project-management/notices/2026-07-13-platform-integration-freshness-gate-task-order.md",
+    "docs/project-management/service-plaza/platform-integration-freshness-gate-2026-07-13.md"
+  ],
+  "verification": [
+    "preflight ready",
+    "current checklist 26/26",
+    "governance exam 100",
+    "two divergence occurrences and changed-path impact scan recorded",
+    "integration push policy validates against Draft 2020-12 schema",
+    "fresh/lease-push/stale/diverged/behind/dirty/wrong-branch tests 8/8 pass",
+    "real bb9e717 reconciliation not executed before independent review"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/platform-integration-freshness-gate-2026-07-13.md",
+    "contracts/foundation/development-checklists/2026-07-13-platform-integration-freshness-gate-r2.json",
+    "contracts/foundation/governance-exams/2026-07-13-platform-integration-freshness-gate-r2-attempt-1.json"
+  ],
+  "premises": [
+    "the authoritative branch is a shared resource beyond file-path ownership",
+    "a clean worktree does not prove current remote ancestry",
+    "third recurrence requires ADR, CONSTRAINTS and full dependent audit"
+  ],
+  "implementation_mode": "ai-assisted"
+}
