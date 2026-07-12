@@ -24,3 +24,20 @@
 | next_action | 复用已批准合成身份建立可审计浏览器会话后补四身份 UAT；先重新核对 OTP 容量，禁止重复申请或读取/记录验证码和会话秘密 |
 
 本证据只证明浏览器通道恢复和现有无凭据页面事实，不证明四身份 UAT、会员首页、权限或 lifecycle 场景通过。
+
+## 追加：无会话会员首页登录壳复核
+
+- case_id：`CMH-M3-BR-RESUME-004`
+- time：`2026-07-12`（Asia/Shanghai）
+- target：`/app/service-plaza/services/club-alliance/member-home`
+- session class：无会话；未读取或保存 Cookie、JWT、验证码或完整账号标识
+- mutation：0
+- secrets：`none-recorded`
+
+| 字段 | 证据 |
+| --- | --- |
+| action | 新建应用内浏览器标签，单次直达会员首页路由，再只读读取可见 DOM。 |
+| actual | 浏览器标签创建、导航和 DOM 读取均成功；无会话状态呈现手机号、验证码与登录控件，未出现会员首页数据或已认证 DOM。 |
+| control channel | 仍出现浏览器插件自身的 Statsig 初始化超时；页面 DOM 可读取，因此该噪声不计为 APP 请求或产品失败。 |
+| conclusion | 浏览器控制通道当前可用；认证态页面矩阵仍未验证。四个合成账号的本轮一次验证码授权已耗尽，不重复发送。 |
+| next action | 等待 UTC 日容量自然恢复并取得下一轮明确授权后，先重新核对容量，再按一次一账号建立会话；禁止重部署、重跑已完成 fixture 或记录任何验证码/会话秘密。 |
