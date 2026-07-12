@@ -1,11 +1,25 @@
-# Project Brain v1 M2-CP1 Handoff
+# Project Brain v1 M3-CP1 Handoff
 
 日期：2026-07-12
 提交角色：Project Brain M1-R3 实施 Agent
 接收角色：Project Brain 项目负责人（独立复核）
 work_id：`AIW-20260712-PROJECT-BRAIN-V1`
-record_id：`IR-20260712-PROJECT-BRAIN-V1-M2`
-结论：M2 提交态独立复验 Go；M3-CP1 精确授权。
+record_id：`IR-20260712-PROJECT-BRAIN-V1-M3`
+结论：M3 内部只读驾驶舱、路由回归和生产默认关闭门禁完成；提交独立复验，M4 未授权。
+
+## M3 实现与验证
+
+- 新增 `app/src/modules/project-brain/`：只读总览、模块、活动工作、待验收、决策、风险、来源提交和生成时间。
+- `/internal/project-brain` 只在 Vite DEV 或 `test-server` mode 启用；普通 production mode 重定向 `/services`。
+- 快照读取失败明确显示 Unknown；No-Go 不会被提升；DOM 无表单、按钮、批准、部署、删除或修改入口。
+- 全量 Vitest：23 files / 221 tests passed；production 与 test-server TypeScript/Vite 构建通过。
+- 生产资产门禁：普通 production `dist` 中 Project Brain snapshot 数量为 0。
+- 发现并关闭一次制品边界缺陷：最初使用 Vite 静态 URL 会让禁用路由的生产制品仍包含快照；最终改为固定内部 URL，并要求 M4 仅向 test-server 显式装配快照。
+- 工作树依赖通过 bootstrap 技能复用 package-lock SHA 完全一致的共享 `node_modules` junction；未提交依赖目录或修改锁文件。
+
+## 下一授权
+
+请求提交态独立复核 M3。Go 后才授权 M4 的 test-server 制品装配、浏览器 360px/桌面 UAT、安全扫描、最终实施记录、独立验收和受控集成。
 
 ## M2 独立复验 Go
 
