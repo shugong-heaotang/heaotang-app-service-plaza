@@ -30,13 +30,13 @@
 4. A003按 fixture `emergency_handoff_open` 和签署紧急结果使用 `risk-event:triage_pending→emergency:CLASSIFY_EMERGENCY`，professional actor，version1→2。
 5. A002继续覆盖health-management-entry，A013继续覆盖human-handoff，全局6状态机不靠正常场景造风险占位。
 
-## 未完成且未授权
+## 历史C1时点缺口与持续No-Go
 
-- 负向 fixture 包、15场景最终执行矩阵与完整零调用证据；
-- 共享前端/后端/API/数据库；
-- 环境、部署、真实数据、收费或生产。
+- 当时未完成：负向 fixture 包、15场景最终执行矩阵与完整零调用证据；该缺口现已由C3完成并受控集成。
+- 持续未授权：共享前端/后端/API/数据库。
+- 持续未授权：环境、部署、真实数据、收费或生产。
 
-## 请求平台复核
+## 历史检查点演进
 
 ## P2-C2 新增成果
 
