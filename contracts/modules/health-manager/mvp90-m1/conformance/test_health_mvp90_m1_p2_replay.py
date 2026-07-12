@@ -8,6 +8,7 @@ from jsonschema import Draft202012Validator
 
 from .synthetic_pdcar_reference import (
     ERR_AUDIT_REQUIRED,
+    ERR_ACTION_NOT_AUTHORIZED,
     ERR_IDEMPOTENCY_CONFLICT,
     ERR_AI_RUNTIME_NOT_AUTHORIZED,
     ERR_STATE_CONFLICT,
@@ -317,6 +318,7 @@ class SyntheticReplayPlanContractTests(unittest.TestCase):
         runner.execute_event("MVP-A001", event)
         state_before = runner.resources
         audit_before = runner.audit_events
+        trace_before = runner.trace_events
         conflicting = copy.deepcopy(event)
         conflicting["idempotency"]["payload_ref"] = "MVP-A001/conflicting-payload"
         result = runner.execute_event("MVP-A001", conflicting)
@@ -324,12 +326,67 @@ class SyntheticReplayPlanContractTests(unittest.TestCase):
         self.assertFalse(result["committed"])
         self.assertEqual(runner.resources, state_before)
         self.assertEqual(runner.audit_events, audit_before)
+        self.assertEqual(runner.trace_events, trace_before)
+        idempotency_before = runner.idempotency_records
+        changed_expectation = copy.deepcopy(event)
+        changed_expectation["idempotency"]["expectation"] = "return_original_result"
+        expectation_result = runner.execute_event("MVP-A001", changed_expectation)
+        self.assertEqual(expectation_result["error_id"], ERR_IDEMPOTENCY_CONFLICT)
+        self.assertFalse(expectation_result["committed"])
+        self.assertEqual(runner.resources, state_before)
+        self.assertEqual(runner.audit_events, audit_before)
+        self.assertEqual(runner.trace_events, trace_before)
+        self.assertEqual(runner.idempotency_records, idempotency_before)
         changed_semantics = copy.deepcopy(event)
         changed_semantics["transition_ref"] = "consent-grant:draft->withdrawn:WITHDRAW_CONSENT"
         changed_semantics["expected_to"] = "withdrawn"
         changed_semantics_result = runner.execute_event("MVP-A001", changed_semantics)
         self.assertEqual(changed_semantics_result["error_id"], ERR_IDEMPOTENCY_CONFLICT)
         self.assertEqual(runner.resources, state_before)
+
+    def test_signed_denials_cannot_be_changed_to_allow_and_fail_atomically(self):
+        for scenario_id in ("MVP-A005", "MVP-A008", "MVP-A009", "MVP-A014", "MVP-A015"):
+            with self.subTest(scenario_id=scenario_id):
+                runner = self.new_runner()
+                mutated_plan = copy.deepcopy(self.plan)
+                scenario = next(item for item in mutated_plan["scenarios"] if item["scenario_id"] == scenario_id)
+                changed = scenario["events"][0]
+                changed["denial_expectation"] = {"outcome": "allow", "condition": None, "error_id": None}
+                Draft202012Validator(self.schema).validate(mutated_plan)
+                resources_before = runner.resources
+                audit_before = runner.audit_events
+                trace_before = runner.trace_events
+                idempotency_before = runner.idempotency_records
+                result = runner.execute_event(scenario_id, changed)
+                self.assertEqual(result["error_id"], ERR_ACTION_NOT_AUTHORIZED)
+                self.assertFalse(result["committed"])
+                self.assertEqual(runner.resources, resources_before)
+                self.assertEqual(runner.audit_events, audit_before)
+                self.assertEqual(runner.trace_events, trace_before)
+                self.assertEqual(runner.idempotency_records, idempotency_before)
+
+    def test_authoritative_event_semantics_cannot_drift_on_first_execution(self):
+        base = self.plan["scenarios"][0]["events"][0]
+        mutations = []
+        for field, value in (
+            ("actor_role", "ai"),
+            ("resource_ref", "AssessmentSession:syn-member-other"),
+            ("audit_expectation", {"required": False, "failure_mode": None}),
+        ):
+            changed = copy.deepcopy(base)
+            changed[field] = value
+            mutations.append(changed)
+        changed = copy.deepcopy(base)
+        changed["expected_version"]["after"] = 9
+        mutations.append(changed)
+        for changed in mutations:
+            runner = self.new_runner()
+            result = runner.execute_event("MVP-A001", changed)
+            self.assertFalse(result["committed"])
+            self.assertEqual(runner.resources, {})
+            self.assertEqual(runner.audit_events, [])
+            self.assertEqual(runner.trace_events, [])
+            self.assertEqual(runner.idempotency_records, {})
 
     def test_version_conflict_leaves_state_audit_and_trace_unchanged(self):
         runner = self.new_runner()

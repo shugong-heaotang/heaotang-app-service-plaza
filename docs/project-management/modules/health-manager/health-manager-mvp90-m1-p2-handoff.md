@@ -4,7 +4,7 @@
 - 提交方：健康大管家负责人
 - 接收方：平台集成负责人
 - 日期：2026-07-12
-- 状态：`P2-C1 Go / P2-C2 ready for independent review`
+- 状态：`P2-C1 Go / P2-C2 Exact revision corrected candidate ready for independent review`
 
 ## 已完成
 
@@ -44,6 +44,14 @@
 2. 新增纯Python内存reference runner，不读取文件，不调用网络、DB、clock、random或模型。
 3. 实现稳定状态/版本冲突、完整载荷幂等、未知/禁止迁移、AI越权拒绝。
 4. 审计失败按本事件原子回滚resource、version、trace、audit和idempotency。
-5. P2测试由5项增至13项；P1原11项继续回归。
+5. P2测试由5项增至15项；P1原11项继续回归。
 
-请平台独立复跑P2-C2 runner语义、13项P2测试、P1 11项回归、治理和范围门禁。获得C2 Go前不进入P2-C3。
+## P2-C2 Exact revision 修订
+
+1. 保留未集成 source `d351d35113c977d011d6ce5fe2f4fddfaa8e50a3` 与 R3 历史，不改写旧证据。
+2. 以 `scenario_id + event_id` 绑定 replay plan 权威事件，拒绝 denial、actor、action、resource、transition、version、audit 等首次执行语义漂移。
+3. 幂等摘要只排除 Idempotency-Key；合法 `expectation` 或其他完整事件字段变化稳定返回 `HM_IDEMPOTENCY_CONFLICT`。
+4. 新增 A005/A008/A009/A014/A015 deny→allow 与 expectation 变化负例；失败后 resource、audit、trace、idempotency 全部保持不变。
+5. 根因 `HM-M1-P2-C2-CALLER-CONTROLLED-SAFETY-SEMANTICS` 已写入 conformance report。
+
+请平台独立复跑P2-C2 runner语义、15项P2测试、P1 11项回归、治理和范围门禁。获得C2 Go前不进入P2-C3。

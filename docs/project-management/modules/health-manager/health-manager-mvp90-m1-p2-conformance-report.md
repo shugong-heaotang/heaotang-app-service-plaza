@@ -2,7 +2,7 @@
 
 ## P2-C1 结论
 
-当前结论：`P2-C1 Go / P2-C2 ready for independent review`。
+当前结论：`P2-C1 Go / P2-C2 Exact revision corrected candidate ready for independent review`。
 
 | 检查项 | 结果 |
 | --- | --- |
@@ -75,3 +75,19 @@ P2-C1已由平台独立验收Go，squash integration=`40a042b`，authoritative e
 | runner输出边界 | synthetic_only=true / executable=false |
 
 当前runner只接受注入合同和合成事件，不自行读取文件或连接任何外部系统。负向fixture包、15场景最终执行矩阵和完整零调用证据保留给P2-C3。
+
+## 根因闭环：HM-M1-P2-C2-CALLER-CONTROLLED-SAFETY-SEMANTICS
+
+- first_seen / recurrence_count：2026-07-12 / 1；affected checkpoint：P2-C2 R3。
+- symptom：调用方把权威计划中的 `denial_expectation` 从 deny 改为 allow 后，运行器仍可提交并写入 allow audit；幂等摘要同时遗漏合法的 `idempotency.expectation`。
+- exact stop：平台 `P2-C2 Exact revision / No-Go`；source `d351d35113c977d011d6ce5fe2f4fddfaa8e50a3` 不集成，C3 不授权。
+- reproduction：对 A005/A008/A009/A014/A015 分别执行 Schema 合法 deny→allow 变异，旧 runner 返回 committed；同键把 expectation 从 `new_result` 改为 `return_original_result`，旧 runner 返回 replayed。
+- expected / actual：权威拒绝边界和完整事件载荷变化必须失败关闭；实际由调用方自报 denial，并从幂等摘要排除了 expectation。
+- causal chain：因为 runner 只验证调用方自报的 deny 条件，因此 allow 分支没有权威来源；因为首次执行未绑定 replay plan 事件，因此安全语义可漂移；因为摘要额外排除 expectation，因此合法字段变化不可见。最早可控根因是运行时没有把候选完整绑定到权威事件。
+- impact：阻塞 P2-C2 Go 与 C3；不影响已签署专业源、C1集成、其他模块、环境或真实数据。
+- rejected workaround：不依赖调用方诚信、不只增加单一 A008 特判、不把 expectation 继续视为非载荷元数据。
+- systemic fix：初始化时建立 `(scenario_id,event_id)` 权威事件表；首次执行在任何提交前进行完整事件一致性检查；幂等摘要只排除 key。
+- prevention gate：Schema 合法 deny→allow、跨会员、撤权、风险、版本冲突与 expectation 变化全部拒绝；每个失败断言 resource/audit/trace/idempotency 不变。
+- positive/regression：修订后 P2 15项与 P1 11项通过；零文件、网络、DB、clock、random、browser、model依赖保持。
+- security/data/release impact：关闭本地参考运行器的安全语义绕过；仍仅合成数据且 executable=false，不产生环境或发布影响。
+- verdict：corrected candidate 等待平台独立复核；未获 C2 Go 前不进入 C3。

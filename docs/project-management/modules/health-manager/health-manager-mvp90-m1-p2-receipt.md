@@ -2,7 +2,7 @@
 
 - work_id：`AIW-20260712-HEALTH-MVP90-M1-P2-SYNTHETIC-REPLAY`
 - owner：健康大管家负责人
-- 状态：`P2-C1 Go / P2-C2 ready for independent review`
+- 状态：`P2-C1 Go / P2-C2 Exact revision corrected candidate ready for independent review`
 - activation HEAD：`15ce1053e1a9173e5a000655167f7d69acac5bcd`
 - registered base：`4556c5b0359ebc70694e1a218d651244d6d28b89`
 
@@ -59,4 +59,8 @@ R4 current：checklist 28/28，exam 100，IR=`IR-20260712-HEALTH-MVP90-M1-P2-C1-
 - 已覆盖：A001重放、稳定hash、完整载荷幂等、版本冲突、audit原子回滚、AI越权、前序缺失和未知迁移；
 - 状态：等待平台独立复核，未获Go不进入C3。
 
-最终治理使用R3 current：checklist 28/28、exam 100、IR=`IR-20260712-HEALTH-MVP90-M1-P2-C2-R3`；R2保留为内部依赖kind纠正前的历史快照。
+平台对 source `d351d35113c977d011d6ce5fe2f4fddfaa8e50a3` 给出 Exact revision：调用方可把权威 deny 改成 allow，且幂等摘要遗漏 `idempotency.expectation`。该 source 不集成，C3 不授权。
+
+修订后运行器以 `scenario_id + event_id` 完整绑定权威事件；首次执行时 denial、actor、action、resource、transition、version、audit 等任一漂移均失败关闭。幂等摘要现在只排除 key，保留 expectation 与其余完整事件语义。新增 Schema 合法的 deny→allow、跨会员、撤权、风险、版本冲突和 expectation 变化负例，并逐项断言 resource/audit/trace/idempotency 不变。
+
+最终治理改用 R4 current：checklist 28/28、exam 100、IR=`IR-20260712-HEALTH-MVP90-M1-P2-C2-R4`；R2/R3均保留历史不可修改。

@@ -72,9 +72,14 @@ class SyntheticPdcarReferenceRunner:
             raise ValueError(ERR_EXECUTABLE_PROMOTION)
         self._plan = copy.deepcopy(dict(replay_plan))
         self._scenarios = {item["scenario_id"]: item for item in replay_plan["scenarios"]}
+        self._events = {}
         self._first_event_by_resource = {}
         for scenario in replay_plan["scenarios"]:
             for event in scenario["events"]:
+                event_key = (scenario["scenario_id"], event["event_id"])
+                if event_key in self._events:
+                    raise ValueError(ERR_ACTION_NOT_AUTHORIZED)
+                self._events[event_key] = copy.deepcopy(event)
                 self._first_event_by_resource.setdefault(
                     (scenario["scenario_id"], event["resource_ref"]), event["event_id"]
                 )
@@ -99,6 +104,10 @@ class SyntheticPdcarReferenceRunner:
     @property
     def trace_events(self):
         return copy.deepcopy(self._trace_events)
+
+    @property
+    def idempotency_records(self):
+        return copy.deepcopy(self._idempotency)
 
     def trace_hash(self) -> str:
         return canonical_sha256(
@@ -204,7 +213,6 @@ class SyntheticPdcarReferenceRunner:
         key = idempotency["key"]
         payload_basis = copy.deepcopy(candidate)
         payload_basis["idempotency"].pop("key", None)
-        payload_basis["idempotency"].pop("expectation", None)
         payload_digest = canonical_sha256(payload_basis)
         previous = self._idempotency.get(key)
         if previous is not None:
@@ -235,6 +243,12 @@ class SyntheticPdcarReferenceRunner:
             if transition_error:
                 return self._result(candidate, "rejected", False, transition_error)
         elif candidate.get("authorization_action_id") is None:
+            return self._result(candidate, "rejected", False, ERR_ACTION_NOT_AUTHORIZED)
+
+        authoritative_event = self._events.get((scenario_id, candidate.get("event_id")))
+        candidate_event = copy.deepcopy(candidate)
+        candidate_event.pop("scenario_id", None)
+        if authoritative_event is None or candidate_event != authoritative_event:
             return self._result(candidate, "rejected", False, ERR_ACTION_NOT_AUTHORIZED)
 
         denial = candidate["denial_expectation"]

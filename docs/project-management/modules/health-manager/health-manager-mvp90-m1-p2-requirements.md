@@ -1,7 +1,7 @@
 # 健康大管家 MVP-90 M1 P2 确定性合成重放需求
 
 - work_id：`AIW-20260712-HEALTH-MVP90-M1-P2-SYNTHETIC-REPLAY`
-- 当前检查点：`P2-C1`
+- 当前检查点：`P2-C2 Exact revision`
 - 范围：成年合成会员、本地内存、零网络、零数据库
 - 输出属性：`synthetic_only=true`、`executable=false`
 
@@ -47,5 +47,7 @@ P2-C2只实现纯Python、内存内参考运行器：
 6. AI激活计划、作出专业风险分类或直接关闭风险均被权威迁移/授权规则拒绝；
 7. canonical trace只由确定性内存状态生成；输出始终`synthetic_only=true`、`executable=false`；
 8. 禁止导入或调用网络、数据库、系统时间、随机数、浏览器、文件持久化和外部模型。
+9. 运行时必须以 `scenario_id + event_id` 把首次候选事件完整绑定到已验证 replay plan；调用方不得改写 denial、actor、action、resource、transition、version、audit 或其他安全语义。
+10. 幂等摘要只排除 Idempotency-Key 本身，`expectation` 及其余完整事件语义必须进入摘要；任何合法字段变化均按同键异载荷处理。
 
 C2不包含负向fixture包和15场景最终矩阵；这些属于获得C2 Go后的P2-C3。
