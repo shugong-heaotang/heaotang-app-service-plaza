@@ -3,6 +3,12 @@
   "decision": {
     "decision_id": "C4-S04",
     "decision_maker_role": "平台安全负责人",
+    "decision_maker": "Platform security decision agent acting as the registered 平台安全负责人 for this work item",
+    "decision_evidence_ref": [
+      "work-item://AIW-20260712-HEALTH-M1-SECURITY-FREEZE",
+      "thread://019f54a1-6140-7690-ae1d-c96672f104bc",
+      "owner-role://平台安全负责人"
+    ],
     "decided_at": "2026-07-12",
     "scope": "M1 成年合成会员 PDCAR 首检查点的技术授权与威胁模型",
     "version": "v1",
@@ -89,8 +95,8 @@
   "review": {"scheduled_review_date":"2026-08-12","triggers":["new subject role or resource type","minor/proxy/real data/production scope","authorization or retention policy change","qualification source change","AI model/provider/tool/prompt policy change","template signing or approval change","new external processor","security incident or repeated denial anomaly","authorization bypass finding","audit durability architecture change"],"compatibility":"Additive actions require new negative tests; broader data, subjects, purposes or weaker denial is breaking and requires a new reviewed version.","migration":"Existing grants never inherit a broader purpose; new policy/template versions require explicit compatibility review and cannot retroactively authorize old data use."},
   "forbidden_alternatives": ["frontend-only hiding","administrator superuser bypass","invented future scope","postponed server authorization","implicit consent","AI self-authorization","reuse of withdrawn grant","fail-open on audit failure"],
   "external_dependencies": [
-    {"decision":"C4-H01 and M1 template professional signoff","owner":"和奥堂医生集团专业负责人","status":"Pending with owner","effect":"blocks executable professional actions and template use"},
-    {"decision":"privacy purpose, retention, export/deletion and AI data use","owner":"隐私与法律负责人","status":"Pending with owner","effect":"blocks real data and production use"},
-    {"decision":"business implementation and environment authorization","owner":"平台集成/运维负责人","status":"Pending with owner","effect":"blocks API, database, deployment and real-member pilot"}
+    {"decision_id":"C4-H01","decision":"professional action boundary signoff","owner":"和奥堂医生集团专业负责人","status":"Pending with owner","effect":"blocks executable professional actions"},
+    {"decision_id":"M1-LIFESTYLE-TEMPLATE","decision":"M1 narrow lifestyle template professional signoff","owner":"和奥堂医生集团专业负责人","status":"Pending with owner","effect":"blocks executable template use"},
+    {"decision_id":"C4-L02-L04","decision":"privacy purpose, retention, export/deletion and AI data use","owner":"隐私与法律负责人","status":"Pending with owner","effect":"blocks real data and production use"}
   ]
 }
