@@ -130,6 +130,14 @@
 
 下一阻塞精确收敛为合成身份浏览器会话：须先重新核对 OTP UTC 日容量，再按已批准身份逐个建立会话；禁止重复申请、读取或记录验证码/JWT/Cookie。未具备会话前不执行 fixture、不重复部署。证据见 `acceptance/m3/2026-07-12-browser-resume.md`。
 
+### 2026-07-12 16:01 合成资料测试服执行
+
+四个合成账号 UTC 日容量重新核对均为 `capacity_ready=true`、`secrets_read=false`。在不请求 OTP、不建立会话的前提下，已用 integration `1c8e064` 对 `ApplicationPending`、`ApplicationRejected`、`DissolvedClub` 三个场景逐场执行 Plan/Apply/Inspect/Cleanup/RestoreVerify。
+
+三场 Inspect 均符合设计：pending/rejected 各一条且不产生目标新会员当前关系；dissolved 明确保留 `club_status=dissolved`。每场 Cleanup 后 run-owned remaining=0、users_deleted=0；RestoreVerify integrity=ok、dump SHA match。测试资料能力与可逆性 Go，测试服务器已恢复。证据见 `acceptance/m3/2026-07-12-synthetic-lifecycle-execution.md`。
+
+当前仅剩浏览器合成身份会话和页面矩阵；数据库层通过不得冒充页面通过。`left/suspended` 继续 Unsupported/Unverified，需要独立后端合同与模型。
+
 ## 11. 最小合成资料接续
 
 已新增 `acceptance/m3/synthetic-data-design.md`，将缺失状态收敛为两个可安全执行的资料组：加入申请 `pending/rejected` 与俱乐部生命周期 `dissolved`。它们只使用 run-owned 合成记录、独立 RunId 和可恢复清理，不需要真实会员资料。
