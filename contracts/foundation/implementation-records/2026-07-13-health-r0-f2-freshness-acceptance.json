@@ -1,0 +1,65 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-HEALTH-R0-F2-FRESHNESS-ACCEPTANCE",
+  "title": "健康大管家 HM-R0 F2-FRESH-01 独立验收与受控集成",
+  "date": "2026-07-13",
+  "status": "verified",
+  "objective": "独立验证并受控集成 F1 状态新鲜度修复，同时保持完整 F2 和所有真实活动门禁。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-13-health-r0-f2-freshness-acceptance.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-13-health-r0-f2-freshness-acceptance-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-13-health-r0-f2-audit-task-order.md",
+    "docs/project-management/modules/health-manager/health-manager-r0-f2-handoff.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.ai-engineering-traceability"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/modules/health-manager/hm-r0-formal-freeze.v1.json",
+    "contracts/modules/health-manager/hm-r0-formal-freeze.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklists/2026-07-13-health-r0-f2-freshness-acceptance.json",
+    "contracts/foundation/governance-exams/2026-07-13-health-r0-f2-freshness-acceptance-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-13-health-r0-f2-freshness-acceptance.json",
+    "docs/project-management/service-plaza/health-r0-f2-freshness-acceptance-2026-07-13.md"
+  ],
+  "verification": [
+    "F2-0 source 5b51d1d1433b67219bcb1803a9383e65233b3cd6 independently Go",
+    "freshness source 66cc6cb9545eef461e9f20c9c93c13fe05151a0c independently Go",
+    "9 freshness paths within module allowed paths",
+    "F1 evidence refs resolve at exact commits",
+    "valid schema accepted and 10 negative mutations rejected",
+    "27 decision and classification invariants unchanged",
+    "module checklist 28/28 and exam100",
+    "platform checklist 26/26 and exam100",
+    "collaboration/checklist/exam/IR/Service Plaza contracts/UTF-8/diff pass"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/health-r0-f2-freshness-acceptance-2026-07-13.md",
+    "docs/project-management/modules/health-manager/health-manager-r0-f2-handoff.md",
+    "contracts/modules/health-manager/hm-r0-formal-freeze.v1.json"
+  ],
+  "premises": [
+    "freshness Go is not full F2 Go",
+    "no Pending decision gains new evidence or status",
+    "F2-1/F3/P3 and all code or real activities require separate authorization"
+  ],
+  "implementation_mode": "ai-assisted"
+}
