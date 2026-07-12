@@ -8,8 +8,8 @@ Project Brain 是和奥堂 APP 的统一知识与项目事实入口。它聚合�
 2. 当前 Agent 工作项：`contracts/foundation/agent-collaboration.v1.json`
 3. Project Brain 产品与架构：`docs/project-management/project-brain/README.md`
 4. 模块、知识、决策和风险：`contracts/project-brain/`
-5. 自动审计输出：`contracts/project-brain/generated/project-brain.audit.json`
-6. 项目负责人驾驶舱：内部路由 `/internal/project-brain`
+5. 自动审计输出：M2 待实现；计划路径 `contracts/project-brain/generated/project-brain.audit.json`
+6. 项目负责人驾驶舱：M3 待实现；计划内部路由 `/internal/project-brain`
 
 ## 权威规则
 

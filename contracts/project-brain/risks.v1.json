@@ -10,7 +10,10 @@
       "impact": "high",
       "owner_role": "平台集成负责人",
       "mitigation": "一个事实只登记一个权威来源；驾驶舱仅聚合",
-      "source_path": "docs/project-management/project-brain/requirements-v1.md"
+      "escalation_at": "2026-07-13T18:00:00+08:00",
+      "related_work_ids": ["AIW-20260712-PROJECT-BRAIN-V1"],
+      "source_path": "docs/project-management/project-brain/requirements-v1.md",
+      "source_field": "核心原则/一个事实只有一个权威来源"
     },
     {
       "risk_id": "PB-RISK-002",
@@ -21,7 +24,10 @@
       "impact": "critical",
       "owner_role": "安全验收角色",
       "mitigation": "采用允许字段清单、敏感数据测试和只读静态快照",
-      "source_path": "docs/project-management/project-brain/architecture-v1.md"
+      "escalation_at": "2026-07-31T18:00:00+08:00",
+      "related_work_ids": ["AIW-20260712-PROJECT-BRAIN-V1"],
+      "source_path": "docs/project-management/project-brain/architecture-v1.md",
+      "source_field": "安全边界"
     },
     {
       "risk_id": "PB-RISK-003",
@@ -32,7 +38,10 @@
       "impact": "high",
       "owner_role": "Project Brain 交付负责人",
       "mitigation": "专用工作树、分段允许路径和平台受控集成",
-      "source_path": "docs/project-management/project-brain/delivery-plan-v1.md"
+      "escalation_at": "2026-07-13T18:00:00+08:00",
+      "related_work_ids": ["AIW-20260712-PROJECT-BRAIN-V1"],
+      "source_path": "docs/project-management/project-brain/delivery-plan-v1.md",
+      "source_field": "建议工作项边界"
     }
   ]
 }

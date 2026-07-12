@@ -1,0 +1,78 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-PROJECT-BRAIN-V1-M1-R3",
+  "title": "Project Brain v1 M1-R3 独立验收 No-Go 整改",
+  "date": "2026-07-12",
+  "status": "implemented",
+  "objective": "关闭 R2 独立验收发现的证据真实性、行尾空白、Schema 完整性、首批事实、来源精度与阶段误导问题，并提交给项目负责人复验。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m1-r3.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1-r3-attempt-2.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-project-brain-v1-task-order.md",
+    "docs/project-management/project-brain/requirements-v1.md",
+    "docs/project-management/project-brain/acceptance-v1.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/project-brain/modules.v1.schema.json",
+    "contracts/project-brain/knowledge-sources.v1.schema.json",
+    "contracts/project-brain/decisions.v1.schema.json",
+    "contracts/project-brain/risks.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/notices/2026-07-12-project-brain-v1-task-order.md",
+    "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m1-r3.json",
+    "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1-r3-attempt-1.json",
+    "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1-r3-attempt-2.json",
+    "contracts/foundation/implementation-records/2026-07-12-project-brain-v1-m1-r3.json",
+    "PROJECT-BRAIN.md",
+    "docs/project-management/project-brain",
+    "contracts/project-brain"
+  ],
+  "verification": [
+    "scripts/Test-AgentDevelopmentPreflight.ps1: ready",
+    "FC-20260712-PROJECT-BRAIN-V1-M1-R3: completed with current SHA-256 and exact attestation",
+    "EX-20260712-PROJECT-BRAIN-V1-M1-R3-1: failed score 50; immutable",
+    "EX-20260712-PROJECT-BRAIN-V1-M1-R3-2: passed score 100 after remediation reread and PreviousAttemptPath generation",
+    "four Project Brain catalogs validate against Draft 2020-12 schemas",
+    "all module JSON Pointers resolve and all Markdown source fields match exact source text",
+    "git diff --check f31f67f1613b7c97c9f46969d7c3eb59cdc0e46c: pass before commit",
+    "old R2 evidence blobs match e982bedaf91ecd914a029ac9a7c561663d179b2a",
+    "allowed-scope audit: no scripts, app, or SC remediation changes"
+  ],
+  "evidence": [
+    "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m1-r3.json",
+    "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1-r3-attempt-1.json",
+    "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1-r3-attempt-2.json",
+    "docs/project-management/project-brain/m1-r3-root-cause-closeout.md",
+    "docs/project-management/project-brain/handoff-v1.md"
+  ],
+  "premises": [
+    "M1 remains No-Go until the Project Brain project lead independently re-verifies and grants Go",
+    "M2 scripts, M3 app and route, and all SC remediation paths are outside this R3 authorization",
+    "attempt 1 failed because answers for a prior randomized question order were reused; it was not altered or deleted",
+    "M2, M3 and M4 remain pending and this record makes no verified or integrated claim"
+  ],
+  "implementation_mode": "ai-assisted"
+}

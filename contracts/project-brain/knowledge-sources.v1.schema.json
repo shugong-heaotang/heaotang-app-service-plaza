@@ -11,13 +11,15 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["knowledge_id", "title", "category", "source_path", "owner_role", "status", "last_reviewed_at", "next_review_at"],
+        "required": ["knowledge_id", "title", "category", "source_path", "owner_role", "scope", "supersedes", "status", "last_reviewed_at", "next_review_at"],
         "properties": {
           "knowledge_id": {"type": "string", "pattern": "^KB-[A-Z0-9-]+$"},
           "title": {"type": "string", "minLength": 1},
           "category": {"type": "string", "minLength": 1},
           "source_path": {"type": "string", "minLength": 1},
           "owner_role": {"type": "string", "minLength": 1},
+          "scope": {"type": "string", "minLength": 1},
+          "supersedes": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
           "status": {"enum": ["authoritative", "draft", "deprecated", "unknown"]},
           "last_reviewed_at": {"type": "string", "format": "date-time"},
           "next_review_at": {"type": "string", "format": "date-time"}

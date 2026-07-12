@@ -23,7 +23,9 @@
 - 不增加第二套任务状态。
 - 首期不使用数据库或向量检索。
 
-## 运行
+## M2 计划运行方式（当前未实现）
+
+以下命令将在 M2 聚合器获得独立授权并实现后启用；M1 不提供该脚本或生成输出。
 
 ```powershell
 python -X utf8 scripts/build_project_brain.py `

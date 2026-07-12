@@ -10,15 +10,20 @@
       "type": "array",
       "items": {
         "type": "object",
-        "additionalProperties": true,
-        "required": ["decision_id", "question", "status", "risk_level", "approver_role", "source_path"],
+        "additionalProperties": false,
+        "required": ["decision_id", "question", "options", "recommendation", "impact", "deadline", "status", "risk_level", "approver_role", "source_path", "source_field"],
         "properties": {
           "decision_id": {"type": "string", "pattern": "^PB-DEC-[0-9]{3,}$"},
           "question": {"type": "string", "minLength": 1},
+          "options": {"type": "array", "minItems": 2, "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+          "recommendation": {"type": "string", "minLength": 1},
+          "impact": {"type": "string", "minLength": 1},
+          "deadline": {"type": "string", "format": "date-time"},
           "status": {"enum": ["pending", "approved", "rejected", "superseded"]},
           "risk_level": {"enum": ["low", "medium", "high", "critical"]},
           "approver_role": {"type": "string", "minLength": 1},
-          "source_path": {"type": "string", "minLength": 1}
+          "source_path": {"type": "string", "minLength": 1},
+          "source_field": {"type": "string", "minLength": 1}
         }
       }
     }
