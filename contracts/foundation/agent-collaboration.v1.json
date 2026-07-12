@@ -2450,7 +2450,7 @@
                            "title":  "Project Brain 分叉集成与 R5 治理证据受控收口",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-project-brain-reconciliation",
                            "branch":  "codex/project-brain-integration-reconciliation",
@@ -2474,8 +2474,39 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "远端权威be47cbf含治理retry R5与健康激活；本地未推送7a3f254含Project Brain与商城且基于旧8110af6。只从Project Brain source 815383e受控纳入M1-M4，不推7a3整链，不触碰商城。旧R3 retry证据按原字节迁入invalidated，基于合并后当前治理输入新建R4；两处未跟踪R4候选保持隔离，不直接采用。生产发布不授权。",
+                           "migration_note":  "Project Brain source 815383e在R5权威基线806252f上受控合并；候选b37a4da唯一freshness退回已由df67d2a关闭并获独立Go，df67d2a已进入远端integration。未推送7a3整链和商城未采用；旧R3 retry attempt2/IR原字节进入invalidated；未知owner的两组R4保留原脏工作树且未采用。Python10/10、前端231/231、双构建、全治理/合同/UTF8/diff通过。生产发布不授权。",
                            "handoff_record":  "docs/project-management/project-brain/integration-reconciliation-2026-07-12.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-PROJECT-BRAIN-V1",
+                           "title":  "Project Brain v1 事实模型、解阻审计与内部只读驾驶舱",
+                           "owner":  "Codex Project Brain project lead agent",
+                           "owner_role":  "Project Brain 项目负责人",
+                           "status":  "integrated",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-project-brain-v1",
+                           "branch":  "codex/project-brain-v1",
+                           "base_commit":  "f31f67f1613b7c97c9f46969d7c3eb59cdc0e46c",
+                           "allowed_paths":  [
+                                                 "PROJECT-BRAIN.md",
+                                                 "contracts/project-brain/",
+                                                 "docs/project-management/notices/2026-07-12-project-brain-v1-task-order.md",
+                                                 "docs/project-management/project-brain/",
+                                                 "scripts/build_project_brain.py",
+                                                 "scripts/validate_project_brain.py",
+                                                 "scripts/tests/test_project_brain.py",
+                                                 "app/src/modules/project-brain/",
+                                                 "app/src/App.tsx",
+                                                 "app/src/App.test.tsx",
+                                                 "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-project-brain-v1-*.json",
+                                                 "contracts/foundation/invalidated-snapshots/project-brain-v1-m1/"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "M1-M4 source 815383e通过独立验收；因与治理retry R5远端权威分叉，由AIW-20260712-PROJECT-BRAIN-INTEGRATION-RECONCILIATION单独受控合并并在df67d2a完成freshness修复和最终Go。controlled R4 checklist26/26、exam100；Python10/10、前端231/231、prod/test build和全门禁通过。内部只读能力已集成，生产发布仍需独立授权。",
+                           "handoff_record":  "docs/project-management/project-brain/handoff-v1.md"
                        }
                    ]
 }

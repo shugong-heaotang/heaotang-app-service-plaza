@@ -119,4 +119,4 @@ record_id：`IR-20260712-PROJECT-BRAIN-V1-M4`
 - 两组未跟踪 M1-R4 候选 owner 为 Unknown，保留原工作树，不作为验收或提交来源。
 - 旧 M1-R3 attempt 2 与关联 IR 原字节移入 invalidated snapshots；未修改旧试卷内容。
 - 新当前治理记录：`IR-20260712-PROJECT-BRAIN-V1-M1-R4-CONTROLLED`，checklist 26/26、attempt 1 score 100。
-- 当前结论：等待平台独立复核与受控集成；生产发布仍 No-Go。
+- 当前结论：`df67d2a` 已获平台独立复核 Go 并进入权威 integration；Project Brain v1 工作项 integrated。生产发布仍 No-Go。
