@@ -68,7 +68,7 @@ record_id：`IR-20260712-PROJECT-BRAIN-V1-M4`
 
 请求独立复核 M2 的代码、测试、生成合约和失败关闭语义。只有 M2 独立验收 Go 后，才扩展 `app/src/modules/project-brain/`、`App.tsx`、`App.test.tsx` 的 M3 精确范围。
 
-## 独立复验结论
+## 历史 R3 独立复验结论（已被 R5 收口取代）
 
 - 复验 commit：`b33068018a7db7097225952ce0f7ec480e2bc251`
 - `git diff --check f31f67f1613b7c97c9f46969d7c3eb59cdc0e46c..HEAD`：通过。
@@ -76,9 +76,9 @@ record_id：`IR-20260712-PROJECT-BRAIN-V1-M4`
 - 四类 Project Brain 合约：Draft 2020-12 Schema 错误均为 0。
 - 六个模块来源：JSON Pointer 均解析到具体值，Markdown 完整字段均逐字存在。
 - UTF-8：925 个文件通过；allowed scope：未修改 `scripts/`、`app/` 或 SC remediation。
-- M1 verdict：`Go`。M2 仅按任务通知中的精确路径推进；M3/M4 保持未授权。
+- 当时 M1 verdict：`Go`；当时 M2 仅按任务通知中的精确路径推进、M3/M4 未授权。后续 M2-M4 已在 source `815383e` 完成，本段不再表示当前状态。
 
-## 已完成
+## 历史 R3 已完成快照（已被 R5 收口取代）
 
 - 保留负责人遗留的 R3 task-order record-id 修改与 pending checklist，并完成 preflight `ready`。
 - R3 checklist 逐项全文读取、记录当前 SHA 并使用固定 attestation 完成。
@@ -90,28 +90,27 @@ record_id：`IR-20260712-PROJECT-BRAIN-V1-M4`
 - `PROJECT-BRAIN.md` 将生成审计标为 M2 待实现、内部路由标为 M3 待实现。
 - 旧 R2 文件未修改；未修改 `scripts/`、`app/` 或任何 SC remediation 路径。
 
-## 治理证据
+## 历史 R3 治理证据（原字节保留）
 
 - checklist：`contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m1-r3.json`
 - failed exam：`contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1-r3-attempt-1.json`，50 分
-- passed exam：`contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1-r3-attempt-2.json`，100 分
-- implementation record：`contracts/foundation/implementation-records/2026-07-12-project-brain-v1-m1-r3.json`
+- passed exam（已失效迁移）：`contracts/foundation/invalidated-snapshots/project-brain-v1-m1/2026-07-12-project-brain-v1-m1-r3-attempt-2-pre-retry-contract.json`，历史 100 分，但不满足 R5 retry 证据合同
+- implementation record（已失效迁移）：`contracts/foundation/invalidated-snapshots/project-brain-v1-m1/2026-07-12-project-brain-v1-m1-r3-implementation-record-pre-retry-contract.json`
 - root cause：`docs/project-management/project-brain/m1-r3-root-cause-closeout.md`
 
-## 门禁结论
+## 历史 R3 门禁结论（superseded）
 
 提交前门禁以 R3 implementation record 中的真实命令结果为准。任何未通过或未运行项保持未验证，不推断为通过。提交后由实施 Agent 对 `f31f67f..HEAD` 再跑 `git diff --check` 并回报精确结果。
 
-## 未完成与风险
+## 历史 R3 未完成与风险（后续 M2-M4 已关闭）
 
-- M1 独立复验与 Go/No-Go 决定未完成。
-- M2 scripts、M3 app/route、M4 UAT/安全/集成均未获本切片授权且未实现。
-- 静态首批模块状态仍需 M2 聚合器执行新鲜度与冲突审计，不能成为第二套状态台账。
-- Schema 的精确来源约束已建立，但 M2 自动审计器尚未实现。
+- 当时 M1 独立复验与 Go/No-Go 决定未完成；后续已完成。
+- 当时 M2 scripts、M3 app/route、M4 UAT/安全/集成未获 R3 切片授权且未实现；后续 source `815383e` 已完成并形成独立验收证据。
+- 当时静态首批模块状态与自动审计仍待 M2；该缺口已由后续 M2-M4 关闭。
 
-## 下一步
+## 历史 R3 下一步（已执行并 superseded）
 
-请 Project Brain 项目负责人复核 R3 commit、旧 R2 blob 不变证据、来源解析证据、全门禁输出与 allowed scope；只有独立复验明确 Go 后，才可进入下一授权。
+当时要求项目负责人先复核 R3 再授权后续阶段；该步骤已经完成。本段仅保留历史，不是当前待办。
 ## 2026-07-12 R5 权威基线受控收口
 
 - 远端权威基线：`806252f33d7ef283ab44ef63c2a9569057589cd7`。

@@ -57,7 +57,8 @@
     "python -X utf8 -m unittest scripts.tests.test_project_brain",
     "frontend test/build and Project Brain validators",
     "governance exam/checklist/IR/collaboration validators",
-    "Service Plaza contracts, UTF-8 and git diff gates"
+    "Service Plaza contracts, UTF-8 and git diff gates",
+    "independent review freshness correction: historical R3 Handoff section marked superseded and invalidated paths corrected"
   ],
   "evidence": [
     "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m1-r4-controlled.json",

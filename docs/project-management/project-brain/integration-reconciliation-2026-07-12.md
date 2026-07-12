@@ -41,6 +41,6 @@
 
 ## Verdict
 
-- 当前：implemented，等待独立复核与受控集成。
+- 当前：independent review 首轮仅退回 Handoff 历史 R3 段落 freshness；已标记 superseded 并改为 invalidated 精确路径，等待最小复核与受控集成。
 - does_not_block：健康 HM-R0 F0 只读复核；不冲突模块继续工作。
 - No-Go：生产发布、未知 R4 候选采用、商城提交夹带。
