@@ -2086,6 +2086,30 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "C4-S04 技术安全冻结 source e68b1a0fbe295ba61452d824b0db7dc57cc1f341 经平台独立复核 Accepted，并受控集成至 APP e547190000cf6337274452336789ac4d3ca88320。valid ACCEPT，原六项负向变异及重复 subject/threat/premise ID 均 REJECT；checklist current SHA mismatch0、exam100、总合同、IR、UTF-8、diff、scope、敏感扫描通过。合同仍 executable=false；C4-H01、M1 窄模板和隐私/法律依赖继续 Pending，不自动激活 M1。",
                            "handoff_record":  "docs/project-management/modules/health-manager/health-manager-mvp90-m1-security-freeze-receipt.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-HEALTH-MVP90-M1-P2-DISPATCH",
+                           "title":  "健康大管家 MVP-90 M1 P2 合成运行内核规划与派发",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-m1-p2-dispatch",
+                           "branch":  "codex/health-mvp90-m1-p2-dispatch",
+                           "base_commit":  "de31a235b9679698b9de4e33faa6ab980e0461f6",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-12-health-mvp90-m1-p2-dispatch*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-health-mvp90-m1-p2-dispatch*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-health-mvp90-m1-p2-dispatch*.json",
+                                                 "contracts/foundation/invalidated-snapshots/health-mvp90-m1-p2-dispatch/",
+                                                 "docs/project-management/notices/2026-07-12-health-manager-mvp90-m1-p2-task-order.md",
+                                                 "docs/project-management/service-plaza/health-mvp90-m1-p2-dispatch-2026-07-12.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "只读差距审计与正式派发进行中；本工作项只负责确定 P2 最小目标、两层依赖、精确范围和模块工作项，不实现运行内核，不修改共享前端、后端、API、数据库或环境。",
+                           "handoff_record":  "docs/project-management/service-plaza/health-mvp90-m1-p2-dispatch-2026-07-12.md"
                        }
                    ]
 }
