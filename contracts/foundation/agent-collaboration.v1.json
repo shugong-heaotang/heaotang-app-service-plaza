@@ -1806,11 +1806,12 @@
                                                  "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md",
                                                  "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-membership-contract*.json",
                                                  "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-membership-contract*.json",
-                                                 "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-membership-contract*.json"
+                                                 "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-membership-contract*.json",
+                                                 "contracts/modules/club-alliance/invalidated-snapshots/member-home-membership-contract/r1/"
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "已从权威 APP integration bd1100f740567c67a7fb37d69c16ad1605fc469a 创建独立 branch/worktree，HEAD/base/merge-base 一致且 clean。只纠正 membership/application/club lifecycle 状态分层：pending/rejected 为申请历史，left 为历史关系，suspended 为可选会员停权，dissolved 为 club lifecycle。首检查点只做文档、合同、fixtures/conformance，不修改业务代码、后端、部署或环境。",
+                           "migration_note":  "已从权威 APP integration bd1100f740567c67a7fb37d69c16ad1605fc469a 创建独立 branch/worktree。R1 checklist 尾部多一个空白行且考试 SHA 已绑定，禁止原地修改；最小扩权仅允许原字节 R1 checklist/exam 迁入专属 invalidated-snapshots/r1，再从当前输入生成干净 R2 与新考试。只纠正 membership/application/club lifecycle 状态分层，不修改业务代码、后端、部署或环境。",
                            "handoff_record":  "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md"
                        },
                        {
