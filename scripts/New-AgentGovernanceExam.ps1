@@ -90,7 +90,7 @@ if ($AttemptNumber -gt 1) {
     $presentationHash = (Get-FileHash -LiteralPath $resolvedSource -Algorithm SHA256).Hash.ToLowerInvariant()
     $presentationNonce = [Guid]::NewGuid().ToString('N')
     $presentedAt = [DateTime]::UtcNow.ToString("o")
-    Write-Output "===== REMEDIATION SOURCE BEGIN: $sourcePath sha256=$presentationHash nonce=$presentationNonce ====="
+    Write-Output "===== REMEDIATION SOURCE BEGIN: $sourcePath sha256=$presentationHash presented_at=$presentedAt nonce=$presentationNonce ====="
     Write-Output $sourceText
     Write-Output "===== REMEDIATION SOURCE END: $sourcePath ====="
     $challenge = "$normalizedSourcePath|$presentationNonce"

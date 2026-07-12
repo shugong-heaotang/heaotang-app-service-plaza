@@ -24,6 +24,8 @@ class GovernanceExamValidationTests(unittest.TestCase):
         presented = script.index('Write-Output $sourceText')
         confirmed = script.index('$confirmation = Read-Host')
         recorded = script.index('$confirmedAt = [DateTime]::UtcNow')
+        presented_at_output = script.index('presented_at=$presentedAt')
+        self.assertLess(presented_at_output, confirmed)
         self.assertLess(presented, confirmed)
         self.assertLess(confirmed, recorded)
         self.assertIn('presentation_nonce = $presentationNonce', script)
