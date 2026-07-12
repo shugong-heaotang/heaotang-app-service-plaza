@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.local/schemas/health-manager/mvp90-m1/m1-lifestyle-template-signoff.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "decision_id", "parent_decision_ref", "scope", "decision_status", "executable", "decision_maker", "decision_date", "version", "template", "premises", "falsification_evidence", "review_trigger", "evidence_references", "signer_role", "signature_reference"],
+  "properties": {
+    "contract_version": {"const": "health-manager.mvp90-m1.lifestyle-template-signoff.v1"},
+    "decision_id": {"const": "M1-LIFESTYLE-TEMPLATE"},
+    "parent_decision_ref": {"const": "C4-H06"},
+    "scope": {"const": "HM-MVP90-M1 adult synthetic-member safe lifestyle template only; does not accept C4-H06 globally"},
+    "decision_status": {"enum": ["Accepted", "Exact revision", "Pending with owner"]},
+    "executable": {"type": "boolean"},
+    "decision_maker": {"type": ["string", "null"]},
+    "decision_date": {"type": ["string", "null"], "format": "date"},
+    "version": {"const": "v1-proposed"},
+    "template": {"type": "object", "additionalProperties": false, "required": ["template_id", "template_version", "applicable_population", "excluded_population", "contraindications", "allowed_content", "forbidden_content", "stop_conditions", "human_transfer_conditions", "reviewer", "validity"], "properties": {
+      "template_id": {"const": "HM-M1-SAFE-LIFESTYLE"}, "template_version": {"const": "v1-proposed"},
+      "applicable_population": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+      "excluded_population": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+      "contraindications": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+      "allowed_content": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+      "forbidden_content": {"type": "array", "minItems": 5, "uniqueItems": true, "items": {"type": "string"}},
+      "stop_conditions": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+      "human_transfer_conditions": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+      "reviewer": {"type": ["string", "null"]},
+      "validity": {"type": "object", "additionalProperties": false, "required": ["effective_from", "expires_at", "review_interval_ref"], "properties": {"effective_from": {"type": ["string", "null"], "format": "date"}, "expires_at": {"type": ["string", "null"], "format": "date"}, "review_interval_ref": {"type": "string", "minLength": 1}}}
+    }},
+    "premises": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "falsification_evidence": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "review_trigger": {"type": "object", "additionalProperties": false, "required": ["events", "review_date"], "properties": {"events": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}}, "review_date": {"type": ["string", "null"], "format": "date"}}},
+    "evidence_references": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+    "signer_role": {"const": "和奥堂医生集团专业负责人"},
+    "signature_reference": {"type": ["string", "null"]}
+  },
+  "allOf": [{"if": {"properties": {"decision_status": {"const": "Pending with owner"}}, "required": ["decision_status"]}, "then": {"properties": {"executable": {"const": false}, "decision_maker": {"const": null}, "decision_date": {"const": null}, "signature_reference": {"const": null}, "template": {"properties": {"reviewer": {"const": null}, "validity": {"properties": {"effective_from": {"const": null}, "expires_at": {"const": null}}}}}}}}]
+}

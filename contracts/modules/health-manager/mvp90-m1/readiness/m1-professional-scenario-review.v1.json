@@ -1,0 +1,29 @@
+{
+  "contract_version": "health-manager.mvp90-m1.professional-scenario-review.v1",
+  "review_id": "HM-M1-PROFESSIONAL-SCENARIO-REVIEW",
+  "scope": "MVP-A001 through MVP-A015 professional review for HM-MVP90-M1 only",
+  "version": "v1-proposed",
+  "overall_status": "Pending with owner",
+  "executable": false,
+  "decision_maker": null,
+  "decision_date": null,
+  "signer_role": "和奥堂医生集团专业负责人",
+  "signature_reference": null,
+  "scenarios": [
+    {"scenario_id":"MVP-A001","title_zh":"正常首轮闭环","decision_status":"Pending with owner","professional_review_question":"普通生活方式计划的专业边界和需升级条件是否充分？","proposed_safe_outcome":"仅经管理师复核、会员确认且无专业触发的普通任务可进入 M1 合成闭环","proposed_forbidden_outcome":"未确认计划生效或产生医疗结论","stop_or_transfer_condition":"出现禁忌、不适、专业问题或资料不足即停止并转人工","missing_evidence":["专业负责人逐项书面确认"],"owner":"和奥堂医生集团专业负责人"},
+    {"scenario_id":"MVP-A002","title_zh":"资料不足","decision_status":"Pending with owner","professional_review_question":"资料不足时的最小停止和转人工标准是否充分？","proposed_safe_outcome":"不形成确定性评估或有效计划，显示缺项并补充/转人工","proposed_forbidden_outcome":"用默认值补齐健康事实","stop_or_transfer_condition":"任何关键资料缺失、冲突或来源不可验证","missing_evidence":["专业关键资料清单确认"],"owner":"和奥堂医生集团专业负责人"},
+    {"scenario_id":"MVP-A003","title_zh":"紧急风险","decision_status":"Pending with owner","professional_review_question":"紧急触发后停止普通流程和急救/医生转介边界是否充分？","proposed_safe_outcome":"立即停止普通计划，显示审核过的紧急引导并保持风险开放至人工处理","proposed_forbidden_outcome":"AI 关闭风险或继续普通计划","stop_or_transfer_condition":"任何紧急规则触发或无法排除紧急风险","missing_evidence":["专业紧急边界确认","审核过的引导版本引用"],"owner":"和奥堂医生集团专业负责人"},
+    {"scenario_id":"MVP-A004","title_zh":"任务导致不适","decision_status":"Pending with owner","professional_review_question":"不适触发的暂停、记录和转介规则是否充分？","proposed_safe_outcome":"任务暂停、保留原始反馈并创建人工转介","proposed_forbidden_outcome":"继续鼓励执行或摘要覆盖原反馈","stop_or_transfer_condition":"任何新发、加重或无法解释的不适","missing_evidence":["不适停止条件专业确认"],"owner":"和奥堂医生集团专业负责人"},
+    {"scenario_id":"MVP-A005","title_zh":"连续无法执行","decision_status":"Pending with owner","professional_review_question":"普通执行障碍与专业风险的分界是否清晰？","proposed_safe_outcome":"汇总障碍并仅生成待复核的新版本草案","proposed_forbidden_outcome":"惩罚会员或覆盖旧计划","stop_or_transfer_condition":"障碍伴随不适、风险、禁忌或需要治疗性调整","missing_evidence":["普通调整与专业转介分界确认"],"owner":"和奥堂医生集团专业负责人"},
+    {"scenario_id":"MVP-A006","title_zh":"AI 越权拦截","decision_status":"Pending with owner","professional_review_question":"诊断、处方、改药、治疗和疗效承诺的拦截与转介是否完整？","proposed_safe_outcome":"说明边界、拒绝越权内容、建立转人工并写脱敏审计","proposed_forbidden_outcome":"输出诊断、处方、改药、治疗方案或疗效保证","stop_or_transfer_condition":"请求或模型输出触及任何禁止专业动作","missing_evidence":["C4-H01 签署"],"owner":"和奥堂医生集团专业负责人"},
+    {"scenario_id":"MVP-A007","title_zh":"AI 不可用","decision_status":"Pending with owner","professional_review_question":"AI 不可用时是否仍保持已确认计划与人工通道，不生成替代建议？","proposed_safe_outcome":"只读展示已确认内容、保留反馈和人工联系方式","proposed_forbidden_outcome":"生成虚构建议或半激活计划","stop_or_transfer_condition":"AI/规则/模板不可用或版本不可验证","missing_evidence":["降级路径专业可接受性确认"],"owner":"和奥堂医生集团专业负责人"},
+    {"scenario_id":"MVP-A008","title_zh":"授权撤回","decision_status":"Pending with owner","professional_review_question":"撤权后普通任务、专业风险和历史记录边界是否可接受？","proposed_safe_outcome":"拒绝新处理并说明影响；开放风险按独立合规流程保持可见","proposed_forbidden_outcome":"复用授权、继续建议或未经批准删除记录","stop_or_transfer_condition":"授权撤回、过期或范围不覆盖当前用途","missing_evidence":["专业服务连续性边界确认","隐私/法律独立决定仍需保留"],"owner":"和奥堂医生集团专业负责人"},
+    {"scenario_id":"MVP-A009","title_zh":"越权访问","decision_status":"Pending with owner","professional_review_question":"专业人员最小必要访问和正式转介前置是否充分？","proposed_safe_outcome":"服务端拒绝跨会员访问且不泄露对象存在性","proposed_forbidden_outcome":"无关系访问或仅靠前端隐藏","stop_or_transfer_condition":"主体、关系、资质、目的或授权任一不满足","missing_evidence":["专业最小必要资料范围确认","C4-S04 独立安全冻结"],"owner":"和奥堂医生集团专业负责人"},
+    {"scenario_id":"MVP-A010","title_zh":"管理师超容量","decision_status":"Pending with owner","professional_review_question":"容量不足时现有开放风险的专业责任边界是否充分？","proposed_safe_outcome":"拒绝新分配、要求调度并保持既有风险开放","proposed_forbidden_outcome":"虚假接管或用硬编码容量绕过","stop_or_transfer_condition":"无合格且有容量的人工责任人","missing_evidence":["容量数值后置 M2","开放风险升级责任确认"],"owner":"和奥堂医生集团专业负责人"},
+    {"scenario_id":"MVP-A011","title_zh":"模板或规则失效","decision_status":"Pending with owner","professional_review_question":"M1 窄模板的版本、审核、有效期和失效行为是否充分？","proposed_safe_outcome":"拒绝新计划激活，旧确认计划只读并提示人工核对","proposed_forbidden_outcome":"使用过期/未审模板或同人审批","stop_or_transfer_condition":"模板未签署、过期、版本不匹配或完整性失败","missing_evidence":["M1 窄模板签署","有效期/复审日期"],"owner":"和奥堂医生集团专业负责人"},
+    {"scenario_id":"MVP-A012","title_zh":"重复提交","decision_status":"Pending with owner","professional_review_question":"重复技术请求不得重复产生专业结论或通知的边界是否充分？","proposed_safe_outcome":"同载荷同结果，异载荷冲突，保留一个主审计事件","proposed_forbidden_outcome":"重复计划、风险或专业通知","stop_or_transfer_condition":"幂等冲突、版本冲突或审计失败","missing_evidence":["专业记录重复风险确认","C4-S04 独立安全冻结"],"owner":"和奥堂医生集团专业负责人"},
+    {"scenario_id":"MVP-A013","title_zh":"人工消息未送达","decision_status":"Pending with owner","professional_review_question":"未送达/未回复不等于接管或风险解决的规则是否充分？","proposed_safe_outcome":"发送、送达、回复、接管、解决分离并继续重试/升级","proposed_forbidden_outcome":"把 sent 或 unreachable 标为 resolved","stop_or_transfer_condition":"未确认真实人工接管或风险仍开放","missing_evidence":["专业升级责任确认","运营时限后置 M2"],"owner":"和奥堂医生集团专业负责人"},
+    {"scenario_id":"MVP-A014","title_zh":"数据纠错","decision_status":"Pending with owner","professional_review_question":"资料纠错是否必须触发对既有专业内容的影响复核？","proposed_safe_outcome":"保留原来源、创建新版本并列出待复核影响","proposed_forbidden_outcome":"静默覆盖历史或专业意见","stop_or_transfer_condition":"纠错影响已确认计划、风险分级或专业签署","missing_evidence":["专业影响复核条件确认"],"owner":"和奥堂医生集团专业负责人"},
+    {"scenario_id":"MVP-A015","title_zh":"安全退出","decision_status":"Pending with owner","professional_review_question":"退出时普通任务停止而开放风险仍需安全转介的边界是否充分？","proposed_safe_outcome":"停止普通任务，保留开放风险转介并给出权利提示","proposed_forbidden_outcome":"强制续费、删除开放风险或未经批准删除数据","stop_or_transfer_condition":"服务结束但仍有开放专业/紧急风险","missing_evidence":["退出后的专业风险责任确认","隐私/运营独立决定仍需保留"],"owner":"和奥堂医生集团专业负责人"}
+  ]
+}

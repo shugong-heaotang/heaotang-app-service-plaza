@@ -1,0 +1,30 @@
+{
+  "contract_version": "health-manager.mvp90-m1.lifestyle-template-signoff.v1",
+  "decision_id": "M1-LIFESTYLE-TEMPLATE",
+  "parent_decision_ref": "C4-H06",
+  "scope": "HM-MVP90-M1 adult synthetic-member safe lifestyle template only; does not accept C4-H06 globally",
+  "decision_status": "Pending with owner",
+  "executable": false,
+  "decision_maker": null,
+  "decision_date": null,
+  "version": "v1-proposed",
+  "template": {
+    "template_id": "HM-M1-SAFE-LIFESTYLE",
+    "template_version": "v1-proposed",
+    "applicable_population": ["成年合成会员", "已完成最小资料核对且无已知禁忌", "仅接受普通睡眠、饮水、日常活动、饮食记录和自我观察提示"],
+    "excluded_population": ["未成年人", "孕产期或其他需要专门专业评估的人群", "急性不适、疑似紧急或专业风险人群", "需要疾病诊断、药物调整、治疗或康复处方的人群", "资料不足、授权无效或无有效服务关系的人群"],
+    "contraindications": ["任何已知或疑似运动、饮食、饮水或睡眠干预禁忌", "当前不适、症状加重或异常反馈", "专业人员已要求暂停普通生活方式任务", "模板、规则、授权或服务关系过期/撤回"],
+    "allowed_content": ["不含强度和疗效承诺的日常活动提醒", "睡眠与作息记录提示", "饮水和饮食事实记录提示", "已确认普通任务的解释", "不适、风险和资料不足时停止并转人工"],
+    "forbidden_content": ["疾病诊断或筛查结论", "处方、药物剂量、停药、换药或用药建议", "治疗方案、康复处方或疗效保证", "未经专业审核的运动强度、频率或负荷", "个体化营养处方、补充剂治疗或限制性饮食方案", "以模板替代医生、急救或现场处置"],
+    "stop_conditions": ["出现任何不适或风险提示", "会员撤回授权或请求停止", "资料不足、来源冲突或身份/关系校验失败", "模板/规则过期、未批准或版本不匹配", "任务被专业人员暂停", "AI 输出触及禁止内容"],
+    "human_transfer_conditions": ["任何专业或紧急风险信号", "会员询问诊断、处方、药物、治疗、康复强度或个体化营养", "连续无法执行或不适反馈", "管理师无法在普通职责范围内判断", "转介无人接管、消息未达或风险升级"],
+    "reviewer": null,
+    "validity": {"effective_from": null, "expires_at": null, "review_interval_ref": "config://health.template.validity-policy"}
+  },
+  "premises": ["This packet is limited to synthetic M1 conformance and does not authorize real-member use", "Only a named professional signer can approve the template", "Missing or expired approval always fails closed"],
+  "falsification_evidence": ["Template output contains diagnosis, medication, treatment, efficacy, unreviewed exercise intensity or nutrition prescription", "Template continues after discomfort, risk, consent withdrawal or expiry", "Narrow approval is represented as acceptance of all C4-H06 templates"],
+  "review_trigger": {"events": ["scope or population expansion", "new content category", "adverse event or unsafe output", "template policy or professional premise changes", "validity expiration"], "review_date": null},
+  "evidence_references": ["docs/project-management/notices/2026-07-12-health-mvp90-m1-professional-signoff-task-order.md", "contracts/modules/health-manager/mvp90/synthetic-scenarios.v1.json#/scenarios/3", "contracts/modules/health-manager/mvp90/synthetic-scenarios.v1.json#/scenarios/10"],
+  "signer_role": "和奥堂医生集团专业负责人",
+  "signature_reference": null
+}
