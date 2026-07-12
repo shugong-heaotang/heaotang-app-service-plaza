@@ -1791,7 +1791,7 @@
                            "title":  "Project Brain v1 统一知识入口、权威事实模型与只读驾驶舱",
                            "owner":  "Codex Project Brain project lead agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "handoff-ready",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-project-brain-v1",
                            "branch":  "codex/project-brain-v1",
@@ -1824,7 +1824,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "M1-M3 均已提交态复验 Go。M3 commit ed95fbd 的定向 12 项、全量 221 项前端测试、test-server/production 构建、生产零快照资产、全量合同、UTF-8 与 allowed scope 均通过。现授权 M4 test-server 制品装配、360px/桌面浏览器 UAT、安全扫描、最终治理证据和独立验收；生产发布仍不授权。",
+                           "migration_note":  "M1-M4 实现与验收证据已提交至 bfdc31a。Python 10/10、前端 221/221、双模式构建、生产零快照资产、桌面/360px 浏览器 UAT、安全扫描、全量合同、UTF-8 与范围门禁通过。当前进入 handoff-ready，等待最终 R2 current 治理快照、独立验收与受控集成；生产发布不授权。",
                            "handoff_record":  "docs/project-management/project-brain/handoff-v1.md"
                        }
                    ]

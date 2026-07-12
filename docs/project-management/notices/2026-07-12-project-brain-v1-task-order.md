@@ -7,7 +7,7 @@
 - branch：`codex/project-brain-v1`
 - worktree：`C:/Users/shugo/Documents/worktrees/heaotang-project-brain-v1`
 - 风险等级：高
-- 当前 record_id：`IR-20260712-PROJECT-BRAIN-V1-M4`
+- 当前 record_id：`IR-20260712-PROJECT-BRAIN-V1-M4-R2`
 
 ## 目标
 
