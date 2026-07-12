@@ -1,0 +1,58 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-CLUB-MEMBER-HOME-H2-M2-BACKEND",
+  "title": "俱乐部联盟 H2-M2 会员首页后端授权",
+  "date": "2026-07-12",
+  "status": "draft",
+  "objective": "authorize authenticated self-only aggregate endpoint",
+  "governance_checklist": "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-h2-m2-backend.json",
+  "governance_exam": "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-h2-m2-backend-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/module-dependencies/club-alliance.v1.json",
+    "contracts/modules/club-alliance/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-club-member-home-m2-runtime-task-order.md",
+    "docs/project-management/modules/club-alliance/member-home/requirements.md"
+  ],
+  "capabilities": [
+    "foundation.identity-api",
+    "foundation.authorization-idempotency",
+    "foundation.ai-engineering-traceability"
+  ],
+  "contracts": [
+    "contracts/modules/club-alliance/member-home/member-home.v1.json",
+    "contracts/modules/club-alliance/member-home/error-catalog.v1.json"
+  ],
+  "decisions": [
+    "docs/project-management/modules/club-alliance/member-home/decisions.md"
+  ],
+  "changed_areas": [
+    "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-h2-m2-backend.json",
+    "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-h2-m2-backend-attempt-1.json",
+    "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-h2-m2-backend.json",
+    "docs/project-management/modules/club-alliance/member-home/handoff-m2-backend.md"
+  ],
+  "verification": [
+    "python -X utf8 scripts/validate_development_checklists.py",
+    "python -X utf8 scripts/validate_governance_exams.py",
+    "python -X utf8 scripts/validate_implementation_records.py",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-h2-m2-backend.json",
+    "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-h2-m2-backend-attempt-1.json",
+    "docs/project-management/modules/club-alliance/member-home/handoff-m2-backend.md"
+  ],
+  "premises": [
+    "Backend business implementation has not started and this record only authorizes implementation.",
+    "Backend changes are limited to member_home.go, member_home_test.go, and plugin.go in the registered backend worktree.",
+    "The backend actor must not modify the SC registry, APP collaboration registry, database schema, other plugins, or frontend code."
+  ],
+  "implementation_mode": "ai-assisted"
+}
