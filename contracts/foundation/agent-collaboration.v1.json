@@ -1671,7 +1671,7 @@
                            "title":  "俱乐部联盟 H2 会员首页聚合接口",
                            "owner":  "Club Alliance backend agent",
                            "owner_role":  "俱乐部联盟后端负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/heaotang-main",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-member-home-backend",
                            "branch":  "codex/club-member-home-backend",
@@ -1683,7 +1683,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "严格本人范围聚合端点；不修改数据库 schema、不接受 user_id、不改其他插件。",
+                           "migration_note":  "严格本人范围聚合端点；不修改数据库 schema、不接受 user_id、不改其他插件。实现 9d87240 经独立复核，P1 custom role 缺口关闭，定向/全量/vet 通过并受控集成至 backend 97d8bfc5；APP 验收记录 90621e2 已落盘，工作项收口为 integrated，M3 环境验收仍后置。",
                            "handoff_record":  "docs/project-management/modules/club-alliance/member-home/handoff-m2-backend.md"
                        },
                        {
