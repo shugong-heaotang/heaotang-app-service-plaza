@@ -1,0 +1,68 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-CLUB-MEMBER-HOME-H2-M3",
+  "title": "俱乐部联盟 H2-M3 测试环境四身份 UAT",
+  "date": "2026-07-12",
+  "status": "draft",
+  "objective": "在可回滚的测试环境联合部署窗口中验证俱乐部联盟会员首页，并完成新会员、家庭俱乐部普通会员、多俱乐部会员、理事或管理员四身份浏览器 UAT。",
+  "governance_checklist": "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-h2-m3.json",
+  "governance_exam": "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-h2-m3-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md",
+    "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/modules/club-alliance/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-club-member-home-h2-task-order.md",
+    "docs/project-management/notices/2026-07-12-club-member-home-m2-runtime-task-order.md",
+    "docs/project-management/modules/club-alliance/member-home/requirements.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-plan.md"
+  ],
+  "capabilities": [
+    "foundation.identity-api",
+    "foundation.authorization-idempotency",
+    "foundation.observability-config",
+    "foundation.delivery-recovery",
+    "foundation.app-shell-adapter"
+  ],
+  "contracts": [
+    "contracts/modules/club-alliance/member-home/member-home.v1.json",
+    "contracts/modules/club-alliance/member-home/error-catalog.v1.json"
+  ],
+  "decisions": [
+    "docs/project-management/modules/club-alliance/member-home/decisions.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "changed_areas": [
+    "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-h2-m3.json",
+    "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-h2-m3-attempt-1.json",
+    "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-h2-m3.json",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md"
+  ],
+  "verification": [
+    "python -X utf8 scripts/validate_development_checklists.py",
+    "python -X utf8 scripts/validate_governance_exams.py",
+    "python -X utf8 scripts/validate_implementation_records.py",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-TextEncoding.ps1",
+    "git diff --check",
+    "Pending: approved combined test-environment deployment and four-identity browser UAT"
+  ],
+  "evidence": [
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-plan.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md"
+  ],
+  "premises": [
+    "APP integration authority is f31f67f and the accepted H2 frontend implementation is e06d5c6",
+    "Backend integration authority is 97d8bfc5",
+    "SC safe DTO remediation and the combined deployment window remain pending",
+    "Only synthetic test identities and reversible test-environment data are authorized",
+    "Real members, production, real funds, irreversible data and unapproved writes are prohibited",
+    "This draft record authorizes preparation only and does not prove deployment or H2-M3 Full Go"
+  ],
+  "implementation_mode": "ai-assisted"
+}
