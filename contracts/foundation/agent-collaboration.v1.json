@@ -2022,6 +2022,12 @@
                            "allowed_paths":  [
                                                  "docs/project-management/modules/health-manager/health-manager-mvp90-m1-professional-decision-packet.md",
                                                  "docs/project-management/modules/health-manager/health-manager-mvp90-m1-professional-signoff-receipt.md",
+                                                 "contracts/modules/health-manager/mvp90-m1/readiness/c4-h01-action-boundary-decision.v1.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/readiness/c4-h01-action-boundary-decision.v1.schema.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/readiness/m1-lifestyle-template-signoff.v1.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/readiness/m1-lifestyle-template-signoff.v1.schema.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/readiness/m1-professional-scenario-review.v1.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/readiness/m1-professional-scenario-review.v1.schema.json",
                                                  "contracts/modules/health-manager/development-checklists/2026-07-12-health-m1-professional-signoff*.json",
                                                  "contracts/modules/health-manager/governance-exams/2026-07-12-health-m1-professional-signoff*.json",
                                                  "contracts/modules/health-manager/implementation-records/2026-07-12-health-m1-professional-signoff*.json"

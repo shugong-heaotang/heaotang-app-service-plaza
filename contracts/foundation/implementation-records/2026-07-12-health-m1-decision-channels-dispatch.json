@@ -1,0 +1,77 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-HEALTH-M1-DECISION-CHANNELS-DISPATCH-R2",
+  "title": "健康 M1 专业与安全决策通道正式派发",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "为 C4-H01、M1 窄模板和 C4-S04 建立可投递、可追溯、互不越权的独立决策任务窗口与仓库工作项。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-health-m1-decision-channels-dispatch-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-health-m1-decision-channels-dispatch-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-health-manager-mvp90-m1-task-order.md",
+    "docs/project-management/service-plaza/health-mvp90-m1-readiness-2026-07-12.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m0-requirements.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.authorization-idempotency"
+  ],
+  "contracts": [
+    "contracts/foundation/module-dependencies/health-manager.v1.json",
+    "contracts/modules/health-manager/internal-dependencies.v1.json",
+    "contracts/modules/health-manager/mvp90/object-model.v1.json",
+    "contracts/modules/health-manager/mvp90/role-actions.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklists/2026-07-12-health-m1-decision-channels-dispatch.json",
+    "contracts/foundation/development-checklists/2026-07-12-health-m1-decision-channels-dispatch-r2.json",
+    "contracts/foundation/governance-exams/2026-07-12-health-m1-decision-channels-dispatch-attempt-1.json",
+    "contracts/foundation/governance-exams/2026-07-12-health-m1-decision-channels-dispatch-r2-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-12-health-m1-decision-channels-dispatch.json",
+    "docs/project-management/notices/2026-07-12-health-mvp90-m1-professional-signoff-task-order.md",
+    "docs/project-management/notices/2026-07-12-health-mvp90-m1-security-freeze-task-order.md",
+    "docs/project-management/service-plaza/health-mvp90-m1-decision-channels-2026-07-12.md"
+  ],
+  "verification": [
+    "scripts/Test-AgentDevelopmentPreflight.ps1: ready",
+    "IR-20260712-HEALTH-M1-DECISION-CHANNELS-DISPATCH-R2 checklist: 28/28 and current SHA mismatch 0",
+    "EX-20260712-HEALTH-M1-DECISION-CHANNELS-DISPATCH-R2-1: score 100",
+    "scripts/validate_development_checklists.py",
+    "scripts/validate_governance_exams.py",
+    "scripts/validate_implementation_records.py",
+    "scripts/validate_agent_collaboration.py",
+    "scripts/Test-ServicePlazaContracts.ps1",
+    "scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "docs/project-management/notices/2026-07-12-health-mvp90-m1-professional-signoff-task-order.md",
+    "docs/project-management/notices/2026-07-12-health-mvp90-m1-security-freeze-task-order.md",
+    "docs/project-management/service-plaza/health-mvp90-m1-decision-channels-2026-07-12.md",
+    "contracts/foundation/development-checklists/2026-07-12-health-m1-decision-channels-dispatch-r2.json",
+    "contracts/foundation/governance-exams/2026-07-12-health-m1-decision-channels-dispatch-r2-attempt-1.json"
+  ],
+  "premises": [
+    "平台只能建立通道和验证证据，不能代替专业负责人签字",
+    "安全负责人不能替专业或隐私角色裁决其职责范围",
+    "planned 工作项和干净工作树不等于 active 授权",
+    "任一决策 Pending 时 M1 module item继续 planned"
+  ],
+  "implementation_mode": "ai-assisted"
+}
