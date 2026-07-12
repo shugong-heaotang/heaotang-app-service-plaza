@@ -2167,7 +2167,7 @@
                            "title":  "NOVA M2 人脉 Owner 与四工具契约平台派发",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-nova-m2-people-tools-dispatch",
                            "branch":  "codex/nova-m2-people-tools-dispatch",
@@ -2182,8 +2182,63 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "只派发人脉 canonical owner 决策与 NOVA M2 四工具/callback 契约会签；不代写人脉业务，不改 network/social 后端，不访问真实会员数据，不发送真实消息。两项证据均 Go 前 M2 保持 No-Go。",
+                           "migration_note":  "派发 source 5cb6dc1 已受控集成至 APP efa965f；checklist 26/26、exam100、IR、collaboration、总合同、UTF-8、diff 通过。只派发人脉 canonical owner 决策与 NOVA M2 四工具/callback 契约会签；不代写人脉业务，不改 network/social 后端，不访问真实会员数据，不发送真实消息。两项证据均 Go 前 M2 保持 No-Go。",
                            "handoff_record":  "docs/project-management/service-plaza/nova-m2-people-tools-dispatch-2026-07-12.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-NETWORK-CANONICAL-OWNER-DECISION",
+                           "title":  "人脉 canonical 实现、唯一 Owner 与 legacy 迁移禁用裁决",
+                           "owner":  "People Network module owner",
+                           "owner_role":  "人脉板块唯一负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-network-canonical-owner-decision",
+                           "branch":  "codex/network-canonical-owner-decision",
+                           "base_commit":  "efa965fb003482b403a64946b9028f8cc6197606",
+                           "allowed_paths":  [
+                                                 "docs/project-management/modules/network/README.md",
+                                                 "docs/project-management/modules/network/canonical-implementation-decision.md",
+                                                 "docs/project-management/modules/network/migration-disable-plan.md",
+                                                 "docs/project-management/modules/network/task-receipt.md",
+                                                 "docs/project-management/modules/network/handoff.md",
+                                                 "contracts/modules/network/internal-dependencies.v1.json",
+                                                 "contracts/modules/network/development-checklists/2026-07-12-network-canonical-owner*.json",
+                                                 "contracts/modules/network/governance-exams/2026-07-12-network-canonical-owner*.json",
+                                                 "contracts/modules/network/implementation-records/2026-07-12-network-canonical-owner*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "只作 canonical owner、读写职责、双事实源迁移/禁用和兼容裁决；禁止修改 network/social/backend/db，禁止真实数据和真实消息。默认提案为 network 加固搜索读侧、social canonical 写侧、NOVA 只走 facade；必须由本 owner 形成可证伪决策。",
+                           "handoff_record":  "docs/project-management/notices/2026-07-12-nova-m2-people-tools-task-order.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-NOVA-M2-PEOPLE-TOOLS-CONTRACT",
+                           "title":  "NOVA M2 人脉四工具与结果 callback 版本化契约会签",
+                           "owner":  "NOVA tool contract signoff agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-nova-m2-people-tools-contract",
+                           "branch":  "codex/nova-m2-people-tools-contract",
+                           "base_commit":  "efa965fb003482b403a64946b9028f8cc6197606",
+                           "allowed_paths":  [
+                                                 "contracts/service-plaza/nova/nova-people-tools.v1.json",
+                                                 "contracts/service-plaza/nova/nova-people-tools.v1.schema.json",
+                                                 "contracts/service-plaza/nova/nova-people-tool-errors.v1.json",
+                                                 "contracts/service-plaza/nova/nova-people-tool-errors.v1.schema.json",
+                                                 "contracts/service-plaza/nova/nova-connection-callback.v1.json",
+                                                 "contracts/service-plaza/nova/nova-connection-callback.v1.schema.json",
+                                                 "contracts/service-plaza/nova/fixtures/m2/",
+                                                 "contracts/service-plaza/nova/test_nova_people_tools.py",
+                                                 "docs/project-management/modules/nova/m2-people-tools-signoff.md",
+                                                 "contracts/foundation/development-checklists/2026-07-12-nova-m2-people-tools-contract*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-nova-m2-people-tools-contract*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-nova-m2-people-tools-contract*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "只形成 member_search、connection_draft、connection_send、connection_status 与 server callback 的 JSON/Schema/error/fixtures/tests/会签结论；必须拒绝 legacy network unsafe 写路由，不实现业务、不发送消息、不触碰真实数据。",
+                           "handoff_record":  "docs/project-management/notices/2026-07-12-nova-m2-people-tools-task-order.md"
                        }
                    ]
 }
