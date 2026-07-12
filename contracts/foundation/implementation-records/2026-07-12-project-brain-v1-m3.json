@@ -1,0 +1,32 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-PROJECT-BRAIN-V1-M3",
+  "title": "Project Brain v1 M3 内部只读驾驶舱与路由",
+  "date": "2026-07-12",
+  "status": "implemented",
+  "objective": "在开发和测试环境提供只读 Project Brain 路由，同时确保普通生产构建不开放路由且不包含快照资产。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m3.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m3-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/notices/2026-07-12-project-brain-v1-task-order.md", "docs/project-management/project-brain/requirements-v1.md", "docs/project-management/project-brain/acceptance-v1.md"],
+  "requirement_sources": ["docs/project-management/project-brain/requirements-v1.md", "docs/project-management/project-brain/architecture-v1.md", "docs/project-management/project-brain/acceptance-v1.md"],
+  "capabilities": ["foundation.app-shell-adapter", "foundation.contract-tooling", "foundation.governance-certification"],
+  "contracts": ["contracts/project-brain/generated/project-brain.snapshot.json"],
+  "decisions": ["docs/decisions/0009-approved-toolchain-per-layer.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"],
+  "changed_areas": ["app/src/modules/project-brain", "app/src/App.tsx", "app/src/App.test.tsx", "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m3.json", "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m3-attempt-1.json", "contracts/foundation/implementation-records/2026-07-12-project-brain-v1-m3.json", "docs/project-management/project-brain/handoff-v1.md"],
+  "verification": [
+    "M3 checklist: completed, 26/26 current",
+    "M3 governance exam attempt 1: passed, score 100",
+    "Vitest full suite: 23 files, 221 tests passed",
+    "test-server build: passed",
+    "production build: passed and contains zero Project Brain snapshot assets",
+    "route/component tests prove no write controls, No-Go remains visible, load failure displays Unknown",
+    "dependency bootstrap used a local junction only after package-lock SHA matched"
+  ],
+  "evidence": ["app/src/modules/project-brain/ProjectBrainPage.test.tsx", "app/src/App.test.tsx", "docs/project-management/project-brain/handoff-v1.md"],
+  "premises": [
+    "M4 test-server packaging must explicitly place the validated snapshot at /project-brain/project-brain.snapshot.json.",
+    "Normal production build intentionally contains no Project Brain snapshot and redirects the internal route.",
+    "Browser responsive UAT and final security acceptance remain M4 work."
+  ],
+  "implementation_mode": "ai-assisted"
+}

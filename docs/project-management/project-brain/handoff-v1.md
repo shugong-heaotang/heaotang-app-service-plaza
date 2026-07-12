@@ -1,0 +1,122 @@
+# Project Brain v1 M4 Final Handoff
+
+日期：2026-07-12
+提交角色：Project Brain M1-R3 实施 Agent
+接收角色：Project Brain 项目负责人（独立复核）
+work_id：`AIW-20260712-PROJECT-BRAIN-V1`
+record_id：`IR-20260712-PROJECT-BRAIN-V1-M4`
+结论：M4 自动化、安全与真实浏览器 UAT Go；实现证据提交 `bfdc31a`；最终 R2 current 治理快照和独立验收 Go，工作项为 `handoff-ready`，允许受控集成。
+
+## 最终 R2 与独立验收
+
+- checklist：`contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m4-r2.json`，26/26 current。
+- exam：`contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m4-r2-attempt-1.json`，100 分。
+- implementation record：`contracts/foundation/implementation-records/2026-07-12-project-brain-v1-m4-r2.json`。
+- independent acceptance：`docs/project-management/project-brain/m4-independent-acceptance-2026-07-12.md`，Go。
+
+## M4 验收结果
+
+- Python 10/10、前端 221/221、双模式构建、全量合同、UTF-8 和差异门禁通过。
+- 桌面 1265px 与移动 360px 均无横向溢出，20 张事实卡片可读，0 个写入控件，浏览器日志 0。
+- 移动端首次 17px 溢出已完成根因修复并复验。
+- 安全扫描 47 文件 findings 0；production 快照资产数量 0。
+- 完整证据：`docs/project-management/project-brain/m4-acceptance-2026-07-12.md`。
+
+## M3 独立复验 Go
+
+- 复验提交：`ed95fbd`；工作树 clean、完整差异通过。
+- 定向 12 项与全量 221 项前端测试通过；test-server/production 构建通过。
+- 普通 production 制品包含 Project Brain snapshot 数量为 0；内部路由默认关闭。
+
+## M3 实现与验证
+
+- 新增 `app/src/modules/project-brain/`：只读总览、模块、活动工作、待验收、决策、风险、来源提交和生成时间。
+- `/internal/project-brain` 只在 Vite DEV 或 `test-server` mode 启用；普通 production mode 重定向 `/services`。
+- 快照读取失败明确显示 Unknown；No-Go 不会被提升；DOM 无表单、按钮、批准、部署、删除或修改入口。
+- 全量 Vitest：23 files / 221 tests passed；production 与 test-server TypeScript/Vite 构建通过。
+- 生产资产门禁：普通 production `dist` 中 Project Brain snapshot 数量为 0。
+- 发现并关闭一次制品边界缺陷：最初使用 Vite 静态 URL 会让禁用路由的生产制品仍包含快照；最终改为固定内部 URL，并要求 M4 仅向 test-server 显式装配快照。
+- 工作树依赖通过 bootstrap 技能复用 package-lock SHA 完全一致的共享 `node_modules` junction；未提交依赖目录或修改锁文件。
+
+## 下一授权
+
+请求提交态独立复核 M3。Go 后才授权 M4 的 test-server 制品装配、浏览器 360px/桌面 UAT、安全扫描、最终实施记录、独立验收和受控集成。
+
+## M2 独立复验 Go
+
+- 复验提交：`b393151`；生成证据刷新：`4d365a7`。
+- 工作树 clean；完整差异检查通过；10 项单元测试重跑通过。
+- 正式构建错误退出与 `no-go` verdict 一致；输出验证器通过。
+- M3 路径与全部活动工作项无重叠，允许进入内部只读驾驶舱检查点。
+
+## M2 实现结果
+
+- `scripts/build_project_brain.py`：只读聚合、Draft 2020-12 输入验证、路径逃逸拒绝、范围/工作树冲突、完成真实性、角色分离、新鲜度和重复权威审计。
+- `scripts/validate_project_brain.py`：严格验证 snapshot/audit 顶层合约、finding 字段、失败关闭和禁止输出字段。
+- `scripts/tests/test_project_brain.py`：10 项正负向测试，覆盖路径、安全、冲突、角色、集成证据、来源过期、SC T0 语义、输入不可变和原子写入。
+- 正式生成物：`contracts/project-brain/generated/project-brain.snapshot.json` 与 `project-brain.audit.json`。
+
+## M2 治理与验证证据
+
+- checklist：`contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m2.json`，26/26 current；Project Brain 17 项 overlay 已另行全文复核并记录于实施依据。
+- exam：`contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m2-attempt-1.json`，attempt 1，100 分。
+- 单元测试：10/10 passed。
+- 全量合同：passed；UTF-8：932 files passed；`git diff --check`：passed。
+- 正式构建 exit `1`：审计准确发现 3 个 `PB-INTEGRATED-EVIDENCE` error 和 7 个 `PB-WORK-NEXT` warning；输出 verdict 为 `no-go`，验证器 exit `0`。未修改其他工作项来制造 Go。
+
+## 下一授权
+
+请求独立复核 M2 的代码、测试、生成合约和失败关闭语义。只有 M2 独立验收 Go 后，才扩展 `app/src/modules/project-brain/`、`App.tsx`、`App.test.tsx` 的 M3 精确范围。
+
+## 历史 R3 独立复验结论（已被 R5 收口取代）
+
+- 复验 commit：`b33068018a7db7097225952ce0f7ec480e2bc251`
+- `git diff --check f31f67f1613b7c97c9f46969d7c3eb59cdc0e46c..HEAD`：通过。
+- preflight：`ready`；R3 checklist：`completed`、0 项遗漏；attempt 2：`passed`、100 分。
+- 四类 Project Brain 合约：Draft 2020-12 Schema 错误均为 0。
+- 六个模块来源：JSON Pointer 均解析到具体值，Markdown 完整字段均逐字存在。
+- UTF-8：925 个文件通过；allowed scope：未修改 `scripts/`、`app/` 或 SC remediation。
+- 当时 M1 verdict：`Go`；当时 M2 仅按任务通知中的精确路径推进、M3/M4 未授权。后续 M2-M4 已在 source `815383e` 完成，本段不再表示当前状态。
+
+## 历史 R3 已完成快照（已被 R5 收口取代）
+
+- 保留负责人遗留的 R3 task-order record-id 修改与 pending checklist，并完成 preflight `ready`。
+- R3 checklist 逐项全文读取、记录当前 SHA 并使用固定 attestation 完成。
+- 治理考试 attempt 1 因错误复用前一题序答案而为 50 分 failed；失败文件保持 immutable。重读全部 remediation sources 后，以 `-PreviousAttemptPath` 精确指向 attempt 1 生成 attempt 2，取得 100 分 passed。
+- 清除 `delivery-plan-v1.md` 2 处与本 Handoff 原 5 处 trailing whitespace；建立证据真实性根因闭环。
+- 补齐模块、决策、风险和知识四类最小字段与首批数据；Schema 对实际字段完整声明并拒绝额外 item 字段。
+- 模块来源改为机器可解析 JSON Pointer 或 Markdown 精确字段；Nova 以 PB-F03 为来源并标记 `planned/unknown`。
+- 复验退回后追加修正：移除 Markdown source_field 的合成路径写法，六个模块均以完整字段逐字匹配或 JSON Pointer 实值解析；12cd0aef 的宽松末级词检查不再作为通过证据。
+- `PROJECT-BRAIN.md` 将生成审计标为 M2 待实现、内部路由标为 M3 待实现。
+- 旧 R2 文件未修改；未修改 `scripts/`、`app/` 或任何 SC remediation 路径。
+
+## 历史 R3 治理证据（原字节保留）
+
+- checklist：`contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m1-r3.json`
+- failed exam：`contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1-r3-attempt-1.json`，50 分
+- passed exam（已失效迁移）：`contracts/foundation/invalidated-snapshots/project-brain-v1-m1/2026-07-12-project-brain-v1-m1-r3-attempt-2-pre-retry-contract.json`，历史 100 分，但不满足 R5 retry 证据合同
+- implementation record（已失效迁移）：`contracts/foundation/invalidated-snapshots/project-brain-v1-m1/2026-07-12-project-brain-v1-m1-r3-implementation-record-pre-retry-contract.json`
+- root cause：`docs/project-management/project-brain/m1-r3-root-cause-closeout.md`
+
+## 历史 R3 门禁结论（superseded）
+
+提交前门禁以 R3 implementation record 中的真实命令结果为准。任何未通过或未运行项保持未验证，不推断为通过。提交后由实施 Agent 对 `f31f67f..HEAD` 再跑 `git diff --check` 并回报精确结果。
+
+## 历史 R3 未完成与风险（后续 M2-M4 已关闭）
+
+- 当时 M1 独立复验与 Go/No-Go 决定未完成；后续已完成。
+- 当时 M2 scripts、M3 app/route、M4 UAT/安全/集成未获 R3 切片授权且未实现；后续 source `815383e` 已完成并形成独立验收证据。
+- 当时静态首批模块状态与自动审计仍待 M2；该缺口已由后续 M2-M4 关闭。
+
+## 历史 R3 下一步（已执行并 superseded）
+
+当时要求项目负责人先复核 R3 再授权后续阶段；该步骤已经完成。本段仅保留历史，不是当前待办。
+## 2026-07-12 R5 权威基线受控收口
+
+- 远端权威基线：`806252f33d7ef283ab44ef63c2a9569057589cd7`。
+- Project Brain 正式 source：`815383e4189a12045db11c4c3f10a0859ba07b2e`。
+- 未推送混合集成链 `7a3f254b` 未被采用；其中商城提交不在本次范围。
+- 两组未跟踪 M1-R4 候选 owner 为 Unknown，保留原工作树，不作为验收或提交来源。
+- 旧 M1-R3 attempt 2 与关联 IR 原字节移入 invalidated snapshots；未修改旧试卷内容。
+- 新当前治理记录：`IR-20260712-PROJECT-BRAIN-V1-M1-R4-CONTROLLED`，checklist 26/26、attempt 1 score 100。
+- 当前结论：`df67d2a` 已获平台独立复核 Go 并进入权威 integration；Project Brain v1 工作项 integrated。生产发布仍 No-Go。
