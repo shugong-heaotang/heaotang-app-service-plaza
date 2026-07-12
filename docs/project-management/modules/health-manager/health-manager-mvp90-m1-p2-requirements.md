@@ -51,3 +51,16 @@ P2-C2只实现纯Python、内存内参考运行器：
 10. 幂等摘要只排除 Idempotency-Key 本身，`expectation` 及其余完整事件语义必须进入摘要；任何合法字段变化均按同键异载荷处理。
 
 C2不包含负向fixture包和15场景最终矩阵；这些属于获得C2 Go后的P2-C3。
+
+## C3 合成验收矩阵
+
+P2-C3只补齐合成验收证据：
+
+1. 15个权威场景各有一个冻结正例结果，包含 outcome、error、result count 与隔离运行 canonical trace hash；
+2. 15个场景各有一个负例，覆盖审计失败、权威拒绝改允许、actor/action/resource/transition/audit漂移、幂等 expectation 变化和资源版本冲突；
+3. 每个负例必须返回稳定 error、`committed=false`，并证明 resource、audit、trace、idempotency 四类状态完全不变；
+4. 正例与负例 exact set、`synthetic_only=true`、`executable=false` 由 Draft 2020-12 Schema 和测试共同锁定；
+5. reference runner 的文件、网络、API、DB、时钟、随机、浏览器、local/session storage、真实身份和真实健康数据运行时入口为零；
+6. P2与P1回归、治理、内部依赖、总合同、UTF-8、diff/scope和敏感信息门禁全部通过。
+
+C3仍不产生共享实现、环境、真实数据或可上线能力；通过后只可进入任务书的P2-C4模块Handoff。

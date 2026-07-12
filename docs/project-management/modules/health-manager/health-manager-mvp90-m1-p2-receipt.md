@@ -2,7 +2,7 @@
 
 - work_id：`AIW-20260712-HEALTH-MVP90-M1-P2-SYNTHETIC-REPLAY`
 - owner：健康大管家负责人
-- 状态：`P2-C1 Go / P2-C2 Exact revision corrected candidate ready for independent review`
+- 状态：`P2-C1 Go / P2-C2 integrated / P2-C3 ready for independent review`
 - activation HEAD：`15ce1053e1a9173e5a000655167f7d69acac5bcd`
 - registered base：`4556c5b0359ebc70694e1a218d651244d6d28b89`
 
@@ -64,3 +64,19 @@ R4 current：checklist 28/28，exam 100，IR=`IR-20260712-HEALTH-MVP90-M1-P2-C1-
 修订后运行器以 `scenario_id + event_id` 完整绑定权威事件；首次执行时 denial、actor、action、resource、transition、version、audit 等任一漂移均失败关闭。幂等摘要现在只排除 key，保留 expectation 与其余完整事件语义。新增 Schema 合法的 deny→allow、跨会员、撤权、风险、版本冲突和 expectation 变化负例，并逐项断言 resource/audit/trace/idempotency 不变。
 
 最终治理改用 R4 current：checklist 28/28、exam 100、IR=`IR-20260712-HEALTH-MVP90-M1-P2-C2-R4`；R2/R3均保留历史不可修改。
+
+## P2-C2 平台集成
+
+- corrected source：`a2e8424c6c4f2cc3e52b7ad0782968ca9d693267`；
+- controlled integration / authoritative HEAD：`4c195d07c21c8ce6944ecca91f69d9f83e6893e7`；
+- verdict：C2 Go并已集成；`d351d351...`未作为独立集成提交；
+- C3：在原 active work item 与既有 allowed paths 内正式授权。
+
+## P2-C3
+
+- 模块同步 merge：`63e5f03c9570c1dfd13e8af045e3c8343066f84d`，merge-base=`4c195d07...`，同步后clean；
+- 新增15/15冻结正例结果与canonical trace hash；
+- 新增15/15负例矩阵及Draft 2020-12 Schema；
+- 每个负例证明resource/audit/trace/idempotency无副作用；
+- P2测试19项、P1回归11项通过；零外部依赖证据通过；
+- 状态：等待平台独立复核，未获C3 Go不进入P2-C4。
