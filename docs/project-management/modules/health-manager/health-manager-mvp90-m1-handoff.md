@@ -1,10 +1,10 @@
 # 健康大管家 MVP-90 M1 阶段 Handoff
 
-- checkpoint：`M1-P0`
+- checkpoint：`M1-P1`
 - 提交方：健康大管家负责人
 - 接收方：平台集成负责人
 - 日期：2026-07-12
-- 结论：`Handoff ready / independent review pending`
+- 结论：`P1 handoff ready / independent review pending`
 
 ## 已完成
 
@@ -21,13 +21,25 @@
 - 未修改前端、后端、API、数据库、平台契约或部署文件；
 - 未接触真实身份或真实健康数据。
 
-## 请求平台复核
+## 平台复核结果
 
-请平台独立核验：
+平台已独立核验：
 
-- 两项 Accepted 与一项 Pending 的 Schema 约束是否精确；
-- 内部依赖是否仍保持真实活动失败关闭；
-- P0 是否严格位于 allowed paths；
-- current checklist/exam/IR、UTF-8、diff、scope 和敏感扫描是否通过。
+- 两项 Accepted 与一项 Pending 的 Schema 约束精确；
+- 内部依赖继续保持真实活动失败关闭；
+- 13/13 路径严格位于 allowed paths；
+- R3 current checklist、exam100、IR、UTF-8、diff/scope 和敏感扫描通过。
 
-平台给出 P0 Go 前，不进入 P1。
+平台已授权进入 P1；共享代码、环境和真实活动仍保持 No-Go。
+
+## P1 新增成果
+
+- `vertical-slice.v1` JSON/Schema：10 个精确步骤及 PDCAR 闭环；
+- `professional-boundaries.v1` JSON/Schema：17 个精确专业动作边界；
+- `synthetic-pdcar-scenarios.v1` JSON/Schema：15 个精确场景；
+- 固定 seed 的 15 个合成夹具；
+- 11 项本地 conformance：除缺失 ID、范围逃逸、提前 executable 外，新增专业语义漂移、错误源指针和 fixture 重复/引用负例。
+
+## P1 请求平台复核
+
+请平台独立复跑 Schema 与 conformance，核对三组 exact ID、跨合同引用、专业决策忠实性、合成数据边界、R2 current 治理链和 allowed paths。P1 Go 前不进入后续检查点。

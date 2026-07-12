@@ -226,8 +226,8 @@
     {
       "dependency_id": "m1.p0-handoff",
       "kind": "handoff",
-      "description": "M1-P0 激活证据、专业/安全门禁和两层依赖图的首检查点交接",
-      "status": "implemented",
+      "description": "M1-P0 激活证据、专业/安全门禁和两层依赖图已由平台独立验收 P0 Go，并受控集成至 07791b9c2bd8310155726988846be8582d21293f",
+      "status": "verified",
       "required_for_slice": true,
       "depends_on": ["m1.governance-entry", "m1.professional-decisions", "m1.security-authorization"],
       "contracts": ["docs/project-management/modules/health-manager/health-manager-mvp90-m1-handoff.md"],
@@ -236,9 +236,70 @@
         "docs/project-management/modules/health-manager/health-manager-mvp90-m1-requirements.md",
         "docs/project-management/modules/health-manager/health-manager-mvp90-m1-receipt.md"
       ],
-      "unresolved": ["等待平台独立复核 M1-P0"],
+      "unresolved": [],
       "owner": "健康大管家负责人",
-      "blocks": ["M1-P1"],
+      "blocks": [],
+      "does_not_block": ["M1-P1 合同与合成一致性检查点"]
+    },
+    {
+      "dependency_id": "m1.vertical-slice-contract",
+      "kind": "contract",
+      "description": "10 个有序步骤覆盖 P-D-C-A-R，引用 M0 对象、状态迁移、角色和 C4-S04 拒绝条件；合同仅用于成年合成会员且 executable=false",
+      "status": "test-verified",
+      "required_for_slice": true,
+      "depends_on": ["m1.p0-handoff", "object.contract", "state-machines.contract", "role-actions.contract"],
+      "contracts": ["contracts/modules/health-manager/mvp90-m1/vertical-slice.v1.json", "contracts/modules/health-manager/mvp90-m1/vertical-slice.v1.schema.json"],
+      "evidence": ["contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_contracts.py", "docs/project-management/modules/health-manager/health-manager-mvp90-m1-conformance-report.md"],
+      "unresolved": [],
+      "owner": "健康大管家负责人",
+      "blocks": ["m1.p1-handoff"],
+      "does_not_block": ["C4-L02-L04 保持独立失败关闭"]
+    },
+    {
+      "dependency_id": "m1.professional-boundaries-contract",
+      "kind": "contract",
+      "description": "17/17 动作逐项忠实映射 C4-H01 的 AI、健康管理师和专业人员决策，不改变签署语义且 executable=false",
+      "status": "test-verified",
+      "required_for_slice": true,
+      "depends_on": ["m1.professional-decisions", "m1.security-authorization"],
+      "contracts": ["contracts/modules/health-manager/mvp90-m1/professional-boundaries.v1.json", "contracts/modules/health-manager/mvp90-m1/professional-boundaries.v1.schema.json"],
+      "evidence": ["contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_contracts.py", "contracts/modules/health-manager/mvp90-m1/readiness/c4-h01-action-boundary-decision.v1.json"],
+      "unresolved": ["全量 C4-H06 仍 Pending"],
+      "owner": "健康大管家负责人",
+      "blocks": ["m1.p1-handoff"],
+      "does_not_block": ["development-only 合成合同验证"]
+    },
+    {
+      "dependency_id": "m1.synthetic-scenarios-contract",
+      "kind": "acceptance",
+      "description": "MVP-A001-A015 与 M0 场景、专业复核、纵切步骤和安全拒绝条件逐项对齐；15 个固定 seed 夹具不含真实身份或健康数据",
+      "status": "test-verified",
+      "required_for_slice": true,
+      "depends_on": ["m1.vertical-slice-contract", "m1.professional-boundaries-contract", "synthetic.scenarios"],
+      "contracts": ["contracts/modules/health-manager/mvp90-m1/synthetic-pdcar-scenarios.v1.json", "contracts/modules/health-manager/mvp90-m1/synthetic-pdcar-scenarios.v1.schema.json"],
+      "evidence": ["contracts/modules/health-manager/mvp90-m1/conformance/fixtures/synthetic-pdcar-fixtures.v1.json", "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_contracts.py", "docs/project-management/modules/health-manager/health-manager-mvp90-m1-conformance-report.md"],
+      "unresolved": [],
+      "owner": "健康大管家负责人",
+      "blocks": ["m1.p1-handoff"],
+      "does_not_block": ["真实数据和环境仍 No-Go"]
+    },
+    {
+      "dependency_id": "m1.p1-handoff",
+      "kind": "handoff",
+      "description": "M1-P1 纵切、专业边界、15 场景、固定 seed 合成夹具与 conformance 的短检查点交接",
+      "status": "implemented",
+      "required_for_slice": true,
+      "depends_on": ["m1.vertical-slice-contract", "m1.professional-boundaries-contract", "m1.synthetic-scenarios-contract"],
+      "contracts": ["docs/project-management/modules/health-manager/health-manager-mvp90-m1-handoff.md"],
+      "evidence": [
+        "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p1-r3.json",
+        "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p1-r3-attempt-1.json",
+        "contracts/modules/health-manager/implementation-records/2026-07-12-health-mvp90-m1-p1-r3.json",
+        "docs/project-management/modules/health-manager/health-manager-mvp90-m1-conformance-report.md"
+      ],
+      "unresolved": ["等待平台独立复核 M1-P1"],
+      "owner": "健康大管家负责人",
+      "blocks": ["M1-P2 或共享实现工作项评估"],
       "does_not_block": []
     }
   ]

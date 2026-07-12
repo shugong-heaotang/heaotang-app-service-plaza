@@ -1,0 +1,30 @@
+{
+  "contract_version":"health-manager.mvp90-m1.professional-boundaries.v1",
+  "module_id":"health-manager",
+  "scope":"HM-MVP90-M1 adult synthetic-member PDCAR only",
+  "source_decision":"contracts/modules/health-manager/mvp90-m1/readiness/c4-h01-action-boundary-decision.v1.json",
+  "source_version":"v1-proposed",
+  "decision_status":"Accepted",
+  "executable":false,
+  "boundaries":[
+    {"action_id":"DATA_ORGANIZATION","ai":"draft-only","health_manager":"allow","professional":"allow","fail_closed":"资料不全、授权无效或目的不符时停止并拒绝输出","transfer_owner":"AI 转管理师；涉及专业含义时管理师转医生","source_pointer":"#/actions/0"},
+    {"action_id":"ASSESSMENT_DRAFT","ai":"draft-only","health_manager":"review-required","professional":"review-required","fail_closed":"缺资料或规则过期时不生成确定性评估","transfer_owner":"AI/管理师发现专业或紧急信号立即转医生或急救路径","source_pointer":"#/actions/1"},
+    {"action_id":"GOAL_PLAN_DRAFT","ai":"draft-only","health_manager":"review-required","professional":"review-required","fail_closed":"模板未批准/过期、资料不足或存在禁忌时保持无有效计划","transfer_owner":"管理师负责转专业复核，不得自行消除禁忌","source_pointer":"#/actions/2"},
+    {"action_id":"PLAN_REVIEW_ACTIVATION","ai":"deny","health_manager":"review-required","professional":"review-required","fail_closed":"任一审核、确认、版本或授权缺失时不生效","transfer_owner":"管理师负责补证或转医生；医生明确普通流程恢复条件","source_pointer":"#/actions/3"},
+    {"action_id":"TASK_EXPLANATION","ai":"allow","health_manager":"allow","professional":"allow","fail_closed":"任务状态或版本无效时停止解释并提示人工核对","transfer_owner":"出现专业问题或不适时转管理师/医生","source_pointer":"#/actions/4"},
+    {"action_id":"FEEDBACK_RECORDING","ai":"draft-only","health_manager":"allow","professional":"allow","fail_closed":"来源或主体不明时不并入当前记录","transfer_owner":"不适或风险反馈立即转人工分级","source_pointer":"#/actions/5"},
+    {"action_id":"PLAN_ADJUSTMENT","ai":"draft-only","health_manager":"review-required","professional":"review-required","fail_closed":"不得覆盖旧版本；复核或确认缺失时不生效","transfer_owner":"触及禁忌、诊疗或风险时转医生","source_pointer":"#/actions/6"},
+    {"action_id":"GROWTH_RECORDING","ai":"draft-only","health_manager":"allow","professional":"allow","fail_closed":"缺来源或超出目的时拒绝写入","transfer_owner":"专业解释需求转医生","source_pointer":"#/actions/7"},
+    {"action_id":"RISK_IDENTIFICATION","ai":"transfer-only","health_manager":"review-required","professional":"allow","fail_closed":"无法排除风险时停止普通流程并升级","transfer_owner":"AI/管理师负责发起转介；医生负责专业分级和下一步","source_pointer":"#/actions/8"},
+    {"action_id":"RISK_CLOSURE","ai":"deny","health_manager":"deny","professional":"review-required","fail_closed":"条件不足时风险保持开放并继续升级","transfer_owner":"管理师维护转介与可达性记录；医生承担专业关闭决定","source_pointer":"#/actions/9"},
+    {"action_id":"EMERGENCY_RESPONSE","ai":"transfer-only","health_manager":"transfer-only","professional":"review-required","fail_closed":"普通计划立即停止，风险保持开放并记录转介","transfer_owner":"AI/管理师立即引导急救和转医生；不得等待异步建议","source_pointer":"#/actions/10"},
+    {"action_id":"DIAGNOSIS","ai":"deny","health_manager":"deny","professional":"review-required","fail_closed":"M1 纵切不输出诊断","transfer_owner":"任何诊断需求转正式医疗服务","source_pointer":"#/actions/11"},
+    {"action_id":"PRESCRIPTION","ai":"deny","health_manager":"deny","professional":"review-required","fail_closed":"M1 不生成、修改或暗示处方","transfer_owner":"药物问题转正式医生/药师渠道","source_pointer":"#/actions/12"},
+    {"action_id":"TREATMENT_ADVICE","ai":"deny","health_manager":"deny","professional":"review-required","fail_closed":"M1 仅保留安全生活方式边界并转医疗渠道","transfer_owner":"治疗问题转合格医生","source_pointer":"#/actions/13"},
+    {"action_id":"REFERRAL","ai":"transfer-only","health_manager":"allow","professional":"allow","fail_closed":"无人接管或消息未达时保持 pending/unreachable，不标记解决","transfer_owner":"发起方跟踪至明确接受；医生接受后承担专业复核","source_pointer":"#/actions/14"},
+    {"action_id":"PROFESSIONAL_REVIEW","ai":"deny","health_manager":"transfer-only","professional":"allow","fail_closed":"未完成专业复核时相关内容保持草案/风险开放","transfer_owner":"管理师负责补充材料和升级；医生给出签署、修订或继续 pending","source_pointer":"#/actions/15"},
+    {"action_id":"SAFE_RESUME_AUTHORIZATION","ai":"deny","health_manager":"review-required","professional":"allow","fail_closed":"条件缺失时继续暂停普通任务","transfer_owner":"管理师执行并监测恢复条件；异常再次转医生","source_pointer":"#/actions/16"}
+  ],
+  "global_forbidden_outcomes":["AI diagnosis, prescription, treatment advice or efficacy promise","AI or manager independently activates a plan","AI or manager closes professional or emergency risk","sent or unreachable handoff is represented as resolved","narrow M1 acceptance is represented as global C4-H06 acceptance"],
+  "review_triggers":["scope expansion beyond M1","new population or template","safety incident or boundary escape","qualification, regulation or professional premise change","template expiry"]
+}
