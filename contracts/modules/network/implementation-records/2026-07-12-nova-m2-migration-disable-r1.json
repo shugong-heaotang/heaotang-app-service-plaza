@@ -1,0 +1,33 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-NOVA-M2-MIGRATION-DISABLE-DRILL-R1",
+  "title": "NOVA M2 introductions 单向迁移与 legacy 禁用演练",
+  "date": "2026-07-12",
+  "status": "implemented",
+  "objective": "在临时合成 SQLite 数据库中验证单向迁移、unknown tenant quarantine、禁双写、legacy 410 successor 和恢复后不重开 unsafe writes。",
+  "governance_checklist": "contracts/modules/network/development-checklists/2026-07-12-nova-m2-migration-disable-r1.json",
+  "governance_exam": "contracts/modules/network/governance-exams/2026-07-12-nova-m2-migration-disable-r1-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json", "AGENTS.md", "README.md", "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md", "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json", "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json", "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md", "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md", "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md", "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md", "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md", "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md", "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": ["docs/project-management/notices/2026-07-12-nova-m2-provider-task-order.md", "docs/project-management/modules/network/migration-disable-plan.md"],
+  "capabilities": ["foundation.ai-engineering-traceability", "foundation.governance-certification", "foundation.contract-tooling", "foundation.delivery-recovery"],
+  "contracts": ["contracts/modules/network/migration/nova-introduction-migration.v1.json", "contracts/modules/network/migration/nova-introduction-migration.v1.schema.json"],
+  "decisions": ["docs/project-management/modules/network/canonical-implementation-decision.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"],
+  "changed_areas": ["scripts/Manage-NovaPeopleMigrationDrill.ps1", "scripts/Test-NovaPeopleMigrationDrillSafety.ps1", "contracts/modules/network/migration/", "docs/project-management/modules/network/migration-drill-plan.md", "docs/project-management/modules/network/migration-drill-report.md", "docs/project-management/modules/network/migration-drill-handoff.md", "contracts/modules/network/development-checklists", "contracts/modules/network/governance-exams", "contracts/modules/network/implementation-records"],
+  "verification": ["Test-NovaPeopleMigrationDrillSafety.ps1", "Plan zero mutation", "Apply backup and transaction", "2 migrated and 2 quarantined", "legacy insert/update/delete blocked", "three 410 successor controls", "Cleanup and RestoreVerify keep unsafe writes closed", "PowerShell parser and UTF-8 BOM/CRLF", "governance and repository gates"],
+  "evidence": ["docs/project-management/modules/network/migration-drill-report.md", "docs/project-management/modules/network/migration-drill-handoff.md", "contracts/modules/network/migration/fixtures/nova-introduction-migration-fixture.v1.json"],
+  "premises": ["only temporary synthetic SQLite databases are authorized", "route 410 controls are drill evidence and not deployed backend behavior", "rollback must never reenable legacy unsafe writes", "real data migration and production remain separately authorized No-Go"],
+  "implementation_mode": "ai-assisted"
+}
