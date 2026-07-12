@@ -1,6 +1,6 @@
 # 保障商城 M0 Handoff
 
-状态：Active / R3 correction 待平台会签与独立验收
+状态：Go / R3 correction 已平台会签、独立验收并受控集成
 
 work_id：`AIW-20260712-PROTECTION-MALL-M0-R3-CORRECTION`
 
@@ -19,7 +19,7 @@ activation HEAD：`b27713d10cd35e846fb1f9252e47dc7ea75845f6`
 
 ## 当前检查点
 
-请求平台复核 v2 依赖合同、模块证据路径和冻结入口；请求 APP 总架构独立验收 Agent 给出 R3 Go/No-Go。
+R3 exact source `73cf4a3abfa65c21348a7e2116c19a0cc1b07ddb` 已通过平台会签与 APP 总架构独立验收 Go，并以 integration `d9f8c7cdac6d1983a3de0dbfbb2293383117d6ce` 受控集成。
 
 ## R3证据
 
@@ -46,4 +46,4 @@ activation HEAD：`b27713d10cd35e846fb1f9252e47dc7ea75845f6`
 
 ## 下一授权
 
-M0-CP1 独立验收与平台会签 Go 后，另立 M1 商城业务实现工作项并开放精确代码路径。
+M0 R3 已 Go；M1 仍为 No-Go。只有另立商城 M1 工作项、冻结精确代码路径、完成新 checklist/exam 和支付及权限依赖检查后，才可开始业务实现。

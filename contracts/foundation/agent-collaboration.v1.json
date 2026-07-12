@@ -2132,7 +2132,7 @@
                            "title":  "保障商城 M0 R3 模块证据与依赖纠正",
                            "owner":  "Protection Mall module lead agent",
                            "owner_role":  "商城板块唯一负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-m0-r3-correction",
                            "branch":  "codex/protection-mall-m0-r3-correction",
@@ -2147,7 +2147,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "从含平台 R1 immutable 归档的权威 HEAD 19eb22c 创建。旧 6bce98f 与旧脏工作树仅作不可信只读差异输入；禁止 reset、cherry-pick、整体复制或接管。逐项重建 internal-dependencies.v2 与模块 R3 checklist/exam/IR/Handoff；M1 继续 No-Go。",
+                           "migration_note":  "从含平台 R1 immutable 归档的权威 HEAD 19eb22c 创建。旧 6bce98f 与旧脏工作树仅作不可信只读差异输入；禁止 reset、cherry-pick、整体复制或接管。source 73cf4a3 经平台会签与 APP 总架构独立验收 Go，以 d9f8c7c 受控集成；模块依赖、current checklist、exam100、IR、协作登记、UTF-8、diff 与 scope 验证通过。M0 R3 收口，M1 仍须另立工作项。",
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m0.md"
                        },
                        {
