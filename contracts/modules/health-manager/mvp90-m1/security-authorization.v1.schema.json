@@ -1,0 +1,86 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/health-manager/mvp90-m1/security-authorization.v1.schema.json",
+  "$defs": {
+    "exactIds": {
+      "subject": {"enum":["adult_member_self","unrelated_authenticated_person","health_manager","qualified_professional","platform_support","security_auditor","ai_runtime"]},
+      "resource": {"enum":["ConsentGrant","HealthProfileItem","AssessmentSession","HealthGoal","HealthPlan","HealthPlanVersion","HealthTask","TaskFeedback","CheckRecord","ServiceRecord","TemplateVersion","AuditEvent"]},
+      "action": {"enum":["consent.read_self","consent.grant_change_withdraw","member.read_self_pdcar","member.submit_source_or_feedback","member.confirm_plan_version","manager.read_assigned_minimum","manager.review_ordinary_pdcar","professional.review_referred_minimum","support.read_technical_metadata","security.audit_metadata","ai.read_minimum_context_and_draft"]},
+      "denial": {"enum":["unauthenticated","not_self_for_self_action","cross_member_reference","no_active_service_relationship","role_insufficient","qualification_missing_or_expired","authorization_missing_withdrawn_or_expired","resource_state_conflict","version_conflict","template_unapproved_or_expired","information_insufficient","risk_or_discomfort_block","idempotency_key_same_key_different_payload","audit_write_failed","ai_policy_or_tool_not_allowed"]},
+      "threat": {"enum":["T01","T02","T03","T04","T05","T06","T07","T08","T09","T10"]},
+      "premise": {"enum":["P01","P02","P03","P04","P05","P06"]},
+      "externalDecision": {"enum":["C4-H01","M1-LIFESTYLE-TEMPLATE","C4-L02-L04"]}
+    }
+  },
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version","decision","default_policy","subjects","resources","actions","server_denial_matrix","minimum_audit_fields","audit_forbidden_fields","threat_model","premises","review","forbidden_alternatives","external_dependencies"],
+  "properties": {
+    "contract_version": {"const":"health-manager.mvp90-m1.security-authorization.v1"},
+    "decision": {
+      "type":"object","additionalProperties":false,
+      "required":["decision_id","decision_maker_role","decision_maker","decision_evidence_ref","decided_at","scope","version","status","executable","non_executable_reason"],
+      "properties":{
+        "decision_id":{"const":"C4-S04"},"decision_maker_role":{"const":"平台安全负责人"},
+        "decision_maker":{"type":"string","minLength":1},
+        "decision_evidence_ref":{"type":"array","minItems":3,"maxItems":3,"uniqueItems":true,"items":{"enum":["work-item://AIW-20260712-HEALTH-M1-SECURITY-FREEZE","thread://019f54a1-6140-7690-ae1d-c96672f104bc","owner-role://平台安全负责人"]},"allOf":[{"contains":{"const":"work-item://AIW-20260712-HEALTH-M1-SECURITY-FREEZE"},"minContains":1,"maxContains":1},{"contains":{"const":"thread://019f54a1-6140-7690-ae1d-c96672f104bc"},"minContains":1,"maxContains":1},{"contains":{"const":"owner-role://平台安全负责人"},"minContains":1,"maxContains":1}]},
+        "decided_at":{"type":"string","format":"date"},"scope":{"type":"string","minLength":1},"version":{"const":"v1"},
+        "status":{"enum":["Accepted","Exact revision","Pending with owner"]},"executable":{"const":false},"non_executable_reason":{"type":"string","minLength":1}
+      }
+    },
+    "default_policy":{"const":"deny"},
+    "subjects": {
+      "type":"array","minItems":7,"maxItems":7,
+      "items":{"type":"object","additionalProperties":false,"required":["subject_id","kind","description","may_delegate"],"properties":{"subject_id":{"$ref":"#/$defs/exactIds/subject"},"kind":{"enum":["human","workforce","machine"]},"description":{"type":"string","minLength":1},"may_delegate":{"const":false}}},
+      "allOf":[
+        {"contains":{"properties":{"subject_id":{"const":"adult_member_self"}},"required":["subject_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"subject_id":{"const":"unrelated_authenticated_person"}},"required":["subject_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"subject_id":{"const":"health_manager"}},"required":["subject_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"subject_id":{"const":"qualified_professional"}},"required":["subject_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"subject_id":{"const":"platform_support"}},"required":["subject_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"subject_id":{"const":"security_auditor"}},"required":["subject_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"subject_id":{"const":"ai_runtime"}},"required":["subject_id"]},"minContains":1,"maxContains":1}
+      ]
+    },
+    "resources": {
+      "type":"array","minItems":12,"maxItems":12,
+      "items":{"type":"object","additionalProperties":false,"required":["resource_type","owner_rule","sensitivity"],"properties":{"resource_type":{"$ref":"#/$defs/exactIds/resource"},"owner_rule":{"type":"string","minLength":1},"sensitivity":{"type":"string","minLength":1}}},
+      "allOf":[
+        {"contains":{"properties":{"resource_type":{"const":"ConsentGrant"}},"required":["resource_type"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"resource_type":{"const":"HealthProfileItem"}},"required":["resource_type"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"resource_type":{"const":"AssessmentSession"}},"required":["resource_type"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"resource_type":{"const":"HealthGoal"}},"required":["resource_type"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"resource_type":{"const":"HealthPlan"}},"required":["resource_type"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"resource_type":{"const":"HealthPlanVersion"}},"required":["resource_type"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"resource_type":{"const":"HealthTask"}},"required":["resource_type"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"resource_type":{"const":"TaskFeedback"}},"required":["resource_type"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"resource_type":{"const":"CheckRecord"}},"required":["resource_type"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"resource_type":{"const":"ServiceRecord"}},"required":["resource_type"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"resource_type":{"const":"TemplateVersion"}},"required":["resource_type"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"resource_type":{"const":"AuditEvent"}},"required":["resource_type"]},"minContains":1,"maxContains":1}
+      ]
+    },
+    "actions": {
+      "type":"array","minItems":11,"maxItems":11,
+      "items":{"type":"object","additionalProperties":false,"required":["action_id","subjects","resources","effect","prerequisites","prohibitions"],"properties":{"action_id":{"$ref":"#/$defs/exactIds/action"},"subjects":{"type":"array","minItems":1,"uniqueItems":true,"items":{"$ref":"#/$defs/exactIds/subject"}},"resources":{"type":"array","minItems":1,"uniqueItems":true,"items":{"$ref":"#/$defs/exactIds/resource"}},"effect":{"type":"string","minLength":1},"prerequisites":{"type":"array","minItems":1,"items":{"type":"string"},"uniqueItems":true},"prohibitions":{"type":"array","items":{"type":"string"},"uniqueItems":true}}},
+      "allOf":[
+        {"contains":{"properties":{"action_id":{"const":"consent.read_self"}},"required":["action_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"action_id":{"const":"consent.grant_change_withdraw"}},"required":["action_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"action_id":{"const":"member.read_self_pdcar"}},"required":["action_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"action_id":{"const":"member.submit_source_or_feedback"}},"required":["action_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"action_id":{"const":"member.confirm_plan_version"}},"required":["action_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"action_id":{"const":"manager.read_assigned_minimum"}},"required":["action_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"action_id":{"const":"manager.review_ordinary_pdcar"}},"required":["action_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"action_id":{"const":"professional.review_referred_minimum"}},"required":["action_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"action_id":{"const":"support.read_technical_metadata"}},"required":["action_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"action_id":{"const":"security.audit_metadata"}},"required":["action_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"action_id":{"const":"ai.read_minimum_context_and_draft"}},"required":["action_id"]},"minContains":1,"maxContains":1}
+      ]
+    },
+    "server_denial_matrix": {
+      "type":"array","minItems":15,"maxItems":15,
+      "items":{"type":"object","additionalProperties":false,"required":["condition","http_status","error_id","fail_closed_state","audit","recovery"],"properties":{"condition":{"$ref":"#/$defs/exactIds/denial"},"http_status":{"enum":[401,403,404,409,422,503]},"error_id":{"type":"string","pattern":"^HM_[A-Z0-9_]+$"},"fail_closed_state":{"type":"string","minLength":1},"audit":{"type":"boolean"},"recovery":{"type":"string","minLength":1}}},
+      "allOf":[
+        {"contains":{"properties":{"condition":{"const":"unauthenticated"}},"required":["condition"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"condition":{"const":"not_self_for_self_action"}},"required":["condition"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"condition":{"const":"cross_member_reference"}},"required":["condition"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"condition":{"const":"no_active_service_relationship"}},"required":["condition"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"condition":{"const":"role_insufficient"}},"required":["condition"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"condition":{"const":"qualification_missing_or_expired"}},"required":["condition"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"condition":{"const":"authorization_missing_withdrawn_or_expired"}},"required":["condition"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"condition":{"const":"resource_state_conflict"}},"required":["condition"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"condition":{"const":"version_conflict"}},"required":["condition"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"condition":{"const":"template_unapproved_or_expired"}},"required":["condition"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"condition":{"const":"information_insufficient"}},"required":["condition"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"condition":{"const":"risk_or_discomfort_block"}},"required":["condition"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"condition":{"const":"idempotency_key_same_key_different_payload"}},"required":["condition"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"condition":{"const":"audit_write_failed"}},"required":["condition"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"condition":{"const":"ai_policy_or_tool_not_allowed"}},"required":["condition"]},"minContains":1,"maxContains":1}
+      ]
+    },
+    "minimum_audit_fields":{"type":"array","minItems":14,"items":{"type":"string"},"uniqueItems":true},
+    "audit_forbidden_fields":{"type":"array","minItems":8,"items":{"type":"string"},"uniqueItems":true},
+    "threat_model": {
+      "type":"array","minItems":10,"maxItems":10,
+      "items":{"type":"object","additionalProperties":false,"required":["threat_id","threat","controls","verification"],"properties":{"threat_id":{"$ref":"#/$defs/exactIds/threat"},"threat":{"type":"string","minLength":1},"controls":{"type":"array","minItems":1,"items":{"type":"string"}},"verification":{"type":"string","minLength":1}}},
+      "allOf":[{"contains":{"properties":{"threat_id":{"const":"T01"}},"required":["threat_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"threat_id":{"const":"T02"}},"required":["threat_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"threat_id":{"const":"T03"}},"required":["threat_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"threat_id":{"const":"T04"}},"required":["threat_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"threat_id":{"const":"T05"}},"required":["threat_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"threat_id":{"const":"T06"}},"required":["threat_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"threat_id":{"const":"T07"}},"required":["threat_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"threat_id":{"const":"T08"}},"required":["threat_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"threat_id":{"const":"T09"}},"required":["threat_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"threat_id":{"const":"T10"}},"required":["threat_id"]},"minContains":1,"maxContains":1}]
+    },
+    "premises": {
+      "type":"array","minItems":6,"maxItems":6,
+      "items":{"type":"object","additionalProperties":false,"required":["premise_id","statement","falsification_evidence","review_trigger","owner"],"properties":{"premise_id":{"$ref":"#/$defs/exactIds/premise"},"statement":{"type":"string","minLength":1},"falsification_evidence":{"type":"string","minLength":1},"review_trigger":{"type":"string","minLength":1},"owner":{"type":"string","minLength":1}}},
+      "allOf":[{"contains":{"properties":{"premise_id":{"const":"P01"}},"required":["premise_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"premise_id":{"const":"P02"}},"required":["premise_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"premise_id":{"const":"P03"}},"required":["premise_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"premise_id":{"const":"P04"}},"required":["premise_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"premise_id":{"const":"P05"}},"required":["premise_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"premise_id":{"const":"P06"}},"required":["premise_id"]},"minContains":1,"maxContains":1}]
+    },
+    "review":{"type":"object","additionalProperties":false,"required":["scheduled_review_date","triggers","compatibility","migration"],"properties":{"scheduled_review_date":{"type":"string","format":"date"},"triggers":{"type":"array","minItems":5,"items":{"type":"string"}},"compatibility":{"type":"string","minLength":1},"migration":{"type":"string","minLength":1}}},
+    "forbidden_alternatives":{"type":"array","minItems":5,"items":{"type":"string"},"uniqueItems":true},
+    "external_dependencies": {
+      "type":"array","minItems":3,"maxItems":3,
+      "items":{"type":"object","additionalProperties":false,"required":["decision_id","decision","owner","status","effect"],"properties":{"decision_id":{"$ref":"#/$defs/exactIds/externalDecision"},"decision":{"type":"string","minLength":1},"owner":{"type":"string","minLength":1},"status":{"const":"Pending with owner"},"effect":{"type":"string","minLength":1}}},
+      "allOf":[{"contains":{"properties":{"decision_id":{"const":"C4-H01"}},"required":["decision_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"decision_id":{"const":"M1-LIFESTYLE-TEMPLATE"}},"required":["decision_id"]},"minContains":1,"maxContains":1},{"contains":{"properties":{"decision_id":{"const":"C4-L02-L04"}},"required":["decision_id"]},"minContains":1,"maxContains":1}]
+    }
+  }
+}

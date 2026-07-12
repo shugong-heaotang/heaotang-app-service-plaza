@@ -1,0 +1,102 @@
+{
+  "contract_version": "health-manager.mvp90-m1.security-authorization.v1",
+  "decision": {
+    "decision_id": "C4-S04",
+    "decision_maker_role": "平台安全负责人",
+    "decision_maker": "Platform security decision agent acting as the registered 平台安全负责人 for this work item",
+    "decision_evidence_ref": [
+      "work-item://AIW-20260712-HEALTH-M1-SECURITY-FREEZE",
+      "thread://019f54a1-6140-7690-ae1d-c96672f104bc",
+      "owner-role://平台安全负责人"
+    ],
+    "decided_at": "2026-07-12",
+    "scope": "M1 成年合成会员 PDCAR 首检查点的技术授权与威胁模型",
+    "version": "v1",
+    "status": "Accepted",
+    "executable": false,
+    "non_executable_reason": "技术安全合同已冻结；C4-H01、M1 专业模板会签和隐私用途/保留决定仍由各自 owner 决定，且尚无业务实现授权。"
+  },
+  "default_policy": "deny",
+  "subjects": [
+    {"subject_id":"adult_member_self","kind":"human","description":"经认证的成年会员本人","may_delegate":false},
+    {"subject_id":"unrelated_authenticated_person","kind":"human","description":"已登录但既非资源本人也无有效服务关系的人员","may_delegate":false},
+    {"subject_id":"health_manager","kind":"workforce","description":"身份、角色、服务关系与 M1 适用资格均有效的健康管理师","may_delegate":false},
+    {"subject_id":"qualified_professional","kind":"workforce","description":"身份、专业角色、资质范围、正式转介与服务关系均有效的医生或专业人员","may_delegate":false},
+    {"subject_id":"platform_support","kind":"workforce","description":"仅处理账号与技术支持的最小权限角色，不获得健康正文权限","may_delegate":false},
+    {"subject_id":"security_auditor","kind":"workforce","description":"只读最小审计元数据的独立安全审计角色","may_delegate":false},
+    {"subject_id":"ai_runtime","kind":"machine","description":"受平台委托、绑定会员授权目的与最小上下文的草案运行时；不是业务授权主体","may_delegate":false}
+  ],
+  "resources": [
+    {"resource_type":"ConsentGrant","owner_rule":"member_ref equals authenticated member","sensitivity":"restricted"},
+    {"resource_type":"HealthProfileItem","owner_rule":"member_ref plus valid purpose grant","sensitivity":"health-sensitive"},
+    {"resource_type":"AssessmentSession","owner_rule":"member_ref plus valid purpose grant","sensitivity":"health-sensitive"},
+    {"resource_type":"HealthGoal","owner_rule":"member_ref plus active relationship","sensitivity":"health-sensitive"},
+    {"resource_type":"HealthPlan","owner_rule":"member_ref plus active relationship","sensitivity":"health-sensitive"},
+    {"resource_type":"HealthPlanVersion","owner_rule":"parent plan ownership and exact version","sensitivity":"health-sensitive"},
+    {"resource_type":"HealthTask","owner_rule":"parent active plan version ownership","sensitivity":"health-sensitive"},
+    {"resource_type":"TaskFeedback","owner_rule":"member_ref and task ownership","sensitivity":"health-sensitive"},
+    {"resource_type":"CheckRecord","owner_rule":"member_ref plus active relationship and purpose","sensitivity":"health-sensitive"},
+    {"resource_type":"ServiceRecord","owner_rule":"member_ref plus provider relationship","sensitivity":"health-sensitive"},
+    {"resource_type":"TemplateVersion","owner_rule":"platform governed; no member ownership","sensitivity":"internal"},
+    {"resource_type":"AuditEvent","owner_rule":"platform governed; security auditor gets metadata only","sensitivity":"restricted-metadata"}
+  ],
+  "actions": [
+    {"action_id":"consent.read_self","subjects":["adult_member_self"],"resources":["ConsentGrant"],"effect":"read","prerequisites":["authenticated","self_resource"],"prohibitions":[]},
+    {"action_id":"consent.grant_change_withdraw","subjects":["adult_member_self"],"resources":["ConsentGrant"],"effect":"write","prerequisites":["authenticated","self_resource","exact_version"],"prohibitions":["proxy_change","withdrawal_block"]},
+    {"action_id":"member.read_self_pdcar","subjects":["adult_member_self"],"resources":["HealthProfileItem","AssessmentSession","HealthGoal","HealthPlan","HealthPlanVersion","HealthTask","TaskFeedback","CheckRecord","ServiceRecord"],"effect":"read","prerequisites":["authenticated","self_resource","purpose_allowed_when_required"],"prohibitions":["cross_member"]},
+    {"action_id":"member.submit_source_or_feedback","subjects":["adult_member_self"],"resources":["HealthProfileItem","AssessmentSession","HealthGoal","TaskFeedback"],"effect":"write","prerequisites":["authenticated","self_resource","valid_authorization","state_allows","exact_version","idempotency_key"],"prohibitions":["overwrite_source","write_professional_conclusion"]},
+    {"action_id":"member.confirm_plan_version","subjects":["adult_member_self"],"resources":["HealthPlanVersion"],"effect":"transition","prerequisites":["authenticated","self_resource","valid_authorization","state_is_member_confirmation","exact_version","approved_unexpired_template","idempotency_key"],"prohibitions":["confirm_other_member","confirm_ai_draft_directly"]},
+    {"action_id":"manager.read_assigned_minimum","subjects":["health_manager"],"resources":["HealthProfileItem","AssessmentSession","HealthGoal","HealthPlan","HealthPlanVersion","HealthTask","TaskFeedback","CheckRecord","ServiceRecord"],"effect":"read","prerequisites":["authenticated","role_valid","qualification_valid","active_service_relationship","valid_authorization","purpose_allowed"],"prohibitions":["full_profile_by_default","unassigned_access"]},
+    {"action_id":"manager.review_ordinary_pdcar","subjects":["health_manager"],"resources":["HealthGoal","HealthPlanVersion","HealthTask","CheckRecord","ServiceRecord"],"effect":"write","prerequisites":["authenticated","role_valid","qualification_valid","active_service_relationship","valid_authorization","state_allows","exact_version","approved_unexpired_template","sufficient_information","no_professional_or_emergency_block","idempotency_key"],"prohibitions":["diagnose","prescribe","close_professional_risk"]},
+    {"action_id":"professional.review_referred_minimum","subjects":["qualified_professional"],"resources":["HealthProfileItem","AssessmentSession","HealthPlanVersion","CheckRecord","ServiceRecord"],"effect":"read-write","prerequisites":["authenticated","role_valid","qualification_valid_for_action","formal_referral","active_service_relationship","valid_authorization","purpose_allowed","exact_version","idempotency_key_on_write"],"prohibitions":["access_beyond_referral","access_beyond_qualification"]},
+    {"action_id":"support.read_technical_metadata","subjects":["platform_support"],"resources":["ConsentGrant","HealthPlan","HealthTask","AuditEvent"],"effect":"read-metadata","prerequisites":["authenticated","support_role_valid","ticket_reference","approved_support_purpose"],"prohibitions":["health_body","professional_conclusion","bulk_export"]},
+    {"action_id":"security.audit_metadata","subjects":["security_auditor"],"resources":["AuditEvent"],"effect":"read-metadata","prerequisites":["authenticated","security_auditor_role","approved_audit_purpose","time_bounded_access"],"prohibitions":["health_body","identity_reconstruction","business_write"]},
+    {"action_id":"ai.read_minimum_context_and_draft","subjects":["ai_runtime"],"resources":["HealthProfileItem","AssessmentSession","HealthGoal","HealthPlanVersion","TaskFeedback","TemplateVersion"],"effect":"read-and-draft","prerequisites":["delegating_member_authenticated","explicit_ai_purpose_authorization","minimum_data_scope","approved_model_policy","approved_unexpired_template","correlation_id"],"prohibitions":["independent_business_authorization","activate_plan","final_professional_conclusion","diagnose","prescribe","tool_call_outside_allowlist"]}
+  ],
+  "server_denial_matrix": [
+    {"condition":"unauthenticated","http_status":401,"error_id":"HM_AUTHENTICATION_REQUIRED","fail_closed_state":"no_read_no_write","audit":true,"recovery":"establish a valid authenticated session"},
+    {"condition":"not_self_for_self_action","http_status":403,"error_id":"HM_RESOURCE_NOT_OWNED","fail_closed_state":"no_read_no_write","audit":true,"recovery":"use only the authenticated member's resource"},
+    {"condition":"cross_member_reference","http_status":404,"error_id":"HM_RESOURCE_NOT_FOUND","fail_closed_state":"non_enumerating_no_read_no_write","audit":true,"recovery":"supply an authorized same-member reference"},
+    {"condition":"no_active_service_relationship","http_status":403,"error_id":"HM_SERVICE_RELATIONSHIP_REQUIRED","fail_closed_state":"no_read_no_write","audit":true,"recovery":"establish an independently authorized active relationship"},
+    {"condition":"role_insufficient","http_status":403,"error_id":"HM_ROLE_NOT_AUTHORIZED","fail_closed_state":"no_read_no_write","audit":true,"recovery":"use a subject with the exact approved role"},
+    {"condition":"qualification_missing_or_expired","http_status":403,"error_id":"HM_QUALIFICATION_INVALID","fail_closed_state":"no_read_no_write","audit":true,"recovery":"independently verify a current qualification within scope"},
+    {"condition":"authorization_missing_withdrawn_or_expired","http_status":403,"error_id":"HM_AUTHORIZATION_NOT_ACTIVE","fail_closed_state":"no_read_no_write_no_background_use","audit":true,"recovery":"member creates a new explicit authorization version; withdrawn grant is never reused"},
+    {"condition":"resource_state_conflict","http_status":409,"error_id":"HM_RESOURCE_STATE_CONFLICT","fail_closed_state":"state_unchanged","audit":true,"recovery":"refresh and use an allowed transition"},
+    {"condition":"version_conflict","http_status":409,"error_id":"HM_VERSION_CONFLICT","fail_closed_state":"version_unchanged","audit":true,"recovery":"reload the current version and explicitly retry"},
+    {"condition":"template_unapproved_or_expired","http_status":422,"error_id":"HM_TEMPLATE_NOT_EXECUTABLE","fail_closed_state":"draft_or_current_state_unchanged","audit":true,"recovery":"independent reviewer approves a current template version"},
+    {"condition":"information_insufficient","http_status":422,"error_id":"HM_INFORMATION_INSUFFICIENT","fail_closed_state":"missing_information","audit":true,"recovery":"member or authorized worker supplies the explicitly missing minimum data"},
+    {"condition":"risk_or_discomfort_block","http_status":409,"error_id":"HM_HUMAN_REVIEW_REQUIRED","fail_closed_state":"paused_or_handoff_pending","audit":true,"recovery":"qualified human review records an allowed recovery point"},
+    {"condition":"idempotency_key_same_key_different_payload","http_status":409,"error_id":"HM_IDEMPOTENCY_CONFLICT","fail_closed_state":"original_result_preserved","audit":true,"recovery":"do not mutate the original request; use a new key only for a deliberate new operation"},
+    {"condition":"audit_write_failed","http_status":503,"error_id":"HM_AUDIT_WRITE_REQUIRED","fail_closed_state":"protected_operation_not_committed","audit":false,"recovery":"restore durable audit capability and retry with the same idempotency reference"},
+    {"condition":"ai_policy_or_tool_not_allowed","http_status":403,"error_id":"HM_AI_RUNTIME_NOT_AUTHORIZED","fail_closed_state":"no_context_release_no_tool_call_no_draft_promotion","audit":true,"recovery":"satisfy explicit purpose, model policy, template and tool allowlist gates"}
+  ],
+  "minimum_audit_fields": ["event_id","actor_ref","actor_role","action","resource_type","resource_ref","purpose","authorization_version","policy_version","template_version","outcome","reason_or_error_id","occurred_at","correlation_id","request_ref","idempotency_ref"],
+  "audit_forbidden_fields": ["health_body","otp","jwt","cookie","secret","full_phone","national_id","unnecessary_personal_identifier","ai_prompt_health_body","ai_output_health_body"],
+  "threat_model": [
+    {"threat_id":"T01","threat":"unauthorized read or write","controls":["default deny","exact role-action-resource check","purpose and grant check"],"verification":"negative tests for every subject-action pair"},
+    {"threat_id":"T02","threat":"cross-member IDOR and enumeration","controls":["owner predicate before lookup result disclosure","404 non-enumerating denial","audit repeated attempts"],"verification":"two-member synthetic cross-reference suite"},
+    {"threat_id":"T03","threat":"continued use after grant withdrawal or expiry","controls":["grant version checked at every protected operation","cache invalidation","no background continuation"],"verification":"withdraw/expire then read, write and AI retry all denied"},
+    {"threat_id":"T04","threat":"role or qualification impersonation","controls":["server-derived role","independent qualification registry","scope and expiry check"],"verification":"forged claims and expired qualification denied"},
+    {"threat_id":"T05","threat":"AI prompt injection or unauthorized tool use","controls":["untrusted content isolation","tool allowlist","minimum context","no final-state authority"],"verification":"synthetic injected profile text cannot expand tools, purpose or resources"},
+    {"threat_id":"T06","threat":"template or policy supply-chain tampering","controls":["immutable version","independent approval","integrity digest","expiry and rollback"],"verification":"unapproved, modified and expired versions denied"},
+    {"threat_id":"T07","threat":"replay and concurrent lost update","controls":["atomic idempotency","same-key payload binding","optimistic version check"],"verification":"replay, conflict and race tests"},
+    {"threat_id":"T08","threat":"audit bypass or partial commit","controls":["audit in protected transaction/outbox boundary","audit failure denies commit","append-only access"],"verification":"fault injection proves no protected commit without durable audit"},
+    {"threat_id":"T09","threat":"sensitive logs and support overreach","controls":["metadata-only audit","denylisted fields","role and ticket bounded support access"],"verification":"structured report secret/health-body scan and support negative tests"},
+    {"threat_id":"T10","threat":"frontend authorization bypass","controls":["all decisions repeated server-side","direct API negative tests"],"verification":"hidden/disabled UI bypass attempts remain denied"}
+  ],
+  "premises": [
+    {"premise_id":"P01","statement":"M1 is limited to an authenticated adult member acting for self with synthetic non-production data.","falsification_evidence":"minor, proxy, dependent, real-member or production scope is requested","review_trigger":"scope expansion","owner":"产品与隐私/法律负责人"},
+    {"premise_id":"P02","statement":"Every workforce read has a server-verifiable active service relationship and purpose.","falsification_evidence":"a workflow requires pool-wide or relationship-free member access","review_trigger":"assignment model changes","owner":"平台安全负责人"},
+    {"premise_id":"P03","statement":"Qualification status and action scope can be independently verified at request time.","falsification_evidence":"qualification source is absent, stale, self-asserted or cannot express action scope","review_trigger":"qualification provider or policy changes","owner":"专业负责人和平台安全负责人"},
+    {"premise_id":"P04","statement":"Authorization version, withdrawal and expiry are available synchronously for every protected operation.","falsification_evidence":"cached or asynchronous authorization permits use after withdrawal","review_trigger":"authorization storage or caching changes","owner":"隐私/法律负责人和平台安全负责人"},
+    {"premise_id":"P05","statement":"AI runtime is a constrained delegate that cannot approve, activate or write final professional conclusions.","falsification_evidence":"a tool, model or workflow can promote its own output or widen its context","review_trigger":"model, tool, prompt, provider or autonomy changes","owner":"AI 与平台安全负责人"},
+    {"premise_id":"P06","statement":"Protected writes can fail closed when durable audit recording fails.","falsification_evidence":"an implementation commits business state before audit durability is guaranteed","review_trigger":"transaction, queue or audit architecture changes","owner":"平台安全与运维负责人"}
+  ],
+  "review": {"scheduled_review_date":"2026-08-12","triggers":["new subject role or resource type","minor/proxy/real data/production scope","authorization or retention policy change","qualification source change","AI model/provider/tool/prompt policy change","template signing or approval change","new external processor","security incident or repeated denial anomaly","authorization bypass finding","audit durability architecture change"],"compatibility":"Additive actions require new negative tests; broader data, subjects, purposes or weaker denial is breaking and requires a new reviewed version.","migration":"Existing grants never inherit a broader purpose; new policy/template versions require explicit compatibility review and cannot retroactively authorize old data use."},
+  "forbidden_alternatives": ["frontend-only hiding","administrator superuser bypass","invented future scope","postponed server authorization","implicit consent","AI self-authorization","reuse of withdrawn grant","fail-open on audit failure"],
+  "external_dependencies": [
+    {"decision_id":"C4-H01","decision":"professional action boundary signoff","owner":"和奥堂医生集团专业负责人","status":"Pending with owner","effect":"blocks executable professional actions"},
+    {"decision_id":"M1-LIFESTYLE-TEMPLATE","decision":"M1 narrow lifestyle template professional signoff","owner":"和奥堂医生集团专业负责人","status":"Pending with owner","effect":"blocks executable template use"},
+    {"decision_id":"C4-L02-L04","decision":"privacy purpose, retention, export/deletion and AI data use","owner":"隐私与法律负责人","status":"Pending with owner","effect":"blocks real data and production use"}
+  ]
+}
