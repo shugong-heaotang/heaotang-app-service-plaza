@@ -21,6 +21,27 @@
     "reading_list_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
     "checklist_path": { "type": "string", "minLength": 1 },
     "checklist_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "previous_attempt_path": { "type": "string", "minLength": 1, "pattern": "^(?![A-Za-z]:|/|.*(?:^|/)\\.\\.(?:/|$)).+" },
+    "previous_attempt_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "remediation_rereads": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["source_path", "presented_at", "presentation_sha256", "presentation_nonce", "confirmed_at", "source_sha256", "confirmed_by", "confirmation_method"],
+        "properties": {
+          "source_path": { "type": "string", "minLength": 1, "pattern": "^(?![A-Za-z]:|/|.*(?:^|/)\\.\\.(?:/|$)).+" },
+          "presented_at": { "type": "string", "format": "date-time" },
+          "presentation_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "presentation_nonce": { "type": "string", "pattern": "^[a-f0-9]{32}$" },
+          "confirmed_at": { "type": "string", "format": "date-time" },
+          "source_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+          "confirmed_by": { "type": "string", "minLength": 1 },
+          "confirmation_method": { "const": "interactive-path-nonce-after-full-output" }
+        }
+      }
+    },
     "responses": {
       "type": "array",
       "minItems": 8,
@@ -38,5 +59,11 @@
       }
     },
     "remediation_sources": { "type": "array", "uniqueItems": true, "items": { "type": "string", "minLength": 1 } }
-  }
+  },
+  "allOf": [
+    {
+      "if": { "properties": { "attempt_number": { "minimum": 2 } }, "required": ["attempt_number"] },
+      "then": { "required": ["previous_attempt_path", "previous_attempt_sha256", "remediation_rereads"] }
+    }
+  ]
 }
