@@ -1984,6 +1984,76 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "正式预登记，尚未激活。planned 工作树已快进至派发集成基线 5a263fa1c99754e313bd202ac2d6f39ca877d0c6，HEAD/merge-base 一致且 clean，但模块仍只读。自动激活必须同时满足：C4-H01 专业动作边界书面会签；仅限 M1 安全生活方式模板的适用范围、禁忌、停止/转人工条件、版本和审核人会签；C4-S04 精确权限、服务端拒绝矩阵、审计字段与威胁模型冻结。只授权合同与合成一致性首检查点；共享前端、后端、环境与部署另立工作项。",
                            "handoff_record":  "docs/project-management/service-plaza/health-mvp90-m1-readiness-2026-07-12.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-HEALTH-M1-DECISION-CHANNELS-DISPATCH",
+                           "title":  "健康 M1 专业与安全决策通道正式派发",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-m1-decision-channels-dispatch",
+                           "branch":  "codex/health-m1-decision-channels-dispatch",
+                           "base_commit":  "ef66b98113862d4b75bfe96df2966db52d65fddf",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-12-health-m1-decision-channels-dispatch*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-health-m1-decision-channels-dispatch*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-health-m1-decision-channels-dispatch*.json",
+                                                 "docs/project-management/notices/2026-07-12-health-mvp90-m1-professional-signoff-task-order.md",
+                                                 "docs/project-management/notices/2026-07-12-health-mvp90-m1-security-freeze-task-order.md",
+                                                 "docs/project-management/service-plaza/health-mvp90-m1-decision-channels-2026-07-12.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "只建立 C4-H01、M1 窄模板和 C4-S04 的正式决策接收通道；不替责任人签字，不激活 M1，不授权业务代码、环境、真实健康数据或资金操作。",
+                           "handoff_record":  "docs/project-management/service-plaza/health-mvp90-m1-decision-channels-2026-07-12.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-HEALTH-M1-PROFESSIONAL-SIGNOFF",
+                           "title":  "健康 M1 C4-H01 与窄模板专业会签材料包",
+                           "owner":  "Health professional signoff coordinator",
+                           "owner_role":  "和奥堂医生集团专业负责人会签协调",
+                           "status":  "planned",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-m1-professional-signoff",
+                           "branch":  "codex/health-m1-professional-signoff",
+                           "base_commit":  "ef66b98113862d4b75bfe96df2966db52d65fddf",
+                           "allowed_paths":  [
+                                                 "docs/project-management/modules/health-manager/health-manager-mvp90-m1-professional-decision-packet.md",
+                                                 "docs/project-management/modules/health-manager/health-manager-mvp90-m1-professional-signoff-receipt.md",
+                                                 "contracts/modules/health-manager/development-checklists/2026-07-12-health-m1-professional-signoff*.json",
+                                                 "contracts/modules/health-manager/governance-exams/2026-07-12-health-m1-professional-signoff*.json",
+                                                 "contracts/modules/health-manager/implementation-records/2026-07-12-health-m1-professional-signoff*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "决策通道 thread 019f54a1-2847-7a71-b0ea-ee1ec403f29b。只允许整理 C4-H01 与仅限 M1 的安全生活方式模板决策包、回执和治理证据；协调 Agent 不得代替和奥堂医生集团专业负责人签字，不得扩大为全量 C4-H06。",
+                           "handoff_record":  "docs/project-management/modules/health-manager/health-manager-mvp90-m1-professional-signoff-receipt.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-HEALTH-M1-SECURITY-FREEZE",
+                           "title":  "健康 M1 C4-S04 权限审计与威胁模型冻结",
+                           "owner":  "Platform security decision agent",
+                           "owner_role":  "平台安全负责人",
+                           "status":  "planned",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-m1-security-freeze",
+                           "branch":  "codex/health-m1-security-freeze",
+                           "base_commit":  "ef66b98113862d4b75bfe96df2966db52d65fddf",
+                           "allowed_paths":  [
+                                                 "docs/project-management/modules/health-manager/health-manager-mvp90-m1-security-freeze.md",
+                                                 "docs/project-management/modules/health-manager/health-manager-mvp90-m1-security-freeze-receipt.md",
+                                                 "contracts/modules/health-manager/mvp90-m1/security-authorization.v1.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/security-authorization.v1.schema.json",
+                                                 "contracts/modules/health-manager/development-checklists/2026-07-12-health-m1-security-freeze*.json",
+                                                 "contracts/modules/health-manager/governance-exams/2026-07-12-health-m1-security-freeze*.json",
+                                                 "contracts/modules/health-manager/implementation-records/2026-07-12-health-m1-security-freeze*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "决策通道 thread 019f54a1-6140-7690-ae1d-c96672f104bc。只允许 C4-S04 主体/资源/动作、服务端拒绝矩阵、审计字段、威胁模型及治理证据；禁止业务实现、真实健康数据和替专业/隐私角色签字。",
+                           "handoff_record":  "docs/project-management/modules/health-manager/health-manager-mvp90-m1-security-freeze-receipt.md"
                        }
                    ]
 }
