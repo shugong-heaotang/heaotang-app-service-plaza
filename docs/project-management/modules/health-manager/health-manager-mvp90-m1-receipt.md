@@ -6,7 +6,15 @@
 - registered base：`4796e8fd1ad952e8788b51c0f72cf393466652fa`
 - activation HEAD：`cb3fd5548ab578327a81e70e06237f2daa1ffea3`
 - owner：健康大管家负责人
-- status：`M1-P1 handoff ready / platform review pending`
+- status：`M1-P1 Go / closeout in progress`
+
+## P1 平台结论
+
+- corrected source：`6d483f12cd55d3083b4214e8957c5f874a2f751d`
+- superseded source：`869e992c67e8d91262af8fc0391e4043f442b29f`，保留历史且不作为独立权威集成提交
+- final squashed controlled integration：`8d6fe1d5fd45a005abf950651b8ddfb23dfbc306`
+- verdict：`P1 Go`
+- 本结论仅授权 P1 closeout；P2、共享实现、环境和真实活动仍须独立工作项。
 
 ## P0 平台结论
 
