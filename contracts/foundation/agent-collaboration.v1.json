@@ -2427,7 +2427,7 @@
                            "title":  "健康大管家 HM-R0 Accepted for development planning 正式冻结",
                            "owner":  "Health Manager module agent",
                            "owner_role":  "健康大管家负责人",
-                           "status":  "handoff-ready",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r0-formal-freeze",
                            "branch":  "codex/health-manager-r0-formal-freeze",
@@ -2442,7 +2442,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "F0 source 45a49c4因checklist completed_at晚于exam而被独立复核Exact revision，原三文件保持历史不改写；F0-R2 source f63c4487已Go并集成。F1 source 384436c7经独立复核Go：6路径越界0，27项为2 Accepted/24 Pending with owner/1 Exact revision，分类7/16/4；Schema valid与15负例、checklist28/28、exam100、IR、总合同、UTF8和diff均通过；受控合并提交fb1b8820。当前仅Accepted for development planning且executable=false，模块转handoff-ready等待新阶段裁定；F2/P3、共享实现、真实数据、环境、医疗服务、收费、资金、部署和生产均未授权。",
+                           "migration_note":  "F0-R2与F1均已Go并受控集成；F1 source 384436c7、merge fb1b8820、权威验收034e46b，27项2/24/1、分类7/16/4，Schema与15负例、checklist28/28、exam100、IR和总门禁通过。本工作项仅完成F0/F1开发规划冻结并收口integrated；后续F2由独立AIW-20260713-HEALTH-R0-F2-AUDIT承接，不继承业务或真实活动权限。F3/P3、共享实现、真实数据、环境、医疗服务、收费、资金、部署和生产均未授权。",
                            "handoff_record":  "docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
                        },
                        {
@@ -2495,7 +2495,7 @@
                            "title":  "健康大管家 HM-R0 F2 专业与责任边界审计派发",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "handoff-ready",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/health-r0-f2-dispatch",
                            "branch":  "codex/health-r0-f2-dispatch",
@@ -2510,7 +2510,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "派发提交0be5d7dd包含正式任务书、平台checklist26/26、exam100、IR和报告；仅派发R0-F2文档、机器合同和证据审计。Pending无新owner证据不得提升，executable保持false；F3/P3及所有业务、真实活动继续No-Go。模块工作项预登记planned，待专用分支/工作树从最终激活基线创建并核验clean后转active。",
+                           "migration_note":  "派发提交0be5d7dd包含正式任务书、平台checklist26/26、exam100、IR和报告；预登记提交7d0beeb已进入权威基线。模块专用分支/worktree实际创建并同步到7d0beeb，clean、无路径冲突，现正式激活。Pending无新owner证据不得提升，executable保持false；F3/P3及所有业务、真实活动继续No-Go。平台派发工作项收口integrated。",
                            "handoff_record":  "docs/project-management/notices/2026-07-13-health-r0-f2-audit-task-order.md"
                        },
                        {
@@ -2518,11 +2518,11 @@
                            "title":  "健康大管家 HM-R0 F2 专业与责任边界审计",
                            "owner":  "Health Manager module agent",
                            "owner_role":  "健康大管家负责人",
-                           "status":  "planned",
+                           "status":  "active",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r0-f2-audit",
                            "branch":  "codex/health-manager-r0-f2-audit",
-                           "base_commit":  "0be5d7dd7368d90fb1a73e0a2160bcf33fe06710",
+                           "base_commit":  "7d0beeb60c7354b438f682d2ae16c40ead28dca1",
                            "allowed_paths":  [
                                                  "docs/project-management/modules/health-manager/health-manager-r0-formal-freeze-decision.md",
                                                  "docs/project-management/modules/health-manager/health-manager-r0-f2-audit.md",
@@ -2538,7 +2538,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "预登记R0-F2审计。激活后先完成preflight/current checklist/exam100/receipt；只可逐项审计六类边界并保持无新owner证据的Pending，executable=false。F3/P3、业务代码、共享实现、API/DB、真实数据、环境、医疗、收费、资金、部署和生产均No-Go。",
+                           "migration_note":  "R0-F2审计正式激活；branch codex/health-manager-r0-f2-audit，worktree C:/Users/shugo/Documents/worktrees/heaotang-health-r0-f2-audit，activation base 7d0beeb，创建与同步后clean。先完成preflight/current checklist/exam100/receipt；只可逐项审计六类边界并保持无新owner证据的Pending，executable=false。F3/P3、业务代码、共享实现、API/DB、真实数据、环境、医疗、收费、资金、部署和生产均No-Go。",
                            "handoff_record":  "docs/project-management/notices/2026-07-13-health-r0-f2-audit-task-order.md"
                        },
                        {
