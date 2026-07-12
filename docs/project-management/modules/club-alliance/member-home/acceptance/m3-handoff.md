@@ -21,11 +21,22 @@
 
 合同检查点证据：
 
-- checklist：contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-membership-contract-r1.json（28/28 completed）；
-- exam：contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-membership-contract-r1-attempt-1.json（100 / passed）；
-- implementation record：IR-20260712-CLUB-MEMBER-HOME-MEMBERSHIP-CONTRACT-R1；
+- current checklist：contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-membership-contract-r2.json（28/28 completed）；
+- current exam：contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-membership-contract-r2-attempt-1.json（100 / passed）；
+- implementation record：IR-20260712-CLUB-MEMBER-HOME-MEMBERSHIP-CONTRACT-R2；
 - conformance：15/15 passed；
 - 结论：Contract Go / Implementation and Environment No-Go。
+
+### R1 快照格式根因与隔离
+
+- symptom：R1 checklist 在完成勾选时被 apply_patch 写成两个结尾换行，Git staged diff 报 new blank line at EOF；合同、Schema 与 conformance 内容本身未受影响。
+- causal chain：初始 checklist 由官方脚本生成；勾选时采用“删除后完整重建文件”的补丁，补丁生成器在已有 LF 之后又添加空行；attempt-1 随后以该字节快照的 SHA 出题并通过，因而不得原地删空行或改写试卷。
+- preserved checklist SHA-256：8cea0d38c65590d54f060bd8b76be80d75a2397ad8f3e924b35000f87d64008b。
+- preserved exam SHA-256：e6deb3de77cbfa0413ca6c75d244b0b22315c9baf954e5c7ed774d0b36e9b2db。
+- isolation：两份 R1 原字节快照已迁入 contracts/modules/club-alliance/invalidated-snapshots/member-home-membership-contract/r1/；迁移前后 SHA 完全一致。
+- blocks：R1 不再作为 current checklist/exam，也不能支撑最终实现记录或 Contract Go。
+- does_not_block：已完成的状态分层合同、Schema、fixtures、15 个 conformance 测试及其内容审查；它们由新的 R2 current checklist、随机考试和 IR 重新收口。
+- prevention：R2 勾选采用精确 JSON 更新并在考试前运行 diff --check；任何快照格式缺陷都先隔离原字节，再生成新记录，禁止篡改已评分证据。
 
 ## 1. 已授权范围
 

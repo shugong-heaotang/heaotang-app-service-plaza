@@ -1,12 +1,12 @@
 {
   "contract_version": "implementation-record.v1",
-  "record_id": "IR-20260712-CLUB-MEMBER-HOME-MEMBERSHIP-CONTRACT-R1",
-  "title": "H2 会员关系状态语义合同纠正首检查点",
+  "record_id": "IR-20260712-CLUB-MEMBER-HOME-MEMBERSHIP-CONTRACT-R2",
+  "title": "H2 会员关系状态语义合同纠正最终收口",
   "date": "2026-07-12",
   "status": "verified",
   "objective": "把会员首页的申请历史、会员关系与俱乐部生命周期从错误的扁平状态数组中分离，并以 Schema、合成夹具和负向 conformance 固化边界。",
-  "governance_checklist": "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-membership-contract-r1.json",
-  "governance_exam": "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-membership-contract-r1-attempt-1.json",
+  "governance_checklist": "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-membership-contract-r2.json",
+  "governance_exam": "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-membership-contract-r2-attempt-1.json",
   "governance_inputs": [
     "contracts/foundation/governance-reading-list.v1.json",
     "AGENTS.md",
@@ -70,8 +70,10 @@
     "git diff --check"
   ],
   "evidence": [
-    "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-membership-contract-r1.json",
-    "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-membership-contract-r1-attempt-1.json",
+    "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-membership-contract-r2.json",
+    "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-membership-contract-r2-attempt-1.json",
+    "contracts/modules/club-alliance/invalidated-snapshots/member-home-membership-contract/r1/checklist-r1.json",
+    "contracts/modules/club-alliance/invalidated-snapshots/member-home-membership-contract/r1/exam-r1-attempt-1.json",
     "contracts/modules/club-alliance/member-home/test_member_home_contracts.py",
     "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md"
   ],
@@ -80,6 +82,8 @@
     "left describes historical club membership and must not appear in the current my-clubs list",
     "suspended is optional and cannot be emitted until a dedicated backend implementation and acceptance checkpoint supports it",
     "dissolved describes club lifecycle and must not be encoded as membership status",
+    "the R1 checklist and exam were byte-preserved under invalidated-snapshots because an EOF blank-line defect could not be repaired without invalidating the graded SHA",
+    "the R2 checklist and exam are current, clean and independently bind the final contract artifacts",
     "this checkpoint does not authorize or claim frontend, backend, deployment, environment, or production completion"
   ],
   "implementation_mode": "ai-assisted"
