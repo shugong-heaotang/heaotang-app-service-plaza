@@ -7,6 +7,16 @@
 - packet status：`Package Ready candidate after platform Exact revision; professional decisions remain Pending with owner`
 - executable：`false`
 
+## 0. 真人裁决进度
+
+- `C4-H01`：张树功于 2026-07-12 基于 `v1-proposed` 权威 17 项矩阵直接回复“确认 C4-H01，按上述17项职责边界 Accepted。”已忠实录入，仍 `executable=false`，等待平台结构、版本、身份范围与联合门禁复核。
+- `M1-LIFESTYLE-TEMPLATE`：张树功于 2026-07-12 基于 `v1-proposed` 权威模板回复 Accepted；独立 reviewer=张树功，生效日 2026-07-12，到期日 2026-10-10。已忠实录入，仍 `executable=false`，且不接受全量 C4-H06。
+- `MVP-A001`—`MVP-A015`：张树功于 2026-07-12 基于 `v1-proposed` 权威 15 场景逐项回复 Accepted，并给出 overall Accepted；已忠实录入，仍 `executable=false`。
+
+15 场景复审条件：范围扩大、安全事件、规则或专业前提变化时重新审核。该条件记录在本 decision packet、receipt 和 IR，不改变当前 scenario Schema。
+
+张树功的身份权限仅为 `Provisional Verified / development-only`；本裁决不授权真实会员、真实身份/健康数据、医疗服务、诊断、处方、真实风险处置、环境、部署、收费、资金、外部合作或生产。
+
 ## 1. 决策范围
 
 本包只请求两项正式决定：
