@@ -1901,6 +1901,29 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "evidence source 9486d25d545a2ffd11ce871bad82fb0b0e6a344c 以 APP 00854ba 受控集成，并包含于 final APP 4a9b42e；checklist28/28、exam100、IR/Handoff、UTF8、diff 通过。",
                            "handoff_record":  "docs/project-management/modules/club-alliance/member-home/handoff-m2-state-backend.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-CLUB-MEMBER-HOME-M3-ACCEPTANCE",
+                           "title":  "H2 会员首页测试环境四身份验收",
+                           "owner":  "H2 M3 acceptance agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-member-home-m3-acceptance",
+                           "branch":  "codex/club-member-home-m3-acceptance",
+                           "base_commit":  "37c6c3aa65b9a1332732d552063d6e06a2d7643a",
+                           "allowed_paths":  [
+                                                 "docs/project-management/modules/club-alliance/member-home/acceptance/m3/",
+                                                 "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md",
+                                                 "docs/project-management/service-plaza/handoff-log.md",
+                                                 "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-m3-acceptance*.json",
+                                                 "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-m3-acceptance*.json",
+                                                 "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-m3-acceptance*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "从 combined local Go APP 37c6c3a / backend e4126590 创建独立验收工作树，clean。只允许测试环境可回滚部署、现有 fixture 的 Plan/Apply/Inspect/Cleanup/RestoreVerify、四合成身份、浏览器/网络/DB脱敏证据和最终恢复；禁止代码/Schema修改、生产、真实会员、真实资金、直接DB捷径和未授权OTP重复申请。",
+                           "handoff_record":  "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md"
                        }
                    ]
 }
