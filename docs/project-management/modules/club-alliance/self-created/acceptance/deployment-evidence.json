@@ -3,11 +3,13 @@
   "environment": "test",
   "base_url": "https://heaotang.cn",
   "app_source_commit": "2c4b295e6fd625a2df24957f7b8becbc28ad1dcf",
-  "backend_source_commit": "a998812cf44dc449d85b726706d4ae2573179860",
+  "backend_source_commit": "98426ff83a1218080019faa377c152a81ecca437",
   "backend": {
-    "deployed_binary_sha256": "9edd8cf44f04b80e8d8adf821b41e551052a733a40d78ad764e6de2757778136",
-    "remote_backup": "/root/heaotang-backups/20260712-081106.tar.gz",
-    "local_backup": "D:/Backup/heaotang-test-server/20260712-081106/test-server-state.tar.gz"
+    "deployed_binary_sha256": "fec7bcbb58d6186d9c384b1b837479f592d978c145ce09c46e002763d9c565f1",
+    "deployed_at": "2026-07-12T01:58:45.2212882Z",
+    "remote_backup": "/root/heaotang-backups/20260712-095800.tar.gz",
+    "local_backup": "D:/Backup/heaotang-test-server/20260712-095800/test-server-state.tar.gz",
+    "local_backup_sha256": "2b24a9d07588eace04ae4bbfa448e6a9ace23da0ddd064c0f90945acf8306f1f"
   },
   "frontend": {
     "asset": "assets/index-6r_HRkaO.js",
@@ -28,5 +30,7 @@
   },
   "secrets_rotated": false,
   "secrets_persisted": false,
-  "production": false
+  "production": false,
+  "h2_entry_go": false,
+  "scope_note": "combined backend is reusable upstream evidence only; this deployment does not grant H2 Entry Go"
 }

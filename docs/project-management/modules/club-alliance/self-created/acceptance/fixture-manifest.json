@@ -1,8 +1,10 @@
 {
   "contract_version": "club-sc-t0-fixture.v1",
-  "captured_at": "2026-07-12T00:48:00Z",
+  "captured_at": "2026-07-12T02:01:00Z",
   "seed": "HEAOTANG-CA-SC-20260712-V1",
-  "fixture_prefix": "T0-SC-20260712",
+  "run_id": "club-sc-t0-20260712-100100",
+  "fixture_prefix": "T0-SC-20260712-100100",
+  "unique_run_selector": true,
   "environment": "test",
   "club_count": 10,
   "expected_self_created_active": 5,
@@ -15,18 +17,18 @@
     "standard_health_active": 1,
     "standard_general_inactive": 1
   },
-  "self_created_ids": [45, 46, 47, 48, 49],
-  "non_self_created_ids": [50, 52, 51, 53, 54],
+  "self_created_ids": [55, 56, 57, 58, 59],
+  "non_self_created_ids": [60, 61, 62, 63, 64],
   "real_data": false,
   "secrets_persisted": false,
-  "cleanup_selector": "historical fixed prefix only; superseded by unique run selector",
+  "cleanup_selector": "exact unique run prefix plus run-owned application message and idempotency keys",
   "cleanup": {
-    "executed_at": "2026-07-12T01:08:00Z",
+    "executed_at": "2026-07-12T02:02:00Z",
     "remaining_clubs": 0,
     "remaining_join_applications": 0,
     "remaining_members": 0,
-    "remaining_idempotency_keys": null,
+    "remaining_idempotency_keys": 0,
     "database_ready": true
   },
-  "status": "historical-cleanup-incomplete"
+  "status": "cleaned"
 }

@@ -9,6 +9,14 @@
     "ready": true,
     "database_ready": true
   },
+  "current_backend_deployment": {
+    "source_commit": "98426ff83a1218080019faa377c152a81ecca437",
+    "binary_sha256": "fec7bcbb58d6186d9c384b1b837479f592d978c145ce09c46e002763d9c565f1",
+    "remote_backup": "/root/heaotang-backups/20260712-095800.tar.gz",
+    "local_backup_sha256": "2b24a9d07588eace04ae4bbfa448e6a9ace23da0ddd064c0f90945acf8306f1f",
+    "ready": true,
+    "database_ready": true
+  },
   "frontend": {
     "executed_at": "2026-07-12T00:50:50.6688477Z",
     "expected_failure_observed": true,
@@ -19,10 +27,19 @@
     "page_status": 200
   },
   "database": {
-    "restore_exercised": false,
-    "integrity_verified": false,
-    "status": "pending-remediation"
+    "executed_at": "2026-07-12T01:50:00Z",
+    "method": "sqlite online backup restored into isolated temporary database",
+    "restore_exercised": true,
+    "live_database_unchanged": true,
+    "integrity_verified": true,
+    "integrity_check": "ok",
+    "schema_object_count": 400,
+    "backup_restore_dump_sha256_match": true,
+    "temporary_files_removed": true,
+    "backend_backup_archive_sha256": "74c62b73cad2d453ff07e6b25976f1d0a4a618a91240db86ed356c702f0b3e3d",
+    "frontend_backup_archive_sha256": "88f6976a8d07e474c00ff875ce37617d62e415d31d535d99f026488d3b22d5bd",
+    "status": "pass"
   },
-  "result": "no-go-pending-database-restore",
+  "result": "pass",
   "secrets_persisted": false
 }

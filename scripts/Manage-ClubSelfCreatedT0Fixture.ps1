@@ -143,6 +143,11 @@ printf '%s|%s|%s|%s\n' "$integrity" "$schema_count" "$backup_dump_hash" "$restor
 }
 
 if ($Operation -eq "Cleanup") {
+  $fixtureIdRows = Invoke-RemoteSql -Sql "SELECT id FROM clubs WHERE code IN ($quotedCodes) ORDER BY id;"
+  $fixtureIds = @()
+  if ($fixtureIdRows) {
+    $fixtureIds = @($fixtureIdRows -split "`n" | ForEach-Object { [int64]$_.Trim() })
+  }
   $cleanupSql = @"
 BEGIN IMMEDIATE;
 DELETE FROM api_idempotency_keys WHERE operation='club.apply-join' AND idempotency_key LIKE $(Quote-Sql ($RunId + '-%'));
@@ -156,8 +161,17 @@ COMMIT;
   if ([int]$remaining -ne 0) { throw "Fixture cleanup did not remove all synthetic clubs." }
   $remainingIdempotency = Invoke-RemoteSql -Sql "SELECT COUNT(*) FROM api_idempotency_keys WHERE operation='club.apply-join' AND idempotency_key LIKE $(Quote-Sql ($RunId + '-%'));"
   if ([int]$remainingIdempotency -ne 0) { throw "Fixture cleanup did not remove this run's idempotency keys." }
+  $remainingApplications = Invoke-RemoteSql -Sql "SELECT COUNT(*) FROM club_join_applications WHERE message LIKE $(Quote-Sql ($RunId + '%'));"
+  if ([int]$remainingApplications -ne 0) { throw "Fixture cleanup did not remove this run's join applications." }
+  $remainingMembers = 0
+  if ($fixtureIds.Count -gt 0) {
+    $remainingMembers = Invoke-RemoteSql -Sql "SELECT COUNT(*) FROM club_members WHERE club_id IN ($($fixtureIds -join ','));"
+  }
+  if ([int]$remainingMembers -ne 0) { throw "Fixture cleanup did not remove this run's members." }
   $manifest.operation = "cleanup"
   $manifest.remaining_clubs = 0
+  $manifest.remaining_join_applications = 0
+  $manifest.remaining_members = 0
   $manifest.remaining_idempotency_keys = 0
   $manifest | ConvertTo-Json -Depth 6
   exit 0
