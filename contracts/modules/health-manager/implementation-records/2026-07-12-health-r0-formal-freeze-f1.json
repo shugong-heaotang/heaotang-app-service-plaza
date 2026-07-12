@@ -1,0 +1,81 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-HEALTH-R0-FORMAL-FREEZE-F1",
+  "title": "健康大管家 HM-R0 R0-F1 开发规划正式冻结决定",
+  "date": "2026-07-13",
+  "status": "implemented",
+  "objective": "基于 authoritative HEAD 1927ae133fdd70117f5358dc3485492781b7bc23，形成 HM-R0 唯一 Accepted for development planning 状态，将27项未决决定逐项分类并以严格机器合同保持专业、隐私、商业、环境和生产边界。",
+  "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-12-health-r0-formal-freeze-f1.json",
+  "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-12-health-r0-formal-freeze-f1-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/module-dependencies/health-manager.v1.json",
+    "contracts/modules/health-manager/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-professional-signoff-receipt.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-security-freeze-receipt.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.ai-collaboration-safety",
+    "foundation.authorization-idempotency",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/modules/health-manager/hm-r0-formal-freeze.v1.json",
+    "contracts/modules/health-manager/hm-r0-formal-freeze.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/modules/health-manager/health-manager-r0-formal-freeze-decision.md",
+    "contracts/modules/health-manager/hm-r0-formal-freeze.v1.json",
+    "contracts/modules/health-manager/hm-r0-formal-freeze.v1.schema.json",
+    "contracts/modules/health-manager/development-checklists/2026-07-12-health-r0-formal-freeze-f1.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-12-health-r0-formal-freeze-f1-attempt-1.json",
+    "contracts/modules/health-manager/implementation-records/2026-07-12-health-r0-formal-freeze-f1.json"
+  ],
+  "verification": [
+    "checkpoint state reports active work item, branch and authoritative HEAD 1927ae133fdd70117f5358dc3485492781b7bc23 with a clean worktree before F1 edits",
+    "platform and module dependency declarations remain development Go; acceptance partial-go; release and operations pending",
+    "F1 current checklist completed 28 of 28 with current source hashes",
+    "checklist completed_at 2026-07-12T21:19:47.4124916Z precedes exam generated_at 2026-07-12T21:19:56.9385167Z and exam completed_at 2026-07-12T21:20:06.0651582Z",
+    "F1 governance exam attempt 1 passed with score 100",
+    "machine contract contains the exact ordered 27 decision IDs with status counts Accepted 2, Pending with owner 24, Exact revision 1",
+    "classification counts are blocks-development 7, blocks-real-data-environment 16, does-not-block-synthetic 4",
+    "C4-H01 and C4-S04 are Accepted only in their signed non-executable development scopes; C4-T06 is an Exact revision that separates planning freeze from PR merge",
+    "Draft 2020-12 valid instance ACCEPT and all 15 negative mutations REJECT",
+    "every path evidence reference exists and every git evidence reference resolves to the referenced commit and path",
+    "top-level executable remains false, production identity remains Pending, PR auto-merge remains false and P3 remains unauthorized"
+  ],
+  "evidence": [
+    "docs/project-management/modules/health-manager/health-manager-r0-formal-freeze-decision.md",
+    "contracts/modules/health-manager/hm-r0-formal-freeze.v1.json",
+    "contracts/modules/health-manager/hm-r0-formal-freeze.v1.schema.json",
+    "contracts/modules/health-manager/development-checklists/2026-07-12-health-r0-formal-freeze-f1.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-12-health-r0-formal-freeze-f1-attempt-1.json",
+    "contracts/modules/health-manager/implementation-records/2026-07-12-health-r0-formal-freeze-f1.json"
+  ],
+  "premises": [
+    "F0-R2 has been independently accepted and integrated into authoritative HEAD 1927ae133fdd70117f5358dc3485492781b7bc23",
+    "PR number 1 and PR number 2 remain Draft and read-only; this F1 checkpoint cannot merge them",
+    "Accepted for development planning is not business implementation, real-data, environment, medical service, charging, deployment or production authorization",
+    "all contracts and accepted professional or security evidence remain executable=false",
+    "F1 checkpoint remains a candidate until independent platform review and must not be self-marked integrated",
+    "F2 and P3 are not started by this implementation record"
+  ],
+  "implementation_mode": "ai-assisted"
+}
