@@ -126,7 +126,9 @@
 
 应用内浏览器已恢复并成功读取目标 URL、title、DOM、viewport 与静态资产，因此原“浏览器 backend 不可用”阻塞关闭。当前无凭据直达显示标准俱乐部首页，heading 为“俱乐部联盟 / 选择俱乐部服务”，`data-member-home-state` 数量为 0；这不足以证明会员首页或 unauthorized 状态通过。
 
-阻塞已转化为部署路由/会话进入条件核对：先确认 `index-DCYGiKy4.js` 是否仍是批准 M3 制品及会员首页的合法进入条件，再决定是否启用合成身份。未核对前不请求 OTP、不读取会话秘密、不执行 fixture、不重复部署。证据见 `acceptance/m3/2026-07-12-browser-resume.md`。
+现场重新下载 `index-DCYGiKy4.js`，SHA-256=`ce2a254c66d46505260ef89f52c9acda0c0707a24a96d0f392cdfe42adaa3de7`，与冻结 M3 制品一致；`/ready`=200，health status=ok、数据库连接正常。源码合同确认会员首页只在 `authenticated + empty query` 时加载，因此无凭据显示标准首页不是部署漂移。
+
+下一阻塞精确收敛为合成身份浏览器会话：须先重新核对 OTP UTC 日容量，再按已批准身份逐个建立会话；禁止重复申请、读取或记录验证码/JWT/Cookie。未具备会话前不执行 fixture、不重复部署。证据见 `acceptance/m3/2026-07-12-browser-resume.md`。
 
 ## 11. 最小合成资料接续
 
