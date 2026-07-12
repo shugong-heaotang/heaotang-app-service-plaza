@@ -2542,6 +2542,28 @@
                            "handoff_record":  "docs/project-management/notices/2026-07-13-health-r0-f2-audit-task-order.md"
                        },
                        {
+                           "work_id":  "AIW-20260713-HEALTH-R0-F2-FRESHNESS-ACCEPTANCE",
+                           "title":  "健康大管家 HM-R0 F2-FRESH-01 独立验收与受控集成",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/health-r0-f2-freshness-acceptance",
+                           "branch":  "codex/health-r0-f2-freshness-acceptance",
+                           "base_commit":  "e947d70498fbd9e1731d83d71c2aa64645c98a29",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-13-health-r0-f2-freshness-acceptance*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-13-health-r0-f2-freshness-acceptance*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-13-health-r0-f2-freshness-acceptance*.json",
+                                                 "docs/project-management/service-plaza/health-r0-f2-freshness-acceptance-2026-07-13.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "只验收并集成F2-FRESH-01 source 66cc6cb9；核对F1证据新鲜度、27项不变量和10类负例。不得宣称完整F2 Go，不授权F2-1/F3/P3、代码、真实数据、环境、医疗、资金、部署或生产。",
+                           "handoff_record":  "docs/project-management/service-plaza/health-r0-f2-freshness-acceptance-2026-07-13.md"
+                       },
+                       {
                            "work_id":  "AIW-20260712-PROJECT-BRAIN-INTEGRATION-RECONCILIATION",
                            "title":  "Project Brain 分叉集成与 R5 治理证据受控收口",
                            "owner":  "Codex platform integration agent",
