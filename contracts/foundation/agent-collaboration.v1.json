@@ -1940,6 +1940,7 @@
                                                  "contracts/foundation/development-checklists/2026-07-12-health-mvp90-m1-readiness-dispatch*.json",
                                                  "contracts/foundation/governance-exams/2026-07-12-health-mvp90-m1-readiness-dispatch*.json",
                                                  "contracts/foundation/implementation-records/2026-07-12-health-mvp90-m1-readiness-dispatch*.json",
+                                                 "contracts/foundation/invalidated-snapshots/health-mvp90-m1-readiness-dispatch/",
                                                  "docs/project-management/notices/2026-07-12-health-manager-mvp90-m1-task-order.md",
                                                  "docs/project-management/service-plaza/health-mvp90-m1-readiness-2026-07-12.md",
                                                  "docs/project-management/service-plaza/health-platform-safety-2026-07-11.md"
@@ -1947,6 +1948,41 @@
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "只完成 M1 准入事实、三项会签门禁、精确范围和 planned 模块工作包派发；C4-H01、M1 窄模板专业会签和 C4-S04 未全部落盘前，模块不得 active，不授权前后端实现、环境、部署、生产、真实健康数据、收费或资金操作。",
+                           "handoff_record":  "docs/project-management/service-plaza/health-mvp90-m1-readiness-2026-07-12.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-HEALTH-MVP90-M1-SYNTHETIC-PDCAR",
+                           "title":  "健康大管家 MVP-90 M1 成年合成会员 PDCAR 纵切",
+                           "owner":  "Health Manager module agent",
+                           "owner_role":  "健康大管家负责人",
+                           "status":  "planned",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-m1-synthetic-pdcar",
+                           "branch":  "codex/health-manager-mvp90-m1-synthetic-pdcar",
+                           "base_commit":  "b5d2b635de2cddd71debf76a6c688615b72de2ab",
+                           "allowed_paths":  [
+                                                 "docs/project-management/modules/health-manager/health-manager-mvp90-m1-requirements.md",
+                                                 "docs/project-management/modules/health-manager/health-manager-mvp90-m1-receipt.md",
+                                                 "docs/project-management/modules/health-manager/health-manager-mvp90-m1-handoff.md",
+                                                 "docs/project-management/modules/health-manager/health-manager-mvp90-m1-conformance-report.md",
+                                                 "contracts/modules/health-manager/internal-dependencies.v1.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/vertical-slice.v1.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/vertical-slice.v1.schema.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/professional-boundaries.v1.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/professional-boundaries.v1.schema.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/security-authorization.v1.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/security-authorization.v1.schema.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/synthetic-pdcar-scenarios.v1.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/synthetic-pdcar-scenarios.v1.schema.json",
+                                                 "contracts/modules/health-manager/mvp90-m1/conformance/fixtures/",
+                                                 "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_contracts.py",
+                                                 "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1*.json",
+                                                 "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1*.json",
+                                                 "contracts/modules/health-manager/implementation-records/2026-07-12-health-mvp90-m1*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "正式预登记，尚未激活。planned 工作树已从 registration base b5d2b635de2cddd71debf76a6c688615b72de2ab 创建并核验 clean，但模块仍只读。自动激活必须同时满足：C4-H01 专业动作边界书面会签；仅限 M1 安全生活方式模板的适用范围、禁忌、停止/转人工条件、版本和审核人会签；C4-S04 精确权限、服务端拒绝矩阵、审计字段与威胁模型冻结；平台派发提交已受控集成且模块工作树同步最终基线。只授权合同与合成一致性首检查点；共享前端、后端、环境与部署另立工作项。",
                            "handoff_record":  "docs/project-management/service-plaza/health-mvp90-m1-readiness-2026-07-12.md"
                        }
                    ]
