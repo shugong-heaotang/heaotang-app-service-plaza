@@ -63,6 +63,13 @@
     "scenario": {
       "type": "object", "additionalProperties": false,
       "required": ["scenario_id", "fixture_id", "scenario_source_ref", "fixture_source_ref", "required_step_refs", "events"],
+      "allOf": [
+        {
+          "if": {"properties": {"scenario_id": {"const": "MVP-A001"}}, "required": ["scenario_id"]},
+          "then": {"properties": {"events": {"minItems": 11, "maxItems": 11}}},
+          "else": {"properties": {"events": {"minItems": 1, "maxItems": 1}}}
+        }
+      ],
       "properties": {
         "scenario_id": {"enum": ["MVP-A001","MVP-A002","MVP-A003","MVP-A004","MVP-A005","MVP-A006","MVP-A007","MVP-A008","MVP-A009","MVP-A010","MVP-A011","MVP-A012","MVP-A013","MVP-A014","MVP-A015"]},
         "fixture_id": {"pattern": "^HMM1-F(00[1-9]|01[0-5])$"},
@@ -74,12 +81,16 @@
     },
     "event": {
       "type": "object", "additionalProperties": false,
-      "required": ["event_id", "step_id", "actor_role", "action_id", "transition_ref", "resource_ref", "expected_from", "expected_to", "expected_version", "idempotency", "denial_expectation", "audit_expectation"],
+      "required": ["event_id", "step_id", "actor_role", "authorization_action_id", "transition_ref", "resource_ref", "expected_from", "expected_to", "expected_version", "idempotency", "denial_expectation", "audit_expectation"],
+      "anyOf": [
+        {"properties": {"authorization_action_id": {"type": "string"}}, "required": ["authorization_action_id"]},
+        {"properties": {"transition_ref": {"type": "string"}}, "required": ["transition_ref"]}
+      ],
       "properties": {
         "event_id": {"pattern":"^A(00[1-9]|01[0-5])-E(0[1-9]|1[0-9])$"},
         "step_id": {"enum":["M1-S01","M1-S02","M1-S03","M1-S04","M1-S05","M1-S06","M1-S07","M1-S08","M1-S09","M1-S10"]},
         "actor_role": {"enum":["member","ai","health_manager","professional","platform"]},
-        "action_id": {"enum":["consent.read_self","consent.grant_change_withdraw","member.read_self_pdcar","member.submit_source_or_feedback","member.confirm_plan_version","manager.read_assigned_minimum","manager.review_ordinary_pdcar","professional.review_referred_minimum","support.read_technical_metadata","security.audit_metadata","ai.read_minimum_context_and_draft"]},
+        "authorization_action_id": {"type":["string","null"],"enum":[null,"consent.read_self","consent.grant_change_withdraw","member.read_self_pdcar","member.submit_source_or_feedback","member.confirm_plan_version","manager.read_assigned_minimum","manager.review_ordinary_pdcar","professional.review_referred_minimum","support.read_technical_metadata","security.audit_metadata","ai.read_minimum_context_and_draft"]},
         "transition_ref": {"type":["string","null"],"pattern":"^(health-management-entry|health-plan-version|health-task|risk-event|human-handoff|consent-grant):[^:]+->[^:]+:[A-Z0-9_]+$"},
         "resource_ref": {"type":"string","minLength":3},
         "expected_from": {"type":"string","minLength":1}, "expected_to": {"type":"string","minLength":1},

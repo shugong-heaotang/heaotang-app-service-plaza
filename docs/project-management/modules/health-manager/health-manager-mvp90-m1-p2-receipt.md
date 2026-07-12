@@ -2,7 +2,7 @@
 
 - work_id：`AIW-20260712-HEALTH-MVP90-M1-P2-SYNTHETIC-REPLAY`
 - owner：健康大管家负责人
-- 状态：`P2-C1 ready for independent review`
+- 状态：`P2-C1 Exact revision corrected / ready for independent review`
 - activation HEAD：`15ce1053e1a9173e5a000655167f7d69acac5bcd`
 - registered base：`4556c5b0359ebc70694e1a218d651244d6d28b89`
 
@@ -24,3 +24,12 @@
 - source closure：场景、fixture、动作、迁移和拒绝错误均解析权威源；
 - 本地测试：5 项通过；
 - 下一步：等待平台独立复核，未获 Go 不进入 P2-C2。
+
+## Exact revision 处理
+
+- 未集成 source：`fedaeab192f198791817367b4f70871ffda43ce3`；
+- 根因：状态迁移命令、授权动作和审计动作语义混同；
+- 修复：删除审计冒充写入，逐事件验证 action actor/resource/effect/prerequisite，真实解引用 pointer，锁定25事件及全局唯一性；
+- 最终治理：使用新的 R3 current checklist、考试和 IR，R2 保持历史。
+
+R3 current：checklist 28/28，exam 100，IR=`IR-20260712-HEALTH-MVP90-M1-P2-C1-R3`。

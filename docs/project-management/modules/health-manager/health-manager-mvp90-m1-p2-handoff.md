@@ -4,7 +4,7 @@
 - 提交方：健康大管家负责人
 - 接收方：平台集成负责人
 - 日期：2026-07-12
-- 状态：`ready for independent review`
+- 状态：`Exact revision corrected / ready for independent review`
 
 ## 已完成
 
@@ -13,6 +13,14 @@
 3. `MVP-A001` 以 11 个事件覆盖 10 步；全计划覆盖 6 组状态机。
 4. 建立场景、fixture、步骤、动作、迁移、拒绝错误的源闭包测试。
 5. 保持 `synthetic_only=true`、`executable=false` 及全部真实活动 No-Go。
+
+## Exact revision 修订
+
+1. 保留未集成 source `fedaeab192f198791817367b4f70871ffda43ce3` 与 R2 历史，不改写旧证据。
+2. 将状态迁移 command 与可选安全 authorization action 分离；删除全部用审计动作冒充业务写的映射。
+3. 安全 action 存在时强制验证 actor、resource、effect、prerequisite；只读动作不得改变状态或版本。
+4. scenario/fixture pointer 真实解引用到目标 ID；上游数组反转必须失败。
+5. 固定 exactly 25 events，并锁定 event_id、idempotency key、payload_ref 全局唯一。
 
 ## 未完成且未授权
 
