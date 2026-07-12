@@ -155,4 +155,21 @@ describe("服务广场主链路", () => {
     expect(screen.getByText("这个页面不存在")).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "返回服务广场" })).toBeInTheDocument();
   });
+
+  it("开发与测试环境提供内部只读 Project Brain 路由", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(new Response(JSON.stringify({
+      contract_version: "project-brain.snapshot.v1",
+      generated_at: "2026-07-12T00:00:00Z",
+      source_commit: "test-commit",
+      source_freshness: "current",
+      overall_verdict: "no-go",
+      modules: [], work_summary: {}, active_work: [], pending_decisions: [], risks: [],
+      acceptance_queue: [], recent_integrations: [], audit_summary: { error: 1 },
+    }), { status: 200, headers: { "Content-Type": "application/json" } }));
+
+    renderAt("/internal/project-brain");
+    expect(await screen.findByRole("heading", { name: "和奥堂项目大脑" })).toBeInTheDocument();
+    expect(screen.getByText("暂不可推进")).toBeInTheDocument();
+    expect(screen.queryByRole("button")).not.toBeInTheDocument();
+  });
 });

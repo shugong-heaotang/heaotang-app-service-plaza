@@ -1,0 +1,18 @@
+{
+  "contract_version": "project-brain.decisions.v1",
+  "items": [
+    {
+      "decision_id": "PB-DEC-001",
+      "question": "Project Brain 第一版是否只读并仅在开发和测试环境启用",
+      "options": ["只读并仅在开发和测试环境启用", "立即在生产开放写入能力"],
+      "recommendation": "第一版只读；生产开放另立权限与安全决策",
+      "impact": "限制当前暴露面，生产开放与写入能力延后到独立安全决策",
+      "deadline": "2026-07-31T23:59:59+08:00",
+      "status": "approved",
+      "risk_level": "high",
+      "approver_role": "项目负责人",
+      "source_path": "docs/project-management/project-brain/requirements-v1.md",
+      "source_field": "权限需求"
+    }
+  ]
+}

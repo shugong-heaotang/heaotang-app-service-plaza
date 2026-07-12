@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "project-brain.risks.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "items"],
+  "properties": {
+    "contract_version": {"const": "project-brain.risks.v1"},
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["risk_id", "title", "category", "status", "probability", "impact", "owner_role", "mitigation", "escalation_at", "related_work_ids", "source_path", "source_field"],
+        "properties": {
+          "risk_id": {"type": "string", "pattern": "^PB-RISK-[0-9]{3,}$"},
+          "title": {"type": "string", "minLength": 1},
+          "category": {"type": "string", "minLength": 1},
+          "status": {"enum": ["open", "mitigating", "accepted", "closed"]},
+          "probability": {"enum": ["low", "medium", "high"]},
+          "impact": {"enum": ["low", "medium", "high", "critical"]},
+          "owner_role": {"type": "string", "minLength": 1},
+          "mitigation": {"type": "string", "minLength": 1},
+          "escalation_at": {"type": "string", "format": "date-time"},
+          "related_work_ids": {"type": "array", "items": {"type": "string", "minLength": 1}, "uniqueItems": true},
+          "source_path": {"type": "string", "minLength": 1},
+          "source_field": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

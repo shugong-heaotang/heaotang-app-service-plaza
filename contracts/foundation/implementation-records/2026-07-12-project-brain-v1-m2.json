@@ -1,0 +1,75 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-PROJECT-BRAIN-V1-M2",
+  "title": "Project Brain v1 M2 只读聚合器与治理审计",
+  "date": "2026-07-12",
+  "status": "implemented",
+  "objective": "从仓库权威事实生成脱敏快照和失败关闭审计，不回写来源、不建立第二套任务状态。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-12-project-brain-v1-task-order.md",
+    "docs/project-management/project-brain/requirements-v1.md",
+    "docs/project-management/project-brain/architecture-v1.md",
+    "docs/project-management/project-brain/acceptance-v1.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-project-brain-v1-task-order.md",
+    "docs/project-management/project-brain/requirements-v1.md",
+    "docs/project-management/project-brain/acceptance-v1.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/project-brain/modules.v1.schema.json",
+    "contracts/project-brain/knowledge-sources.v1.schema.json",
+    "contracts/project-brain/decisions.v1.schema.json",
+    "contracts/project-brain/risks.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "changed_areas": [
+    "scripts/build_project_brain.py",
+    "scripts/validate_project_brain.py",
+    "scripts/tests/test_project_brain.py",
+    "contracts/project-brain/generated",
+    "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m2.json",
+    "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m2-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-12-project-brain-v1-m2.json",
+    "docs/project-management/project-brain/handoff-v1.md"
+  ],
+  "verification": [
+    "M2 checklist: completed, 26/26 current official governance inputs",
+    "M2 governance exam attempt 1: passed, score 100",
+    "python -X utf8 -m unittest scripts.tests.test_project_brain -v: 10 tests passed",
+    "formal build: exit 1 because three authoritative integrated work items lack Handoff; audit verdict no-go as designed",
+    "validate_project_brain.py: exit 0; snapshot and audit contracts valid",
+    "Test-ServicePlazaContracts.ps1: passed with pinned Python runtime",
+    "Test-TextEncoding.ps1: 932 files passed",
+    "git diff --check: passed"
+  ],
+  "evidence": [
+    "contracts/project-brain/generated/project-brain.snapshot.json",
+    "contracts/project-brain/generated/project-brain.audit.json",
+    "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m2.json",
+    "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m2-attempt-1.json",
+    "docs/project-management/project-brain/handoff-v1.md"
+  ],
+  "premises": [
+    "A no-go audit of current project facts is a correct fail-closed product result, not an M2 implementation failure.",
+    "The three PB-INTEGRATED-EVIDENCE findings belong to their authoritative work items and were not rewritten by Project Brain.",
+    "M3 app and route paths remain unauthorized until M2 independent review grants Go."
+  ],
+  "implementation_mode": "ai-assisted"
+}

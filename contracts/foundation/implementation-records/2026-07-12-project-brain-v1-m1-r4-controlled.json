@@ -1,0 +1,74 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-PROJECT-BRAIN-V1-M1-R4-CONTROLLED",
+  "title": "Project Brain M1-M4 在治理 retry R5 基线受控收口",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "在不采用未知R4和不改写旧R3的前提下，把Project Brain 815383e合入R5权威基线并生成当前R4治理证据。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m1-r4-controlled.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1-r4-controlled-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/project-brain/integration-reconciliation-2026-07-12.md",
+    "docs/project-management/project-brain/handoff-v1.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.ai-engineering-traceability"
+  ],
+  "contracts": [
+    "contracts/project-brain/modules.v1.schema.json",
+    "contracts/project-brain/decisions.v1.schema.json",
+    "contracts/project-brain/risks.v1.schema.json",
+    "contracts/project-brain/knowledge-sources.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "changed_areas": [
+    "PROJECT-BRAIN.md",
+    "contracts/project-brain/",
+    "docs/project-management/project-brain/",
+    "scripts/build_project_brain.py",
+    "scripts/validate_project_brain.py",
+    "scripts/tests/test_project_brain.py",
+    "app/src/modules/project-brain/",
+    "app/src/App.tsx",
+    "app/src/App.test.tsx",
+    "contracts/foundation/invalidated-snapshots/project-brain-v1-m1/",
+    "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m1-r4-controlled.json",
+    "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1-r4-controlled-attempt-1.json"
+  ],
+  "verification": [
+    "preflight ready on 806252f authoritative base",
+    "controlled merge source 815383e only; local 7a3 mixed chain excluded",
+    "R4 controlled checklist 26/26 current",
+    "R4 controlled exam attempt1 score 100",
+    "python -X utf8 -m unittest scripts.tests.test_project_brain",
+    "frontend test/build and Project Brain validators",
+    "governance exam/checklist/IR/collaboration validators",
+    "Service Plaza contracts, UTF-8 and git diff gates"
+  ],
+  "evidence": [
+    "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m1-r4-controlled.json",
+    "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1-r4-controlled-attempt-1.json",
+    "docs/project-management/project-brain/integration-reconciliation-2026-07-12.md",
+    "docs/project-management/project-brain/m4-independent-acceptance-2026-07-12.md"
+  ],
+  "premises": [
+    "815383e是Project Brain正式远端source且M1-M4历史完整",
+    "未知owner的两组R4中间文件不构成可采用证据",
+    "生产发布仍需独立授权"
+  ],
+  "implementation_mode": "ai-assisted"
+}
