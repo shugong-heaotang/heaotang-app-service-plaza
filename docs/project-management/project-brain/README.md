@@ -23,9 +23,7 @@
 - 不增加第二套任务状态。
 - 首期不使用数据库或向量检索。
 
-## M2 计划运行方式（当前未实现）
-
-以下命令将在 M2 聚合器获得独立授权并实现后启用；M1 不提供该脚本或生成输出。
+## 聚合与审计运行方式
 
 ```powershell
 python -X utf8 scripts/build_project_brain.py `
@@ -35,3 +33,10 @@ python -X utf8 scripts/build_project_brain.py `
 ```
 
 审计出现 error 时返回非零，禁止把结果标记为 Go。
+
+## 内部驾驶舱
+
+- 开发/测试路由：`/internal/project-brain`
+- test-server 制品必须显式把已验证快照装配到 `/project-brain/project-brain.snapshot.json`
+- 普通 production 构建重定向内部路由且不包含快照资产
+- 页面只读；缺失或读取失败显示 Unknown；审计 No-Go 不得提升

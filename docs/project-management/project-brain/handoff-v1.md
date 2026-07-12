@@ -1,11 +1,19 @@
-# Project Brain v1 M3-CP1 Handoff
+# Project Brain v1 M4 Final Handoff
 
 日期：2026-07-12
 提交角色：Project Brain M1-R3 实施 Agent
 接收角色：Project Brain 项目负责人（独立复核）
 work_id：`AIW-20260712-PROJECT-BRAIN-V1`
-record_id：`IR-20260712-PROJECT-BRAIN-V1-M3`
-结论：M3 提交态独立复验 Go；M4 最终验收已授权。
+record_id：`IR-20260712-PROJECT-BRAIN-V1-M4`
+结论：M4 自动化、安全与真实浏览器 UAT Go；等待最终 current R2 治理快照、提交推送和受控集成。
+
+## M4 验收结果
+
+- Python 10/10、前端 221/221、双模式构建、全量合同、UTF-8 和差异门禁通过。
+- 桌面 1265px 与移动 360px 均无横向溢出，20 张事实卡片可读，0 个写入控件，浏览器日志 0。
+- 移动端首次 17px 溢出已完成根因修复并复验。
+- 安全扫描 47 文件 findings 0；production 快照资产数量 0。
+- 完整证据：`docs/project-management/project-brain/m4-acceptance-2026-07-12.md`。
 
 ## M3 独立复验 Go
 
