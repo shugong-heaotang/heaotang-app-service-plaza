@@ -2,10 +2,10 @@
 
 - checkpoint：`H2-M3`
 - owner：Club Alliance acceptance agent
-- status：`Authorized / deployment pending`
-- current verdict：`No-Go before deployment`
+- status：`Environment executed / evidence incomplete`
+- current verdict：`No-Go — API/recovery passed; browser and lifecycle coverage Unverified`
 - plan：`docs/project-management/modules/club-alliance/member-home/acceptance/m3-plan.md`
-- implementation record：`IR-20260712-CLUB-MEMBER-HOME-H2-M3`（draft）
+- implementation record：`IR-20260712-CLUB-MEMBER-HOME-M3-ACCEPTANCE`（implemented）
 
 ## 0. 会员状态合同纠正检查点
 
