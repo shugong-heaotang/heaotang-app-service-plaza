@@ -7,7 +7,7 @@
 - branch：`codex/project-brain-v1`
 - worktree：`C:/Users/shugo/Documents/worktrees/heaotang-project-brain-v1`
 - 风险等级：高
-- 当前 record_id：`IR-20260712-PROJECT-BRAIN-V1-M3`
+- 当前 record_id：`IR-20260712-PROJECT-BRAIN-V1-M4`
 
 ## 目标
 
@@ -44,6 +44,14 @@ M2 必须保持 registry 为任务状态唯一权威来源；只复制白名单�
 - 同一 record_id 的 M3 checklist、exam、implementation record 与本 Handoff
 
 驾驶舱必须内部只读、失败显示 Unknown/No-Go、展示来源和生成时间、无写入/批准/部署/删除操作，并通过现有路由回归、360px 与桌面响应式自动化测试。M4 浏览器 UAT、测试环境发布和最终集成仍需另行授权。
+
+## M3 独立复验结论：Go
+
+提交 `ed95fbd` 已通过提交态定向 12 项、全量 221 项前端测试、双模式构建、生产零快照资产、全量合同、UTF-8、完整差异和范围复核。M3-CP1 正式 Go。
+
+## 当前授权：M4
+
+仅允许 test-server 制品内显式装配已验证快照、桌面与 360px 浏览器 UAT、安全/敏感数据扫描、最终 checklist/exam/implementation record/Handoff 和提交推送。禁止生产发布、真实用户数据、账号凭据、写入操作和未经独立验收的集成。
 
 ## 已完成授权：M1-CP1
 

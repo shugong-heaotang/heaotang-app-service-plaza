@@ -5,7 +5,13 @@
 接收角色：Project Brain 项目负责人（独立复核）
 work_id：`AIW-20260712-PROJECT-BRAIN-V1`
 record_id：`IR-20260712-PROJECT-BRAIN-V1-M3`
-结论：M3 内部只读驾驶舱、路由回归和生产默认关闭门禁完成；提交独立复验，M4 未授权。
+结论：M3 提交态独立复验 Go；M4 最终验收已授权。
+
+## M3 独立复验 Go
+
+- 复验提交：`ed95fbd`；工作树 clean、完整差异通过。
+- 定向 12 项与全量 221 项前端测试通过；test-server/production 构建通过。
+- 普通 production 制品包含 Project Brain snapshot 数量为 0；内部路由默认关闭。
 
 ## M3 实现与验证
 
