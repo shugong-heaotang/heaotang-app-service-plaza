@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-PROJECT-BRAIN-V1-M4-R2",
+  "title": "Project Brain v1 M4 最终 current 治理快照与独立验收",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "在工作项提升 handoff-ready 后重新绑定当前治理 SHA，并独立复核 M1-M4 全部完成证据。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m4-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m4-r2-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/notices/2026-07-12-project-brain-v1-task-order.md", "docs/project-management/project-brain/acceptance-v1.md"],
+  "requirement_sources": ["docs/project-management/project-brain/requirements-v1.md", "docs/project-management/project-brain/architecture-v1.md", "docs/project-management/project-brain/delivery-plan-v1.md", "docs/project-management/project-brain/acceptance-v1.md"],
+  "capabilities": ["foundation.ai-engineering-traceability", "foundation.governance-certification", "foundation.contract-tooling", "foundation.app-shell-adapter"],
+  "contracts": ["contracts/project-brain/generated/project-brain.snapshot.json", "contracts/project-brain/generated/project-brain.audit.json"],
+  "decisions": ["docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"],
+  "changed_areas": ["contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m4-r2.json", "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m4-r2-attempt-1.json", "contracts/foundation/implementation-records/2026-07-12-project-brain-v1-m4-r2.json", "docs/project-management/notices/2026-07-12-project-brain-v1-task-order.md", "docs/project-management/project-brain/handoff-v1.md", "docs/project-management/project-brain/m4-independent-acceptance-2026-07-12.md"],
+  "verification": ["Final R2 checklist 26/26 current after handoff-ready registry update", "Final R2 exam attempt 1 passed score 100", "M1-M4 commits and full diff independently inspected", "Python 10/10 and React 221/221 tests passed", "desktop and 360px browser UAT passed", "security scan findings 0", "production snapshot asset count 0", "full contracts, implementation records, UTF-8 and diff gates passed"],
+  "evidence": ["docs/project-management/project-brain/m4-acceptance-2026-07-12.md", "docs/project-management/project-brain/m4-independent-acceptance-2026-07-12.md", "docs/project-management/project-brain/handoff-v1.md", "contracts/project-brain/generated/project-brain.audit.json"],
+  "premises": ["Controlled integration commit is the sole remaining evidence before registry status may become integrated.", "The dashboard's No-Go reflects external authoritative project findings and is the required fail-closed behavior.", "Production deployment remains unauthorized."],
+  "implementation_mode": "ai-assisted"
+}

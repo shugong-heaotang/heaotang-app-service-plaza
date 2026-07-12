@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { ClubAllianceRoute, SelfCreatedClubRoute } from "./modules/club-alliance";
 import { HealthManagerRoute } from "./modules/health-manager";
 import { LifeNavigationPage } from "./modules/life-navigation";
+import { ProjectBrainPage } from "./modules/project-brain/ProjectBrainPage";
 import { CoreServicePage } from "./pages/CoreServicePage";
 import { NotFoundPage } from "./pages/NotFoundPage";
 import { ServicePlazaPage } from "./pages/ServicePlazaPage";
@@ -11,6 +12,10 @@ export function AppRoutes() {
     <Routes>
       <Route path="/" element={<Navigate to="/services" replace />} />
       <Route path="/services" element={<ServicePlazaPage />} />
+      <Route
+        path="/internal/project-brain"
+        element={import.meta.env.DEV || import.meta.env.MODE === "test-server" ? <ProjectBrainPage /> : <Navigate to="/services" replace />}
+      />
       <Route path="/services/life-navigation" element={<LifeNavigationPage />} />
       <Route
         path="/services/club-alliance/self-created/applications"

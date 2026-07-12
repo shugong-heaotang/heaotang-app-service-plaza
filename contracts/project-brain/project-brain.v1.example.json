@@ -1,0 +1,34 @@
+{
+  "contract_version": "project-brain.snapshot.v1",
+  "generated_at": "2026-07-12T00:00:00Z",
+  "source_commit": "example-only",
+  "overall_verdict": "unknown",
+  "source_freshness": "unknown",
+  "modules": [
+    {
+      "module_id": "life-navigation",
+      "name": "生命导航",
+      "stage": "implementation",
+      "development_status": "active",
+      "acceptance_status": "unknown",
+      "next_checkpoint": "以权威模块状态为准",
+      "source_path": "docs/project-management/modules/life-navigation/README.md",
+      "source_updated_at": null
+    }
+  ],
+  "work_summary": {
+    "active": 0,
+    "handoff_ready": 0,
+    "blocked": 0,
+    "integrated": 0
+  },
+  "pending_decisions": [],
+  "risks": [],
+  "acceptance_queue": [],
+  "recent_integrations": [],
+  "audit_summary": {
+    "errors": 0,
+    "warnings": 0,
+    "unknowns": 1
+  }
+}
