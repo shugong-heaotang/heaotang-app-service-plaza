@@ -2433,9 +2433,6 @@
                            "branch":  "codex/health-manager-r0-formal-freeze",
                            "base_commit":  "a4debc54ca65c14b7516fa6dc2acce3b4221ed29",
                            "allowed_paths":  [
-                                                 "docs/project-management/modules/health-manager/health-manager-v1-requirements-and-development-plan.md",
-                                                 "docs/project-management/modules/health-manager/health-manager-v1-docs-receipt.md",
-                                                 "docs/project-management/modules/health-manager/health-manager-v1-docs-handoff.md",
                                                  "docs/project-management/modules/health-manager/health-manager-r0-formal-freeze-decision.md",
                                                  "contracts/modules/health-manager/hm-r0-formal-freeze.v1.json",
                                                  "contracts/modules/health-manager/hm-r0-formal-freeze.v1.schema.json",
@@ -2445,7 +2442,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "正式派发a4debc54进入权威基线后，专用工作树已fast-forward至同一HEAD，merge-base一致且clean，现正式激活。只冻结开发规划文档/决策证据，不授权业务代码、共享前后端、API/DB、环境、真实数据、收费、资金、部署、生产或P3。Draft PR#1/#2是否合并必须由本切片另行裁定，不能自动合并。",
+                           "migration_note":  "正式派发a4debc54进入权威基线后，专用工作树已fast-forward至同一HEAD，merge-base一致且clean，现正式激活。PR#1三份旧成果仍归原handoff-ready工作项，只作为read-only输入；本工作项仅新增冻结决定、机器合同和本轮治理证据，消除所有权重叠。禁止业务代码、共享前后端、API/DB、环境、真实数据、收费、资金、部署、生产或P3；PR#1/#2不能自动合并。",
                            "handoff_record":  "docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
                        }
                    ]

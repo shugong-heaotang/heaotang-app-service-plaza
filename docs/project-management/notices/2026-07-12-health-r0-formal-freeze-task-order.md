@@ -30,15 +30,14 @@
 
 ## 精确允许路径
 
-- `docs/project-management/modules/health-manager/health-manager-v1-requirements-and-development-plan.md`
-- `docs/project-management/modules/health-manager/health-manager-v1-docs-receipt.md`
-- `docs/project-management/modules/health-manager/health-manager-v1-docs-handoff.md`
 - `docs/project-management/modules/health-manager/health-manager-r0-formal-freeze-decision.md`
 - `contracts/modules/health-manager/hm-r0-formal-freeze.v1.json`
 - `contracts/modules/health-manager/hm-r0-formal-freeze.v1.schema.json`
 - `contracts/modules/health-manager/development-checklists/2026-07-12-health-r0-formal-freeze*.json`
 - `contracts/modules/health-manager/governance-exams/2026-07-12-health-r0-formal-freeze*.json`
 - `contracts/modules/health-manager/implementation-records/2026-07-12-health-r0-formal-freeze*.json`
+
+PR #1 的三份既有产品宪法/receipt/Handoff 是只读输入，仍由原 `AIW-20260711-HEALTH-V1-REQUIREMENTS-DOCS` 所有；本工作项不得修改。冻结结论通过新增 decision 与机器合同表达，待平台最终复核后再单独裁定是否更新或合并 PR #1。
 
 ## 明确禁止
 
