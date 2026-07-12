@@ -17,6 +17,20 @@ def sha(path: Path) -> str:
 
 
 class GovernanceExamValidationTests(unittest.TestCase):
+    def test_retry_generator_orders_presentation_before_interactive_confirmation(self):
+        script_path = Path(__file__).resolve().parents[1] / "New-AgentGovernanceExam.ps1"
+        script = script_path.read_text(encoding="utf-8-sig")
+        self.assertNotIn("RemediationConfirmationsCsv", script)
+        presented = script.index('Write-Output $sourceText')
+        confirmed = script.index('$confirmation = Read-Host')
+        recorded = script.index('$confirmedAt = [DateTime]::UtcNow')
+        presented_at_output = script.index('presented_at=$presentedAt')
+        self.assertLess(presented_at_output, confirmed)
+        self.assertLess(presented, confirmed)
+        self.assertLess(confirmed, recorded)
+        self.assertIn('presentation_nonce = $presentationNonce', script)
+        self.assertIn('confirmation_method = "interactive-path-nonce-after-full-output"', script)
+
     def test_passed_attempt_is_bound_to_current_bank_reading_list_and_checklist(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
@@ -161,10 +175,13 @@ class GovernanceExamValidationTests(unittest.TestCase):
                 "previous_attempt_sha256": sha(first_path),
                 "remediation_rereads": [{
                     "source_path": "RULE.md",
-                    "reread_at": "2026-07-12T00:02:00Z",
+                    "presented_at": "2026-07-12T00:01:30Z",
+                    "presentation_sha256": sha(source),
+                    "presentation_nonce": "1" * 32,
+                    "confirmed_at": "2026-07-12T00:02:00Z",
                     "source_sha256": sha(source),
                     "confirmed_by": "test agent",
-                    "confirmation_method": "explicit-source-path",
+                    "confirmation_method": "interactive-path-nonce-after-full-output",
                 }],
             }
             retry_path = attempts / "attempt-2.json"
@@ -200,18 +217,24 @@ class GovernanceExamValidationTests(unittest.TestCase):
             stale_source = copy.deepcopy(retry)
             stale_source["remediation_rereads"][0]["source_sha256"] = "0" * 64
             mutations.append(("source hash mismatch", stale_source))
+            stale_presentation = copy.deepcopy(retry)
+            stale_presentation["remediation_rereads"][0]["presentation_sha256"] = "0" * 64
+            mutations.append(("source hash mismatch", stale_presentation))
             wrong_actor = copy.deepcopy(retry)
             wrong_actor["remediation_rereads"][0]["confirmed_by"] = "another agent"
             mutations.append(("confirmation actor mismatch", wrong_actor))
             missing_confirmation = copy.deepcopy(retry)
             missing_confirmation["remediation_rereads"][0].pop("confirmation_method")
             mutations.append(("confirmation_method", missing_confirmation))
+            confirmation_before_presentation = copy.deepcopy(retry)
+            confirmation_before_presentation["remediation_rereads"][0]["confirmed_at"] = "2026-07-12T00:01:00Z"
+            mutations.append(("occur in order", confirmation_before_presentation))
             too_early = copy.deepcopy(retry)
-            too_early["remediation_rereads"][0]["reread_at"] = "2026-07-11T23:59:00Z"
-            mutations.append(("between previous completion", too_early))
+            too_early["remediation_rereads"][0]["presented_at"] = "2026-07-11T23:59:00Z"
+            mutations.append(("occur in order", too_early))
             too_late = copy.deepcopy(retry)
-            too_late["remediation_rereads"][0]["reread_at"] = "2026-07-12T00:05:00Z"
-            mutations.append(("between previous completion", too_late))
+            too_late["remediation_rereads"][0]["confirmed_at"] = "2026-07-12T00:05:00Z"
+            mutations.append(("occur in order", too_late))
             nonconsecutive = copy.deepcopy(retry)
             nonconsecutive["attempt_number"] = 3
             nonconsecutive["attempt_id"] = "EX-20260712-RETRY-3"
