@@ -2427,7 +2427,7 @@
                            "title":  "健康大管家 HM-R0 Accepted for development planning 正式冻结",
                            "owner":  "Health Manager module agent",
                            "owner_role":  "健康大管家负责人",
-                           "status":  "active",
+                           "status":  "handoff-ready",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r0-formal-freeze",
                            "branch":  "codex/health-manager-r0-formal-freeze",
@@ -2442,7 +2442,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "F0 source 45a49c4因checklist completed_at晚于exam而被独立复核Exact revision，原三文件保持历史不改写；模块同步authoritative 253fa4e后形成F0-R2 source f63c4487，28/28、exam100且时序13:03:47\u003c=13:03:59\u003c=13:04:08，全门禁通过并获独立Go，已进入权威integration。正式授权F1：模块先同步到本授权最终HEAD，再新建current checklist/exam100/IR；只允许新增formal-freeze decision、JSON/Schema及治理证据，完成27项分类、证据闭包、唯一开发规划冻结状态和负例。PR#1三份旧成果继续只读；禁止业务代码、共享前后端、API/DB、环境、真实数据、收费、资金、部署、生产或P3。",
+                           "migration_note":  "F0 source 45a49c4因checklist completed_at晚于exam而被独立复核Exact revision，原三文件保持历史不改写；F0-R2 source f63c4487已Go并集成。F1 source 384436c7经独立复核Go：6路径越界0，27项为2 Accepted/24 Pending with owner/1 Exact revision，分类7/16/4；Schema valid与15负例、checklist28/28、exam100、IR、总合同、UTF8和diff均通过；受控合并提交fb1b8820。当前仅Accepted for development planning且executable=false，模块转handoff-ready等待新阶段裁定；F2/P3、共享实现、真实数据、环境、医疗服务、收费、资金、部署和生产均未授权。",
                            "handoff_record":  "docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
                        },
                        {
@@ -2450,7 +2450,7 @@
                            "title":  "健康大管家 HM-R0 F1 独立验收与受控集成",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "handoff-ready",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/health-r0-f1-acceptance",
                            "branch":  "codex/health-r0-f1-acceptance",
@@ -2460,11 +2460,12 @@
                                                  "contracts/foundation/development-checklists/2026-07-13-health-r0-f1-acceptance*.json",
                                                  "contracts/foundation/governance-exams/2026-07-13-health-r0-f1-acceptance*.json",
                                                  "contracts/foundation/implementation-records/2026-07-13-health-r0-f1-acceptance*.json",
+                                                 "contracts/foundation/invalidated-snapshots/health-r0-f1-acceptance/",
                                                  "docs/project-management/service-plaza/health-r0-f1-acceptance-2026-07-13.md"
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "独立复核F1 source 384436c7；仅验收27项开发规划冻结、Schema/负例和治理证据，并执行受控集成。F2/P3、共享实现、真实数据、环境、医疗服务、收费、部署和生产均不在本工作项授权范围。",
+                           "migration_note":  "F1 source 384436c7独立复核Go并以fb1b8820受控合并：6路径越界0；27项2/24/1、分类7/16/4；Schema valid和15负例、模块checklist28/28+exam100、平台checklist26/26+exam100、IR、总合同、UTF8、diff均通过。验收证据已形成，等待最终registry closeout后转integrated。F2/P3、共享实现、真实数据、环境、医疗服务、收费、部署和生产未授权。",
                            "handoff_record":  "docs/project-management/service-plaza/health-r0-f1-acceptance-2026-07-13.md"
                        },
                        {

@@ -1,0 +1,82 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-HEALTH-R0-F1-ACCEPTANCE-R2",
+  "title": "健康大管家 HM-R0 F1 独立验收与受控集成",
+  "date": "2026-07-13",
+  "status": "verified",
+  "objective": "独立复核并受控集成 HM-R0 F1 开发规划冻结，同时保持 F2/P3 及真实活动 No-Go。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-13-health-r0-f1-acceptance-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-13-health-r0-f1-acceptance-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md",
+    "docs/project-management/modules/health-manager/health-manager-r0-formal-freeze-decision.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.ai-engineering-traceability"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/modules/health-manager/hm-r0-formal-freeze.v1.json",
+    "contracts/modules/health-manager/hm-r0-formal-freeze.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklists/2026-07-13-health-r0-f1-acceptance-r2.json",
+    "contracts/foundation/governance-exams/2026-07-13-health-r0-f1-acceptance-r2-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-13-health-r0-f1-acceptance.json",
+    "contracts/foundation/invalidated-snapshots/health-r0-f1-acceptance/",
+    "docs/project-management/service-plaza/health-r0-f1-acceptance-2026-07-13.md",
+    "contracts/modules/health-manager/development-checklists/2026-07-12-health-r0-formal-freeze-f1.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-12-health-r0-formal-freeze-f1-attempt-1.json",
+    "contracts/modules/health-manager/hm-r0-formal-freeze.v1.json",
+    "contracts/modules/health-manager/hm-r0-formal-freeze.v1.schema.json",
+    "contracts/modules/health-manager/implementation-records/2026-07-12-health-r0-formal-freeze-f1.json",
+    "docs/project-management/modules/health-manager/health-manager-r0-formal-freeze-decision.md"
+  ],
+  "verification": [
+    "scripts/Test-AgentDevelopmentPreflight.ps1: ready",
+    "independent review: F1 Go for exact source 384436c719396d0a0105f448716ef37aa8ba7ab8",
+    "module F1 checklist: 28/28 completed, current SHA mismatch 0 and causal exam ordering",
+    "module governance exam: score 100",
+    "Draft 2020-12 valid instance accepted and 15 negative mutations rejected",
+    "platform R1 checklist used non-exact attestation and its bound 100-point exam is preserved as invalidated without authorizing integration",
+    "platform R2 acceptance checklist: 26/26 completed and current",
+    "platform R2 governance exam attempt 1: score 100",
+    "scripts/validate_agent_collaboration.py",
+    "scripts/validate_development_checklists.py",
+    "scripts/validate_governance_exams.py",
+    "scripts/validate_implementation_records.py",
+    "scripts/Test-ServicePlazaContracts.ps1",
+    "scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/foundation/development-checklists/2026-07-13-health-r0-f1-acceptance-r2.json",
+    "contracts/foundation/governance-exams/2026-07-13-health-r0-f1-acceptance-r2-attempt-1.json",
+    "docs/project-management/service-plaza/health-r0-f1-acceptance-2026-07-13.md",
+    "contracts/modules/health-manager/hm-r0-formal-freeze.v1.json",
+    "contracts/modules/health-manager/implementation-records/2026-07-12-health-r0-formal-freeze-f1.json"
+  ],
+  "premises": [
+    "Accepted for development planning is not executable business or production authorization",
+    "F2 and P3 require new explicit platform authorization",
+    "Draft PR disposition remains an independent controlled decision"
+  ],
+  "implementation_mode": "ai-assisted"
+}
