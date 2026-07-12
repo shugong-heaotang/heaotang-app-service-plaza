@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.local/schemas/health-manager/mvp90-m1/m1-professional-scenario-review.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "review_id", "scope", "version", "overall_status", "executable", "decision_maker", "decision_date", "signer_role", "signature_reference", "scenarios"],
+  "properties": {
+    "contract_version": {"const": "health-manager.mvp90-m1.professional-scenario-review.v1"},
+    "review_id": {"const": "HM-M1-PROFESSIONAL-SCENARIO-REVIEW"},
+    "scope": {"const": "MVP-A001 through MVP-A015 professional review for HM-MVP90-M1 only"},
+    "version": {"const": "v1-proposed"},
+    "overall_status": {"enum": ["Accepted", "Exact revision", "Pending with owner"]},
+    "executable": {"type": "boolean"},
+    "decision_maker": {"type": ["string", "null"]},
+    "decision_date": {"type": ["string", "null"], "format": "date"},
+    "signer_role": {"const": "和奥堂医生集团专业负责人"},
+    "signature_reference": {"type": ["string", "null"]},
+    "scenarios": {"type": "array", "minItems": 15, "maxItems": 15, "uniqueItems": true, "items": {"type": "object", "additionalProperties": false, "required": ["scenario_id", "title_zh", "decision_status", "professional_review_question", "proposed_safe_outcome", "proposed_forbidden_outcome", "stop_or_transfer_condition", "missing_evidence", "owner"], "properties": {
+      "scenario_id": {"enum": ["MVP-A001","MVP-A002","MVP-A003","MVP-A004","MVP-A005","MVP-A006","MVP-A007","MVP-A008","MVP-A009","MVP-A010","MVP-A011","MVP-A012","MVP-A013","MVP-A014","MVP-A015"]},
+      "title_zh": {"type": "string", "minLength": 1}, "decision_status": {"enum": ["Accepted", "Exact revision", "Pending with owner"]},
+      "professional_review_question": {"type": "string", "minLength": 1}, "proposed_safe_outcome": {"type": "string", "minLength": 1}, "proposed_forbidden_outcome": {"type": "string", "minLength": 1}, "stop_or_transfer_condition": {"type": "string", "minLength": 1},
+      "missing_evidence": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}}, "owner": {"const": "和奥堂医生集团专业负责人"}
+    }}}
+  },
+  "allOf": [{"if": {"properties": {"overall_status": {"const": "Pending with owner"}}, "required": ["overall_status"]}, "then": {"properties": {"executable": {"const": false}, "decision_maker": {"const": null}, "decision_date": {"const": null}, "signature_reference": {"const": null}}}}]
+}
