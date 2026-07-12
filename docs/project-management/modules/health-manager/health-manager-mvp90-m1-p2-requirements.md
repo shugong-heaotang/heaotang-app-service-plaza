@@ -34,3 +34,18 @@
 ## 保持 No-Go
 
 `C4-L02-L04`、全量 `C4-H06`、production identity、真实会员/健康数据、共享前后端/API/数据库、测试环境、部署、收费、资金和生产均不在本检查点。
+
+## C2 Reference Runner
+
+P2-C2只实现纯Python、内存内参考运行器：
+
+1. 构造函数只接收已加载的replay plan、state machines和security authorization，不自行读文件；
+2. 同资源状态和版本必须连续，非首事件不能凭计划期望值凭空初始化资源；
+3. 同一幂等键同一完整事件载荷返回原结果且不重复审计；同键异载荷稳定返回`HM_IDEMPOTENCY_CONFLICT`；
+4. 状态冲突、版本冲突、未知/禁止迁移、actor/action/resource不匹配均失败关闭且不修改资源、审计、trace或幂等存储；
+5. 审计写失败返回`HM_AUDIT_WRITE_REQUIRED`，本事件的状态、版本、trace、audit和idempotency全部回滚；
+6. AI激活计划、作出专业风险分类或直接关闭风险均被权威迁移/授权规则拒绝；
+7. canonical trace只由确定性内存状态生成；输出始终`synthetic_only=true`、`executable=false`；
+8. 禁止导入或调用网络、数据库、系统时间、随机数、浏览器、文件持久化和外部模型。
+
+C2不包含负向fixture包和15场景最终矩阵；这些属于获得C2 Go后的P2-C3。

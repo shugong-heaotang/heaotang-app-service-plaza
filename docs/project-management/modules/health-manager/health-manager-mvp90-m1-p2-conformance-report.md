@@ -2,7 +2,7 @@
 
 ## P2-C1 结论
 
-当前结论：`Exact revision corrected / ready for independent review`。
+当前结论：`P2-C1 Go / P2-C2 ready for independent review`。
 
 | 检查项 | 结果 |
 | --- | --- |
@@ -56,4 +56,22 @@
 
 ## 后续检查点
 
-P2-C2 才允许实现纯 Python reference runner、稳定错误、幂等、版本冲突和 audit 原子回滚；必须先取得 P2-C1 平台 Go。
+P2-C1已由平台独立验收Go，squash integration=`40a042b`，authoritative evidence HEAD=`5004cdc`。
+
+## P2-C2 Reference Runner
+
+| 检查项 | 结果 |
+| --- | --- |
+| A001 11事件内存顺序重放 | PASS |
+| canonical trace hash跨独立runner一致 | PASS |
+| 同键同载荷安全重放 | PASS，无重复state/audit/trace |
+| 同键异载荷（含语义变化） | `HM_IDEMPOTENCY_CONFLICT` |
+| version conflict | 状态、audit、trace不变 |
+| audit failure | state/version/event/audit/idempotency全回滚 |
+| AI激活计划/专业分类/直接关闭风险 | REJECT |
+| 未完成前序直接激活计划 | `HM_RESOURCE_STATE_CONFLICT` |
+| unknown transition | `HM_P2_UNKNOWN_TRANSITION` |
+| 网络/DB/clock/random导入 | 0 |
+| runner输出边界 | synthetic_only=true / executable=false |
+
+当前runner只接受注入合同和合成事件，不自行读取文件或连接任何外部系统。负向fixture包、15场景最终执行矩阵和完整零调用证据保留给P2-C3。

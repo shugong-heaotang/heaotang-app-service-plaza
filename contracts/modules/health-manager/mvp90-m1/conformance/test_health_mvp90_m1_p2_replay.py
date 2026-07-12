@@ -1,9 +1,20 @@
+import ast
 import copy
 import json
 import unittest
 from pathlib import Path
 
 from jsonschema import Draft202012Validator
+
+from .synthetic_pdcar_reference import (
+    ERR_AUDIT_REQUIRED,
+    ERR_IDEMPOTENCY_CONFLICT,
+    ERR_AI_RUNTIME_NOT_AUTHORIZED,
+    ERR_STATE_CONFLICT,
+    ERR_UNKNOWN_TRANSITION,
+    ERR_VERSION_CONFLICT,
+    SyntheticPdcarReferenceRunner,
+)
 
 
 ROOT = Path(__file__).resolve().parents[5]
@@ -261,6 +272,150 @@ class SyntheticReplayPlanContractTests(unittest.TestCase):
         documents[fixture_path]["fixtures"].reverse()
         with self.assertRaises(AssertionError):
             validate_source_closure(self.plan, documents)
+
+    def new_runner(self):
+        return SyntheticPdcarReferenceRunner(
+            self.plan,
+            load(self.plan["source_contracts"]["state_machines"]),
+            load(self.plan["source_contracts"]["security_authorization"]),
+        )
+
+    def test_runner_replays_a001_contiguously_with_stable_trace_hash(self):
+        first = self.new_runner()
+        second = self.new_runner()
+        first_result = first.replay_scenario("MVP-A001")
+        second_result = second.replay_scenario("MVP-A001")
+        self.assertEqual(len(first_result["results"]), 11)
+        self.assertTrue(all(item["committed"] for item in first_result["results"]))
+        self.assertEqual(first_result["trace_hash"], second_result["trace_hash"])
+        self.assertEqual(first.resources["HealthTask:syn-member-001:t1"], {"state": "recorded", "version": 4})
+        self.assertTrue(first_result["synthetic_only"])
+        self.assertFalse(first_result["executable"])
+        first_hash = first_result["trace_hash"]
+        replayed = first.replay_scenario("MVP-A001")
+        self.assertEqual(replayed["trace_hash"], first_hash)
+        self.assertTrue(all(item["outcome"] == "replayed" for item in replayed["results"]))
+
+    def test_same_idempotency_key_same_payload_replays_without_duplicate_commit(self):
+        runner = self.new_runner()
+        event = self.plan["scenarios"][0]["events"][0]
+        first = runner.execute_event("MVP-A001", event)
+        state_before = runner.resources
+        audit_before = runner.audit_events
+        trace_before = runner.trace_events
+        second = runner.execute_event("MVP-A001", event)
+        self.assertEqual(first["state"], second["state"])
+        self.assertEqual(second["outcome"], "replayed")
+        self.assertTrue(second["replayed"])
+        self.assertEqual(runner.resources, state_before)
+        self.assertEqual(runner.audit_events, audit_before)
+        self.assertEqual(runner.trace_events, trace_before)
+
+    def test_same_idempotency_key_different_payload_conflicts_atomically(self):
+        runner = self.new_runner()
+        event = self.plan["scenarios"][0]["events"][0]
+        runner.execute_event("MVP-A001", event)
+        state_before = runner.resources
+        audit_before = runner.audit_events
+        conflicting = copy.deepcopy(event)
+        conflicting["idempotency"]["payload_ref"] = "MVP-A001/conflicting-payload"
+        result = runner.execute_event("MVP-A001", conflicting)
+        self.assertEqual(result["error_id"], ERR_IDEMPOTENCY_CONFLICT)
+        self.assertFalse(result["committed"])
+        self.assertEqual(runner.resources, state_before)
+        self.assertEqual(runner.audit_events, audit_before)
+        changed_semantics = copy.deepcopy(event)
+        changed_semantics["transition_ref"] = "consent-grant:draft->withdrawn:WITHDRAW_CONSENT"
+        changed_semantics["expected_to"] = "withdrawn"
+        changed_semantics_result = runner.execute_event("MVP-A001", changed_semantics)
+        self.assertEqual(changed_semantics_result["error_id"], ERR_IDEMPOTENCY_CONFLICT)
+        self.assertEqual(runner.resources, state_before)
+
+    def test_version_conflict_leaves_state_audit_and_trace_unchanged(self):
+        runner = self.new_runner()
+        event = self.plan["scenarios"][0]["events"][0]
+        runner.seed_resource(event["resource_ref"], event["expected_from"], 9)
+        state_before = runner.resources
+        result = runner.execute_event("MVP-A001", event)
+        self.assertEqual(result["error_id"], ERR_VERSION_CONFLICT)
+        self.assertFalse(result["committed"])
+        self.assertEqual(runner.resources, state_before)
+        self.assertEqual(runner.audit_events, [])
+        self.assertEqual(runner.trace_events, [])
+
+    def test_audit_failure_rolls_back_resource_event_and_idempotency(self):
+        runner = self.new_runner()
+        event = self.plan["scenarios"][0]["events"][0]
+        failed = runner.execute_event("MVP-A001", event, audit_write_succeeds=False)
+        self.assertEqual(failed["error_id"], ERR_AUDIT_REQUIRED)
+        self.assertFalse(failed["committed"])
+        self.assertEqual(runner.resources, {})
+        self.assertEqual(runner.audit_events, [])
+        self.assertEqual(runner.trace_events, [])
+        retried = runner.execute_event("MVP-A001", event)
+        self.assertEqual(retried["outcome"], "applied")
+        self.assertFalse(retried["replayed"])
+
+        later = self.new_runner()
+        failed_scenario = later.replay_scenario("MVP-A001", audit_fail_event_ids={"A001-E07"})
+        self.assertEqual(failed_scenario["results"][-1]["error_id"], ERR_AUDIT_REQUIRED)
+        self.assertEqual(later.resources["HealthTask:syn-member-001:t1"], {"state": "in_progress", "version": 1})
+        self.assertEqual(len(later.audit_events), 6)
+        self.assertEqual(len(later.trace_events), 6)
+        event_e07 = self.plan["scenarios"][0]["events"][6]
+        recovered = later.execute_event("MVP-A001", event_e07)
+        self.assertEqual(recovered["outcome"], "applied")
+        self.assertEqual(later.resources["HealthTask:syn-member-001:t1"], {"state": "completed", "version": 2})
+
+    def test_ai_plan_activation_and_direct_risk_close_are_rejected(self):
+        runner = self.new_runner()
+        activate = copy.deepcopy(self.plan["scenarios"][0]["events"][4])
+        activate["actor_role"] = "ai"
+        activate["authorization_action_id"] = "ai.read_minimum_context_and_draft"
+        activation_result = runner.execute_event("MVP-A001", activate)
+        self.assertEqual(activation_result["error_id"], ERR_AI_RUNTIME_NOT_AUTHORIZED)
+        self.assertFalse(activation_result["committed"])
+
+        professional_conclusion = copy.deepcopy(self.plan["scenarios"][2]["events"][0])
+        professional_conclusion["actor_role"] = "ai"
+        conclusion_result = runner.execute_event("MVP-A003", professional_conclusion)
+        self.assertEqual(conclusion_result["error_id"], ERR_AI_RUNTIME_NOT_AUTHORIZED)
+        self.assertFalse(conclusion_result["committed"])
+
+        close_risk = copy.deepcopy(self.plan["scenarios"][2]["events"][0])
+        close_risk["actor_role"] = "ai"
+        close_risk["transition_ref"] = "risk-event:emergency->human_closed:AI_CLOSE"
+        close_risk["expected_from"] = "emergency"
+        close_risk["expected_to"] = "human_closed"
+        close_result = runner.execute_event("MVP-A003", close_risk)
+        self.assertEqual(close_result["error_id"], "HMM0_AI_OR_DIRECT_RISK_CLOSE_FORBIDDEN")
+        self.assertFalse(close_result["committed"])
+        self.assertEqual(runner.resources, {})
+
+    def test_plan_cannot_be_activated_before_prior_review_sequence(self):
+        runner = self.new_runner()
+        member_confirm = self.plan["scenarios"][0]["events"][4]
+        result = runner.execute_event("MVP-A001", member_confirm)
+        self.assertEqual(result["error_id"], ERR_STATE_CONFLICT)
+        self.assertFalse(result["committed"])
+        self.assertEqual(runner.resources, {})
+
+    def test_unknown_transition_and_forbidden_runtime_imports_fail_closed(self):
+        runner = self.new_runner()
+        event = copy.deepcopy(self.plan["scenarios"][0]["events"][5])
+        event["transition_ref"] = "health-task:pending->completed:SKIP_TASK"
+        result = runner.execute_event("MVP-A001", event)
+        self.assertEqual(result["error_id"], ERR_UNKNOWN_TRANSITION)
+        self.assertFalse(result["committed"])
+        source = (Path(__file__).parent / "synthetic_pdcar_reference.py").read_text(encoding="utf-8")
+        imported_roots = set()
+        for node in ast.walk(ast.parse(source)):
+            if isinstance(node, ast.Import):
+                imported_roots.update(alias.name.split(".", 1)[0] for alias in node.names)
+            elif isinstance(node, ast.ImportFrom) and node.module:
+                imported_roots.add(node.module.split(".", 1)[0])
+        self.assertTrue(imported_roots.isdisjoint({"socket", "requests", "sqlite3", "time", "random", "pathlib", "os"}))
+        self.assertNotIn("open(", source)
 
 
 if __name__ == "__main__":

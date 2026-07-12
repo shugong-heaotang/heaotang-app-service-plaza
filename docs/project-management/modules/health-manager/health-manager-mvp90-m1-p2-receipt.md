@@ -2,7 +2,7 @@
 
 - work_id：`AIW-20260712-HEALTH-MVP90-M1-P2-SYNTHETIC-REPLAY`
 - owner：健康大管家负责人
-- 状态：`P2-C1 Exact revision corrected / ready for independent review`
+- 状态：`P2-C1 Go / P2-C2 ready for independent review`
 - activation HEAD：`15ce1053e1a9173e5a000655167f7d69acac5bcd`
 - registered base：`4556c5b0359ebc70694e1a218d651244d6d28b89`
 
@@ -43,3 +43,20 @@ R3 current：checklist 28/28，exam 100，IR=`IR-20260712-HEALTH-MVP90-M1-P2-C1-
 - 最终治理改用R4 current checklist、考试和IR，R2/R3均保留历史。
 
 R4 current：checklist 28/28，exam 100，IR=`IR-20260712-HEALTH-MVP90-M1-P2-C1-R4`。
+
+## P2-C1 平台结论
+
+- corrected source：`4ee6ccb67b3320c6fbc387abe340b5f8c2a8bd10`；
+- squash integration：`40a042b`；
+- authoritative evidence HEAD：`5004cdc45e21604817f809d3b9babe783f0ac40b`；
+- verdict：Go，允许进入P2-C2。
+
+## P2-C2
+
+- 工作树同步merge：`2f138b3843839f39e9015562bf61e18bb31d23cd`；
+- entry current checklist：28/28；exam：100；
+- runner：纯Python、内存、注入合同；
+- 已覆盖：A001重放、稳定hash、完整载荷幂等、版本冲突、audit原子回滚、AI越权、前序缺失和未知迁移；
+- 状态：等待平台独立复核，未获Go不进入C3。
+
+最终治理使用R3 current：checklist 28/28、exam 100、IR=`IR-20260712-HEALTH-MVP90-M1-P2-C2-R3`；R2保留为内部依赖kind纠正前的历史快照。
