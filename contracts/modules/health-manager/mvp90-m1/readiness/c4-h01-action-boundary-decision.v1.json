@@ -13,6 +13,10 @@
   "evidence_references": ["docs/project-management/notices/2026-07-12-health-mvp90-m1-professional-signoff-task-order.md", "contracts/modules/health-manager/mvp90/role-actions.v1.json", "contracts/modules/health-manager/mvp90/synthetic-scenarios.v1.json"],
   "signer_role": "和奥堂医生集团专业负责人",
   "signature_reference": null,
+  "pending_owner": "和奥堂医生集团专业负责人",
+  "missing_evidence": ["真实专业负责人逐项书面决定", "真实签署姓名、角色、日期、版本与书面确认引用"],
+  "next_checkpoint": "真实 signer 回复后由协调窗口忠实录入，再由平台复跑签署门禁与联合准入复核",
+  "revision_request": null,
   "actions": [
     {"action_id":"DATA_ORGANIZATION","action_name_zh":"资料整理","ai":{"proposed_decision":"draft-only","rationale":"仅整理已授权最小资料并保留来源与不确定性"},"health_manager":{"proposed_decision":"allow","rationale":"可在有效服务关系和授权内澄清、整理"},"doctor":{"proposed_decision":"allow","rationale":"可在正式转介和专业目的内查看整理"},"resource_scope":["authorized profile items","assessment inputs"],"authorization_prerequisites":["valid consent","valid service relationship","minimum necessary purpose"],"fail_closed_result":"资料不全、授权无效或目的不符时停止并拒绝输出","transfer_escalation_responsibility":"AI 转管理师；涉及专业含义时管理师转医生","stop_condition":"撤权、资料冲突、风险提示或来源不可验证","non_substitutable_boundary":"整理结果不得冒充专业判断或原始资料"},
     {"action_id":"ASSESSMENT_DRAFT","action_name_zh":"评估草案","ai":{"proposed_decision":"draft-only","rationale":"只能基于已审核规则生成可追溯草案"},"health_manager":{"proposed_decision":"review-required","rationale":"普通范围可复核，专业信号须转医生"},"doctor":{"proposed_decision":"review-required","rationale":"涉及专业结论时由合格医生签署"},"resource_scope":["assessment session","authorized profile items"],"authorization_prerequisites":["sufficient information","current reviewed rule version","valid consent"],"fail_closed_result":"缺资料或规则过期时不生成确定性评估","transfer_escalation_responsibility":"AI/管理师发现专业或紧急信号立即转医生或急救路径","stop_condition":"资料不足、不适、专业或紧急风险","non_substitutable_boundary":"草案不是诊断、筛查结论或医疗建议"},

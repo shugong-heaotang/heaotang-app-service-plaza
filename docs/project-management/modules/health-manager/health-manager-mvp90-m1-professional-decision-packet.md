@@ -4,7 +4,7 @@
 - decision thread：`019f54a1-2847-7a71-b0ea-ee1ec403f29b`
 - signer：和奥堂医生集团专业负责人
 - packet version：`v1-proposed`
-- packet status：`Pending with owner`
+- packet status：`Package Ready candidate after platform Exact revision; professional decisions remain Pending with owner`
 - executable：`false`
 
 ## 1. 决策范围
@@ -80,3 +80,16 @@
 ## 7. 回执位置
 
 正式书面回复及引用应登记到 `health-manager-mvp90-m1-professional-signoff-receipt.md`。在真实 signer 回执前，该回执必须保持 Pending，M1 模块仍为 planned/No-Go。
+
+## 8. 平台 Exact revision 后的机器签署门禁
+
+平台拒绝集成首版提交 `dbd4f10c8c5caf663453e2207dc3c56046789620`，原因是 Schema 未拒绝 7 类无效签署变异。本修订已补齐：
+
+- Pending：强制非可执行、签字字段为空，并要求唯一 owner、缺失证据和下一检查点。
+- Accepted：强制真实 decision maker/date/signature；模板另强制 signed version、独立 reviewer、生效日、到期日/有效期策略。即使专业 Accepted，本包仍 `executable=false`，须等待平台联合门禁。
+- Exact revision：强制 exact target、替换文本、专业理由、唯一 owner、复验条件和复验人。
+- 17 action 与 15 scenario 均采用 exact ID set 门禁，拒绝重复、遗漏和额外 ID。
+- scenario overall Accepted 仅在 15/15 逐项 Accepted 时成立；任一 Pending/Exact revision 都禁止 overall Accepted/executable。
+- Schema 无法比较两个人名是否相同，`content_author != reviewer` 必须由 conformance 和平台复核证明。
+
+独立变异测试结果：3 份合法 Accepted 样本 ACCEPT；平台指定 7 类负例全部 REJECT；附加的 overall Accepted + 单场景 Pending 负例亦 REJECT。

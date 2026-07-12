@@ -9,6 +9,10 @@
   "decision_date": null,
   "signer_role": "和奥堂医生集团专业负责人",
   "signature_reference": null,
+  "pending_owner": "和奥堂医生集团专业负责人",
+  "missing_evidence": ["真实专业负责人对 15 个场景逐项书面决定", "真实签署姓名、角色、日期、版本与书面确认引用"],
+  "next_checkpoint": "真实 signer 回复后逐项录入 15 场景结论，再由平台复跑 exact-set、状态一致性与联合准入门禁",
+  "revision_request": null,
   "scenarios": [
     {"scenario_id":"MVP-A001","title_zh":"正常首轮闭环","decision_status":"Pending with owner","professional_review_question":"普通生活方式计划的专业边界和需升级条件是否充分？","proposed_safe_outcome":"仅经管理师复核、会员确认且无专业触发的普通任务可进入 M1 合成闭环","proposed_forbidden_outcome":"未确认计划生效或产生医疗结论","stop_or_transfer_condition":"出现禁忌、不适、专业问题或资料不足即停止并转人工","missing_evidence":["专业负责人逐项书面确认"],"owner":"和奥堂医生集团专业负责人"},
     {"scenario_id":"MVP-A002","title_zh":"资料不足","decision_status":"Pending with owner","professional_review_question":"资料不足时的最小停止和转人工标准是否充分？","proposed_safe_outcome":"不形成确定性评估或有效计划，显示缺项并补充/转人工","proposed_forbidden_outcome":"用默认值补齐健康事实","stop_or_transfer_condition":"任何关键资料缺失、冲突或来源不可验证","missing_evidence":["专业关键资料清单确认"],"owner":"和奥堂医生集团专业负责人"},
