@@ -1842,7 +1842,7 @@
                            "title":  "H2 M3 申请历史与俱乐部生命周期合成 fixture 扩展",
                            "owner":  "H2 fixture extension agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-member-home-m3-fixture-extension",
                            "branch":  "codex/club-member-home-m3-fixture-extension",
@@ -1857,7 +1857,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "只把已批准设计转为可回滚的 ApplicationPending、ApplicationRejected 与 DissolvedClub 三个显式场景；先离线 Plan 和隔离数据库验证。禁止真实资料、生产、OTP、业务代码、Schema、直接数据库捷径，以及伪造 left/suspended。",
+                           "migration_note":  "source 28e6bb7 经平台精确路径与门禁复核，以 1c8e064 受控集成。ApplicationPending、ApplicationRejected、DissolvedClub 三个显式场景均在专用临时 SQLite 完成 Apply/Inspect/Cleanup remaining=0 与 RestoreVerify dump SHA 一致；测试服务器 mutations=0、OTP=0、secrets=false。left/suspended 继续 Unsupported/Unverified，未伪造。",
                            "handoff_record":  "docs/project-management/modules/club-alliance/member-home/acceptance/m3-fixture-extension-handoff.md"
                        },
                        {
