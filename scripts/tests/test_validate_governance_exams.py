@@ -163,6 +163,8 @@ class GovernanceExamValidationTests(unittest.TestCase):
                     "source_path": "RULE.md",
                     "reread_at": "2026-07-12T00:02:00Z",
                     "source_sha256": sha(source),
+                    "confirmed_by": "test agent",
+                    "confirmation_method": "explicit-source-path",
                 }],
             }
             retry_path = attempts / "attempt-2.json"
@@ -198,6 +200,12 @@ class GovernanceExamValidationTests(unittest.TestCase):
             stale_source = copy.deepcopy(retry)
             stale_source["remediation_rereads"][0]["source_sha256"] = "0" * 64
             mutations.append(("source hash mismatch", stale_source))
+            wrong_actor = copy.deepcopy(retry)
+            wrong_actor["remediation_rereads"][0]["confirmed_by"] = "another agent"
+            mutations.append(("confirmation actor mismatch", wrong_actor))
+            missing_confirmation = copy.deepcopy(retry)
+            missing_confirmation["remediation_rereads"][0].pop("confirmation_method")
+            mutations.append(("confirmation_method", missing_confirmation))
             too_early = copy.deepcopy(retry)
             too_early["remediation_rereads"][0]["reread_at"] = "2026-07-11T23:59:00Z"
             mutations.append(("between previous completion", too_early))

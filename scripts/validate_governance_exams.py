@@ -152,6 +152,10 @@ def validate(schema_path: Path, bank_schema_path: Path, bank_path: Path, attempt
                     failed_at = retry_at = None
                 for reread in rereads:
                     source_value = reread.get("source_path", "")
+                    if reread.get("confirmed_by") != attempt.get("actor"):
+                        errors.append(f"{current_path}: remediation confirmation actor mismatch for {source_value}")
+                    if reread.get("confirmation_method") != "explicit-source-path":
+                        errors.append(f"{current_path}: remediation confirmation method is invalid for {source_value}")
                     source_path = resolve_repository_path(project_root, source_value) if source_value else None
                     if source_path is None or not source_path.is_file():
                         errors.append(f"{current_path}: missing or unsafe remediation source {source_value}")

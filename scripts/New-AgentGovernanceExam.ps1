@@ -4,7 +4,8 @@
   [Parameter(Mandatory = $true)][string]$ChecklistPath,
   [Parameter(Mandatory = $true)][string]$OutputPath,
   [int]$AttemptNumber = 1,
-  [string]$PreviousAttemptPath = ""
+  [string]$PreviousAttemptPath = "",
+  [string]$RemediationConfirmationsCsv = ""
 )
 
 $ErrorActionPreference = "Stop"
@@ -78,17 +79,37 @@ if ($AttemptNumber -gt 1) {
   $requiredRemediation = @($previous.remediation_sources | Select-Object -Unique)
   if ($requiredRemediation.Count -eq 0) { throw "Previous failed attempt must list remediation_sources." }
   if ($requiredRemediation.Count -ne @($previous.remediation_sources).Count) { throw "Previous remediation_sources must be unique." }
+  $confirmedRemediation = @($RemediationConfirmationsCsv.Split(',') | ForEach-Object { $_.Trim().Replace('\', '/') } | Where-Object { $_ })
+  if ($confirmedRemediation.Count -ne @($confirmedRemediation | Select-Object -Unique).Count) {
+    throw "Remediation confirmations must not contain duplicate source paths."
+  }
+  $normalizedRequiredRemediation = @($requiredRemediation | ForEach-Object { ([string]$_).Replace('\', '/') })
+  if (@($confirmedRemediation | Where-Object { $_ -notin $normalizedRequiredRemediation }).Count -gt 0) {
+    throw "Remediation confirmations contain a source that was not required by the previous failed attempt."
+  }
   $previousAttemptRelative = Get-RepositoryRelativePath $resolvedPrevious
   $previousAttemptHash = (Get-FileHash -LiteralPath $resolvedPrevious -Algorithm SHA256).Hash.ToLowerInvariant()
   foreach ($sourcePath in $requiredRemediation) {
     $resolvedSource = Resolve-RepositoryEvidencePath (Join-Path $root ([string]$sourcePath)) "Remediation source"
     if (-not (Test-Path -LiteralPath $resolvedSource)) { throw "Remediation source not found: $sourcePath" }
-    $null = Get-Content -LiteralPath $resolvedSource -Raw -Encoding UTF8
+    $sourceText = Get-Content -LiteralPath $resolvedSource -Raw -Encoding UTF8
+    Write-Output "===== REMEDIATION SOURCE BEGIN: $sourcePath ====="
+    Write-Output $sourceText
+    Write-Output "===== REMEDIATION SOURCE END: $sourcePath ====="
+    $normalizedSourcePath = ([string]$sourcePath).Replace('\', '/')
+    if ($normalizedSourcePath -notin $confirmedRemediation) {
+      throw "Full remediation source was presented, but its exact source path was not explicitly confirmed: $sourcePath"
+    }
     $remediationRereads += [ordered]@{
-      source_path = ([string]$sourcePath).Replace('\', '/')
+      source_path = $normalizedSourcePath
       reread_at = [DateTime]::UtcNow.ToString("o")
       source_sha256 = (Get-FileHash -LiteralPath $resolvedSource -Algorithm SHA256).Hash.ToLowerInvariant()
+      confirmed_by = $Actor
+      confirmation_method = "explicit-source-path"
     }
+  }
+  if ($confirmedRemediation.Count -ne $requiredRemediation.Count) {
+    throw "A retry requires explicit confirmation of every previous remediation source and no additional source."
   }
 }
 $bank = Get-Content -LiteralPath $bankPath -Raw -Encoding UTF8 | ConvertFrom-Json

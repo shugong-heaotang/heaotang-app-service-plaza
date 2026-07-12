@@ -23,6 +23,7 @@
 2. 因为试卷没有保存前序 SHA，所以无法证明前序失败快照没有被替换。
 3. 因为补课只由提示文字要求而无路径、时间、当前 SHA，所以无法证明 remediation sources 真正重读。
 4. 因为 Schema 和 validator 没有上述字段与条件约束，所以手工构造 retry 仍可通过。最早可控根因是 retry evidence 未进入版本化考试合同。
+5. 首轮修复 `a8106033` 虽补齐路径、SHA 和时间，却由生成器静默读取文件并自行生成“已重读”证据；Agent 没有看到完整内容，也没有逐来源明确确认。独立复核据此 No-Go。R2 改为完整输出每份补课源，并要求显式提供与失败试卷完全一致、无遗漏/无重复的来源路径确认，才生成带确认人和确认方式的重读证据。
 
 ## Impact
 
@@ -34,15 +35,15 @@
 ## Resolution
 
 - rejected_workaround_and_reason：不允许在 Project Brain IR 中补一句说明，也不允许修改旧 R3 试卷；聊天或文件名推断不能替代机器证据。
-- systemic_fix：为 retry 增加前序路径、前序 SHA 与逐来源重读证据；生成器真实读取并哈希；Schema 对 attempt>1 条件强制；validator 校验同 record、连续编号、上一场 failed、精确哈希、来源集合、当前 SHA 和时间窗口。
+- systemic_fix：为 retry 增加前序路径、前序 SHA 与逐来源重读证据；生成器完整展示每份来源并要求精确来源路径确认后记录确认人、确认方式、时间和当前 SHA；Schema 对 attempt>1 条件强制；validator 校验同 record、连续编号、上一场 failed、精确哈希、来源集合、确认人/方式、当前 SHA 和时间窗口。
 - changed_contracts_code_tools：`governance-exam.v1.schema.json`、`New-AgentGovernanceExam.ps1`、`validate_governance_exams.py` 及回归测试。
 - compatibility_or_migration：attempt 1 和全部既有已集成快照保持有效；权威基线中没有 attempt_number>1，旧 Project Brain R3 保留为未集成历史，修复后从新基线生成 R4。
 - rollback：回退本切片提交即可恢复旧工具；不得回写或迁移历史试卷。
 
 ## Prevention and proof
 
-- prevention_gate：attempt>1 缺任一字段即 Schema/validator 失败；引用越界、非紧邻失败、错误 SHA、缺/多/重复补课来源、来源 SHA 漂移和时间越界均失败。
-- positive_test：failed attempt 1 → 真实重读 → passed attempt 2，提交后字段完整保留。
+- prevention_gate：attempt>1 缺任一字段即 Schema/validator 失败；引用越界、非紧邻失败、错误 SHA、缺/多/重复补课确认、确认人不符、确认方式不符、来源 SHA 漂移和时间越界均失败。
+- positive_test：failed attempt 1 → 全文展示并逐来源明确确认 → passed attempt 2，提交后字段完整保留。
 - negative_test：missing/wrong previous path/hash、nonconsecutive、path escape、missing/duplicate/stale reread 与时间边界。
 - regression_set：legacy attempt 1、全仓治理试卷、检查单、IR、总合同与 UTF-8。
 - environment_retest：不适用；纯仓库治理工具。
@@ -50,6 +51,6 @@
 
 ## Verdict
 
-- 当前：implemented，等待独立复核与受控集成。
+- 当前：R1 source `a8106033` 因静默自动重读证据被独立复核 No-Go；R2 已完成显式展示/确认修复，等待独立复核与受控集成。
 - unresolved_risk：Project Brain 需在新权威基线生成 M1-R4；首试100不人为制造 retry。
 - next_authorization：平台集成后通知 Project Brain 重新生成当前治理证据。
