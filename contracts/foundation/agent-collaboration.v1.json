@@ -1940,8 +1940,11 @@
                                                  "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md",
                                                  "docs/project-management/service-plaza/handoff-log.md",
                                                  "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-m3-acceptance*.json",
+                                                 "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-m3-synthetic-data-design*.json",
                                                  "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-m3-acceptance*.json",
-                                                 "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-m3-acceptance*.json"
+                                                 "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-m3-synthetic-data-design*.json",
+                                                 "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-m3-acceptance*.json",
+                                                 "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-m3-synthetic-data-design*.json"
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
