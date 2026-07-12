@@ -1,0 +1,135 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/schemas/nova-people-tools.v1.schema.json",
+  "title": "NOVA M2 people tools contract v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "module_id", "stage", "status", "executable", "canonical_dependency", "security", "tools"],
+  "properties": {
+    "contract_version": {"const": "nova-people-tools.v1"},
+    "module_id": {"const": "nova"},
+    "stage": {"const": "M2"},
+    "status": {"enum": ["proposed", "standardized", "deprecated"]},
+    "executable": {"const": false},
+    "canonical_dependency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["work_id", "required_status", "current_status", "facade_authority", "legacy_route_authority", "forbidden_routes"],
+      "properties": {
+        "work_id": {"const": "AIW-20260712-NETWORK-CANONICAL-OWNER-DECISION"},
+        "required_status": {"const": "accepted"},
+        "current_status": {"enum": ["pending", "accepted"]},
+        "facade_authority": {"const": "people_connection_facade"},
+        "legacy_route_authority": {"const": "forbidden_for_nova"},
+        "forbidden_routes": {"type": "array", "minItems": 3, "uniqueItems": true, "items": {"type": "string"}}
+      }
+    },
+    "security": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["identity_source", "tenant_source", "authorization_enforced_by", "request_may_supply_actor_or_tenant", "model_may_expand_scope"],
+      "properties": {
+        "identity_source": {"const": "trusted_server_context"},
+        "tenant_source": {"const": "trusted_server_context"},
+        "authorization_enforced_by": {"const": "server"},
+        "request_may_supply_actor_or_tenant": {"const": false},
+        "model_may_expand_scope": {"const": false}
+      }
+    },
+    "tools": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/tool"}
+    }
+  },
+  "$defs": {
+    "inline_schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "additionalProperties", "required", "properties"],
+      "properties": {
+        "type": {"const": "object"},
+        "additionalProperties": {"const": false},
+        "required": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "properties": {"type": "object"}
+      }
+    },
+    "transport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["kind", "provider_operation", "legacy_endpoint_allowed"],
+      "properties": {
+        "kind": {"const": "platform_operation"},
+        "provider_operation": {"type": "string", "pattern": "^people\\."},
+        "legacy_endpoint_allowed": {"const": false}
+      }
+    },
+    "confirmation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["policy", "ticket_required", "binds"],
+      "properties": {
+        "policy": {"enum": ["never", "preview_only", "always"]},
+        "ticket_required": {"type": "boolean"},
+        "binds": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    },
+    "idempotency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required", "key_source", "same_key_same_payload", "same_key_different_payload"],
+      "properties": {
+        "required": {"type": "boolean"},
+        "key_source": {"enum": ["none", "Idempotency-Key"]},
+        "same_key_same_payload": {"enum": ["not_applicable", "safe_replay"]},
+        "same_key_different_payload": {"enum": ["not_applicable", "conflict"]}
+      }
+    },
+    "audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_fields", "sensitive_handling"],
+      "properties": {
+        "required_fields": {"type": "array", "minItems": 7, "items": {"type": "string"}, "uniqueItems": true},
+        "sensitive_handling": {"const": "hash_or_redacted_summary"}
+      }
+    },
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["additive_optional_fields", "new_required_fields_or_changed_meaning", "unknown_fields"],
+      "properties": {
+        "additive_optional_fields": {"const": "compatible_minor"},
+        "new_required_fields_or_changed_meaning": {"const": "new_major_and_platform_signoff"},
+        "unknown_fields": {"const": "reject"}
+      }
+    },
+    "tool": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["tool_id", "tool_version", "owner_role", "classification", "transport", "input_schema", "output_schema", "authn", "required_permissions", "tenant_source", "resource_policy", "visible_fields", "redacted_fields", "confirmation", "idempotency", "audit", "error_ids", "compatibility", "executable"],
+      "properties": {
+        "tool_id": {"enum": ["member_search", "connection_draft", "connection_send", "connection_status"]},
+        "tool_version": {"const": "v1"},
+        "owner_role": {"const": "People Network module owner"},
+        "classification": {"enum": ["read", "draft", "external_effect"]},
+        "transport": {"$ref": "#/$defs/transport"},
+        "input_schema": {"$ref": "#/$defs/inline_schema"},
+        "output_schema": {"$ref": "#/$defs/inline_schema"},
+        "authn": {"type": "string", "minLength": 1},
+        "required_permissions": {"type": "array", "minItems": 1, "items": {"type": "string"}, "uniqueItems": true},
+        "tenant_source": {"const": "trusted_server_context"},
+        "resource_policy": {"type": "array", "minItems": 3, "items": {"type": "string"}, "uniqueItems": true},
+        "visible_fields": {"type": "array", "minItems": 4, "items": {"type": "string"}, "uniqueItems": true},
+        "redacted_fields": {"type": "array", "minItems": 4, "items": {"type": "string"}, "uniqueItems": true},
+        "confirmation": {"$ref": "#/$defs/confirmation"},
+        "idempotency": {"$ref": "#/$defs/idempotency"},
+        "audit": {"$ref": "#/$defs/audit"},
+        "error_ids": {"type": "array", "minItems": 5, "items": {"type": "string", "pattern": "^NOVA_[A-Z0-9_]+$"}, "uniqueItems": true},
+        "compatibility": {"$ref": "#/$defs/compatibility"},
+        "executable": {"const": false}
+      }
+    }
+  }
+}

@@ -1,0 +1,75 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-NOVA-M2-PEOPLE-TOOLS-DISPATCH-R1",
+  "title": "NOVA M2 人脉 Owner 与版本化工具契约正式派发",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "建立唯一人脉 Owner 决策通道和独立 NOVA 四工具/callback 契约会签工作项，在不触碰业务代码或真实数据的前提下关闭 M2 前置治理缺口。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-nova-m2-people-tools-dispatch-r1.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-nova-m2-people-tools-dispatch-r1-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-nova-m2-people-tools-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.identity-api",
+    "foundation.authorization-idempotency",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklists/2026-07-12-nova-m2-people-tools-dispatch-r1.json",
+    "contracts/foundation/governance-exams/2026-07-12-nova-m2-people-tools-dispatch-r1-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-12-nova-m2-people-tools-dispatch-r1.json",
+    "docs/project-management/notices/2026-07-12-nova-m2-people-tools-task-order.md",
+    "docs/project-management/service-plaza/nova-m2-people-tools-dispatch-2026-07-12.md"
+  ],
+  "verification": [
+    "scripts/Test-AgentDevelopmentPreflight.ps1: ready",
+    "IR-20260712-NOVA-M2-PEOPLE-TOOLS-DISPATCH-R1 checklist: 26/26 completed",
+    "EX-20260712-NOVA-M2-PEOPLE-TOOLS-DISPATCH-R1-1: score 100",
+    "read-only network/social route and ownership audit",
+    "scripts/validate_development_checklists.py",
+    "scripts/validate_governance_exams.py",
+    "scripts/validate_implementation_records.py",
+    "scripts/validate_agent_collaboration.py",
+    "scripts/Test-ServicePlazaContracts.ps1",
+    "scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/foundation/development-checklists/2026-07-12-nova-m2-people-tools-dispatch-r1.json",
+    "contracts/foundation/governance-exams/2026-07-12-nova-m2-people-tools-dispatch-r1-attempt-1.json",
+    "docs/project-management/notices/2026-07-12-nova-m2-people-tools-task-order.md",
+    "docs/project-management/service-plaza/nova-m2-people-tools-dispatch-2026-07-12.md"
+  ],
+  "premises": [
+    "network legacy introductions/referral/status 写路径当前不满足服务端身份和资源权限门禁",
+    "social 是更安全的暂定写侧候选但仍需 tenant、确认、幂等和审计加固",
+    "人脉业务 canonical 决策必须由唯一人脉 Owner 作出，平台不代签",
+    "版本化工具契约必须先于任何 NOVA M2 业务实现",
+    "两项证据未独立 Go 前 M2 保持 No-Go"
+  ],
+  "implementation_mode": "ai-assisted"
+}

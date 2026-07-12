@@ -1,0 +1,71 @@
+{
+  "contract_version": "nova-connection-callback.v1",
+  "protocol_id": "connection_result_callback",
+  "status": "standardized",
+  "executable": false,
+  "classification": "server_to_server_callback",
+  "transport": {
+    "method": "POST",
+    "path": "/api/nova/internal/callbacks/connection-results",
+    "public_or_model_tool": false,
+    "authentication": "mutual_tls_or_oidc_service_principal",
+    "allowed_principal_role": "people_connection_outbox",
+    "tenant_source": "trusted_server_context",
+    "body_may_override_server_identity_or_tenant": false
+  },
+  "responsibility": {
+    "canonical_state_owner": "People Network module owner",
+    "outbox_producer": "People Network module owner",
+    "transport_schema_auth_owner": "platform integration owner",
+    "consumer": "Nova + AI module owner",
+    "consumer_effect": "append_only_task_event",
+    "callback_may_rewrite_canonical_state": false,
+    "reconciliation_source": "connection_status"
+  },
+  "event_schema": {
+    "type": "object",
+    "additionalProperties": false,
+    "required": ["event_id", "event_version", "request_id", "event_type", "occurred_at", "trace_id", "payload_hash", "result_summary"],
+    "properties": {
+      "event_id": {"type": "string", "pattern": "^event:[A-Za-z0-9_-]{8,128}$"},
+      "event_version": {"const": "v1"},
+      "request_id": {"type": "string", "pattern": "^connection:[A-Za-z0-9_-]{8,128}$"},
+      "event_type": {"enum": ["request_accepted", "request_rejected", "request_canceled", "request_expired", "contact_confirmed", "cooperation_started", "cooperation_completed", "no_result"]},
+      "occurred_at": {"type": "string", "format": "date-time"},
+      "trace_id": {"type": "string", "minLength": 8, "maxLength": 128},
+      "payload_hash": {"type": "string", "pattern": "^sha256:[a-f0-9]{64}$"},
+      "result_summary": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["result_code", "note_present"],
+        "properties": {
+          "result_code": {"enum": ["accepted", "rejected", "canceled", "expired", "contacted", "cooperation_started", "cooperation_completed", "no_result"]},
+          "note_present": {"type": "boolean"}
+        }
+      }
+    }
+  },
+  "idempotency": {
+    "key": "event_id",
+    "same_event_same_payload": "safe_replay",
+    "same_event_different_payload": "NOVA_CALLBACK_EVENT_CONFLICT",
+    "consumer_write": "append_once"
+  },
+  "recovery": {
+    "delivery": "at_least_once",
+    "failure_path": "retry_then_dlq",
+    "status_reconciliation_required": true,
+    "callback_failure_rolls_back_domain_outcome": false,
+    "dlq_owner": "platform integration owner"
+  },
+  "audit": {
+    "required_fields": ["event_id", "event_version", "request_id", "trace_id", "server_principal", "tenant_id", "payload_hash", "outcome", "event_time"],
+    "redacted_fields": ["full_user_id", "phone", "email", "message_body", "credentials", "token", "private_notes"]
+  },
+  "error_ids": ["NOVA_CALLBACK_UNAUTHORIZED", "NOVA_CALLBACK_TENANT_MISMATCH", "NOVA_CALLBACK_EVENT_CONFLICT", "NOVA_CONNECTION_STATE_CONFLICT", "NOVA_TOOL_DEPENDENCY_UNAVAILABLE", "NOVA_RATE_LIMITED", "NOVA_INTERNAL_ERROR"],
+  "compatibility": {
+    "additive_optional_fields": "compatible_minor",
+    "new_event_type_required_field_or_changed_meaning": "new_major_and_producer_consumer_platform_signoff",
+    "unknown_fields": "reject"
+  }
+}
