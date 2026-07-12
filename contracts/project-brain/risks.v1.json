@@ -1,0 +1,38 @@
+{
+  "contract_version": "project-brain.risks.v1",
+  "items": [
+    {
+      "risk_id": "PB-RISK-001",
+      "title": "多个状态文件形成相互矛盾的权威来源",
+      "category": "governance",
+      "status": "open",
+      "probability": "high",
+      "impact": "high",
+      "owner_role": "平台集成负责人",
+      "mitigation": "一个事实只登记一个权威来源；驾驶舱仅聚合",
+      "source_path": "docs/project-management/project-brain/requirements-v1.md"
+    },
+    {
+      "risk_id": "PB-RISK-002",
+      "title": "将敏感项目字段暴露到前端快照",
+      "category": "security",
+      "status": "mitigating",
+      "probability": "medium",
+      "impact": "critical",
+      "owner_role": "安全验收角色",
+      "mitigation": "采用允许字段清单、敏感数据测试和只读静态快照",
+      "source_path": "docs/project-management/project-brain/architecture-v1.md"
+    },
+    {
+      "risk_id": "PB-RISK-003",
+      "title": "Project Brain 与活动模块修改范围发生冲突",
+      "category": "delivery",
+      "status": "open",
+      "probability": "high",
+      "impact": "high",
+      "owner_role": "Project Brain 交付负责人",
+      "mitigation": "专用工作树、分段允许路径和平台受控集成",
+      "source_path": "docs/project-management/project-brain/delivery-plan-v1.md"
+    }
+  ]
+}

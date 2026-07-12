@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "project-brain.decisions.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "items"],
+  "properties": {
+    "contract_version": {"const": "project-brain.decisions.v1"},
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["decision_id", "question", "status", "risk_level", "approver_role", "source_path"],
+        "properties": {
+          "decision_id": {"type": "string", "pattern": "^PB-DEC-[0-9]{3,}$"},
+          "question": {"type": "string", "minLength": 1},
+          "status": {"enum": ["pending", "approved", "rejected", "superseded"]},
+          "risk_level": {"enum": ["low", "medium", "high", "critical"]},
+          "approver_role": {"type": "string", "minLength": 1},
+          "source_path": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

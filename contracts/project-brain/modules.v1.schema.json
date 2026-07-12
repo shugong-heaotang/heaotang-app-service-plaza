@@ -1,0 +1,26 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "project-brain.modules.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "items"],
+  "properties": {
+    "contract_version": {"const": "project-brain.modules.v1"},
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": ["module_id", "name", "status", "source_path", "source_updated_at", "next_checkpoint"],
+        "properties": {
+          "module_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "name": {"type": "string", "minLength": 1},
+          "status": {"enum": ["planned", "active", "blocked", "handoff-ready", "integrated", "unknown"]},
+          "source_path": {"type": "string", "minLength": 1},
+          "source_updated_at": {"type": "string", "format": "date-time"},
+          "next_checkpoint": {"type": "string", "minLength": 1}
+        }
+      }
+    }
+  }
+}

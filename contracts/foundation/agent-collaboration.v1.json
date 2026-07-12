@@ -1785,6 +1785,32 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "与独立后端 Git 根使用同一 owner/切片；只保存 current checklist、100 分考试、IR、exact backend commit/test 证据和根因报告，不复制后端源码。工作树已快进至 4b15dc9eb14578987e28b2b204e96f452dd7da5f，HEAD/base/merge-base 一致且 clean 后正式激活。",
                            "handoff_record":  "docs/project-management/service-plaza/club-sc-list-safe-dto-2026-07-12.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-PROJECT-BRAIN-V1",
+                           "title":  "Project Brain v1 统一知识入口、权威事实模型与只读驾驶舱",
+                           "owner":  "Codex Project Brain project lead agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-project-brain-v1",
+                           "branch":  "codex/project-brain-v1",
+                           "base_commit":  "f31f67f1613b7c97c9f46969d7c3eb59cdc0e46c",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m1*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-project-brain-v1-m1*.json",
+                                                 "contracts/foundation/invalidated-snapshots/project-brain-v1-m1/",
+                                                 "docs/project-management/notices/2026-07-12-project-brain-v1-task-order.md",
+                                                 "PROJECT-BRAIN.md",
+                                                 "docs/project-management/project-brain/",
+                                                 "contracts/project-brain/"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "最高负责人以权威 integration f31f67f 正式授权激活。首个检查点只迁入 M1 权威入口、项目文档和四类事实合约；M2 聚合审计、M3 React/路由、M4 安全/UAT/独立验收须在前一检查点 Go 后分段扩展 allowed_paths。SC T0 integrated 仅表示 No-Go/Remediation 证据收口，不代表 T0 Go；本工作项不得修改任何 SC remediation 文件。",
+                           "handoff_record":  "docs/project-management/project-brain/handoff-v1.md"
                        }
                    ]
 }

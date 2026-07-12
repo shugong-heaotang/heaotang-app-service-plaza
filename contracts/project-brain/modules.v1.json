@@ -1,0 +1,65 @@
+{
+  "contract_version": "project-brain.modules.v1",
+  "items": [
+    {
+      "module_id": "platform-foundation",
+      "name": "平台公共底座",
+      "status": "active",
+      "development_status": "go",
+      "acceptance_status": "partial-go",
+      "source_path": "contracts/foundation/foundation-capabilities.v1.json",
+      "source_updated_at": "2026-07-12T00:00:00+08:00",
+      "next_checkpoint": "继续关闭活动平台工作项并保持公共契约兼容"
+    },
+    {
+      "module_id": "service-plaza",
+      "name": "服务广场",
+      "status": "active",
+      "development_status": "go",
+      "acceptance_status": "partial-go",
+      "source_path": "docs/project-management/service-plaza/project-status-one-page.md",
+      "source_updated_at": "2026-07-12T00:00:00+08:00",
+      "next_checkpoint": "完成三大板块主链路与第一阶段综合验收"
+    },
+    {
+      "module_id": "life-navigation",
+      "name": "生命导航",
+      "status": "active",
+      "development_status": "active",
+      "acceptance_status": "partial-go",
+      "source_path": "docs/project-management/modules/life-navigation/README.md",
+      "source_updated_at": "2026-07-12T00:00:00+08:00",
+      "next_checkpoint": "按模块权威状态推进当前最小切片"
+    },
+    {
+      "module_id": "club-alliance",
+      "name": "俱乐部联盟",
+      "status": "active",
+      "development_status": "active",
+      "acceptance_status": "partial-go",
+      "source_path": "contracts/modules/club-alliance/internal-dependencies.v1.json",
+      "source_updated_at": "2026-07-12T00:00:00+08:00",
+      "next_checkpoint": "完成活动验收和会员主页切片交接"
+    },
+    {
+      "module_id": "health-manager",
+      "name": "健康大管家",
+      "status": "active",
+      "development_status": "active",
+      "acceptance_status": "partial-go",
+      "source_path": "contracts/modules/health-manager/internal-dependencies.v1.json",
+      "source_updated_at": "2026-07-12T00:00:00+08:00",
+      "next_checkpoint": "完成 MVP90 需求与平台安全工作项交接"
+    },
+    {
+      "module_id": "nova-ai",
+      "name": "Nova AI",
+      "status": "active",
+      "development_status": "active",
+      "acceptance_status": "unknown",
+      "source_path": "contracts/foundation/agent-collaboration.v1.json",
+      "source_updated_at": "2026-07-12T00:00:00+08:00",
+      "next_checkpoint": "完成第五阶段当前运行时检查点"
+    }
+  ]
+}

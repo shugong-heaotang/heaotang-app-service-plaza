@@ -1,0 +1,14 @@
+{
+  "contract_version": "project-brain.decisions.v1",
+  "items": [
+    {
+      "decision_id": "PB-DEC-001",
+      "question": "Project Brain 第一版是否只读并仅在开发和测试环境启用",
+      "status": "approved",
+      "risk_level": "high",
+      "recommendation": "第一版只读；生产开放另立权限与安全决策",
+      "approver_role": "项目负责人",
+      "source_path": "docs/project-management/project-brain/requirements-v1.md"
+    }
+  ]
+}
