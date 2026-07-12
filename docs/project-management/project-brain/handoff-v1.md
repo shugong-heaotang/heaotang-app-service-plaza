@@ -5,7 +5,7 @@
 接收角色：Project Brain 项目负责人（独立复核）
 work_id：`AIW-20260712-PROJECT-BRAIN-V1`
 record_id：`IR-20260712-PROJECT-BRAIN-V1-M4`
-结论：M4 自动化、安全与真实浏览器 UAT Go；实现证据提交 `bfdc31a`；最终 R2 current 治理快照和独立验收 Go，工作项为 `handoff-ready`，允许受控集成。
+结论：M4 自动化、安全与真实浏览器 UAT Go；实现证据提交 `bfdc31a`；最终 R2 current 治理快照和独立验收 Go；source `815383e` 已以 integration `57e798f8447e4eaf66bc810606fc70f961a41fc1` 受控集成，工作项为 `integrated`。
 
 ## 最终 R2 与独立验收
 

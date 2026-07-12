@@ -2471,7 +2471,7 @@
                            "title":  "Project Brain v1 统一知识入口、权威事实模型与只读驾驶舱",
                            "owner":  "Codex Project Brain project lead agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "handoff-ready",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-project-brain-v1",
                            "branch":  "codex/project-brain-v1",
