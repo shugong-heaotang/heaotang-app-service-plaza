@@ -263,7 +263,7 @@
                            "title":  "健康接口输入缓存与 AI 失败关闭后端实现",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台后端负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/heaotang-main",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-platform-safety",
                            "branch":  "codex/health-manager-platform-safety",
@@ -275,7 +275,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  null,
+                           "migration_note":  "后端实现提交 e361a8ac792d1caaa15241062be904a266bf83ea 已包含于权威 backend integration e41265905815082433e040412f3dd6b6b33dfede；独立复核确认仅三条允许路径，health-plugin 定向 go test 与 go vet 通过，工作树和远端一致且干净。测试环境部署仍未执行，不把代码集成冒充环境 Go。",
                            "handoff_record":  "docs/project-management/service-plaza/health-platform-safety-2026-07-11.md"
                        },
                        {
@@ -1924,6 +1924,30 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "从 combined local Go APP 37c6c3a / backend e4126590 创建独立验收工作树，clean。只允许测试环境可回滚部署、现有 fixture 的 Plan/Apply/Inspect/Cleanup/RestoreVerify、四合成身份、浏览器/网络/DB脱敏证据和最终恢复；禁止代码/Schema修改、生产、真实会员、真实资金、直接DB捷径和未授权OTP重复申请。",
                            "handoff_record":  "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-HEALTH-MVP90-M1-READINESS-DISPATCH",
+                           "title":  "健康大管家 MVP-90 M1 合成 PDCAR 纵切准入与派发",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-mvp90-m1-readiness-dispatch",
+                           "branch":  "codex/health-mvp90-m1-readiness-dispatch",
+                           "base_commit":  "b64f20bef97d5e01afed71812e9a062e35364f5f",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-12-health-mvp90-m1-readiness-dispatch*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-health-mvp90-m1-readiness-dispatch*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-health-mvp90-m1-readiness-dispatch*.json",
+                                                 "docs/project-management/notices/2026-07-12-health-manager-mvp90-m1-task-order.md",
+                                                 "docs/project-management/service-plaza/health-mvp90-m1-readiness-2026-07-12.md",
+                                                 "docs/project-management/service-plaza/health-platform-safety-2026-07-11.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "只完成 M1 准入事实、三项会签门禁、精确范围和 planned 模块工作包派发；C4-H01、M1 窄模板专业会签和 C4-S04 未全部落盘前，模块不得 active，不授权前后端实现、环境、部署、生产、真实健康数据、收费或资金操作。",
+                           "handoff_record":  "docs/project-management/service-plaza/health-mvp90-m1-readiness-2026-07-12.md"
                        }
                    ]
 }
