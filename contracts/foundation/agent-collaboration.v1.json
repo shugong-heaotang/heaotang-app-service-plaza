@@ -2245,7 +2245,7 @@
                            "title":  "NOVA M2 三包 Provider 与迁移演练正式派发",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-nova-m2-provider-dispatch",
                            "branch":  "codex/nova-m2-provider-dispatch",
@@ -2260,8 +2260,116 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "基于已 integrated 的 canonical Owner 与四工具契约，派发 network read、social write、migration/disable drill 三包；两个后端包各使用独立 APP companion evidence item，避免跨 Git 根伪路径。三包与环境安全验收全部 Go 前 M2保持No-Go。",
+                           "migration_note":  "派发 source 9d65128 已受控集成至 APP 68b6feaae45610e9a655662b24adcfbf27a04c06；checklist26/26、exam100、IR、总合同、UTF8、collaboration和diff通过。基于已 integrated 的 canonical Owner 与四工具契约，派发 network read、social write、migration/disable drill 三包；两个后端包各使用独立 APP companion evidence item，避免跨 Git 根伪路径。三包与环境安全验收全部 Go 前 M2保持No-Go。",
                            "handoff_record":  "docs/project-management/service-plaza/nova-m2-provider-dispatch-2026-07-12.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-NOVA-M2-NETWORK-READ-PROVIDER-BACKEND",
+                           "title":  "NOVA M2 member_search Network 读侧 Provider",
+                           "owner":  "NOVA network read provider agent",
+                           "owner_role":  "平台后端负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/heaotang-main",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-nova-m2-network-read-provider",
+                           "branch":  "codex/nova-m2-network-read-provider",
+                           "base_commit":  "e41265905815082433e040412f3dd6b6b33dfede",
+                           "allowed_paths":  [
+                                                 "backend-go/plugins/network-plugin/nova_member_search_provider.go",
+                                                 "backend-go/plugins/network-plugin/nova_member_search_provider_test.go"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "首检查点只实现未挂路由的member_search provider核：trusted actor/tenant、资源/字段白名单、opt-out、速率限制决定、审计和稳定错误。禁止任何introduction/referral/status写、legacy文件、真实数据或生产。治理证据由同owner APP companion item保存。",
+                           "handoff_record":  "docs/project-management/modules/network/network-read-provider-handoff.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-NOVA-M2-NETWORK-READ-PROVIDER-EVIDENCE",
+                           "title":  "NOVA M2 Network 读侧 Provider 跨仓治理证据",
+                           "owner":  "NOVA network read provider agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-nova-m2-network-read-provider-evidence",
+                           "branch":  "codex/nova-m2-network-read-provider-evidence",
+                           "base_commit":  "68b6feaae45610e9a655662b24adcfbf27a04c06",
+                           "allowed_paths":  [
+                                                 "docs/project-management/modules/network/network-read-provider-handoff.md",
+                                                 "contracts/foundation/development-checklists/2026-07-12-nova-m2-network-read-provider*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-nova-m2-network-read-provider*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-nova-m2-network-read-provider*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "只保存同owner后端切片的current checklist/exam100/IR/Handoff与exact Go commit/test，不拥有或复制后端源码，不执行环境操作。",
+                           "handoff_record":  "docs/project-management/modules/network/network-read-provider-handoff.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-NOVA-M2-SOCIAL-WRITE-PROVIDER-BACKEND",
+                           "title":  "NOVA M2 connection draft/send/status Social 写侧 Provider",
+                           "owner":  "NOVA social write provider agent",
+                           "owner_role":  "平台后端负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/heaotang-main",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-nova-m2-social-write-provider",
+                           "branch":  "codex/nova-m2-social-write-provider",
+                           "base_commit":  "e41265905815082433e040412f3dd6b6b33dfede",
+                           "allowed_paths":  [
+                                                 "backend-go/plugins/social-plugin/nova_connection_provider.go",
+                                                 "backend-go/plugins/social-plugin/nova_connection_provider_test.go"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "首检查点只实现未挂路由的draft/send/status provider核：confirmation、Idempotency-Key、participant授权、contact settings/cooldown、RowsAffected fail-close与transactional outbox；仅临时模拟DB，禁止真实消息、legacy文件和生产。治理证据由同owner APP companion item保存。",
+                           "handoff_record":  "docs/project-management/modules/network/social-write-provider-handoff.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-NOVA-M2-SOCIAL-WRITE-PROVIDER-EVIDENCE",
+                           "title":  "NOVA M2 Social 写侧 Provider 跨仓治理证据",
+                           "owner":  "NOVA social write provider agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-nova-m2-social-write-provider-evidence",
+                           "branch":  "codex/nova-m2-social-write-provider-evidence",
+                           "base_commit":  "68b6feaae45610e9a655662b24adcfbf27a04c06",
+                           "allowed_paths":  [
+                                                 "docs/project-management/modules/network/social-write-provider-handoff.md",
+                                                 "contracts/foundation/development-checklists/2026-07-12-nova-m2-social-write-provider*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-nova-m2-social-write-provider*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-nova-m2-social-write-provider*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "只保存同owner后端切片的current checklist/exam100/IR/Handoff与exact Go commit/test，不拥有或复制后端源码，不执行环境或真实消息。",
+                           "handoff_record":  "docs/project-management/modules/network/social-write-provider-handoff.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-NOVA-M2-MIGRATION-DISABLE-DRILL",
+                           "title":  "NOVA M2 introductions 单向迁移与 legacy 禁用演练",
+                           "owner":  "NOVA migration and disable drill agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-nova-m2-migration-disable-drill",
+                           "branch":  "codex/nova-m2-migration-disable-drill",
+                           "base_commit":  "68b6feaae45610e9a655662b24adcfbf27a04c06",
+                           "allowed_paths":  [
+                                                 "scripts/Manage-NovaPeopleMigrationDrill.ps1",
+                                                 "scripts/Test-NovaPeopleMigrationDrillSafety.ps1",
+                                                 "contracts/modules/network/migration/nova-introduction-migration.v1.json",
+                                                 "contracts/modules/network/migration/nova-introduction-migration.v1.schema.json",
+                                                 "contracts/modules/network/migration/fixtures/",
+                                                 "docs/project-management/modules/network/migration-drill-plan.md",
+                                                 "docs/project-management/modules/network/migration-drill-report.md",
+                                                 "docs/project-management/modules/network/migration-drill-handoff.md",
+                                                 "contracts/modules/network/development-checklists/2026-07-12-nova-m2-migration-disable*.json",
+                                                 "contracts/modules/network/governance-exams/2026-07-12-nova-m2-migration-disable*.json",
+                                                 "contracts/modules/network/implementation-records/2026-07-12-nova-m2-migration-disable*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "只对临时或明确测试DB实施Plan/Apply/Inspect/Cleanup/RestoreVerify，覆盖unknown tenant quarantine、禁双写、单向迁移、Sunset/410 successor合同与不重开unsafe writes的回滚；禁止后端路由修改、生产和真实消息。",
+                           "handoff_record":  "docs/project-management/modules/network/migration-drill-handoff.md"
                        }
                    ]
 }
