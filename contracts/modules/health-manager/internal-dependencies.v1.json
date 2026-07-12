@@ -323,7 +323,7 @@
       "dependency_id": "m1.p2-replay-plan",
       "kind": "contract",
       "description": "15/15场景、exact25事件的确定性计划；同资源状态与版本连续，normal PDCAR不生成风险/转人工事件，紧急场景由签署结果闭包至专业风险分类；迁移命令、可选安全授权动作与审计期望分离，所有输出仍synthetic_only=true、executable=false",
-      "status": "implemented",
+      "status": "test-verified",
       "required_for_slice": true,
       "depends_on": ["m1.p2-governance-entry", "m1.vertical-slice-contract", "m1.synthetic-scenarios-contract", "m1.security-authorization"],
       "contracts": [
@@ -334,10 +334,49 @@
         "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_p2_replay.py",
         "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md"
       ],
-      "unresolved": ["P2-C1第二次Exact revision已修复，等待平台对R4独立复核"],
+      "unresolved": [],
       "owner": "健康大管家负责人",
-      "blocks": ["P2-C2 reference runner"],
+      "blocks": ["m1.p2-c1-handoff"],
       "does_not_block": ["真实数据、共享实现、环境、收费和生产继续 No-Go"]
+    },
+    {
+      "dependency_id": "m1.p2-c1-handoff",
+      "kind": "handoff",
+      "description": "P2-C1 replay plan、exact25事件、A001连续重放、A003紧急风险闭包及全部源指针/授权语义已由平台独立验收Go，并squash integration至40a042b",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": ["m1.p2-replay-plan"],
+      "contracts": ["docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-handoff.md"],
+      "evidence": [
+        "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p2-c1-r4.json",
+        "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p2-c1-r4-attempt-1.json",
+        "contracts/modules/health-manager/implementation-records/2026-07-12-health-mvp90-m1-p2-c1-r4.json",
+        "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md"
+      ],
+      "unresolved": [],
+      "owner": "健康大管家负责人",
+      "blocks": ["m1.p2-reference-runner"],
+      "does_not_block": ["C4-L02-L04、全量C4-H06、production identity与真实活动继续失败关闭"]
+    },
+    {
+      "dependency_id": "m1.p2-reference-runner",
+      "kind": "contract",
+      "description": "纯Python、内存内reference runner；以scenario_id+event_id绑定权威事件，执行状态/版本、授权、完整载荷幂等、稳定拒绝与审计原子回滚，不访问文件、网络、数据库、系统时间、随机数或外部模型",
+      "status": "implemented",
+      "required_for_slice": true,
+      "depends_on": ["m1.p2-c1-handoff"],
+      "contracts": [
+        "contracts/modules/health-manager/mvp90-m1/conformance/synthetic_pdcar_reference.py",
+        "contracts/modules/health-manager/mvp90-m1/synthetic-replay-plan.v1.json"
+      ],
+      "evidence": [
+        "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_p2_replay.py",
+        "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md"
+      ],
+      "unresolved": ["P2-C2 Exact revision已按权威事件绑定与完整载荷幂等修订，等待平台独立复核corrected candidate"],
+      "owner": "健康大管家负责人",
+      "blocks": ["P2-C3 15场景正负例与零调用证据"],
+      "does_not_block": ["其他模块独立工作；真实数据、共享实现、环境、收费和生产继续No-Go"]
     }
   ]
 }
