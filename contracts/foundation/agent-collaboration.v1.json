@@ -2042,7 +2042,7 @@
                            "title":  "健康 M1 C4-S04 权限审计与威胁模型冻结",
                            "owner":  "Platform security decision agent",
                            "owner_role":  "平台安全负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-m1-security-freeze",
                            "branch":  "codex/health-m1-security-freeze",
@@ -2058,7 +2058,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "决策通道 thread 019f54a1-6140-7690-ae1d-c96672f104bc。工作树已快进至 d2608781af981d19021c36dd706f99ee041634b9，HEAD/merge-base 一致且 clean 后激活。只允许 C4-S04 主体/资源/动作、服务端拒绝矩阵、审计字段、威胁模型、机器合同及治理证据；禁止业务实现、真实健康数据和替专业/隐私角色签字。",
+                           "migration_note":  "C4-S04 技术安全冻结 source e68b1a0fbe295ba61452d824b0db7dc57cc1f341 经平台独立复核 Accepted，并受控集成至 APP e547190000cf6337274452336789ac4d3ca88320。valid ACCEPT，原六项负向变异及重复 subject/threat/premise ID 均 REJECT；checklist current SHA mismatch0、exam100、总合同、IR、UTF-8、diff、scope、敏感扫描通过。合同仍 executable=false；C4-H01、M1 窄模板和隐私/法律依赖继续 Pending，不自动激活 M1。",
                            "handoff_record":  "docs/project-management/modules/health-manager/health-manager-mvp90-m1-security-freeze-receipt.md"
                        }
                    ]
