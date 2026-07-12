@@ -1202,7 +1202,7 @@
                            "title":  "动作遥测 boolean 业务变量与 service-plaza 适配",
                            "owner":  "Backend platform agent",
                            "owner_role":  "后端平台负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/heaotang-main",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-action-telemetry-businessconfig",
                            "branch":  "codex/action-telemetry-businessconfig",
@@ -2034,7 +2034,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "决策通道 thread 019f54a1-2847-7a71-b0ea-ee1ec403f29b。Proposed package source 4af882b7761367c7caa8ee5f5a0c9ad7768f3a3f 经平台独立复核 Package Accepted，并受控集成至 APP 587510dd870950c1268c168257e77940d447b87d；3 个 Pending 当前实例和3个合法 Accepted 样本 ACCEPT，8类负向变异全部 REJECT，治理/总合同/UTF-8/diff/scope/secret scan 通过。工作项继续 active 等待真实和奥堂医生集团专业负责人分别签署 C4-H01 与 M1 窄模板；当前仍 Pending/executable=false，不扩大为全量 C4-H06。",
+                           "migration_note":  "决策通道 thread 019f54a1-2847-7a71-b0ea-ee1ec403f29b。Proposed package source 4af882b7761367c7caa8ee5f5a0c9ad7768f3a3f 经平台独立复核 Package Accepted 并受控集成至 APP 587510dd870950c1268c168257e77940d447b87d。张树功 development-only 回执已分别绑定 item-637/item-645/item-656；C4-H01、M1 窄模板和 15/15 场景均 Accepted 且 executable=false。最终 source 90e52a69aff37ff52fe3d9d9989de2ed793d8901 经独立复核：R5 checklist 28/28 current SHA mismatch0、exam100、三份 Schema 0 errors、总合同/IR/collaboration/UTF-8/diff/scope/secret scan 通过；受控集成提交 f509b3e 与 a5607e2。工作项已完成并 integrated；不扩大为全量 C4-H06，不授权真实数据、环境、收费或生产。",
                            "handoff_record":  "docs/project-management/modules/health-manager/health-manager-mvp90-m1-professional-signoff-receipt.md"
                        },
                        {
