@@ -8,6 +8,7 @@
     "activation_rule": "No new business stream may activate while the unique active business-stream count exceeds the limit. Existing isolated work drains without forced interruption."
   },
   "handoff": {
+    "first_response_sla_hours": 4,
     "decision_sla_hours": 24,
     "on_expiry": "escalate-to-project-owner",
     "required_next_owner": true
@@ -36,9 +37,27 @@
     "independent_acceptance_required": true,
     "developer_reviewer_approver_separation_for_high_risk": true
   },
+  "business_value_gate": {
+    "required_for_active_business_stream": true,
+    "required_fields": [
+      "customer_segment",
+      "customer_problem",
+      "value_event",
+      "success_metric",
+      "metric_target",
+      "measurement_window",
+      "end_to_end_owner_role",
+      "commercial_hypothesis",
+      "kill_condition",
+      "journey_scope"
+    ],
+    "cross_module_value_streams_use_one_end_to_end_owner": true,
+    "measurement_required_before_completion": true
+  },
   "completion": {
     "requires_business_flow_resumed": true,
     "requires_independent_acceptance": true,
-    "commit_or_document_alone_is_not_completion": true
+    "commit_or_document_alone_is_not_completion": true,
+    "requires_value_event_evidence": true
   }
 }

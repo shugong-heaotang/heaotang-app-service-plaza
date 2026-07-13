@@ -14,6 +14,11 @@ REQUIRED_FLOW_FIELDS = {
     "developer_role", "reviewer_role", "approver_role", "blocks",
     "does_not_block", "auto_continue", "stop_conditions",
 }
+REQUIRED_BUSINESS_FIELDS = {
+    "customer_segment", "customer_problem", "value_event", "success_metric",
+    "metric_target", "measurement_window", "end_to_end_owner_role",
+    "commercial_hypothesis", "kill_condition", "journey_scope",
+}
 
 
 def parse_time(value: str) -> datetime:
@@ -37,11 +42,19 @@ def validate(policy_path: Path, schema_path: Path, registry_path: Path) -> list[
             roles = {item.get("developer_role"), item.get("reviewer_role"), item.get("approver_role")}
             if len(roles) != 3:
                 errors.append(f"{item['work_id']}: high-risk roles must be separated")
+        if item.get("flow_class") == "business-stream" and item.get("status") in {"active", "handoff-ready"}:
+            missing_business = sorted(REQUIRED_BUSINESS_FIELDS - item.keys())
+            if missing_business:
+                errors.append(f"{item['work_id']}: missing business value fields: {', '.join(missing_business)}")
 
-    active_streams = {
-        i["business_stream_id"]: i for i in governed
+    active_stream_items = [
+        i for i in governed
         if i.get("status") == "active" and i.get("flow_class") == "business-stream"
-    }
+    ]
+    stream_counts = Counter(i["business_stream_id"] for i in active_stream_items)
+    if any(v > 1 for v in stream_counts.values()):
+        errors.append("DELIVERY_DUPLICATE_ACTIVE_BUSINESS_STREAM")
+    active_streams = {i["business_stream_id"]: i for i in active_stream_items}
     module_counts = Counter(i["module_id"] for i in active_streams.values())
     if len(active_streams) > policy["wip"]["max_active_business_streams"]:
         errors.append("DELIVERY_WIP_GLOBAL_EXCEEDED")

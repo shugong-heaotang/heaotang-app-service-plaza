@@ -3,7 +3,7 @@
   "$id": "https://heaotang.cn/contracts/foundation/delivery-flow-policy.v1.schema.json",
   "type": "object",
   "additionalProperties": false,
-  "required": ["contract_version", "effective_at", "wip", "handoff", "continuation", "work_item_model", "completion"],
+  "required": ["contract_version", "effective_at", "wip", "handoff", "continuation", "work_item_model", "business_value_gate", "completion"],
   "properties": {
     "contract_version": {"const": "delivery-flow-policy.v1"},
     "effective_at": {"type": "string", "format": "date-time"},
@@ -19,8 +19,9 @@
     },
     "handoff": {
       "type": "object", "additionalProperties": false,
-      "required": ["decision_sla_hours", "on_expiry", "required_next_owner"],
+      "required": ["first_response_sla_hours", "decision_sla_hours", "on_expiry", "required_next_owner"],
       "properties": {
+        "first_response_sla_hours": {"type": "integer", "minimum": 1, "maximum": 4},
         "decision_sla_hours": {"type": "integer", "minimum": 1, "maximum": 24},
         "on_expiry": {"const": "escalate-to-project-owner"},
         "required_next_owner": {"const": true}
@@ -36,6 +37,17 @@
       }
     },
     "work_item_model": {"type": "object", "additionalProperties": {"const": true}, "minProperties": 4},
+    "business_value_gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_for_active_business_stream", "required_fields", "cross_module_value_streams_use_one_end_to_end_owner", "measurement_required_before_completion"],
+      "properties": {
+        "required_for_active_business_stream": {"const": true},
+        "required_fields": {"type": "array", "minItems": 10, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "cross_module_value_streams_use_one_end_to_end_owner": {"const": true},
+        "measurement_required_before_completion": {"const": true}
+      }
+    },
     "completion": {"type": "object", "additionalProperties": {"const": true}, "minProperties": 3}
   }
 }

@@ -1,0 +1,13 @@
+{
+  "contract_version":"activity.domain-model.v1",
+  "execution":{"executable":false,"mode":"mock-only","environment":"non-production"},
+  "aggregates":[
+    {"name":"Activity","identity":"activity_id","owns":["club_id","proposal_id","responsible_member_id","visibility","risk_level","schedule","status"],"invariants":["exactly_one_responsible_club","publish_requires_club_approval"]},
+    {"name":"Registration","identity":"registration_id","owns":["activity_id","member_id","ticket_type","attendance_status","consents"],"invariants":["granular_consent","idempotency_key_required"]},
+    {"name":"MatchReport","identity":"report_id","owns":["data_timestamp","completeness","theme_help","participant_aggregate","relationship_opportunities","action_advice"],"invariants":["visible_scope_only","official_tier_only","small_cohort_suppression","explanation_required"]},
+    {"name":"Connection","identity":"connection_id","owns":["activity_id","parties","consent_state"],"invariants":["mutual_consent_required","contact_separate_from-profile-visibility"]},
+    {"name":"CommercePlacement","identity":"placement_id","owns":["activity_id","club_id","external_product_id","position","promotion_label"],"invariants":["reference_only","seller_disclosed","saleability-synchronized"]},
+    {"name":"Attribution","identity":"attribution_id","owns":["order_id","activity_id","club_id","product_id","source","window","status"],"invariants":["one-order-one-attribution","refund-and-fulfilment-reconciled"]}
+  ],
+  "data_boundaries":{"activity_source_of_truth":["activity","proposal","agenda","event-space"],"external_sources":{"club-alliance":["club","membership","role"],"member-relationship":["official-tier","relationship","consent"],"mall-order-payment":["product","inventory","price","order","payment","refund","fulfilment"],"message":["subscription","delivery-audit"]}}
+}

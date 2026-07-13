@@ -1,0 +1,379 @@
+{
+  "contract_version": "activity.internal-dependencies.v3",
+  "module_id": "activity",
+  "execution": {
+    "executable": false,
+    "mode": "mock-only",
+    "environment": "non-production"
+  },
+  "dependencies": [
+    {
+      "id": "club-alliance",
+      "owner": "Club Alliance 接口所有者",
+      "version": "provisional-v1",
+      "request_schema": {
+        "type": "object",
+        "required": [
+          "club_id",
+          "member_id",
+          "proposal",
+          "role"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "club_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "member_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "proposal": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "response_schema": {
+        "type": "object",
+        "required": [
+          "membership",
+          "role",
+          "approval",
+          "status"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "membership": {
+            "type": "string",
+            "minLength": 1
+          },
+          "role": {
+            "type": "string",
+            "minLength": 1
+          },
+          "approval": {
+            "type": "string",
+            "minLength": 1
+          },
+          "status": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "errors": [
+        "CLUB_NOT_FOUND",
+        "MEMBERSHIP_REQUIRED",
+        "APPROVAL_REQUIRED"
+      ],
+      "permission": "club-resource-scope",
+      "fixture": "club-approved-001",
+      "readiness": "provisional"
+    },
+    {
+      "id": "mall-order-payment",
+      "owner": "商城/订单/支付接口所有者",
+      "version": "provisional-v1",
+      "request_schema": {
+        "type": "object",
+        "required": [
+          "club_id",
+          "product_id",
+          "activity_context"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "club_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "product_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "activity_context": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "response_schema": {
+        "type": "object",
+        "required": [
+          "product_snapshot",
+          "order_reference",
+          "refund_status"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "product_snapshot": {
+            "type": "string",
+            "minLength": 1
+          },
+          "order_reference": {
+            "type": "string",
+            "minLength": 1
+          },
+          "refund_status": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "errors": [
+        "PRODUCT_NOT_SALEABLE",
+        "ATTRIBUTION_CONFLICT",
+        "PAYMENT_NOT_AUTHORIZED"
+      ],
+      "permission": "seller-and-order-scope",
+      "fixture": "mall-product-001",
+      "readiness": "provisional"
+    },
+    {
+      "id": "nova",
+      "owner": "NOVA 接口所有者",
+      "version": "provisional-v1",
+      "request_schema": {
+        "type": "object",
+        "required": [
+          "user_goal",
+          "visible_activity_scope",
+          "consents"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "user_goal": {
+            "type": "string",
+            "minLength": 1
+          },
+          "visible_activity_scope": {
+            "type": "string",
+            "minLength": 1
+          },
+          "consents": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "response_schema": {
+        "type": "object",
+        "required": [
+          "ranked_explanations",
+          "draft_actions",
+          "uncertainty"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "ranked_explanations": {
+            "type": "string",
+            "minLength": 1
+          },
+          "draft_actions": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uncertainty": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "errors": [
+        "CONSENT_REQUIRED",
+        "INSUFFICIENT_DATA",
+        "ACTION_CONFIRMATION_REQUIRED"
+      ],
+      "permission": "user-visible-and-consented-data-only",
+      "fixture": "ai-match-001",
+      "readiness": "provisional"
+    },
+    {
+      "id": "member-relationship",
+      "owner": "会员/关系接口所有者",
+      "version": "provisional-v1",
+      "request_schema": {
+        "type": "object",
+        "required": [
+          "viewer_id",
+          "event_id",
+          "consent_scope"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "viewer_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "event_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "consent_scope": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "response_schema": {
+        "type": "object",
+        "required": [
+          "official_tier",
+          "aggregate_relations",
+          "visibility"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "official_tier": {
+            "type": "string",
+            "minLength": 1
+          },
+          "aggregate_relations": {
+            "type": "string",
+            "minLength": 1
+          },
+          "visibility": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "errors": [
+        "RELATION_SCOPE_DENIED",
+        "PRIVACY_THRESHOLD_NOT_MET"
+      ],
+      "permission": "field-consent-and-event-scope",
+      "fixture": "relations-aggregate-001",
+      "readiness": "provisional"
+    },
+    {
+      "id": "message",
+      "owner": "消息接口所有者",
+      "version": "provisional-v1",
+      "request_schema": {
+        "type": "object",
+        "required": [
+          "audience",
+          "template",
+          "frequency",
+          "confirmation"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "audience": {
+            "type": "string",
+            "minLength": 1
+          },
+          "template": {
+            "type": "string",
+            "minLength": 1
+          },
+          "frequency": {
+            "type": "string",
+            "minLength": 1
+          },
+          "confirmation": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "response_schema": {
+        "type": "object",
+        "required": [
+          "draft_id",
+          "send_audit"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "draft_id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "send_audit": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "errors": [
+        "UNSUBSCRIBED",
+        "FREQUENCY_LIMITED",
+        "CONFIRMATION_REQUIRED"
+      ],
+      "permission": "explicit-subscription-and-operator-confirmation",
+      "fixture": "message-draft-001",
+      "readiness": "provisional"
+    },
+    {
+      "id": "auth-privacy",
+      "owner": "鉴权/隐私接口所有者",
+      "version": "provisional-v1",
+      "request_schema": {
+        "type": "object",
+        "required": [
+          "actor",
+          "resource",
+          "action",
+          "consent"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "actor": {
+            "type": "string",
+            "minLength": 1
+          },
+          "resource": {
+            "type": "string",
+            "minLength": 1
+          },
+          "action": {
+            "type": "string",
+            "minLength": 1
+          },
+          "consent": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "response_schema": {
+        "type": "object",
+        "required": [
+          "allow",
+          "scope",
+          "retention"
+        ],
+        "additionalProperties": false,
+        "properties": {
+          "allow": {
+            "type": "string",
+            "minLength": 1
+          },
+          "scope": {
+            "type": "string",
+            "minLength": 1
+          },
+          "retention": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      },
+      "errors": [
+        "UNAUTHENTICATED",
+        "FORBIDDEN",
+        "CONSENT_REVOKED"
+      ],
+      "permission": "deny-by-default",
+      "fixture": "privacy-deny-001",
+      "readiness": "provisional"
+    }
+  ]
+}

@@ -48,6 +48,25 @@ class DeliveryFlowPolicyTests(unittest.TestCase):
             registry["work_items"].append(item)
         self.assertIn("DELIVERY_WIP_GLOBAL_EXCEEDED", self.run_validation(registry=registry))
 
+    def test_rejects_business_stream_without_value_contract(self):
+        registry = copy.deepcopy(self.registry)
+        item = next(i for i in registry["work_items"] if i.get("flow_policy_version"))
+        item["flow_class"] = "business-stream"
+        for field in FLOW.REQUIRED_BUSINESS_FIELDS:
+            item.pop(field, None)
+        errors = self.run_validation(registry=registry)
+        self.assertTrue(any("missing business value fields" in error for error in errors))
+
+    def test_rejects_duplicate_active_business_stream(self):
+        registry = copy.deepcopy(self.registry)
+        template = next(i for i in registry["work_items"] if i.get("flow_class") == "business-stream")
+        duplicate = copy.deepcopy(template)
+        duplicate["work_id"] = "AIW-20260713-TEST-DUPLICATE-STREAM"
+        duplicate["branch"] = "codex/test-duplicate-stream"
+        duplicate["workspace_path"] = "C:/tmp/test-duplicate-stream"
+        registry["work_items"].append(duplicate)
+        self.assertIn("DELIVERY_DUPLICATE_ACTIVE_BUSINESS_STREAM", self.run_validation(registry=registry))
+
 
 if __name__ == "__main__":
     unittest.main()

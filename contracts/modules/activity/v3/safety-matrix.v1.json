@@ -1,0 +1,11 @@
+{
+  "contract_version":"activity.safety-matrix.v1",
+  "execution":{"executable":false,"mode":"mock-only","environment":"non-production"},
+  "boundaries":[
+    {"area":"permission","deny":["member-direct-publish","cross-club-admin","staff-full-consumption-detail"]},
+    {"area":"privacy","deny":["unconsented-profile-use","small-cohort-exact-count","precise-location","single-party-contact-exchange","inferred-member-tier"]},
+    {"area":"ai","deny":["auto-publish","auto-register","auto-invite","auto-contact","auto-seat","auto-cart","auto-order","auto-payment","fabricated-source"],"require":["explanation","uncertainty","data_timestamp","user-control"]},
+    {"area":"message","deny":["unconfirmed-send","unsubscribed-send","frequency-limit-bypass","vip-based-high-frequency"]},
+    {"area":"transaction","deny":["chat-as-payment","points-as-cash","duplicate-product-record","duplicate-attribution","hidden-sponsor","real-payment-in-m0"]}
+  ]
+}
