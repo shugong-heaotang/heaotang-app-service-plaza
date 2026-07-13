@@ -2894,6 +2894,43 @@
                            "preexisting_changes_acknowledged": false,
                            "migration_note": "planned contracts-only；平台集成负责人当前已有活跃治理项。恢复条件=A current checklist/exam100落盘或平台owner释放一个活跃治理切片；只冻结Nova、商家资质/履约、会员画像、通知、支付端口与fake/in-memory行为，禁止真实调用。",
                            "handoff_record": "docs/project-management/modules/protection-mall/handoff-m2.md"
+                       },
+                       {
+                           "work_id": "AIW-20260713-LEARNING-PLAZA-M0",
+                           "title": "学习广场 M0 核心体系合同化与离线闭环",
+                           "owner": "Learning Plaza continuous development agent",
+                           "owner_role": "学习广场持续开发负责人",
+                           "status": "active",
+                           "repository_root": "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-learning-plaza-m0",
+                           "branch": "codex/learning-plaza-m0",
+                           "base_commit": "094bafdbba48c84f41611ca541c8225e4de4a8dd",
+                           "allowed_paths": [
+                               "contracts/modules/learning-plaza/**",
+                               "docs/project-management/modules/learning-plaza/**"
+                           ],
+                           "priority": "P1",
+                           "risk_level": "medium",
+                           "updated_at": "2026-07-13T13:02:02+08:00",
+                           "target_date": "2026-07-14T18:00:00+08:00",
+                           "status_expires_at": "2026-07-14T18:00:00+08:00",
+                           "next_checkpoint": "完成 current checklist、治理考试 100 分与 M0 离线合同验证",
+                           "developer_role": "学习广场持续开发负责人",
+                           "reviewer_role": "学习广场独立验收负责人",
+                           "approver_role": "项目最高负责人",
+                           "blocks": [
+                               "学习广场 M1 正式前端与 API 实现",
+                               "学习广场测试服联调"
+                           ],
+                           "does_not_block": [
+                               "其他已隔离模块开发",
+                               "现有 Nova 学习广场只读验证",
+                               "学习广场离线合同和确定性 fixture 设计"
+                           ],
+                           "started_with_clean_worktree": true,
+                           "preexisting_changes_acknowledged": false,
+                           "migration_note": "用户于2026-07-13明确要求立即启动学习广场开发，但不要求立即上线；M0 仅把核心板块、跨模块边界和离线可测闭环合同化。Nova phase5 的学习广场实现 c158b2087d54e026ab385eec7850c105894b33d0 仅作为固定哈希的参考资产，不自动视为平台已集成。M1、共享 app/src、后端、DB、部署、真实用户、消息、支付和生产均未授权。",
+                           "handoff_record": "docs/project-management/modules/learning-plaza/handoff-m0.md"
                        }
                    ]
 }
