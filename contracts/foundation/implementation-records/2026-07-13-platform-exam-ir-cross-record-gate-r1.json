@@ -1,0 +1,75 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-PLATFORM-EXAM-IR-CROSS-RECORD-GATE-R1",
+  "title": "治理考试与实施记录跨记录一致性失败关闭门禁",
+  "date": "2026-07-14",
+  "status": "implemented",
+  "objective": "确保 foundation 与模块实施记录引用的治理考试存在、同记录、通过且为100分，并让 Service Plaza 总门禁递归阻止失败考试被 verified 声明掩盖。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-13-platform-exam-ir-cross-record-gate-r1.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-13-platform-exam-ir-cross-record-gate-r1-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-13-platform-exam-ir-cross-record-gate-r1-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.recurrence-prevention",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/implementation-record.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "scripts/validate_governance_exams.py",
+    "scripts/validate_implementation_records.py",
+    "scripts/tests/test_validate_governance_exams.py",
+    "scripts/tests/test_validate_implementation_records.py",
+    "scripts/Test-ServicePlazaContracts.ps1",
+    "docs/project-management/notices/2026-07-13-platform-exam-ir-cross-record-gate-r1-task-order.md",
+    "docs/project-management/service-plaza/platform-exam-ir-cross-record-gate-r1-handoff.md",
+    "contracts/foundation/development-checklists/2026-07-13-platform-exam-ir-cross-record-gate-r1.json",
+    "contracts/foundation/governance-exams/2026-07-13-platform-exam-ir-cross-record-gate-r1-attempt-1.json"
+  ],
+  "verification": [
+    "current checklist 26/26 with exact SHA-256 matches",
+    "governance exam attempt 1 passed with score 100",
+    "same-record passed-100 positive regression passes",
+    "failed-75, record-id mismatch and missing-exam regressions fail closed",
+    "module governance exam directories are recursively discovered and exam grading is recalculated before IR linkage",
+    "Service Plaza contract gate passes in the candidate worktree",
+    "protection mall nine-file dirty snapshot fails read-only with status and hashes unchanged",
+    "full Python governance suite runs 79 tests with 78 pass and one exact-base-identical pre-existing foundation checklist inventory failure"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/platform-exam-ir-cross-record-gate-r1-handoff.md",
+    "scripts/tests/test_validate_implementation_records.py",
+    "contracts/foundation/development-checklists/2026-07-13-platform-exam-ir-cross-record-gate-r1.json",
+    "contracts/foundation/governance-exams/2026-07-13-platform-exam-ir-cross-record-gate-r1-attempt-1.json"
+  ],
+  "premises": [
+    "foundation implementation records retain full schema and path validation",
+    "module records share checklist and exam linkage requirements even when historical module-specific fields are non-canonical",
+    "failed governance exam snapshots are immutable and cannot be repaired by changing claims",
+    "this repair does not authorize registry edits, NOVA activation, mall file edits, business code, deployment, production, real data, payment or funds"
+  ],
+  "implementation_mode": "ai-assisted"
+}

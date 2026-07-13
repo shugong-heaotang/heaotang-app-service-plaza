@@ -30,7 +30,23 @@ def resolve_repository_path(project_root: Path, value: str) -> Path | None:
     return candidate
 
 
-def validate(schema_path: Path, bank_schema_path: Path, bank_path: Path, attempts_dir: Path, project_root: Path) -> list[str]:
+def attempt_directories(attempts_dir: Path, project_root: Path, include_module_attempts: bool = False) -> list[Path]:
+    directories = [attempts_dir]
+    if include_module_attempts:
+        modules_root = project_root / "contracts/modules"
+        if modules_root.is_dir():
+            directories.extend(sorted(path for path in modules_root.glob("*/governance-exams") if path.is_dir()))
+    return directories
+
+
+def validate(
+    schema_path: Path,
+    bank_schema_path: Path,
+    bank_path: Path,
+    attempts_dir: Path,
+    project_root: Path,
+    include_module_attempts: bool = False,
+) -> list[str]:
     attempt_schema = json.loads(schema_path.read_text(encoding="utf-8"))
     bank_schema = json.loads(bank_schema_path.read_text(encoding="utf-8"))
     bank = json.loads(bank_path.read_text(encoding="utf-8"))
@@ -48,7 +64,11 @@ def validate(schema_path: Path, bank_schema_path: Path, bank_path: Path, attempt
             errors.append(f"{question_id}: options must be exactly A, B and C")
         if not (project_root / question.get("source_path", "")).exists():
             errors.append(f"{question_id}: missing source_path {question.get('source_path')}")
-    files = sorted(attempts_dir.glob("*.json"))
+    files = sorted(
+        attempt
+        for directory in attempt_directories(attempts_dir, project_root, include_module_attempts)
+        for attempt in directory.glob("*.json")
+    )
     if not files:
         return errors + ["no governance exam attempts found"]
     validator = Draft202012Validator(attempt_schema)
@@ -189,8 +209,16 @@ def main() -> int:
     parser.add_argument("bank", type=Path)
     parser.add_argument("attempts", type=Path)
     parser.add_argument("--project-root", type=Path, default=Path.cwd())
+    parser.add_argument("--include-module-attempts", action="store_true")
     args = parser.parse_args()
-    errors = validate(args.schema, args.bank_schema, args.bank, args.attempts, args.project_root.resolve())
+    errors = validate(
+        args.schema,
+        args.bank_schema,
+        args.bank,
+        args.attempts,
+        args.project_root.resolve(),
+        include_module_attempts=args.include_module_attempts,
+    )
     if errors:
         for error in errors:
             print(f"ERROR: {error}", file=sys.stderr)
