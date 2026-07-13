@@ -3219,6 +3219,32 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "exact source da66c7db451ae786268d743e0a1ff267fbc4a460 已独立复核 Go；九个模块 blob 精确一致并受控纳入 authority。19/19 conformance、需求 SHA、模块与平台 current 治理证据、两层依赖、总合同、UTF-8、范围、秘密和敏感模式门禁通过。R5 必须另立工作项。",
                            "handoff_record":  "docs/project-management/service-plaza/health-r4-c1-acceptance-2026-07-14.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260714-HEALTH-R5-CONSULTATION-SECOND-OPINION-MDT-CONTRACTS",
+                           "title":  "健康大管家 R5 咨询、第二意见与疑难病例协同合同和负例",
+                           "owner":  "Health Manager continuous development agent",
+                           "owner_role":  "健康大管家负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r5-consultation-second-opinion-mdt-contracts",
+                           "branch":  "codex/health-r5-consultation-second-opinion-mdt-contracts",
+                           "base_commit":  "b6736b6117c05780cd6a8df9f3ca162ea1f3f40b",
+                           "allowed_paths":  [
+                                                 "docs/project-management/modules/health-manager/health-manager-r5-consultation-second-opinion-mdt-contracts.md",
+                                                 "docs/project-management/modules/health-manager/health-manager-r5-consultation-second-opinion-mdt-receipt.md",
+                                                 "docs/project-management/modules/health-manager/health-manager-r5-consultation-second-opinion-mdt-handoff.md",
+                                                 "contracts/modules/health-manager/r5/consultation-second-opinion-mdt.v1.json",
+                                                 "contracts/modules/health-manager/r5/consultation-second-opinion-mdt.v1.schema.json",
+                                                 "contracts/modules/health-manager/r5/conformance/test_health_r5_consultation_second_opinion_mdt.py",
+                                                 "contracts/modules/health-manager/development-checklists/2026-07-14-health-r5-consultation-second-opinion-mdt*.json",
+                                                 "contracts/modules/health-manager/governance-exams/2026-07-14-health-r5-consultation-second-opinion-mdt*.json",
+                                                 "contracts/modules/health-manager/implementation-records/2026-07-14-health-r5-consultation-second-opinion-mdt*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "R4 已独立验收并受控集成至 b6736b6；本工作项只冻结 synthetic_only=true、executable=false 的结构化转介、人工初审、紧急线下分流、主责医生/MDT、合规医疗机构承接、第二意见、专家定向征集和全程留痕合同与负例。真实身份/健康数据、互联网诊疗、真实费用、收费、支付、运行时、部署和生产继续 No-Go。",
+                           "handoff_record":  "docs/project-management/modules/health-manager/health-manager-r5-consultation-second-opinion-mdt-handoff.md"
                        }
                    ]
 }
