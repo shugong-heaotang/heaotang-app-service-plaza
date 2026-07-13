@@ -83,14 +83,16 @@ try {
     (Join-Path $repoRoot "contracts\foundation\governance-exam-bank.v1.schema.json") `
     (Join-Path $repoRoot "contracts\foundation\governance-exam-bank.v1.json") `
     (Join-Path $repoRoot "contracts\foundation\governance-exams") `
-    --project-root $repoRoot
+    --project-root $repoRoot `
+    --include-module-attempts
   if ($LASTEXITCODE -ne 0) {
     throw "README course and randomized governance exam validation failed."
   }
   & python -X utf8 (Join-Path $PSScriptRoot "validate_implementation_records.py") `
     (Join-Path $repoRoot "contracts\foundation\implementation-record.v1.schema.json") `
     (Join-Path $repoRoot "contracts\foundation\implementation-records") `
-    --project-root $repoRoot
+    --project-root $repoRoot `
+    --include-module-records
   if ($LASTEXITCODE -ne 0) {
     throw "AI implementation record validation failed."
   }

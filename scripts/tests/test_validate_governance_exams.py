@@ -9,7 +9,7 @@ from pathlib import Path
 SCRIPTS = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(SCRIPTS))
 
-from validate_governance_exams import validate
+from validate_governance_exams import attempt_directories, validate
 
 
 def sha(path: Path) -> str:
@@ -17,6 +17,15 @@ def sha(path: Path) -> str:
 
 
 class GovernanceExamValidationTests(unittest.TestCase):
+    def test_module_attempt_directories_are_discovered_for_total_gate(self) -> None:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            foundation = root / "contracts/foundation/governance-exams"
+            module = root / "contracts/modules/example/governance-exams"
+            foundation.mkdir(parents=True)
+            module.mkdir(parents=True)
+            self.assertEqual(attempt_directories(foundation, root, True), [foundation, module])
+
     def test_retry_generator_orders_presentation_before_interactive_confirmation(self):
         script_path = Path(__file__).resolve().parents[1] / "New-AgentGovernanceExam.ps1"
         script = script_path.read_text(encoding="utf-8-sig")
