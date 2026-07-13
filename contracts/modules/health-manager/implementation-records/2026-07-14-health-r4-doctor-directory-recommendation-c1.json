@@ -1,0 +1,78 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260714-HEALTH-R4-DOCTOR-DIRECTORY-RECOMMENDATION-C1",
+  "title": "健康大管家 R4-C1 医生目录与受约束推荐合同和负例",
+  "date": "2026-07-14",
+  "status": "implemented",
+  "objective": "把医生资质和执业硬门禁、受约束推荐顺序、商业中立、推荐解释、人工复核和退出冻结为不可执行且可负例验证的合同。",
+  "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-14-health-r4-doctor-directory-recommendation.json",
+  "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-14-health-r4-doctor-directory-recommendation-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/module-dependencies/health-manager.v1.json",
+    "contracts/modules/health-manager/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-14-health-r4-doctor-directory-recommendation-task-order.md",
+    "C:/Users/shugo/Documents/项目最高负责人/health-cross-module-requirements/健康大管家-大益健康馆-学习广场-健康俱乐部需求补充-v1.0.md",
+    "contracts/modules/health-manager/r1/cross-module-freeze.v1.json",
+    "contracts/modules/health-manager/r2/dual-channel-record.v1.json",
+    "contracts/modules/health-manager/r3/learning-club-entry.v1.json"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.contract-tooling",
+    "foundation.ai-collaboration-safety"
+  ],
+  "contracts": [
+    "contracts/modules/health-manager/r4/doctor-directory-recommendation.v1.json",
+    "contracts/modules/health-manager/r4/doctor-directory-recommendation.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/modules/health-manager/health-manager-r4-doctor-directory-recommendation-contracts.md",
+    "docs/project-management/modules/health-manager/health-manager-r4-doctor-directory-recommendation-receipt.md",
+    "docs/project-management/modules/health-manager/health-manager-r4-doctor-directory-recommendation-handoff.md",
+    "contracts/modules/health-manager/r4/doctor-directory-recommendation.v1.json",
+    "contracts/modules/health-manager/r4/doctor-directory-recommendation.v1.schema.json",
+    "contracts/modules/health-manager/r4/conformance/test_health_r4_doctor_directory_recommendation.py",
+    "contracts/modules/health-manager/development-checklists/2026-07-14-health-r4-doctor-directory-recommendation.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-14-health-r4-doctor-directory-recommendation-attempt-1.json",
+    "contracts/modules/health-manager/implementation-records/2026-07-14-health-r4-doctor-directory-recommendation-c1.json"
+  ],
+  "verification": [
+    "current checklist completed 28 of 28 with current hashes and governance exam attempt 1 passed with score 100",
+    "contract validates against draft 2020-12 schema and 19 of 19 conformance tests pass",
+    "hard gates reject missing unverified expired revoked suspended or conflicting credentials and practice scope mismatch",
+    "recommendation pipeline preserves legal qualification professional match safety triage quality training availability and preference order",
+    "negative tests reject training substitution paid priority AI-created specialty missing explanation evidence human review bypass exit leakage and AI emergency closure",
+    "foundation and health internal dependencies remain development Go",
+    "collaboration Service Plaza total contract UTF-8 diff allowed scope and secret scans are required before commit"
+  ],
+  "evidence": [
+    "contracts/modules/health-manager/r4/conformance/test_health_r4_doctor_directory_recommendation.py",
+    "docs/project-management/modules/health-manager/health-manager-r4-doctor-directory-recommendation-contracts.md",
+    "docs/project-management/modules/health-manager/health-manager-r4-doctor-directory-recommendation-receipt.md",
+    "docs/project-management/modules/health-manager/health-manager-r4-doctor-directory-recommendation-handoff.md"
+  ],
+  "premises": [
+    "the requirement supplement hash remains exact",
+    "doctor group governance remains authoritative for credentials practice specialty quality and exit state",
+    "all outputs remain synthetic_only and executable=false",
+    "medical quality privacy legal platform security and health venue operations signoffs remain pending",
+    "runtime real doctor or health data medical service public ranking charging deployment and production require separate authorization"
+  ],
+  "implementation_mode": "ai-assisted"
+}

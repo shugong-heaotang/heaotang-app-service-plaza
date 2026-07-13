@@ -1,0 +1,82 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260714-HEALTH-R4-C1-ACCEPTANCE-R2",
+  "title": "健康大管家 R4-C1 独立验收与受控集成",
+  "date": "2026-07-14",
+  "status": "verified",
+  "objective": "独立复核并受控集成 R4-C1 医生目录与受约束推荐合同和负例，同时保持真实医生数据、医疗服务、公开排名、收费、部署和生产 No-Go。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-14-health-r4-c1-acceptance-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-14-health-r4-c1-acceptance-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/module-dependencies/health-manager.v1.json",
+    "contracts/modules/health-manager/internal-dependencies.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-14-health-r4-c1-acceptance-task-order.md",
+    "docs/project-management/notices/2026-07-14-health-r4-doctor-directory-recommendation-task-order.md",
+    "C:/Users/shugo/Documents/项目最高负责人/health-cross-module-requirements/健康大管家-大益健康馆-学习广场-健康俱乐部需求补充-v1.0.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.contract-tooling",
+    "foundation.ai-collaboration-safety"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/modules/health-manager/r4/doctor-directory-recommendation.v1.json",
+    "contracts/modules/health-manager/r4/doctor-directory-recommendation.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklists/2026-07-14-health-r4-c1-acceptance.json",
+    "contracts/foundation/development-checklists/2026-07-14-health-r4-c1-acceptance-r2.json",
+    "contracts/foundation/governance-exams/2026-07-14-health-r4-c1-acceptance-attempt-1.json",
+    "contracts/foundation/governance-exams/2026-07-14-health-r4-c1-acceptance-r2-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-14-health-r4-c1-acceptance-r2.json",
+    "docs/project-management/notices/2026-07-14-health-r4-c1-acceptance-task-order.md",
+    "docs/project-management/service-plaza/health-r4-c1-acceptance-2026-07-14.md",
+    "contracts/modules/health-manager/r4/",
+    "docs/project-management/modules/health-manager/health-manager-r4-doctor-directory-recommendation-contracts.md"
+  ],
+  "verification": [
+    "exact source da66c7db451ae786268d743e0a1ff267fbc4a460 local and remote match with clean worktree",
+    "requirement supplement SHA-256 fc07676f9d0ab0dbaf1a4575457e4d1a67d642d1c483187e28a5b2c64e2a9012",
+    "source commit 9 paths and 9 blobs exactly preserved",
+    "Health R4 conformance 19 of 19 passed before and after controlled integration",
+    "module checklist 28 of 28 and governance exam score 100",
+    "platform entry checklist 28 of 28 and governance exam score 100",
+    "platform final R2 checklist 28 of 28 current and governance exam score 100",
+    "foundation and health internal dependencies valid",
+    "collaboration, checklist, exam, implementation record, Service Plaza total contract and UTF-8 gates passed",
+    "git diff check, allowed scope, secret and sensitive pattern scans passed"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/health-r4-c1-acceptance-2026-07-14.md",
+    "contracts/modules/health-manager/r4/conformance/test_health_r4_doctor_directory_recommendation.py",
+    "contracts/modules/health-manager/implementation-records/2026-07-14-health-r4-doctor-directory-recommendation-c1.json",
+    "contracts/foundation/development-checklists/2026-07-14-health-r4-c1-acceptance-r2.json",
+    "contracts/foundation/governance-exams/2026-07-14-health-r4-c1-acceptance-r2-attempt-1.json"
+  ],
+  "premises": [
+    "R4 remains synthetic_only and executable=false",
+    "doctor group governance directory retains authority for credentials practice specialty quality and exit state",
+    "pending medical quality privacy legal platform security and operations signoffs do not block synthetic contract acceptance",
+    "R4 runtime R5 active implementation real doctor or health data medical service public ranking charging deployment and production require separate authorization"
+  ],
+  "implementation_mode": "ai-assisted"
+}

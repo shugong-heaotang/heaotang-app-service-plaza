@@ -3176,7 +3176,7 @@
                            "title":  "健康大管家 R4 医生目录与受约束推荐合同和负例",
                            "owner":  "Health Manager continuous development agent",
                            "owner_role":  "健康大管家负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r4-doctor-directory-recommendation-contracts",
                            "branch":  "codex/health-r4-doctor-directory-recommendation-contracts",
@@ -3194,7 +3194,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "R3 已独立验收并受控集成至 dfbff8e；本工作项只冻结 synthetic_only=true、executable=false 的医生资质/执业/专科硬门禁、质量治理、推荐解释、人工复核、退出和禁止付费改变医疗安全排序，并以正负例验证。真实医生/会员/健康数据、公开排名、互联网诊疗、收费、支付、运行时、部署和生产继续 No-Go。",
+                           "migration_note":  "R4-C1 exact source da66c7db451ae786268d743e0a1ff267fbc4a460 已由平台独立复核 Go 并受控纳入 authority；19/19 conformance、需求哈希、模块 checklist/exam100/IR/Handoff、两层依赖、总合同、UTF-8、范围、秘密与敏感模式门禁通过。仅冻结 synthetic_only=true、executable=false 合同；真实医生/健康数据、医疗、公开排名、收费、部署和生产继续 No-Go。",
                            "handoff_record":  "docs/project-management/modules/health-manager/health-manager-r4-doctor-directory-recommendation-handoff.md"
                        },
                        {
@@ -3202,7 +3202,7 @@
                            "title":  "健康大管家 R4-C1 独立验收与受控集成",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r4-c1-acceptance",
                            "branch":  "codex/health-r4-c1-acceptance",
@@ -3217,7 +3217,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "只独立复核 exact source da66c7db451ae786268d743e0a1ff267fbc4a460 并在全部门禁 Go 后受控纳入九个模块 blob；禁止修改候选成果、医疗安全门禁、运行时、真实数据、收费、部署或生产。",
+                           "migration_note":  "exact source da66c7db451ae786268d743e0a1ff267fbc4a460 已独立复核 Go；九个模块 blob 精确一致并受控纳入 authority。19/19 conformance、需求 SHA、模块与平台 current 治理证据、两层依赖、总合同、UTF-8、范围、秘密和敏感模式门禁通过。R5 必须另立工作项。",
                            "handoff_record":  "docs/project-management/service-plaza/health-r4-c1-acceptance-2026-07-14.md"
                        }
                    ]

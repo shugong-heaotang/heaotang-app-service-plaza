@@ -1,0 +1,139 @@
+{
+  "contract_version": "health-manager.r4.doctor-directory-recommendation.v1",
+  "module_id": "health-manager",
+  "checkpoint": "R4-C1",
+  "status": "contract-frozen-awaiting-independent-review",
+  "synthetic_only": true,
+  "executable": false,
+  "source": {
+    "path": "C:/Users/shugo/Documents/项目最高负责人/health-cross-module-requirements/健康大管家-大益健康馆-学习广场-健康俱乐部需求补充-v1.0.md",
+    "sha256": "fc07676f9d0ab0dbaf1a4575457e4d1a67d642d1c483187e28a5b2c64e2a9012",
+    "authorization": "synthetic-contract-and-negative-test-only"
+  },
+  "directory_entry": {
+    "authority_id": "doctor-group-governance-directory",
+    "minimum_fields": [
+      "doctor_reference",
+      "identity_verification_status",
+      "qualification_reference",
+      "practice_license_reference",
+      "practice_institution_reference",
+      "practice_scope",
+      "clinical_departments",
+      "specialty_evidence_references",
+      "training_governance_status",
+      "service_modes",
+      "service_availability_status",
+      "quality_governance_status",
+      "complaint_or_exit_status",
+      "verification_timestamp"
+    ],
+    "forbidden_fields": ["private_identity_document", "private_contact_detail", "member_health_record", "unverified_self_claimed_credential"],
+    "health_manager_permissions": ["read_verified_directory_summary", "build_explainable_candidate_set", "request_human_review"],
+    "forbidden": ["create_credential", "alter_practice_scope", "declare_medical_eligibility", "publish_public_doctor_ranking"]
+  },
+  "hard_eligibility_gates": {
+    "all_required": true,
+    "default_decision": "reject",
+    "qualification": {
+      "identity_verified": true,
+      "qualification_verified": true,
+      "practice_license_verified": true,
+      "verification_authority_required": true,
+      "verification_timestamp_required": true,
+      "accepted_statuses": ["active"],
+      "fail_closed_conditions": ["missing", "unverified", "expired", "revoked", "suspended", "conflicting_source"]
+    },
+    "practice_relation": {
+      "institution_verified": true,
+      "practice_scope_match_required": true,
+      "clinical_department_match_required": true,
+      "service_mode_authorized_required": true,
+      "fail_closed_conditions": ["institution_unknown", "scope_mismatch", "department_mismatch", "service_mode_not_authorized"]
+    },
+    "service_and_quality": {
+      "availability_required": true,
+      "quality_status_allowed": ["eligible", "human-review-required"],
+      "complaint_hold_excludes_candidate": true,
+      "exit_or_suspension_excludes_candidate": true,
+      "fail_closed_conditions": ["not_accepting", "quality_suspended", "complaint_hold", "withdrawn", "directory_exit"]
+    }
+  },
+  "recommendation_pipeline": {
+    "ordered_stages": [
+      "legal_qualification_and_practice_gate",
+      "specialty_disease_and_scope_match",
+      "online_or_offline_safety_triage",
+      "quality_governance",
+      "training_and_professional_governance",
+      "availability_region_and_service_mode",
+      "member_explicit_preferences"
+    ],
+    "non_bypassable_stages": ["legal_qualification_and_practice_gate", "specialty_disease_and_scope_match", "online_or_offline_safety_triage", "quality_governance"],
+    "online_unsuitable_action": "route_to_human_and_offline_medical_institution",
+    "member_preferences_allowed": ["language", "gender", "distance"],
+    "member_preferences_cannot_override": ["legal_qualification", "practice_scope", "safety_triage", "quality_hold"]
+  },
+  "training_governance": {
+    "training_may_break_tie": true,
+    "tie_preconditions": ["equal_professional_match", "equal_safety_level", "all_hard_gates_passed"],
+    "training_replaces_legal_qualification": false,
+    "training_replaces_practice_scope": false,
+    "ai_may_create_training_status": false
+  },
+  "commercial_neutrality": {
+    "medical_safety_order_immutable": true,
+    "professional_match_order_immutable": true,
+    "commercial_inputs_allowed_in_medical_ranking": [],
+    "prohibited_influences": ["payment", "bidding", "commission", "advertising_spend", "institution_commercial_relationship", "result_fee"],
+    "public_ranking_authorized": false,
+    "charging_or_payment_authorized": false
+  },
+  "recommendation_explanation": {
+    "required": true,
+    "required_fields": ["candidate_reference", "matched_need_tags", "qualification_evidence_references", "practice_evidence_references", "quality_basis", "service_mode_basis", "uncertainties", "human_review_status", "generated_at", "policy_version"],
+    "prohibited_claims": ["diagnosis", "guaranteed_fit", "guaranteed_cure", "qualification_created_by_ai", "paid_priority_explanation"],
+    "evidence_references_required": true,
+    "uncertainty_required": true
+  },
+  "human_review_and_exit": {
+    "human_review_required_for": ["emergency_or_professional_risk", "conflicting_credential_source", "borderline_scope_match", "quality_flag", "complaint_hold", "online_unsuitable"],
+    "ai_may_close_professional_risk": false,
+    "ai_may_close_emergency_risk": false,
+    "human_reviewer_identity_required": true,
+    "review_reason_and_version_required": true,
+    "exit_actions": ["remove_from_candidate_pool", "stop_new_recommendations", "preserve_audit_history", "notify_responsible_governance_owner"],
+    "reentry_requires_fresh_verification_and_human_approval": true
+  },
+  "ai_boundary": {
+    "allowed": ["organize_authorized_synthetic_need", "identify_missing_information", "match_verified_candidate_pool", "explain_candidate_reasons_and_uncertainty", "flag_professional_or_emergency_risk", "prepare_human_review_packet"],
+    "forbidden": ["diagnose", "prescribe", "change_medication", "impersonate_doctor", "promise_outcome", "create_credential", "create_specialty_tag_without_authority", "override_hard_gate", "change_ranking_for_payment", "close_professional_risk", "close_emergency_risk", "approve_reentry"]
+  },
+  "pending_signoffs": [
+    {"signoff_id": "medical-quality", "owner": "医生集团医疗质量负责人", "status": "pending-with-owner", "executable": false, "blocks": ["real_doctor_directory", "credential_policy_execution", "quality_policy_execution"]},
+    {"signoff_id": "privacy-legal", "owner": "隐私与法律负责人", "status": "pending-with-owner", "executable": false, "blocks": ["real_identity", "real_health_data", "internet_medical_service"]},
+    {"signoff_id": "platform-security", "owner": "平台安全负责人", "status": "pending-with-owner", "executable": false, "blocks": ["shared_runtime", "api", "database", "environment"]},
+    {"signoff_id": "health-venue-operations", "owner": "大益健康馆运营负责人", "status": "pending-with-owner", "executable": false, "blocks": ["real_member_pilot", "public_directory_display", "service_operations"]}
+  ],
+  "acceptance_scenarios": [
+    {"scenario_id": "R4-A001", "polarity": "positive", "assertion": "fully_verified_doctor_enters_candidate_pool"},
+    {"scenario_id": "R4-A002", "polarity": "positive", "assertion": "pipeline_preserves_hard_gate_safety_quality_and_preference_order"},
+    {"scenario_id": "R4-A003", "polarity": "positive", "assertion": "recommendation_explains_evidence_uncertainty_and_human_review"},
+    {"scenario_id": "R4-A004", "polarity": "positive", "assertion": "quality_hold_and_exit_remove_candidate_with_audit_preserved"},
+    {"scenario_id": "R4-A005", "polarity": "negative", "assertion": "reject_missing_unverified_expired_revoked_or_suspended_credential"},
+    {"scenario_id": "R4-A006", "polarity": "negative", "assertion": "reject_practice_scope_department_or_service_mode_mismatch"},
+    {"scenario_id": "R4-A007", "polarity": "negative", "assertion": "reject_online_path_when_safety_triage_requires_offline_care"},
+    {"scenario_id": "R4-A008", "polarity": "negative", "assertion": "reject_training_as_substitute_for_legal_qualification"},
+    {"scenario_id": "R4-A009", "polarity": "negative", "assertion": "reject_payment_bidding_commission_or_advertising_rank_influence"},
+    {"scenario_id": "R4-A010", "polarity": "negative", "assertion": "reject_ai_created_credential_or_specialty_tag"},
+    {"scenario_id": "R4-A011", "polarity": "negative", "assertion": "reject_recommendation_without_evidence_uncertainty_or_policy_version"},
+    {"scenario_id": "R4-A012", "polarity": "negative", "assertion": "reject_required_human_review_bypass"},
+    {"scenario_id": "R4-A013", "polarity": "negative", "assertion": "reject_candidate_after_quality_hold_suspension_or_exit"},
+    {"scenario_id": "R4-A014", "polarity": "negative", "assertion": "reject_ai_professional_or_emergency_risk_closure"},
+    {"scenario_id": "R4-A015", "polarity": "negative", "assertion": "reject_premature_signoff_or_executable_contract"},
+    {"scenario_id": "R4-A016", "polarity": "negative", "assertion": "reject_real_data_runtime_public_ranking_charging_deployment_or_production_authorization"}
+  ],
+  "blocks": ["runtime_implementation", "real_doctor_directory", "real_identity", "real_health_data", "medical_service", "public_ranking", "charging", "deployment", "production"],
+  "does_not_block": ["synthetic_contract_conformance", "negative_test_design", "independent_r4_contract_review", "r5_task_planning_after_r4_controlled_integration"],
+  "no_go": ["business_code", "shared_runtime", "api", "database", "real_doctor_data", "real_identity", "real_member", "real_health_data", "internet_medical_service", "diagnosis", "prescription", "medication_change", "doctor_impersonation", "outcome_promise", "public_doctor_ranking", "paid_medical_ranking", "charging", "payment", "test_server_deployment", "production", "irreversible_operation"]
+}
