@@ -2878,11 +2878,11 @@
                            "title":  "保障商城 M2 外围端口与失败关闭模拟合同",
                            "owner":  "Protection Mall M2 ports contract agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "planned",
+                           "status":  "active",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-m2-ports-simulation",
                            "branch":  "codex/protection-mall-m2-ports-simulation",
-                           "base_commit":  "03ab808f4a21f8a9585ed8aeefeb55e98c5434af",
+                           "base_commit":  "119748cce2cc295b8f3dfbb9ae2ce7665ee7d497",
                            "allowed_paths":  [
                                                  "contracts/modules/protection-mall/m2/ports/",
                                                  "docs/project-management/modules/protection-mall/m2-ports-simulation.md",
@@ -2892,7 +2892,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "planned contracts-only；平台集成负责人当前已有活跃治理项。恢复条件=A current checklist/exam100落盘或平台owner释放一个活跃治理切片；只冻结Nova、商家资质/履约、会员画像、通知、支付端口与fake/in-memory行为，禁止真实调用。",
+                           "migration_note":  "active contracts-only；A checklist/exam100已完成，且C与A Evidence R2语义修复不重叠。activation base=119748c，preflight ready。只冻结Nova、商家资质/履约、会员画像、通知、支付端口与fake/in-memory行为，禁止真实调用。",
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m2.md"
                        },
                        {
@@ -2978,7 +2978,7 @@
                            "title":  "Protection Mall治理读取overlay最小补登记",
                            "owner":  "Platform protection-mall overlay correction agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-platform-protection-mall-overlay-correction",
                            "branch":  "codex/platform-protection-mall-overlay-correction",
