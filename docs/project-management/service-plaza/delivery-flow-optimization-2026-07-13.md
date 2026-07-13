@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-- 状态：R4、R6、R8 independent review 均为 No-Go；R9 使用不可变 Git 快照整改，未受控集成
+- 状态：R4、R6、R8 independent review 均为 No-Go 且保持不可覆盖；R11 完成跨仓 base commit 存在性整改，等待最终 current 认证、提交和独立复验
 - 主因：业务工作被拆成多个长期并行治理项，Handoff 缺少决策时限，范围内下一检查点仍反复等待授权，平台集成负责人形成单点队列；原 R2 又只优化技术流，没有约束客户价值和商业结果。
 - 处置：同步权威 HEAD `094bafdbba48c84f41611ca541c8225e4de4a8dd`，升级 `delivery-flow-policy.v1`、机器校验和商业价值门禁。
 
@@ -96,3 +96,32 @@
 - 首次响应期限：4 小时；决策期限：24 小时；逾期升级项目最高负责人。
 - 验证标准：原来等待授权的范围内下一检查点能自动续跑；活动—俱乐部—商城合成价值流可重放；没有人工特批、真实资金、真实数据或生产绕行。
 - 防复发：新业务主线缺少价值字段、WIP 超限、同模块多主线、角色未分离或状态过期时机器门禁失败；2026-07-14 复查迁移和首个价值流证据。
+
+## R11 P0 治理检查点
+
+### 根因与处置
+
+- Activity V3 M0 登记的 base_commit=485601ce10ad4d3ac7d9db655465754ad5ac0032 不存在于 APP repository_root 的 Git 对象库；原始可追溯基线修正为 485601cb4b40025ce5b96fc746b9996bbf80250d。
+- Activity 恢复基线没有冒充原始基线，继续以 reactivation_base=5d6d22b51b65abf87a5f7c9b9bdd419ce04dfd40 保存在 migration note。
+- validate_agent_collaboration.py 现在对 active 与 handoff-ready 项逐项调用其自身 repository_root 的 Git 对象库；不能再假设 validator 当前仓库就是工作项仓库。
+- planned、cancelled 和不可变 legacy 行保留为元数据，不因本地对象库被清理而被误拒绝；激活或进入 Handoff 时自动转入强制对象检查。
+- 新增 planned AIW-20260713-PLATFORM-NOVA-OVERLAY-R2，base 为 59263f7e9717907bdc3953e752ad1a8fd3f2789a，完整声明 delivery-flow 字段。实施 Agent 的 allowed paths 明确不包含 agent-collaboration.v1.json，registry 仍由平台集成负责人所有。
+
+### 测试与边界
+
+- 新增 5 项 validator 单测：跨仓正确对象、对象只存在于错误仓库、handoff-ready 缺对象、planned/cancelled legacy 豁免、repository_root 缺失。
+- 新增单测：5/5 通过。
+- delivery-flow 回归：20/20 通过。
+- 协作 registry 与串联 delivery-flow gate：通过。
+- Service Plaza 总合同：通过。
+- UTF-8：1350 文件通过。
+- R11 入口检查单：26/26；治理考试 attempt 1 为 100 分。
+- R11 修改治理核心输入后不改写历史清单/试卷；按 RI-CURRENT-CHECKLIST-MUTABLE-OVERLAY 规则另建最终 current 认证。
+- 未修改业务代码、生产、真实数据、真实资金、部署或不可逆状态。
+
+### Handoff
+
+- developer：平台治理实施负责人。
+- independent reviewer：APP 总架构独立验收负责人。
+- verdict：候选测试 Go；集成保持 Pending，必须绑定推送后的 exact commit 独立复验。
+- next gate：最终 current checklist/exam 100，IR、diff/secret 复核、commit/push，随后独立验收；实施负责人不得自行集成。
