@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-PROJECT-BRAIN-V1-M1-R4",
+  "title": "Project Brain v1 M1-R4 治理考试重试合约迁移复验",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "在集成分支采用新的治理考试重试证据合约，不改写旧 retry，重新证明 Project Brain M1 与后续交付准入。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m1-r4.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1-r4-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/service-plaza/governance-exam-retry-evidence-2026-07-12.md", "docs/project-management/notices/2026-07-12-project-brain-v1-task-order.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-12-project-brain-v1-task-order.md", "docs/project-management/project-brain/requirements-v1.md", "docs/project-management/project-brain/acceptance-v1.md"],
+  "capabilities": ["foundation.governance-certification", "foundation.ai-engineering-traceability", "foundation.contract-tooling"],
+  "contracts": ["contracts/project-brain/modules.v1.schema.json", "contracts/project-brain/knowledge-sources.v1.schema.json", "contracts/project-brain/decisions.v1.schema.json", "contracts/project-brain/risks.v1.schema.json"],
+  "decisions": ["docs/decisions/0014-ai-development-flight-checklist.md", "docs/decisions/0017-readme-course-and-random-governance-exam.md"],
+  "changed_areas": ["contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m1-r4.json", "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1-r4-attempt-1.json", "contracts/foundation/implementation-records/2026-07-12-project-brain-v1-m1-r4.json", "contracts/foundation/invalidated-snapshots/project-brain-v1-m1", "docs/project-management/project-brain/handoff-v1.md"],
+  "verification": ["M1-R4 checklist completed against current integration registry", "M1-R4 attempt 1 passed score 100 under new retry contract", "old M1-R3 attempt 2 and dependent IR preserved unchanged in invalidated snapshots", "four Project Brain catalogs remain schema-valid", "M2-M4 final evidence remains independently verified"],
+  "evidence": ["contracts/foundation/invalidated-snapshots/project-brain-v1-m1/2026-07-12-project-brain-v1-m1-r3-attempt-2-pre-retry-contract.json", "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m1-r4.json", "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1-r4-attempt-1.json", "docs/project-management/project-brain/m4-independent-acceptance-2026-07-12.md"],
+  "premises": ["The old retry snapshot is historical invalidated evidence and is not a passing current exam.", "Attempt 1 passed without manufacturing a retry.", "Production deployment remains unauthorized."],
+  "implementation_mode": "ai-assisted"
+}
