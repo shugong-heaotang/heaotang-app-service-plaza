@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-- 状态：R4、R6、R8、候选 dadcc42、71889d4、5d4d86e、14d209f 与 ed34542 的 independent review 均为 No-Go 且保持不可覆盖；e079f0e 是第四次独立验收 Go 的 candidate，fbf6218 是其受控 integration exact。R21 候选 8e615e6 已通过第三次独立复验并受控集成为 platform-governance exact 6489a237；R22 只刷新 reviewer bootstrap base，保持 planned，等待独立验收。
+- 状态：R4、R6、R8、候选 dadcc42、71889d4、5d4d86e、14d209f 与 ed34542 的 independent review 均为 No-Go 且保持不可覆盖；e079f0e 是第四次独立验收 Go 的 candidate，fbf6218 是其受控 integration exact。R21 候选 8e615e6 已通过第三次独立复验并集成为 6489a237；R22 base-refresh 候选 721206f 已受控集成为 61c0f559。R23 只登记 reviewer 激活候选，等待独立验收。
 - 主因：业务工作被拆成多个长期并行治理项，Handoff 缺少决策时限，范围内下一检查点仍反复等待授权，平台集成负责人形成单点队列；原 R2 又只优化技术流，没有约束客户价值和商业结果。
 - 处置：以权威 HEAD `fbf621872372f5aac0cad604af1b1a428d5e3b6d` 创建独立 clean worktree，只登记 planned 工作项并刷新当前 next checkpoint；不实现业务代码或 validator。
 
@@ -251,3 +251,14 @@
 - 其他三个 planned 工作项以及旧 Action Telemetry integrated 工作项保持逐字段不变；allowed_paths 未扩大。
 - R22 checklist 26/26、governance exam attempt 1 为 100；registry 语义审计确认仅目标项 `base_commit/updated_at/next_checkpoint` 三字段变化，其他 registry 行变化数为 0。agent collaboration、delivery-flow、implementation-record、governance-exam validators、26项回归、Service Plaza 总合同、UTF-8 1380 文件全部通过。
 - 当前 verdict：R22 registry-only refresh candidate；须先独立验收，再由平台 owner决定后续是否激活，当前不得执行 reviewer 工作。
+
+## R22 受控集成与 R23 reviewer 激活候选
+
+- R22 candidate：`721206fb7bb579c737f35cb8529b5d8e4bb99e8d`；受控 integration exact：`61c0f559e0a13b82c01298fbe932df2bd9fdc9e9`。
+- 治理允许在激活登记前创建隔离 worktree，但 worktree 存在不构成执行授权；激活候选受控集成前禁止写 reviewer namespace 或证据。
+- 平台 owner worktree/branch 从 `61c0f559` 创建并 clean：`C:/Users/shugo/Documents/worktrees/heaotang-platform-reviewer-activation-20260714` / `codex/platform-reviewer-activation-20260714`。
+- reviewer worktree/branch 从 `61c0f559` 创建并 clean：`C:/Users/shugo/Documents/worktrees/heaotang-delivery-flow-independent-acceptance` / `codex/delivery-flow-independent-acceptance`；目标 namespace 当前不存在，未写任何文件。
+- R23 只把 reviewer bootstrap 的 `base_commit` 刷新为 `61c0f559`，状态 `planned -> active`，并登记上述真实 workspace/branch；`started_with_clean_worktree=true` 有真实 Git 状态证据。
+- reviewer 不拥有 registry；其 allowed paths 仍只限非保护 namespace，其他三个 planned 工作项与旧 Action Telemetry integrated 工作项不变。
+- R23 checklist 26/26、governance exam attempt 1 为 100；registry 语义审计确认仅目标行的 `base_commit/branch/next_checkpoint/status/updated_at/workspace_path` 六字段变化，其他 registry 行变化数为 0。agent collaboration、delivery-flow、implementation-record、governance-exam validators、26项回归、Service Plaza 总合同、UTF-8 1383 文件全部通过。
+- 当前 verdict：R23 activation candidate only；须独立验收和受控集成后 reviewer 才能开始创建 task/checklist/exam/IR/evidence。
