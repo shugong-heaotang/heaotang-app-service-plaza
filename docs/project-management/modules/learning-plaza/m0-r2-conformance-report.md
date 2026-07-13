@@ -12,4 +12,4 @@
 python -X utf8 contracts/modules/learning-plaza/m0-r2/validate_learning_plaza_m0_r2.py
 ```
 
-预期证据：架构不变量 PASS、平台依赖 9/9、确定性 fixtures 25/25。所有五个运行时端口继续 `provisional/fail-closed`。
+预期证据：架构不变量 PASS、平台依赖 9/9、确定性 fixtures 27/27。审核双开、单开和双关均强制完整发布审计；所有五个运行时端口继续 `provisional/fail-closed`。

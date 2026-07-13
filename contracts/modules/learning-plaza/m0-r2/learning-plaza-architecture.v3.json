@@ -18,7 +18,8 @@
     "default_sequence": ["ai-review", "human-final-review"],
     "switches": ["ai-review-enabled", "human-review-enabled"],
     "switch_change_policy": "versioned-maker-checker",
-    "both_disabled_policy": "authorized-publisher-with-mandatory-audit"
+    "both_disabled_policy": "authorized-publisher-with-mandatory-audit",
+    "mandatory_audit_fields": ["publisher_id", "source_refs", "copyright_basis", "content_version", "published_at", "change_log", "takedown_status", "review_trace"]
   },
   "nova_learning_assistant": {
     "engine": "nova-ai-engine-port",

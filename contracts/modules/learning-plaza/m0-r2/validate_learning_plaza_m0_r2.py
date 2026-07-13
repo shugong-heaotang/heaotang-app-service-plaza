@@ -30,6 +30,8 @@ def decide(case: dict, contract: dict) -> str:
     if operation == "club-role":
         return "deny" if case["claims_content_ownership"] else "allow"
     if operation == "review":
+        if not case["audit_complete"]:
+            return "deny"
         if case["ai_enabled"] and not case["ai_passed"]:
             return "deny"
         if case["human_enabled"] and not case["human_passed"]:
@@ -69,6 +71,9 @@ def validate_contract(contract: dict) -> list[str]:
     review = contract.get("review_policy", {})
     if review.get("switch_change_policy") != "versioned-maker-checker":
         errors.append("review switches must use versioned maker-checker")
+    required_audit_fields = {"publisher_id", "source_refs", "copyright_basis", "content_version", "published_at", "change_log", "takedown_status", "review_trace"}
+    if set(review.get("mandatory_audit_fields", [])) != required_audit_fields:
+        errors.append("every publish mode must retain the complete audit record")
     event = contract.get("growth_event", {})
     if event.get("source_of_truth") != "learning-plaza" or "never-write-consumer-database" not in event.get("write_policy", ""):
         errors.append("learning facts must remain owned by learning plaza")
