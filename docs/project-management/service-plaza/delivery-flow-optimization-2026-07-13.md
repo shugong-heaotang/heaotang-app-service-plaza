@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-- 状态：R2 independent review No-Go；R3 implementation complete / awaiting independent acceptance
+- 状态：R4 exact commit `33f5e45499fbadaac71f07bbe6de5d72579e39c9` independent review No-Go；R5整改中，未受控集成
 - 主因：业务工作被拆成多个长期并行治理项，Handoff 缺少决策时限，范围内下一检查点仍反复等待授权，平台集成负责人形成单点队列；原 R2 又只优化技术流，没有约束客户价值和商业结果。
 - 处置：同步权威 HEAD `094bafdbba48c84f41611ca541c8225e4de4a8dd`，升级 `delivery-flow-policy.v1`、机器校验和商业价值门禁。
 
@@ -38,23 +38,32 @@
 
 客户提出活动需求，活动模块完成授权检索和匹配，俱乐部承担主办/审批责任，商城只引用责任主体明确的目录条目并形成无资金履约意向。成功标准为：关键合成旅程全部通过，越权、重复归因、责任主体缺失、快照变异和真实资金调用全部为零。
 
+## R4 独立验收结论（不可覆盖）
+
+- 结论：No-Go；没有 P0，有六类 P1 制度缺口。
+- 缺口：新增工作项可不声明政策而绕过；过期只与 `updated_at` 比较而不与验证时钟比较；Handoff 下一责任人与 4/24 小时 SLA 未机器执行；WIP 和重复主线未合并计算 `active` 与 `handoff-ready`；`integrated` 可缺失指标、价值事件、独立验收和集成提交；负向测试缺少角色分离、模块 WIP 与缺失流字段回归。
+- 处置：保留原提交及 No-Go 证据，另建 R5 候选；未经新的独立 Go 不集成。
+
 ## 迁移
 
-旧工作项不补造历史字段。下一次激活、Handoff 或检查点变化时增加 `flow_policy_version` 和流控制字段。新工作项立即执行本政策。
+旧工作项不补造历史字段。以 `AIW-20260713-PROTECTION-MALL-M2-PORTS-SIMULATION` 为遗留切换点，切换点以前的 115 个 work_id 顺序与 `work_id + status` 状态快照分别由 SHA-256 固化；任何插入、删除、重排或未迁移状态变化都会失败。切换点后的全部新工作项必须声明 `flow_policy_version` 并具备完整流字段。
 
 ## 验证
 
 - Policy Schema：通过
 - 语义校验：通过
-- 单元测试：3/3 通过
+- 单元测试：15/15 通过（1 个当前正例、14 个负向/边界回归）
 - 协作登记：通过，并已自动串联 delivery flow gate
 - Service Plaza 总合同：通过
-- UTF-8：1277 files 通过
+- UTF-8：待 R5 最终验证
 - Git diff：通过
 - R2 独立验收：No-Go（落后权威基线且缺少商业价值门禁）
 - R3 入口检查单：26/26；治理考试 100
 - R4 最终 current 检查单：26/26；治理考试 100
-- R4 独立验收：待执行
+- R4 独立验收：No-Go，结论已保留
+- R5 入口检查单：26/26；治理考试 100
+- R6 最终 current 检查单：26/26；治理考试 100
+- R5 独立复验：待新候选提交后执行
 
 ## 组织阻滞清障记录
 

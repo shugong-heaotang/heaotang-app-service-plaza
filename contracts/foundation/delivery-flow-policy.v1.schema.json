@@ -3,10 +3,20 @@
   "$id": "https://heaotang.cn/contracts/foundation/delivery-flow-policy.v1.schema.json",
   "type": "object",
   "additionalProperties": false,
-  "required": ["contract_version", "effective_at", "wip", "handoff", "continuation", "work_item_model", "business_value_gate", "completion"],
+  "required": ["contract_version", "effective_at", "migration", "wip", "handoff", "continuation", "work_item_model", "business_value_gate", "completion"],
   "properties": {
     "contract_version": {"const": "delivery-flow-policy.v1"},
     "effective_at": {"type": "string", "format": "date-time"},
+    "migration": {
+      "type": "object", "additionalProperties": false,
+      "required": ["legacy_cutover_work_id", "legacy_work_ids_sha256", "legacy_work_states_sha256", "new_items_require_flow_policy"],
+      "properties": {
+        "legacy_cutover_work_id": {"type": "string", "pattern": "^AIW-[0-9]{8}-[A-Z0-9-]+$"},
+        "legacy_work_ids_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "legacy_work_states_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "new_items_require_flow_policy": {"const": true}
+      }
+    },
     "wip": {
       "type": "object", "additionalProperties": false,
       "required": ["max_active_business_streams", "max_active_business_streams_per_module", "legacy_drain_mode", "activation_rule"],
@@ -48,6 +58,17 @@
         "measurement_required_before_completion": {"const": true}
       }
     },
-    "completion": {"type": "object", "additionalProperties": {"const": true}, "minProperties": 3}
+    "completion": {
+      "type": "object", "additionalProperties": false,
+      "required": ["requires_business_flow_resumed", "requires_independent_acceptance", "commit_or_document_alone_is_not_completion", "requires_value_event_evidence", "accepted_independent_verdicts", "required_metric_evidence_fields"],
+      "properties": {
+        "requires_business_flow_resumed": {"const": true},
+        "requires_independent_acceptance": {"const": true},
+        "commit_or_document_alone_is_not_completion": {"const": true},
+        "requires_value_event_evidence": {"const": true},
+        "accepted_independent_verdicts": {"type": "array", "const": ["go"]},
+        "required_metric_evidence_fields": {"type": "array", "minItems": 5, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    }
   }
 }

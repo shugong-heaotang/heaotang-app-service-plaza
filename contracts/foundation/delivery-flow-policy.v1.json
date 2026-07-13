@@ -1,6 +1,12 @@
 {
   "contract_version": "delivery-flow-policy.v1",
   "effective_at": "2026-07-13T09:00:00+08:00",
+  "migration": {
+    "legacy_cutover_work_id": "AIW-20260713-PROTECTION-MALL-M2-PORTS-SIMULATION",
+    "legacy_work_ids_sha256": "64105cf520b0c971150d0491eba27967d7976aa0bad89400ececd302959d650e",
+    "legacy_work_states_sha256": "b7dc23fab67191405a852301ae4f9650164bf3e619bd323587d684f1e5773aaa",
+    "new_items_require_flow_policy": true
+  },
   "wip": {
     "max_active_business_streams": 3,
     "max_active_business_streams_per_module": 1,
@@ -58,6 +64,16 @@
     "requires_business_flow_resumed": true,
     "requires_independent_acceptance": true,
     "commit_or_document_alone_is_not_completion": true,
-    "requires_value_event_evidence": true
+    "requires_value_event_evidence": true,
+    "accepted_independent_verdicts": [
+      "go"
+    ],
+    "required_metric_evidence_fields": [
+      "metric_name",
+      "target",
+      "actual",
+      "measured_at",
+      "evidence_path"
+    ]
   }
 }
