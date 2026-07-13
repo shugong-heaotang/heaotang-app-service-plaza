@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-DELIVERY-FLOW-OPTIMIZATION-R22",
+  "title": "独立 reviewer bootstrap 受控集成 base 刷新",
+  "date": "2026-07-14",
+  "status": "implemented",
+  "objective": "仅把 planned reviewer bootstrap 的 base 刷新为包含授权项的 platform-governance integration exact，并保持所有执行门禁关闭。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-13-delivery-flow-optimization-r22.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-13-delivery-flow-optimization-r22.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/service-plaza/project-status-one-page.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-13-delivery-flow-optimization-task-order.md", "docs/project-management/service-plaza/delivery-flow-optimization-2026-07-13.md"],
+  "capabilities": ["foundation.ai-collaboration-safety", "foundation.governance-certification", "foundation.contract-tooling"],
+  "contracts": ["contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/agent-collaboration.v1.schema.json", "contracts/foundation/delivery-flow-policy.v1.json"],
+  "decisions": ["docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"],
+  "changed_areas": ["contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/development-checklists/2026-07-13-delivery-flow-optimization-r22.json", "contracts/foundation/governance-exams/2026-07-13-delivery-flow-optimization-r22.json", "contracts/foundation/implementation-records/2026-07-13-delivery-flow-optimization-r22.json", "docs/project-management/service-plaza/delivery-flow-optimization-2026-07-13.md"],
+  "verification": ["authoritative start commit is 6489a2371a81e91344263d360d03aa943473b22e", "only the independent acceptance bootstrap base_commit updated_at and next_checkpoint fields changed in the registry", "bootstrap base equals 6489a2371a81e91344263d360d03aa943473b22e and status remains planned", "reviewer namespace worktree task checklist exam implementation record and evidence remain absent", "all other registry rows including the other three planned rows and old action telemetry integrated row are unchanged", "R22 final current checklist completed 26 of 26 after the corrected registry hash", "R22 governance exam attempt 1 passed with score 100", "agent collaboration delivery-flow implementation-record and governance-exam validators pass", "delivery-flow regression passes 26 of 26", "Service Plaza contract gate passes", "UTF-8 gate passes 1380 files", "diff scope and secret gates pass"],
+  "evidence": ["docs/project-management/service-plaza/delivery-flow-optimization-2026-07-13.md", "contracts/foundation/development-checklists/2026-07-13-delivery-flow-optimization-r22.json", "contracts/foundation/governance-exams/2026-07-13-delivery-flow-optimization-r22.json"],
+  "premises": ["6489a2371a81e91344263d360d03aa943473b22e contains the integrated reviewer bootstrap authorization", "this registry-only candidate is not independent acceptance", "planned does not authorize namespace or reviewer execution", "activation requires a later explicit controlled decision"],
+  "implementation_mode": "ai-assisted"
+}
