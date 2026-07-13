@@ -2580,7 +2580,7 @@
                            "title":  "保障商城 M1 Go纯领域状态机与授权幂等核",
                            "owner":  "Protection Mall backend agent",
                            "owner_role":  "商城后端负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/和奥堂总后端",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-m1-domain-backend",
                            "branch":  "codex/protection-mall-m1-domain-backend",
@@ -2599,7 +2599,7 @@
                            "title":  "保障商城 M1 Go领域核APP治理与跨仓库证据",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-m1-domain-evidence",
                            "branch":  "codex/protection-mall-m1-domain-evidence",
@@ -2615,6 +2615,29 @@
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "只保存task order、模块治理证据、Handoff和后端exact commit/test映射；不得写后端代码或业务运行时。",
+                           "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m1-domain.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260713-PROTECTION-MALL-M1-INTEGRATION-CLOSEOUT",
+                           "title":  "保障商城 M1 领域核受控集成台账收口",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-m1-closeout",
+                           "branch":  "codex/protection-mall-m1-closeout",
+                           "base_commit":  "de7ab630abb9b0f8238c04d2766fcef248c1afd6",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "docs/project-management/notices/2026-07-13-protection-mall-m1-integration-closeout.md",
+                                                 "docs/project-management/modules/protection-mall/handoff-m1-domain.md",
+                                                 "contracts/foundation/development-checklists/2026-07-13-protection-mall-m1-integration-closeout*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-13-protection-mall-m1-integration-closeout*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-13-protection-mall-m1-integration-closeout*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "仅核验并登记已存在的后端与APP证据受控集成；不修改商城业务、路由、数据库、支付、测试环境或真实数据。",
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m1-domain.md"
                        }
                    ]
