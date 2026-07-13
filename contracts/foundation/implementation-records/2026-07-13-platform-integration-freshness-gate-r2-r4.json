@@ -1,0 +1,63 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-PLATFORM-INTEGRATION-FRESHNESS-GATE-R4",
+  "title": "平台集成分支新鲜度门禁授权范围内最终认证",
+  "date": "2026-07-13",
+  "status": "implemented",
+  "objective": "以工作项授权的 r2* 路径完成最终治理认证，保留被退回历史且不执行真实分支调和。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-13-platform-integration-freshness-gate-r2-r4.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-13-platform-integration-freshness-gate-r2-r4-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-13-platform-integration-freshness-gate-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/integration-push-policy.v1.json",
+    "contracts/foundation/integration-push-policy.v1.schema.json",
+    "contracts/foundation/recurring-issues.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/development-checklists/2026-07-13-platform-integration-freshness-gate-r2-r4.json",
+    "contracts/foundation/governance-exams/2026-07-13-platform-integration-freshness-gate-r2-r4-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-13-platform-integration-freshness-gate-r2-r4.json",
+    "docs/project-management/service-plaza/platform-integration-freshness-gate-2026-07-13.md"
+  ],
+  "verification": [
+    "R2 and rejected R3 checkpoints preserved in Git history without final-tree scope leakage",
+    "R4 final governance inputs reread with 26/26 current SHA matches",
+    "R4 governance exam attempt 1 passed with score 100",
+    "all final certification paths match the authorized r2* globs",
+    "policy and recurring issue validators pass",
+    "freshness gate temporary Git regression 8/8 pass",
+    "real bb9e717 reconciliation not executed before independent review"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/platform-integration-freshness-gate-2026-07-13.md",
+    "contracts/foundation/development-checklists/2026-07-13-platform-integration-freshness-gate-r2-r4.json",
+    "contracts/foundation/governance-exams/2026-07-13-platform-integration-freshness-gate-r2-r4-attempt-1.json"
+  ],
+  "premises": [
+    "final governance evidence must remain inside exact registered path patterns",
+    "historical rejected commits remain traceable but do not enter the integrated final tree",
+    "third recurrence requires ADR, CONSTRAINTS and full dependent audit"
+  ],
+  "implementation_mode": "ai-assisted"
+}

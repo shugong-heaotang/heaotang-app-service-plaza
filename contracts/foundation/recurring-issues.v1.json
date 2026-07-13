@@ -125,6 +125,36 @@
       "systemic_fix": "派发阶段识别同时属于治理 overlay 与切片输出的可变文件，预先授权入口快照和最终 R2 current 快照；入口快照保留为不可修改历史，最终成果落盘后重新全文读取、重新考试并由 R2 IR 收口。",
       "prevention_gates": ["contracts/foundation/agent-collaboration.v1.json", "scripts/validate_development_checklists.py", "scripts/validate_governance_exams.py"],
       "regression_evidence": ["docs/project-management/service-plaza/governance-current-snapshot-self-reference-2026-07-12.md"]
+    },
+    {
+      "pattern_id": "RI-INTEGRATION-AUTHORITY-DIVERGENCE",
+      "title": "多个平台工作树从过期基线向同一权威集成分支形成分叉",
+      "occurrence_count": 2,
+      "status": "implemented",
+      "owner_role": "平台集成负责人",
+      "root_cause": "协作注册表只隔离文件路径，没有把权威集成分支的推送租约建模为共享门禁；多个平台执行者可以从各自干净但已过期的基线形成提交，而普通推送前没有统一核对远端精确 HEAD、候选 ancestry、ahead/behind 和 expected lease。",
+      "occurrences": [
+        {
+          "date": "2026-07-13",
+          "summary": "本地保障商城 M1 集成链 7d638e3 与远端健康 F1 权威链 034e46b 从 cd2bbae 分叉",
+          "evidence": "docs/project-management/service-plaza/platform-integration-divergence-reconciliation-2026-07-13.md"
+        },
+        {
+          "date": "2026-07-13",
+          "summary": "本地活动 V3 M0 激活提交 bb9e717 与远端健康 F2 freshness 权威链 6f4f904 从 e947d70 再次分叉",
+          "evidence": "docs/project-management/service-plaza/platform-integration-freshness-gate-2026-07-13.md"
+        }
+      ],
+      "systemic_fix": "建立版本化 integration push policy 和共享 PowerShell freshness gate；每次推送先 fetch，核对调用者 expected remote HEAD、候选包含远端历史、behind=0、codex 分支和 clean worktree，再用精确 force-with-lease 执行并复核远端结果；任何失败禁止普通 push、重试覆盖或强推回退。",
+      "prevention_gates": [
+        "contracts/foundation/integration-push-policy.v1.json",
+        "scripts/Test-IntegrationPushFreshness.ps1",
+        "scripts/validate_integration_push_policy.py",
+        "scripts/tests/test_integration_push_freshness.py"
+      ],
+      "regression_evidence": [
+        "docs/project-management/service-plaza/platform-integration-freshness-gate-2026-07-13.md"
+      ]
     }
   ]
 }

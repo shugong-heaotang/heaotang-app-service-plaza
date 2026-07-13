@@ -2563,34 +2563,34 @@
                            "migration_note":  "F2-FRESH-01 source 66cc6cb9独立复核Go并以58c3a7cd受控合并；验收证据fee48e60已进入权威远端。F1五类权威证据完整，C4-T06仍Exact revision且只剩PR处置，27项和10类负例门禁通过。平台验收工作项收口integrated；模块保持handoff-ready等待是否另行授权完整F2-1。不得宣称完整F2 Go，不授权F2-1/F3/P3或任何代码/真实活动。",
                            "handoff_record":  "docs/project-management/service-plaza/health-r0-f2-freshness-acceptance-2026-07-13.md"
                        },
-                       {
-                           "work_id":  "AIW-20260713-PLATFORM-INTEGRATION-FRESHNESS-GATE-R2",
-                           "title":  "平台集成分支第二次分叉根因修复与推送新鲜度门禁",
-                           "owner":  "Codex platform integration agent",
-                           "owner_role":  "平台集成负责人",
-                           "status":  "active",
-                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
-                           "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/platform-integration-freshness-gate-r2",
-                           "branch":  "codex/platform-integration-freshness-gate-r2",
-                           "base_commit":  "6f4f9048458b4458cb163b148cce924991bf81fc",
-                           "allowed_paths":  [
-                                                 "contracts/foundation/agent-collaboration.v1.json",
-                                                 "contracts/foundation/recurring-issues.v1.json",
-                                                 "contracts/foundation/integration-push-policy.v1.json",
-                                                 "contracts/foundation/integration-push-policy.v1.schema.json",
-                                                 "contracts/foundation/development-checklists/2026-07-13-platform-integration-freshness-gate-r2*.json",
-                                                 "contracts/foundation/governance-exams/2026-07-13-platform-integration-freshness-gate-r2*.json",
-                                                 "contracts/foundation/implementation-records/2026-07-13-platform-integration-freshness-gate-r2*.json",
-                                                 "scripts/Test-IntegrationPushFreshness.ps1",
-                                                 "scripts/validate_integration_push_policy.py",
-                                                 "scripts/tests/test_integration_push_freshness.py",
-                                                 "docs/project-management/notices/2026-07-13-platform-integration-freshness-gate-task-order.md",
-                                                 "docs/project-management/service-plaza/platform-integration-freshness-gate-2026-07-13.md"
-                                             ],
-                           "started_with_clean_worktree":  true,
-                           "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "第二次出现同类integration分叉：远端健康权威6f4f904与本地activity bb9e717共同基线e947d70，remote-only6/local-only1。先完成证据、recurring issue、版本化策略和共享freshness gate；current checklist/exam100及独立复核前禁止调和和推送。第三次复发升级ADR/CONSTRAINTS和全依赖审计。",
-                           "handoff_record":  "docs/project-management/service-plaza/platform-integration-freshness-gate-2026-07-13.md"
+                                              {
+                           "work_id": "AIW-20260713-PLATFORM-INTEGRATION-FRESHNESS-GATE-R2",
+                           "title": "平台集成分支第二次分叉根因修复与推送新鲜度门禁",
+                           "owner": "Codex platform integration agent",
+                           "owner_role": "平台集成负责人",
+                           "status": "handoff-ready",
+                           "repository_root": "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path": "C:/Users/shugo/Documents/APP系统/.codex-worktrees/platform-integration-freshness-gate-r2",
+                           "branch": "codex/platform-integration-freshness-gate-r2",
+                           "base_commit": "6f4f9048458b4458cb163b148cce924991bf81fc",
+                           "allowed_paths": [
+                               "contracts/foundation/agent-collaboration.v1.json",
+                               "contracts/foundation/recurring-issues.v1.json",
+                               "contracts/foundation/integration-push-policy.v1.json",
+                               "contracts/foundation/integration-push-policy.v1.schema.json",
+                               "contracts/foundation/development-checklists/2026-07-13-platform-integration-freshness-gate-r2*.json",
+                               "contracts/foundation/governance-exams/2026-07-13-platform-integration-freshness-gate-r2*.json",
+                               "contracts/foundation/implementation-records/2026-07-13-platform-integration-freshness-gate-r2*.json",
+                               "scripts/Test-IntegrationPushFreshness.ps1",
+                               "scripts/validate_integration_push_policy.py",
+                               "scripts/tests/test_integration_push_freshness.py",
+                               "docs/project-management/notices/2026-07-13-platform-integration-freshness-gate-task-order.md",
+                               "docs/project-management/service-plaza/platform-integration-freshness-gate-2026-07-13.md"
+                           ],
+                           "started_with_clean_worktree": true,
+                           "preexisting_changes_acknowledged": false,
+                           "migration_note": "第二次integration分叉已完成系统性门禁检查点：远端健康6f4f904与本地activity bb9e717共同基线e947d70，remote-only6/local-only1；recurring issue、版本化policy/Schema、PowerShell gate、validator与8项临时Git回归已落盘，checklist26/26、exam100。当前handoff-ready等待独立复核；复核Go前禁止真实调和和权威推送。第三次复发升级ADR/CONSTRAINTS和全依赖审计。",
+                           "handoff_record": "docs/project-management/service-plaza/platform-integration-freshness-gate-2026-07-13.md"
                        },
                        {
                            "work_id":  "AIW-20260712-PROJECT-BRAIN-INTEGRATION-RECONCILIATION",
@@ -2782,6 +2782,34 @@
                            "preexisting_changes_acknowledged": false,
                            "migration_note": "最高负责人仅批准 M0。需求基线 SHA-256=838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6。保护路径包括 app/src/**、后端业务实现、部署与生产配置、其他模块实现及其他工作项治理证据；禁止真实触达、验证码、支付和生产变更。blocks=M1、测试服部署和生产上线；does_not_block=版本化 mock-only 合同/schema/fixture/原型准备。独立验收负责人=APP 总架构独立验收 Agent（非活动实施、非临时平台激活代理）。激活后仅允许开始 current checklist。",
                            "handoff_record": "docs/project-management/modules/activity/handoff-m0.md"
+                       },
+                       {
+                           "work_id": "AIW-20260713-PLATFORM-NEW-MODULE-BOOTSTRAP-R1",
+                           "title": "平台新模块治理冷启动动态注册修复",
+                           "owner": "Platform governance bootstrap agent",
+                           "owner_role": "平台集成负责人",
+                           "status": "planned",
+                           "repository_root": "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-platform-new-module-bootstrap-r1",
+                           "branch": "codex/platform-new-module-bootstrap-r1",
+                           "base_commit": "6f4f9048458b4458cb163b148cce924991bf81fc",
+                           "allowed_paths": [
+                               "scripts/New-AgentDevelopmentChecklist.ps1",
+                               "contracts/foundation/governance-reading-list.v1.json",
+                               "docs/project-management/notices/2026-07-13-activity-v3-m0-bootstrap-readme.md",
+                               "scripts/tests/test_new_agent_development_checklist.py",
+                               "docs/project-management/service-plaza/new-module-governance-bootstrap-audit-2026-07-13.md",
+                               "contracts/foundation/recurring-issues.v1.json",
+                               "contracts/foundation/development-checklists/2026-07-13-platform-new-module-bootstrap-r1*.json",
+                               "contracts/foundation/governance-exams/2026-07-13-platform-new-module-bootstrap-r1*.json",
+                               "contracts/foundation/implementation-records/2026-07-13-platform-new-module-bootstrap-r1*.json",
+                               "docs/project-management/notices/2026-07-13-platform-new-module-bootstrap-r1-task-order.md",
+                               "docs/project-management/service-plaza/platform-new-module-bootstrap-r1-handoff.md"
+                           ],
+                           "started_with_clean_worktree": false,
+                           "preexisting_changes_acknowledged": true,
+                           "migration_note": "第二次 GOV-NEW-MODULE-BOOTSTRAP-001 复发的系统修复；计划态尚未创建工作树，激活时必须从最新干净权威基线重建并重新核验。平台治理实施主体受平台集成负责人角色的受保护路径约束；实施、活动负责人和独立测试负责人必须分离；禁止活动 M0、业务代码、部署、真实触达、验证码、支付和生产变更。",
+                           "handoff_record": "docs/project-management/service-plaza/platform-new-module-bootstrap-r1-handoff.md"
                        }
                    ]
 }
