@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-`Activation candidate R3 / Independent acceptance Pending`。
+`Base refresh candidate R4 / Independent acceptance Pending`。
 
 root-of-trust 已受控集成到权威 `edf2133e171bce31a68e2e535f94eac20d04d03b`。R3 候选执行首个受控派发交易：仅将 `AIW-20260713-PLATFORM-EXAM-IR-CROSS-RECORD-GATE-R1` 从 `planned` 激活为 `active` 并绑定 edf exact clean worktree；NOVA overlay 与 Telemetry 保持 `planned`。本候选不实现业务或 validator，不授权部署、生产、真实数据或真实资金。
 
@@ -36,6 +36,19 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R3-R2-1`，attempt-1，100 分
 - registry：仅目标 row 的 status、base_commit、updated_at、next_checkpoint、status_expires_at 变化；workspace/branch 原值已与真实工作树一致；其他 rows 逐字段不变。
 
+## R4 安全方案 B：权威基线刷新
+
+- authority exact：`2535a6bf0b59a308dce0e73fd58071be52353ed8`
+- dispatch branch：从 `eae160e` 经 `--ff-only` 到 `2535a6bf`，无 reset、无删除、无改动丢失。
+- target worktree：`C:/Users/shugo/Documents/worktrees/heaotang-platform-exam-ir-cross-record-gate-r1`
+- target branch：`codex/platform-exam-ir-cross-record-gate-r1`，从 `edf2133e` 经 `--ff-only` 到 `2535a6bf`，clean。
+- target local registry：cross-record 为 `active`；NOVA overlay 与 Telemetry 均为 `planned`。
+- registry-only refresh：cross-record 保持 active，仅 `base_commit` 从 `edf2133e` 更新为 `2535a6bf`，并更新 `updated_at`、`next_checkpoint`、`status_expires_at`；其他 123 rows 必须逐字段不变。
+- record：`IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R4`
+- checklist：`FC-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R4`，26/26 current
+- exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R4-1`，attempt-1，100 分
+- 禁止项：未实现 validator，未激活 NOVA/Telemetry，未修改业务、部署、生产、真实数据或真实资金路径。
+
 ## 修改范围
 
 - `contracts/foundation/agent-collaboration.v1.json`
@@ -50,6 +63,9 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r3-r2.json`
 - `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r3-r2-attempt-1.json`
 - `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r3-r2.json`
+- `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r4.json`
+- `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r4-attempt-1.json`
+- `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r4.json`
 
 ## 停止线
 
@@ -69,7 +85,11 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - NOVA overlay、Telemetry 与其余 123 rows：逐字段不变；NOVA 与 Telemetry 均保持 `planned`。
 - target worktree：HEAD=`edf2133e171bce31a68e2e535f94eac20d04d03b`、branch=`codex/platform-exam-ir-cross-record-gate-r1`、clean。
 - scope：仅 dispatch 已授权 registry、R3/R3-R2 checklist/exam/IR 与 Handoff；`git diff --check` 通过；未修改 validator、业务、部署文件。
+- R4：preflight ready；agent collaboration、delivery flow、implementation record、governance exam、development checklist validators 全部通过。
+- R4：delivery-flow 永久回归 26/26、Service Plaza 总合同通过、UTF-8 1407 files 通过。
+- R4：authority/candidate 均为 124 rows，仅 cross-record row 的 `base_commit`、`updated_at`、`next_checkpoint`、`status_expires_at` 变化；status 持续 active，其他 123 rows 逐字段不变。
+- R4 target worktree：HEAD=`2535a6bf0b59a308dce0e73fd58071be52353ed8`、branch=`codex/platform-exam-ir-cross-record-gate-r1`、clean；本地 registry 可见 cross-record active。
 
 ## 下一步
 
-运行全量门禁、提交并推送 exact activation candidate；由 APP 总架构独立验收负责人给出 Go/No-Go。只有独立 Go 且受控集成后，cross-record 实施负责人才能在已激活的独立工作树中完成自身 current checklist、考试与 validator 实现。
+运行全量门禁、提交并推送 exact R4 base-refresh candidate；由 APP 总架构独立验收负责人给出 Go/No-Go。只有独立 Go 且受控集成后，cross-record 实施负责人才能从包含 R4 的最新权威 exact 同步工作树，再完成自身 current checklist、考试与 validator 实现。

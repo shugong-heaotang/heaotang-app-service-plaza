@@ -1,0 +1,65 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R4",
+  "title": "cross-record 权威基线刷新派发 R4",
+  "date": "2026-07-14",
+  "status": "verified",
+  "objective": "采用安全方案B，将已激活 cross-record 工作项的 base_commit 从 edf2133e 刷新到已包含激活交易的权威 2535a6bf，并保持目标工作树、分支和本地 registry 状态一致。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r4.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r4-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "cross-record active registry base refresh and freshness fields",
+    "R4 current checklist and 100-point governance exam",
+    "R4 implementation record and Handoff"
+  ],
+  "verification": [
+    "dispatch and target branches fast-forwarded without reset or deletion to exact 2535a6bf",
+    "target worktree branch codex/platform-exam-ir-cross-record-gate-r1 at exact 2535a6bf and clean",
+    "target local registry shows cross-record active",
+    "R4 current checklist 26/26 with exact attestation and current SHA-256",
+    "R4 governance exam attempt-1 passed with score 100",
+    "semantic registry comparison requires exactly one row changed and only base_commit, updated_at, next_checkpoint and status_expires_at",
+    "NOVA overlay, Telemetry and all other rows remain field-for-field unchanged",
+    "agent collaboration, delivery flow, implementation record, governance exam, development checklist, aggregate contract, UTF-8, scope, diff and secret gates"
+  ],
+  "evidence": [
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md",
+    "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md"
+  ],
+  "premises": [
+    "2535a6bf is the authoritative controlled integration containing activation candidate eae160e",
+    "both worktrees were clean before fast-forward and 2535a6bf descends from their prior heads",
+    "cross-record remains active; this transaction does not change status or implement validator logic",
+    "NOVA overlay and Telemetry remain planned",
+    "independent acceptance and controlled integration are required before cross-record implementation proceeds"
+  ],
+  "implementation_mode": "ai-assisted"
+}
