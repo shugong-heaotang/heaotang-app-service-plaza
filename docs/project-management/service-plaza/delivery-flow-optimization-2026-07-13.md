@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-- 状态：R4、R6、R8、候选 dadcc42、71889d4、5d4d86e、14d209f 与 ed34542 的 independent review 均为 No-Go 且保持不可覆盖；e079f0e 是第四次独立验收 Go 的 candidate，fbf6218 是其受控 integration exact。R21 正在整改 ed34542 唯一 P0 命名授权缺陷，等待第三次独立复验，不包含 independent acceptance 或 integrated 结论。
+- 状态：R4、R6、R8、候选 dadcc42、71889d4、5d4d86e、14d209f 与 ed34542 的 independent review 均为 No-Go 且保持不可覆盖；e079f0e 是第四次独立验收 Go 的 candidate，fbf6218 是其受控 integration exact。R21 候选 8e615e6 已通过第三次独立复验并受控集成为 platform-governance exact 6489a237；R22 只刷新 reviewer bootstrap base，保持 planned，等待独立验收。
 - 主因：业务工作被拆成多个长期并行治理项，Handoff 缺少决策时限，范围内下一检查点仍反复等待授权，平台集成负责人形成单点队列；原 R2 又只优化技术流，没有约束客户价值和商业结果。
 - 处置：以权威 HEAD `fbf621872372f5aac0cad604af1b1a428d5e3b6d` 创建独立 clean worktree，只登记 planned 工作项并刷新当前 next checkpoint；不实现业务代码或 validator。
 
@@ -242,3 +242,12 @@
 - reviewer bootstrap 继续保持 planned；owner role、非保护 future namespace、禁止创建 reviewer 文件及受控集成后刷新 future integration exact 的硬激活顺序不变。
 - R21 checklist 26/26、governance exam attempt 1 为 100；agent collaboration、delivery-flow、implementation-record、governance-exam validators、26项回归、Service Plaza 总合同、UTF-8 1377 文件全部通过。从 `fbf6218` 起算的累计差异为 8 个文件，全部命中原 delivery-flow allowed paths，越权数为 0，三份 `2026-07-14` R20 路径为 0。
 - 当前 verdict：R21 仅可提交推送等待第三次独立复验；未写 independent acceptance、integration commit 或 integrated 状态。
+
+## R21 受控集成与 R22 registry-only base refresh
+
+- R21 candidate：`8e615e6c5cb6422baf2f6c05dc17806755e8e418`；第三次独立复验 Go 后，受控 integration exact 为 `6489a2371a81e91344263d360d03aa943473b22e`。
+- R22 从 `6489a237` 创建独立 clean worktree/branch，只更新 `AIW-20260713-DELIVERY-FLOW-OPTIMIZATION-INDEPENDENT-ACCEPTANCE` 的 `base_commit`、`updated_at` 与 `next_checkpoint`。
+- 新 base `6489a237` 已包含 reviewer bootstrap 授权项；bootstrap 继续保持 `planned`。本轮未创建 reviewer namespace、worktree、task、checklist、exam、IR 或 evidence，未激活。
+- 其他三个 planned 工作项以及旧 Action Telemetry integrated 工作项保持逐字段不变；allowed_paths 未扩大。
+- R22 checklist 26/26、governance exam attempt 1 为 100；registry 语义审计确认仅目标项 `base_commit/updated_at/next_checkpoint` 三字段变化，其他 registry 行变化数为 0。agent collaboration、delivery-flow、implementation-record、governance-exam validators、26项回归、Service Plaza 总合同、UTF-8 1380 文件全部通过。
+- 当前 verdict：R22 registry-only refresh candidate；须先独立验收，再由平台 owner决定后续是否激活，当前不得执行 reviewer 工作。
