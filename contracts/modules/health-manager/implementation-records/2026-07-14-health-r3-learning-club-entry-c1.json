@@ -1,0 +1,77 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260714-HEALTH-R3-LEARNING-CLUB-ENTRY-C1",
+  "title": "健康大管家 R3-C1 健康学习与健康俱乐部入口合同和负例",
+  "date": "2026-07-14",
+  "status": "implemented",
+  "objective": "把健康馆展示最小学习与俱乐部摘要、跳转权威模块和会员确认回传冻结为模块隔离、来源可追溯且不可执行的合同。",
+  "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-14-health-r3-learning-club-entry.json",
+  "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-14-health-r3-learning-club-entry-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/module-dependencies/health-manager.v1.json",
+    "contracts/modules/health-manager/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-14-health-r3-learning-club-entry-task-order.md",
+    "C:/Users/shugo/Documents/项目最高负责人/health-cross-module-requirements/健康大管家-大益健康馆-学习广场-健康俱乐部需求补充-v1.0.md",
+    "contracts/modules/health-manager/r1/cross-module-freeze.v1.json",
+    "contracts/modules/health-manager/r2/dual-channel-record.v1.json"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.contract-tooling",
+    "foundation.ai-collaboration-safety"
+  ],
+  "contracts": [
+    "contracts/modules/health-manager/r3/learning-club-entry.v1.json",
+    "contracts/modules/health-manager/r3/learning-club-entry.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/modules/health-manager/health-manager-r3-learning-club-entry-contracts.md",
+    "docs/project-management/modules/health-manager/health-manager-r3-learning-club-entry-receipt.md",
+    "docs/project-management/modules/health-manager/health-manager-r3-learning-club-entry-handoff.md",
+    "contracts/modules/health-manager/r3/learning-club-entry.v1.json",
+    "contracts/modules/health-manager/r3/learning-club-entry.v1.schema.json",
+    "contracts/modules/health-manager/r3/conformance/test_health_r3_learning_club_entry.py",
+    "contracts/modules/health-manager/development-checklists/2026-07-14-health-r3-learning-club-entry.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-14-health-r3-learning-club-entry-attempt-1.json",
+    "contracts/modules/health-manager/implementation-records/2026-07-14-health-r3-learning-club-entry-c1.json"
+  ],
+  "verification": [
+    "current checklist completed 28 of 28 with current hashes and governance exam attempt 1 passed with score 100",
+    "contract validates against draft 2020-12 schema and 17 of 17 conformance tests pass",
+    "learning and club summaries are exact four-field allowlists with canonical authority routes",
+    "negative tests reject missing authorization, summary expansion, route spoofing, direct database write and authority capture",
+    "negative tests reject automatic or unconfirmed return, missing source version, full health profile access, AI diagnosis, premature signoff and real data authorization",
+    "foundation and health internal dependencies remain development Go",
+    "collaboration, Service Plaza total contract, UTF-8, diff, allowed scope and secret scans are required before commit"
+  ],
+  "evidence": [
+    "contracts/modules/health-manager/r3/conformance/test_health_r3_learning_club_entry.py",
+    "docs/project-management/modules/health-manager/health-manager-r3-learning-club-entry-contracts.md",
+    "docs/project-management/modules/health-manager/health-manager-r3-learning-club-entry-receipt.md",
+    "docs/project-management/modules/health-manager/health-manager-r3-learning-club-entry-handoff.md"
+  ],
+  "premises": [
+    "the requirement supplement hash remains exact",
+    "learning plaza and club alliance retain authoritative ownership and canonical routes",
+    "all outputs remain synthetic_only and executable=false",
+    "privacy legal medical quality platform security and module operations signoffs remain pending",
+    "runtime real data medical service charging deployment and production require separate authorization"
+  ],
+  "implementation_mode": "ai-assisted"
+}

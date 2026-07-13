@@ -3127,7 +3127,7 @@
                            "title":  "健康大管家 R3 健康学习与健康俱乐部入口合同和负例",
                            "owner":  "Health Manager continuous development agent",
                            "owner_role":  "健康大管家负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r3-learning-club-entry-contracts",
                            "branch":  "codex/health-r3-learning-club-entry-contracts",
@@ -3145,7 +3145,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "R1 与 R2 均已独立验收并受控集成。R3-C1 只冻结 synthetic_only=true、executable=false 的学习/俱乐部最小摘要、权威跳转和会员确认回传合同及正负例；禁止跨模块直写、权威夺取、自动回传、真实数据、运行时、医疗、收费、部署和生产。",
+                           "migration_note":  "R3-C1 exact source 8565f1b43cfa196fdc5546ebf5316da71da8e074 已由平台独立复核 Go 并受控纳入 authority；17/17 conformance、需求哈希、模块 checklist/exam100/IR/Handoff、两层依赖、UTF-8、范围与安全门禁通过。仅冻结 synthetic_only=true、executable=false 合同；运行时、真实数据、医疗、收费、部署和生产继续 No-Go。",
                            "handoff_record":  "docs/project-management/modules/health-manager/health-manager-r3-learning-club-entry-handoff.md"
                        },
                        {
@@ -3153,7 +3153,7 @@
                            "title":  "健康大管家 R3-C1 独立验收与受控集成",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r3-c1-acceptance",
                            "branch":  "codex/health-r3-c1-acceptance",
@@ -3168,7 +3168,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "只独立复核 exact source 8565f1b43cfa196fdc5546ebf5316da71da8e074 并在全部门禁 Go 后受控纳入九个模块 blob；禁止修改候选成果、跨模块权威、运行时、真实数据、医疗、收费、部署或生产。",
+                           "migration_note":  "exact source 8565f1b43cfa196fdc5546ebf5316da71da8e074 已独立复核 Go；九个模块 blob 精确一致并受控纳入 authority。17/17 conformance、需求 SHA、模块与平台 current 治理证据、两层依赖、总合同、UTF-8、范围、秘密和敏感模式门禁通过。R4 必须另立工作项。",
                            "handoff_record":  "docs/project-management/service-plaza/health-r3-c1-acceptance-2026-07-14.md"
                        }
                    ]

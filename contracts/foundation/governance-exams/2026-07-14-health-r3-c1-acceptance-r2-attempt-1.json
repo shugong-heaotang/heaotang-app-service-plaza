@@ -1,0 +1,70 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260714-HEALTH-R3-C1-ACCEPTANCE-R2-1",
+    "record_id":  "IR-20260714-HEALTH-R3-C1-ACCEPTANCE-R2",
+    "actor":  "Codex platform integration agent",
+    "attempt_number":  1,
+    "status":  "passed",
+    "generated_at":  "2026-07-13T18:01:17.6470994Z",
+    "completed_at":  "2026-07-13T18:01:24.8186133Z",
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  100,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "b0df386a68e8e00a803a08d0b3e786893a47bad6742dd36a5b6273803b7abcb1",
+    "checklist_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r3-c1-acceptance/contracts/foundation/development-checklists/2026-07-14-health-r3-c1-acceptance-r2.json",
+    "checklist_sha256":  "0046b0e15a9802f1b395ba65d86e5d6eaa93ae4dfca8d0a0980b1a8dbf09740b",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-005",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+                      },
+                      {
+                          "question_id":  "GQ-011",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/project-management/module-internal-dependency-standard-v1.md"
+                      },
+                      {
+                          "question_id":  "GQ-015",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "contracts/foundation/engineering-standards.v1.json"
+                      },
+                      {
+                          "question_id":  "GQ-013",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0014-ai-development-flight-checklist.md"
+                      },
+                      {
+                          "question_id":  "GQ-010",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0012-two-strike-root-cause-rule.md"
+                      },
+                      {
+                          "question_id":  "GQ-014",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "contracts/foundation/recurring-issues.v1.json"
+                      },
+                      {
+                          "question_id":  "GQ-004",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+                      },
+                      {
+                          "question_id":  "GQ-007",
+                          "selected_option":  "A",
+                          "correct":  true,
+                          "source_path":  "AGENTS.md"
+                      }
+                  ],
+    "remediation_sources":  [
+
+                            ]
+}
