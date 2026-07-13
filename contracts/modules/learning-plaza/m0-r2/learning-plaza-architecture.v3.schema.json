@@ -1,0 +1,22 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/learning-plaza/m0-r2/learning-plaza-architecture.v3.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "project_id", "project_type", "execution", "internal_apps", "connected_capabilities", "external_projects", "ownership", "review_policy", "nova_learning_assistant", "growth_event", "first_course_loop", "ports"],
+  "properties": {
+    "contract_version": {"const": "learning-plaza.architecture.v3"},
+    "project_id": {"const": "learning-plaza"},
+    "project_type": {"const": "independent-general-learning-platform"},
+    "execution": {"type": "object"},
+    "internal_apps": {"type": "array", "minItems": 7, "uniqueItems": true},
+    "connected_capabilities": {"type": "array", "minItems": 5, "uniqueItems": true},
+    "external_projects": {"type": "array", "minItems": 4, "uniqueItems": true},
+    "ownership": {"type": "object"},
+    "review_policy": {"type": "object"},
+    "nova_learning_assistant": {"type": "object"},
+    "growth_event": {"type": "object"},
+    "first_course_loop": {"type": "array", "minItems": 9},
+    "ports": {"type": "array", "minItems": 5}
+  }
+}

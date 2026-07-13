@@ -1,0 +1,18 @@
+{
+  "receipt_version": "task-comprehension-receipt.v1",
+  "work_id": "AIW-20260713-LEARNING-PLAZA-M0",
+  "record_id": "IR-20260713-LEARNING-PLAZA-M0-R2",
+  "actor": "Learning Plaza continuous development agent",
+  "understood_goal": "纠正学习广场项目层级，冻结独立通用学习平台v3.0边界，并规定先搭应用骨架、再立即打通课程学习闭环。",
+  "non_goals": ["不修改共享前端或后端", "不创建数据库", "不接真实知识库、直播、Nova引擎或成长消费者", "不发起订单支付", "不部署测试服或生产"],
+  "allowed_paths": ["contracts/modules/learning-plaza/**", "docs/project-management/modules/learning-plaza/**"],
+  "forbidden_actions": ["继续把学习广场称为生命导航专属执行层", "把Nova AI Engine与Nova学习助手混为同一所有权", "让俱乐部因组织学习自动取得内容所有权", "直接写外部项目数据库", "用旧M0认证授权新任务"],
+  "dependencies": ["foundation L0-L5", "knowledge base port", "live board port", "Nova AI Engine port", "growth event consumers", "shared order-payment port"],
+  "risks": ["历史Nova实现继续造成运行时归属倒置", "审核双关被误解为无审计发布", "知识商品目录与商城形成双事实源", "成长记录在多个项目重复保存"],
+  "stop_conditions": ["需要修改foundation或共享运行时代码", "出现路径所有权重叠", "需要真实用户、数据、资金或环境权限", "provisional端口未失败关闭"],
+  "developer_role": "学习广场持续开发负责人",
+  "reviewer_role": "学习广场独立验收负责人",
+  "approver_role": "项目最高负责人",
+  "acceptance_evidence": ["current checklist 28/28", "governance exam 100/100", "v3 architecture fixtures", "platform and internal dependency gates", "UTF-8 and diff gates", "independent acceptance"],
+  "created_at": "2026-07-13T14:20:00+08:00"
+}
