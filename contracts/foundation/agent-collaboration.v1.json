@@ -3031,6 +3031,32 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "用户要求多个智能代理从服务广场入口到生命导航、俱乐部联盟、健康大管家逐板块端到端检查，确认问题后立即根因修复。仅允许合成测试账号与测试服务器；禁止真实会员、真实健康数据、支付、生产和不可逆操作。候选 74d3876 与发布证据 79b8d2f 已完成；独立复验发现旧 IR 与 R2 checklist record_id 不一致，R3 current checklist 26/26、exam100 和 exact record_id 根因修复后，总合同、23/237 前端测试、test-server build、部署安全及 UTF-8 1331 文件门禁全部通过，现重新 handoff-ready。",
                            "handoff_record":  "docs/project-management/service-plaza/service-plaza-e2e-uat-remediation-2026-07-13.md"
-                       }
-                   ]
+                        },
+                        {
+                            "work_id":  "AIW-20260713-HEALTH-R1-CROSS-MODULE-FREEZE",
+                            "title":  "健康大管家 R1 跨模块需求与原型冻结",
+                            "owner":  "Health Manager continuous development agent",
+                            "owner_role":  "健康大管家负责人",
+                            "status":  "active",
+                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r1-cross-module-freeze",
+                            "branch":  "codex/health-r1-cross-module-freeze",
+                            "base_commit":  "5c1069b134747ae5a702ae677457c2422d3137da",
+                            "allowed_paths":  [
+                                                  "docs/project-management/modules/health-manager/health-manager-r1-cross-module-freeze.md",
+                                                  "docs/project-management/modules/health-manager/health-manager-r1-cross-module-freeze-receipt.md",
+                                                  "docs/project-management/modules/health-manager/health-manager-r1-cross-module-freeze-handoff.md",
+                                                  "contracts/modules/health-manager/r1/cross-module-freeze.v1.json",
+                                                  "contracts/modules/health-manager/r1/cross-module-freeze.v1.schema.json",
+                                                  "contracts/modules/health-manager/r1/conformance/test_health_r1_cross_module_freeze.py",
+                                                  "contracts/modules/health-manager/development-checklists/2026-07-13-health-r1-cross-module-freeze*.json",
+                                                  "contracts/modules/health-manager/governance-exams/2026-07-13-health-r1-cross-module-freeze*.json",
+                                                  "contracts/modules/health-manager/implementation-records/2026-07-13-health-r1-cross-module-freeze*.json"
+                                              ],
+                            "started_with_clean_worktree":  true,
+                            "preexisting_changes_acknowledged":  false,
+                            "migration_note":  "仅推进 R1-C1：冻结新增需求 SHA-256、健康馆首页信息架构、模块权威边界、展示摘要+跳转权威模块+会员确认回传协议及正负验收场景。全部成果 synthetic_only=true、executable=false；禁止业务代码、共享前后端、API/数据库、真实身份/健康数据、医疗服务、收费、资金、环境、部署和生产。",
+                            "handoff_record":  "docs/project-management/modules/health-manager/health-manager-r1-cross-module-freeze-handoff.md"
+                        }
+                    ]
 }
