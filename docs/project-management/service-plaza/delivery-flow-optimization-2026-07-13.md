@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-- 状态：R4、R6、R8、候选 dadcc42、71889d4 与 5d4d86e 的 independent review 均为 No-Go 且保持不可覆盖；e079f0e 已通过第四次独立复验并受控集成为 fbf6218。R19 仅登记后续授权候选，等待新的独立复验，不包含 independent acceptance 或 integrated 结论。
+- 状态：R4、R6、R8、候选 dadcc42、71889d4、5d4d86e 与 14d209f 的 independent review 均为 No-Go 且保持不可覆盖；e079f0e 是第四次独立验收 Go 的 candidate，fbf6218 是其受控 integration exact。R20 正在整改 14d209f 的两个 P0 语义缺陷，等待新的独立复验，不包含 independent acceptance 或 integrated 结论。
 - 主因：业务工作被拆成多个长期并行治理项，Handoff 缺少决策时限，范围内下一检查点仍反复等待授权，平台集成负责人形成单点队列；原 R2 又只优化技术流，没有约束客户价值和商业结果。
 - 处置：以权威 HEAD `fbf621872372f5aac0cad604af1b1a428d5e3b6d` 创建独立 clean worktree，只登记 planned 工作项并刷新当前 next checkpoint；不实现业务代码或 validator。
 
@@ -205,3 +205,31 @@
 - 当前 verdict：authorization candidate only；等待独立复验，登记负责人不得自行验收或集成。
 - 未写 `independent_acceptance`、`integration_commit` 或任何 `integrated` 状态。
 - next checkpoint：提交并推送 exact candidate，由独立验收负责人复核 registry 字段、串行激活条件、范围、测试与证据新鲜度。
+
+## 14d209f 独立验收 No-Go 与 R20 整改
+
+### 不可覆盖结论
+
+- 验收对象：`14d209feb49c2f92b457e3c727acaeebcfdb3189`；机器门禁全绿，但结论为 No-Go，禁止集成。
+- P0-1：独立验收工作项把 `owner_role` 写成平台集成负责人，并把 reviewer evidence/checklist/exam/IR 放入 `contracts/foundation` 保护 namespace，造成角色冒充。
+- P0-2：独立验收项的 base 不能降到被验 candidate 或其既有 integration；必须在授权整改受控集成后绑定包含该授权项的未来 integration exact。
+
+### 合法 namespace 审计与选型
+
+- 平台保护路径为 `AGENTS.md`、`CONSTRAINTS.md`、`README.md`、`contracts/foundation`、`contracts/service-plaza`、`docs/decisions`、`scripts`；触及这些路径必须由平台集成负责人拥有。
+- 既有合法非平台先例是板块 owner 在 `contracts/modules/<module>/development-checklists|governance-exams|implementation-records` 与 `docs/project-management/modules/.../acceptance` 写本板块证据。
+- 仓库虽有 `docs/project-management/project-brain/m4-independent-acceptance-2026-07-12.md`，但 Project Brain 工作项仍由平台集成负责人拥有，且没有通用 platform reviewer checklist/exam/IR namespace；不得冒用该目录假装已有 reviewer namespace。
+- 因此原 independent acceptance 项改为 `planned reviewer-evidence-namespace/bootstrap`，`owner_role=APP总架构独立验收负责人`；未来 evidence/task/checklist/exam/IR 全部限制在非保护目录 `docs/project-management/independent-acceptance/delivery-flow-optimization/`。本轮只登记，不创建该目录或证据文件。
+
+### Base 与激活顺序
+
+- `14d209f` 只作为 R20 的 clean 整改父候选，并包含 R19 原始登记项；它不是 reviewer 验收 base。
+- 原业务事实分开绑定：第四次验收 candidate=`e079f0e41f375e7988478d428e672695fbdefc2f`；受控 integration=`fbf621872372f5aac0cad604af1b1a428d5e3b6d`。
+- 顺序固定为：R20 candidate 独立复验 Go -> R20 受控集成 -> 平台 owner 将 bootstrap 项 `base_commit` 更新为包含本授权项的未来 integration exact -> 激活 reviewer namespace/bootstrap -> 独立 reviewer 创建证据。任何一步不得跳过。
+
+### 当前结论
+
+- R19 checklist/exam/IR 保持不可修改。
+- R20 checklist 26/26、governance exam attempt 1 为 100；agent collaboration、delivery-flow、implementation-record、governance-exam validators、26项回归、Service Plaza 总合同、UTF-8 1377 文件、diff/scope/secret 门禁全部通过。
+- reviewer namespace 当前不存在；R20 未创建或激活任何 reviewer evidence 文件，planned bootstrap 的 5 项 allowed paths 与平台保护路径重叠数为 0。
+- R20 仅可提交推送等待独立复验；未写 independent acceptance、integration commit 或 integrated 状态。

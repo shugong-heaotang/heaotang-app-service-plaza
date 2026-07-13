@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260714-DELIVERY-FLOW-OPTIMIZATION-R20",
+  "title": "独立 reviewer namespace 与 base 语义整改",
+  "date": "2026-07-14",
+  "status": "implemented",
+  "objective": "关闭 14d209f 独立验收发现的角色冒充与错误验收 base 两个 P0，保持 reviewer 不触及平台保护路径。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-14-delivery-flow-optimization-r20.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-14-delivery-flow-optimization-r20.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/service-plaza/project-status-one-page.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-13-delivery-flow-optimization-task-order.md", "docs/project-management/service-plaza/delivery-flow-optimization-2026-07-13.md"],
+  "capabilities": ["foundation.ai-collaboration-safety", "foundation.governance-certification", "foundation.contract-tooling"],
+  "contracts": ["contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/agent-collaboration.v1.schema.json", "contracts/foundation/delivery-flow-policy.v1.json"],
+  "decisions": ["docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"],
+  "changed_areas": ["contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/development-checklists/2026-07-14-delivery-flow-optimization-r20.json", "contracts/foundation/governance-exams/2026-07-14-delivery-flow-optimization-r20.json", "contracts/foundation/implementation-records/2026-07-14-delivery-flow-optimization-r20.json", "docs/project-management/service-plaza/delivery-flow-optimization-2026-07-13.md"],
+  "verification": ["R19 checklist exam and IR Git object hashes are unchanged", "R20 final current checklist completed 26 of 26", "R20 governance exam attempt 1 passed with score 100", "reviewer owner_role is APP total architecture independent acceptance owner", "reviewer bootstrap allowed paths have zero overlap with every protected path", "reviewer namespace does not exist and bootstrap remains planned", "14d209f is explicitly a remediation parent and not reviewer base", "future integration exact replacement is a hard activation prerequisite", "e079f0e candidate and fbf6218 integration facts are recorded separately", "agent collaboration delivery-flow implementation-record and governance-exam validators pass", "delivery-flow regression passes 26 of 26", "Service Plaza contract gate passes", "UTF-8 gate passes 1377 files", "diff scope and secret gates pass"],
+  "evidence": ["docs/project-management/service-plaza/delivery-flow-optimization-2026-07-13.md", "contracts/foundation/development-checklists/2026-07-14-delivery-flow-optimization-r20.json", "contracts/foundation/governance-exams/2026-07-14-delivery-flow-optimization-r20.json"],
+  "premises": ["14d209feb49c2f92b457e3c727acaeebcfdb3189 is the clean remediation parent and remains No-Go", "a future integration commit cannot be self-referenced by the candidate that creates it", "planned does not authorize namespace creation or review execution", "the platform owner must refresh base_commit to the future integration exact before activation"],
+  "implementation_mode": "ai-assisted"
+}
