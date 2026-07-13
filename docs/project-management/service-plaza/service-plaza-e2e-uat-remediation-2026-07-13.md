@@ -2,6 +2,18 @@
 
 状态：候选修复、自动测试、治理门禁和测试服务器最终发布均已完成。
 
+## RC-E2E-IR-CHECKLIST-ID-MISMATCH 根因收口
+
+- 首次发现：2026-07-13；发生次数：1；影响检查点：服务广场 E2E/UAT 候选独立复验。
+- 症状与精确停止点：`Test-ServicePlazaContracts.ps1` 在实现记录校验阶段失败，报告实现记录 `record_id` 为非 R2，而其 checklist 已指向 R2。
+- 因果链：最终 current 治理快照升级为 R2，但实现记录只替换了 checklist/exam 路径，没有同步替换自身 `record_id`；因此同一实现记录引用了不同身份的治理证据，追溯门禁正确失败关闭。
+- 影响：阻断合同门禁、受控集成和完成声明；不影响已部署页面运行、237 项前端测试、构建、测试服务器 ready 或回滚资产。
+- 拒绝的绕行：不删除校验、不回指旧 R1、不修改已通过的 R2 历史快照。
+- 系统修复：重新激活原工作项，创建并全文完成 current R3 checklist，重新参加随机治理考试并取得 100 分，再将实现记录、checklist 和 exam 统一绑定到同一 R3 `record_id`。
+- 防复发与证明：继续由 `validate_implementation_records.py` 强制检查 exact record_id；总合同、正向 R3 记录以及仓库内全部实现记录作为回归集。
+- 回滚：本修复仅涉及治理证据；如复验失败，保持工作项 active 和总体 No-Go，不回滚或改写历史 R1/R2 快照。
+- 复验证明：R3 checklist 26/26、随机考试 100；总合同通过；前端 23 文件/237 测试通过；test-server TypeScript/Vite 构建通过；部署安全通过；UTF-8 1331 文件通过。结论：本根因修复 Pass，工作项恢复 handoff-ready，等待独立受控集成。
+
 ## 范围与边界
 
 - 从 `https://heaotang.cn/app/service-plaza/services/` 依次检查生命导航、俱乐部联盟、健康大管家、会员首页内部链接、登录/退出和深链接回退。

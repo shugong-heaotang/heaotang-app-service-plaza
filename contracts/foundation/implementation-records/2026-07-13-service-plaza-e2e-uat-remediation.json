@@ -1,12 +1,12 @@
 {
   "contract_version": "implementation-record.v1",
-  "record_id": "IR-20260713-SERVICE-PLAZA-E2E-UAT-REMEDIATION",
-  "title": "服务广场三大核心板块端到端缺陷闭环",
+  "record_id": "IR-20260713-SERVICE-PLAZA-E2E-UAT-REMEDIATION-R3",
+  "title": "服务广场三大核心板块端到端缺陷与证据链闭环",
   "date": "2026-07-13",
-  "status": "implemented",
+  "status": "verified",
   "objective": "修复服务广场老页面回跳、跨账号草稿残留、无可见权限反馈、健康联调控件外露和发布深链接回退问题，并对未完成能力保持诚实边界。",
-  "governance_checklist": "contracts/foundation/development-checklists/2026-07-13-service-plaza-e2e-uat-remediation-r2.json",
-  "governance_exam": "contracts/foundation/governance-exams/2026-07-13-service-plaza-e2e-uat-remediation-r2-attempt-1.json",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-13-service-plaza-e2e-uat-remediation-r3.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-13-service-plaza-e2e-uat-remediation-r3-attempt-1.json",
   "governance_inputs": [
     "AGENTS.md",
     "README.md",
@@ -48,6 +48,7 @@
     "test-server TypeScript and Vite build passes",
     "frontend deployment safety and UTF-8 checks pass",
     "Service Plaza contract and collaboration validation passes",
+    "implementation record, checklist and governance exam share the exact R3 record_id",
     "six public deep-link paths load the expected Service Plaza asset",
     "test-server readiness remains ready before and after deployment"
   ],
