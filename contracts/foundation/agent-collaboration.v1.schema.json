@@ -30,7 +30,16 @@
           "started_with_clean_worktree": { "type": "boolean" },
           "preexisting_changes_acknowledged": { "type": "boolean" },
           "migration_note": { "type": ["string", "null"] },
-          "handoff_record": { "type": ["string", "null"] }
+          "handoff_record": { "type": ["string", "null"] },
+          "risk_level": { "enum": ["low", "medium", "high"] },
+          "updated_at": { "type": "string", "format": "date-time" },
+          "target_date": { "type": "string", "format": "date-time" },
+          "status_expires_at": { "type": "string", "format": "date-time" },
+          "next_checkpoint": { "type": "string", "minLength": 1 },
+          "reviewer_role": { "type": "string", "minLength": 1 },
+          "approver_role": { "type": "string", "minLength": 1 },
+          "blocks": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true },
+          "does_not_block": { "type": "array", "items": { "type": "string", "minLength": 1 }, "uniqueItems": true }
         }
       }
     }

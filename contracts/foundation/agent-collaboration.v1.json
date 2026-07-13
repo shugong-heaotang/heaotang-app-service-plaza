@@ -1202,7 +1202,7 @@
                            "title":  "动作遥测 boolean 业务变量与 service-plaza 适配",
                            "owner":  "Backend platform agent",
                            "owner_role":  "后端平台负责人",
-                           "status":  "active",
+                           "status":  "cancelled",
                            "repository_root":  "C:/Users/shugo/Documents/heaotang-main",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-action-telemetry-businessconfig",
                            "branch":  "codex/action-telemetry-businessconfig",
@@ -2100,10 +2100,7 @@
                            "allowed_paths":  [
                                                  "docs/project-management/notices/2026-07-12-protection-mall-m0-task-order.md",
                                                  "docs/project-management/modules/protection-mall/",
-                                                 "contracts/modules/protection-mall/",
-                                                 "contracts/foundation/development-checklists/2026-07-12-protection-mall-m0*.json",
-                                                 "contracts/foundation/governance-exams/2026-07-12-protection-mall-m0*.json",
-                                                 "contracts/foundation/implementation-records/2026-07-12-protection-mall-m0*.json"
+                                                 "contracts/modules/protection-mall/"
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
@@ -2114,10 +2111,33 @@
                            "next_checkpoint":  "M0-CP1 来源只读盘点、迁移矩阵、接入卡与 mall.api.v1 契约冻结提案",
                            "reviewer_role":  "平台集成负责人",
                            "approver_role":  "APP 总架构独立验收 Agent",
-                           "migration_note":  "商城提前启动持续开发但不提前上线。M0 仅授权治理准入、受控迁移审计、服务广场接入卡和 mall.api.v1 契约冻结；本地商城既存未提交修改只读盘点，禁止整体 git add、覆盖、复制 Git 历史或强推。M0-CP1 Go 前不得编辑业务代码。",
+                           "migration_note":  "Superseded after an independent audit found that the module owner was assigned protected foundation evidence paths and the dependency declaration was schema-invalid. Commit 6bce98f and the frozen uncommitted v2 candidate remain historical input only; no reset, deletion, migration or direct reuse is authorized. A clean module work package and a separate platform evidence work package will be dispatched after governance repair integration.",
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m0.md",
                            "blocks":  ["保障商城 M1 业务实现激活"],
                            "does_not_block":  ["其他模块非重叠开发", "商城本地来源只读盘点", "商城 2.0-3.0 非执行性设计"]
+                       },
+                       {
+                           "work_id":  "AIW-20260712-PROTECTION-MALL-M0-GOVERNANCE-REPAIR",
+                           "title":  "保障商城 M0 派发所有权与协作登记根因修复",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/.codex/visualizations/2026/07/10/019f4bd2-3b20-7d31-ad71-95dc0d933886/pgfix",
+                           "branch":  "codex/protection-mall-governance-fix",
+                           "base_commit":  "0b4520a7ab2a72329e357fb99270775e3b14ef7a",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.schema.json",
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-12-protection-mall-governance-repair*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-protection-mall-governance-repair*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-protection-mall-governance-repair*.json",
+                                                 "docs/project-management/service-plaza/protection-mall-m0-governance-repair-2026-07-12.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "Project owner accepted the clean module work package plus separate platform evidence work package recovery. This slice only repairs schema/registry ownership and records the dispatch boundary; it does not implement Mall M0 or M1.",
+                           "handoff_record":  null
                        }
                    ]
 }
