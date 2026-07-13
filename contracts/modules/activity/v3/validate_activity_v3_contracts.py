@@ -14,6 +14,17 @@ def decision_oracle(synthetic_input):
         return "deny"
     return "allow"
 
+def cross_domain_oracle(synthetic_input):
+    if synthetic_input["club_id"] != synthetic_input["authorized_club_id"]:
+        return "deny", 1
+    if not synthetic_input["human_confirmed"]:
+        return "deny", 1
+    if synthetic_input["requested_action"] != "reference_product":
+        return "deny", 2
+    if not synthetic_input["saleable"]:
+        return "deny", 2
+    return "allow", 3
+
 def validate_trace_semantics(req, trace_doc, fixture_doc):
     cases = {x["id"]: x for x in fixture_doc["cases"]}
     traces = trace_doc["traces"]
@@ -41,6 +52,7 @@ def main():
         ("v3/safety-matrix.v1.json", "v3/safety-matrix.v1.schema.json"),
         ("v3/trace-matrix.v3.json", "v3/trace-matrix.v3.schema.json"),
         ("v3/fixtures/cases.v1.json", "v3/fixtures/cases.v1.schema.json"),
+        ("v3/cross-domain-events.v1.json", "v3/cross-domain-events.v1.schema.json"),
     ]
     for instance, schema in schema_pairs:
         validate(docs[instance], docs[schema])
@@ -94,7 +106,26 @@ def main():
         raise AssertionError("synthetic-input mutation accepted")
     api_operations = {item["operation"] for item in docs["v3/api-contracts.v1.json"]["endpoints"]}
     assert all(trace["api_operation"] in api_operations for trace in trace_doc["traces"])
-    print(f"PASS activity V3 M0: {len(files)} JSON files, 72 oracle-executed cases, 6 usable dependency schemas, semantic APIs and mutation guards")
+    cross_domain = docs["v3/cross-domain-events.v1.json"]
+    assert [event["sequence"] for event in cross_domain["chain"]] == [1, 2, 3]
+    assert [(event["producer"], event["consumer"]) for event in cross_domain["chain"]] == [
+        ("activity", "club-alliance"), ("club-alliance", "mall"), ("mall", "activity")
+    ]
+    money_fields = {"amount", "currency", "price", "payment_id", "order_id", "refund_id", "settlement_id"}
+    assert all(money_fields <= set(event["forbidden_payload"]) for event in cross_domain["chain"])
+    for scenario in cross_domain["synthetic_scenarios"]:
+        decision, emitted_events = cross_domain_oracle(scenario["input"])
+        assert decision == scenario["expected"]["decision"]
+        assert emitted_events == scenario["expected"]["emitted_events"]
+        assert scenario["expected"]["money_movement"] is False
+    mutated_cross_domain = copy.deepcopy(cross_domain)
+    mutated_cross_domain["synthetic_scenarios"][2]["input"]["requested_action"] = "reference_product"
+    decision, emitted_events = cross_domain_oracle(mutated_cross_domain["synthetic_scenarios"][2]["input"])
+    assert (decision, emitted_events) != (
+        mutated_cross_domain["synthetic_scenarios"][2]["expected"]["decision"],
+        mutated_cross_domain["synthetic_scenarios"][2]["expected"]["emitted_events"],
+    )
+    print(f"PASS activity V3 M0: {len(files)} JSON files, 72 acceptance cases, 3 cross-domain event cases, 6 usable dependency schemas, semantic APIs and mutation guards")
 
 if __name__ == "__main__":
     main()

@@ -1,0 +1,93 @@
+{
+  "contract_version": "activity.cross-domain-events.v1",
+  "execution": {"executable": false, "mode": "mock-only", "environment": "non-production"},
+  "owner_readiness": {"activity": "candidate", "club-alliance": "provisional", "mall-order-payment": "provisional"},
+  "chain": [
+    {
+      "sequence": 1,
+      "event_type": "activity.proposal-submitted.v1",
+      "producer": "activity",
+      "consumer": "club-alliance",
+      "purpose": "request host-club authorization without publishing or transacting",
+      "required_payload": ["event_id", "correlation_id", "activity_id", "club_id", "proposal_id", "occurred_at"],
+      "forbidden_payload": ["amount", "currency", "price", "payment_id", "order_id", "refund_id", "settlement_id"]
+    },
+    {
+      "sequence": 2,
+      "event_type": "club-alliance.activity-host-authorized.v1",
+      "producer": "club-alliance",
+      "consumer": "mall",
+      "purpose": "confirm host ownership before a catalog reference can be evaluated",
+      "required_payload": ["event_id", "correlation_id", "activity_id", "club_id", "authorization_id", "occurred_at"],
+      "forbidden_payload": ["amount", "currency", "price", "payment_id", "order_id", "refund_id", "settlement_id"]
+    },
+    {
+      "sequence": 3,
+      "event_type": "mall.activity-product-reference-ready.v1",
+      "producer": "mall",
+      "consumer": "activity",
+      "purpose": "return a saleability-checked product reference without cart order or payment",
+      "required_payload": ["event_id", "correlation_id", "activity_id", "club_id", "product_reference", "saleable", "occurred_at"],
+      "forbidden_payload": ["amount", "currency", "price", "payment_id", "order_id", "refund_id", "settlement_id"]
+    }
+  ],
+  "invariants": [
+    "synthetic-identifiers-only",
+    "one-correlation-id-across-chain",
+    "club-id-must-match-authorized-host",
+    "human-confirmation-required",
+    "existing-product-reference-only",
+    "saleability-must-be-true",
+    "no-cart-or-order-creation",
+    "no-payment-refund-or-settlement",
+    "idempotent-event-id-required",
+    "external-owner-contracts-remain-provisional"
+  ],
+  "synthetic_scenarios": [
+    {
+      "id": "ACT-CLUB-MALL-ALLOW",
+      "synthetic_only": true,
+      "input": {
+        "activity_id": "synthetic-activity-001",
+        "club_id": "synthetic-club-001",
+        "authorized_club_id": "synthetic-club-001",
+        "product_reference": "synthetic-product-001",
+        "saleable": true,
+        "human_confirmed": true,
+        "requested_action": "reference_product",
+        "correlation_id": "synthetic-correlation-001"
+      },
+      "expected": {"decision": "allow", "emitted_events": 3, "money_movement": false, "reason": "authorized zero-value reference chain"}
+    },
+    {
+      "id": "ACT-CLUB-MALL-DENY-CLUB-MISMATCH",
+      "synthetic_only": true,
+      "input": {
+        "activity_id": "synthetic-activity-002",
+        "club_id": "synthetic-club-002",
+        "authorized_club_id": "synthetic-club-999",
+        "product_reference": "synthetic-product-002",
+        "saleable": true,
+        "human_confirmed": true,
+        "requested_action": "reference_product",
+        "correlation_id": "synthetic-correlation-002"
+      },
+      "expected": {"decision": "deny", "emitted_events": 1, "money_movement": false, "reason": "host club authorization mismatch"}
+    },
+    {
+      "id": "ACT-CLUB-MALL-DENY-MONEY-ACTION",
+      "synthetic_only": true,
+      "input": {
+        "activity_id": "synthetic-activity-003",
+        "club_id": "synthetic-club-003",
+        "authorized_club_id": "synthetic-club-003",
+        "product_reference": "synthetic-product-003",
+        "saleable": true,
+        "human_confirmed": true,
+        "requested_action": "take_payment",
+        "correlation_id": "synthetic-correlation-003"
+      },
+      "expected": {"decision": "deny", "emitted_events": 2, "money_movement": false, "reason": "M0 forbids payment and money movement"}
+    }
+  ]
+}

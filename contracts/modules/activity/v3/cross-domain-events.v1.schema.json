@@ -1,0 +1,105 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Activity to club to mall synthetic event chain",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "execution", "owner_readiness", "chain", "invariants", "synthetic_scenarios"],
+  "properties": {
+    "contract_version": {"const": "activity.cross-domain-events.v1"},
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["executable", "mode", "environment"],
+      "properties": {
+        "executable": {"const": false},
+        "mode": {"const": "mock-only"},
+        "environment": {"const": "non-production"}
+      }
+    },
+    "owner_readiness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["activity", "club-alliance", "mall-order-payment"],
+      "properties": {
+        "activity": {"const": "candidate"},
+        "club-alliance": {"const": "provisional"},
+        "mall-order-payment": {"const": "provisional"}
+      }
+    },
+    "chain": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["sequence", "event_type", "producer", "consumer", "purpose", "required_payload", "forbidden_payload"],
+        "properties": {
+          "sequence": {"type": "integer", "minimum": 1, "maximum": 3},
+          "event_type": {"type": "string", "pattern": "^[a-z][a-z0-9.-]+\\.v1$"},
+          "producer": {"enum": ["activity", "club-alliance", "mall"]},
+          "consumer": {"enum": ["activity", "club-alliance", "mall"]},
+          "purpose": {"type": "string", "minLength": 10},
+          "required_payload": {
+            "type": "array",
+            "minItems": 5,
+            "uniqueItems": true,
+            "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]+$"}
+          },
+          "forbidden_payload": {
+            "type": "array",
+            "minItems": 5,
+            "uniqueItems": true,
+            "items": {"enum": ["amount", "currency", "price", "payment_id", "order_id", "refund_id", "settlement_id"]}
+          }
+        }
+      }
+    },
+    "invariants": {
+      "type": "array",
+      "minItems": 8,
+      "uniqueItems": true,
+      "items": {"type": "string", "minLength": 8}
+    },
+    "synthetic_scenarios": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["id", "synthetic_only", "input", "expected"],
+        "properties": {
+          "id": {"type": "string", "pattern": "^ACT-CLUB-MALL-(ALLOW|DENY-[A-Z-]+)$"},
+          "synthetic_only": {"const": true},
+          "input": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["activity_id", "club_id", "authorized_club_id", "product_reference", "saleable", "human_confirmed", "requested_action", "correlation_id"],
+            "properties": {
+              "activity_id": {"type": "string", "pattern": "^synthetic-activity-"},
+              "club_id": {"type": "string", "pattern": "^synthetic-club-"},
+              "authorized_club_id": {"type": "string", "pattern": "^synthetic-club-"},
+              "product_reference": {"type": "string", "pattern": "^synthetic-product-"},
+              "saleable": {"type": "boolean"},
+              "human_confirmed": {"type": "boolean"},
+              "requested_action": {"enum": ["reference_product", "create_order", "take_payment"]},
+              "correlation_id": {"type": "string", "pattern": "^synthetic-correlation-"}
+            }
+          },
+          "expected": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["decision", "emitted_events", "money_movement", "reason"],
+            "properties": {
+              "decision": {"enum": ["allow", "deny"]},
+              "emitted_events": {"type": "integer", "minimum": 0, "maximum": 3},
+              "money_movement": {"const": false},
+              "reason": {"type": "string", "minLength": 8}
+            }
+          }
+        }
+      }
+    }
+  }
+}
