@@ -3196,6 +3196,29 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "R3 已独立验收并受控集成至 dfbff8e；本工作项只冻结 synthetic_only=true、executable=false 的医生资质/执业/专科硬门禁、质量治理、推荐解释、人工复核、退出和禁止付费改变医疗安全排序，并以正负例验证。真实医生/会员/健康数据、公开排名、互联网诊疗、收费、支付、运行时、部署和生产继续 No-Go。",
                            "handoff_record":  "docs/project-management/modules/health-manager/health-manager-r4-doctor-directory-recommendation-handoff.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260714-HEALTH-R4-C1-ACCEPTANCE",
+                           "title":  "健康大管家 R4-C1 独立验收与受控集成",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r4-c1-acceptance",
+                           "branch":  "codex/health-r4-c1-acceptance",
+                           "base_commit":  "9c3bfdb93fb4dd37c2759c64e29a0490eeff7109",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-14-health-r4-c1-acceptance*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-14-health-r4-c1-acceptance*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-14-health-r4-c1-acceptance*.json",
+                                                 "docs/project-management/notices/2026-07-14-health-r4-c1-acceptance-task-order.md",
+                                                 "docs/project-management/service-plaza/health-r4-c1-acceptance-2026-07-14.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "只独立复核 exact source da66c7db451ae786268d743e0a1ff267fbc4a460 并在全部门禁 Go 后受控纳入九个模块 blob；禁止修改候选成果、医疗安全门禁、运行时、真实数据、收费、部署或生产。",
+                           "handoff_record":  "docs/project-management/service-plaza/health-r4-c1-acceptance-2026-07-14.md"
                        }
                    ]
 }
