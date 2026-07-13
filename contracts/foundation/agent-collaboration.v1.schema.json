@@ -22,10 +22,18 @@
           "owner": { "type": "string", "minLength": 1 },
           "owner_role": { "type": "string", "minLength": 1 },
           "status": { "enum": ["planned", "active", "handoff-ready", "integrated", "cancelled"] },
-          "repository_root": { "type": "string", "minLength": 1 },
+          "repository_root": {
+            "type": "string",
+            "minLength": 1,
+            "description": "Git repository whose object database is authoritative for this work item. Active and handoff-ready items must resolve base_commit here."
+          },
           "workspace_path": { "type": "string", "minLength": 1 },
           "branch": { "type": "string", "pattern": "^codex/[a-z0-9._/-]+$" },
-          "base_commit": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+          "base_commit": {
+            "type": "string",
+            "pattern": "^[a-f0-9]{40}$",
+            "description": "Exact commit object. Existence is checked for active and handoff-ready items against their own repository_root; planned, cancelled and immutable legacy rows remain metadata-only."
+          },
           "allowed_paths": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string", "minLength": 1 } },
           "started_with_clean_worktree": { "type": "boolean" },
           "preexisting_changes_acknowledged": { "type": "boolean" },

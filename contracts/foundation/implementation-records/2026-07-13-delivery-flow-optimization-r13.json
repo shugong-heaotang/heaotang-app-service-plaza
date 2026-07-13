@@ -1,0 +1,64 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-DELIVERY-FLOW-OPTIMIZATION-R13",
+  "title": "dadcc42 独立验收 No-Go 根因整改",
+  "date": "2026-07-13",
+  "status": "implemented",
+  "objective": "移除同提交自增测试授权，将跨仓 base commit 负例迁入父提交已授权测试文件，并按平台负责人原案修正 planned NOVA overlay R2。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-13-delivery-flow-optimization-r13.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-13-delivery-flow-optimization-r13.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/service-plaza/project-status-one-page.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-13-delivery-flow-optimization-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/agent-collaboration.v1.schema.json",
+    "contracts/foundation/delivery-flow-policy.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "scripts/tests/test_validate_delivery_flow_policy.py",
+    "scripts/tests/test_validate_agent_collaboration.py",
+    "contracts/foundation/development-checklists/2026-07-13-delivery-flow-optimization-r13.json",
+    "contracts/foundation/governance-exams/2026-07-13-delivery-flow-optimization-r13.json",
+    "docs/project-management/service-plaza/delivery-flow-optimization-2026-07-13.md"
+  ],
+  "verification": [
+    "R13 entry checklist completed 26 of 26",
+    "R13 governance exam attempt 1 passed with score 100",
+    "combined delivery-flow and base-commit regression tests pass 25 of 25",
+    "agent collaboration registry and delivery-flow policy pass",
+    "dadcc42 remains prohibited from integration",
+    "new candidate remains pending final current certification and independent review"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/delivery-flow-optimization-2026-07-13.md",
+    "contracts/foundation/development-checklists/2026-07-13-delivery-flow-optimization-r13.json",
+    "contracts/foundation/governance-exams/2026-07-13-delivery-flow-optimization-r13.json",
+    "scripts/tests/test_validate_delivery_flow_policy.py"
+  ],
+  "premises": [
+    "a path added by the same candidate cannot retrospectively authorize that candidate",
+    "the parent work item already authorizes scripts/tests/test_validate_delivery_flow_policy.py",
+    "the NOVA R2 implementation agent must not own the collaboration registry",
+    "the future overlay gate must also detect active Protection Mall missing an overlay"
+  ],
+  "implementation_mode": "ai-assisted"
+}

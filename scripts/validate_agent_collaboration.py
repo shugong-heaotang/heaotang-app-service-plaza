@@ -2,6 +2,7 @@
 import argparse
 import importlib.util
 import json
+import subprocess
 import sys
 from pathlib import Path, PurePosixPath
 
@@ -17,6 +18,28 @@ def overlaps(left: str, right: str) -> bool:
     if "." in (left, right):
         return True
     return left == right or left.startswith(right + "/") or right.startswith(left + "/")
+
+
+def commit_exists(repository_root: str, commit: str) -> tuple[bool, str]:
+    root = Path(repository_root).expanduser()
+    if not root.is_dir():
+        return False, "repository_root does not exist or is not a directory"
+    try:
+        result = subprocess.run(
+            ["git", "-C", str(root), "cat-file", "-e", f"{commit}^{{commit}}"],
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.PIPE,
+            text=True,
+            encoding="utf-8",
+            errors="replace",
+            check=False,
+        )
+    except OSError as exc:
+        return False, f"cannot invoke git: {exc}"
+    if result.returncode == 0:
+        return True, ""
+    detail = result.stderr.strip().splitlines()
+    return False, detail[-1] if detail else "git cat-file rejected the object"
 
 
 def validate(schema_path: Path, registry_path: Path) -> list[str]:
@@ -40,6 +63,13 @@ def validate(schema_path: Path, registry_path: Path) -> list[str]:
         if any(overlaps(scope, guard) for scope in item.get("allowed_paths", []) for guard in protected):
             if item.get("owner_role") != owner_role:
                 errors.append(f"{item.get('work_id')}: protected paths require role {owner_role}")
+        if item.get("status") in {"active", "handoff-ready"}:
+            exists, detail = commit_exists(item.get("repository_root", ""), item.get("base_commit", ""))
+            if not exists:
+                errors.append(
+                    f"{item.get('work_id')}: base_commit {item.get('base_commit')} does not exist "
+                    f"as a commit in repository_root {item.get('repository_root')}: {detail}"
+                )
     for index, left in enumerate(active):
         for right in active[index + 1:]:
             if normalize(left["repository_root"]) != normalize(right["repository_root"]):

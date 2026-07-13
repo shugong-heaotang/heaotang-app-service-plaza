@@ -1,0 +1,66 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-DELIVERY-FLOW-OPTIMIZATION-R11",
+  "title": "跨仓 base commit 存在性门禁与治理登记修复",
+  "date": "2026-07-13",
+  "status": "implemented",
+  "objective": "修正 Activity 不存在的原始基线，按每个工作项自身 repository_root 强制核验 active 与 handoff-ready base commit，并登记 NOVA overlay R2 后续治理项。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-13-delivery-flow-optimization-r11.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-13-delivery-flow-optimization-r11.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/service-plaza/project-status-one-page.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-13-delivery-flow-optimization-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/agent-collaboration.v1.schema.json",
+    "contracts/foundation/delivery-flow-policy.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/agent-collaboration.v1.schema.json",
+    "scripts/validate_agent_collaboration.py",
+    "scripts/tests/test_validate_agent_collaboration.py",
+    "contracts/foundation/development-checklists/2026-07-13-delivery-flow-optimization-r11.json",
+    "contracts/foundation/governance-exams/2026-07-13-delivery-flow-optimization-r11.json",
+    "docs/project-management/service-plaza/delivery-flow-optimization-2026-07-13.md"
+  ],
+  "verification": [
+    "R11 entry checklist completed 26 of 26",
+    "R11 governance exam attempt 1 passed with score 100",
+    "agent collaboration base commit tests pass 5 of 5",
+    "delivery flow regression tests pass 20 of 20",
+    "Service Plaza contract gate passes",
+    "UTF-8 gate passes for 1350 files",
+    "integration remains pending independent review of the pushed exact commit"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/delivery-flow-optimization-2026-07-13.md",
+    "contracts/foundation/development-checklists/2026-07-13-delivery-flow-optimization-r11.json",
+    "contracts/foundation/governance-exams/2026-07-13-delivery-flow-optimization-r11.json",
+    "scripts/tests/test_validate_delivery_flow_policy.py"
+  ],
+  "premises": [
+    "repository_root identifies the authoritative Git object database for each work item",
+    "planned and cancelled legacy metadata does not require local object retention until activation or Handoff",
+    "R4 R6 and R8 No-Go decisions remain immutable",
+    "the implementation agent does not own the collaboration registry"
+  ],
+  "implementation_mode": "ai-assisted"
+}

@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-- 状态：R4、R6、R8 independent review 均为 No-Go；R9 使用不可变 Git 快照整改，未受控集成
+- 状态：R4、R6、R8、候选 dadcc42、71889d4 与 5d4d86e 的 independent review 均为 No-Go 且保持不可覆盖；R15/R16 已完成，刷新后的新候选等待第四次独立复验与受控集成
 - 主因：业务工作被拆成多个长期并行治理项，Handoff 缺少决策时限，范围内下一检查点仍反复等待授权，平台集成负责人形成单点队列；原 R2 又只优化技术流，没有约束客户价值和商业结果。
 - 处置：同步权威 HEAD `094bafdbba48c84f41611ca541c8225e4de4a8dd`，升级 `delivery-flow-policy.v1`、机器校验和商业价值门禁。
 
@@ -96,3 +96,86 @@
 - 首次响应期限：4 小时；决策期限：24 小时；逾期升级项目最高负责人。
 - 验证标准：原来等待授权的范围内下一检查点能自动续跑；活动—俱乐部—商城合成价值流可重放；没有人工特批、真实资金、真实数据或生产绕行。
 - 防复发：新业务主线缺少价值字段、WIP 超限、同模块多主线、角色未分离或状态过期时机器门禁失败；2026-07-14 复查迁移和首个价值流证据。
+
+## R11 P0 治理检查点
+
+### 根因与处置
+
+- Activity V3 M0 登记的 base_commit=485601ce10ad4d3ac7d9db655465754ad5ac0032 不存在于 APP repository_root 的 Git 对象库；原始可追溯基线修正为 485601cb4b40025ce5b96fc746b9996bbf80250d。
+- Activity 恢复基线没有冒充原始基线，继续以 reactivation_base=5d6d22b51b65abf87a5f7c9b9bdd419ce04dfd40 保存在 migration note。
+- validate_agent_collaboration.py 现在对 active 与 handoff-ready 项逐项调用其自身 repository_root 的 Git 对象库；不能再假设 validator 当前仓库就是工作项仓库。
+- planned、cancelled 和不可变 legacy 行保留为元数据，不因本地对象库被清理而被误拒绝；激活或进入 Handoff 时自动转入强制对象检查。
+- 新增 planned AIW-20260713-PLATFORM-NOVA-OVERLAY-R2，base 为 59263f7e9717907bdc3953e752ad1a8fd3f2789a，完整声明 delivery-flow 字段。实施 Agent 的 allowed paths 明确不包含 agent-collaboration.v1.json，registry 仍由平台集成负责人所有。
+
+### 测试与边界
+
+- 新增 5 项 validator 单测：跨仓正确对象、对象只存在于错误仓库、handoff-ready 缺对象、planned/cancelled legacy 豁免、repository_root 缺失。
+- 新增单测：5/5 通过。
+- delivery-flow 回归：20/20 通过。
+- 协作 registry 与串联 delivery-flow gate：通过。
+- Service Plaza 总合同：通过。
+- UTF-8：1350 文件通过。
+- R11 入口检查单：26/26；治理考试 attempt 1 为 100 分。
+- R11 修改治理核心输入后不改写历史清单/试卷；按 RI-CURRENT-CHECKLIST-MUTABLE-OVERLAY 规则另建最终 current 认证。
+- 未修改业务代码、生产、真实数据、真实资金、部署或不可逆状态。
+
+### Handoff
+
+- developer：平台治理实施负责人。
+- independent reviewer：APP 总架构独立验收负责人。
+- verdict：候选测试 Go；集成保持 Pending，必须绑定推送后的 exact commit 独立复验。
+- next gate：最终 current checklist/exam 100，IR、diff/secret 复核、commit/push，随后独立验收；实施负责人不得自行集成。
+
+## dadcc42 独立验收 No-Go 与 R13 整改
+
+### 不可覆盖结论
+
+- 验收对象：dadcc42c76e1dbc008d13780a19d248d11c54fb6。
+- 结论：No-Go，禁止集成。
+- P0-1：新增 scripts/tests/test_validate_agent_collaboration.py 不在父提交既有 allowed paths；同提交向 registry 添加自身路径不能追溯授权该提交。
+- P0-2：planned NOVA overlay R2 的 owner、title、business stream、next checkpoint、阻塞范围和 allowed paths 未逐字段采用平台负责人原案。
+
+### R13 根因整改
+
+- 从累计候选差异中删除越权新增测试文件，也删除 delivery-flow 工作项对该文件的同提交自增授权。
+- 5 个 base commit 负向/边界测试迁入父提交已经授权的 scripts/tests/test_validate_delivery_flow_policy.py。
+- NOVA R2 按平台负责人建议修正 owner、title、business_stream_id、next_checkpoint、blocks、does_not_block 和完整 allowed paths。
+- NOVA R2 实施范围不包含 registry；registry 的登记与未来状态切换继续由当前 delivery-flow owner 执行。
+- 后续共享 overlay 完整性门禁必须扫描所有 active 模块，并同时发现 active Protection Mall 缺 overlay；只让 NOVA 通过仍属失败。
+- R13 入口检查单：26/26；考试 attempt 1：100 分。
+- 下一门禁：R13 IR、R14 最终 current 认证、25 项回归、总合同、UTF-8、范围/diff/secret、提交推送及第二次独立验收。
+
+## R14 最终 current 认证与候选交接
+
+- R14 checklist：26/26 current 哈希一致；精确 attestation 已通过总合同校验。
+- R14 governance exam：attempt 1，100 分；exam 与修正后的 checklist SHA-256 一致。
+- 跨仓 base commit 与 delivery-flow 回归：25/25 通过。
+- `validate_agent_collaboration.py`、`validate_delivery_flow_policy.py`、implementation-record validator：全部通过。
+- Service Plaza 总合同：通过；UTF-8：1359 个文件通过。
+- 累计候选不再包含 `scripts/tests/test_validate_agent_collaboration.py`；5 个 base commit 负例已位于父提交授权的 `scripts/tests/test_validate_delivery_flow_policy.py`。
+- NOVA overlay R2：平台建议字段已逐项采用，allowed paths 为 17 项，且实施 Agent 不拥有 registry。
+- verdict：候选具备提交与推送条件；`dadcc42` 继续禁止集成，新候选仍为 Pending，必须由 APP 总架构独立验收负责人绑定远端 exact commit 复验。
+
+## 71889d4 第二次独立验收 No-Go 与 R15 整改
+
+- 验收对象：`71889d44b2243b6c715335a47a4c3d0e17a18c3a`。
+- 结论：No-Go，禁止集成；R13/R14 已关闭项保持有效且不得回退。
+- P1：registry 的 `next_checkpoint` 仍描述已经完成的 R14 和推送动作；现已刷新为“第三次独立复验与受控集成”，并同步 `updated_at`。
+- P2：原 25 项回归未永久覆盖“repository_root 路径存在但不是 Git 仓库”；新增 fail-closed 负例，要求 active 工作项产生包含 `not a git repository` 的明确错误。
+- R15 入口检查单：26/26；治理考试 attempt 1：100 分。
+- 下一门禁：26 项回归、R16 最终 current 认证、IR、validators、总合同、UTF-8、范围/diff/secret、提交推送及第三次独立验收。
+
+### R16 最终 current 认证
+
+- R16 checklist：26/26 current；governance exam attempt 1：100 分。
+- 累计回归：26/26；新增非 Git repository_root 负例真实执行并通过。
+- registry 只描述剩余的第三次独立复验与受控集成，不再重复已完成的 R14/推送动作。
+- verdict：整改候选具备提交推送条件；提交后保持 Pending，实施负责人不自行集成。
+
+## 5d4d86e 第三次独立验收 No-Go 与 R17/R18 整改
+
+- 验收对象：`5d4d86ea028cafc982b8708b0633a4444ac90f35`；结论 No-Go，禁止集成。
+- 唯一 P1 为 Handoff 顶部状态仍描述 R15 进行中，与 R16 完成和 exact commit 已推送的事实冲突。
+- R17 入口检查单 26/26、考试 100；顶部状态和 registry 均已刷新为第四次独立复验与受控集成。
+- R18 最终 current 检查单 26/26、考试 100；历史 No-Go 正文未覆盖。
+- verdict：新候选仅可提交推送并等待第四次独立验收，实施负责人不得自行集成。

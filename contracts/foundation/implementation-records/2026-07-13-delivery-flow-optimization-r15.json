@@ -1,0 +1,62 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-DELIVERY-FLOW-OPTIMIZATION-R15",
+  "title": "71889d4 独立验收 No-Go 最小整改",
+  "date": "2026-07-13",
+  "status": "implemented",
+  "objective": "刷新 delivery-flow 工作项事实状态，并永久覆盖 repository_root 路径存在但非 Git 仓库的 fail-closed 边界。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-13-delivery-flow-optimization-r15.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-13-delivery-flow-optimization-r15.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/service-plaza/project-status-one-page.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-13-delivery-flow-optimization-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/agent-collaboration.v1.schema.json",
+    "contracts/foundation/delivery-flow-policy.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "scripts/tests/test_validate_delivery_flow_policy.py",
+    "contracts/foundation/development-checklists/2026-07-13-delivery-flow-optimization-r15.json",
+    "contracts/foundation/governance-exams/2026-07-13-delivery-flow-optimization-r15.json",
+    "docs/project-management/service-plaza/delivery-flow-optimization-2026-07-13.md"
+  ],
+  "verification": [
+    "R15 entry checklist completed 26 of 26",
+    "R15 governance exam attempt 1 passed with score 100",
+    "combined delivery-flow and base-commit regression tests pass 26 of 26",
+    "existing non-Git repository_root fails closed with an explicit error",
+    "71889d4 remains prohibited from integration",
+    "new candidate remains pending final current certification and independent review"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/delivery-flow-optimization-2026-07-13.md",
+    "contracts/foundation/development-checklists/2026-07-13-delivery-flow-optimization-r15.json",
+    "contracts/foundation/governance-exams/2026-07-13-delivery-flow-optimization-r15.json",
+    "scripts/tests/test_validate_delivery_flow_policy.py"
+  ],
+  "premises": [
+    "a directory existing on disk does not prove it is a Git repository",
+    "active and handoff-ready base commits must fail closed when Git object verification cannot run",
+    "registry next_checkpoint must only describe unfinished work",
+    "third independent acceptance must bind to the new pushed exact commit"
+  ],
+  "implementation_mode": "ai-assisted"
+}
