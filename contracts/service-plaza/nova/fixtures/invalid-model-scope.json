@@ -1,0 +1,11 @@
+{
+  "contract_version": "nova-api-contract.v1",
+  "base_path": "/api/nova",
+  "endpoints": [],
+  "security": {"identity_source": "trusted_server_context", "tenant_source": "trusted_server_context", "authorization_enforced_by": "server", "model_may_expand_scope": true},
+  "confirmation": {"required_for": [], "binds": []},
+  "idempotency": {"header": "Idempotency-Key", "same_key_same_payload": "safe_replay", "same_key_different_payload": "conflict", "recovery_rule": "no_duplicate_side_effect"},
+  "audit": {"required_fields": [], "redaction_required": true},
+  "error_model": {"required_fields": [], "waiting_confirmation_is_state": true},
+  "compatibility": {"legacy_endpoints": [], "additive_changes": "compatible_minor", "breaking_changes": "new_major_and_platform_signoff", "runtime_owner": "Nova + AI module owner", "platform_owner": "platform integration owner"}
+}

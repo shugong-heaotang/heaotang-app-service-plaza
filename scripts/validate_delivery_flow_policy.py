@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import subprocess
 import sys
 from collections import Counter
 from datetime import datetime, timedelta, timezone
@@ -26,10 +27,55 @@ def parse_time(value: str) -> datetime:
     return datetime.fromisoformat(value.replace("Z", "+00:00"))
 
 
+def evidence_exists(repo_root: Path, value: str) -> bool:
+    try:
+        candidate = (repo_root / value).resolve()
+        candidate.relative_to(repo_root)
+    except (ValueError, TypeError):
+        return False
+    return candidate.is_file()
+
+
+def evidence_hash_matches(repo_root: Path, value: str, expected: str) -> bool:
+    if not evidence_exists(repo_root, value):
+        return False
+    candidate = (repo_root / value).resolve()
+    return hashlib.sha256(candidate.read_bytes()).hexdigest() == expected
+
+
+def git_commit_exists(repo_root: Path, value: str) -> bool:
+    result = subprocess.run(
+        ["git", "-C", str(repo_root), "cat-file", "-e", f"{value}^{{commit}}"],
+        capture_output=True,
+        text=True,
+    )
+    return result.returncode == 0
+
+
+def git_is_ancestor(repo_root: Path, ancestor: str, descendant: str) -> bool:
+    result = subprocess.run(
+        ["git", "-C", str(repo_root), "merge-base", "--is-ancestor", ancestor, descendant],
+        capture_output=True,
+        text=True,
+    )
+    return result.returncode == 0
+
+
+def metric_target_met(metric: dict) -> bool:
+    actual = metric["actual_value"]
+    target = metric["target_value"]
+    return {
+        "gte": actual >= target,
+        "lte": actual <= target,
+        "eq": actual == target,
+    }[metric["comparison"]]
+
+
 def validate(policy_path: Path, schema_path: Path, registry_path: Path, now: datetime | None = None) -> list[str]:
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
     schema = json.loads(schema_path.read_text(encoding="utf-8"))
     registry = json.loads(registry_path.read_text(encoding="utf-8"))
+    repo_root = registry_path.resolve().parents[2]
     errors = [e.message for e in Draft202012Validator(schema, format_checker=FormatChecker()).iter_errors(policy)]
     now = now or datetime.now(timezone.utc)
     if now.tzinfo is None:
@@ -97,6 +143,15 @@ def validate(policy_path: Path, schema_path: Path, registry_path: Path, now: dat
                     errors.append(f"{item['work_id']}: DELIVERY_HANDOFF_DECISION_BEFORE_REQUEST")
                 if not decision and now > requested + timedelta(hours=policy["handoff"]["decision_sla_hours"]):
                     errors.append(f"{item['work_id']}: DELIVERY_HANDOFF_DECISION_SLA_EXCEEDED")
+                    deadline = requested + timedelta(hours=policy["handoff"]["decision_sla_hours"])
+                    escalated_at = item.get("escalated_at")
+                    if (
+                        not escalated_at
+                        or item.get("escalated_to_role") != policy["handoff"]["escalation_owner_role"]
+                        or parse_time(escalated_at) < deadline
+                        or parse_time(escalated_at) > now
+                    ):
+                        errors.append(f"{item['work_id']}: DELIVERY_HANDOFF_ESCALATION_EVIDENCE_REQUIRED")
                 if decision and parse_time(decision) > requested + timedelta(hours=policy["handoff"]["decision_sla_hours"]):
                     errors.append(f"{item['work_id']}: DELIVERY_HANDOFF_DECISION_SLA_EXCEEDED")
         if item.get("status") == "integrated":
@@ -104,15 +159,41 @@ def validate(policy_path: Path, schema_path: Path, registry_path: Path, now: dat
                 missing_business = sorted(REQUIRED_BUSINESS_FIELDS - item.keys())
                 if missing_business:
                     errors.append(f"{item['work_id']}: missing business value fields: {', '.join(missing_business)}")
-                if not item.get("metric_evidence") or not item.get("value_event_evidence"):
+                metrics = item.get("metric_evidence", [])
+                value_evidence = item.get("value_event_evidence", [])
+                if not metrics or not value_evidence:
                     errors.append(f"{item['work_id']}: DELIVERY_COMPLETION_VALUE_EVIDENCE_REQUIRED")
+                else:
+                    for metric in metrics:
+                        required_metric_fields = set(policy["completion"]["required_metric_evidence_fields"])
+                        if required_metric_fields - metric.keys():
+                            errors.append(f"{item['work_id']}: DELIVERY_METRIC_EVIDENCE_INCOMPLETE")
+                            continue
+                        if not evidence_hash_matches(repo_root, metric["evidence_path"], metric["evidence_sha256"]):
+                            errors.append(f"{item['work_id']}: DELIVERY_METRIC_EVIDENCE_PATH_INVALID")
+                        if not metric_target_met(metric):
+                            errors.append(f"{item['work_id']}: DELIVERY_METRIC_TARGET_NOT_MET")
+                    if any(not evidence_hash_matches(repo_root, evidence.get("path", ""), evidence.get("sha256", "")) for evidence in value_evidence):
+                        errors.append(f"{item['work_id']}: DELIVERY_VALUE_EVIDENCE_PATH_INVALID")
             acceptance = item.get("independent_acceptance")
             if not acceptance or acceptance.get("verdict") not in policy["completion"]["accepted_independent_verdicts"]:
                 errors.append(f"{item['work_id']}: DELIVERY_INDEPENDENT_ACCEPTANCE_REQUIRED")
             elif acceptance.get("reviewer_role") == item.get("developer_role"):
                 errors.append(f"{item['work_id']}: DELIVERY_INDEPENDENT_ACCEPTANCE_ROLE_CONFLICT")
-            if not item.get("integration_commit"):
+            elif acceptance.get("reviewer_role") != item.get("reviewer_role"):
+                errors.append(f"{item['work_id']}: DELIVERY_INDEPENDENT_REVIEWER_NOT_REGISTERED")
+            elif not evidence_hash_matches(repo_root, acceptance.get("evidence_path", ""), acceptance.get("evidence_sha256", "")):
+                errors.append(f"{item['work_id']}: DELIVERY_ACCEPTANCE_EVIDENCE_PATH_INVALID")
+            exact_commit = acceptance.get("exact_commit") if acceptance else None
+            integration_commit = item.get("integration_commit")
+            if exact_commit and not git_commit_exists(repo_root, exact_commit):
+                errors.append(f"{item['work_id']}: DELIVERY_ACCEPTANCE_COMMIT_INVALID")
+            if not integration_commit:
                 errors.append(f"{item['work_id']}: DELIVERY_INTEGRATION_COMMIT_REQUIRED")
+            elif not git_commit_exists(repo_root, integration_commit):
+                errors.append(f"{item['work_id']}: DELIVERY_INTEGRATION_COMMIT_INVALID")
+            elif exact_commit and git_commit_exists(repo_root, exact_commit) and not git_is_ancestor(repo_root, exact_commit, integration_commit):
+                errors.append(f"{item['work_id']}: DELIVERY_ACCEPTED_COMMIT_NOT_IN_INTEGRATION")
 
     in_flight_stream_items = [
         i for i in governed

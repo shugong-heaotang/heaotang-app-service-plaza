@@ -17,7 +17,8 @@
     "first_response_sla_hours": 4,
     "decision_sla_hours": 24,
     "on_expiry": "escalate-to-project-owner",
-    "required_next_owner": true
+    "required_next_owner": true,
+    "escalation_owner_role": "项目最高负责人"
   },
   "continuation": {
     "default": "auto-continue",
@@ -70,10 +71,13 @@
     ],
     "required_metric_evidence_fields": [
       "metric_name",
-      "target",
-      "actual",
+      "target_value",
+      "actual_value",
+      "comparison",
+      "unit",
       "measured_at",
-      "evidence_path"
+      "evidence_path",
+      "evidence_sha256"
     ]
   }
 }

@@ -1,0 +1,19 @@
+{
+  "contract_version": "nova-api-contract.v1",
+  "base_path": "/api/nova",
+  "endpoints": [
+    {"method": "POST", "path": "/api/nova/chat", "operation": "route_chat", "write": false, "confirmation_policy": "never"},
+    {"method": "POST", "path": "/api/nova/tasks", "operation": "create_task", "write": true, "confirmation_policy": "policy_required"},
+    {"method": "GET", "path": "/api/nova/tasks/{task_id}", "operation": "get_task", "write": false, "confirmation_policy": "never"},
+    {"method": "GET", "path": "/api/nova/tasks/{task_id}/events", "operation": "get_events", "write": false, "confirmation_policy": "never"},
+    {"method": "POST", "path": "/api/nova/tasks/{task_id}/confirm", "operation": "confirm_task_action", "write": true, "confirmation_policy": "always"},
+    {"method": "POST", "path": "/api/nova/tasks/{task_id}/cancel", "operation": "cancel_task", "write": true, "confirmation_policy": "policy_required"},
+    {"method": "POST", "path": "/api/nova/tasks/{task_id}/retry", "operation": "retry_task", "write": true, "confirmation_policy": "policy_required"}
+  ],
+  "security": {"identity_source": "trusted_server_context", "tenant_source": "trusted_server_context", "authorization_enforced_by": "server", "model_may_expand_scope": false},
+  "confirmation": {"required_for": ["external_effect", "privacy_disclosure", "publication", "commercial_commitment", "rights_change"], "binds": ["actor", "tenant", "action", "target", "impact", "trace_id"]},
+  "idempotency": {"header": "Idempotency-Key", "same_key_same_payload": "safe_replay", "same_key_different_payload": "conflict", "recovery_rule": "no_duplicate_side_effect"},
+  "audit": {"required_fields": ["trace_id", "actor", "tenant_id", "contract_version", "event_time"], "redaction_required": true},
+  "error_model": {"required_fields": ["code", "message", "trace_id", "retryable", "details"], "waiting_confirmation_is_state": true},
+  "compatibility": {"legacy_endpoints": ["/api/nova/ask", "/api/chat"], "additive_changes": "compatible_minor", "breaking_changes": "new_major_and_platform_signoff", "runtime_owner": "Nova + AI module owner", "platform_owner": "platform integration owner"}
+}

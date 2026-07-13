@@ -11,9 +11,9 @@
       "type": "object", "additionalProperties": false,
       "required": ["legacy_cutover_work_id", "legacy_work_ids_sha256", "legacy_work_states_sha256", "new_items_require_flow_policy"],
       "properties": {
-        "legacy_cutover_work_id": {"type": "string", "pattern": "^AIW-[0-9]{8}-[A-Z0-9-]+$"},
-        "legacy_work_ids_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
-        "legacy_work_states_sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "legacy_cutover_work_id": {"const": "AIW-20260713-PROTECTION-MALL-M2-PORTS-SIMULATION"},
+        "legacy_work_ids_sha256": {"const": "64105cf520b0c971150d0491eba27967d7976aa0bad89400ececd302959d650e"},
+        "legacy_work_states_sha256": {"const": "b7dc23fab67191405a852301ae4f9650164bf3e619bd323587d684f1e5773aaa"},
         "new_items_require_flow_policy": {"const": true}
       }
     },
@@ -29,12 +29,13 @@
     },
     "handoff": {
       "type": "object", "additionalProperties": false,
-      "required": ["first_response_sla_hours", "decision_sla_hours", "on_expiry", "required_next_owner"],
+      "required": ["first_response_sla_hours", "decision_sla_hours", "on_expiry", "required_next_owner", "escalation_owner_role"],
       "properties": {
         "first_response_sla_hours": {"type": "integer", "minimum": 1, "maximum": 4},
         "decision_sla_hours": {"type": "integer", "minimum": 1, "maximum": 24},
         "on_expiry": {"const": "escalate-to-project-owner"},
-        "required_next_owner": {"const": true}
+        "required_next_owner": {"const": true},
+        "escalation_owner_role": {"const": "项目最高负责人"}
       }
     },
     "continuation": {
