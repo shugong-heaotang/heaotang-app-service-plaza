@@ -3245,6 +3245,29 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "R4 已独立验收并受控集成至 b6736b6；本工作项只冻结 synthetic_only=true、executable=false 的结构化转介、人工初审、紧急线下分流、主责医生/MDT、合规医疗机构承接、第二意见、专家定向征集和全程留痕合同与负例。真实身份/健康数据、互联网诊疗、真实费用、收费、支付、运行时、部署和生产继续 No-Go。",
                            "handoff_record":  "docs/project-management/modules/health-manager/health-manager-r5-consultation-second-opinion-mdt-handoff.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260714-HEALTH-R5-C1-ACCEPTANCE",
+                           "title":  "健康大管家 R5-C1 独立验收与受控集成",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r5-c1-acceptance",
+                           "branch":  "codex/health-r5-c1-acceptance",
+                           "base_commit":  "f03aa13dc32111ad3b880a7971ac782f4acb556b",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-14-health-r5-c1-acceptance*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-14-health-r5-c1-acceptance*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-14-health-r5-c1-acceptance*.json",
+                                                 "docs/project-management/notices/2026-07-14-health-r5-c1-acceptance-task-order.md",
+                                                 "docs/project-management/service-plaza/health-r5-c1-acceptance-2026-07-14.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "只独立复核 exact source eebc197837d85d68c471299eb94bc80778697949 并在全部门禁 Go 后受控纳入十个模块 blob；禁止修改候选成果、医疗安全门禁、运行时、真实数据、收费、部署或生产。",
+                           "handoff_record":  "docs/project-management/service-plaza/health-r5-c1-acceptance-2026-07-14.md"
                        }
                    ]
 }
