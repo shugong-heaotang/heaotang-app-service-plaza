@@ -155,6 +155,27 @@
       "regression_evidence": [
         "docs/project-management/service-plaza/platform-integration-freshness-gate-2026-07-13.md"
       ]
+    },
+    {
+      "pattern_id": "RI-NEW-MODULE-CHECKLIST-BOOTSTRAP",
+      "title": "新模块因检查单硬编码枚举和缺失 overlay 被迫生成 core-only 证据",
+      "occurrence_count": 2,
+      "status": "implemented",
+      "owner_role": "平台集成负责人",
+      "root_cause": "New-AgentDevelopmentChecklist.ps1 维护了独立于 governance-reading-list 的 ValidateSet，且新模块正式产物必须在考试后创建，形成模块 overlay 与检查单的冷启动循环；历史执行者因此省略 ModuleId，生成 module_id=null 的 core-only 完成态快照。",
+      "occurrences": [
+        { "date": "2026-07-12", "summary": "network 与 protection-mall 四份模块检查单以 module_id=null、26项 core-only 状态完成", "evidence": "docs/project-management/service-plaza/new-module-governance-bootstrap-audit-2026-07-13.md" },
+        { "date": "2026-07-13", "summary": "activity V3 M0 使用 ModuleId=activity 时被硬编码 ValidateSet 拒绝，且 reading list 尚无 activity bootstrap overlay", "evidence": "docs/project-management/notices/2026-07-13-platform-new-module-bootstrap-r1-task-order.md" }
+      ],
+      "systemic_fix": "模块 ID 只从 governance-reading-list 动态解析；为 activity 建立平台 bootstrap overlay；未知、空和缺失 overlay 失败关闭；共享测试门禁拒绝新增模块目录下 module_id=null 或缺失注册 overlay 的完成态检查单。",
+      "prevention_gates": [
+        "scripts/New-AgentDevelopmentChecklist.ps1",
+        "scripts/tests/test_new_agent_development_checklist.py"
+      ],
+      "regression_evidence": [
+        "docs/project-management/service-plaza/new-module-governance-bootstrap-audit-2026-07-13.md",
+        "docs/project-management/service-plaza/platform-new-module-bootstrap-r1-handoff.md"
+      ]
     }
   ]
 }

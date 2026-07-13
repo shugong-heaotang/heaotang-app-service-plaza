@@ -1,0 +1,87 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-PLATFORM-NEW-MODULE-BOOTSTRAP-R1-R2",
+  "title": "平台新模块治理冷启动动态注册系统修复",
+  "date": "2026-07-13",
+  "status": "implemented",
+  "objective": "消除检查单模块硬编码枚举和新模块 overlay 冷启动循环，为 activity 建立可审计 bootstrap overlay，并以历史影响扫描和共享 CI 门禁阻止模块 core-only 完成态证据再次出现。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-13-platform-new-module-bootstrap-r1-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-13-platform-new-module-bootstrap-r1-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-13-platform-new-module-bootstrap-r1-task-order.md",
+    "docs/project-management/notices/2026-07-13-activity-v3-m0-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.recurrence-prevention",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/recurring-issues.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md"
+  ],
+  "changed_areas": [
+    "scripts/New-AgentDevelopmentChecklist.ps1",
+    "scripts/tests/test_new_agent_development_checklist.py",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/development-checklists/2026-07-13-platform-new-module-bootstrap-r1.json",
+    "contracts/foundation/development-checklists/2026-07-13-platform-new-module-bootstrap-r1-r2.json",
+    "contracts/foundation/governance-exams/2026-07-13-platform-new-module-bootstrap-r1-attempt-1.json",
+    "contracts/foundation/governance-exams/2026-07-13-platform-new-module-bootstrap-r1-r2-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-13-platform-new-module-bootstrap-r1-r2.json",
+    "docs/project-management/notices/2026-07-13-activity-v3-m0-bootstrap-readme.md",
+    "docs/project-management/service-plaza/new-module-governance-bootstrap-audit-2026-07-13.md",
+    "docs/project-management/service-plaza/platform-new-module-bootstrap-r1-handoff.md"
+  ],
+  "verification": [
+    "activity and life-navigation, club-alliance, health-manager checklist generation pass",
+    "unknown module, empty overlay and missing overlay file fail closed",
+    "shared module checklist gate rejects any new completed module checklist with null or unregistered module_id",
+    "legacy exception set is exactly four immutable network and protection-mall checklist paths",
+    "original activity command produces pending module_id=activity checklist with 28 unchecked items",
+    "corrected Python regression suite passes 48 tests, including foundation-path bypass rejection and immutable legacy SHA/shape checks",
+    "text encoding gate passes 1275 files",
+    "recurring issue validator passes mandatory two-strike rule",
+    "R2 current checklist matches all 26 current governance hashes",
+    "R2 randomized governance exam attempt 1 passes with score 100",
+    "git diff check passes"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/new-module-governance-bootstrap-audit-2026-07-13.md",
+    "docs/project-management/service-plaza/platform-new-module-bootstrap-r1-handoff.md",
+    "contracts/foundation/development-checklists/2026-07-13-platform-new-module-bootstrap-r1-r2.json",
+    "contracts/foundation/governance-exams/2026-07-13-platform-new-module-bootstrap-r1-r2-attempt-1.json",
+    "scripts/tests/test_new_agent_development_checklist.py"
+  ],
+  "premises": [
+    "governance-reading-list.v1.json is the only module registration authority",
+    "platform bootstrap overlay may reference pre-exam task and boundary documents but not post-exam module deliverables",
+    "historical core-only checklists are immutable evidence and require future corrective certification rather than rewriting",
+    "this repair does not authorize activity M0 content, runtime code, deployment, real user contact, messages, verification codes, payment or production"
+  ],
+  "implementation_mode": "ai-assisted"
+}
