@@ -9,8 +9,10 @@
     "effective_at": {"type": "string", "format": "date-time"},
     "migration": {
       "type": "object", "additionalProperties": false,
-      "required": ["legacy_cutover_work_id", "legacy_work_ids_sha256", "legacy_work_states_sha256", "new_items_require_flow_policy"],
+      "required": ["legacy_snapshot_commit", "legacy_snapshot_path", "legacy_cutover_work_id", "legacy_work_ids_sha256", "legacy_work_states_sha256", "new_items_require_flow_policy"],
       "properties": {
+        "legacy_snapshot_commit": {"const": "33f5e45499fbadaac71f07bbe6de5d72579e39c9"},
+        "legacy_snapshot_path": {"const": "contracts/foundation/agent-collaboration.v1.json"},
         "legacy_cutover_work_id": {"const": "AIW-20260713-PROTECTION-MALL-M2-PORTS-SIMULATION"},
         "legacy_work_ids_sha256": {"const": "64105cf520b0c971150d0491eba27967d7976aa0bad89400ececd302959d650e"},
         "legacy_work_states_sha256": {"const": "b7dc23fab67191405a852301ae4f9650164bf3e619bd323587d684f1e5773aaa"},

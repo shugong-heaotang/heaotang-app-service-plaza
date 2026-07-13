@@ -2,6 +2,8 @@
   "contract_version": "delivery-flow-policy.v1",
   "effective_at": "2026-07-13T09:00:00+08:00",
   "migration": {
+    "legacy_snapshot_commit": "33f5e45499fbadaac71f07bbe6de5d72579e39c9",
+    "legacy_snapshot_path": "contracts/foundation/agent-collaboration.v1.json",
     "legacy_cutover_work_id": "AIW-20260713-PROTECTION-MALL-M2-PORTS-SIMULATION",
     "legacy_work_ids_sha256": "64105cf520b0c971150d0491eba27967d7976aa0bad89400ececd302959d650e",
     "legacy_work_states_sha256": "b7dc23fab67191405a852301ae4f9650164bf3e619bd323587d684f1e5773aaa",

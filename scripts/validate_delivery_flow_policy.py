@@ -21,6 +21,8 @@ REQUIRED_BUSINESS_FIELDS = {
     "metric_target", "measurement_window", "end_to_end_owner_role",
     "commercial_hypothesis", "kill_condition", "journey_scope",
 }
+LEGACY_SNAPSHOT_COMMIT = "33f5e45499fbadaac71f07bbe6de5d72579e39c9"
+LEGACY_SNAPSHOT_PATH = "contracts/foundation/agent-collaboration.v1.json"
 
 
 def parse_time(value: str) -> datetime:
@@ -61,6 +63,19 @@ def git_is_ancestor(repo_root: Path, ancestor: str, descendant: str) -> bool:
     return result.returncode == 0
 
 
+def git_json_at_commit(repo_root: Path, commit: str, path: str) -> dict | None:
+    result = subprocess.run(
+        ["git", "-C", str(repo_root), "show", f"{commit}:{path}"],
+        capture_output=True,
+    )
+    if result.returncode != 0:
+        return None
+    try:
+        return json.loads(result.stdout.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        return None
+
+
 def metric_target_met(metric: dict) -> bool:
     actual = metric["actual_value"]
     target = metric["target_value"]
@@ -71,17 +86,47 @@ def metric_target_met(metric: dict) -> bool:
     }[metric["comparison"]]
 
 
-def validate(policy_path: Path, schema_path: Path, registry_path: Path, now: datetime | None = None) -> list[str]:
+def validate(
+    policy_path: Path,
+    schema_path: Path,
+    registry_path: Path,
+    now: datetime | None = None,
+    repo_root: Path | None = None,
+) -> list[str]:
     policy = json.loads(policy_path.read_text(encoding="utf-8"))
     schema = json.loads(schema_path.read_text(encoding="utf-8"))
     registry = json.loads(registry_path.read_text(encoding="utf-8"))
-    repo_root = registry_path.resolve().parents[2]
+    repo_root = (repo_root or registry_path.resolve().parents[2]).resolve()
     errors = [e.message for e in Draft202012Validator(schema, format_checker=FormatChecker()).iter_errors(policy)]
     now = now or datetime.now(timezone.utc)
     if now.tzinfo is None:
         raise ValueError("validation clock must be timezone-aware")
     work_items = registry["work_items"]
     cutover_id = policy.get("migration", {}).get("legacy_cutover_work_id")
+    snapshot = git_json_at_commit(repo_root, LEGACY_SNAPSHOT_COMMIT, LEGACY_SNAPSHOT_PATH)
+    if snapshot is None:
+        errors.append("DELIVERY_LEGACY_EXTERNAL_SNAPSHOT_UNAVAILABLE")
+    else:
+        snapshot_items = snapshot.get("work_items", [])
+        snapshot_cutovers = [n for n, item in enumerate(snapshot_items) if item.get("work_id") == cutover_id]
+        if len(snapshot_cutovers) != 1:
+            errors.append("DELIVERY_LEGACY_EXTERNAL_CUTOVER_NOT_UNIQUE")
+        else:
+            snapshot_prefix = [
+                (item.get("work_id"), item.get("status"))
+                for item in snapshot_items[:snapshot_cutovers[0] + 1]
+            ]
+            current_prefix = [
+                (item.get("work_id"), item.get("status"))
+                for item in work_items[:len(snapshot_prefix)]
+            ]
+            if current_prefix != snapshot_prefix:
+                errors.append("DELIVERY_LEGACY_EXTERNAL_SNAPSHOT_MISMATCH")
+    if (
+        policy.get("migration", {}).get("legacy_snapshot_commit") != LEGACY_SNAPSHOT_COMMIT
+        or policy.get("migration", {}).get("legacy_snapshot_path") != LEGACY_SNAPSHOT_PATH
+    ):
+        errors.append("DELIVERY_LEGACY_EXTERNAL_ANCHOR_CHANGED")
     cutover_indexes = [n for n, item in enumerate(work_items) if item.get("work_id") == cutover_id]
     if len(cutover_indexes) != 1:
         errors.append("DELIVERY_LEGACY_CUTOVER_NOT_UNIQUE")

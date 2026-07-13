@@ -24,15 +24,18 @@ class DeliveryFlowPolicyTests(unittest.TestCase):
             check=True, capture_output=True, text=True,
         ).stdout.strip()
 
-    def run_validation(self, policy=None, registry=None, now=None):
+    def run_validation(self, policy=None, registry=None, schema=None, now=None):
         with tempfile.TemporaryDirectory() as tmp:
             p = Path(tmp) / "policy.json"
             r = Path(tmp) / "registry.json"
+            s = Path(tmp) / "schema.json"
             p.write_text(json.dumps(policy or self.policy), encoding="utf-8")
             r.write_text(json.dumps(registry or self.registry), encoding="utf-8")
+            s.write_text(json.dumps(schema or json.loads(self.schema.read_text(encoding="utf-8"))), encoding="utf-8")
             return FLOW.validate(
-                p, self.schema, r,
+                p, s, r,
                 now=now or datetime(2026, 7, 13, 6, 0, tzinfo=timezone.utc),
+                repo_root=ROOT,
             )
 
     def governed_template(self):
@@ -144,6 +147,24 @@ class DeliveryFlowPolicyTests(unittest.TestCase):
             ("\n".join(rows) + "\n").encode("utf-8")
         ).hexdigest()
         self.assertTrue(self.run_validation(policy=policy, registry=registry))
+
+    def test_rejects_registry_policy_schema_triple_tamper(self):
+        registry = copy.deepcopy(self.registry)
+        policy = copy.deepcopy(self.policy)
+        schema = json.loads(self.schema.read_text(encoding="utf-8"))
+        item = next(i for i in registry["work_items"] if i.get("status") == "planned" and not i.get("flow_policy_version"))
+        item["status"] = "active"
+        cutover = policy["migration"]["legacy_cutover_work_id"]
+        rows = []
+        for legacy in registry["work_items"]:
+            rows.append(f"{legacy['work_id']}\t{legacy['status']}")
+            if legacy["work_id"] == cutover:
+                break
+        tampered_hash = hashlib.sha256(("\n".join(rows) + "\n").encode("utf-8")).hexdigest()
+        policy["migration"]["legacy_work_states_sha256"] = tampered_hash
+        schema["properties"]["migration"]["properties"]["legacy_work_states_sha256"]["const"] = tampered_hash
+        errors = self.run_validation(policy=policy, registry=registry, schema=schema)
+        self.assertIn("DELIVERY_LEGACY_EXTERNAL_SNAPSHOT_MISMATCH", errors)
 
     def test_rejects_status_expired_against_current_clock(self):
         registry = copy.deepcopy(self.registry)
