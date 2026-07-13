@@ -3029,7 +3029,7 @@
                            "title":  "健康大管家 R1-C1 独立验收与受控集成",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r1-c1-acceptance",
                            "branch":  "codex/health-r1-c1-acceptance",
@@ -3044,15 +3044,15 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "独立复核 exact source e50d48c4dd28307f9f09170ad1466c3b20064b26，并从 authority a4b83a9f02e0163458dc971d9e0d41d3c0f55779 显式调和 registry 后受控集成。只验收 R1-C1 合成、离线、executable=false 的 IA、责任边界、跨模块协议与正负例；禁止 R2 实现、共享运行时、真实身份或健康数据、医疗、收费、部署和生产。",
-                           "handoff_record":  "docs/project-management/notices/2026-07-13-health-r1-c1-acceptance-task-order.md"
+                           "migration_note":  "exact source e50d48c4dd28307f9f09170ad1466c3b20064b26 已独立复核 Go；9 个模块 blob 精确保留，activation task order blob 精确恢复，未合并 E2E 祖先链。source integration candidate=70c261c74525dd5d00534fd38707f921d69520d8；平台最终 current checklist/exam 由 R3 收口。R1 仅冻结 synthetic_only=true、executable=false 的 IA、责任边界、跨模块协议与正负例；R2 需另立工作项。",
+                           "handoff_record":  "docs/project-management/service-plaza/health-r1-c1-acceptance-2026-07-13.md"
                        },
                        {
                            "work_id":  "AIW-20260713-HEALTH-R1-CROSS-MODULE-FREEZE",
                            "title":  "健康大管家 R1 跨模块需求与原型冻结",
                            "owner":  "Health Manager continuous development agent",
                            "owner_role":  "健康大管家负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r1-cross-module-freeze",
                            "branch":  "codex/health-r1-cross-module-freeze",
@@ -3070,7 +3070,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "仅推进 R1-C1：冻结新增需求 SHA-256、健康馆首页信息架构、模块权威边界、展示摘要+跳转权威模块+会员确认回传协议及正负验收场景。全部成果 synthetic_only=true、executable=false；禁止业务代码、共享前后端、API/数据库、真实身份/健康数据、医疗服务、收费、资金、环境、部署和生产。",
+                           "migration_note":  "R1-C1 source e50d48c4dd28307f9f09170ad1466c3b20064b26 已由独立平台验收 Go，并以 source integration candidate 70c261c74525dd5d00534fd38707f921d69520d8 受控纳入 authority；13/13 conformance、需求 SHA、模块 checklist28/28+exam100、平台最终 R3 current checklist/exam、依赖/总合同/UTF-8/范围/安全门禁通过。R2、共享运行时、真实身份/健康数据、医疗、收费、部署和生产继续 No-Go，必须另立工作项。",
                            "handoff_record":  "docs/project-management/modules/health-manager/health-manager-r1-cross-module-freeze-handoff.md"
                        }
                    ]
