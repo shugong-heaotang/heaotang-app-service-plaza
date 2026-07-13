@@ -1,0 +1,70 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260713-PROTECTION-MALL-M2-CATALOG-R2-1",
+    "record_id":  "IR-20260713-PROTECTION-MALL-M2-CATALOG-R2",
+    "actor":  "Protection Mall M2 evidence correction agent",
+    "attempt_number":  1,
+    "status":  "passed",
+    "generated_at":  "2026-07-13T13:01:03.9687475Z",
+    "completed_at":  "2026-07-13T13:01:12.4687701Z",
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  100,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "b0df386a68e8e00a803a08d0b3e786893a47bad6742dd36a5b6273803b7abcb1",
+    "checklist_path":  "contracts/modules/protection-mall/development-checklists/2026-07-13-protection-mall-m2-catalog-evidence-r2.json",
+    "checklist_sha256":  "ce22b9661566cec643c24f71122e4ff9c7eb5ce64357f5ef2cbd7ac6b69d80fb",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-007",
+                          "selected_option":  "A",
+                          "correct":  true,
+                          "source_path":  "AGENTS.md"
+                      },
+                      {
+                          "question_id":  "GQ-002",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0008-versioned-business-variables.md"
+                      },
+                      {
+                          "question_id":  "GQ-010",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0012-two-strike-root-cause-rule.md"
+                      },
+                      {
+                          "question_id":  "GQ-005",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+                      },
+                      {
+                          "question_id":  "GQ-006",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/project-management/ai-coding-incident-lessons-2026-07-10.md"
+                      },
+                      {
+                          "question_id":  "GQ-013",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0014-ai-development-flight-checklist.md"
+                      },
+                      {
+                          "question_id":  "GQ-008",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0007-stable-foundation-variable-business.md"
+                      },
+                      {
+                          "question_id":  "GQ-011",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/project-management/module-internal-dependency-standard-v1.md"
+                      }
+                  ],
+    "remediation_sources":  [
+
+                            ]
+}

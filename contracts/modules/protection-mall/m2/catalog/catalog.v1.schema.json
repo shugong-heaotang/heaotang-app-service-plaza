@@ -11,17 +11,55 @@
       "additionalProperties": false,
       "required": ["required_fields", "kind_product_type", "assurance_policy", "failure_mode"],
       "properties": {
-        "required_fields": {"type": "array", "minItems": 5, "uniqueItems": true, "items": {"type": "string"}},
-        "kind_product_type": {"type": "object", "required": ["product", "service", "course", "activity"]},
-        "assurance_policy": {"type": "object", "required": ["protection_mall", "club_mall"]},
+        "required_fields": {"const": ["mall_type", "product_type", "seller_id", "fulfillment_owner_id", "after_sale_owner_id"]},
+        "kind_product_type": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["product", "service", "course", "activity"],
+          "properties": {"product": {"const": "physical"}, "service": {"const": "service"}, "course": {"const": "service"}, "activity": {"const": "service"}}
+        },
+        "assurance_policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protection_mall", "club_mall"],
+          "properties": {
+            "protection_mall": {"const": "snapshot_allowed_grant_deferred_until_order_completed_and_after_sale_closed"},
+            "club_mall": {"const": "forbidden"}
+          }
+        },
         "failure_mode": {"const": "fail_closed"}
       }
     },
-    "catalog_entry": {"type": "object", "required": ["required_fields", "scene_ids", "publish_scope", "cross_seller_scope"]},
+    "catalog_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_fields", "scene_ids", "publish_scope", "cross_seller_scope"],
+      "properties": {
+        "required_fields": {"const": ["contract_version", "id", "kind", "title", "scene_ids", "responsibility", "price_snapshot", "benefit_snapshot"]},
+        "scene_ids": {"const": "non_empty_unique_strings"},
+        "publish_scope": {"const": "catalog:write"},
+        "cross_seller_scope": {"const": "catalog:write:any"}
+      }
+    },
     "snapshots": {"type": "object", "required": ["price", "benefit", "mutation_policy", "copy_policy"]},
-    "membership_plan": {"type": "object", "required": ["required_scope", "owner", "operations", "budget", "currency_policy", "overflow_policy", "replacement_policy"]},
+    "membership_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_scope", "owner", "delegated_scope", "delegated_policy", "operations", "budget", "currency_policy", "overflow_policy", "replacement_policy"],
+      "properties": {
+        "required_scope": {"const": "catalog:plan"},
+        "owner": {"const": "authenticated_actor"},
+        "delegated_scope": {"const": "catalog:plan:any"},
+        "delegated_policy": {"const": "preserve_owner"},
+        "operations": {"const": ["compose", "replace"]},
+        "budget": {"const": "non_negative_int64_minor_units"},
+        "currency_policy": {"const": "single_currency"},
+        "overflow_policy": {"const": "fail_closed"},
+        "replacement_policy": {"const": "rebuild_and_revalidate"}
+      }
+    },
     "repository": {"type": "object", "required": ["implementation", "concurrency", "external_io"], "properties": {"external_io": {"const": false}}},
-    "error_codes": {"type": "array", "minItems": 6, "uniqueItems": true, "items": {"type": "string", "pattern": "^MALL_CATALOG_"}},
+    "error_codes": {"const": ["MALL_CATALOG_INVALID_ARGUMENT", "MALL_CATALOG_UNTRUSTED_SCOPE", "MALL_CATALOG_FORBIDDEN", "MALL_CATALOG_RESPONSIBILITY_MISSING", "MALL_CATALOG_NOT_FOUND", "MALL_CATALOG_SNAPSHOT_IMMUTABLE", "MALL_CATALOG_BUDGET_EXCEEDED", "MALL_CATALOG_CURRENCY_MISMATCH", "MALL_CATALOG_ARITHMETIC_OVERFLOW", "MALL_CATALOG_REPLACEMENT_NOT_FOUND", "MALL_CATALOG_DUPLICATE_PLAN_ITEM", "MALL_BENEFIT_FORBIDDEN"]},
     "no_go": {"type": "array", "minItems": 9, "uniqueItems": true, "items": {"type": "string"}}
   }
 }

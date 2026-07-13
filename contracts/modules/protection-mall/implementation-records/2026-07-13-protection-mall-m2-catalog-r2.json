@@ -1,0 +1,63 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-PROTECTION-MALL-M2-CATALOG-R2",
+  "title": "保障商城 M2 目录 Evidence 语义一致性 R2",
+  "date": "2026-07-13",
+  "status": "verified",
+  "objective": "修复原 Evidence 与后端 22073cd8 在 scope、稳定错误、责任映射、保障权益、方案所有权和 fixture 验证上的语义漂移。",
+  "governance_checklist": "contracts/modules/protection-mall/development-checklists/2026-07-13-protection-mall-m2-catalog-evidence-r2.json",
+  "governance_exam": "contracts/modules/protection-mall/governance-exams/2026-07-13-protection-mall-m2-catalog-evidence-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-13-protection-mall-m2-offline-task-order.md",
+    "contracts/modules/protection-mall/m1/responsibility.v1.json"
+  ],
+  "capabilities": [
+    "foundation.authorization-idempotency",
+    "foundation.business-variables",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/modules/protection-mall/m2/catalog/catalog.v1.json",
+    "contracts/modules/protection-mall/m2/catalog/catalog.v1.schema.json",
+    "contracts/modules/protection-mall/m2/catalog/fixtures/cases.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "changed_areas": [
+    "backend-go/plugins/mall-plugin/catalog_m2.go@22073cd8ddeff48a4f679ffcd41a2686d8ea3ba5",
+    "backend-go/plugins/mall-plugin/catalog_m2_test.go@22073cd8ddeff48a4f679ffcd41a2686d8ea3ba5",
+    "contracts/modules/protection-mall/m2/catalog/",
+    "docs/project-management/modules/protection-mall/m2-catalog-evidence.md",
+    "docs/project-management/modules/protection-mall/handoff-m2.md"
+  ],
+  "verification": [
+    "R2 checklist 29/29 completed; original checklist remains immutable",
+    "R2 governance exam 100; original governance exam remains immutable",
+    "backend 22073cd8 independently source/tests Go",
+    "validate_catalog_contracts.py exact semantic assertions passed",
+    "JSON schema and 19 synthetic fixtures passed",
+    "UTF-8, scope, secret and git diff checks passed"
+  ],
+  "evidence": [
+    "docs/project-management/modules/protection-mall/m2-catalog-evidence.md",
+    "docs/project-management/modules/protection-mall/handoff-m2.md"
+  ],
+  "premises": [
+    "f332c7e is superseded No-Go evidence and must not be integrated",
+    "database route network payment real data deployment and production remain No-Go",
+    "platform reviewer and APP architecture approver do not participate in R2 implementation"
+  ],
+  "implementation_mode": "ai-assisted"
+}
