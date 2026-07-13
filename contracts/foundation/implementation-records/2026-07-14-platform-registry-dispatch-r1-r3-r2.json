@@ -1,0 +1,65 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R3-R2",
+  "title": "平台注册表串行派发首个激活交易 R3-R2",
+  "date": "2026-07-14",
+  "status": "verified",
+  "objective": "从已集成 root-of-trust 权威 edf2133e 串行激活治理考试与实施记录跨记录一致性门禁工作项，同时保持 NOVA overlay 与 Telemetry 为 planned，且不实现任何 validator。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r3-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r3-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "cross-record work item planned-to-active registry transition",
+    "R3-R2 current checklist and 100-point governance exam",
+    "R3-R2 implementation record and Handoff"
+  ],
+  "verification": [
+    "target clean worktree branch codex/platform-exam-ir-cross-record-gate-r1 at exact edf2133e",
+    "R3-R2 current checklist 26/26 with exact attestation and current SHA-256",
+    "R3-R2 governance exam attempt-1 passed with score 100",
+    "semantic registry comparison: exactly one original row changed and exactly five authorized fields",
+    "NOVA overlay, Telemetry and all other rows remain field-for-field unchanged",
+    "agent collaboration, delivery flow, implementation record, governance exam and development checklist gates",
+    "Service Plaza aggregate contracts, UTF-8, scope, diff and secret checks"
+  ],
+  "evidence": [
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md",
+    "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md"
+  ],
+  "premises": [
+    "edf2133e integrated the independently accepted root-of-trust registry dispatch item",
+    "cross-record is first in the authorized serial dispatch order",
+    "NOVA overlay is planned and shares scripts/Test-ServicePlazaContracts.ps1 with cross-record",
+    "the initial uncommitted R3 candidate was rejected before commit because non-anchored field edits touched unrelated rows; R3-R2 binds the corrected registry bytes",
+    "this transaction changes registry and dispatch evidence only; it does not implement validator logic",
+    "independent acceptance and controlled integration remain required before implementation proceeds"
+  ],
+  "implementation_mode": "ai-assisted"
+}

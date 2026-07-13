@@ -2,9 +2,9 @@
 
 ## 当前结论
 
-`Implementation candidate / Independent acceptance Pending`。
+`Activation candidate R3 / Independent acceptance Pending`。
 
-exact base `384304a87e2a6965dc6cb3cdcafd2a92eef7d101` 的原 123 个 registry rows 保持逐字段不变；候选只新增 `AIW-20260714-PLATFORM-REGISTRY-DISPATCH-R1`，使平台注册表恢复一个唯一 `active` owner。该候选不激活 cross-record，不激活 NOVA overlay，不授权业务、validator、部署、生产、真实数据或真实资金。
+root-of-trust 已受控集成到权威 `edf2133e171bce31a68e2e535f94eac20d04d03b`。R3 候选执行首个受控派发交易：仅将 `AIW-20260713-PLATFORM-EXAM-IR-CROSS-RECORD-GATE-R1` 从 `planned` 激活为 `active` 并绑定 edf exact clean worktree；NOVA overlay 与 Telemetry 保持 `planned`。本候选不实现业务或 validator，不授权部署、生产、真实数据或真实资金。
 
 ## 授权链与职责分离
 
@@ -12,7 +12,7 @@ exact base `384304a87e2a6965dc6cb3cdcafd2a92eef7d101` 的原 123 个 registry ro
 - developer：平台注册表派发授权记录人。
 - owner_role：平台集成负责人。
 - reviewer：APP 总架构独立验收负责人。
-- 后续串行目标：先 `AIW-20260713-PLATFORM-EXAM-IR-CROSS-RECORD-GATE-R1`，后 `AIW-20260713-PLATFORM-NOVA-OVERLAY-R2`；本候选本身不执行激活。
+- 串行派发：本 R3 只激活 `AIW-20260713-PLATFORM-EXAM-IR-CROSS-RECORD-GATE-R1`；`AIW-20260713-PLATFORM-NOVA-OVERLAY-R2` 必须保持 planned，直至 cross-record 退出 active/handoff-ready 且另有受控交易。
 
 ## R1 证据纠正
 
@@ -24,6 +24,18 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - checklist：`FC-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R2`，26/26 current
 - exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R2-1`，attempt-1，100 分
 
+## R3 首个派发证据
+
+- authority exact：`edf2133e171bce31a68e2e535f94eac20d04d03b`
+- target worktree：`C:/Users/shugo/Documents/worktrees/heaotang-platform-exam-ir-cross-record-gate-r1`
+- target branch：`codex/platform-exam-ir-cross-record-gate-r1`
+- target initial HEAD：`edf2133e171bce31a68e2e535f94eac20d04d03b`，clean
+- 初版 R3 的非锚定补丁误命中同名字段，语义门禁在提交前拒绝；其 checklist/exam 保留为历史快照，不作为 current 授权。
+- record：`IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R3-R2`
+- checklist：`FC-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R3-R2`，26/26 current
+- exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R3-R2-1`，attempt-1，100 分
+- registry：仅目标 row 的 status、base_commit、updated_at、next_checkpoint、status_expires_at 变化；workspace/branch 原值已与真实工作树一致；其他 rows 逐字段不变。
+
 ## 修改范围
 
 - `contracts/foundation/agent-collaboration.v1.json`
@@ -33,12 +45,17 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r2.json`
 - `contracts/foundation/invalidated-snapshots/platform-registry-dispatch-r1/`
 - `docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md`
+- `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r3.json`
+- `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r3-attempt-1.json`
+- `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r3-r2.json`
+- `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r3-r2-attempt-1.json`
+- `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r3-r2.json`
 
 ## 停止线
 
 - 禁止自行再增加 allowed paths。
 - 禁止同时激活共享路径工作项。
-- 禁止本候选激活 cross-record 或 NOVA。
+- 本候选只允许激活 cross-record；禁止激活 NOVA 或 Telemetry。
 - 独立验收失败或 exact candidate 变化即保持 No-Go。
 - 生产、真实数据、真实资金与不可逆操作持续禁止。
 
@@ -47,10 +64,12 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - agent collaboration、delivery-flow、implementation-record、governance-exam、development-checklist validators：通过。
 - delivery-flow 永久回归：26/26 通过。
 - Service Plaza 总合同：通过。
-- UTF-8：1399 文件通过。
-- registry 语义审计：base 123、current 124、原 123 rows 变化数 0。
-- scope：7 个授权路径组，越权 0；`git diff --check` 通过；secret suspects 0。
+- UTF-8：1404 文件通过。
+- R3-R2 registry 语义审计：authority 124、candidate 124，仅 cross-record row 变化；变化字段严格为 `base_commit`、`next_checkpoint`、`status`、`status_expires_at`、`updated_at`。
+- NOVA overlay、Telemetry 与其余 123 rows：逐字段不变；NOVA 与 Telemetry 均保持 `planned`。
+- target worktree：HEAD=`edf2133e171bce31a68e2e535f94eac20d04d03b`、branch=`codex/platform-exam-ir-cross-record-gate-r1`、clean。
+- scope：仅 dispatch 已授权 registry、R3/R3-R2 checklist/exam/IR 与 Handoff；`git diff --check` 通过；未修改 validator、业务、部署文件。
 
 ## 下一步
 
-运行全量门禁、提交并推送 exact candidate；由 APP 总架构独立验收负责人给出 Go/No-Go。只有独立 Go 且受控集成后，平台集成负责人才能另建后续状态交易，先激活 cross-record。
+运行全量门禁、提交并推送 exact activation candidate；由 APP 总架构独立验收负责人给出 Go/No-Go。只有独立 Go 且受控集成后，cross-record 实施负责人才能在已激活的独立工作树中完成自身 current checklist、考试与 validator 实现。
