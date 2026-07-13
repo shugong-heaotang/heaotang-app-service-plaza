@@ -377,6 +377,19 @@ class AgentCollaborationBaseCommitTests(unittest.TestCase):
         item = self.item("AIW-20260713-MISSING-ROOT", "active", self.root / "gone", "3" * 40)
         self.assertTrue(any("repository_root does not exist" in error for error in self.validate([item])))
 
+    def test_active_existing_non_git_repository_root_is_rejected(self):
+        non_git_root = self.root / "existing-non-git-directory"
+        non_git_root.mkdir()
+        item = self.item("AIW-20260713-NON-GIT-ROOT", "active", non_git_root, "4" * 40)
+        errors = self.validate([item])
+        self.assertTrue(
+            any(
+                "does not exist as a commit" in error and "not a git repository" in error.lower()
+                for error in errors
+            ),
+            errors,
+        )
+
 
 if __name__ == "__main__":
     unittest.main()

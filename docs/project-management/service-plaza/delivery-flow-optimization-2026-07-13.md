@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-- 状态：R4、R6、R8 与候选 dadcc42 的 independent review 均为 No-Go 且保持不可覆盖；R13 根因整改与 R14 最终 current 认证已完成，等待新候选 exact commit 的第二次独立复验
+- 状态：R4、R6、R8、候选 dadcc42 与候选 71889d4 的 independent review 均为 No-Go 且保持不可覆盖；R15 正在关闭 registry 新鲜度和非 Git repository_root fail-closed 永久回归，完成后进入第三次独立复验
 - 主因：业务工作被拆成多个长期并行治理项，Handoff 缺少决策时限，范围内下一检查点仍反复等待授权，平台集成负责人形成单点队列；原 R2 又只优化技术流，没有约束客户价值和商业结果。
 - 处置：同步权威 HEAD `094bafdbba48c84f41611ca541c8225e4de4a8dd`，升级 `delivery-flow-policy.v1`、机器校验和商业价值门禁。
 
@@ -155,3 +155,19 @@
 - 累计候选不再包含 `scripts/tests/test_validate_agent_collaboration.py`；5 个 base commit 负例已位于父提交授权的 `scripts/tests/test_validate_delivery_flow_policy.py`。
 - NOVA overlay R2：平台建议字段已逐项采用，allowed paths 为 17 项，且实施 Agent 不拥有 registry。
 - verdict：候选具备提交与推送条件；`dadcc42` 继续禁止集成，新候选仍为 Pending，必须由 APP 总架构独立验收负责人绑定远端 exact commit 复验。
+
+## 71889d4 第二次独立验收 No-Go 与 R15 整改
+
+- 验收对象：`71889d44b2243b6c715335a47a4c3d0e17a18c3a`。
+- 结论：No-Go，禁止集成；R13/R14 已关闭项保持有效且不得回退。
+- P1：registry 的 `next_checkpoint` 仍描述已经完成的 R14 和推送动作；现已刷新为“第三次独立复验与受控集成”，并同步 `updated_at`。
+- P2：原 25 项回归未永久覆盖“repository_root 路径存在但不是 Git 仓库”；新增 fail-closed 负例，要求 active 工作项产生包含 `not a git repository` 的明确错误。
+- R15 入口检查单：26/26；治理考试 attempt 1：100 分。
+- 下一门禁：26 项回归、R16 最终 current 认证、IR、validators、总合同、UTF-8、范围/diff/secret、提交推送及第三次独立验收。
+
+### R16 最终 current 认证
+
+- R16 checklist：26/26 current；governance exam attempt 1：100 分。
+- 累计回归：26/26；新增非 Git repository_root 负例真实执行并通过。
+- registry 只描述剩余的第三次独立复验与受控集成，不再重复已完成的 R14/推送动作。
+- verdict：整改候选具备提交推送条件；提交后保持 Pending，实施负责人不自行集成。
