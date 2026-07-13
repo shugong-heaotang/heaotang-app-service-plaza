@@ -3023,6 +3023,29 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "实施owner=商城M2 Evidence负责人；reviewer=平台集成负责人；approver=APP总架构独立验收。仅修正f332与backend 22073cd8之间8项语义漂移，补完整fixture和validator强断言；原checklist/exam不可修改，f332保持No-Go。",
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m2.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260713-HEALTH-R1-C1-ACCEPTANCE",
+                           "title":  "健康大管家 R1-C1 独立验收与受控集成",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r1-c1-acceptance",
+                           "branch":  "codex/health-r1-c1-acceptance",
+                           "base_commit":  "a4b83a9f02e0163458dc971d9e0d41d3c0f55779",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-13-health-r1-c1-acceptance*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-13-health-r1-c1-acceptance*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-13-health-r1-c1-acceptance*.json",
+                                                 "docs/project-management/notices/2026-07-13-health-r1-c1-acceptance-task-order.md",
+                                                 "docs/project-management/service-plaza/health-r1-c1-acceptance-2026-07-13.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "独立复核 exact source e50d48c4dd28307f9f09170ad1466c3b20064b26，并从 authority a4b83a9f02e0163458dc971d9e0d41d3c0f55779 显式调和 registry 后受控集成。只验收 R1-C1 合成、离线、executable=false 的 IA、责任边界、跨模块协议与正负例；禁止 R2 实现、共享运行时、真实身份或健康数据、医疗、收费、部署和生产。",
+                           "handoff_record":  "docs/project-management/notices/2026-07-13-health-r1-c1-acceptance-task-order.md"
                        }
                    ]
 }
