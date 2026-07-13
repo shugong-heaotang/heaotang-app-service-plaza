@@ -1,0 +1,91 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/health-manager/r1/cross-module-freeze.v1.schema.json",
+  "title": "Health Manager R1 cross-module freeze v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "module_id", "checkpoint", "status", "synthetic_only", "executable", "source", "information_architecture", "authority_boundaries", "responsibility_boundaries", "cross_module_protocol", "ai_boundary", "pending_signoffs", "acceptance_scenarios", "blocks", "does_not_block", "no_go"],
+  "properties": {
+    "contract_version": {"const": "health-manager.r1.cross-module-freeze.v1"},
+    "module_id": {"const": "health-manager"},
+    "checkpoint": {"const": "R1-C1"},
+    "status": {"const": "frozen-for-development-planning-pending-signoff"},
+    "synthetic_only": {"const": true},
+    "executable": {"const": false},
+    "source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "sha256", "authority", "authorization"],
+      "properties": {
+        "path": {"const": "C:/Users/shugo/Documents/项目最高负责人/health-cross-module-requirements/健康大管家-大益健康馆-学习广场-健康俱乐部需求补充-v1.0.md"},
+        "sha256": {"const": "fc07676f9d0ab0dbaf1a4575457e4d1a67d642d1c483187e28a5b2c64e2a9012"},
+        "authority": {"const": "project-owner-confirmed-requirement-supplement"},
+        "authorization": {"const": "requirements-and-independent-slice-planning-only"}
+      }
+    },
+    "information_architecture": {
+      "type": "object", "additionalProperties": false,
+      "required": ["first_screen_priority", "entrypoints", "journeys", "page_states"],
+      "properties": {
+        "first_screen_priority": {"const": "risk-and-current-health-action-before-commerce-advertising-or-ranking"},
+        "entrypoints": {"type": "array", "minItems": 7, "maxItems": 7, "items": {"$ref": "#/$defs/entrypoint"}},
+        "journeys": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/journey"}},
+        "page_states": {"type": "array", "minItems": 7, "maxItems": 7, "uniqueItems": true, "items": {"type": "string", "minLength": 2}}
+      }
+    },
+    "authority_boundaries": {"type": "array", "minItems": 5, "maxItems": 5, "items": {"$ref": "#/$defs/authority"}},
+    "responsibility_boundaries": {"type": "array", "minItems": 5, "maxItems": 5, "items": {"$ref": "#/$defs/responsibility"}},
+    "cross_module_protocol": {
+      "type": "object", "additionalProperties": false,
+      "required": ["protocol_id", "steps", "prohibited"],
+      "properties": {
+        "protocol_id": {"const": "summary-navigation-member-confirmed-return"},
+        "steps": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"$ref": "#/$defs/protocolStep"}},
+        "prohibited": {"type": "array", "minItems": 6, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}}
+      }
+    },
+    "ai_boundary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["allowed", "forbidden"],
+      "properties": {
+        "allowed": {"type": "array", "minItems": 6, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}},
+        "forbidden": {"type": "array", "minItems": 9, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}}
+      }
+    },
+    "pending_signoffs": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"$ref": "#/$defs/signoff"}},
+    "acceptance_scenarios": {"type": "array", "minItems": 12, "maxItems": 12, "items": {"$ref": "#/$defs/scenario"}},
+    "blocks": {"$ref": "#/$defs/nonEmptyUniqueStrings"},
+    "does_not_block": {"$ref": "#/$defs/nonEmptyUniqueStrings"},
+    "no_go": {"type": "array", "minItems": 14, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}}
+  },
+  "$defs": {
+    "nonEmptyUniqueStrings": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "entrypoint": {
+      "type": "object", "additionalProperties": false, "required": ["entry_id", "label_zh", "authority"],
+      "properties": {"entry_id": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}, "label_zh": {"type": "string", "minLength": 4}, "authority": {"type": "string", "pattern": "^[a-z][a-z0-9-]*$"}}
+    },
+    "journey": {
+      "type": "object", "additionalProperties": false, "required": ["journey_id", "steps"],
+      "properties": {"journey_id": {"enum": ["vertical_health_service", "horizontal_health_participation"]}, "steps": {"type": "array", "minItems": 6, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}}}
+    },
+    "authority": {
+      "type": "object", "additionalProperties": false, "required": ["authority_id", "owns", "minimum_summary", "forbidden"],
+      "properties": {"authority_id": {"type": "string", "pattern": "^[a-z][a-z0-9-]*$"}, "owns": {"$ref": "#/$defs/nonEmptyUniqueStrings"}, "minimum_summary": {"$ref": "#/$defs/nonEmptyUniqueStrings"}, "forbidden": {"$ref": "#/$defs/nonEmptyUniqueStrings"}}
+    },
+    "responsibility": {
+      "type": "object", "additionalProperties": false, "required": ["role_id", "responsibilities", "prohibitions"],
+      "properties": {"role_id": {"type": "string", "pattern": "^[a-z][a-z0-9-]*$"}, "responsibilities": {"$ref": "#/$defs/nonEmptyUniqueStrings"}, "prohibitions": {"$ref": "#/$defs/nonEmptyUniqueStrings"}}
+    },
+    "protocolStep": {
+      "type": "object", "additionalProperties": false, "required": ["step", "action", "requirements"],
+      "properties": {"step": {"type": "integer", "minimum": 1, "maximum": 3}, "action": {"enum": ["show_minimum_summary", "navigate_to_authority", "member_confirmed_return"]}, "requirements": {"$ref": "#/$defs/nonEmptyUniqueStrings"}}
+    },
+    "signoff": {
+      "type": "object", "additionalProperties": false, "required": ["signoff_id", "owner", "status", "executable", "blocks"],
+      "properties": {"signoff_id": {"enum": ["privacy-legal", "medical-quality", "platform-security", "operations"]}, "owner": {"type": "string", "minLength": 2}, "status": {"const": "pending-with-owner"}, "executable": {"const": false}, "blocks": {"$ref": "#/$defs/nonEmptyUniqueStrings"}}
+    },
+    "scenario": {
+      "type": "object", "additionalProperties": false, "required": ["scenario_id", "polarity", "assertion"],
+      "properties": {"scenario_id": {"pattern": "^R1-A0(0[1-9]|1[0-2])$"}, "polarity": {"enum": ["positive", "negative"]}, "assertion": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}}
+    }
+  }
+}

@@ -1,0 +1,144 @@
+{
+  "contract_version": "health-manager.r1.cross-module-freeze.v1",
+  "module_id": "health-manager",
+  "checkpoint": "R1-C1",
+  "status": "frozen-for-development-planning-pending-signoff",
+  "synthetic_only": true,
+  "executable": false,
+  "source": {
+    "path": "C:/Users/shugo/Documents/项目最高负责人/health-cross-module-requirements/健康大管家-大益健康馆-学习广场-健康俱乐部需求补充-v1.0.md",
+    "sha256": "fc07676f9d0ab0dbaf1a4575457e4d1a67d642d1c483187e28a5b2c64e2a9012",
+    "authority": "project-owner-confirmed-requirement-supplement",
+    "authorization": "requirements-and-independent-slice-planning-only"
+  },
+  "information_architecture": {
+    "first_screen_priority": "risk-and-current-health-action-before-commerce-advertising-or-ranking",
+    "entrypoints": [
+      {"entry_id": "health_record", "label_zh": "我的健康档案", "authority": "health-manager"},
+      {"entry_id": "health_plan", "label_zh": "我的健康计划", "authority": "health-manager"},
+      {"entry_id": "professional_help", "label_zh": "找医生与专业帮助", "authority": "health-manager-and-doctor-group"},
+      {"entry_id": "complex_case_coordination", "label_zh": "疑难病例协同", "authority": "doctor-group-and-regulated-medical-institution"},
+      {"entry_id": "health_learning", "label_zh": "健康学习", "authority": "learning-plaza"},
+      {"entry_id": "health_clubs", "label_zh": "健康俱乐部", "authority": "club-alliance"},
+      {"entry_id": "dayi_health_center_services", "label_zh": "大益健康馆服务", "authority": "dayi-health-center-operations"}
+    ],
+    "journeys": [
+      {
+        "journey_id": "vertical_health_service",
+        "steps": ["member_profile", "health_assessment", "health_plan", "daily_action", "human_risk_escalation", "doctor_or_mdt", "member_record_return"]
+      },
+      {
+        "journey_id": "horizontal_health_participation",
+        "steps": ["dayi_health_center", "health_learning", "health_club", "co_learning_activity_support", "member_voluntary_feedback", "confirmed_management_review"]
+      }
+    ],
+    "page_states": [
+      "unauthenticated",
+      "consent_required",
+      "ready",
+      "partial_data",
+      "pending_member_confirmation",
+      "professional_risk_handoff",
+      "unavailable_fail_closed"
+    ]
+  },
+  "authority_boundaries": [
+    {
+      "authority_id": "health-manager",
+      "owns": ["health_profile", "health_consent", "health_plan"],
+      "minimum_summary": ["current_goal", "authorized_recommendation_context"],
+      "forbidden": ["delegate_record_ownership", "accept_unconfirmed_cross_module_write"]
+    },
+    {
+      "authority_id": "learning-plaza",
+      "owns": ["learning_resource", "learning_path", "learning_progress"],
+      "minimum_summary": ["currently_learning", "completion_status", "resource_reference"],
+      "forbidden": ["duplicate_learning_progress_in_health_manager", "auto_write_learning_completion_to_health_record"]
+    },
+    {
+      "authority_id": "club-alliance",
+      "owns": ["club_membership", "club_activity", "club_feedback"],
+      "minimum_summary": ["visible_club_card", "member_join_status"],
+      "forbidden": ["read_full_health_profile_without_separate_authorization", "allow_health_manager_to_modify_membership"]
+    },
+    {
+      "authority_id": "doctor-group-platform-directory",
+      "owns": ["doctor_credential_verification", "professional_tags", "availability"],
+      "minimum_summary": ["verification_status", "specialty", "service_capability"],
+      "forbidden": ["allow_ai_to_create_credentials", "allow_paid_priority_to_override_safety"]
+    },
+    {
+      "authority_id": "regulated-medical-institution",
+      "owns": ["formal_diagnosis_and_treatment", "electronic_medical_record"],
+      "minimum_summary": ["authorized_result", "referral_status"],
+      "forbidden": ["let_health_center_impersonate_medical_institution", "return_unnecessary_medical_record_content"]
+    }
+  ],
+  "responsibility_boundaries": [
+    {"role_id": "member", "responsibilities": ["control_consent", "confirm_returned_feedback", "request_correction"], "prohibitions": ["none"]},
+    {"role_id": "dayi-health-center", "responsibilities": ["service_entry", "authorized_assistance", "offline_service_coordination"], "prohibitions": ["replace_member_consent", "own_member_health_record", "create_doctor_relationship_automatically"]},
+    {"role_id": "health-manager", "responsibilities": ["health_record_and_plan_authority", "source_and_version_traceability", "human_risk_handoff"], "prohibitions": ["direct_write_to_learning_or_club_authority", "form_medical_record"]},
+    {"role_id": "doctor-group", "responsibilities": ["credential_governance", "medical_quality_review", "professional_triage"], "prohibitions": ["treat_training_as_legal_credential", "promise_cure"]},
+    {"role_id": "regulated-medical-institution", "responsibilities": ["formal_medical_service", "medical_record_and_service_traceability"], "prohibitions": ["delegate_formal_diagnosis_to_ai_or_health_center"]}
+  ],
+  "cross_module_protocol": {
+    "protocol_id": "summary-navigation-member-confirmed-return",
+    "steps": [
+      {"step": 1, "action": "show_minimum_summary", "requirements": ["member_authorization", "data_minimization", "source_authority", "source_version"]},
+      {"step": 2, "action": "navigate_to_authority", "requirements": ["canonical_route", "authority_retains_write_ownership", "no_shared_database_write"]},
+      {"step": 3, "action": "member_confirmed_return", "requirements": ["explicit_member_confirmation", "provenance", "source_version", "responsible_actor", "target_review_before_recording"]}
+    ],
+    "prohibited": [
+      "cross_module_direct_database_write",
+      "automatic_learning_completion_to_health_record",
+      "automatic_club_activity_to_health_record",
+      "health_manager_membership_mutation",
+      "club_full_health_profile_read",
+      "unconfirmed_return"
+    ]
+  },
+  "ai_boundary": {
+    "allowed": [
+      "organize_authorized_material",
+      "identify_missing_material",
+      "risk_prompt_from_professionally_approved_rules",
+      "match_verified_candidates",
+      "explain_recommendation_and_uncertainty",
+      "prepare_summary_for_human_review"
+    ],
+    "forbidden": [
+      "diagnose",
+      "prescribe",
+      "change_medication",
+      "impersonate_doctor",
+      "promise_cure",
+      "close_professional_risk",
+      "close_emergency_risk",
+      "recommend_unverified_practitioner",
+      "change_medical_priority_for_payment"
+    ]
+  },
+  "pending_signoffs": [
+    {"signoff_id": "privacy-legal", "owner": "隐私与法律负责人", "status": "pending-with-owner", "executable": false, "blocks": ["real_identity", "real_health_data"]},
+    {"signoff_id": "medical-quality", "owner": "医生集团医疗质量负责人", "status": "pending-with-owner", "executable": false, "blocks": ["medical_service", "professional_policy_execution"]},
+    {"signoff_id": "platform-security", "owner": "平台安全负责人", "status": "pending-with-owner", "executable": false, "blocks": ["shared_runtime", "environment"]},
+    {"signoff_id": "operations", "owner": "健康馆运营负责人", "status": "pending-with-owner", "executable": false, "blocks": ["real_member_pilot", "capacity_commitment"]}
+  ],
+  "acceptance_scenarios": [
+    {"scenario_id": "R1-A001", "polarity": "positive", "assertion": "exactly_seven_entrypoints_and_two_journeys"},
+    {"scenario_id": "R1-A002", "polarity": "positive", "assertion": "learning_summary_navigates_to_learning_authority"},
+    {"scenario_id": "R1-A003", "polarity": "positive", "assertion": "club_summary_navigates_to_club_authority"},
+    {"scenario_id": "R1-A004", "polarity": "positive", "assertion": "member_confirmed_feedback_preserves_provenance_and_version"},
+    {"scenario_id": "R1-A005", "polarity": "positive", "assertion": "professional_help_retains_credential_and_human_review_boundaries"},
+    {"scenario_id": "R1-A006", "polarity": "negative", "assertion": "reject_cross_module_direct_database_write"},
+    {"scenario_id": "R1-A007", "polarity": "negative", "assertion": "reject_automatic_learning_or_club_writeback"},
+    {"scenario_id": "R1-A008", "polarity": "negative", "assertion": "reject_club_full_health_profile_read"},
+    {"scenario_id": "R1-A009", "polarity": "negative", "assertion": "reject_ai_diagnosis_medication_or_risk_closure"},
+    {"scenario_id": "R1-A010", "polarity": "negative", "assertion": "reject_training_as_legal_credential_or_paid_safety_priority"},
+    {"scenario_id": "R1-A011", "polarity": "negative", "assertion": "reject_premature_signoff_or_executable_contract"},
+    {"scenario_id": "R1-A012", "polarity": "negative", "assertion": "reject_real_data_deployment_payment_or_production_authorization"}
+  ],
+  "blocks": ["R2_implementation", "shared_runtime", "real_data", "medical_service", "charging", "deployment", "production"],
+  "does_not_block": ["R1_contract_conformance", "synthetic_acceptance_design", "R2_task_planning_after_independent_R1_acceptance"],
+  "no_go": ["business_code", "api", "database", "real_identity", "real_health_data", "internet_medical_service", "diagnosis", "prescription", "medication_change", "charging", "payment", "test_server_deployment", "production", "irreversible_operation"]
+}
