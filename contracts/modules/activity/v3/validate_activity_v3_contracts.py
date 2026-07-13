@@ -1,4 +1,5 @@
 import json
+import copy
 from pathlib import Path
 from jsonschema import validate
 
@@ -7,6 +8,20 @@ MODULE = ROOT.parent
 
 def load(path):
     return json.loads(path.read_text(encoding="utf-8"))
+
+def validate_trace_semantics(req, trace_doc, fixture_doc):
+    cases = {x["id"]: x for x in fixture_doc["cases"]}
+    traces = trace_doc["traces"]
+    assert [x["acceptance_id"] for x in traces] == list(range(1, 37))
+    assert len(cases) == 72
+    for trace in traces:
+        positive, negative = cases[trace["positive_fixture"]], cases[trace["negative_fixture"]]
+        assert positive["acceptance_id"] == negative["acceptance_id"] == trace["acceptance_id"]
+        assert positive["capability"] == negative["capability"] == trace["capability"]
+        assert trace["capability"] == req["acceptance"][trace["acceptance_id"] - 1]["capability"]
+        assert (positive["polarity"], positive["decision"]) == ("positive", "allow")
+        assert (negative["polarity"], negative["decision"]) == ("negative", "deny")
+        assert negative["rule"] == req["acceptance"][trace["acceptance_id"] - 1]["negative"]
 
 def main():
     files = list(ROOT.rglob("*.json")) + [MODULE / "internal-dependencies.v1.json"]
@@ -18,6 +33,8 @@ def main():
         ("v3/state-machines.v1.json", "v3/state-machines.v1.schema.json"),
         ("v3/api-contracts.v1.json", "v3/api-contracts.v1.schema.json"),
         ("v3/safety-matrix.v1.json", "v3/safety-matrix.v1.schema.json"),
+        ("v3/trace-matrix.v3.json", "v3/trace-matrix.v3.schema.json"),
+        ("v3/fixtures/cases.v1.json", "v3/fixtures/cases.v1.schema.json"),
     ]
     for instance, schema in schema_pairs:
         validate(docs[instance], docs[schema])
@@ -39,8 +56,26 @@ def main():
         assert item in denied
     fixtures = docs["v3/fixtures/cases.v1.json"]
     assert fixtures["deterministic"] and fixtures["synthetic_only"]
-    assert {x["id"] for x in fixtures["cases"]} >= {"member-direct-publish-denied","privacy-small-cohort","unilateral-introduction","duplicate-attribution","retry-idempotent"}
-    print(f"PASS activity V3 M0 contracts: {len(files)} JSON files, 36 acceptance mappings, 6 provisional dependencies")
+    trace_doc = docs["v3/trace-matrix.v3.json"]
+    validate_trace_semantics(req, trace_doc, fixtures)
+    # Mutation guards: semantic weakening must fail, not merely remain non-empty.
+    mutated = copy.deepcopy(trace_doc)
+    mutated["traces"][0]["positive_fixture"] = mutated["traces"][1]["positive_fixture"]
+    try:
+        validate_trace_semantics(req, mutated, fixtures)
+    except AssertionError:
+        pass
+    else:
+        raise AssertionError("trace fixture mutation accepted")
+    mutated_negative = copy.deepcopy(fixtures)
+    mutated_negative["cases"][1]["decision"] = "allow"
+    try:
+        validate_trace_semantics(req, trace_doc, mutated_negative)
+    except AssertionError:
+        pass
+    else:
+        raise AssertionError("negative decision mutation accepted")
+    print(f"PASS activity V3 M0: {len(files)} JSON files, 36 executable positive + 36 negative traces, schema and mutation guards")
 
 if __name__ == "__main__":
     main()

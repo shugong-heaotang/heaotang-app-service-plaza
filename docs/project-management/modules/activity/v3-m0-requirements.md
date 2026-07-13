@@ -19,4 +19,3 @@
 需求书第15章的10项决策在 M0 均标记为 `provisional`。它们不会被假定为已解决，也不授权 M1：会员提案默认权、L1-L3升级、平台复审、T1范围、退款分账模块、成果防刷、归档期限、收益/责任/IP、高风险准入、AI授权文本与保存期限。
 
 逐条验收与负面用例见 `contracts/modules/activity/v3/requirements.v3.json`，依赖 readiness 见 `internal-dependencies.v1.json`。
-

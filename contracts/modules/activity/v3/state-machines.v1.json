@@ -1,13 +1,309 @@
 {
-  "contract_version":"activity.state-machines.v1",
-  "machines":{
-    "activity":["draft","club_review","approved","published","registration_open","in_progress","completed","archived","cancelled"],
-    "proposal":["draft","submitted","changes_requested","approved","rejected","withdrawn"],
-    "registration":["initiated","pending_review","confirmed","waitlisted","checked_in","completed","cancelled","refunded"],
-    "introduction":["suggested","requester_confirmed","counterparty_confirmed","connected","declined","revoked"],
-    "meeting":["requested","accepted","rescheduled","completed","cancelled"],
-    "intent":["draft","shared","mutually_accepted","routed_to_standard_order","cooperation_item","closed"]
+  "contract_version": "activity.state-machines.v2",
+  "execution": {
+    "executable": false,
+    "mode": "mock-only",
+    "environment": "non-production"
   },
-  "guards":["club_approval_before_publish","human_confirmation_before_external_action","mutual_consent_before_connection","counterparty_acceptance_before_meeting","approved-commerce-flow-before-transaction","idempotency-key-on-side-effect"]
+  "machines": {
+    "activity": {
+      "initial": "draft",
+      "terminal": [
+        "archived",
+        "cancelled"
+      ],
+      "transitions": [
+        {
+          "from": "draft",
+          "to": "club_review",
+          "event": "submit",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "club_review",
+          "to": "approved",
+          "event": "approve",
+          "guard": "club_authorized"
+        },
+        {
+          "from": "club_review",
+          "to": "draft",
+          "event": "request_changes",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "approved",
+          "to": "published",
+          "event": "publish",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "published",
+          "to": "registration_open",
+          "event": "open_registration",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "registration_open",
+          "to": "in_progress",
+          "event": "start",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "in_progress",
+          "to": "completed",
+          "event": "complete",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "completed",
+          "to": "archived",
+          "event": "archive",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "draft",
+          "to": "cancelled",
+          "event": "cancel",
+          "guard": "actor_authorized"
+        }
+      ]
+    },
+    "proposal": {
+      "initial": "draft",
+      "terminal": [
+        "approved",
+        "rejected",
+        "withdrawn"
+      ],
+      "transitions": [
+        {
+          "from": "draft",
+          "to": "submitted",
+          "event": "submit",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "submitted",
+          "to": "changes_requested",
+          "event": "request_changes",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "changes_requested",
+          "to": "submitted",
+          "event": "resubmit",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "submitted",
+          "to": "approved",
+          "event": "approve",
+          "guard": "club_authorized"
+        },
+        {
+          "from": "submitted",
+          "to": "rejected",
+          "event": "reject",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "draft",
+          "to": "withdrawn",
+          "event": "withdraw",
+          "guard": "actor_authorized"
+        }
+      ]
+    },
+    "registration": {
+      "initial": "initiated",
+      "terminal": [
+        "completed",
+        "cancelled",
+        "refunded"
+      ],
+      "transitions": [
+        {
+          "from": "initiated",
+          "to": "pending_review",
+          "event": "submit",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "pending_review",
+          "to": "confirmed",
+          "event": "confirm",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "pending_review",
+          "to": "waitlisted",
+          "event": "waitlist",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "waitlisted",
+          "to": "confirmed",
+          "event": "promote",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "confirmed",
+          "to": "checked_in",
+          "event": "check_in",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "checked_in",
+          "to": "completed",
+          "event": "complete",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "confirmed",
+          "to": "cancelled",
+          "event": "cancel",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "cancelled",
+          "to": "refunded",
+          "event": "refund",
+          "guard": "actor_authorized"
+        }
+      ]
+    },
+    "introduction": {
+      "initial": "suggested",
+      "terminal": [
+        "connected",
+        "declined",
+        "revoked"
+      ],
+      "transitions": [
+        {
+          "from": "suggested",
+          "to": "requester_confirmed",
+          "event": "requester_confirm",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "requester_confirmed",
+          "to": "counterparty_confirmed",
+          "event": "counterparty_confirm",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "counterparty_confirmed",
+          "to": "connected",
+          "event": "connect",
+          "guard": "mutual_confirmation"
+        },
+        {
+          "from": "requester_confirmed",
+          "to": "declined",
+          "event": "decline",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "connected",
+          "to": "revoked",
+          "event": "revoke",
+          "guard": "actor_authorized"
+        }
+      ]
+    },
+    "meeting": {
+      "initial": "requested",
+      "terminal": [
+        "completed",
+        "cancelled"
+      ],
+      "transitions": [
+        {
+          "from": "requested",
+          "to": "accepted",
+          "event": "accept",
+          "guard": "mutual_confirmation"
+        },
+        {
+          "from": "accepted",
+          "to": "rescheduled",
+          "event": "reschedule",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "rescheduled",
+          "to": "accepted",
+          "event": "accept_change",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "accepted",
+          "to": "completed",
+          "event": "complete",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "requested",
+          "to": "cancelled",
+          "event": "cancel",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "accepted",
+          "to": "cancelled",
+          "event": "cancel",
+          "guard": "actor_authorized"
+        }
+      ]
+    },
+    "intent": {
+      "initial": "draft",
+      "terminal": [
+        "routed_to_standard_order",
+        "cooperation_item",
+        "closed"
+      ],
+      "transitions": [
+        {
+          "from": "draft",
+          "to": "shared",
+          "event": "share",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "shared",
+          "to": "mutually_accepted",
+          "event": "accept",
+          "guard": "mutual_confirmation"
+        },
+        {
+          "from": "mutually_accepted",
+          "to": "routed_to_standard_order",
+          "event": "route_standard",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "mutually_accepted",
+          "to": "cooperation_item",
+          "event": "route_nonstandard",
+          "guard": "actor_authorized"
+        },
+        {
+          "from": "shared",
+          "to": "closed",
+          "event": "close",
+          "guard": "actor_authorized"
+        }
+      ]
+    }
+  },
+  "global_guards": [
+    "club_approval_before_publish",
+    "human_confirmation_before_external_action",
+    "mutual_consent_before_connection",
+    "approved-commerce-flow-before-transaction",
+    "idempotency-key-on-side-effect"
+  ]
 }
-

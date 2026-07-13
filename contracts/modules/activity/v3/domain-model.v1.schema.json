@@ -1,1 +1,84 @@
-{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"Activity domain model","type":"object","required":["contract_version","execution","aggregates","data_boundaries"],"properties":{"aggregates":{"type":"array","minItems":6,"items":{"type":"object","required":["name","identity","owns","invariants"]}}}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "execution",
+    "aggregates",
+    "data_boundaries"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "activity.domain-model.v1"
+    },
+    "execution": {
+      "type": "object"
+    },
+    "aggregates": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "name",
+          "identity",
+          "owns",
+          "invariants"
+        ],
+        "properties": {
+          "name": {
+            "enum": [
+              "Activity",
+              "Registration",
+              "MatchReport",
+              "Connection",
+              "CommercePlacement",
+              "Attribution"
+            ]
+          },
+          "identity": {
+            "type": "string",
+            "pattern": "_id$"
+          },
+          "owns": {
+            "type": "array",
+            "minItems": 3,
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "invariants": {
+            "type": "array",
+            "minItems": 2,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "minLength": 8
+            }
+          }
+        }
+      }
+    },
+    "data_boundaries": {
+      "type": "object",
+      "required": [
+        "activity_source_of_truth",
+        "external_sources"
+      ],
+      "properties": {
+        "activity_source_of_truth": {
+          "type": "array",
+          "minItems": 4
+        },
+        "external_sources": {
+          "type": "object",
+          "minProperties": 4
+        }
+      }
+    }
+  }
+}

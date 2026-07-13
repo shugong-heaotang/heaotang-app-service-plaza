@@ -9,4 +9,3 @@
     {"area":"transaction","deny":["chat-as-payment","points-as-cash","duplicate-product-record","duplicate-attribution","hidden-sponsor","real-payment-in-m0"]}
   ]
 }
-

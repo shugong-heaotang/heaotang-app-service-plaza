@@ -11,4 +11,3 @@
   ],
   "data_boundaries":{"activity_source_of_truth":["activity","proposal","agenda","event-space"],"external_sources":{"club-alliance":["club","membership","role"],"member-relationship":["official-tier","relationship","consent"],"mall-order-payment":["product","inventory","price","order","payment","refund","fulfilment"],"message":["subscription","delivery-audit"]}}
 }
-

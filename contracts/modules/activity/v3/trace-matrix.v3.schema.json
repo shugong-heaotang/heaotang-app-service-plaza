@@ -1,0 +1,131 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Activity acceptance trace matrix",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "execution",
+    "traces"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "activity.trace-matrix.v3"
+    },
+    "execution": {
+      "$ref": "#/$defs/execution"
+    },
+    "traces": {
+      "type": "array",
+      "minItems": 36,
+      "maxItems": 36,
+      "items": {
+        "$ref": "#/$defs/trace"
+      }
+    }
+  },
+  "$defs": {
+    "execution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "executable",
+        "mode",
+        "environment"
+      ],
+      "properties": {
+        "executable": {
+          "const": false
+        },
+        "mode": {
+          "const": "mock-only"
+        },
+        "environment": {
+          "const": "non-production"
+        }
+      }
+    },
+    "trace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "acceptance_id",
+        "source",
+        "capability",
+        "contract_refs",
+        "api_operation",
+        "positive_fixture",
+        "negative_fixture",
+        "assertions"
+      ],
+      "properties": {
+        "acceptance_id": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 36
+        },
+        "source": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "document",
+            "section",
+            "baseline_sha256"
+          ],
+          "properties": {
+            "document": {
+              "const": "和奥堂APP活动板块统一需求说明书-V3.0.md"
+            },
+            "section": {
+              "type": "string",
+              "pattern": "^14\\.(?:[1-9]|[12][0-9]|3[0-6])$"
+            },
+            "baseline_sha256": {
+              "const": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+            }
+          }
+        },
+        "capability": {
+          "type": "string",
+          "pattern": "^[a-z][a-z0-9-]{5,}$"
+        },
+        "contract_refs": {
+          "type": "array",
+          "minItems": 3,
+          "uniqueItems": true,
+          "items": {
+            "type": "string",
+            "pattern": "\\.json$"
+          }
+        },
+        "api_operation": {
+          "enum": [
+            "submitProposal",
+            "searchActivities",
+            "getMatchReport",
+            "register",
+            "requestIntroduction",
+            "createOrderRedirect",
+            "listActivityProducts"
+          ]
+        },
+        "positive_fixture": {
+          "type": "string",
+          "pattern": "^AC-[0-9]{2}-POS$"
+        },
+        "negative_fixture": {
+          "type": "string",
+          "pattern": "^AC-[0-9]{2}-NEG$"
+        },
+        "assertions": {
+          "type": "array",
+          "minItems": 4,
+          "items": {
+            "type": "string",
+            "minLength": 10
+          }
+        }
+      }
+    }
+  }
+}

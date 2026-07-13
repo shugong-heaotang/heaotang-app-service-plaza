@@ -1,17 +1,871 @@
 {
-  "fixture_version":"activity.fixtures.v1",
-  "deterministic":true,
-  "synthetic_only":true,
-  "cases":[
-    {"id":"club-approved-001","expect":"proposal-approved","club_membership":true,"club_approval":true},
-    {"id":"member-direct-publish-denied","expect":"FORBIDDEN","club_approval":false},
-    {"id":"ai-match-001","expect":"report","visible_activities":3,"consented_aggregate":6,"data_timestamp":"2026-07-13T00:00:00Z"},
-    {"id":"privacy-small-cohort","expect":"suppressed","aggregate_count":1,"display":"现场存在相关参与者"},
-    {"id":"mutual-introduction","expect":"connected","requester":true,"counterparty":true},
-    {"id":"unilateral-introduction","expect":"MUTUAL_CONSENT_REQUIRED","requester":true,"counterparty":false},
-    {"id":"mall-product-001","expect":"external-reference","product_source":"mall","saleable":true},
-    {"id":"duplicate-attribution","expect":"ATTRIBUTION_CONFLICT","order_id":"order-synthetic-001","candidate_activity_count":2},
-    {"id":"retry-idempotent","expect":"single-side-effect","same_idempotency_key_attempts":2,"created_count":1}
+  "fixture_version": "activity.fixtures.v2",
+  "deterministic": true,
+  "synthetic_only": true,
+  "cases": [
+    {
+      "id": "AC-01-POS",
+      "acceptance_id": 1,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "club-owned-publishing",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-01-NEG",
+      "acceptance_id": 1,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "club-owned-publishing",
+      "rule": "member-direct-platform-publish-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-02-POS",
+      "acceptance_id": 2,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "natural-language-member-proposal",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-02-NEG",
+      "acceptance_id": 2,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "natural-language-member-proposal",
+      "rule": "non-member-club-proposal-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-03-POS",
+      "acceptance_id": 3,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "club-ai-proposal-review",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-03-NEG",
+      "acceptance_id": 3,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "club-ai-proposal-review",
+      "rule": "ai-cannot-approve",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-04-POS",
+      "acceptance_id": 4,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "organizer-accountability-display",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-04-NEG",
+      "acceptance_id": 4,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "organizer-accountability-display",
+      "rule": "missing-responsible-club-invalid",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-05-POS",
+      "acceptance_id": 5,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "ai-draft-confirmation",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-05-NEG",
+      "acceptance_id": 5,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "ai-draft-confirmation",
+      "rule": "unconfirmed-ai-external-action-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-06-POS",
+      "acceptance_id": 6,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "all-visible-activity-search",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-06-NEG",
+      "acceptance_id": 6,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "all-visible-activity-search",
+      "rule": "sponsored-only-ranking-invalid",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-07-POS",
+      "acceptance_id": 7,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "theme-and-people-explanation",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-07-NEG",
+      "acceptance_id": 7,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "theme-and-people-explanation",
+      "rule": "uncertainty-omission-invalid",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-08-POS",
+      "acceptance_id": 8,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "self-service-registration",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-08-NEG",
+      "acceptance_id": 8,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "self-service-registration",
+      "rule": "network-introduction-not-required",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-09-POS",
+      "acceptance_id": 9,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "structured-match-report",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-09-NEG",
+      "acceptance_id": 9,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "structured-match-report",
+      "rule": "conclusion-only-report-invalid",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-10-POS",
+      "acceptance_id": 10,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "official-member-tier-aggregate",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-10-NEG",
+      "acceptance_id": 10,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "official-member-tier-aggregate",
+      "rule": "inferred-tier-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-11-POS",
+      "acceptance_id": 11,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "consented-relation-aggregate",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-11-NEG",
+      "acceptance_id": 11,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "consented-relation-aggregate",
+      "rule": "stale-or-unconsented-count-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-12-POS",
+      "acceptance_id": 12,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "small-cohort-suppression",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-12-NEG",
+      "acceptance_id": 12,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "small-cohort-suppression",
+      "rule": "reidentifiable-exact-count-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-13-POS",
+      "acceptance_id": 13,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "granular-consent",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-13-NEG",
+      "acceptance_id": 13,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "granular-consent",
+      "rule": "bundled-consent-invalid",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-14-POS",
+      "acceptance_id": 14,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "optional-mutual-introduction",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-14-NEG",
+      "acceptance_id": 14,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "optional-mutual-introduction",
+      "rule": "unilateral-contact-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-15-POS",
+      "acceptance_id": 15,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "personal-preparation-and-outcome",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-15-NEG",
+      "acceptance_id": 15,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "personal-preparation-and-outcome",
+      "rule": "other-user-outcome-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-16-POS",
+      "acceptance_id": 16,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "mutual-contact-and-connection",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-16-NEG",
+      "acceptance_id": 16,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "mutual-contact-and-connection",
+      "rule": "single-party-effective-connection-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-17-POS",
+      "acceptance_id": 17,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "approved-order-payment-only",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-17-NEG",
+      "acceptance_id": 17,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "approved-order-payment-only",
+      "rule": "chat-or-points-as-payment-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-18-POS",
+      "acceptance_id": 18,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "post-event-asset-package",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-18-NEG",
+      "acceptance_id": 18,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "post-event-asset-package",
+      "rule": "unverified-outcome-invalid",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-19-POS",
+      "acceptance_id": 19,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "reference-existing-club-products",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-19-NEG",
+      "acceptance_id": 19,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "reference-existing-club-products",
+      "rule": "duplicate-product-source-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-20-POS",
+      "acceptance_id": 20,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "complete-commercial-disclosure",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-20-NEG",
+      "acceptance_id": 20,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "complete-commercial-disclosure",
+      "rule": "unlabelled-sponsored-product-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-21-POS",
+      "acceptance_id": 21,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "unified-order-and-attribution",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-21-NEG",
+      "acceptance_id": 21,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "unified-order-and-attribution",
+      "rule": "stale-unsaleable-product-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-22-POS",
+      "acceptance_id": 22,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "user-initiated-commerce",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-22-NEG",
+      "acceptance_id": 22,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "user-initiated-commerce",
+      "rule": "auto-cart-order-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-23-POS",
+      "acceptance_id": 23,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "club-role-based-dashboard",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-23-NEG",
+      "acceptance_id": 23,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "club-role-based-dashboard",
+      "rule": "personal-spend-leak-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-24-POS",
+      "acceptance_id": 24,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "auditable-reversal-and-complaint",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-24-NEG",
+      "acceptance_id": 24,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "auditable-reversal-and-complaint",
+      "rule": "unaudited-state-change-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-25-POS",
+      "acceptance_id": 25,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "idempotent-retry",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-25-NEG",
+      "acceptance_id": 25,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "idempotent-retry",
+      "rule": "duplicate-side-effect-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-26-POS",
+      "acceptance_id": 26,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "first-attendee-guide",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-26-NEG",
+      "acceptance_id": 26,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "first-attendee-guide",
+      "rule": "sensitive-newcomer-status-exposure-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-27-POS",
+      "acceptance_id": 27,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "personal-agenda-conflict-check",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-27-NEG",
+      "acceptance_id": 27,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "personal-agenda-conflict-check",
+      "rule": "capacity-or-eligibility-bypass-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-28-POS",
+      "acceptance_id": 28,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "scoped-live-operations-dashboard",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-28-NEG",
+      "acceptance_id": 28,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "scoped-live-operations-dashboard",
+      "rule": "unauthorized-consumption-detail-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-29-POS",
+      "acceptance_id": 29,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "reschedule-cancel-calendar-sync",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-29-NEG",
+      "acceptance_id": 29,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "reschedule-cancel-calendar-sync",
+      "rule": "stale-time-display-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-30-POS",
+      "acceptance_id": 30,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "explainable-user-controlled-agenda",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-30-NEG",
+      "acceptance_id": 30,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "explainable-user-controlled-agenda",
+      "rule": "ai-auto-seat-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-31-POS",
+      "acceptance_id": 31,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "mutual-meeting-confirmation",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-31-NEG",
+      "acceptance_id": 31,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "mutual-meeting-confirmation",
+      "rule": "one-party-meeting-confirmation-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-32-POS",
+      "acceptance_id": 32,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "participant-initiated-sponsor-lead",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-32-NEG",
+      "acceptance_id": 32,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "participant-initiated-sponsor-lead",
+      "rule": "checkin-as-marketing-consent-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-33-POS",
+      "acceptance_id": 33,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "versioned-series-rerun",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-33-NEG",
+      "acceptance_id": 33,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "versioned-series-rerun",
+      "rule": "carry-forward-stale-risk-rules-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-34-POS",
+      "acceptance_id": 34,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "actual-participation-recap",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-34-NEG",
+      "acceptance_id": 34,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "actual-participation-recap",
+      "rule": "unattended-content-as-outcome-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-35-POS",
+      "acceptance_id": 35,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "single-attribution-profitability",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-35-NEG",
+      "acceptance_id": 35,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "single-attribution-profitability",
+      "rule": "duplicate-order-attribution-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    },
+    {
+      "id": "AC-36-POS",
+      "acceptance_id": 36,
+      "polarity": "positive",
+      "decision": "allow",
+      "capability": "hybrid-parity-and-source-traceability",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "actor": "synthetic-authorized",
+        "confirmed": true
+      }
+    },
+    {
+      "id": "AC-36-NEG",
+      "acceptance_id": 36,
+      "polarity": "negative",
+      "decision": "deny",
+      "capability": "hybrid-parity-and-source-traceability",
+      "rule": "fabricated-ai-summary-source-denied",
+      "synthetic_input": {
+        "actor": "synthetic-unauthorized",
+        "confirmed": false
+      }
+    }
   ]
 }
-

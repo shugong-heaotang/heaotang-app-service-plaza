@@ -1,1 +1,86 @@
-{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"Activity API contracts","type":"object","required":["contract_version","execution","endpoints","global_error_semantics"],"properties":{"endpoints":{"type":"array","minItems":7,"items":{"type":"object","required":["operation","scope","input","output","errors"]}}}}
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "execution",
+    "endpoints",
+    "global_error_semantics"
+  ],
+  "properties": {
+    "contract_version": {
+      "const": "activity.api-contracts.v1"
+    },
+    "execution": {
+      "type": "object"
+    },
+    "endpoints": {
+      "type": "array",
+      "minItems": 7,
+      "maxItems": 7,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "operation",
+          "scope",
+          "input",
+          "output",
+          "errors"
+        ],
+        "properties": {
+          "operation": {
+            "enum": [
+              "submitProposal",
+              "searchActivities",
+              "getMatchReport",
+              "register",
+              "requestIntroduction",
+              "listActivityProducts",
+              "createOrderRedirect"
+            ]
+          },
+          "scope": {
+            "type": "string",
+            "pattern": "^activity:"
+          },
+          "input": {
+            "type": "array",
+              "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "output": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string"
+            }
+          },
+          "errors": {
+            "type": "array",
+            "minItems": 1,
+            "uniqueItems": true,
+            "items": {
+              "type": "string",
+              "pattern": "^[A-Z][A-Z0-9_]+$"
+            }
+          }
+        }
+      }
+    },
+    "global_error_semantics": {
+      "type": "object",
+      "minProperties": 7,
+      "additionalProperties": {
+        "type": "integer",
+        "minimum": 400,
+        "maximum": 599
+      }
+    }
+  }
+}

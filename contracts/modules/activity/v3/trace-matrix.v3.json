@@ -1,0 +1,838 @@
+{
+  "contract_version": "activity.trace-matrix.v3",
+  "execution": {
+    "executable": false,
+    "mode": "mock-only",
+    "environment": "non-production"
+  },
+  "traces": [
+    {
+      "acceptance_id": 1,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.1",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "club-owned-publishing",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "submitProposal",
+      "positive_fixture": "AC-01-POS",
+      "negative_fixture": "AC-01-NEG",
+      "assertions": [
+        "capability == club-owned-publishing",
+        "positive.decision == allow",
+        "negative.rule == member-direct-platform-publish-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 2,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.2",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "natural-language-member-proposal",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "submitProposal",
+      "positive_fixture": "AC-02-POS",
+      "negative_fixture": "AC-02-NEG",
+      "assertions": [
+        "capability == natural-language-member-proposal",
+        "positive.decision == allow",
+        "negative.rule == non-member-club-proposal-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 3,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.3",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "club-ai-proposal-review",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "submitProposal",
+      "positive_fixture": "AC-03-POS",
+      "negative_fixture": "AC-03-NEG",
+      "assertions": [
+        "capability == club-ai-proposal-review",
+        "positive.decision == allow",
+        "negative.rule == ai-cannot-approve",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 4,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.4",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "organizer-accountability-display",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "submitProposal",
+      "positive_fixture": "AC-04-POS",
+      "negative_fixture": "AC-04-NEG",
+      "assertions": [
+        "capability == organizer-accountability-display",
+        "positive.decision == allow",
+        "negative.rule == missing-responsible-club-invalid",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 5,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.5",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "ai-draft-confirmation",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "submitProposal",
+      "positive_fixture": "AC-05-POS",
+      "negative_fixture": "AC-05-NEG",
+      "assertions": [
+        "capability == ai-draft-confirmation",
+        "positive.decision == allow",
+        "negative.rule == unconfirmed-ai-external-action-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 6,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.6",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "all-visible-activity-search",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "searchActivities",
+      "positive_fixture": "AC-06-POS",
+      "negative_fixture": "AC-06-NEG",
+      "assertions": [
+        "capability == all-visible-activity-search",
+        "positive.decision == allow",
+        "negative.rule == sponsored-only-ranking-invalid",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 7,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.7",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "theme-and-people-explanation",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "getMatchReport",
+      "positive_fixture": "AC-07-POS",
+      "negative_fixture": "AC-07-NEG",
+      "assertions": [
+        "capability == theme-and-people-explanation",
+        "positive.decision == allow",
+        "negative.rule == uncertainty-omission-invalid",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 8,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.8",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "self-service-registration",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "register",
+      "positive_fixture": "AC-08-POS",
+      "negative_fixture": "AC-08-NEG",
+      "assertions": [
+        "capability == self-service-registration",
+        "positive.decision == allow",
+        "negative.rule == network-introduction-not-required",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 9,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.9",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "structured-match-report",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "getMatchReport",
+      "positive_fixture": "AC-09-POS",
+      "negative_fixture": "AC-09-NEG",
+      "assertions": [
+        "capability == structured-match-report",
+        "positive.decision == allow",
+        "negative.rule == conclusion-only-report-invalid",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 10,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.10",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "official-member-tier-aggregate",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "getMatchReport",
+      "positive_fixture": "AC-10-POS",
+      "negative_fixture": "AC-10-NEG",
+      "assertions": [
+        "capability == official-member-tier-aggregate",
+        "positive.decision == allow",
+        "negative.rule == inferred-tier-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 11,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.11",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "consented-relation-aggregate",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "getMatchReport",
+      "positive_fixture": "AC-11-POS",
+      "negative_fixture": "AC-11-NEG",
+      "assertions": [
+        "capability == consented-relation-aggregate",
+        "positive.decision == allow",
+        "negative.rule == stale-or-unconsented-count-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 12,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.12",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "small-cohort-suppression",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "getMatchReport",
+      "positive_fixture": "AC-12-POS",
+      "negative_fixture": "AC-12-NEG",
+      "assertions": [
+        "capability == small-cohort-suppression",
+        "positive.decision == allow",
+        "negative.rule == reidentifiable-exact-count-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 13,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.13",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "granular-consent",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "register",
+      "positive_fixture": "AC-13-POS",
+      "negative_fixture": "AC-13-NEG",
+      "assertions": [
+        "capability == granular-consent",
+        "positive.decision == allow",
+        "negative.rule == bundled-consent-invalid",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 14,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.14",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "optional-mutual-introduction",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "requestIntroduction",
+      "positive_fixture": "AC-14-POS",
+      "negative_fixture": "AC-14-NEG",
+      "assertions": [
+        "capability == optional-mutual-introduction",
+        "positive.decision == allow",
+        "negative.rule == unilateral-contact-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 15,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.15",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "personal-preparation-and-outcome",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "getMatchReport",
+      "positive_fixture": "AC-15-POS",
+      "negative_fixture": "AC-15-NEG",
+      "assertions": [
+        "capability == personal-preparation-and-outcome",
+        "positive.decision == allow",
+        "negative.rule == other-user-outcome-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 16,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.16",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "mutual-contact-and-connection",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "requestIntroduction",
+      "positive_fixture": "AC-16-POS",
+      "negative_fixture": "AC-16-NEG",
+      "assertions": [
+        "capability == mutual-contact-and-connection",
+        "positive.decision == allow",
+        "negative.rule == single-party-effective-connection-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 17,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.17",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "approved-order-payment-only",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "createOrderRedirect",
+      "positive_fixture": "AC-17-POS",
+      "negative_fixture": "AC-17-NEG",
+      "assertions": [
+        "capability == approved-order-payment-only",
+        "positive.decision == allow",
+        "negative.rule == chat-or-points-as-payment-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 18,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.18",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "post-event-asset-package",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "getMatchReport",
+      "positive_fixture": "AC-18-POS",
+      "negative_fixture": "AC-18-NEG",
+      "assertions": [
+        "capability == post-event-asset-package",
+        "positive.decision == allow",
+        "negative.rule == unverified-outcome-invalid",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 19,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.19",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "reference-existing-club-products",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "listActivityProducts",
+      "positive_fixture": "AC-19-POS",
+      "negative_fixture": "AC-19-NEG",
+      "assertions": [
+        "capability == reference-existing-club-products",
+        "positive.decision == allow",
+        "negative.rule == duplicate-product-source-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 20,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.20",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "complete-commercial-disclosure",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "listActivityProducts",
+      "positive_fixture": "AC-20-POS",
+      "negative_fixture": "AC-20-NEG",
+      "assertions": [
+        "capability == complete-commercial-disclosure",
+        "positive.decision == allow",
+        "negative.rule == unlabelled-sponsored-product-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 21,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.21",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "unified-order-and-attribution",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "createOrderRedirect",
+      "positive_fixture": "AC-21-POS",
+      "negative_fixture": "AC-21-NEG",
+      "assertions": [
+        "capability == unified-order-and-attribution",
+        "positive.decision == allow",
+        "negative.rule == stale-unsaleable-product-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 22,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.22",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "user-initiated-commerce",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "createOrderRedirect",
+      "positive_fixture": "AC-22-POS",
+      "negative_fixture": "AC-22-NEG",
+      "assertions": [
+        "capability == user-initiated-commerce",
+        "positive.decision == allow",
+        "negative.rule == auto-cart-order-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 23,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.23",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "club-role-based-dashboard",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "getMatchReport",
+      "positive_fixture": "AC-23-POS",
+      "negative_fixture": "AC-23-NEG",
+      "assertions": [
+        "capability == club-role-based-dashboard",
+        "positive.decision == allow",
+        "negative.rule == personal-spend-leak-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 24,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.24",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "auditable-reversal-and-complaint",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "register",
+      "positive_fixture": "AC-24-POS",
+      "negative_fixture": "AC-24-NEG",
+      "assertions": [
+        "capability == auditable-reversal-and-complaint",
+        "positive.decision == allow",
+        "negative.rule == unaudited-state-change-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 25,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.25",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "idempotent-retry",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "register",
+      "positive_fixture": "AC-25-POS",
+      "negative_fixture": "AC-25-NEG",
+      "assertions": [
+        "capability == idempotent-retry",
+        "positive.decision == allow",
+        "negative.rule == duplicate-side-effect-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 26,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.26",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "first-attendee-guide",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "getMatchReport",
+      "positive_fixture": "AC-26-POS",
+      "negative_fixture": "AC-26-NEG",
+      "assertions": [
+        "capability == first-attendee-guide",
+        "positive.decision == allow",
+        "negative.rule == sensitive-newcomer-status-exposure-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 27,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.27",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "personal-agenda-conflict-check",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "register",
+      "positive_fixture": "AC-27-POS",
+      "negative_fixture": "AC-27-NEG",
+      "assertions": [
+        "capability == personal-agenda-conflict-check",
+        "positive.decision == allow",
+        "negative.rule == capacity-or-eligibility-bypass-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 28,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.28",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "scoped-live-operations-dashboard",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "getMatchReport",
+      "positive_fixture": "AC-28-POS",
+      "negative_fixture": "AC-28-NEG",
+      "assertions": [
+        "capability == scoped-live-operations-dashboard",
+        "positive.decision == allow",
+        "negative.rule == unauthorized-consumption-detail-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 29,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.29",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "reschedule-cancel-calendar-sync",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "register",
+      "positive_fixture": "AC-29-POS",
+      "negative_fixture": "AC-29-NEG",
+      "assertions": [
+        "capability == reschedule-cancel-calendar-sync",
+        "positive.decision == allow",
+        "negative.rule == stale-time-display-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 30,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.30",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "explainable-user-controlled-agenda",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "register",
+      "positive_fixture": "AC-30-POS",
+      "negative_fixture": "AC-30-NEG",
+      "assertions": [
+        "capability == explainable-user-controlled-agenda",
+        "positive.decision == allow",
+        "negative.rule == ai-auto-seat-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 31,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.31",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "mutual-meeting-confirmation",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "requestIntroduction",
+      "positive_fixture": "AC-31-POS",
+      "negative_fixture": "AC-31-NEG",
+      "assertions": [
+        "capability == mutual-meeting-confirmation",
+        "positive.decision == allow",
+        "negative.rule == one-party-meeting-confirmation-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 32,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.32",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "participant-initiated-sponsor-lead",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "getMatchReport",
+      "positive_fixture": "AC-32-POS",
+      "negative_fixture": "AC-32-NEG",
+      "assertions": [
+        "capability == participant-initiated-sponsor-lead",
+        "positive.decision == allow",
+        "negative.rule == checkin-as-marketing-consent-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 33,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.33",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "versioned-series-rerun",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "submitProposal",
+      "positive_fixture": "AC-33-POS",
+      "negative_fixture": "AC-33-NEG",
+      "assertions": [
+        "capability == versioned-series-rerun",
+        "positive.decision == allow",
+        "negative.rule == carry-forward-stale-risk-rules-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 34,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.34",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "actual-participation-recap",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "getMatchReport",
+      "positive_fixture": "AC-34-POS",
+      "negative_fixture": "AC-34-NEG",
+      "assertions": [
+        "capability == actual-participation-recap",
+        "positive.decision == allow",
+        "negative.rule == unattended-content-as-outcome-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 35,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.35",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "single-attribution-profitability",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "createOrderRedirect",
+      "positive_fixture": "AC-35-POS",
+      "negative_fixture": "AC-35-NEG",
+      "assertions": [
+        "capability == single-attribution-profitability",
+        "positive.decision == allow",
+        "negative.rule == duplicate-order-attribution-denied",
+        "negative.decision == deny"
+      ]
+    },
+    {
+      "acceptance_id": 36,
+      "source": {
+        "document": "和奥堂APP活动板块统一需求说明书-V3.0.md",
+        "section": "14.36",
+        "baseline_sha256": "838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"
+      },
+      "capability": "hybrid-parity-and-source-traceability",
+      "contract_refs": [
+        "requirements.v3.json",
+        "domain-model.v1.json",
+        "safety-matrix.v1.json"
+      ],
+      "api_operation": "getMatchReport",
+      "positive_fixture": "AC-36-POS",
+      "negative_fixture": "AC-36-NEG",
+      "assertions": [
+        "capability == hybrid-parity-and-source-traceability",
+        "positive.decision == allow",
+        "negative.rule == fabricated-ai-summary-source-denied",
+        "negative.decision == deny"
+      ]
+    }
+  ]
+}
