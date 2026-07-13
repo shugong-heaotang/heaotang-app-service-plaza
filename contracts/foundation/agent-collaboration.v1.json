@@ -3015,7 +3015,9 @@
                                                  "contracts/modules/protection-mall/m2/catalog/validate_catalog_contracts.py",
                                                  "docs/project-management/modules/protection-mall/m2-catalog-evidence.md",
                                                  "docs/project-management/modules/protection-mall/handoff-m2.md",
-                                                 "contracts/modules/protection-mall/implementation-records/2026-07-13-protection-mall-m2-catalog-r2.json"
+                                                 "contracts/modules/protection-mall/implementation-records/2026-07-13-protection-mall-m2-catalog-r2.json",
+                                                 "contracts/modules/protection-mall/development-checklists/2026-07-13-protection-mall-m2-catalog-evidence-r2*.json",
+                                                 "contracts/modules/protection-mall/governance-exams/2026-07-13-protection-mall-m2-catalog-evidence-r2*.json"
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
