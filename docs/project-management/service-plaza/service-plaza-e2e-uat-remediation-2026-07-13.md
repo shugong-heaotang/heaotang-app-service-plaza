@@ -1,6 +1,6 @@
 # 服务广场端到端巡检与缺陷闭环（2026-07-13）
 
-状态：候选修复已完成，自动测试与治理门禁通过；测试服务器已完成第一轮发布，最终候选提交发布后补记资产哈希。
+状态：候选修复、自动测试、治理门禁和测试服务器最终发布均已完成。
 
 ## 范围与边界
 
@@ -55,6 +55,9 @@
 - 合同与协作门禁：无活动工作区或路径冲突，全部合同校验通过。
 - 服务器 ready：部署前后均为 `ready` 且数据库就绪。
 - 第一轮部署资产：`assets/index-DquEMgzY.js`；回滚目录 `/var/www/heaotang/app/service-plaza.rollback-20260713-183927`。
+- 最终候选提交：`74d3876`；发布资产：`assets/index-gcsUwwTF.js`；六条深链接全部验证通过。
+- 最终发布备份：`/root/heaotang-backups/20260713-185652.tar.gz`；本地副本 `D:\Backup\heaotang-test-server\20260713-185652\test-server-state.tar.gz`。
+- 最终回滚目录：`/var/www/heaotang/app/service-plaza.rollback-20260713-185650`。
 - Nginx 配置备份：`/etc/nginx/sites-enabled/heaotang.before-service-plaza-fallback-20260713-183915`。
 
 ## 仍未完成，不得误报
