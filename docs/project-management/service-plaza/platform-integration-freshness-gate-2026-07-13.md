@@ -52,7 +52,9 @@
 - first review source: `057a5b6f41085fe654480528471d5aa465dd0788`。
 - exact revision: 原 R2 checklist/exam 保留原字节；其记录的 `recurring-issues.v1.json` 与 `agent-collaboration.v1.json` SHA 在最终状态更新后已不再 current，不作为最终准入证明。
 - final certification: 新建 R3 checklist，最终 26 项逐项重读且 current SHA 匹配；R3 exam attempt 1 score=100；R3 IR 单独引用最终证据。
-- unchanged stop line: R3 独立复核 Go 前仍不执行 `bb9e717` 与权威远端的真实调和或推送。
+- unchanged stop line: 最终 R4 独立复核 Go 前仍不执行 `bb9e717` 与权威远端的真实调和或推送。
+- second exact revision: R3 认证文件名不匹配工作项的 `r2*` 精确授权，因此该检查点仅保留在 Git 历史，不进入最终树。
+- authorized final certification: 以 `...freshness-gate-r2-r4...` 路径新建 R4 checklist/exam/IR；26/26 current SHA、exam100，并保持实现和停止线不变。
 
 ## Verdict
 

@@ -2763,6 +2763,34 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "只保存task order、模块治理证据、Handoff和后端exact commit/test映射；不得写后端代码或业务运行时。",
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m1-domain.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260713-PLATFORM-NEW-MODULE-BOOTSTRAP-R1",
+                           "title":  "平台新模块治理冷启动动态注册修复",
+                           "owner":  "Platform governance bootstrap agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "planned",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-platform-new-module-bootstrap-r1",
+                           "branch":  "codex/platform-new-module-bootstrap-r1",
+                           "base_commit":  "6f4f9048458b4458cb163b148cce924991bf81fc",
+                           "allowed_paths":  [
+                                                 "scripts/New-AgentDevelopmentChecklist.ps1",
+                                                 "contracts/foundation/governance-reading-list.v1.json",
+                                                 "docs/project-management/notices/2026-07-13-activity-v3-m0-bootstrap-readme.md",
+                                                 "scripts/tests/test_new_agent_development_checklist.py",
+                                                 "docs/project-management/service-plaza/new-module-governance-bootstrap-audit-2026-07-13.md",
+                                                 "contracts/foundation/recurring-issues.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-13-platform-new-module-bootstrap-r1*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-13-platform-new-module-bootstrap-r1*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-13-platform-new-module-bootstrap-r1*.json",
+                                                 "docs/project-management/notices/2026-07-13-platform-new-module-bootstrap-r1-task-order.md",
+                                                 "docs/project-management/service-plaza/platform-new-module-bootstrap-r1-handoff.md"
+                                             ],
+                           "started_with_clean_worktree":  false,
+                           "preexisting_changes_acknowledged":  true,
+                           "migration_note":  "第二次 GOV-NEW-MODULE-BOOTSTRAP-001 复发的系统修复；计划态尚未创建工作树，激活时必须从最新干净权威基线重建并重新核验。平台治理实施主体受平台集成负责人角色的受保护路径约束；实施、活动负责人和独立测试负责人必须分离；禁止活动 M0、业务代码、部署、真实触达、验证码、支付和生产变更。",
+                           "handoff_record":  "docs/project-management/service-plaza/platform-new-module-bootstrap-r1-handoff.md"
                        }
                    ]
 }
