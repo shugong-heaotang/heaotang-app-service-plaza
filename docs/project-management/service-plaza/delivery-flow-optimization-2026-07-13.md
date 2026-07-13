@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-- 状态：R4、R6、R8、候选 dadcc42、71889d4、5d4d86e、14d209f 与 ed34542 的 independent review 均为 No-Go 且保持不可覆盖；e079f0e 是第四次独立验收 Go 的 candidate，fbf6218 是其受控 integration exact。R21 候选 8e615e6 已通过第三次独立复验并集成为 6489a237；R22 base-refresh 候选 721206f 已受控集成为 61c0f559。R23 只登记 reviewer 激活候选，等待独立验收。
+- 状态：R4、R6、R8、候选 dadcc42、71889d4、5d4d86e、14d209f 与 ed34542 的 independent review 均为 No-Go 且保持不可覆盖；Delivery Flow 正式 independent acceptance 绑定 candidate e079f0e、integration fbf6218、evidence source f1db5d4，并已随 artifact integration 25b6cd75 进入权威链。R24 正在生成原工作项终态 closeout 候选，等待独立复验。
 - 主因：业务工作被拆成多个长期并行治理项，Handoff 缺少决策时限，范围内下一检查点仍反复等待授权，平台集成负责人形成单点队列；原 R2 又只优化技术流，没有约束客户价值和商业结果。
 - 处置：以权威 HEAD `fbf621872372f5aac0cad604af1b1a428d5e3b6d` 创建独立 clean worktree，只登记 planned 工作项并刷新当前 next checkpoint；不实现业务代码或 validator。
 
@@ -262,3 +262,14 @@
 - reviewer 不拥有 registry；其 allowed paths 仍只限非保护 namespace，其他三个 planned 工作项与旧 Action Telemetry integrated 工作项不变。
 - R23 checklist 26/26、governance exam attempt 1 为 100；registry 语义审计确认仅目标行的 `base_commit/branch/next_checkpoint/status/updated_at/workspace_path` 六字段变化，其他 registry 行变化数为 0。agent collaboration、delivery-flow、implementation-record、governance-exam validators、26项回归、Service Plaza 总合同、UTF-8 1383 文件全部通过。
 - 当前 verdict：R23 activation candidate only；须独立验收和受控集成后 reviewer 才能开始创建 task/checklist/exam/IR/evidence。
+
+## 正式独立证据集成与 R24 closeout 候选
+
+- 权威起点：`25b6cd753d2194efa2c0b4faab3dff0357805a93`；本轮使用独立 clean worktree/branch `C:/Users/shugo/Documents/worktrees/heaotang-delivery-flow-closeout-20260714` / `codex/delivery-flow-closeout-20260714`。
+- 正式 evidence source：`f1db5d43da40bfab33004776a4b903e78f86ec7c`，commit time `2026-07-14T05:41:23+08:00`；artifact integration：`25b6cd753d2194efa2c0b4faab3dff0357805a93`。
+- Evidence：`docs/project-management/independent-acceptance/delivery-flow-optimization/evidence.md`；SHA-256：`21bfe6cb4dab21db4072bb5a4335c5f2ff85cd85f8a971cd0deb8265466cbd86`。
+- 祖先证据：accepted candidate `e079f0e41f375e7988478d428e672695fbdefc2f` 是 controlled integration `fbf621872372f5aac0cad604af1b1a428d5e3b6d` 的祖先；`fbf6218` 是 artifact integration `25b6cd75` 的祖先。
+- 原 `AIW-20260713-DELIVERY-FLOW-OPTIMIZATION` 设置为 `integrated`，独立验收与 integration commit 精确写入，终态 `blocks=[]`、`auto_continue=false`，禁止无新工作项复活。
+- Reviewer bootstrap 只进入 `handoff-ready`：记录 source `f1db5d4` 与 artifact integration `25b6cd75`，交给平台集成负责人决定后续；未写其 `independent_acceptance` 或 `integration_commit`，不声称 integrated。
+- 其他 registry 行必须保持逐字段不变。R24 仅可提交推送等待独立复验，不由 closeout 实施人自行集成。
+- R24 checklist 26/26、governance exam attempt 1 为 100；agent collaboration、delivery-flow、implementation-record、governance-exam validators、26项回归、Service Plaza 总合同、UTF-8 1391 文件全部通过。Registry 语义审计确认变化行只有原 Delivery Flow 与 reviewer bootstrap 两项。
