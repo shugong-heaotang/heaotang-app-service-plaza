@@ -1,0 +1,70 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260713-ACTIVITY-V3-M1-FRONTEND-1",
+    "record_id":  "IR-20260713-ACTIVITY-V3-M1-FRONTEND",
+    "actor":  "Activity V3 continuous development agent",
+    "attempt_number":  1,
+    "status":  "pending",
+    "generated_at":  "2026-07-13T05:44:26.8537628Z",
+    "completed_at":  null,
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  null,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "e70e460a0c5ae4b80752d0d1a3c41379e2f216265dc509bcb2164b7fbd8c9fdc",
+    "checklist_path":  "contracts/modules/activity/development-checklists/2026-07-13-activity-v3-m1-frontend.json",
+    "checklist_sha256":  "e57698edb597e076153c715cc34cdc2021d11a55cf07b1601221e104ed7bcd4b",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-009",
+                          "selected_option":  null,
+                          "correct":  null,
+                          "source_path":  "docs/decisions/0010-ai-implementation-records-required.md"
+                      },
+                      {
+                          "question_id":  "GQ-007",
+                          "selected_option":  null,
+                          "correct":  null,
+                          "source_path":  "AGENTS.md"
+                      },
+                      {
+                          "question_id":  "GQ-002",
+                          "selected_option":  null,
+                          "correct":  null,
+                          "source_path":  "docs/decisions/0008-versioned-business-variables.md"
+                      },
+                      {
+                          "question_id":  "GQ-008",
+                          "selected_option":  null,
+                          "correct":  null,
+                          "source_path":  "docs/decisions/0007-stable-foundation-variable-business.md"
+                      },
+                      {
+                          "question_id":  "GQ-004",
+                          "selected_option":  null,
+                          "correct":  null,
+                          "source_path":  "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+                      },
+                      {
+                          "question_id":  "GQ-005",
+                          "selected_option":  null,
+                          "correct":  null,
+                          "source_path":  "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+                      },
+                      {
+                          "question_id":  "GQ-006",
+                          "selected_option":  null,
+                          "correct":  null,
+                          "source_path":  "docs/project-management/ai-coding-incident-lessons-2026-07-10.md"
+                      },
+                      {
+                          "question_id":  "GQ-012",
+                          "selected_option":  null,
+                          "correct":  null,
+                          "source_path":  "contracts/foundation/agent-collaboration.v1.json"
+                      }
+                  ],
+    "remediation_sources":  [
+
+                            ]
+}
