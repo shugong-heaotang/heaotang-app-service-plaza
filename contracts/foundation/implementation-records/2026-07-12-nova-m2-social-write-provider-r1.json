@@ -1,0 +1,68 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-NOVA-M2-SOCIAL-WRITE-PROVIDER-R1",
+  "title": "NOVA M2 connection Social write provider R1",
+  "date": "2026-07-13",
+  "status": "implemented",
+  "objective": "Implement an unrouted SQLite-backed connection draft, send, status, and transition provider core with trusted tenant context, confirmation binding, idempotent send, participant authorization, contact policy, rejection cooldown, RowsAffected fail-close, and transactional outbox behavior.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-nova-m2-social-write-provider-r1.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-nova-m2-social-write-provider-r1-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-nova-m2-provider-task-order.md",
+    "contracts/service-plaza/nova/nova-people-tools.v1.json",
+    "contracts/service-plaza/nova/nova-people-tool-errors.v1.json",
+    "contracts/service-plaza/nova/nova-connection-callback.v1.json"
+  ],
+  "capabilities": [
+    "foundation.identity-api",
+    "foundation.authorization-idempotency",
+    "foundation.contract-tooling",
+    "foundation.observability-config"
+  ],
+  "contracts": [
+    "contracts/service-plaza/nova/nova-people-tools.v1.json",
+    "contracts/service-plaza/nova/nova-people-tool-errors.v1.json",
+    "contracts/service-plaza/nova/nova-connection-callback.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/project-management/modules/network/canonical-implementation-decision.md"
+  ],
+  "changed_areas": [
+    "backend-go/plugins/social-plugin/nova_connection_provider.go",
+    "backend-go/plugins/social-plugin/nova_connection_provider_test.go"
+  ],
+  "verification": [
+    "Test-AgentDevelopmentPreflight.ps1: ready",
+    "current checklist: completed 26/26, SHA256 86E8FF6807F01A7066879D2D05560562A2C9650FF078D0338599E8204AF6AC88",
+    "governance exam attempt 1: passed 100, SHA256 A3788E30C0C2D659F2D04E2E3CF32CB1606DD330985AC9AE89EA2382C3D80330",
+    "backend source commit: 70fb18b82c20be1927d8b39abd530aa30d40f8a3",
+    "gofmt -d: no diff",
+    "go test ./plugins/social-plugin -run TestNova -count=1: passed",
+    "go test -race ./plugins/social-plugin -run TestNova -count=1: passed",
+    "go test ./...: passed",
+    "go vet ./...: passed",
+    "git diff --check: passed",
+    "source commit changes exactly the two registered backend paths"
+  ],
+  "evidence": [
+    "contracts/foundation/development-checklists/2026-07-12-nova-m2-social-write-provider-r1.json",
+    "contracts/foundation/governance-exams/2026-07-12-nova-m2-social-write-provider-r1-attempt-1.json",
+    "docs/project-management/modules/network/social-write-provider-handoff.md"
+  ],
+  "premises": [
+    "The provider remains unrouted and non-executable until independent acceptance and controlled integration.",
+    "Only temporary or synthetic SQLite data is authorized; real messages, external notifications, deployment, and production writes remain No-Go.",
+    "Confirmation verification and trusted tenant identity are server-owned inputs and cannot be supplied by an untrusted request body."
+  ],
+  "implementation_mode": "ai-assisted"
+}
