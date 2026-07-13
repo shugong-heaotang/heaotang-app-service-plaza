@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-- 状态：R4、R6、R8、候选 dadcc42 与候选 71889d4 的 independent review 均为 No-Go 且保持不可覆盖；R15 正在关闭 registry 新鲜度和非 Git repository_root fail-closed 永久回归，完成后进入第三次独立复验
+- 状态：R4、R6、R8、候选 dadcc42、71889d4 与 5d4d86e 的 independent review 均为 No-Go 且保持不可覆盖；R15/R16 已完成，刷新后的新候选等待第四次独立复验与受控集成
 - 主因：业务工作被拆成多个长期并行治理项，Handoff 缺少决策时限，范围内下一检查点仍反复等待授权，平台集成负责人形成单点队列；原 R2 又只优化技术流，没有约束客户价值和商业结果。
 - 处置：同步权威 HEAD `094bafdbba48c84f41611ca541c8225e4de4a8dd`，升级 `delivery-flow-policy.v1`、机器校验和商业价值门禁。
 
@@ -171,3 +171,11 @@
 - 累计回归：26/26；新增非 Git repository_root 负例真实执行并通过。
 - registry 只描述剩余的第三次独立复验与受控集成，不再重复已完成的 R14/推送动作。
 - verdict：整改候选具备提交推送条件；提交后保持 Pending，实施负责人不自行集成。
+
+## 5d4d86e 第三次独立验收 No-Go 与 R17/R18 整改
+
+- 验收对象：`5d4d86ea028cafc982b8708b0633a4444ac90f35`；结论 No-Go，禁止集成。
+- 唯一 P1 为 Handoff 顶部状态仍描述 R15 进行中，与 R16 完成和 exact commit 已推送的事实冲突。
+- R17 入口检查单 26/26、考试 100；顶部状态和 registry 均已刷新为第四次独立复验与受控集成。
+- R18 最终 current 检查单 26/26、考试 100；历史 No-Go 正文未覆盖。
+- verdict：新候选仅可提交推送并等待第四次独立验收，实施负责人不得自行集成。
