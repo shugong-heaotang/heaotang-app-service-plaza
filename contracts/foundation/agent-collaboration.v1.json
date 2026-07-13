@@ -2769,7 +2769,7 @@
                            "title": "活动板块 V3.0 M0 治理与设计合同化",
                            "owner": "Activity V3 continuous development agent",
                            "owner_role": "活动板块 V3.0 持续负责人",
-                           "status": "active",
+                           "status": "handoff-ready",
                            "repository_root": "C:/Users/shugo/Documents/APP系统",
                            "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-activity-v3-m0",
                            "branch": "codex/activity-v3-m0",
@@ -2909,27 +2909,9 @@
                                "contracts/modules/learning-plaza/**",
                                "docs/project-management/modules/learning-plaza/**"
                            ],
-                           "priority": "P1",
-                           "risk_level": "medium",
-                           "updated_at": "2026-07-13T13:02:02+08:00",
-                           "target_date": "2026-07-14T18:00:00+08:00",
-                           "status_expires_at": "2026-07-14T18:00:00+08:00",
-                           "next_checkpoint": "完成 current checklist、治理考试 100 分与 M0 离线合同验证",
-                           "developer_role": "学习广场持续开发负责人",
-                           "reviewer_role": "学习广场独立验收负责人",
-                           "approver_role": "项目最高负责人",
-                           "blocks": [
-                               "学习广场 M1 正式前端与 API 实现",
-                               "学习广场测试服联调"
-                           ],
-                           "does_not_block": [
-                               "其他已隔离模块开发",
-                               "现有 Nova 学习广场只读验证",
-                               "学习广场离线合同和确定性 fixture 设计"
-                           ],
                            "started_with_clean_worktree": true,
                            "preexisting_changes_acknowledged": false,
-                           "migration_note": "用户于2026-07-13明确要求立即启动学习广场开发，但不要求立即上线；M0 仅把核心板块、跨模块边界和离线可测闭环合同化。Nova phase5 的学习广场实现 c158b2087d54e026ab385eec7850c105894b33d0 仅作为固定哈希的参考资产，不自动视为平台已集成。M1、共享 app/src、后端、DB、部署、真实用户、消息、支付和生产均未授权。",
+                           "migration_note": "用户于2026-07-13明确要求立即启动学习广场开发，但不要求立即上线；M0 仅把核心板块、跨模块边界和离线可测闭环合同化。Nova phase5 的学习广场实现 c158b2087d54e026ab385eec7850c105894b33d0 仅作为固定哈希的参考资产，不自动视为平台已集成。候选 b2237a10e9e697045ea8ce1f82671cfac91806fc 已完成清单28/28、考试100、9项平台依赖、16项正负例、IR、UTF-8与diff门禁，现转handoff-ready；下一检查点由学习广场独立验收负责人复跑门禁并给出Go/No-Go，Go前不得集成或激活M1。blocks=学习广场M1正式前端/API及测试服联调；does_not_block=其他已隔离模块开发、现有Nova学习广场只读验证。M1、共享app/src、后端、DB、部署、真实用户、消息、支付和生产均未授权。",
                            "handoff_record": "docs/project-management/modules/learning-plaza/handoff-m0.md"
                        }
                    ]
