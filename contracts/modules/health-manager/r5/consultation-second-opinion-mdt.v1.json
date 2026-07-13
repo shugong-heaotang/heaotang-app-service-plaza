@@ -1,0 +1,125 @@
+{
+  "contract_version": "health-manager.r5.consultation-second-opinion-mdt.v1",
+  "module_id": "health-manager",
+  "checkpoint": "R5-C1",
+  "status": "contract-frozen-awaiting-independent-review",
+  "synthetic_only": true,
+  "executable": false,
+  "source": {
+    "path": "C:/Users/shugo/Documents/项目最高负责人/health-cross-module-requirements/健康大管家-大益健康馆-学习广场-健康俱乐部需求补充-v1.0.md",
+    "sha256": "fc07676f9d0ab0dbaf1a4575457e4d1a67d642d1c483187e28a5b2c64e2a9012",
+    "authorization": "synthetic-contract-and-negative-test-only"
+  },
+  "referral_package": {
+    "supported_request_types": ["consultation", "second_opinion", "complex_case_expert_solicitation", "multidisciplinary_consultation"],
+    "required_fields": ["request_reference", "request_type", "applicant_reference", "applicant_authority_role", "authorization_reference", "authorization_status", "primary_request", "source_record_references", "source_provenance", "source_versions", "missing_information", "responsible_coordinator", "submitted_at", "package_version"],
+    "accepted_applicant_authority_roles": ["member_self", "verified_legal_representative"],
+    "authorization_required": true,
+    "accepted_authorization_statuses": ["active"],
+    "source_references_only": true,
+    "ai_output": ["structured_summary", "missing_information_list"],
+    "ai_output_is_diagnosis": false,
+    "fail_closed_conditions": ["identity_or_authority_unverified", "authorization_missing", "authorization_expired", "source_unknown", "version_missing", "responsible_coordinator_missing"]
+  },
+  "human_intake_and_triage": {
+    "initial_review_required": true,
+    "review_owner_role": "doctor_group_medical_quality_reviewer",
+    "reviewer_identity_required": true,
+    "review_timestamp_required": true,
+    "review_reason_and_policy_version_required": true,
+    "emergency_or_professional_risk_action": "stop_online_flow_and_route_to_offline_medical_institution",
+    "online_unsuitable_action": "route_to_offline_medical_institution",
+    "insufficient_information_action": "hold_and_request_missing_information",
+    "ai_may_close_professional_risk": false,
+    "ai_may_close_emergency_risk": false,
+    "ai_may_approve_intake": false
+  },
+  "expert_solicitation": {
+    "mode": "directed_verified_expert_pool_only",
+    "public_case_board_allowed": false,
+    "open_claim_or_grab_allowed": false,
+    "verified_identity_required": true,
+    "qualification_and_license_required": true,
+    "practice_scope_match_required": true,
+    "service_mode_authorized_required": true,
+    "conflict_of_interest_disclosure_required": true,
+    "conflict_review_required": true,
+    "acceptance_fields": ["expert_reference", "qualification_evidence_references", "practice_institution_reference", "practice_scope", "service_mode", "required_materials", "conflict_disclosure", "availability_status", "accepted_at"]
+  },
+  "responsible_care_governance": {
+    "responsible_physician_or_mdt_required": true,
+    "responsible_physician_verified": true,
+    "mdt_member_identity_and_role_required": true,
+    "mdt_member_scope_match_required": true,
+    "verified_medical_institution_required": true,
+    "formal_diagnosis_or_treatment_owner": "qualified_medical_institution",
+    "health_manager_may_form_medical_record": false,
+    "health_venue_may_form_medical_record": false,
+    "service_relationship_statuses": ["not_established", "referral_pending", "established", "ended"]
+  },
+  "second_opinion_governance": {
+    "independent_reviewer_required": true,
+    "independent_qualification_and_scope_required": true,
+    "original_opinion_immutable": true,
+    "second_opinion_preserved_as_separate_version": true,
+    "disagreement_preserved": true,
+    "responsible_human_review_required": true,
+    "ai_may_merge_or_replace_opinions": false,
+    "ai_may_choose_final_medical_conclusion": false
+  },
+  "audit_trail": {
+    "required_events": ["request_submitted", "authorization_verified", "summary_generated", "human_intake_reviewed", "triage_decided", "expert_invited", "conflict_reviewed", "expert_accepted_or_declined", "responsible_physician_or_mdt_assigned", "opinion_recorded", "follow_up_arranged", "service_relationship_changed"],
+    "required_fields_per_event": ["event_reference", "event_type", "actor_reference", "actor_role", "occurred_at", "source_reference", "source_version", "policy_version", "correlation_reference"],
+    "original_opinion_and_source_immutable": true,
+    "corrections_append_new_version": true,
+    "authorization_history_preserved": true,
+    "fee_state_fields": ["fee_status", "fee_policy_reference", "fee_review_owner"],
+    "real_amount_authorized": false,
+    "charging_or_payment_authorized": false
+  },
+  "prohibited_modes": {
+    "public_identity_or_full_record": false,
+    "open_case_grabbing": false,
+    "doctor_bidding": false,
+    "cure_bounty": false,
+    "outcome_based_payment": false,
+    "outcome_promise": false,
+    "unverified_expert": false,
+    "non_medical_institution_diagnosis_or_treatment": false,
+    "commercial_priority_over_safety": false
+  },
+  "ai_boundary": {
+    "allowed": ["organize_authorized_synthetic_materials", "identify_missing_information", "generate_structured_non_diagnostic_summary", "match_verified_expert_candidates", "explain_candidate_basis_and_uncertainty", "flag_professional_or_emergency_risk", "prepare_human_review_packet", "preserve_version_and_source_references"],
+    "forbidden": ["diagnose", "prescribe", "change_medication", "impersonate_doctor", "promise_outcome", "close_professional_risk", "close_emergency_risk", "approve_intake", "publish_identity_or_full_record", "invite_unverified_expert", "create_qualification_or_specialty", "hide_conflict_of_interest", "assign_responsible_physician", "form_medical_record", "merge_or_replace_medical_opinion", "choose_final_medical_conclusion", "authorize_charging_or_payment"]
+  },
+  "pending_signoffs": [
+    {"signoff_id": "medical-quality", "owner": "医生集团医疗质量负责人", "status": "pending-with-owner", "executable": false, "blocks": ["real_consultation", "real_second_opinion", "real_expert_solicitation", "real_mdt"]},
+    {"signoff_id": "qualified-medical-institution", "owner": "合规医疗机构负责人", "status": "pending-with-owner", "executable": false, "blocks": ["formal_diagnosis", "formal_treatment", "medical_record", "service_delivery"]},
+    {"signoff_id": "privacy-legal", "owner": "隐私与法律负责人", "status": "pending-with-owner", "executable": false, "blocks": ["real_identity", "real_health_data", "internet_medical_service"]},
+    {"signoff_id": "platform-security", "owner": "平台安全负责人", "status": "pending-with-owner", "executable": false, "blocks": ["shared_runtime", "api", "database", "environment"]},
+    {"signoff_id": "health-venue-operations", "owner": "大益健康馆运营负责人", "status": "pending-with-owner", "executable": false, "blocks": ["real_member_pilot", "offline_service_operations", "real_fee_workflow"]}
+  ],
+  "acceptance_scenarios": [
+    {"scenario_id": "R5-A001", "polarity": "positive", "assertion": "authorized_referral_package_preserves_sources_versions_and_missing_information"},
+    {"scenario_id": "R5-A002", "polarity": "positive", "assertion": "human_intake_routes_emergency_or_online_unsuitable_case_offline"},
+    {"scenario_id": "R5-A003", "polarity": "positive", "assertion": "verified_expert_is_invited_with_scope_and_conflict_review"},
+    {"scenario_id": "R5-A004", "polarity": "positive", "assertion": "responsible_physician_or_mdt_and_medical_institution_are_traceable"},
+    {"scenario_id": "R5-A005", "polarity": "positive", "assertion": "second_opinion_and_disagreement_preserve_original_versions"},
+    {"scenario_id": "R5-A006", "polarity": "negative", "assertion": "reject_unverified_applicant_authority_or_missing_authorization"},
+    {"scenario_id": "R5-A007", "polarity": "negative", "assertion": "reject_ai_diagnosis_or_final_medical_conclusion"},
+    {"scenario_id": "R5-A008", "polarity": "negative", "assertion": "reject_human_initial_review_bypass"},
+    {"scenario_id": "R5-A009", "polarity": "negative", "assertion": "reject_ai_professional_or_emergency_risk_closure"},
+    {"scenario_id": "R5-A010", "polarity": "negative", "assertion": "reject_public_identity_full_record_or_open_case_grabbing"},
+    {"scenario_id": "R5-A011", "polarity": "negative", "assertion": "reject_unverified_expert_scope_mismatch_or_hidden_conflict"},
+    {"scenario_id": "R5-A012", "polarity": "negative", "assertion": "reject_missing_responsible_physician_mdt_or_medical_institution"},
+    {"scenario_id": "R5-A013", "polarity": "negative", "assertion": "reject_overwrite_of_original_or_disagreement"},
+    {"scenario_id": "R5-A014", "polarity": "negative", "assertion": "reject_bidding_cure_bounty_outcome_promise_or_result_payment"},
+    {"scenario_id": "R5-A015", "polarity": "negative", "assertion": "reject_non_medical_institution_diagnosis_or_treatment"},
+    {"scenario_id": "R5-A016", "polarity": "negative", "assertion": "reject_missing_audit_actor_source_version_or_correlation"},
+    {"scenario_id": "R5-A017", "polarity": "negative", "assertion": "reject_premature_signoff_or_executable_contract"},
+    {"scenario_id": "R5-A018", "polarity": "negative", "assertion": "reject_real_data_fee_runtime_deployment_or_production_authorization"}
+  ],
+  "blocks": ["runtime_implementation", "real_consultation", "real_second_opinion", "real_expert_solicitation", "real_mdt", "real_identity", "real_health_data", "medical_service", "charging", "deployment", "production"],
+  "does_not_block": ["synthetic_contract_conformance", "negative_test_design", "independent_r5_contract_review", "controlled_integration_after_independent_go"],
+  "no_go": ["business_code", "shared_runtime", "api", "database", "real_doctor_data", "real_identity", "real_member", "real_health_data", "internet_medical_service", "diagnosis", "prescription", "medication_change", "doctor_impersonation", "outcome_promise", "public_case_record", "open_case_grabbing", "doctor_bidding", "cure_bounty", "outcome_based_payment", "charging", "payment", "test_server_deployment", "production", "irreversible_operation"]
+}

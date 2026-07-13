@@ -1,0 +1,114 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260714-HEALTH-R5-CONSULTATION-SECOND-OPINION-MDT-C1-2",
+    "record_id":  "IR-20260714-HEALTH-R5-CONSULTATION-SECOND-OPINION-MDT-C1",
+    "actor":  "Health Manager continuous development agent",
+    "attempt_number":  2,
+    "status":  "passed",
+    "generated_at":  "2026-07-13T21:02:04.4806734Z",
+    "completed_at":  "2026-07-13T21:02:13.0972552Z",
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  100,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "b0df386a68e8e00a803a08d0b3e786893a47bad6742dd36a5b6273803b7abcb1",
+    "checklist_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r5-consultation-second-opinion-mdt-contracts/contracts/modules/health-manager/development-checklists/2026-07-14-health-r5-consultation-second-opinion-mdt.json",
+    "checklist_sha256":  "f044093837209b810602521aac1d2735a2045868ee9579ccb1d03522f52d64e7",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-008",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0007-stable-foundation-variable-business.md"
+                      },
+                      {
+                          "question_id":  "GQ-001",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "CONSTRAINTS.md"
+                      },
+                      {
+                          "question_id":  "GQ-007",
+                          "selected_option":  "A",
+                          "correct":  true,
+                          "source_path":  "AGENTS.md"
+                      },
+                      {
+                          "question_id":  "GQ-013",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0014-ai-development-flight-checklist.md"
+                      },
+                      {
+                          "question_id":  "GQ-009",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0010-ai-implementation-records-required.md"
+                      },
+                      {
+                          "question_id":  "GQ-016",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0013-mandatory-ai-development-entrypoint.md"
+                      },
+                      {
+                          "question_id":  "GQ-012",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "contracts/foundation/agent-collaboration.v1.json"
+                      },
+                      {
+                          "question_id":  "GQ-003",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0011-two-person-config-approval.md"
+                      }
+                  ],
+    "remediation_sources":  [
+
+                            ],
+    "previous_attempt_path":  "contracts/modules/health-manager/governance-exams/2026-07-14-health-r5-consultation-second-opinion-mdt-attempt-1.json",
+    "previous_attempt_sha256":  "a2663c59b5b50f8cec4ef52bce28f0fc927b3c8e1afbe57685eb6afa67227750",
+    "remediation_rereads":  [
+                                {
+                                    "source_path":  "AGENTS.md",
+                                    "presented_at":  "2026-07-13T21:02:04.4561322Z",
+                                    "presentation_sha256":  "242fb10e0e85b9336e774c30e512275a3d139b4c7b71a74583884753417e9881",
+                                    "presentation_nonce":  "bc23fa6ced7f402fabaf0bbeaa4844ca",
+                                    "confirmed_at":  "2026-07-13T21:02:04.4661389Z",
+                                    "source_sha256":  "242fb10e0e85b9336e774c30e512275a3d139b4c7b71a74583884753417e9881",
+                                    "confirmed_by":  "Health Manager continuous development agent",
+                                    "confirmation_method":  "interactive-path-nonce-after-full-output"
+                                },
+                                {
+                                    "source_path":  "docs/decisions/0008-versioned-business-variables.md",
+                                    "presented_at":  "2026-07-13T21:02:04.4691369Z",
+                                    "presentation_sha256":  "0a881479c7d96184098363511d0851181bcad63d1c29443531fc227aa1fe24a8",
+                                    "presentation_nonce":  "f8a938a55c2544349468fecda2a04fe3",
+                                    "confirmed_at":  "2026-07-13T21:02:04.4701413Z",
+                                    "source_sha256":  "0a881479c7d96184098363511d0851181bcad63d1c29443531fc227aa1fe24a8",
+                                    "confirmed_by":  "Health Manager continuous development agent",
+                                    "confirmation_method":  "interactive-path-nonce-after-full-output"
+                                },
+                                {
+                                    "source_path":  "docs/decisions/0012-two-strike-root-cause-rule.md",
+                                    "presented_at":  "2026-07-13T21:02:04.4721397Z",
+                                    "presentation_sha256":  "4207186ddd332684a8b8bbf7276b2fdca333898a6fbce1643e2d5e9b5f3dd4da",
+                                    "presentation_nonce":  "f4847ed70c694e79a7f49a080b64ea56",
+                                    "confirmed_at":  "2026-07-13T21:02:04.4721397Z",
+                                    "source_sha256":  "4207186ddd332684a8b8bbf7276b2fdca333898a6fbce1643e2d5e9b5f3dd4da",
+                                    "confirmed_by":  "Health Manager continuous development agent",
+                                    "confirmation_method":  "interactive-path-nonce-after-full-output"
+                                },
+                                {
+                                    "source_path":  "docs/decisions/0011-two-person-config-approval.md",
+                                    "presented_at":  "2026-07-13T21:02:04.4741396Z",
+                                    "presentation_sha256":  "2736e5c8584bd69f39bcfeb98dcdbb6c6a69b489f079487136502aff1e3272c1",
+                                    "presentation_nonce":  "a09e403cb9204d6ea7bf8db5fe2abdf9",
+                                    "confirmed_at":  "2026-07-13T21:02:04.4751393Z",
+                                    "source_sha256":  "2736e5c8584bd69f39bcfeb98dcdbb6c6a69b489f079487136502aff1e3272c1",
+                                    "confirmed_by":  "Health Manager continuous development agent",
+                                    "confirmation_method":  "interactive-path-nonce-after-full-output"
+                                }
+                            ]
+}
