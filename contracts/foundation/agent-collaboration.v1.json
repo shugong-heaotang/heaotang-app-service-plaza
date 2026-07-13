@@ -2769,7 +2769,7 @@
                            "title": "活动板块 V3.0 M0 治理与设计合同化",
                            "owner": "Activity V3 continuous development agent",
                            "owner_role": "活动板块 V3.0 持续负责人",
-                           "status": "planned",
+                           "status": "active",
                            "repository_root": "C:/Users/shugo/Documents/APP系统",
                            "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-activity-v3-m0",
                            "branch": "codex/activity-v3-m0",
@@ -2780,7 +2780,7 @@
                            ],
                            "started_with_clean_worktree": true,
                            "preexisting_changes_acknowledged": false,
-                           "migration_note": "用户于2026-07-13要求活动需求重新打磨完成前先不要动。现有工作树和证据原地保留，只读冻结；禁止继续checklist、合同、原型或业务编辑。恢复条件=用户明确确认活动需求定稿并重新授权启动；届时必须从最新权威HEAD重做scope与preflight。",
+                           "migration_note": "用户曾于2026-07-13要求活动需求重新打磨完成前先不要动，工作项一度只读冻结。用户随后明确要求继续技术开发并持续推进活动V3.0目标；平台新模块治理R1已独立Go并集成，activity worktree已受控快进至5d6d22b51b65abf87a5f7c9b9bdd419ce04dfd40。现恢复active，仅授权M0合同化范围；M1、部署、真实触达、验证码、消息、支付与生产仍禁止。next_gate=complete-current-activity-checklist-and-exam-100。",
                            "handoff_record": "docs/project-management/modules/activity/handoff-m0.md"
                        },
                                               {
