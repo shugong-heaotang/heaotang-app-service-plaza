@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-- 状态：R4、R6、R8、候选 dadcc42、71889d4、5d4d86e 与 14d209f 的 independent review 均为 No-Go 且保持不可覆盖；e079f0e 是第四次独立验收 Go 的 candidate，fbf6218 是其受控 integration exact。R20 正在整改 14d209f 的两个 P0 语义缺陷，等待新的独立复验，不包含 independent acceptance 或 integrated 结论。
+- 状态：R4、R6、R8、候选 dadcc42、71889d4、5d4d86e、14d209f 与 ed34542 的 independent review 均为 No-Go 且保持不可覆盖；e079f0e 是第四次独立验收 Go 的 candidate，fbf6218 是其受控 integration exact。R21 正在整改 ed34542 唯一 P0 命名授权缺陷，等待第三次独立复验，不包含 independent acceptance 或 integrated 结论。
 - 主因：业务工作被拆成多个长期并行治理项，Handoff 缺少决策时限，范围内下一检查点仍反复等待授权，平台集成负责人形成单点队列；原 R2 又只优化技术流，没有约束客户价值和商业结果。
 - 处置：以权威 HEAD `fbf621872372f5aac0cad604af1b1a428d5e3b6d` 创建独立 clean worktree，只登记 planned 工作项并刷新当前 next checkpoint；不实现业务代码或 validator。
 
@@ -233,3 +233,12 @@
 - R20 checklist 26/26、governance exam attempt 1 为 100；agent collaboration、delivery-flow、implementation-record、governance-exam validators、26项回归、Service Plaza 总合同、UTF-8 1377 文件、diff/scope/secret 门禁全部通过。
 - reviewer namespace 当前不存在；R20 未创建或激活任何 reviewer evidence 文件，planned bootstrap 的 5 项 allowed paths 与平台保护路径重叠数为 0。
 - R20 仅可提交推送等待独立复验；未写 independent acceptance、integration commit 或 integrated 状态。
+
+## ed34542 独立验收 No-Go 与 R21 整改
+
+- 验收对象：`ed345426923b2245a5ea21e8920a3a9616b5b56f`；reviewer bootstrap 角色、非保护 namespace 与未来 integration exact 激活顺序语义已通过复核，唯一 P0 为三份 R20 文件命名超出授权。
+- 原 delivery-flow active item 的既有 wildcard 仅授权 `contracts/foundation/{development-checklists,governance-exams,implementation-records}/2026-07-13-delivery-flow-optimization*.json`；R20 错用 `2026-07-14`，同提交不得追溯扩大 allowed_paths。
+- R21 删除未集成候选中的三份 `2026-07-14` R20 文件，使用既有 wildcard 重新生成 `2026-07-13-delivery-flow-optimization-r21.json` checklist/exam/IR；R19 保持不可修改。
+- reviewer bootstrap 继续保持 planned；owner role、非保护 future namespace、禁止创建 reviewer 文件及受控集成后刷新 future integration exact 的硬激活顺序不变。
+- R21 checklist 26/26、governance exam attempt 1 为 100；agent collaboration、delivery-flow、implementation-record、governance-exam validators、26项回归、Service Plaza 总合同、UTF-8 1377 文件全部通过。从 `fbf6218` 起算的累计差异为 8 个文件，全部命中原 delivery-flow allowed paths，越权数为 0，三份 `2026-07-14` R20 路径为 0。
+- 当前 verdict：R21 仅可提交推送等待第三次独立复验；未写 independent acceptance、integration commit 或 integrated 状态。

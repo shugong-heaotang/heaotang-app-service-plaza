@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-DELIVERY-FLOW-OPTIMIZATION-R21",
+  "title": "R21 治理证据命名授权整改",
+  "date": "2026-07-14",
+  "status": "implemented",
+  "objective": "删除未集成候选中越出既有 wildcard 的三份 2026-07-14 R20 证据，并在不扩大权限的前提下使用已授权 2026-07-13 delivery-flow 文件名完成 current 认证。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-13-delivery-flow-optimization-r21.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-13-delivery-flow-optimization-r21.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/service-plaza/project-status-one-page.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-13-delivery-flow-optimization-task-order.md", "docs/project-management/service-plaza/delivery-flow-optimization-2026-07-13.md"],
+  "capabilities": ["foundation.ai-collaboration-safety", "foundation.governance-certification", "foundation.contract-tooling"],
+  "contracts": ["contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/agent-collaboration.v1.schema.json", "contracts/foundation/delivery-flow-policy.v1.json"],
+  "decisions": ["docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"],
+  "changed_areas": ["contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/development-checklists/2026-07-13-delivery-flow-optimization-r21.json", "contracts/foundation/governance-exams/2026-07-13-delivery-flow-optimization-r21.json", "contracts/foundation/implementation-records/2026-07-13-delivery-flow-optimization-r21.json", "docs/project-management/service-plaza/delivery-flow-optimization-2026-07-13.md"],
+  "verification": ["R19 checklist exam and IR are unchanged", "three unauthorized 2026-07-14 R20 evidence paths are absent from the cumulative fbf6218 candidate diff", "R21 final current checklist completed 26 of 26", "R21 governance exam attempt 1 passed with score 100", "reviewer bootstrap remains planned and its semantics are unchanged", "no allowed_paths expansion was made", "cumulative fbf6218 diff contains 8 paths and unauthorized path count is 0", "agent collaboration delivery-flow implementation-record and governance-exam validators pass", "delivery-flow regression passes 26 of 26", "Service Plaza contract gate passes", "UTF-8 gate passes 1377 files", "cumulative diff and secret gates pass"],
+  "evidence": ["docs/project-management/service-plaza/delivery-flow-optimization-2026-07-13.md", "contracts/foundation/development-checklists/2026-07-13-delivery-flow-optimization-r21.json", "contracts/foundation/governance-exams/2026-07-13-delivery-flow-optimization-r21.json"],
+  "premises": ["ed345426923b2245a5ea21e8920a3a9616b5b56f remains No-Go", "R20 files from the unintegrated candidate are removed rather than retrospectively authorized", "R19 historical evidence remains immutable", "independent acceptance must bind to the newly pushed R21 exact commit"],
+  "implementation_mode": "ai-assisted"
+}
