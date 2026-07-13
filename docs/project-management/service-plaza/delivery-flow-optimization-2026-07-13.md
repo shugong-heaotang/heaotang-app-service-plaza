@@ -2,9 +2,9 @@
 
 ## 当前结论
 
-- 状态：R4、R6、R8、候选 dadcc42、71889d4 与 5d4d86e 的 independent review 均为 No-Go 且保持不可覆盖；R15/R16 已完成，刷新后的新候选等待第四次独立复验与受控集成
+- 状态：R4、R6、R8、候选 dadcc42、71889d4 与 5d4d86e 的 independent review 均为 No-Go 且保持不可覆盖；e079f0e 已通过第四次独立复验并受控集成为 fbf6218。R19 仅登记后续授权候选，等待新的独立复验，不包含 independent acceptance 或 integrated 结论。
 - 主因：业务工作被拆成多个长期并行治理项，Handoff 缺少决策时限，范围内下一检查点仍反复等待授权，平台集成负责人形成单点队列；原 R2 又只优化技术流，没有约束客户价值和商业结果。
-- 处置：同步权威 HEAD `094bafdbba48c84f41611ca541c8225e4de4a8dd`，升级 `delivery-flow-policy.v1`、机器校验和商业价值门禁。
+- 处置：以权威 HEAD `fbf621872372f5aac0cad604af1b1a428d5e3b6d` 创建独立 clean worktree，只登记 planned 工作项并刷新当前 next checkpoint；不实现业务代码或 validator。
 
 ## 任务理解回执
 
@@ -179,3 +179,29 @@
 - R17 入口检查单 26/26、考试 100；顶部状态和 registry 均已刷新为第四次独立复验与受控集成。
 - R18 最终 current 检查单 26/26、考试 100；历史 No-Go 正文未覆盖。
 - verdict：新候选仅可提交推送并等待第四次独立验收，实施负责人不得自行集成。
+
+## R19 平台 registry 合法派发候选
+
+### 当前认证
+
+- 权威 base：`fbf621872372f5aac0cad604af1b1a428d5e3b6d`；独立 worktree：`C:/Users/shugo/Documents/worktrees/heaotang-platform-governance-dispatch-20260713`；分支：`codex/platform-governance-dispatch-20260713`。
+- R19 current checklist：26/26；governance exam attempt 1：100 分。
+- 本轮只修改已授权 registry、R19 checklist/exam/IR 与本 Handoff；未修改 R15、R17、R18，未实现业务代码或 validator。
+
+### Planned 授权登记
+
+- `AIW-20260713-DELIVERY-FLOW-OPTIMIZATION-INDEPENDENT-ACCEPTANCE`：独立 reviewer 使用专用 branch/worktree；allowed paths 仅含独立 evidence、task、checklist、exam、IR，不含 registry。激活时必须绑定待验 pushed exact commit。
+- `AIW-20260713-ACTION-TELEMETRY-BUSINESSCONFIG-R2-ACCEPTANCE`：APP 单仓新证据项，只允许平台 owner 写 registry、current checklist/exam/IR/Handoff；后端验收对象为 `a0b21cf37cde5cb17002e08e8c6817527efe8686`，禁止复活旧 integrated evidence item。
+- `AIW-20260713-PLATFORM-EXAM-IR-CROSS-RECORD-GATE-R1`：planned validator repair，目标是让 failed exam 与 IR/Handoff 的 exam100/verified 矛盾失败关闭；其 allowed paths 按审计涉及的 exam validator、IR validator、对应测试、总合同入口及治理证据配置。
+
+### NOVA R2 串行条件
+
+- `AIW-20260713-PLATFORM-NOVA-OVERLAY-R2` 保持 `planned`，owner、branch/worktree、17 项 allowed paths、NOVA 与 Protection Mall 全扫描、第三次复发 ADR/CONSTRAINTS 范围均保留。
+- NOVA R2 与 cross-record gate 共享 `scripts/Test-ServicePlazaContracts.ps1`；二者禁止同时进入 `active` 或 `handoff-ready`，必须由平台 owner 从最新 exact base 串行激活。
+
+### Handoff
+
+- 门禁：agent collaboration、delivery-flow、implementation-record、governance-exam validators 全部通过；delivery-flow 回归 26/26；Service Plaza 总合同通过；UTF-8 1374 文件通过；`git diff --check`、secret 与 allowed scope 检查通过。
+- 当前 verdict：authorization candidate only；等待独立复验，登记负责人不得自行验收或集成。
+- 未写 `independent_acceptance`、`integration_commit` 或任何 `integrated` 状态。
+- next checkpoint：提交并推送 exact candidate，由独立验收负责人复核 registry 字段、串行激活条件、范围、测试与证据新鲜度。
