@@ -1,0 +1,65 @@
+{
+  "contract_version": "module-internal-dependencies.v1",
+  "module_id": "learning-plaza",
+  "module_version": "v1",
+  "slice_id": "m0-core-contract",
+  "development_readiness": "go",
+  "acceptance_readiness": "partial-go",
+  "dependencies": [
+    {
+      "dependency_id": "learning.core-model",
+      "kind": "data",
+      "description": "资源、路径、进度、成果、共学和Nova引用六域已版本化。",
+      "status": "standardized",
+      "required_for_slice": true,
+      "depends_on": [],
+      "contracts": ["contracts/modules/learning-plaza/m0/learning-plaza-core.v1.json"],
+      "evidence": ["docs/project-management/modules/learning-plaza/m0-conformance-report.md"],
+      "unresolved": []
+    },
+    {
+      "dependency_id": "learning.visibility-policy",
+      "kind": "policy",
+      "description": "public/login/club_member/private 可见性以服务端资源归属失败关闭。",
+      "status": "standardized",
+      "required_for_slice": true,
+      "depends_on": ["learning.core-model"],
+      "contracts": ["contracts/modules/learning-plaza/m0/learning-plaza-core.v1.json"],
+      "evidence": ["contracts/modules/learning-plaza/m0/fixtures/cases.v1.json"],
+      "unresolved": ["真实俱乐部会员查询端口仍为provisional，M1调用前需owner确认"]
+    },
+    {
+      "dependency_id": "learning.progress-workflow",
+      "kind": "workflow",
+      "description": "学习进度和完成事件使用显式状态机及幂等键。",
+      "status": "standardized",
+      "required_for_slice": true,
+      "depends_on": ["learning.core-model", "learning.visibility-policy"],
+      "contracts": ["contracts/modules/learning-plaza/m0/learning-plaza-core.v1.json"],
+      "evidence": ["contracts/modules/learning-plaza/m0/fixtures/cases.v1.json"],
+      "unresolved": []
+    },
+    {
+      "dependency_id": "learning.cross-module-ports",
+      "kind": "interface",
+      "description": "生命导航推荐、俱乐部会员、Nova引用和完成回写只通过版本化端口连接。",
+      "status": "standardized",
+      "required_for_slice": true,
+      "depends_on": ["learning.core-model"],
+      "contracts": ["contracts/modules/learning-plaza/m0/learning-plaza-core.v1.json"],
+      "evidence": ["docs/project-management/modules/learning-plaza/m0-conformance-report.md"],
+      "unresolved": ["四个真实端口的owner确认和运行版本留待M1派发；当前provisional调用一律失败关闭"]
+    },
+    {
+      "dependency_id": "learning.m0-acceptance",
+      "kind": "acceptance",
+      "description": "确定性正负例和平台依赖解析已通过，等待独立验收。",
+      "status": "implemented",
+      "required_for_slice": true,
+      "depends_on": ["learning.visibility-policy", "learning.progress-workflow", "learning.cross-module-ports"],
+      "contracts": ["contracts/modules/learning-plaza/m0/validate_learning_plaza_m0.py"],
+      "evidence": ["docs/project-management/modules/learning-plaza/m0-conformance-report.md"],
+      "unresolved": ["独立验收未完成，因此M0尚不能标记Go或integrated"]
+    }
+  ]
+}

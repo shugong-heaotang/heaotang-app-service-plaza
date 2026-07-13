@@ -1,0 +1,18 @@
+{
+  "receipt_version": "task-comprehension-receipt.v1",
+  "work_id": "AIW-20260713-LEARNING-PLAZA-M0",
+  "actor": "Learning Plaza continuous development agent",
+  "understood_goal": "把学习广场六个核心板块和生命导航、俱乐部、Nova之间的首条成长闭环转为离线可验证合同，以暴露平台级边界缺口。",
+  "non_goals": ["不实现正式页面或API", "不创建数据库", "不部署测试服或生产", "不开发完整阅读器", "不触达真实用户、消息或支付"],
+  "allowed_paths": ["contracts/modules/learning-plaza/**", "docs/project-management/modules/learning-plaza/**"],
+  "forbidden_actions": ["修改foundation或其他模块", "修改app/src或后端", "调用真实跨模块服务", "把Nova参考实现视为平台已集成", "自我批准M0"],
+  "dependencies": ["foundation L0-L5 verified/deployed capabilities", "life-navigation recommendation port", "club membership visibility port", "Nova grounded assistance port", "versioned completion-event port"],
+  "risks": ["参考实现与权威平台状态分叉", "资源版权和可见性边界未冻结", "进度和完成事件重复或越权", "AI无引用回答", "跨模块直接写库形成耦合"],
+  "stop_conditions": ["工作项或路径发生重叠", "治理哈希漂移", "跨模块owner/version无法确认且调用未失败关闭", "需要真实数据或环境权限", "合同测试出现未关闭失败"],
+  "developer_role": "学习广场持续开发负责人",
+  "reviewer_role": "学习广场独立验收负责人",
+  "approver_role": "项目最高负责人",
+  "acceptance_evidence": ["current checklist 28/28", "governance exam 100/100", "deterministic positive and negative fixtures", "UTF-8 and diff gates", "independent M0 acceptance"],
+  "source_hashes": ["nova-phase5:c158b2087d54e026ab385eec7850c105894b33d0", "plan-v2.1:70C879B1BA1FA45670ACAAEA8E2CAB4E815CB0F48105845E25BC58ED4A76AFF5", "design-v2.1:65D96C58E129A9652A7A0BB7A331A2E5EF0764CF80D2603E9ADD5196F90BC581"],
+  "created_at": "2026-07-13T13:05:00+08:00"
+}

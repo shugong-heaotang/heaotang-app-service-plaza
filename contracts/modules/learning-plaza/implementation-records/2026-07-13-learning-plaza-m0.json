@@ -1,0 +1,83 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-LEARNING-PLAZA-M0",
+  "title": "学习广场 M0 核心体系合同化与离线闭环",
+  "date": "2026-07-13",
+  "status": "implemented",
+  "objective": "把学习广场六个核心域、四级可见性和跨模块成长闭环转为失败关闭的可执行离线合同。",
+  "governance_checklist": "contracts/modules/learning-plaza/development-checklists/2026-07-13-learning-plaza-m0.json",
+  "governance_exam": "contracts/modules/learning-plaza/governance-exams/2026-07-13-learning-plaza-m0-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/foundation-capabilities.v1.json",
+    "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/dependency-driven-master-plan-v1.md",
+    "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md",
+    "docs/project-management/notices/2026-07-13-learning-plaza-m0-task-order.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-13-learning-plaza-m0-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.service-action-contracts",
+    "foundation.identity-api",
+    "foundation.authorization-idempotency",
+    "foundation.contract-tooling",
+    "foundation.observability-config",
+    "foundation.delivery-recovery",
+    "foundation.app-shell-adapter"
+  ],
+  "contracts": [
+    "contracts/modules/learning-plaza/platform-dependencies.v1.json",
+    "contracts/modules/learning-plaza/internal-dependencies.v1.json",
+    "contracts/modules/learning-plaza/m0/learning-plaza-core.v1.json",
+    "contracts/modules/learning-plaza/m0/learning-plaza-core.v1.schema.json",
+    "contracts/modules/learning-plaza/m0/fixtures/cases.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/modules/learning-plaza",
+    "docs/project-management/modules/learning-plaza"
+  ],
+  "verification": [
+    "current checklist 28/28",
+    "governance exam 100/100",
+    "platform dependencies 9/9",
+    "deterministic fixtures 16/16",
+    "module internal dependency schema gate",
+    "UTF-8 gate",
+    "git diff check"
+  ],
+  "evidence": [
+    "docs/project-management/modules/learning-plaza/task-comprehension-receipt-m0.json",
+    "docs/project-management/modules/learning-plaza/m0-conformance-report.md",
+    "docs/project-management/modules/learning-plaza/system-gap-hypotheses-m0.md",
+    "docs/project-management/modules/learning-plaza/handoff-m0.md"
+  ],
+  "premises": [
+    "M0 remains mock-only and non-production",
+    "all cross-module runtime ports remain provisional and fail closed",
+    "independent acceptance is required before M0 Go or integration",
+    "M1, deployment and production require separate authorization",
+    "Nova reference commit c158b2087d54e026ab385eec7850c105894b33d0 and source hashes are fixed in the task order"
+  ],
+  "implementation_mode": "ai-assisted"
+}
