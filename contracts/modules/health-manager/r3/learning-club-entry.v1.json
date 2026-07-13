@@ -1,0 +1,89 @@
+{
+  "contract_version": "health-manager.r3.learning-club-entry.v1",
+  "module_id": "health-manager",
+  "checkpoint": "R3-C1",
+  "status": "contract-frozen-awaiting-independent-review",
+  "synthetic_only": true,
+  "executable": false,
+  "source": {
+    "path": "C:/Users/shugo/Documents/项目最高负责人/health-cross-module-requirements/健康大管家-大益健康馆-学习广场-健康俱乐部需求补充-v1.0.md",
+    "sha256": "fc07676f9d0ab0dbaf1a4575457e4d1a67d642d1c483187e28a5b2c64e2a9012",
+    "authorization": "synthetic-contract-and-negative-test-only"
+  },
+  "authority_snapshots": [
+    {
+      "authority_id": "learning-plaza",
+      "owns": ["learning_resource", "learning_path", "learning_note", "learning_progress", "learning_completion"],
+      "minimum_summary_fields": ["currently_learning", "recently_completed", "recommended_learning", "resource_reference"],
+      "canonical_route": "/services/learning-plaza",
+      "health_manager_permissions": ["read_authorized_minimum_summary", "navigate_to_authority"],
+      "forbidden": ["copy_learning_progress", "mutate_learning_progress", "create_learning_resource", "auto_write_completion_to_health_record"]
+    },
+    {
+      "authority_id": "club-alliance",
+      "owns": ["club_membership", "club_activity", "club_feedback", "club_content_governance"],
+      "minimum_summary_fields": ["visible_club_card", "member_join_status", "join_mode", "safety_notice"],
+      "canonical_route": "/services/club-alliance",
+      "health_manager_permissions": ["read_authorized_minimum_summary", "navigate_to_authority"],
+      "forbidden": ["read_full_health_profile", "mutate_club_membership", "create_club_activity", "auto_write_activity_to_health_record"]
+    }
+  ],
+  "summary_access_policy": {
+    "authorization_required": true,
+    "data_minimization_required": true,
+    "source_authority_required": true,
+    "source_version_required": true,
+    "member_scope": "self_only",
+    "fail_closed_conditions": ["missing_authorization", "expired_authorization", "unknown_source_authority", "missing_source_version", "summary_field_not_allowlisted"]
+  },
+  "navigation_policy": {
+    "mode": "canonical_route_only",
+    "authority_retains_write_ownership": true,
+    "no_shared_database_write": true,
+    "health_manager_action": "display_summary_then_navigate",
+    "prohibited": ["embedded_authority_write_form", "route_spoofing", "cross_module_database_write", "health_manager_state_replica_as_authority"]
+  },
+  "member_confirmed_return": {
+    "eligible_sources": ["learning_completion_feedback", "club_activity_feedback"],
+    "explicit_member_confirmation_required": true,
+    "target_review_required": true,
+    "target_record_class": "health_management_record_candidate",
+    "required_fields": ["source_authority", "source_reference", "source_version", "member_confirmation_id", "confirmed_at", "responsible_actor_id", "target_review_status"],
+    "prohibited": ["automatic_return", "unconfirmed_return", "direct_health_record_write", "medical_record_promotion", "health_improvement_claim_from_completion"]
+  },
+  "module_isolation": {
+    "shared_database_tables": false,
+    "health_manager_owns_learning_or_club_state": false,
+    "club_full_health_profile_default_access": false,
+    "forbidden": ["health_manager_mutates_learning_progress", "health_manager_mutates_club_membership", "learning_or_club_directly_mutates_health_record", "club_admin_reads_full_health_profile_without_separate_authorization"]
+  },
+  "ai_boundary": {
+    "allowed": ["organize_authorized_synthetic_summary", "identify_missing_summary_fields", "match_reviewed_learning_or_club_candidates", "explain_recommendation_and_uncertainty", "prepare_member_confirmed_feedback_for_human_review"],
+    "forbidden": ["diagnose", "prescribe", "change_medication", "impersonate_doctor", "promise_health_improvement", "auto_confirm_return", "close_professional_risk", "close_emergency_risk", "expand_authorization_scope"]
+  },
+  "pending_signoffs": [
+    {"signoff_id": "privacy-legal", "owner": "隐私与法律负责人", "status": "pending-with-owner", "executable": false, "blocks": ["real_identity", "real_health_data", "cross_module_runtime_authorization"]},
+    {"signoff_id": "medical-quality", "owner": "医生集团医疗质量负责人", "status": "pending-with-owner", "executable": false, "blocks": ["health_content_medical_claim", "professional_policy_execution"]},
+    {"signoff_id": "platform-security", "owner": "平台安全负责人", "status": "pending-with-owner", "executable": false, "blocks": ["shared_runtime", "api", "database", "environment"]},
+    {"signoff_id": "module-operations", "owner": "学习广场、俱乐部联盟与健康馆运营负责人", "status": "pending-with-owner", "executable": false, "blocks": ["real_catalog", "real_membership", "real_member_pilot"]}
+  ],
+  "acceptance_scenarios": [
+    {"scenario_id": "R3-A001", "polarity": "positive", "assertion": "authorized_learning_summary_uses_allowlist_and_canonical_route"},
+    {"scenario_id": "R3-A002", "polarity": "positive", "assertion": "authorized_club_summary_uses_allowlist_and_canonical_route"},
+    {"scenario_id": "R3-A003", "polarity": "positive", "assertion": "member_confirmed_feedback_preserves_source_version_actor_and_review"},
+    {"scenario_id": "R3-A004", "polarity": "positive", "assertion": "learning_and_club_authorities_retain_all_write_ownership"},
+    {"scenario_id": "R3-A005", "polarity": "negative", "assertion": "reject_missing_authorization_or_excess_summary_field"},
+    {"scenario_id": "R3-A006", "polarity": "negative", "assertion": "reject_noncanonical_or_spoofed_authority_route"},
+    {"scenario_id": "R3-A007", "polarity": "negative", "assertion": "reject_cross_module_direct_database_write"},
+    {"scenario_id": "R3-A008", "polarity": "negative", "assertion": "reject_health_manager_authority_capture"},
+    {"scenario_id": "R3-A009", "polarity": "negative", "assertion": "reject_automatic_or_unconfirmed_return"},
+    {"scenario_id": "R3-A010", "polarity": "negative", "assertion": "reject_return_missing_source_version_actor_or_target_review"},
+    {"scenario_id": "R3-A011", "polarity": "negative", "assertion": "reject_club_full_health_profile_default_access"},
+    {"scenario_id": "R3-A012", "polarity": "negative", "assertion": "reject_ai_medical_action_or_risk_closure"},
+    {"scenario_id": "R3-A013", "polarity": "negative", "assertion": "reject_premature_signoff_or_executable_contract"},
+    {"scenario_id": "R3-A014", "polarity": "negative", "assertion": "reject_real_data_runtime_payment_deployment_or_production_authorization"}
+  ],
+  "blocks": ["runtime_implementation", "real_identity", "real_health_data", "medical_service", "charging", "deployment", "production"],
+  "does_not_block": ["synthetic_contract_conformance", "negative_test_design", "independent_r3_contract_review", "r4_task_planning_after_r3_controlled_integration"],
+  "no_go": ["business_code", "shared_runtime", "api", "database", "cross_module_direct_write", "real_identity", "real_member", "real_health_data", "internet_medical_service", "diagnosis", "prescription", "medication_change", "charging", "payment", "test_server_deployment", "production", "irreversible_operation"]
+}
