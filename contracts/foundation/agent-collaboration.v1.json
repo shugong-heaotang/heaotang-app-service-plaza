@@ -650,6 +650,31 @@
       "handoff_record": "docs/project-management/service-plaza/frontend-deploy-atomic-2026-07-11.md"
     },
     {
+      "work_id": "AIW-20260711-MODULE-M01-DISPATCH",
+      "title": "健康大管家与俱乐部联盟 M0/M1 正式派发",
+      "owner": "Codex platform integration agent",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-module-m01-dispatch",
+      "branch": "codex/module-m01-dispatch",
+      "base_commit": "d6cabc1d1c28ea83e45f9df2b3026c6cd668b114",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-11-module-m01-dispatch.json",
+        "contracts/foundation/governance-exams/2026-07-11-module-m01-dispatch-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-11-module-m01-dispatch.json",
+        "docs/project-management/notices/2026-07-11-health-manager-first-phase-task-order.md",
+        "docs/project-management/notices/2026-07-11-club-alliance-first-phase-task-order.md",
+        "docs/project-management/service-plaza/module-m01-dispatch-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "平台负责人先登记本次治理派发工作项；只授权 M0/M1，不提前授权 M2 业务编码。",
+      "handoff_record": null
+    },
+    {
       "work_id": "AIW-20260711-SECURE-MODULE-API-ACCEPTANCE",
       "title": "三大核心服务安全取码与部署后 API 验收标准化",
       "owner": "Codex platform integration agent",
