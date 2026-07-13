@@ -1,0 +1,70 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260712-NOVA-M2-PEOPLE-TOOLS-CONTRACT-R1-1",
+    "record_id":  "IR-20260712-NOVA-M2-PEOPLE-TOOLS-CONTRACT-R1",
+    "actor":  "NOVA tool contract signoff agent",
+    "attempt_number":  1,
+    "status":  "passed",
+    "generated_at":  "2026-07-12T09:29:37.2954301Z",
+    "completed_at":  "2026-07-12T09:29:43.5409196Z",
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  100,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "a5db9ef44414b457d8bec993538b1023800ed36bca7cd70c07ba64025fe243ac",
+    "checklist_path":  "contracts/foundation/development-checklists/2026-07-12-nova-m2-people-tools-contract-r1.json",
+    "checklist_sha256":  "7057109dec750e252f51a8989971feb32039acdb2719a24f4a1a528b3875aea2",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-013",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0014-ai-development-flight-checklist.md"
+                      },
+                      {
+                          "question_id":  "GQ-007",
+                          "selected_option":  "A",
+                          "correct":  true,
+                          "source_path":  "AGENTS.md"
+                      },
+                      {
+                          "question_id":  "GQ-002",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0008-versioned-business-variables.md"
+                      },
+                      {
+                          "question_id":  "GQ-004",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+                      },
+                      {
+                          "question_id":  "GQ-006",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/project-management/ai-coding-incident-lessons-2026-07-10.md"
+                      },
+                      {
+                          "question_id":  "GQ-011",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/project-management/module-internal-dependency-standard-v1.md"
+                      },
+                      {
+                          "question_id":  "GQ-005",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+                      },
+                      {
+                          "question_id":  "GQ-010",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0012-two-strike-root-cause-rule.md"
+                      }
+                  ],
+    "remediation_sources":  [
+
+                            ]
+}

@@ -1,0 +1,41 @@
+{
+  "contract_version": "life-navigation-m4-local-gates.v1",
+  "recorded_at": "2026-07-11T01:57:34+08:00",
+  "verdict": "pass",
+  "overall_m4_verdict": "no-go",
+  "frontend": {
+    "branch": "codex/life-navigation-application-history",
+    "functional_commits": [
+      "9a2717f708a1d6ac5d6e47c26991d219e61e598c",
+      "e6243e186b322404e50cf80419ee6c210c335098",
+      "be1b26aab5e85fe63c4494689e1b6551a4417718"
+    ],
+    "route_test": { "files": 1, "tests": 4, "passed": true },
+    "full_test": { "files": 15, "tests": 90, "passed": true },
+    "production_build": true,
+    "test_server_build": true,
+    "test_server_route": "services/life-navigation",
+    "route_index_present": true
+  },
+  "backend": {
+    "root": "C:/Users/shugo/Documents/worktrees/heaotang-life-m1-backend/backend-go",
+    "commit": "70fa12276e6eac17369c0d1d3c1d23a8e757fcc0",
+    "worktree_clean_at_preflight": true,
+    "go_test_all": true,
+    "go_vet_all": true,
+    "default_backend_root_used": false
+  },
+  "governance": {
+    "record_id": "IR-20260711-LIFE-APPLICATION-HISTORY-M4",
+    "checklist_items": 31,
+    "checklist_current_hashes": true,
+    "exam_attempt": 1,
+    "exam_score": 100,
+    "preflight_status": "ready"
+  },
+  "deployment_script_parse_errors": 0,
+  "notes": [
+    "Local gates authorize M4 execution but do not constitute M4 Go.",
+    "The default heaotang-main backend root and its unowned app/dist changes were not used or modified."
+  ]
+}

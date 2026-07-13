@@ -95,6 +95,87 @@
       "systemic_fix": "一任务一分支一工作树，活动范围互斥；平台公共路径归平台集成负责人；以基线、实现记录和 Handoff 受控合并。",
       "prevention_gates": ["contracts/foundation/agent-collaboration.v1.json", "scripts/validate_agent_collaboration.py", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"],
       "regression_evidence": []
+    },
+    {
+      "pattern_id": "RI-TEST-OTP-CAPACITY-NOT-RESERVED",
+      "title": "测试验收在发送验证码前未核对并预留 UTC 日额度",
+      "occurrence_count": 2,
+      "status": "implemented",
+      "owner_role": "平台集成负责人",
+      "root_cause": "测试账号计划只预算当前步骤的发送次数，没有在 API 与受控浏览器分别建立会话前读取服务端当日累计消耗，也没有把不同验收表面的独立会话计入同一账号容量。",
+      "occurrences": [
+        { "date": "2026-07-11", "summary": "生命导航 M4 前置阶段曾因验证码发送频率受限调整账号会话计划", "evidence": "docs/project-management/modules/life-navigation/LN-M4-001-preflight-plan.md" },
+        { "date": "2026-07-11", "summary": "API UAT 后浏览器需要独立会话，但主账号当日 5 次额度已耗尽，登录后 UAT 无法执行", "evidence": "docs/project-management/modules/life-navigation/LN-M4-001-handoff.md" }
+      ],
+      "systemic_fix": "所有需要发送验证码的 API、浏览器和管理验收在开始前，按测试账号和验收表面汇总所需独立会话；使用只读门禁核对服务端 SQLite UTC 日计数，容量不足即失败关闭，不换号、不清计数、不改限流。",
+      "prevention_gates": ["scripts/Test-TestAccountOtpCapacity.ps1"],
+      "regression_evidence": ["docs/project-management/service-plaza/test-account-otp-capacity-gate-2026-07-11.md"]
+    },
+    {
+      "pattern_id": "RI-CURRENT-CHECKLIST-MUTABLE-OVERLAY",
+      "title": "切片成果更新必读 overlay 后使入口检查单不再 current",
+      "occurrence_count": 2,
+      "status": "implemented",
+      "owner_role": "平台集成负责人",
+      "root_cause": "派发只授权了入口检查单和第一次考试，却同时把本切片必须更新的 internal-dependencies.v1.json 纳入模块 overlay；入口时 SHA 正确，成果落盘后必然发生治理输入自修改，而旧快照又不可改写。",
+      "occurrences": [
+        { "date": "2026-07-12", "summary": "健康大管家 MVP-90 M0 更新内部依赖后，原 FC/Exam 无法作为最终 current 证据", "evidence": "docs/project-management/service-plaza/governance-current-snapshot-self-reference-2026-07-12.md" },
+        { "date": "2026-07-12", "summary": "生命导航 LN-S2 P0/P1 更新内部依赖后触发相同的最终 current SHA 漂移", "evidence": "docs/project-management/service-plaza/governance-current-snapshot-self-reference-2026-07-12.md" }
+      ],
+      "systemic_fix": "派发阶段识别同时属于治理 overlay 与切片输出的可变文件，预先授权入口快照和最终 R2 current 快照；入口快照保留为不可修改历史，最终成果落盘后重新全文读取、重新考试并由 R2 IR 收口。",
+      "prevention_gates": ["contracts/foundation/agent-collaboration.v1.json", "scripts/validate_development_checklists.py", "scripts/validate_governance_exams.py"],
+      "regression_evidence": ["docs/project-management/service-plaza/governance-current-snapshot-self-reference-2026-07-12.md"]
+    },
+    {
+      "pattern_id": "RI-INTEGRATION-AUTHORITY-DIVERGENCE",
+      "title": "多个平台工作树从过期基线向同一权威集成分支形成分叉",
+      "occurrence_count": 2,
+      "status": "implemented",
+      "owner_role": "平台集成负责人",
+      "root_cause": "协作注册表只隔离文件路径，没有把权威集成分支的推送租约建模为共享门禁；多个平台执行者可以从各自干净但已过期的基线形成提交，而普通推送前没有统一核对远端精确 HEAD、候选 ancestry、ahead/behind 和 expected lease。",
+      "occurrences": [
+        {
+          "date": "2026-07-13",
+          "summary": "本地保障商城 M1 集成链 7d638e3 与远端健康 F1 权威链 034e46b 从 cd2bbae 分叉",
+          "evidence": "docs/project-management/service-plaza/platform-integration-divergence-reconciliation-2026-07-13.md"
+        },
+        {
+          "date": "2026-07-13",
+          "summary": "本地活动 V3 M0 激活提交 bb9e717 与远端健康 F2 freshness 权威链 6f4f904 从 e947d70 再次分叉",
+          "evidence": "docs/project-management/service-plaza/platform-integration-freshness-gate-2026-07-13.md"
+        }
+      ],
+      "systemic_fix": "建立版本化 integration push policy 和共享 PowerShell freshness gate；每次推送先 fetch，核对调用者 expected remote HEAD、候选包含远端历史、behind=0、codex 分支和 clean worktree，再用精确 force-with-lease 执行并复核远端结果；任何失败禁止普通 push、重试覆盖或强推回退。",
+      "prevention_gates": [
+        "contracts/foundation/integration-push-policy.v1.json",
+        "scripts/Test-IntegrationPushFreshness.ps1",
+        "scripts/validate_integration_push_policy.py",
+        "scripts/tests/test_integration_push_freshness.py"
+      ],
+      "regression_evidence": [
+        "docs/project-management/service-plaza/platform-integration-freshness-gate-2026-07-13.md"
+      ]
+    },
+    {
+      "pattern_id": "RI-NEW-MODULE-CHECKLIST-BOOTSTRAP",
+      "title": "新模块因检查单硬编码枚举和缺失 overlay 被迫生成 core-only 证据",
+      "occurrence_count": 2,
+      "status": "implemented",
+      "owner_role": "平台集成负责人",
+      "root_cause": "New-AgentDevelopmentChecklist.ps1 维护了独立于 governance-reading-list 的 ValidateSet，且新模块正式产物必须在考试后创建，形成模块 overlay 与检查单的冷启动循环；历史执行者因此省略 ModuleId，生成 module_id=null 的 core-only 完成态快照。",
+      "occurrences": [
+        { "date": "2026-07-12", "summary": "network 与 protection-mall 四份模块检查单以 module_id=null、26项 core-only 状态完成", "evidence": "docs/project-management/service-plaza/new-module-governance-bootstrap-audit-2026-07-13.md" },
+        { "date": "2026-07-13", "summary": "activity V3 M0 使用 ModuleId=activity 时被硬编码 ValidateSet 拒绝，且 reading list 尚无 activity bootstrap overlay", "evidence": "docs/project-management/notices/2026-07-13-platform-new-module-bootstrap-r1-task-order.md" }
+      ],
+      "systemic_fix": "模块 ID 只从 governance-reading-list 动态解析；为 activity 建立平台 bootstrap overlay；未知、空和缺失 overlay 失败关闭；共享测试门禁拒绝新增模块目录下 module_id=null 或缺失注册 overlay 的完成态检查单。",
+      "prevention_gates": [
+        "scripts/New-AgentDevelopmentChecklist.ps1",
+        "scripts/tests/test_new_agent_development_checklist.py"
+      ],
+      "regression_evidence": [
+        "docs/project-management/service-plaza/new-module-governance-bootstrap-audit-2026-07-13.md",
+        "docs/project-management/service-plaza/platform-new-module-bootstrap-r1-handoff.md"
+      ]
     }
   ]
 }

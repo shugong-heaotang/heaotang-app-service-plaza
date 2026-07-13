@@ -1,0 +1,81 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/foundation/integration-push-policy.v1.schema.json",
+  "title": "Heaotang authoritative integration push policy v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "policy_id",
+    "authority",
+    "candidate",
+    "freshness",
+    "failure_mode",
+    "third_recurrence_action",
+    "error_ids"
+  ],
+  "properties": {
+    "contract_version": { "const": "integration-push-policy.v1" },
+    "policy_id": { "const": "service-plaza-authoritative-integration" },
+    "authority": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["remote", "branch"],
+      "properties": {
+        "remote": { "const": "origin" },
+        "branch": { "const": "codex/service-plaza-phase1-integration" }
+      }
+    },
+    "candidate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["allowed_branch_prefix", "require_clean_worktree", "require_remote_ancestor", "max_behind_count"],
+      "properties": {
+        "allowed_branch_prefix": { "const": "codex/" },
+        "require_clean_worktree": { "const": true },
+        "require_remote_ancestor": { "const": true },
+        "max_behind_count": { "const": 0 }
+      }
+    },
+    "freshness": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "fetch_before_validation",
+        "require_expected_remote_head",
+        "require_remote_head_unchanged_before_push",
+        "require_explicit_lease",
+        "forbid_unleased_force"
+      ],
+      "properties": {
+        "fetch_before_validation": { "const": true },
+        "require_expected_remote_head": { "const": true },
+        "require_remote_head_unchanged_before_push": { "const": true },
+        "require_explicit_lease": { "const": true },
+        "forbid_unleased_force": { "const": true }
+      }
+    },
+    "failure_mode": { "const": "fail-closed" },
+    "third_recurrence_action": { "const": "ADR-CONSTRAINTS-AND-FULL-DEPENDENT-AUDIT" },
+    "error_ids": {
+      "type": "array",
+      "minItems": 11,
+      "maxItems": 11,
+      "uniqueItems": true,
+      "prefixItems": [
+        { "const": "INTEGRATION_REPOSITORY_INVALID" },
+        { "const": "INTEGRATION_WORKTREE_DIRTY" },
+        { "const": "INTEGRATION_CANDIDATE_BRANCH_INVALID" },
+        { "const": "INTEGRATION_EXPECTED_REMOTE_INVALID" },
+        { "const": "INTEGRATION_REMOTE_UNAVAILABLE" },
+        { "const": "INTEGRATION_REMOTE_HEAD_CHANGED" },
+        { "const": "INTEGRATION_CANDIDATE_INVALID" },
+        { "const": "INTEGRATION_REMOTE_NOT_ANCESTOR" },
+        { "const": "INTEGRATION_CANDIDATE_BEHIND" },
+        { "const": "INTEGRATION_LEASE_PUSH_FAILED" },
+        { "const": "INTEGRATION_POST_PUSH_MISMATCH" }
+      ],
+      "items": false
+    }
+  }
+}

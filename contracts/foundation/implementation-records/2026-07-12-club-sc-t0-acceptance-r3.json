@@ -1,0 +1,97 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-CLUB-SC-T0-ACCEPTANCE-R3",
+  "title": "CA-SC 自建俱乐部测试环境 T0 验收",
+  "date": "2026-07-12",
+  "status": "deployed",
+  "objective": "使用固定 seed 合成数据在测试环境验证自建俱乐部标准首页进入、standard+general 权威列表、安全详情、加入申请和本人状态闭环，并完成备份、失败注入回滚、脱敏证据和 fixture 清理。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-club-sc-t0-acceptance-r3.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-club-sc-t0-acceptance-r3-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md",
+    "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json",
+    "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md",
+    "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md",
+    "contracts/foundation/module-dependencies/club-alliance.v1.json",
+    "contracts/modules/club-alliance/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-club-sc-t0-acceptance-task-order.md",
+    "docs/project-management/modules/club-alliance/self-created/CA-SC-P0-P1-requirements.md",
+    "docs/project-management/modules/club-alliance/self-created/CA-SC-frontend-report.md"
+  ],
+  "capabilities": [
+    "foundation.identity-api",
+    "foundation.contract-tooling",
+    "foundation.delivery-recovery",
+    "foundation.governance-certification"
+  ],
+  "contracts": [
+    "contracts/service-plaza/club-category-filter.v1.json",
+    "contracts/modules/club-alliance/self-created/self-created-club.v1.json",
+    "contracts/modules/club-alliance/self-created/error-catalog.v1.json",
+    "contracts/modules/club-alliance/self-created/conformance/fixtures/cases.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0019-club-category-authoritative-filter.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/development-checklists/2026-07-12-club-sc-t0-acceptance*.json",
+    "contracts/foundation/governance-exams/2026-07-12-club-sc-t0-acceptance*.json",
+    "contracts/foundation/implementation-records/2026-07-12-club-sc-t0-acceptance-r2.json",
+    "contracts/modules/club-alliance/internal-dependencies.v1.json",
+    "docs/project-management/modules/club-alliance/self-created/internal-dependencies.v1.json",
+    "docs/project-management/modules/club-alliance/self-created/acceptance",
+    "docs/project-management/modules/club-alliance/self-created/CA-SC-handoff.md",
+    "docs/project-management/service-plaza/handoff-log.md",
+    "scripts/Manage-ClubSelfCreatedT0Fixture.ps1",
+    "scripts/Invoke-ClubSelfCreatedT0Acceptance.ps1",
+    "scripts/Test-ClubSelfCreatedT0Safety.ps1"
+  ],
+  "verification": [
+    "R3 current checklist 28/28 and governance exam score 100",
+    "CA-SC conformance 17/17",
+    "frontend full suite 22 files and 204 tests passed",
+    "production and test-server builds passed",
+    "Service Plaza contracts and static fixture safety passed",
+    "real HTTP selector, detail, idempotency, concurrency and cross-user isolation passed",
+    "browser list, detail, join replay, my applications, refresh, back, return, responsive and Tab focus evidence passed",
+    "backend and frontend failure-injection rollback passed",
+    "fixture cleanup left zero fixture clubs, applications and members; database ready"
+  ],
+  "evidence": [
+    "contracts/foundation/development-checklists/2026-07-12-club-sc-t0-acceptance-r3.json",
+    "contracts/foundation/governance-exams/2026-07-12-club-sc-t0-acceptance-r3-attempt-1.json",
+    "docs/project-management/modules/club-alliance/self-created/acceptance/fixture-manifest.json",
+    "docs/project-management/modules/club-alliance/self-created/acceptance/deployment-evidence.json",
+    "docs/project-management/modules/club-alliance/self-created/acceptance/rollback-evidence.json",
+    "docs/project-management/modules/club-alliance/self-created/acceptance/api-results.json",
+    "docs/project-management/modules/club-alliance/self-created/acceptance/browser-uat.md",
+    "docs/project-management/modules/club-alliance/self-created/acceptance/network-evidence.json",
+    "docs/project-management/modules/club-alliance/self-created/acceptance/db-evidence.json",
+    "docs/project-management/modules/club-alliance/self-created/acceptance/security-report.md",
+    "docs/project-management/modules/club-alliance/self-created/acceptance/go-no-go.md"
+  ],
+  "premises": [
+    "测试环境 SQLite 与部署资产保持现行路径和备份机制",
+    "自建俱乐部继续使用服务端权威 type=standard AND category=general",
+    "共享登录会话和本人身份投影继续由后端令牌决定",
+    "本结论只覆盖测试环境首个会员侧闭环，不授权创建、审核、成员管理、资金或生产"
+  ],
+  "implementation_mode": "ai-assisted"
+}

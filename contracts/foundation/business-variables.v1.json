@@ -8,9 +8,30 @@
     { "key": "club.family.premium.monthly_fee", "kind": "money", "module": "club", "currency": "CNY", "public": true, "required": true, "default": null },
     { "key": "club.family.annual.yearly_fee", "kind": "money", "module": "club", "currency": "CNY", "public": true, "required": true, "default": null },
     { "key": "club.family.clan.yearly_fee", "kind": "money", "module": "club", "currency": "CNY", "public": true, "required": true, "default": null },
-    { "key": "club.family.member_capacity", "kind": "integer", "module": "club", "public": false, "required": true, "bootstrap": 20 }
+    { "key": "club.family.member_capacity", "kind": "integer", "module": "club", "public": false, "required": true, "bootstrap": 20 },
+    {
+      "key": "service-plaza.action-telemetry.enabled",
+      "kind": "boolean",
+      "module": "service-plaza",
+      "public": false,
+      "required": false,
+      "default": null,
+      "unconfigured_value": false,
+      "failure_policy": "fail_closed_false",
+      "consumer_compatibility": {
+        "endpoint": "GET /api/v1/service-plaza/feature-flags",
+        "response_key": "action_telemetry"
+      },
+      "legacy_source": {
+        "table": "service_plaza_feature_flags",
+        "authority": "forbidden",
+        "role": "compatibility_only",
+        "history": "superseded_by_business_variable_versions"
+      }
+    }
   ],
   "money_format": { "amount_minor": "integer", "currency": "ISO-4217" },
+  "boolean_format": { "true": true, "false": false, "strings_forbidden": true, "numbers_forbidden": true },
   "unconfigured_policy": "display_unconfigured_and_reject_charge",
   "update_policy": "maker_checker_append_only_effective_dated_idempotent_audited",
   "approval_policy": {

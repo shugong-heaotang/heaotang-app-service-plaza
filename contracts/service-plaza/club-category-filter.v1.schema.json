@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/service-plaza/club-category-filter.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "endpoint", "authority", "allowed_categories", "profiles", "stable_errors", "zero_cross_category_required"],
+  "properties": {
+    "contract_version": { "const": "club-category-filter.v1" },
+    "endpoint": { "const": "GET /api/v1/clubs/search" },
+    "authority": { "const": "server" },
+    "allowed_categories": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "enum": ["general", "charity", "health", "education", "trade"] } },
+    "profiles": {
+      "type": "object", "additionalProperties": false, "required": ["self-created", "public-benefit"],
+      "properties": {
+        "self-created": { "$ref": "#/$defs/profile" },
+        "public-benefit": { "$ref": "#/$defs/profile" }
+      }
+    },
+    "stable_errors": { "type": "array", "uniqueItems": true, "items": { "type": "string", "pattern": "^[A-Z][A-Z0-9_]+$" } },
+    "zero_cross_category_required": { "const": true }
+  },
+  "$defs": {
+    "profile": {
+      "type": "object", "additionalProperties": false, "required": ["club_type", "category", "excludes"],
+      "properties": {
+        "club_type": { "const": "standard" },
+        "category": { "enum": ["general", "charity"] },
+        "excludes": { "type": "array", "minItems": 1, "uniqueItems": true, "items": { "type": "string" } }
+      }
+    }
+  }
+}

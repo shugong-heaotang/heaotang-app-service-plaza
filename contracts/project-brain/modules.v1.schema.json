@@ -1,0 +1,43 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "project-brain.modules.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "items"],
+  "properties": {
+    "contract_version": {"const": "project-brain.modules.v1"},
+    "items": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["module_id", "name", "product_purpose", "owner_role", "parent_module", "dependencies", "phase", "status", "development_status", "acceptance_status", "source_path", "source_updated_at", "next_checkpoint"],
+        "properties": {
+          "module_id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9-]*$"},
+          "name": {"type": "string", "minLength": 1},
+          "product_purpose": {"type": "string", "minLength": 1},
+          "owner_role": {"type": "string", "minLength": 1},
+          "parent_module": {"type": ["string", "null"]},
+          "dependencies": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "phase": {"type": "string", "minLength": 1},
+          "status": {"enum": ["planned", "active", "blocked", "handoff-ready", "integrated", "unknown"]},
+          "development_status": {"enum": ["go", "partial-go", "no-go", "planned", "active", "blocked", "unknown"]},
+          "acceptance_status": {"enum": ["go", "partial-go", "no-go", "pending", "unknown"]},
+          "source_path": {"type": "string", "minLength": 1},
+          "source_field": {"type": "string", "minLength": 1},
+          "json_pointer": {"type": "string", "pattern": "^/"},
+          "source_work_id": {"type": "string", "minLength": 1},
+          "source_updated_at": {"type": "string", "format": "date-time"},
+          "next_checkpoint": {"type": "string", "minLength": 1}
+        },
+        "oneOf": [
+          {"required": ["source_field"], "not": {"required": ["json_pointer"]}},
+          {"required": ["json_pointer"], "not": {"required": ["source_field"]}}
+        ],
+        "allOf": [
+          {"if": {"properties": {"source_path": {"const": "contracts/foundation/agent-collaboration.v1.json"}}}, "then": {"required": ["source_work_id"]}}
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/club-alliance/conformance/error-catalog.v1.schema.json",
+  "title": "Club Alliance H0 Conformance Error Catalog v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "breaking_change_policy", "errors"],
+  "properties": {
+    "contract_version": {"const": "club-alliance.conformance-errors.v1"},
+    "breaking_change_policy": {"const": "remove-or-change-meaning-requires-major-version"},
+    "errors": {
+      "type": "array",
+      "minItems": 30,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["error_id", "category", "severity", "meaning", "breaking_change"],
+        "properties": {
+          "error_id": {"type": "string", "pattern": "^CAH0_[A-Z0-9_]+$"},
+          "category": {"enum": ["upstream", "category", "capability", "homepage", "query", "relationship", "decision", "internal"]},
+          "severity": {"enum": ["blocker", "major"]},
+          "meaning": {"type": "string", "minLength": 1},
+          "breaking_change": {"const": true}
+        }
+      }
+    }
+  }
+}

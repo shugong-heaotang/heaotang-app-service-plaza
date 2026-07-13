@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-PROJECT-BRAIN-V1-M4",
+  "title": "Project Brain v1 M4 安全、浏览器 UAT 与最终验收",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "完成 Project Brain v1 自动化、安全、响应式浏览器 UAT、生产默认关闭和最终交接证据。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m4.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m4-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/notices/2026-07-12-project-brain-v1-task-order.md", "docs/project-management/project-brain/acceptance-v1.md"],
+  "requirement_sources": ["docs/project-management/project-brain/requirements-v1.md", "docs/project-management/project-brain/architecture-v1.md", "docs/project-management/project-brain/acceptance-v1.md"],
+  "capabilities": ["foundation.governance-certification", "foundation.contract-tooling", "foundation.app-shell-adapter"],
+  "contracts": ["contracts/project-brain/generated/project-brain.snapshot.json", "contracts/project-brain/generated/project-brain.audit.json"],
+  "decisions": ["docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"],
+  "changed_areas": ["PROJECT-BRAIN.md", "docs/project-management/project-brain", "app/src/modules/project-brain/projectBrain.css", "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m4.json", "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m4-attempt-1.json", "contracts/foundation/implementation-records/2026-07-12-project-brain-v1-m4.json"],
+  "verification": ["M4 checklist completed current and exam attempt 1 passed score 100", "Python 10/10 and frontend 221/221 tests passed", "desktop and 360px browser UAT passed after overflow root-cause fix", "security scan 47 files findings 0", "production snapshot asset count 0", "browser console warnings/errors 0", "full contract, UTF-8 and diff gates passed"],
+  "evidence": ["docs/project-management/project-brain/m4-acceptance-2026-07-12.md", "docs/project-management/project-brain/handoff-v1.md", "contracts/project-brain/generated/project-brain.snapshot.json", "contracts/project-brain/generated/project-brain.audit.json"],
+  "premises": ["The current dashboard No-Go is an accurate rendering of authoritative external governance findings.", "Production deployment remains outside this authorization.", "Controlled integration requires an integration commit after final branch acceptance."],
+  "implementation_mode": "ai-assisted"
+}

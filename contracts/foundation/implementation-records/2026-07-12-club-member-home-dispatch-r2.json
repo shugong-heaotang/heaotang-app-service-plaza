@@ -1,0 +1,73 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-CLUB-MEMBER-HOME-DISPATCH-R2",
+  "title": "俱乐部联盟 H2 会员首页派发最终 current 收口",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "在协作登记和派发成果落盘后，以不可修改的 R2 当前检查单与 100 分考试证明 H2 需求变更、范围隔离和后续激活门禁仍与最新治理输入一致。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-club-member-home-dispatch-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-club-member-home-dispatch-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-club-member-home-h2-task-order.md",
+    "docs/project-management/service-plaza/club-member-home-dispatch-2026-07-12.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.service-action-contracts",
+    "foundation.app-shell-adapter"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/service-plaza/service-plaza-actions.v1.json",
+    "contracts/modules/club-alliance/homepage.v1.json",
+    "contracts/modules/club-alliance/relationship.v1.json"
+  ],
+  "decisions": [
+    "docs/project-management/modules/club-alliance/CA-F0-H0-decisions.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklists/2026-07-12-club-member-home-dispatch-r2.json",
+    "contracts/foundation/governance-exams/2026-07-12-club-member-home-dispatch-r2-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-12-club-member-home-dispatch-r2.json"
+  ],
+  "verification": [
+    "scripts/validate_development_checklists.py",
+    "scripts/validate_governance_exams.py",
+    "scripts/validate_implementation_records.py",
+    "scripts/validate_agent_collaboration.py",
+    "scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/foundation/development-checklists/2026-07-12-club-member-home-dispatch-r2.json",
+    "contracts/foundation/governance-exams/2026-07-12-club-member-home-dispatch-r2-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-12-club-member-home-dispatch.json",
+    "docs/project-management/notices/2026-07-12-club-member-home-h2-task-order.md",
+    "docs/project-management/service-plaza/club-member-home-dispatch-2026-07-12.md"
+  ],
+  "premises": [
+    "The initial checklist and exam remain immutable entry snapshots",
+    "The R2 snapshot reflects the final collaboration registry including exact R2 paths",
+    "H2 remains planned until CA-SC integration produces a new exact base with no overlapping active scope",
+    "No frontend business page, backend, deployment, production or real data was authorized by this dispatch"
+  ],
+  "implementation_mode": "ai-assisted"
+}

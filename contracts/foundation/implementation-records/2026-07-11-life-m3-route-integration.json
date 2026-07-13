@@ -1,0 +1,64 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-LIFE-M3-ROUTE-INTEGRATION",
+  "title": "生命导航二 M3 平台路由集成",
+  "date": "2026-07-11",
+  "status": "verified",
+  "objective": "把生命导航二已验收的模块页面接入服务广场精确路由，并用路由级测试证明目录入口、真实接口适配、提交后刷新和返回路径形成闭环。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-life-m3-route-integration.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-life-m3-route-integration-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/foundation-dependency-standard-v1.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-10-life-navigation-first-phase-task-order.md",
+    "docs/project-management/modules/life-navigation-first-slice-contract-v1.md",
+    "docs/project-management/modules/life-navigation/LN-M3-001-handoff.md"
+  ],
+  "capabilities": [
+    "foundation.app-shell-adapter",
+    "foundation.identity-api",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/service-plaza/service-plaza-actions.v1.json",
+    "contracts/foundation/module-dependencies/life-navigation.v1.json",
+    "contracts/modules/life-navigation/internal-dependencies.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "changed_areas": [
+    "app/src/App.tsx",
+    "app/src/App.test.tsx",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/service-plaza/handoff-log.md"
+  ],
+  "verification": [
+    "npm test -- --run src/App.test.tsx",
+    "npm test",
+    "npm run build",
+    "scripts/Test-ServicePlazaContracts.ps1",
+    "scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/life-m3-route-integration-2026-07-11.md",
+    "contracts/foundation/development-checklists/2026-07-11-life-m3-route-integration.json",
+    "contracts/foundation/governance-exams/2026-07-11-life-m3-route-integration-attempt-1.json",
+    "docs/project-management/service-plaza/handoff-log.md"
+  ],
+  "premises": [
+    "生命导航二模块 M3 页面和 M2 API 适配器已经在基线提交 e6243e186b322404e50cf80419ee6c210c335098 中通过模块验收",
+    "平台路由必须精确匹配 /services/life-navigation 并置于动态服务路由之前",
+    "本记录只关闭本地平台路由门禁，测试环境部署和真实登录 UAT 仍由 M4 完成"
+  ],
+  "implementation_mode": "ai-assisted"
+}

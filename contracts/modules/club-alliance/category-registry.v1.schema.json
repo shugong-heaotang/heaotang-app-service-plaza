@@ -1,0 +1,71 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/club-alliance/category-registry.v1.schema.json",
+  "title": "Club Alliance Category Registry v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "source_contract", "source_schema", "accepted_action_ids", "management_action_id", "entries"],
+  "properties": {
+    "contract_version": {"const": "club-alliance.category-registry.v1"},
+    "source_contract": {"const": "contracts/service-plaza/service-plaza-actions.v1.json"},
+    "source_schema": {"const": "contracts/service-plaza/service-plaza-action.schema.json"},
+    "accepted_action_ids": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "uniqueItems": true,
+      "prefixItems": [
+        {"const": "public-benefit-club"},
+        {"const": "self-created-club"},
+        {"const": "family-club"},
+        {"const": "club-federation"}
+      ],
+      "items": false
+    },
+    "management_action_id": {"const": "club-manage"},
+    "entries": {
+      "type": "array",
+      "minItems": 4,
+      "maxItems": 4,
+      "items": {"$ref": "#/$defs/entry"}
+    }
+  },
+  "$defs": {
+    "clause": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field", "operator", "value"],
+      "properties": {
+        "field": {"enum": ["type", "category", "relationship_kind"]},
+        "operator": {"const": "eq"},
+        "value": {"type": "string", "pattern": "^[a-z][a-z0-9-]*$"}
+      }
+    },
+    "selector": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "executable", "clauses"],
+      "properties": {
+        "status": {"enum": ["accepted", "pending", "code-present-unverified"]},
+        "executable": {"type": "boolean"},
+        "clauses": {"type": "array", "items": {"$ref": "#/$defs/clause"}}
+      },
+      "allOf": [
+        {"if": {"properties": {"status": {"const": "pending"}}}, "then": {"properties": {"executable": {"const": false}}}}
+      ]
+    },
+    "entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["action_id", "child_project_id", "entity_kind", "semantic_selector", "capability_profile_id", "governance_refs"],
+      "properties": {
+        "action_id": {"enum": ["public-benefit-club", "self-created-club", "family-club", "club-federation"]},
+        "child_project_id": {"enum": ["CA-PC", "CA-SC", "CA-FC", "CA-UF"]},
+        "entity_kind": {"enum": ["club", "club_relationship"]},
+        "semantic_selector": {"$ref": "#/$defs/selector"},
+        "capability_profile_id": {"enum": ["ca.pc", "ca.sc", "ca.fc", "ca.uf"]},
+        "governance_refs": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    }
+  }
+}

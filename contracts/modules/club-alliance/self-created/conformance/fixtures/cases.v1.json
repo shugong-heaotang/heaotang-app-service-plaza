@@ -1,0 +1,44 @@
+{
+  "contract_version": "ca-sc-synthetic-fixtures.v1",
+  "seed": "HEAOTANG-CA-SC-20260712-V1",
+  "synthetic_only": true,
+  "environment": "non-production",
+  "page_size": 2,
+  "actors": {
+    "guest": "SYN-ACTOR-GUEST-9dfd8277a221",
+    "candidate_a": "SYN-ACTOR-CANDIDATE-a3b674d101fa",
+    "isolated_b": "SYN-ACTOR-ISOLATED-c0890a2b8327",
+    "existing_member_c": "SYN-ACTOR-MEMBER-5a050fb4bfde"
+  },
+  "clubs": [
+    {"club_id":"SYN-CLUB-ae7db04cf170","display_name":"合成自建俱乐部候选-01","type":"standard","category":"general","status":"active","city":"合成城市","synthetic":true},
+    {"club_id":"SYN-CLUB-91c3e5ba5ec5","display_name":"合成自建俱乐部候选-02","type":"standard","category":"general","status":"active","city":"合成城市","synthetic":true},
+    {"club_id":"SYN-CLUB-f33d40985fc6","display_name":"合成自建俱乐部候选-03","type":"standard","category":"general","status":"active","city":"合成城市","synthetic":true},
+    {"club_id":"SYN-CLUB-2c34e3d8b3d3","display_name":"合成自建俱乐部候选-04","type":"standard","category":"general","status":"active","city":"合成城市","synthetic":true},
+    {"club_id":"SYN-CLUB-7c00c216724c","display_name":"合成自建俱乐部候选-05","type":"standard","category":"general","status":"active","city":"合成城市","synthetic":true},
+    {"club_id":"SYN-CLUB-a466c60208ba","display_name":"合成自建俱乐部候选-06","type":"standard","category":"charity","status":"active","city":"合成城市","synthetic":true},
+    {"club_id":"SYN-CLUB-f33a1ea61b75","display_name":"合成自建俱乐部候选-07","type":"standard","category":"health","status":"active","city":"合成城市","synthetic":true},
+    {"club_id":"SYN-CLUB-b30faf068be2","display_name":"合成自建俱乐部候选-08","type":"standard","category":"trade","status":"active","city":"合成城市","synthetic":true},
+    {"club_id":"SYN-CLUB-f5312885e480","display_name":"合成自建俱乐部候选-09","type":"family","category":"general","status":"active","city":"合成城市","synthetic":true},
+    {"club_id":"SYN-CLUB-7ed21f9817fe","display_name":"合成自建俱乐部候选-10","type":"direct","category":"general","status":"active","city":"合成城市","synthetic":true},
+    {"club_id":"SYN-CLUB-f920e62cdae9","display_name":"合成自建俱乐部候选-11","type":"standard","category":"general","status":"pending","city":"合成城市","synthetic":true},
+    {"club_id":"SYN-CLUB-b1199bb76ec1","display_name":"合成自建俱乐部候选-12","type":"standard","category":"general","status":"rejected","city":"合成城市","synthetic":true},
+    {"club_id":"SYN-CLUB-62139d45ee9f","display_name":"合成自建俱乐部候选-13","type":"standard","category":"general","status":"dissolved","city":"合成城市","synthetic":true}
+  ],
+  "scenarios": [
+    {"case_id":"SC-SYN-001","kind":"list-page-1","expected":"two-active-standard-general"},
+    {"case_id":"SC-SYN-002","kind":"list-page-2","expected":"three-active-standard-general"},
+    {"case_id":"SC-SYN-003","kind":"mixed-zero-crossover","expected":"five-only"},
+    {"case_id":"SC-SYN-004","kind":"detail-valid","expected":"available"},
+    {"case_id":"SC-SYN-005","kind":"detail-charity","expected_error_id":"CLUB_NOT_FOUND"},
+    {"case_id":"SC-SYN-006","kind":"detail-inactive","expected_error_id":"CLUB_NOT_FOUND"},
+    {"case_id":"SC-SYN-007","kind":"join-first","expected_status":201},
+    {"case_id":"SC-SYN-008","kind":"join-replay","expected_status":200,"expected_header":"Idempotency-Replayed:true"},
+    {"case_id":"SC-SYN-009","kind":"join-key-reused","expected_error_id":"IDEMPOTENCY_KEY_REUSED"},
+    {"case_id":"SC-SYN-010","kind":"join-concurrent","expected":"at-most-one-pending"},
+    {"case_id":"SC-SYN-011","kind":"existing-pending","expected":"no-duplicate"},
+    {"case_id":"SC-SYN-012","kind":"my-three-status","expected":["pending","approved","rejected"]},
+    {"case_id":"SC-SYN-013","kind":"cross-user-isolation","expected":"zero-leakage"},
+    {"case_id":"SC-SYN-014","kind":"forbidden-response-field","expected_error_id":"CLUB_APPLICATION_ACCESS_DENIED"}
+  ]
+}

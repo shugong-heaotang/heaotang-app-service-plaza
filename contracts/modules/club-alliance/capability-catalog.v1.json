@@ -1,0 +1,159 @@
+{
+  "contract_version": "club-alliance.capability-catalog.v1",
+  "status_values": ["planned", "code-present-unverified", "standardized", "implemented", "test-verified", "release-go", "operations-go", "forbidden"],
+  "profile_ids": ["ca.pc", "ca.sc", "ca.fc", "ca.uf"],
+  "homepage_consumed_capabilities": ["ENTRY", "CATALOG", "ACCESS", "LIFECYCLE", "TELEMETRY"],
+  "commercial_capability_ids": ["PAYMENT", "WITHDRAWAL", "REFUND", "SUBSCRIPTION"],
+  "capabilities": [
+    {
+      "capability_id": "ENTRY",
+      "status": "standardized",
+      "owner": "平台集成负责人",
+      "contract_refs": ["contracts/service-plaza/service-plaza-actions.v1.json"],
+      "dependency_refs": ["UPSTREAM-ACTIONS"],
+      "evidence_refs": ["SP-H025"],
+      "readiness": {"governance": "go", "development": "go", "acceptance": "partial-go", "release": "pending", "operations": "pending"},
+      "profiles": {"ca.pc": "required", "ca.sc": "required", "ca.fc": "required", "ca.uf": "required"}
+    },
+    {
+      "capability_id": "CATALOG",
+      "status": "standardized",
+      "owner": "俱乐部联盟负责人",
+      "contract_refs": ["contracts/modules/club-alliance/category-registry.v1.json"],
+      "dependency_refs": ["CATEGORY-REGISTRY"],
+      "evidence_refs": ["CA-H0-C02"],
+      "readiness": {"governance": "go", "development": "go", "acceptance": "pending", "release": "pending", "operations": "pending"},
+      "profiles": {"ca.pc": "required", "ca.sc": "required", "ca.fc": "required", "ca.uf": "required"}
+    },
+    {
+      "capability_id": "ACCESS",
+      "status": "code-present-unverified",
+      "owner": "平台安全负责人",
+      "contract_refs": ["contracts/service-plaza/service-plaza-actions.v1.json"],
+      "dependency_refs": ["foundation.authorization-idempotency"],
+      "evidence_refs": ["docs/project-management/service-plaza/foundation-acceptance-2026-07-10.md"],
+      "readiness": {"governance": "go", "development": "partial-go", "acceptance": "pending", "release": "pending", "operations": "pending"},
+      "profiles": {"ca.pc": "required", "ca.sc": "required", "ca.fc": "required", "ca.uf": "required"}
+    },
+    {
+      "capability_id": "LIFECYCLE",
+      "status": "code-present-unverified",
+      "owner": "俱乐部联盟负责人",
+      "contract_refs": ["docs/project-management/modules/club-alliance/CA-F0-H0-requirements.md"],
+      "dependency_refs": ["CATEGORY-REGISTRY"],
+      "evidence_refs": ["CA-H0-C08"],
+      "readiness": {"governance": "go", "development": "partial-go", "acceptance": "pending", "release": "pending", "operations": "pending"},
+      "profiles": {"ca.pc": "required", "ca.sc": "required", "ca.fc": "required", "ca.uf": "required"}
+    },
+    {
+      "capability_id": "TELEMETRY",
+      "status": "standardized",
+      "owner": "平台运维负责人",
+      "contract_refs": ["contracts/service-plaza/service-plaza-actions.v1.json"],
+      "dependency_refs": ["foundation.observability-config"],
+      "evidence_refs": ["CA-H0-C10"],
+      "readiness": {"governance": "go", "development": "go", "acceptance": "pending", "release": "pending", "operations": "pending"},
+      "profiles": {"ca.pc": "required", "ca.sc": "required", "ca.fc": "required", "ca.uf": "required"}
+    },
+    {
+      "capability_id": "CREATE",
+      "status": "planned",
+      "owner": "各子项目负责人",
+      "contract_refs": ["docs/project-management/modules/club-alliance/CA-F0-H0-requirements.md"],
+      "dependency_refs": ["CA-H1"],
+      "evidence_refs": ["CHILD-P0-REQUIRED"],
+      "readiness": {"governance": "go", "development": "pending", "acceptance": "pending", "release": "pending", "operations": "pending"},
+      "profiles": {"ca.pc": "optional", "ca.sc": "optional", "ca.fc": "optional", "ca.uf": "forbidden"}
+    },
+    {
+      "capability_id": "JOIN",
+      "status": "code-present-unverified",
+      "owner": "各 Club 子项目负责人",
+      "contract_refs": ["docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
+      "dependency_refs": ["foundation.authorization-idempotency"],
+      "evidence_refs": ["SP-H017"],
+      "readiness": {"governance": "go", "development": "partial-go", "acceptance": "pending", "release": "pending", "operations": "pending"},
+      "profiles": {"ca.pc": "required", "ca.sc": "required", "ca.fc": "required", "ca.uf": "forbidden"}
+    },
+    {
+      "capability_id": "REVIEW",
+      "status": "code-present-unverified",
+      "owner": "各 Club 子项目负责人",
+      "contract_refs": ["docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
+      "dependency_refs": ["foundation.authorization-idempotency"],
+      "evidence_refs": ["SP-H018", "SP-H019"],
+      "readiness": {"governance": "go", "development": "partial-go", "acceptance": "pending", "release": "pending", "operations": "pending"},
+      "profiles": {"ca.pc": "required", "ca.sc": "required", "ca.fc": "required", "ca.uf": "forbidden"}
+    },
+    {
+      "capability_id": "MEMBER",
+      "status": "code-present-unverified",
+      "owner": "各 Club 子项目负责人",
+      "contract_refs": ["docs/project-management/modules/club-alliance/CA-F0-H0-requirements.md"],
+      "dependency_refs": ["JOIN", "REVIEW"],
+      "evidence_refs": ["CHILD-P0-REQUIRED"],
+      "readiness": {"governance": "go", "development": "partial-go", "acceptance": "pending", "release": "pending", "operations": "pending"},
+      "profiles": {"ca.pc": "required", "ca.sc": "required", "ca.fc": "required", "ca.uf": "forbidden"}
+    },
+    {
+      "capability_id": "RELATIONSHIP",
+      "status": "standardized",
+      "owner": "CA-UF 负责人",
+      "contract_refs": ["contracts/modules/club-alliance/relationship.v1.json"],
+      "dependency_refs": ["DECISION-UF"],
+      "evidence_refs": ["D-CA-002"],
+      "readiness": {"governance": "go", "development": "go", "acceptance": "pending", "release": "pending", "operations": "pending"},
+      "profiles": {"ca.pc": "optional", "ca.sc": "optional", "ca.fc": "optional", "ca.uf": "required"}
+    },
+    {
+      "capability_id": "FAMILY_ALLIANCE",
+      "status": "code-present-unverified",
+      "owner": "CA-FC 负责人",
+      "contract_refs": ["docs/project-management/modules/club-alliance/CA-F0-H0-requirements.md"],
+      "dependency_refs": ["CA-FC-P0"],
+      "evidence_refs": ["FAMILY-ONLY-BOUNDARY"],
+      "readiness": {"governance": "go", "development": "partial-go", "acceptance": "pending", "release": "pending", "operations": "pending"},
+      "profiles": {"ca.pc": "forbidden", "ca.sc": "forbidden", "ca.fc": "optional", "ca.uf": "forbidden"}
+    },
+    {
+      "capability_id": "PAYMENT",
+      "status": "forbidden",
+      "owner": "平台资金安全负责人",
+      "contract_refs": ["docs/project-management/modules/club-alliance/CA-F0-H0-decisions.md"],
+      "dependency_refs": ["INDEPENDENT-FUNDS-GATE"],
+      "evidence_refs": ["D-CA-007"],
+      "readiness": {"governance": "go", "development": "not-applicable", "acceptance": "not-applicable", "release": "not-applicable", "operations": "not-applicable"},
+      "profiles": {"ca.pc": "forbidden", "ca.sc": "forbidden", "ca.fc": "forbidden", "ca.uf": "forbidden"}
+    },
+    {
+      "capability_id": "WITHDRAWAL",
+      "status": "forbidden",
+      "owner": "平台资金安全负责人",
+      "contract_refs": ["docs/project-management/modules/club-alliance/CA-F0-H0-decisions.md"],
+      "dependency_refs": ["INDEPENDENT-FUNDS-GATE"],
+      "evidence_refs": ["D-CA-007"],
+      "readiness": {"governance": "go", "development": "not-applicable", "acceptance": "not-applicable", "release": "not-applicable", "operations": "not-applicable"},
+      "profiles": {"ca.pc": "forbidden", "ca.sc": "forbidden", "ca.fc": "forbidden", "ca.uf": "forbidden"}
+    },
+    {
+      "capability_id": "REFUND",
+      "status": "forbidden",
+      "owner": "平台资金安全负责人",
+      "contract_refs": ["docs/project-management/modules/club-alliance/CA-F0-H0-decisions.md"],
+      "dependency_refs": ["INDEPENDENT-FUNDS-GATE"],
+      "evidence_refs": ["D-CA-007"],
+      "readiness": {"governance": "go", "development": "not-applicable", "acceptance": "not-applicable", "release": "not-applicable", "operations": "not-applicable"},
+      "profiles": {"ca.pc": "forbidden", "ca.sc": "forbidden", "ca.fc": "forbidden", "ca.uf": "forbidden"}
+    },
+    {
+      "capability_id": "SUBSCRIPTION",
+      "status": "forbidden",
+      "owner": "平台资金安全负责人",
+      "contract_refs": ["docs/project-management/modules/club-alliance/CA-F0-H0-decisions.md"],
+      "dependency_refs": ["INDEPENDENT-FUNDS-GATE"],
+      "evidence_refs": ["D-CA-007"],
+      "readiness": {"governance": "go", "development": "not-applicable", "acceptance": "not-applicable", "release": "not-applicable", "operations": "not-applicable"},
+      "profiles": {"ca.pc": "forbidden", "ca.sc": "forbidden", "ca.fc": "forbidden", "ca.uf": "forbidden"}
+    }
+  ]
+}

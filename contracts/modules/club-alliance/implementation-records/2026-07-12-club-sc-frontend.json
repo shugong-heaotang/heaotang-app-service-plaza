@@ -1,0 +1,109 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-CLUB-SC-FRONTEND",
+  "title": "CA-SC 自建俱乐部会员侧前端闭环",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "在 H1 首页壳单一真相源和 CA-SC P0/P1 合同之下，实现登录后的 standard+general 权威列表、详情、幂等加入和本人申请状态，同时保持其他三类、管理和资金能力不可达。",
+  "governance_checklist": "contracts/modules/club-alliance/development-checklists/2026-07-12-club-sc-frontend.json",
+  "governance_exam": "contracts/modules/club-alliance/governance-exams/2026-07-12-club-sc-frontend-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md",
+    "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json",
+    "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md",
+    "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md",
+    "contracts/foundation/module-dependencies/club-alliance.v1.json",
+    "contracts/modules/club-alliance/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-club-sc-first-closure-task-order.md",
+    "docs/project-management/modules/club-alliance/self-created/CA-SC-P0-P1-requirements.md",
+    "docs/project-management/modules/club-alliance/self-created/CA-SC-acceptance-matrix.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.identity-api",
+    "foundation.authorization-idempotency",
+    "foundation.app-shell-adapter"
+  ],
+  "contracts": [
+    "contracts/service-plaza/club-category-filter.v1.json",
+    "contracts/modules/club-alliance/self-created/self-created-club.v1.json",
+    "contracts/modules/club-alliance/self-created/error-catalog.v1.json",
+    "app/src/modules/club-alliance/self-created/selfCreatedClubContract.ts"
+  ],
+  "decisions": [
+    "docs/decisions/0019-club-category-authoritative-filter.md",
+    "docs/project-management/modules/club-alliance/self-created/CA-SC-decisions.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "app/src/App.tsx",
+    "app/src/App.test.tsx",
+    "app/src/modules/club-alliance/ClubAlliancePage.tsx",
+    "app/src/modules/club-alliance/ClubAlliancePage.test.tsx",
+    "app/src/modules/club-alliance/index.ts",
+    "app/src/modules/club-alliance/self-created",
+    "contracts/modules/club-alliance/development-checklists/2026-07-12-club-sc-frontend.json",
+    "contracts/modules/club-alliance/governance-exams/2026-07-12-club-sc-frontend-attempt-1.json",
+    "contracts/modules/club-alliance/implementation-records/2026-07-12-club-sc-frontend.json",
+    "docs/project-management/modules/club-alliance/self-created/CA-SC-frontend-handoff.md",
+    "docs/project-management/modules/club-alliance/self-created/CA-SC-frontend-report.md"
+  ],
+  "verification": [
+    "npm test -- --run src/modules/club-alliance/self-created/selfCreatedClubApi.test.ts src/modules/club-alliance/self-created/SelfCreatedClubPage.test.tsx src/modules/club-alliance/ClubAlliancePage.test.tsx src/App.test.tsx",
+    "canonical route IDs 1e2/0x65/+101/00101/0/unsafe-integer fail closed as CLUB_ID_INVALID with zero detail/join calls",
+    "detail adapter calls only GET /api/v1/clubs/self-created/:id and never the generic detail endpoint",
+    "npm test",
+    "npm run build",
+    "npm run build:test-server",
+    "python -X utf8 contracts/modules/club-alliance/self-created/conformance/test_self_created_club_contracts.py",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-ServicePlazaContracts.ps1",
+    "python -X utf8 scripts/validate_development_checklists.py",
+    "python -X utf8 scripts/validate_governance_exams.py",
+    "python -X utf8 scripts/validate_implementation_records.py",
+    "python -X utf8 scripts/validate_agent_collaboration.py",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/modules/club-alliance/development-checklists/2026-07-12-club-sc-frontend.json",
+    "contracts/modules/club-alliance/governance-exams/2026-07-12-club-sc-frontend-attempt-1.json",
+    "app/src/modules/club-alliance/self-created/selfCreatedClubApi.test.ts",
+    "app/src/modules/club-alliance/self-created/SelfCreatedClubPage.test.tsx",
+    "docs/project-management/modules/club-alliance/self-created/CA-SC-frontend-report.md",
+    "docs/project-management/modules/club-alliance/self-created/CA-SC-frontend-handoff.md"
+  ],
+  "premises": [
+    "The platform action and deployed club routes remain shared-session/Auth:true; unauthenticated users must not start SC business reads",
+    "The server remains authoritative for type=standard AND category=general filtering and pagination",
+    "Non-active or non-SC detail remains hidden behind CLUB_NOT_FOUND",
+    "T0 prerequisite contract HEAD 815d29cff13e9d0b52cfd802b35f67f34594e426 standardizes shared-session access, canonical IDs, the SC-specific detail endpoint and authoritative errors",
+    "This local F0 checkpoint does not prove backend integration, deployment, cross-user environment isolation or final closure Go"
+  ],
+  "implementation_mode": "ai-assisted"
+}

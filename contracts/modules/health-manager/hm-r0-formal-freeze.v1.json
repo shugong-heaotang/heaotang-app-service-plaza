@@ -1,0 +1,1275 @@
+{
+  "contract_version": "hm-r0-formal-freeze.v1",
+  "freeze_id": "HM-R0",
+  "product_version": "V1.0",
+  "source_candidate": {
+    "status": "Final Candidate",
+    "branch": "codex/health-manager-v1-requirements",
+    "commit": "ce9a4c75fb2ea9d7eed46bc4c27c1fa4b3488887",
+    "path": "docs/project-management/modules/health-manager/health-manager-v1-requirements-and-development-plan.md"
+  },
+  "decision_status": "Accepted for development planning",
+  "checkpoint_status": "F1-accepted-integrated-for-development-planning",
+  "f1_acceptance": {
+    "status": "Accepted for development planning",
+    "source": "384436c719396d0a0105f448716ef37aa8ba7ab8",
+    "source_merge": "fb1b882091209897d9f618659ce02733d670b53e",
+    "acceptance_evidence": "1af9032e6fdb2b9faaf5070003e8d2ea3abcba48",
+    "authoritative_integration": "034e46beae3dd30d5616c873d596e9c591c8d797",
+    "acceptance_report": "docs/project-management/service-plaza/health-r0-f1-acceptance-2026-07-13.md"
+  },
+  "development_planning_only": true,
+  "executable": false,
+  "identity_authority_production": "Pending",
+  "professional_scope_policy": "Only exact signed development-only scopes may be treated as Accepted; no global C4-H06 inference.",
+  "synthetic_evidence_policy": "Integrated M0/M1/P2 synthetic evidence proves only synthetic_only=true and executable=false contract/conformance behavior.",
+  "pr_disposition": {
+    "pr_1": "Draft-read-only-pending-separate-platform-decision",
+    "pr_2": "Draft-read-only-pending-separate-platform-decision",
+    "auto_merge": false
+  },
+  "p3_authorized": false,
+  "not_authorized": [
+    "business-code",
+    "shared-frontend",
+    "shared-backend",
+    "api",
+    "database",
+    "environment",
+    "real-identity",
+    "real-member",
+    "real-health-data",
+    "medical-service",
+    "charging",
+    "funds",
+    "deployment",
+    "production"
+  ],
+  "classification_definitions": {
+    "blocks-development": "Missing evidence prevents the named executable business slice, professional policy or shared implementation from starting.",
+    "blocks-real-data-environment": "Synthetic and planning work may continue, but real identity, real health data, workforce service, environment, release or production remains forbidden.",
+    "does-not-block-synthetic": "The item is accepted in a narrow non-executable scope, is an operational metric not required for synthetic evidence, or is separated from synthetic planning by Exact revision."
+  },
+  "summary": {
+    "total": 27,
+    "status_counts": {
+      "Accepted": 2,
+      "Pending with owner": 24,
+      "Exact revision": 1
+    },
+    "classification_counts": {
+      "blocks-development": 7,
+      "blocks-real-data-environment": 16,
+      "does-not-block-synthetic": 4
+    }
+  },
+  "decisions": [
+    {
+      "decision_id": "C4-P08",
+      "title": "首批会员正式纳入、排除和特殊人群边界",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-real-data-environment",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "产品负责人",
+        "co_signers": [
+          "医生集团专业负责人",
+          "隐私与法律负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "产品负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-P08",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "纳排表",
+        "能力限制",
+        "特殊人群转介方案"
+      ],
+      "next_checkpoint": "R0-F2 专业与数据边界审计",
+      "revision_request": null,
+      "blocks": [
+        "真实会员准入",
+        "特殊人群路径"
+      ],
+      "does_not_block": [
+        "成年合成会员规划与合同验证"
+      ],
+      "review_triggers": [
+        "纳排人群变化",
+        "从合成开发进入真实会员"
+      ]
+    },
+    {
+      "decision_id": "C4-H01",
+      "title": "AI、健康管理师与医生允许/禁止动作",
+      "source_status": "Pending with owner",
+      "decision_status": "Accepted",
+      "classification": "does-not-block-synthetic",
+      "scope": "HM-MVP90-M1 adult synthetic-member PDCAR vertical slice only",
+      "executable": false,
+      "owner": {
+        "primary": "和奥堂医生集团专业负责人",
+        "co_signers": [
+          "医疗质量负责人",
+          "平台安全负责人",
+          "法律负责人"
+        ]
+      },
+      "decision_maker": "张树功",
+      "decision_date": "2026-07-12",
+      "signature_reference": "thread:019f4e00-b3be-7742-a76d-c9439c68245e/item-637",
+      "pending_owner": null,
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-H01",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md",
+        "path:contracts/modules/health-manager/mvp90-m1/readiness/c4-h01-action-boundary-decision.v1.json",
+        "path:docs/project-management/modules/health-manager/health-manager-mvp90-m1-professional-signoff-receipt.md"
+      ],
+      "missing_evidence": [],
+      "next_checkpoint": null,
+      "revision_request": null,
+      "blocks": [
+        "超出已签署范围的可执行专业动作"
+      ],
+      "does_not_block": [
+        "已签署范围内的合成合同与一致性验证"
+      ],
+      "review_triggers": [
+        "范围超出 M1",
+        "新增人群或专业模板",
+        "安全事件",
+        "资格或监管前提变化"
+      ]
+    },
+    {
+      "decision_id": "C4-H02",
+      "title": "风险四类专业规则、升级/降级与关闭资格",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-development",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "医疗质量负责人",
+        "co_signers": [
+          "和奥堂医生集团专业负责人",
+          "平台安全负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "医疗质量负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-H02",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "风险规则目录",
+        "证据等级",
+        "审核版本",
+        "复核与关闭方案"
+      ],
+      "next_checkpoint": "R0-F2 风险规则审计",
+      "revision_request": null,
+      "blocks": [
+        "可执行风险分类",
+        "专业或紧急风险关闭"
+      ],
+      "does_not_block": [
+        "风险事件对象、失败关闭和合成负例"
+      ],
+      "review_triggers": [
+        "风险规则或证据等级变化",
+        "专业安全事件"
+      ]
+    },
+    {
+      "decision_id": "C4-H03",
+      "title": "紧急提示、值班、响应和无法联系机制",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-development",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "医生集团医疗质量负责人",
+        "co_signers": [
+          "运营负责人",
+          "法律负责人",
+          "平台安全负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "医生集团医疗质量负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-H03",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "值班模型",
+        "渠道演练",
+        "无法联系分支",
+        "责任链"
+      ],
+      "next_checkpoint": "R0-F2 紧急升级责任审计",
+      "revision_request": null,
+      "blocks": [
+        "真实紧急服务流程",
+        "响应承诺"
+      ],
+      "does_not_block": [
+        "预审核提示、停止普通流程和合成转介验证"
+      ],
+      "review_triggers": [
+        "紧急服务范围变化",
+        "渠道或值班模型变化"
+      ]
+    },
+    {
+      "decision_id": "C4-H04",
+      "title": "健康管理师准入、培训、监督与转医生标准",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-real-data-environment",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "健康管理专业负责人",
+        "co_signers": [
+          "医疗质量负责人",
+          "人力负责人",
+          "运营负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "健康管理专业负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-H04",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "岗位资格",
+        "课程与考核",
+        "监督抽检",
+        "升级清单",
+        "容量边界"
+      ],
+      "next_checkpoint": "R0-F2 管理师准入与监督审计",
+      "revision_request": null,
+      "blocks": [
+        "真实管理师接管",
+        "真实会员资料访问"
+      ],
+      "does_not_block": [
+        "角色合同和无资质拒绝的合成验证"
+      ],
+      "review_triggers": [
+        "准入标准变化",
+        "人员或服务范围变化"
+      ]
+    },
+    {
+      "decision_id": "C4-H05",
+      "title": "老年跌倒 F1—F6 专业内容与停止条件",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-development",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "老年与康复专业负责人",
+        "co_signers": [
+          "药学专业负责人",
+          "法律负责人",
+          "运营负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "老年与康复专业负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-H05",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "筛查规则",
+        "环境评估",
+        "训练方案",
+        "药师与辅具方案",
+        "跌倒后处置"
+      ],
+      "next_checkpoint": "独立 HM-ELDER-FALL-PREVENTION 专业 PRD",
+      "revision_request": null,
+      "blocks": [
+        "跌倒专项业务实现",
+        "专项有效性表达"
+      ],
+      "does_not_block": [
+        "风险入口、停止与转介框架"
+      ],
+      "review_triggers": [
+        "专业规则或目标人群变化",
+        "跌倒相关安全事件"
+      ]
+    },
+    {
+      "decision_id": "C4-H06",
+      "title": "慢病用药、营养、运动、心理和中医等专业模板",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-development",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "对应专业负责人",
+        "co_signers": [
+          "医疗质量负责人",
+          "法律负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "对应专业负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-H06",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "逐类模板",
+        "禁忌",
+        "适用范围",
+        "签署",
+        "退出条件"
+      ],
+      "next_checkpoint": "每类模板独立专业工作项",
+      "revision_request": null,
+      "blocks": [
+        "未审核或过期模板生成计划/任务",
+        "全量专业模板实现"
+      ],
+      "does_not_block": [
+        "已签署 M1 窄生活方式模板的合成验证"
+      ],
+      "review_triggers": [
+        "模板新增或过期",
+        "禁忌或专业前提变化"
+      ]
+    },
+    {
+      "decision_id": "C4-H07",
+      "title": "PDCAR 消费者语言不构成诊断、治疗或疗效保证",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-real-data-environment",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "医生集团专业负责人",
+        "co_signers": [
+          "法律负责人",
+          "产品负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "医生集团专业负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-H07",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "P/D/C/A/R 用语逐项会签",
+        "健康概况、计划和复盘用语审查"
+      ],
+      "next_checkpoint": "R0-F2 专业表述审计",
+      "revision_request": null,
+      "blocks": [
+        "正式对外医疗健康表述",
+        "疗效相关宣传"
+      ],
+      "does_not_block": [
+        "内部规划与非诊断声明"
+      ],
+      "review_triggers": [
+        "消费者文案变化",
+        "法规或专业口径变化"
+      ]
+    },
+    {
+      "decision_id": "C4-L02",
+      "title": "健康数据保留、导出、更正、删除及例外",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-real-data-environment",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "隐私与法律负责人",
+        "co_signers": [
+          "专业负责人",
+          "平台安全负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "隐私与法律负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-L02",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "数据分类",
+        "处理清单",
+        "期限",
+        "权利响应",
+        "保留例外依据"
+      ],
+      "next_checkpoint": "R0-F2 数据权利审计",
+      "revision_request": null,
+      "blocks": [
+        "真实健康数据处理",
+        "期限或删除承诺"
+      ],
+      "does_not_block": [
+        "零真实数据的合成开发"
+      ],
+      "review_triggers": [
+        "数据类别、法律依据或供应商变化"
+      ]
+    },
+    {
+      "decision_id": "C4-L03",
+      "title": "未成年人、认知受限、监护代理和家庭共享",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-real-data-environment",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "隐私与法律负责人",
+        "co_signers": [
+          "专业负责人",
+          "产品负责人",
+          "平台安全负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "隐私与法律负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-L03",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "身份与监护验证",
+        "代理范围",
+        "撤回和冲突规则"
+      ],
+      "next_checkpoint": "独立特殊人群与代理授权工作项",
+      "revision_request": null,
+      "blocks": [
+        "未成年人或代理路径",
+        "家庭数据共享"
+      ],
+      "does_not_block": [
+        "成年本人合成范围"
+      ],
+      "review_triggers": [
+        "人群或代理模式变化",
+        "监护争议"
+      ]
+    },
+    {
+      "decision_id": "C4-L04",
+      "title": "AI 数据用途、提示响应保管、训练和第三方模型",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-real-data-environment",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "隐私与法律负责人",
+        "co_signers": [
+          "AI 安全负责人",
+          "专业负责人",
+          "平台负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "隐私与法律负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-L04",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "供应商与区域",
+        "合同",
+        "保留策略",
+        "训练开关",
+        "退出方案"
+      ],
+      "next_checkpoint": "独立 AI 数据治理工作项",
+      "revision_request": null,
+      "blocks": [
+        "真实健康数据进入模型",
+        "未授权训练或再利用"
+      ],
+      "does_not_block": [
+        "不含真实数据的固定合成验证"
+      ],
+      "review_triggers": [
+        "模型、供应商、区域、工具或训练用途变化"
+      ]
+    },
+    {
+      "decision_id": "C4-L05",
+      "title": "外部单位数据处理、最小发送、回传和退出",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-real-data-environment",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "隐私与法律负责人",
+        "co_signers": [
+          "采购负责人",
+          "专业负责人",
+          "平台安全负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "隐私与法律负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-L05",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "DPA",
+        "责任边界",
+        "最小字段清单",
+        "审计",
+        "删除与退出证明"
+      ],
+      "next_checkpoint": "外部合作独立准入工作项",
+      "revision_request": null,
+      "blocks": [
+        "外部数据交换",
+        "外部健康服务接入"
+      ],
+      "does_not_block": [
+        "内部合成合同"
+      ],
+      "review_triggers": [
+        "新增外部处理者",
+        "字段或退出机制变化"
+      ]
+    },
+    {
+      "decision_id": "C4-L06",
+      "title": "和奥堂医生集团法律与医疗责任主体",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-real-data-environment",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "医生集团法务与负责人",
+        "co_signers": [
+          "医疗质量负责人",
+          "平台集成负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "医生集团法务与负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-L06",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "主体资质",
+        "服务条款",
+        "责任链",
+        "投诉机制",
+        "保险方案"
+      ],
+      "next_checkpoint": "R0-F2 责任主体审计及生产前正式核验",
+      "revision_request": null,
+      "blocks": [
+        "正式总包医疗服务声明",
+        "生产医疗责任承诺"
+      ],
+      "does_not_block": [
+        "开发阶段产品规划"
+      ],
+      "review_triggers": [
+        "主体、资质、组织授权或服务模式变化"
+      ]
+    },
+    {
+      "decision_id": "C4-S04",
+      "title": "MVP 精确权限、审计字段和威胁模型",
+      "source_status": "Pending with owner",
+      "decision_status": "Accepted",
+      "classification": "does-not-block-synthetic",
+      "scope": "M1 成年合成会员 PDCAR 首检查点的技术授权与威胁模型",
+      "executable": false,
+      "owner": {
+        "primary": "平台安全负责人",
+        "co_signers": [
+          "隐私与法律负责人",
+          "后端、前端与测试负责人"
+        ]
+      },
+      "decision_maker": "Platform security decision agent acting as the registered 平台安全负责人 for this work item",
+      "decision_date": "2026-07-12",
+      "signature_reference": "work-item:AIW-20260712-HEALTH-M1-SECURITY-FREEZE",
+      "pending_owner": null,
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-S04",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md",
+        "path:contracts/modules/health-manager/mvp90-m1/security-authorization.v1.json",
+        "path:docs/project-management/modules/health-manager/health-manager-mvp90-m1-security-freeze-receipt.md"
+      ],
+      "missing_evidence": [],
+      "next_checkpoint": null,
+      "revision_request": null,
+      "blocks": [
+        "任何真实业务或生产授权"
+      ],
+      "does_not_block": [
+        "M1 合成安全合同和负例"
+      ],
+      "review_triggers": [
+        "新主体、资源或动作",
+        "真实数据或生产范围",
+        "授权、审计或 AI 供应链变化"
+      ]
+    },
+    {
+      "decision_id": "C4-S05",
+      "title": "AI 安全拦截、误拦截复核、红队和供应链",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-development",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "AI 与平台安全负责人",
+        "co_signers": [
+          "专业负责人",
+          "法律负责人",
+          "测试负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "AI 与平台安全负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-S05",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "模型选型",
+        "拦截目录",
+        "测试集",
+        "红队结果",
+        "供应商评估"
+      ],
+      "next_checkpoint": "独立 AI runtime 安全工作项",
+      "revision_request": null,
+      "blocks": [
+        "真实 AI runtime",
+        "真实健康数据 AI 处理"
+      ],
+      "does_not_block": [
+        "已签署边界的静态合同与合成负例"
+      ],
+      "review_triggers": [
+        "模型、提示、工具、供应商或拦截规则变化"
+      ]
+    },
+    {
+      "decision_id": "C4-S07",
+      "title": "真实数据试运行的环境隔离、审计、备份和回退",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-real-data-environment",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "平台安全与运维负责人",
+        "co_signers": [
+          "隐私负责人",
+          "专业负责人",
+          "测试负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "平台安全与运维负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-S07",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "独立环境方案",
+        "访问控制",
+        "安全验收",
+        "备份回退演练"
+      ],
+      "next_checkpoint": "真实数据试运行前独立环境工作项",
+      "revision_request": null,
+      "blocks": [
+        "测试环境真实身份",
+        "真实数据试运行",
+        "部署与生产"
+      ],
+      "does_not_block": [
+        "本地零网络零数据库合成验证"
+      ],
+      "review_triggers": [
+        "环境、备份、访问或发布架构变化"
+      ]
+    },
+    {
+      "decision_id": "C4-O01",
+      "title": "管理师工时、容量、排班、超容量和交接",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-real-data-environment",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "运营负责人",
+        "co_signers": [
+          "医生集团负责人",
+          "人力负责人",
+          "财务负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "运营负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-O01",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "任务工时抽样",
+        "复杂度权重",
+        "安全利用率",
+        "主备交接演练"
+      ],
+      "next_checkpoint": "R0-F2 容量边界审计及运营模型工作项",
+      "revision_request": null,
+      "blocks": [
+        "真实人员分配",
+        "容量与响应承诺"
+      ],
+      "does_not_block": [
+        "无数字承诺的流程与拒绝状态设计"
+      ],
+      "review_triggers": [
+        "服务包、人员结构或复杂度变化"
+      ]
+    },
+    {
+      "decision_id": "C4-O02",
+      "title": "人工响应、消息重试、安静时间和值班渠道",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-real-data-environment",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "运营负责人",
+        "co_signers": [
+          "专业负责人",
+          "隐私负责人",
+          "平台负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "运营负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-O02",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "服务分层",
+        "渠道同意",
+        "消息配置",
+        "故障演练"
+      ],
+      "next_checkpoint": "运营与消息策略独立工作项",
+      "revision_request": null,
+      "blocks": [
+        "真实消息触达",
+        "SLA 与值班承诺"
+      ],
+      "does_not_block": [
+        "发送、送达、接管分离的合成状态机"
+      ],
+      "review_triggers": [
+        "渠道、同意、服务层级或值班变化"
+      ]
+    },
+    {
+      "decision_id": "C4-O03",
+      "title": "Lite/Pro 权益、价格、退款和单位经济",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-real-data-environment",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "商业负责人",
+        "co_signers": [
+          "运营负责人",
+          "财务负责人",
+          "专业负责人",
+          "法律负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "商业负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-O03",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "服务包",
+        "人工成本",
+        "容量",
+        "价格试验",
+        "消费者条款"
+      ],
+      "next_checkpoint": "商业模型与收费独立工作项",
+      "revision_request": null,
+      "blocks": [
+        "收费、退款、套餐权益生效"
+      ],
+      "does_not_block": [
+        "不含价格的产品规划和业务变量接口设计"
+      ],
+      "review_triggers": [
+        "套餐、成本、价格或消费者条款变化"
+      ]
+    },
+    {
+      "decision_id": "C4-O04",
+      "title": "健康贡献积分、成长等级、推荐和反作弊",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-development",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "运营与商业负责人",
+        "co_signers": [
+          "法律负责人",
+          "隐私负责人",
+          "专业负责人",
+          "安全负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "运营与商业负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-O04",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "非医疗价值规则",
+        "无歧视评估",
+        "反作弊",
+        "现金与返佣边界"
+      ],
+      "next_checkpoint": "增长与积分独立 PRD",
+      "revision_request": null,
+      "blocks": [
+        "复杂积分、裂变奖励、健康信用评分"
+      ],
+      "does_not_block": [
+        "不含积分实现的 PDCAR 核心"
+      ],
+      "review_triggers": [
+        "积分价值、推荐机制或公平性前提变化"
+      ]
+    },
+    {
+      "decision_id": "C4-O05",
+      "title": "Day 0/1/7/30/90 成功指标与阈值",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "does-not-block-synthetic",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "产品与运营负责人",
+        "co_signers": [
+          "专业负责人",
+          "数据负责人",
+          "商业负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "产品与运营负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-O05",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "试验设计",
+        "统计口径",
+        "主观评价",
+        "停止条件"
+      ],
+      "next_checkpoint": "商业运营指标独立评审",
+      "revision_request": null,
+      "blocks": [
+        "正式 KPI、留存与转化承诺"
+      ],
+      "does_not_block": [
+        "证据类型、观察窗口和合成场景"
+      ],
+      "review_triggers": [
+        "样本、人群、指标或统计方法变化"
+      ]
+    },
+    {
+      "decision_id": "C4-O06",
+      "title": "核心会员受控试运行人数、周期、退出和回退",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-real-data-environment",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "运营负责人",
+        "co_signers": [
+          "专业负责人",
+          "隐私负责人",
+          "平台安全负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "运营负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-O06",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "试运行方案",
+        "纳排",
+        "容量",
+        "值班",
+        "同意",
+        "投诉",
+        "退出",
+        "回退演练"
+      ],
+      "next_checkpoint": "真实会员试运行前独立 Go/No-Go",
+      "revision_request": null,
+      "blocks": [
+        "任何真实会员试运行"
+      ],
+      "does_not_block": [
+        "合成开发与静态规划"
+      ],
+      "review_triggers": [
+        "试运行人群、周期、容量或服务模式变化"
+      ]
+    },
+    {
+      "decision_id": "C4-O07",
+      "title": "外部能力池假设及供应商准入退出",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-real-data-environment",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "采购与运营负责人",
+        "co_signers": [
+          "专业负责人",
+          "法律负责人",
+          "平台安全负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "采购与运营负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-O07",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "需求量",
+        "区域模型",
+        "主备",
+        "资质",
+        "质量",
+        "退出方案"
+      ],
+      "next_checkpoint": "外部能力池独立采购与准入工作项",
+      "revision_request": null,
+      "blocks": [
+        "外部供应商接入",
+        "规划数量对外承诺"
+      ],
+      "does_not_block": [
+        "需求地图与内部能力缺口规划"
+      ],
+      "review_triggers": [
+        "供应商、地区、服务或数据处理变化"
+      ]
+    },
+    {
+      "decision_id": "C4-T03",
+      "title": "首个业务切片、接口、分支、路径和两层依赖",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-development",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "平台集成负责人",
+        "co_signers": [
+          "健康大管家负责人",
+          "后端、前端、测试与安全负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "平台集成负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-T03",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "共享业务实现精确任务书",
+        "前后端/API/DB allowed paths",
+        "接口与两层依赖门禁"
+      ],
+      "next_checkpoint": "独立共享业务实现工作项",
+      "revision_request": null,
+      "blocks": [
+        "共享前后端、API、数据库和页面业务编码"
+      ],
+      "does_not_block": [
+        "已集成 M0/M1/P2 synthetic 合同与 reference runner"
+      ],
+      "review_triggers": [
+        "拟议切片、接口、依赖或共享路径变化"
+      ]
+    },
+    {
+      "decision_id": "C4-T04",
+      "title": "性能、可用性、RTO/RPO、容量和发布门槛",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-real-data-environment",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "平台与运维负责人",
+        "co_signers": [
+          "安全负责人",
+          "测试负责人",
+          "业务负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "平台与运维负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-T04",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "目标架构",
+        "压测",
+        "恢复演练",
+        "容量模型"
+      ],
+      "next_checkpoint": "环境与发布准备独立工作项",
+      "revision_request": null,
+      "blocks": [
+        "性能承诺",
+        "release 与 operations Go"
+      ],
+      "does_not_block": [
+        "本地文档、合同和合成测试"
+      ],
+      "review_triggers": [
+        "架构、容量、流量或恢复目标变化"
+      ]
+    },
+    {
+      "decision_id": "C4-T05",
+      "title": "测试环境、真实数据环境、部署、回滚和生产责任链",
+      "source_status": "Pending with owner",
+      "decision_status": "Pending with owner",
+      "classification": "blocks-real-data-environment",
+      "scope": "HM-R0 V1.0 development planning",
+      "executable": false,
+      "owner": {
+        "primary": "平台发布负责人",
+        "co_signers": [
+          "运维负责人",
+          "安全负责人",
+          "隐私负责人",
+          "专业负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": "平台发布负责人",
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-T05",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+      ],
+      "missing_evidence": [
+        "环境隔离",
+        "备份",
+        "回滚",
+        "验收",
+        "生产授权"
+      ],
+      "next_checkpoint": "部署与生产独立工作项",
+      "revision_request": null,
+      "blocks": [
+        "测试环境真实身份",
+        "部署、生产与真实数据"
+      ],
+      "does_not_block": [
+        "零外部依赖的本地合成验证"
+      ],
+      "review_triggers": [
+        "环境、发布、数据或责任链变化"
+      ]
+    },
+    {
+      "decision_id": "C4-T06",
+      "title": "HM-R0 母文档冻结与 Draft PR 合并拆分裁决",
+      "source_status": "Pending with owner",
+      "decision_status": "Exact revision",
+      "classification": "does-not-block-synthetic",
+      "scope": "HM-R0 V1.0 development planning; PR merge excluded",
+      "executable": false,
+      "owner": {
+        "primary": "平台集成负责人",
+        "co_signers": [
+          "和奥堂医生集团专业负责人"
+        ]
+      },
+      "decision_maker": null,
+      "decision_date": null,
+      "signature_reference": null,
+      "pending_owner": null,
+      "evidence_refs": [
+        "git:fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c:docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md#C4-T06",
+        "path:docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md",
+        "git:ce9a4c75fb2ea9d7eed46bc4c27c1fa4b3488887:docs/project-management/modules/health-manager/health-manager-v1-requirements-and-development-plan.md#27.0",
+        "git:ce9a4c75fb2ea9d7eed46bc4c27c1fa4b3488887:docs/project-management/modules/health-manager/health-manager-v1-docs-handoff.md",
+        "git:384436c719396d0a0105f448716ef37aa8ba7ab8:contracts/modules/health-manager/hm-r0-formal-freeze.v1.json",
+        "git:fb1b882091209897d9f618659ce02733d670b53e:contracts/modules/health-manager/hm-r0-formal-freeze.v1.json",
+        "git:034e46beae3dd30d5616c873d596e9c591c8d797:docs/project-management/service-plaza/health-r0-f1-acceptance-2026-07-13.md"
+      ],
+      "missing_evidence": [
+        "PR #1/#2 的单独处置决定"
+      ],
+      "next_checkpoint": "R0-F3 PR 处置、变更控制与最终 Handoff",
+      "revision_request": {
+        "exact_target": "C4-T06",
+        "replacement_text": "HM-R0 母文档可冻结为 Accepted for development planning；Draft PR #1 与 PR #2 是否更新或合并继续由平台单独裁决，当前均保持 Draft。",
+        "rationale": "开发规划冻结与 GitHub 合并是不同权限和不同证据门禁，不能捆绑为一个布尔状态。",
+        "owner": "平台集成负责人",
+        "revalidation_conditions": [
+          "R0-F3 对 PR #1/#2 处置作出独立裁决",
+          "PR 元数据与差异单独复核",
+          "不得扩大为业务、环境或生产授权"
+        ]
+      },
+      "blocks": [
+        "R0-F3 的 PR #1/#2 单独处置收口",
+        "PR #1/#2 合并"
+      ],
+      "does_not_block": [
+        "F2 专业、风险与数据边界审计",
+        "已授权范围内的开发规划"
+      ],
+      "review_triggers": [
+        "母文档核心原则变化",
+        "PR 目标分支或差异变化",
+        "专业或平台证据被撤回"
+      ]
+    }
+  ],
+  "global_review_triggers": [
+    "product positioning or PDCAR core changes",
+    "professional responsibility or safety floor changes",
+    "data rights, population or family authorization changes",
+    "scope expands beyond development planning or synthetic evidence",
+    "identity, organization, qualification or legal authority evidence changes",
+    "AI model, provider, tool, prompt or autonomy changes",
+    "real identity, real health data, environment, medical service, charging, deployment or production is proposed",
+    "any accepted evidence is revoked, expires or becomes contradictory"
+  ],
+  "change_control": {
+    "major_changes_require": [
+      "formal work item",
+      "current checklist",
+      "governance exam score 100",
+      "responsible professional/legal/security decision",
+      "independent platform review"
+    ],
+    "minor_execution_details_go_to": [
+      "MVP-90 PRD",
+      "independent implementation work items",
+      "operations and commercial documents"
+    ],
+    "no_implicit_promotion": true
+  }
+}

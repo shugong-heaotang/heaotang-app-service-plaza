@@ -1,0 +1,12 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"https://heaotang.cn/contracts/club-alliance/self-created-club-error-catalog.v1.schema.json",
+  "type":"object",
+  "additionalProperties":false,
+  "required":["contract_version","module_id","errors"],
+  "properties":{
+    "contract_version":{"const":"self-created-club-error-catalog.v1"},
+    "module_id":{"const":"club-alliance-self-created"},
+    "errors":{"type":"array","minItems":13,"items":{"type":"object","additionalProperties":false,"required":["error_id","category","http_status","severity","blocks"],"properties":{"error_id":{"type":"string","pattern":"^[A-Z][A-Z0-9_]+$"},"category":{"enum":["input","resource","boundary","idempotency","membership","isolation","authorization"]},"http_status":{"enum":[400,403,404,409,500]},"severity":{"enum":["blocker","major"]},"blocks":{"type":"array","minItems":1,"uniqueItems":true,"items":{"enum":["list","detail","join","my-applications"]}}}}}
+  }
+}

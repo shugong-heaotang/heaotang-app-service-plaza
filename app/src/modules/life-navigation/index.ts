@@ -10,3 +10,21 @@ export {
   mapLifeNavigationManifest,
 } from "./lifeNavigationContract";
 export type { LifeNavigationModuleContract } from "./lifeNavigationContract";
+export {
+  defaultLifeNavigationHistoryLimit,
+  fetchLifeNavigationApplicationHistory,
+  loadLifeNavigationApplicationHistory,
+  mapLifeNavigationApplicationRecord,
+  resolveLifeNavigationHistoryLimit,
+  submitLifeNavigationApplication,
+} from "./lifeNavigationApi";
+export { LifeNavigationPage } from "./LifeNavigationPage";
+export type { LifeNavigationPageApi, LifeNavigationPageProps } from "./LifeNavigationPage";
+export type {
+  LifeNavigationApplicationInput,
+  LifeNavigationApplicationRecord,
+  LifeNavigationHistoryResponse,
+  LifeNavigationHistoryState,
+  LifeNavigationRecordDto,
+  LifeNavigationSubmissionResult,
+} from "./lifeNavigationApi";

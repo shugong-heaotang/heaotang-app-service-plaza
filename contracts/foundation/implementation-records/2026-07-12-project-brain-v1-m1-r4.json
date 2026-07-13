@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-PROJECT-BRAIN-V1-M1-R4",
+  "title": "Project Brain v1 M1-R4 治理考试重试合约集成修复",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "在最新集成 HEAD 采用治理考试 retry 证据新合约，不改写旧 retry，恢复 Project Brain 全量治理门禁。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m1-r4.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1-r4-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/service-plaza/governance-exam-retry-evidence-2026-07-12.md", "docs/project-management/notices/2026-07-12-project-brain-v1-task-order.md"],
+  "requirement_sources": ["docs/project-management/project-brain/requirements-v1.md", "docs/project-management/project-brain/acceptance-v1.md"],
+  "capabilities": ["foundation.governance-certification", "foundation.ai-engineering-traceability", "foundation.contract-tooling"],
+  "contracts": ["contracts/project-brain/modules.v1.schema.json", "contracts/project-brain/knowledge-sources.v1.schema.json", "contracts/project-brain/decisions.v1.schema.json", "contracts/project-brain/risks.v1.schema.json"],
+  "decisions": ["docs/decisions/0014-ai-development-flight-checklist.md", "docs/decisions/0017-readme-course-and-random-governance-exam.md"],
+  "changed_areas": ["contracts/foundation/development-checklists/2026-07-12-project-brain-v1-m1-r4.json", "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1-r4-attempt-1.json", "contracts/foundation/implementation-records/2026-07-12-project-brain-v1-m1-r4.json", "contracts/foundation/invalidated-snapshots/project-brain-v1-m1", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/project-brain/handoff-v1.md"],
+  "verification": ["Current integration checklist completed", "M1-R4 attempt 1 passed score 100 under retry evidence contract", "old attempt 2 and dependent R3 IR preserved unchanged under invalidated snapshots", "full contracts, tests, build, encoding and diff gates passed"],
+  "evidence": ["contracts/foundation/invalidated-snapshots/project-brain-v1-m1/2026-07-12-project-brain-v1-m1-r3-attempt-2-pre-retry-contract.json", "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-m1-r4-attempt-1.json", "docs/project-management/project-brain/m4-independent-acceptance-2026-07-12.md"],
+  "premises": ["Project Brain was integrated by merge commit 57e798f8447e4eaf66bc810606fc70f961a41fc1.", "The dashboard No-Go remains an accurate external governance conclusion.", "Production deployment remains unauthorized."],
+  "implementation_mode": "ai-assisted"
+}

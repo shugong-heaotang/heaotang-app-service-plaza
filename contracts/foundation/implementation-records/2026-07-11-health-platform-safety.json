@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-HEALTH-PLATFORM-SAFETY-R3",
+  "title": "健康咨询输入缓存与 AI 失败关闭平台安全前置",
+  "date": "2026-07-11",
+  "status": "implemented",
+  "objective": "在健康板块正式开发前关闭未经同意的健康 AI 外发风险，并固定咨询输入归一化、长度、稳定错误和敏感响应缓存边界。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-health-platform-safety-r3.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-health-platform-safety-r3-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/governance-reading-list.v1.json", "contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/engineering-standards.v1.json", "contracts/modules/health-manager/internal-dependencies.v1.json", "docs/project-management/modules/health-manager/README.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-11-health-manager-first-phase-task-order.md", "docs/project-management/modules/health-manager-first-slice-contract-v1.md", "docs/project-management/module-internal-dependency-standard-v1.md"],
+  "capabilities": ["foundation.identity-api", "foundation.authorization-idempotency", "foundation.observability-config", "foundation.ai-collaboration-safety"],
+  "contracts": ["contracts/foundation/module-dependencies/health-manager.v1.json", "contracts/modules/health-manager/internal-dependencies.v1.json", "docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+  "decisions": ["docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0009-approved-toolchain-per-layer.md", "docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"],
+  "changed_areas": ["backend-go/plugins/health-plugin/plugin.go", "backend-go/plugins/health-plugin/service.go", "backend-go/plugins/health-plugin/service_test.go", "contracts/foundation/agent-collaboration.v1.json", "contracts/modules/health-manager/internal-dependencies.v1.json", "docs/project-management/modules/health-manager-first-slice-contract-v1.md", "docs/project-management/service-plaza/health-platform-safety-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "verification": ["go test -count=1 ./plugins/health-plugin", "go test -count=1 ./...", "go vet ./...", "scripts/Test-ServicePlazaContracts.ps1", "scripts/Test-TextEncoding.ps1", "scripts/validate_implementation_records.py", "git diff --check", "changed-line secret scan"],
+  "evidence": ["docs/project-management/service-plaza/health-platform-safety-2026-07-11.md", "contracts/foundation/development-checklists/2026-07-11-health-platform-safety-r3.json", "contracts/foundation/governance-exams/2026-07-11-health-platform-safety-r3-attempt-1.json", "docs/project-management/service-plaza/handoff-log.md"],
+  "premises": ["健康 AI 同意、供应商、医疗安全、危急分流和保留规则尚未形成独立契约，因此能力必须失败关闭", "姓名 80 字符和症状 2000 字符是本首切片已冻结的服务端安全上限，按 Unicode 字符而非 UTF-8 字节计数", "测试只使用合成非真实健康文本，未接触生产、真实健康数据、真实资金或不可逆数据", "本地全量测试通过不等于测试环境已部署，当前状态只能是 implemented", "本平台前置修复不构成健康板块通知正式派发，也不解除 DTO、日志证据和路由挂载的 M2 No-Go"],
+  "implementation_mode": "ai-assisted"
+}

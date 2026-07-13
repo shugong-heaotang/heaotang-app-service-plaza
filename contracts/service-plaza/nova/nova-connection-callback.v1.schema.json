@@ -1,0 +1,97 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/schemas/nova-connection-callback.v1.schema.json",
+  "title": "NOVA connection result callback v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "protocol_id", "status", "executable", "classification", "transport", "responsibility", "event_schema", "idempotency", "recovery", "audit", "error_ids", "compatibility"],
+  "properties": {
+    "contract_version": {"const": "nova-connection-callback.v1"},
+    "protocol_id": {"const": "connection_result_callback"},
+    "status": {"enum": ["proposed", "standardized", "deprecated"]},
+    "executable": {"const": false},
+    "classification": {"const": "server_to_server_callback"},
+    "transport": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["method", "path", "public_or_model_tool", "authentication", "allowed_principal_role", "tenant_source", "body_may_override_server_identity_or_tenant"],
+      "properties": {
+        "method": {"const": "POST"},
+        "path": {"const": "/api/nova/internal/callbacks/connection-results"},
+        "public_or_model_tool": {"const": false},
+        "authentication": {"const": "mutual_tls_or_oidc_service_principal"},
+        "allowed_principal_role": {"const": "people_connection_outbox"},
+        "tenant_source": {"const": "trusted_server_context"},
+        "body_may_override_server_identity_or_tenant": {"const": false}
+      }
+    },
+    "responsibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["canonical_state_owner", "outbox_producer", "transport_schema_auth_owner", "consumer", "consumer_effect", "callback_may_rewrite_canonical_state", "reconciliation_source"],
+      "properties": {
+        "canonical_state_owner": {"const": "People Network module owner"},
+        "outbox_producer": {"const": "People Network module owner"},
+        "transport_schema_auth_owner": {"const": "platform integration owner"},
+        "consumer": {"const": "Nova + AI module owner"},
+        "consumer_effect": {"const": "append_only_task_event"},
+        "callback_may_rewrite_canonical_state": {"const": false},
+        "reconciliation_source": {"const": "connection_status"}
+      }
+    },
+    "event_schema": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["type", "additionalProperties", "required", "properties"],
+      "properties": {
+        "type": {"const": "object"},
+        "additionalProperties": {"const": false},
+        "required": {"type": "array", "minItems": 8, "uniqueItems": true, "items": {"type": "string"}},
+        "properties": {"type": "object"}
+      }
+    },
+    "idempotency": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["key", "same_event_same_payload", "same_event_different_payload", "consumer_write"],
+      "properties": {
+        "key": {"const": "event_id"},
+        "same_event_same_payload": {"const": "safe_replay"},
+        "same_event_different_payload": {"const": "NOVA_CALLBACK_EVENT_CONFLICT"},
+        "consumer_write": {"const": "append_once"}
+      }
+    },
+    "recovery": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["delivery", "failure_path", "status_reconciliation_required", "callback_failure_rolls_back_domain_outcome", "dlq_owner"],
+      "properties": {
+        "delivery": {"const": "at_least_once"},
+        "failure_path": {"const": "retry_then_dlq"},
+        "status_reconciliation_required": {"const": true},
+        "callback_failure_rolls_back_domain_outcome": {"const": false},
+        "dlq_owner": {"const": "platform integration owner"}
+      }
+    },
+    "audit": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_fields", "redacted_fields"],
+      "properties": {
+        "required_fields": {"type": "array", "minItems": 9, "uniqueItems": true, "items": {"type": "string"}},
+        "redacted_fields": {"type": "array", "minItems": 6, "uniqueItems": true, "items": {"type": "string"}}
+      }
+    },
+    "error_ids": {"type": "array", "minItems": 7, "uniqueItems": true, "items": {"type": "string", "pattern": "^NOVA_[A-Z0-9_]+$"}},
+    "compatibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["additive_optional_fields", "new_event_type_required_field_or_changed_meaning", "unknown_fields"],
+      "properties": {
+        "additive_optional_fields": {"const": "compatible_minor"},
+        "new_event_type_required_field_or_changed_meaning": {"const": "new_major_and_producer_consumer_platform_signoff"},
+        "unknown_fields": {"const": "reject"}
+      }
+    }
+  }
+}

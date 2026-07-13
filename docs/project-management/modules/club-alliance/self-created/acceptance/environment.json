@@ -1,0 +1,28 @@
+{
+  "contract_version": "club-sc-t0-environment.v1",
+  "captured_at": "2026-07-12T02:02:00Z",
+  "base_url": "https://heaotang.cn",
+  "environment": "test",
+  "database_mode": "sqlite",
+  "app_source_commit": "2c4b295e6fd625a2df24957f7b8becbc28ad1dcf",
+  "authoritative_activation_commit": "4bb430a1d2a2b89f6ae1dbc9b5bc9e34655b2c1a",
+  "backend_source_commit": "98426ff83a1218080019faa377c152a81ecca437",
+  "backend_binary_sha256": "fec7bcbb58d6186d9c384b1b837479f592d978c145ce09c46e002763d9c565f1",
+  "frontend_asset": "index-6r_HRkaO.js",
+  "frontend_asset_sha256": "bfe4d9848d52ce4fac6d92edc3668bd78a20c7ca853301976fc6013d52038e99",
+  "predeploy": {
+    "health": "ok",
+    "ready": "ready",
+    "db": true,
+    "plugins": 24,
+    "migrations": 11
+  },
+  "synthetic_fixture_seed": "HEAOTANG-CA-SC-20260712-V1",
+  "fixture_run_id": "club-sc-t0-20260712-100100",
+  "synthetic_users": 2,
+  "mutating_tests_allowed": true,
+  "production": false,
+  "real_data": false,
+  "real_funds": false,
+  "secrets_persisted": false
+}

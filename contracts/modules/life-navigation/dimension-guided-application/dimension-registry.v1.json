@@ -1,0 +1,45 @@
+{
+  "contract_version": "life-navigation.dimension-registry.v1",
+  "contract_status": "base-contract",
+  "authoritative_business_registry": false,
+  "registry_frozen": false,
+  "decision_status": "pending",
+  "executable": false,
+  "source_facts": {
+    "frontend_current_dimension_id": "yun",
+    "backend_current_validation": "non-empty-and-length-only",
+    "legacy_yun_decision": "pending",
+    "synthetic_input_sha256": "82dfd8a2c511895eb819a1c7911433c42f237efef1bb218b160fc2eab1d8af08"
+  },
+  "dimensions": [
+    {
+      "dimension_id": "proposed-wellbeing",
+      "dimension_version": "proposed-v1",
+      "label": "候选维度-01",
+      "sort_order": 10,
+      "active": false,
+      "decision_status": "pending",
+      "executable": false,
+      "authority": "synthetic-decision-candidate-only"
+    },
+    {
+      "dimension_id": "proposed-community",
+      "dimension_version": "proposed-v1",
+      "label": "候选维度-02",
+      "sort_order": 20,
+      "active": false,
+      "decision_status": "pending",
+      "executable": false,
+      "authority": "synthetic-decision-candidate-only"
+    }
+  ],
+  "legacy_dimensions": [
+    {
+      "observed_dimension_id": "yun",
+      "decision_status": "pending",
+      "executable": false,
+      "mapping_target": null,
+      "compatibility_action": "not-decided"
+    }
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-CLUB-SC-LIST-SAFE-DTO",
+  "title": "CA-SC 自建俱乐部列表安全 DTO 根因修复",
+  "date": "2026-07-12",
+  "status": "implemented",
+  "objective": "在不改变 type+category 权威筛选和过滤后分页语义的前提下，阻止俱乐部搜索列表直接序列化完整 Club，并以严格安全 DTO 只返回 id、name、intro、city、type、category、status。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-club-sc-list-safe-dto.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-club-sc-list-safe-dto-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md",
+    "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json",
+    "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md",
+    "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "contracts/modules/club-alliance/self-created/self-created-club.v1.json",
+    "docs/project-management/service-plaza/club-sc-list-safe-dto-2026-07-12.md"
+  ],
+  "capabilities": [
+    "foundation.identity-api",
+    "foundation.ai-engineering-traceability"
+  ],
+  "contracts": [
+    "contracts/modules/club-alliance/self-created/self-created-club.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/project-management/service-plaza/club-sc-list-safe-dto-2026-07-12.md"
+  ],
+  "changed_areas": [
+    "backend-go/plugins/club-plugin/plugin.go",
+    "backend-go/plugins/club-plugin/service_test.go"
+  ],
+  "verification": [
+    "go test ./plugins/club-plugin -run 'TestSearchClubs|TestClubSearchHandler' -count=1",
+    "go test ./...",
+    "go vet ./...",
+    "gofmt",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/foundation/development-checklists/2026-07-12-club-sc-list-safe-dto.json",
+    "contracts/foundation/governance-exams/2026-07-12-club-sc-list-safe-dto-attempt-1.json",
+    "docs/project-management/service-plaza/club-sc-list-safe-dto-2026-07-12.md"
+  ],
+  "premises": [
+    "backend implementation commit is df0575a05c8f75d927d079dc8c662e2cd25b9e55",
+    "search response item fields are exactly id, name, intro, city, type, category and status",
+    "type+category filtering and page/size/total semantics remain delegated unchanged to SearchClubsByCategory",
+    "owner_id, code, parent, level, brand, province, address, logo, member_count and timestamps are forbidden from search list items",
+    "no database, deployment, environment, APP registry, H2 or other backend path was authorized or changed"
+  ],
+  "implementation_mode": "ai-assisted"
+}

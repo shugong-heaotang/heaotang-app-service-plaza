@@ -1,0 +1,71 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-HEALTH-MVP90-M0-R2-GOVERNANCE",
+  "title": "健康与生命导航最终 current 治理快照根因修复",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "为同时更新治理 overlay 的模块切片预留最终 R2 current 证据路径，并把第二次复发升级为系统性治理规则。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-health-mvp90-m0-r2-governance.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-health-mvp90-m0-r2-governance-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-health-manager-mvp90-m0-task-order.md",
+    "docs/project-management/notices/2026-07-12-life-ln-s2-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.recurrence-prevention"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/recurring-issues.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/development-checklists/2026-07-12-health-mvp90-m0-r2-governance.json",
+    "contracts/foundation/governance-exams/2026-07-12-health-mvp90-m0-r2-governance-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-12-health-mvp90-m0-r2-governance.json",
+    "docs/project-management/service-plaza/governance-current-snapshot-self-reference-2026-07-12.md"
+  ],
+  "verification": [
+    "scripts/Test-AgentDevelopmentPreflight.ps1: ready",
+    "FC-20260712-HEALTH-MVP90-M0-R2-GOVERNANCE: 26/26",
+    "EX-20260712-HEALTH-MVP90-M0-R2-GOVERNANCE-1: score 100",
+    "scripts/validate_development_checklists.py",
+    "scripts/validate_governance_exams.py",
+    "scripts/validate_implementation_records.py",
+    "scripts/validate_agent_collaboration.py",
+    "scripts/validate_recurring_issues.py",
+    "scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/foundation/development-checklists/2026-07-12-health-mvp90-m0-r2-governance.json",
+    "contracts/foundation/governance-exams/2026-07-12-health-mvp90-m0-r2-governance-attempt-1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "docs/project-management/service-plaza/governance-current-snapshot-self-reference-2026-07-12.md"
+  ],
+  "premises": [
+    "旧 checklist/exam 是不可修改的入口历史证据，不得改写为最终 current",
+    "R2 路径只恢复治理收口能力，不扩大模块业务、代码、环境或部署权限",
+    "最终 R2 checklist 必须在成果和内部依赖图完成后重新全文读取并取得考试 100 分"
+  ],
+  "implementation_mode": "ai-assisted"
+}

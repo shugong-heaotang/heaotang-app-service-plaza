@@ -1,0 +1,419 @@
+{
+  "contract_version": "activity.api-contracts.v2",
+  "execution": {
+    "executable": false,
+    "mode": "mock-only",
+    "environment": "non-production"
+  },
+  "endpoints": [
+    {
+      "operation": "publishActivity",
+      "scope": "activity:publish-activity",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "submitProposal",
+      "scope": "activity:submit-proposal",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "reviewProposal",
+      "scope": "activity:review-proposal",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "getActivityDetails",
+      "scope": "activity:get-activity-details",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "confirmAiDraft",
+      "scope": "activity:confirm-ai-draft",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "searchActivities",
+      "scope": "activity:search-activities",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "getMatchReport",
+      "scope": "activity:get-match-report",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "register",
+      "scope": "activity:register",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "updateMatchConsents",
+      "scope": "activity:update-match-consents",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "requestIntroduction",
+      "scope": "activity:request-introduction",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "getPersonalActivityPlan",
+      "scope": "activity:get-personal-activity-plan",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "createOrderRedirect",
+      "scope": "activity:create-order-redirect",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "getActivityAssetPackage",
+      "scope": "activity:get-activity-asset-package",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "listActivityProducts",
+      "scope": "activity:list-activity-products",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "getClubActivityDashboard",
+      "scope": "activity:get-club-activity-dashboard",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "createCaseAudit",
+      "scope": "activity:create-case-audit",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "getFirstAttendeeGuide",
+      "scope": "activity:get-first-attendee-guide",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "updatePersonalAgenda",
+      "scope": "activity:update-personal-agenda",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "getLiveOperationsDashboard",
+      "scope": "activity:get-live-operations-dashboard",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "syncActivityCalendar",
+      "scope": "activity:sync-activity-calendar",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "requestMeeting",
+      "scope": "activity:request-meeting",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "createSponsorLead",
+      "scope": "activity:create-sponsor-lead",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "rerunActivitySeries",
+      "scope": "activity:rerun-activity-series",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "getPersonalActivityRecap",
+      "scope": "activity:get-personal-activity-recap",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    },
+    {
+      "operation": "getHybridContentSummary",
+      "scope": "activity:get-hybrid-content-summary",
+      "input": [
+        "actor_id",
+        "resource_id"
+      ],
+      "output": [
+        "result",
+        "audit_id"
+      ],
+      "errors": [
+        "FORBIDDEN",
+        "INVALID_STATE"
+      ]
+    }
+  ],
+  "global_error_semantics": {
+    "UNAUTHENTICATED": 401,
+    "FORBIDDEN": 403,
+    "NOT_FOUND": 404,
+    "CONFLICT": 409,
+    "CONSENT_REQUIRED": 412,
+    "RATE_LIMITED": 429,
+    "DEPENDENCY_UNAVAILABLE": 503
+  }
+}

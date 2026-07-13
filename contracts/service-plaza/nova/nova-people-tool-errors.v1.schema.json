@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/schemas/nova-people-tool-errors.v1.schema.json",
+  "title": "NOVA people tool stable errors v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "envelope", "errors"],
+  "properties": {
+    "contract_version": {"const": "nova-people-tool-errors.v1"},
+    "envelope": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_fields", "details_policy", "sensitive_values_forbidden"],
+      "properties": {
+        "required_fields": {"type": "array", "minItems": 5, "maxItems": 5, "uniqueItems": true, "items": {"enum": ["error_id", "message_key", "trace_id", "retryable", "details"]}},
+        "details_policy": {"const": "allowlist_only"},
+        "sensitive_values_forbidden": {"const": true}
+      }
+    },
+    "errors": {
+      "type": "array",
+      "minItems": 26,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["error_id", "category", "severity", "http_status", "retryable", "message_key", "applies_to"],
+        "properties": {
+          "error_id": {"type": "string", "pattern": "^NOVA_[A-Z0-9_]+$"},
+          "category": {"enum": ["context", "tenant", "permission", "validation", "visibility", "confirmation", "idempotency", "draft", "resource", "state", "callback", "dependency", "rate_limit", "internal"]},
+          "severity": {"enum": ["blocker", "major"]},
+          "http_status": {"type": "integer", "minimum": 400, "maximum": 599},
+          "retryable": {"type": "boolean"},
+          "message_key": {"type": "string", "pattern": "^nova\\."},
+          "applies_to": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"enum": ["member_search", "connection_draft", "connection_send", "connection_status", "connection_result_callback"]}}
+        }
+      }
+    }
+  }
+}

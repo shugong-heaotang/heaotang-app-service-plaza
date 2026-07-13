@@ -1,0 +1,61 @@
+{
+    "contract_version":  "implementation-record.v1",
+    "record_id":  "IR-20260712-CLUB-MEMBER-HOME-H2-M2-RUNTIME",
+    "title":  "俱乐部联盟 H2-M2 会员首页真实数据前端挂载",
+    "date":  "2026-07-12",
+    "status":  "verified",
+    "objective":  "挂载 guest H1 分类导航与 authenticated member H2 真实数据首页的双层边界，同时保持 category/view 查询兼容。",
+    "governance_checklist":  "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-h2-m2-runtime.json",
+    "governance_exam":  "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-h2-m2-runtime-attempt-1.json",
+    "governance_inputs":  [
+                              "AGENTS.md",
+                              "README.md",
+                              "CONSTRAINTS.md",
+                              "contracts/foundation/agent-collaboration.v1.json",
+                              "contracts/foundation/module-dependencies/club-alliance.v1.json",
+                              "contracts/modules/club-alliance/internal-dependencies.v1.json"
+                          ],
+    "requirement_sources":  [
+                                "docs/project-management/notices/2026-07-12-club-member-home-m2-runtime-task-order.md",
+                                "docs/project-management/modules/club-alliance/member-home/requirements.md"
+                            ],
+    "capabilities":  [
+                         "foundation.identity-api",
+                         "foundation.app-shell-adapter",
+                         "foundation.service-action-contracts"
+                     ],
+    "contracts":  [
+                      "contracts/modules/club-alliance/member-home/member-home.v1.json",
+                      "contracts/service-plaza/service-plaza-actions.v1.json"
+                  ],
+    "decisions":  [
+                      "docs/project-management/modules/club-alliance/member-home/decisions.md"
+                  ],
+    "changed_areas":  [
+                          "app/src/modules/club-alliance/member-home/memberHomeApi.ts",
+                          "app/src/modules/club-alliance/member-home/memberHomeApi.test.ts",
+                          "app/src/modules/club-alliance/ClubAlliancePage.tsx",
+                          "app/src/modules/club-alliance/ClubAllianceRoute.tsx",
+                          "app/src/modules/club-alliance/ClubAlliancePage.test.tsx",
+                          "docs/project-management/modules/club-alliance/member-home/handoff-m2.md"
+                      ],
+    "verification":  [
+                         "PASS: targeted Vitest 3 files / 62 tests",
+                         "PASS: full Vitest 22 files / 215 tests",
+                         "PASS: production build tsc + vite / 65 modules",
+                         "PASS: git diff --check",
+                         "PENDING: M3 test-environment deployment and four-role browser UAT"
+                     ],
+    "evidence":  [
+                     "app/src/modules/club-alliance/member-home/memberHomeApi.test.ts",
+                     "app/src/modules/club-alliance/ClubAlliancePage.test.tsx",
+                     "docs/project-management/modules/club-alliance/member-home/handoff-m2.md"
+                 ],
+    "premises":  [
+                     "Empty-query guest sessions remain on H1 home and must not call the member-home endpoint.",
+                     "Empty-query authenticated sessions load H2; API 401 or CMH_AUTH_REQUIRED maps to the H2 unauthorized state.",
+                     "Category and view queries remain on the H1 focused, lifecycle, and access-evaluator path.",
+                     "Backend is repository-verified but M3 test-environment deployment and role-based UAT remain pending."
+                 ],
+    "implementation_mode":  "ai-assisted"
+}

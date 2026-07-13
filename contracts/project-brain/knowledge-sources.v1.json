@@ -1,0 +1,53 @@
+{
+  "contract_version": "project-brain.knowledge-sources.v1",
+  "items": [
+    {
+      "knowledge_id": "KB-GOVERNANCE-ENTRY",
+      "title": "APP 开发治理入口",
+      "category": "governance",
+      "source_path": "README.md",
+      "owner_role": "平台集成负责人",
+      "scope": "全仓库开发入口、必读顺序与平台边界",
+      "supersedes": [],
+      "status": "authoritative",
+      "last_reviewed_at": "2026-07-12T00:00:00+08:00",
+      "next_review_at": "2026-07-26T00:00:00+08:00"
+    },
+    {
+      "knowledge_id": "KB-AI-CONSTRAINTS",
+      "title": "AI 工程硬约束",
+      "category": "governance",
+      "source_path": "CONSTRAINTS.md",
+      "owner_role": "平台集成负责人",
+      "scope": "全仓库 AI 实施与根因闭环硬约束",
+      "supersedes": [],
+      "status": "authoritative",
+      "last_reviewed_at": "2026-07-12T00:00:00+08:00",
+      "next_review_at": "2026-07-26T00:00:00+08:00"
+    },
+    {
+      "knowledge_id": "KB-WORK-REGISTRY",
+      "title": "Agent 工作项与范围",
+      "category": "work-management",
+      "source_path": "contracts/foundation/agent-collaboration.v1.json",
+      "owner_role": "平台集成负责人",
+      "scope": "当前 Agent 工作项、分支、工作树与允许路径",
+      "supersedes": [],
+      "status": "authoritative",
+      "last_reviewed_at": "2026-07-12T00:00:00+08:00",
+      "next_review_at": "2026-07-13T00:00:00+08:00"
+    },
+    {
+      "knowledge_id": "KB-DECISIONS",
+      "title": "架构决策记录",
+      "category": "architecture",
+      "source_path": "docs/decisions",
+      "owner_role": "APP 总架构负责人",
+      "scope": "已锁定的跨模块架构与治理决定",
+      "supersedes": [],
+      "status": "authoritative",
+      "last_reviewed_at": "2026-07-12T00:00:00+08:00",
+      "next_review_at": "2026-07-26T00:00:00+08:00"
+    }
+  ]
+}

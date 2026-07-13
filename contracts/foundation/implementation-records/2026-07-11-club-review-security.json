@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-CLUB-REVIEW-SECURITY",
+  "title": "俱乐部审核资源授权事务故障与错误矩阵",
+  "date": "2026-07-11",
+  "status": "implemented",
+  "objective": "关闭俱乐部审核普通用户和跨俱乐部越权、路径错配、事务故障回滚及稳定机器错误码缺口。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-club-review-security.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-club-review-security-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/governance-reading-list.v1.json", "contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/module-dependencies/club-alliance.v1.json", "contracts/modules/club-alliance/internal-dependencies.v1.json", "docs/project-management/modules/club-alliance/README.md", "docs/project-management/notices/2026-07-11-club-alliance-first-phase-task-order.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-11-club-alliance-first-phase-task-order.md", "docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
+  "capabilities": ["foundation.authorization-idempotency", "foundation.ai-engineering-traceability", "foundation.governance-certification"],
+  "contracts": ["contracts/modules/club-alliance/internal-dependencies.v1.json", "docs/project-management/modules/club-alliance-first-slice-contract-v1.md"],
+  "decisions": ["docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"],
+  "changed_areas": ["backend-go/plugins/club-plugin/plugin.go", "backend-go/plugins/club-plugin/service_test.go", "contracts/foundation/agent-collaboration.v1.json", "contracts/modules/club-alliance/internal-dependencies.v1.json", "docs/project-management/modules/club-alliance-first-slice-contract-v1.md", "docs/project-management/service-plaza/club-review-security-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "verification": ["go test -count=1 ./plugins/club-plugin", "go test -count=1 ./...", "go vet ./...", "scripts/Test-ServicePlazaContracts.ps1", "scripts/Test-TextEncoding.ps1", "git diff --check"],
+  "evidence": ["docs/project-management/service-plaza/club-review-security-2026-07-11.md", "contracts/foundation/development-checklists/2026-07-11-club-review-security.json", "contracts/foundation/governance-exams/2026-07-11-club-review-security-attempt-1.json", "docs/project-management/service-plaza/handoff-log.md"],
+  "premises": ["资源级管理授权必须在 application 查询前完成", "错配 application 对已授权的路径俱乐部管理者统一表现为不存在", "数据库触发器和延迟外键可分别证明事务内部写入及 commit 失败回滚", "本地自动化不等于测试环境 JWT 和 HTTP 已验证", "本切片不修改板块页面或资金接口"],
+  "implementation_mode": "ai-assisted"
+}

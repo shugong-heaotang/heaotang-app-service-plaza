@@ -2,7 +2,7 @@
   [Parameter(Mandatory = $true)][string]$RecordId,
   [Parameter(Mandatory = $true)][string]$Task,
   [Parameter(Mandatory = $true)][string]$Actor,
-  [ValidateSet("", "life-navigation", "club-alliance", "health-manager")][string]$ModuleId = "",
+  [string]$ModuleId = "",
   [Parameter(Mandatory = $true)][string]$OutputPath
 )
 
@@ -13,8 +13,12 @@ $readingListPath = Join-Path $root "contracts\foundation\governance-reading-list
 $readingList = Get-Content -LiteralPath $readingListPath -Raw -Encoding UTF8 | ConvertFrom-Json
 $paths = @($readingList.core)
 if ($ModuleId) {
-  $overlay = $readingList.module_overlays.$ModuleId
-  if (-not $overlay) { throw "Unknown module overlay: $ModuleId" }
+  $overlayProperty = $readingList.module_overlays.PSObject.Properties[$ModuleId]
+  if (-not $overlayProperty) { throw "Unknown module overlay: $ModuleId" }
+  $overlay = @($overlayProperty.Value)
+  if ($overlay.Count -eq 0 -or @($overlay | Where-Object { -not $_ -or -not $_.ToString().Trim() }).Count -gt 0) {
+    throw "Module overlay must contain at least one non-empty governance input: $ModuleId"
+  }
   $paths += @($overlay)
 }
 $items = foreach ($relative in $paths | Select-Object -Unique) {
@@ -43,5 +47,6 @@ $checklist = [ordered]@{
 $target = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($OutputPath)
 $directory = Split-Path $target -Parent
 if ($directory -and -not (Test-Path -LiteralPath $directory)) { New-Item -ItemType Directory -Path $directory -Force | Out-Null }
-[IO.File]::WriteAllText($target, ($checklist | ConvertTo-Json -Depth 6) + "`n", (New-Object Text.UTF8Encoding($false)))
+$json = (($checklist | ConvertTo-Json -Depth 6) -replace "`r?`n", "`n").TrimEnd() + "`n"
+[IO.File]::WriteAllText($target, $json, (New-Object Text.UTF8Encoding($false)))
 Write-Output "Pending checklist created. Read every file, then explicitly set each checked=true with checked_at before completion: $target"

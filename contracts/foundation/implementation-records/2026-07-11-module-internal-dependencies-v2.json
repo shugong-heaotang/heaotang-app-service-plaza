@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-MODULE-INTERNAL-DEPENDENCIES-V2",
+  "title": "模块内部依赖 v2 五维门禁与版本路由",
+  "date": "2026-07-11",
+  "status": "verified",
+  "objective": "发布向后兼容的模块内部依赖 v2，并按 contract_version 验证 v1 与 v2 实例。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-module-internal-dependencies-v2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-module-internal-dependencies-v2-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/module-internal-dependency-standard-v1.md"],
+  "requirement_sources": ["docs/project-management/service-plaza/module-internal-dependencies-v2-2026-07-11.md"],
+  "capabilities": ["foundation.governance-utf8", "foundation.ai-engineering-traceability", "foundation.contract-tooling"],
+  "contracts": ["contracts/foundation/module-internal-dependencies.v1.schema.json", "contracts/foundation/module-internal-dependencies.v2.schema.json"],
+  "decisions": ["docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0012-two-strike-root-cause-rule.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"],
+  "changed_areas": ["contracts/foundation/module-internal-dependencies.v2.schema.json", "scripts/validate_module_internal_dependencies.py", "scripts/Test-ServicePlazaContracts.ps1", "scripts/tests/test_validate_module_internal_dependencies.py", "scripts/tests/fixtures/module-internal-dependencies/valid-v2.json", "docs/project-management/service-plaza/module-internal-dependencies-v2-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "verification": ["python -X utf8 -m unittest scripts.tests.test_validate_module_internal_dependencies -v", "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-ServicePlazaContracts.ps1", "python -X utf8 scripts/validate_agent_collaboration.py contracts/foundation/agent-collaboration.v1.schema.json contracts/foundation/agent-collaboration.v1.json", "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-TextEncoding.ps1", "git diff --check"],
+  "evidence": ["contracts/foundation/development-checklists/2026-07-11-module-internal-dependencies-v2.json", "contracts/foundation/governance-exams/2026-07-11-module-internal-dependencies-v2-attempt-1.json", "docs/project-management/service-plaza/module-internal-dependencies-v2-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "premises": ["v1 历史实例保持不可变并继续使用 v1 Schema", "v2 通过显式 contract_version 选择 Schema", "局部 Pending 只阻塞 blocks 声明的下游", "未知版本必须失败关闭"],
+  "implementation_mode": "ai-assisted"
+}

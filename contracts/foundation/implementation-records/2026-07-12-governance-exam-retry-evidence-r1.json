@@ -1,0 +1,74 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-GOVERNANCE-EXAM-RETRY-EVIDENCE-R1",
+  "title": "治理考试重试前序失败与补课重读证据根因修复",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "使attempt_number大于1的治理考试可机器证明紧邻失败试卷、不可变哈希和全部补课来源重读证据，同时保持attempt 1及既有快照兼容。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-governance-exam-retry-evidence-r1.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-governance-exam-retry-evidence-r1-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/service-plaza/governance-exam-retry-evidence-2026-07-12.md"
+  ],
+  "capabilities": [
+    "foundation.governance-certification",
+    "foundation.ai-collaboration-safety",
+    "foundation.recurrence-prevention"
+  ],
+  "contracts": [
+    "contracts/foundation/governance-exam.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/governance-exam.v1.schema.json",
+    "scripts/New-AgentGovernanceExam.ps1",
+    "scripts/validate_governance_exams.py",
+    "scripts/tests/test_validate_governance_exams.py",
+    "contracts/foundation/development-checklists/2026-07-12-governance-exam-retry-evidence-r1.json",
+    "contracts/foundation/governance-exams/2026-07-12-governance-exam-retry-evidence-r1-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-12-governance-exam-retry-evidence-r1.json",
+    "docs/project-management/service-plaza/governance-exam-retry-evidence-2026-07-12.md"
+  ],
+  "verification": [
+    "scripts/Test-AgentDevelopmentPreflight.ps1: ready",
+    "IR-20260712-GOVERNANCE-EXAM-RETRY-EVIDENCE-R1 checklist: 26/26 completed and current",
+    "EX-20260712-GOVERNANCE-EXAM-RETRY-EVIDENCE-R1-1: score 100",
+    "python -X utf8 -m unittest scripts.tests.test_validate_governance_exams",
+    "scripts/validate_governance_exams.py full repository gate",
+    "manual failed attempt1 to passed attempt2: previous path/SHA and 8 remediation rereads persisted through Submit-AgentGovernanceExam.ps1",
+    "scripts/validate_development_checklists.py",
+    "scripts/validate_implementation_records.py",
+    "scripts/validate_agent_collaboration.py",
+    "scripts/Test-ServicePlazaContracts.ps1",
+    "scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/foundation/development-checklists/2026-07-12-governance-exam-retry-evidence-r1.json",
+    "contracts/foundation/governance-exams/2026-07-12-governance-exam-retry-evidence-r1-attempt-1.json",
+    "docs/project-management/service-plaza/governance-exam-retry-evidence-2026-07-12.md",
+    "scripts/tests/test_validate_governance_exams.py"
+  ],
+  "premises": [
+    "权威基线中没有attempt_number大于1的已集成试卷，因此retry条件增强不破坏历史快照",
+    "补课来源必须是仓库内可寻址且当前哈希可验证的治理文件",
+    "旧Project Brain R3保持未集成历史，不能通过修改旧试卷迁移",
+    "Project Brain R4若首试100无需人为制造retry"
+  ],
+  "implementation_mode": "ai-assisted"
+}

@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-ACTION-TELEMETRY-CONFIG-GOVERNANCE",
+  "title": "动作遥测功能开关双人审批公共依赖治理",
+  "date": "2026-07-11",
+  "status": "verified",
+  "objective": "关闭 CA-H1-M4-B001，使用现有 businessconfig 双人审批承载动作遥测 boolean 开关，禁止数据库和单管理员捷径。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-action-telemetry-config-governance.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-action-telemetry-config-governance-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "docs/decisions/0011-two-person-config-approval.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-11-action-telemetry-config-task-order.md", "docs/project-management/modules/club-alliance/acceptance/CA-H1-M4-frontend-uat.md"],
+  "capabilities": ["foundation.business-variable-service", "foundation.feature-flag-service", "foundation.governance-certification"],
+  "contracts": ["contracts/foundation/business-variables.v1.json", "contracts/foundation/agent-collaboration.v1.json"],
+  "decisions": ["docs/decisions/0011-two-person-config-approval.md", "docs/decisions/0020-action-telemetry-business-variable.md"],
+  "changed_areas": ["contracts/foundation/business-variables.v1.json", "docs/decisions/0020-action-telemetry-business-variable.md", "docs/project-management/notices/2026-07-11-action-telemetry-config-task-order.md", "docs/project-management/service-plaza/action-telemetry-config-governance-2026-07-11.md"],
+  "verification": ["scripts/Test-AgentDevelopmentPreflight.ps1", "scripts/validate_agent_collaboration.py", "scripts/validate_development_checklists.py", "scripts/validate_governance_exams.py", "scripts/validate_implementation_records.py", "scripts/Test-TextEncoding.ps1", "git diff --check"],
+  "evidence": ["contracts/foundation/development-checklists/2026-07-11-action-telemetry-config-governance.json", "contracts/foundation/governance-exams/2026-07-11-action-telemetry-config-governance-attempt-1.json", "docs/project-management/service-plaza/action-telemetry-config-governance-2026-07-11.md"],
+  "premises": ["功能开关属于关键配置并必须双人审批", "businessconfig 是唯一审批真相源", "未配置和读取失败必须保持 false", "M4 不允许直接修改数据库"],
+  "implementation_mode": "ai-assisted"
+}

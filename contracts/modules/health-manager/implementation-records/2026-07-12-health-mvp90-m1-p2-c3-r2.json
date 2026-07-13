@@ -1,0 +1,71 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-HEALTH-MVP90-M1-P2-C3-R2",
+  "title": "健康大管家 MVP-90 M1 P2-C3 合成正负例与确定性证据矩阵",
+  "date": "2026-07-12",
+  "status": "implemented",
+  "objective": "冻结15个合成正例结果与hash、15个失败关闭负例及零外部运行时入口证据，并以新的current治理链提交独立复核。",
+  "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p2-c3-r2.json",
+  "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p2-c3-r2-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/module-dependencies/health-manager.v1.json",
+    "contracts/modules/health-manager/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-health-manager-mvp90-m1-p2-task-order.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-requirements.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.authorization-idempotency",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/modules/health-manager/mvp90-m1/conformance/fixtures/synthetic-replay-negative-cases.v1.json",
+    "contracts/modules/health-manager/mvp90-m1/conformance/fixtures/synthetic-replay-negative-cases.v1.schema.json",
+    "contracts/modules/health-manager/mvp90-m1/conformance/synthetic_pdcar_reference.py"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "changed_areas": [
+    "contracts/modules/health-manager/internal-dependencies.v1.json",
+    "contracts/modules/health-manager/mvp90-m1/conformance/fixtures",
+    "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_p2_replay.py",
+    "contracts/modules/health-manager/development-checklists",
+    "contracts/modules/health-manager/governance-exams",
+    "contracts/modules/health-manager/implementation-records",
+    "docs/project-management/modules/health-manager"
+  ],
+  "verification": [
+    "fifteen exact positive scenarios match frozen outcome error result count and isolated canonical trace hash",
+    "fifteen exact negative cases return stable errors and committed false",
+    "every negative leaves resource audit trace and idempotency stores unchanged",
+    "matrix Schema rejects missing duplicate promotion and non-synthetic mutations",
+    "runner has zero file network API database clock random browser storage and real-data runtime entry",
+    "P2 nineteen-test suite and P1 eleven-test regression pass"
+  ],
+  "evidence": [
+    "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p2-c3-r2.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p2-c3-r2-attempt-1.json",
+    "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_p2_replay.py",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-handoff.md"
+  ],
+  "premises": [
+    "P2-C2 corrected source a2e8424 is integrated at authoritative commit 4c195d07",
+    "module branch synchronized through merge commit 63e5f03c",
+    "C3 matrix remains synthetic_only true and executable false",
+    "C3 produces acceptance evidence only and no shared implementation or environment behavior",
+    "C4-L02-L04 global C4-H06 production identity real data charging and production remain No-Go"
+  ],
+  "implementation_mode": "ai-assisted"
+}

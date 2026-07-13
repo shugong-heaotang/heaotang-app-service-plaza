@@ -1,0 +1,65 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-HEALTH-R0-FORMAL-FREEZE-F0-R2",
+  "title": "健康大管家 HM-R0 R0-F0-R2 治理证据时序修订",
+  "date": "2026-07-12",
+  "status": "implemented",
+  "objective": "保留原 F0 不可变历史，在同步权威基线 253fa4e 后重建可证明先完成检查单、再生成并完成考试的 F0-R2 治理证据。",
+  "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-12-health-r0-formal-freeze-f0-r2.json",
+  "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-12-health-r0-formal-freeze-f0-r2-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/modules/health-manager/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification"
+  ],
+  "contracts": [
+    "contracts/modules/health-manager/development-checklists/2026-07-12-health-r0-formal-freeze-f0-r2.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-12-health-r0-formal-freeze-f0-r2-attempt-1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md"
+  ],
+  "changed_areas": [
+    "contracts/modules/health-manager/development-checklists/2026-07-12-health-r0-formal-freeze-f0-r2.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-12-health-r0-formal-freeze-f0-r2-attempt-1.json",
+    "contracts/modules/health-manager/implementation-records/2026-07-12-health-r0-formal-freeze-f0-r2.json"
+  ],
+  "verification": [
+    "module branch was synchronized with authoritative integration 253fa4e3701dadf0cb360d363be2d1f395f5cffc before creating F0-R2 evidence",
+    "governance reading list and health-manager overlay were reread and all 28 current source hashes match",
+    "F0-R2 checklist completed_at is earlier than exam generated_at and exam completed_at",
+    "F0-R2 governance exam attempt 1 passed with score 100",
+    "original F0 checklist exam and implementation record remain byte-unchanged historical evidence",
+    "PR number 1 and PR number 2 remain read-only and F1 has not started"
+  ],
+  "evidence": [
+    "contracts/modules/health-manager/development-checklists/2026-07-12-health-r0-formal-freeze-f0.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-12-health-r0-formal-freeze-f0-attempt-1.json",
+    "contracts/modules/health-manager/implementation-records/2026-07-12-health-r0-formal-freeze-f0.json",
+    "contracts/modules/health-manager/development-checklists/2026-07-12-health-r0-formal-freeze-f0-r2.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-12-health-r0-formal-freeze-f0-r2-attempt-1.json",
+    "contracts/modules/health-manager/implementation-records/2026-07-12-health-r0-formal-freeze-f0-r2.json"
+  ],
+  "premises": [
+    "45a49c463a5828d0161d8661c881f1abc420a85b is an Exact-revision historical F0 source and is not a Go checkpoint",
+    "253fa4e3701dadf0cb360d363be2d1f395f5cffc is the authoritative integration baseline synchronized for this correction",
+    "HM-R0 work item remains active and only its six registered path patterns are writable",
+    "this checkpoint repairs governance evidence only and does not freeze HM-R0 content or start F1 or P3",
+    "production identity real data environments medical services charging funds deployment and production remain No-Go"
+  ],
+  "implementation_mode": "ai-assisted"
+}

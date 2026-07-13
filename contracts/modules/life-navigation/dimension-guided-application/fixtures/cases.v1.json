@@ -1,0 +1,108 @@
+{
+  "dataset_version": "life-navigation.dimension-cases.v1",
+  "generator": "python-standard-library-faker-style",
+  "generator_version": "1.0",
+  "seed": "HEAOTANG-LN-S2-20260712-V1",
+  "source_dataset_sha256": "82dfd8a2c511895eb819a1c7911433c42f237efef1bb218b160fc2eab1d8af08",
+  "synthetic_only": true,
+  "non_production": true,
+  "destruction_policy": "delete-with-test-workspace",
+  "cases": [
+    {
+      "case_id": "LN-S2-C001",
+      "case_kind": "normal-proposed-dimension",
+      "input": {"dimension_id": "proposed-wellbeing", "dimension_version": "proposed-v1"},
+      "mutation": "none",
+      "expected_outcome": "fail-closed",
+      "expected_error_id": "LN_DIMENSION_DECISION_PENDING"
+    },
+    {
+      "case_id": "LN-S2-C002",
+      "case_kind": "blank-dimension",
+      "input": {"dimension_id": "", "dimension_version": "proposed-v1"},
+      "mutation": "none",
+      "expected_outcome": "fail-closed",
+      "expected_error_id": "LN_DIMENSION_REQUIRED"
+    },
+    {
+      "case_id": "LN-S2-C003",
+      "case_kind": "unknown-dimension",
+      "input": {"dimension_id": "unknown-synthetic-dimension", "dimension_version": "proposed-v1"},
+      "mutation": "none",
+      "expected_outcome": "fail-closed",
+      "expected_error_id": "LN_DIMENSION_UNKNOWN"
+    },
+    {
+      "case_id": "LN-S2-C004",
+      "case_kind": "inactive-dimension",
+      "input": {"dimension_id": "proposed-community", "dimension_version": "proposed-v1"},
+      "mutation": "candidate-accepted-inactive",
+      "expected_outcome": "fail-closed",
+      "expected_error_id": "LN_DIMENSION_INACTIVE"
+    },
+    {
+      "case_id": "LN-S2-C005",
+      "case_kind": "incompatible-version",
+      "input": {"dimension_id": "proposed-wellbeing", "dimension_version": "proposed-v0-incompatible"},
+      "mutation": "candidate-accepted-active",
+      "expected_outcome": "fail-closed",
+      "expected_error_id": "LN_DIMENSION_VERSION_INCOMPATIBLE"
+    },
+    {
+      "case_id": "LN-S2-C006",
+      "case_kind": "legacy-yun-compatibility-pending",
+      "input": {"dimension_id": "yun", "dimension_version": "legacy-unversioned"},
+      "mutation": "none",
+      "expected_outcome": "fail-closed",
+      "expected_error_id": "LN_LEGACY_DIMENSION_DECISION_PENDING"
+    },
+    {
+      "case_id": "LN-S2-C007",
+      "case_kind": "registry-config-missing",
+      "input": {"dimension_id": "proposed-wellbeing", "dimension_version": "proposed-v1"},
+      "mutation": "registry-missing",
+      "expected_outcome": "fail-closed",
+      "expected_error_id": "LN_DIMENSION_REGISTRY_MISSING"
+    },
+    {
+      "case_id": "LN-S2-C008",
+      "case_kind": "registry-read-failed",
+      "input": {"dimension_id": "proposed-wellbeing", "dimension_version": "proposed-v1"},
+      "mutation": "registry-read-failed",
+      "expected_outcome": "fail-closed",
+      "expected_error_id": "LN_DIMENSION_REGISTRY_READ_FAILED"
+    },
+    {
+      "case_id": "LN-S2-C009",
+      "case_kind": "duplicate-dimension-id",
+      "input": {"dimension_id": "proposed-wellbeing", "dimension_version": "proposed-v1"},
+      "mutation": "duplicate-first-dimension-id",
+      "expected_outcome": "fail-closed",
+      "expected_error_id": "LN_DIMENSION_DUPLICATE_ID"
+    },
+    {
+      "case_id": "LN-S2-C010",
+      "case_kind": "duplicate-sort-order",
+      "input": {"dimension_id": "proposed-community", "dimension_version": "proposed-v1"},
+      "mutation": "duplicate-first-sort-order",
+      "expected_outcome": "fail-closed",
+      "expected_error_id": "LN_DIMENSION_DUPLICATE_SORT_ORDER"
+    },
+    {
+      "case_id": "LN-S2-C011",
+      "case_kind": "empty-registry",
+      "input": {"dimension_id": "proposed-wellbeing", "dimension_version": "proposed-v1"},
+      "mutation": "empty-dimensions",
+      "expected_outcome": "fail-closed",
+      "expected_error_id": "LN_DIMENSION_REGISTRY_INVALID"
+    },
+    {
+      "case_id": "LN-S2-C012",
+      "case_kind": "pending-selector-made-executable",
+      "input": {"dimension_id": "proposed-wellbeing", "dimension_version": "proposed-v1"},
+      "mutation": "selector-executable-true",
+      "expected_outcome": "fail-closed",
+      "expected_error_id": "LN_DIMENSION_REGISTRY_INVALID"
+    }
+  ]
+}

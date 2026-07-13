@@ -1,0 +1,58 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-PROJECT-BRAIN-INTEGRATION-RECONCILIATION",
+  "title": "Project Brain 分叉集成治理收口",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "从远端权威R5基线单独合并Project Brain正式source，隔离混合本地integration与未知R4。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-reconciliation.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-reconciliation-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/project-brain/integration-reconciliation-2026-07-12.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.recurrence-prevention"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/governance-exam.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/invalidated-snapshots/project-brain-v1-m1/",
+    "docs/project-management/project-brain/integration-reconciliation-2026-07-12.md",
+    "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-reconciliation.json",
+    "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-reconciliation-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-12-project-brain-v1-reconciliation.json"
+  ],
+  "verification": [
+    "remote authority and merge-base audit",
+    "unknown R4 SHA and actor audit",
+    "governance exam/checklist/IR/collaboration validators",
+    "Project Brain 10 tests and contract validation",
+    "UTF-8 and git diff gates"
+  ],
+  "evidence": [
+    "docs/project-management/project-brain/integration-reconciliation-2026-07-12.md",
+    "contracts/foundation/development-checklists/2026-07-12-project-brain-v1-reconciliation.json",
+    "contracts/foundation/governance-exams/2026-07-12-project-brain-v1-reconciliation-attempt-1.json"
+  ],
+  "premises": [
+    "remote integration is authoritative until reconciliation is independently accepted and pushed",
+    "untracked evidence without registry owner remains quarantined"
+  ],
+  "implementation_mode": "ai-assisted"
+}

@@ -1,0 +1,66 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-CLUB-MEMBER-HOME-STATE-BACKEND",
+  "title": "俱乐部联盟 H2 会员首页状态分层后端修复",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "replace the ambiguous member-home club status with independently sourced club_status and membership_status fields without promoting application or membership history into current clubs",
+  "governance_checklist": "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-state-backend.json",
+  "governance_exam": "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-state-backend-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/module-dependencies/club-alliance.v1.json",
+    "contracts/modules/club-alliance/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/modules/club-alliance/member-home/requirements.md",
+    "contracts/modules/club-alliance/member-home/member-home.v1.json"
+  ],
+  "capabilities": [
+    "foundation.identity-api",
+    "foundation.authorization-idempotency",
+    "foundation.ai-engineering-traceability"
+  ],
+  "contracts": [
+    "contracts/modules/club-alliance/member-home/member-home.v1.json",
+    "contracts/modules/club-alliance/member-home/member-home.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "changed_areas": [
+    "backend-go/plugins/club-plugin/member_home.go",
+    "backend-go/plugins/club-plugin/member_home_test.go",
+    "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-state-backend.json",
+    "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-state-backend-attempt-1.json",
+    "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-state-backend.json",
+    "docs/project-management/modules/club-alliance/member-home/handoff-m2-state-backend.md"
+  ],
+  "verification": [
+    "PASS: backend commit 49227de982d0dc417542652823449a454d380ac2 pushed to origin/codex/club-member-home-state-backend",
+    "PASS: go test ./plugins/club-plugin -run 'TestMemberHome' -count=1",
+    "PASS: go test ./...",
+    "PASS: go vet ./...",
+    "PASS: gofmt on both allowed Go files",
+    "PASS: backend git diff --check and allowed-path audit",
+    "PASS: changed-file sensitive-pattern scan returned zero matches",
+    "PENDING: controlled integration, deployment, and test-environment UAT"
+  ],
+  "evidence": [
+    "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-state-backend.json",
+    "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-state-backend-attempt-1.json",
+    "docs/project-management/modules/club-alliance/member-home/handoff-m2-state-backend.md"
+  ],
+  "premises": [
+    "club_members has no membership-state column; a present row is the current active relationship and leave removes that row, so this checkpoint emits membership_status=active only",
+    "suspended is not emitted because the backend has no authoritative suspended current-membership state",
+    "club lifecycle remains independent: a persisted dissolved club is returned as club_status=dissolved without writing dissolved into membership_status",
+    "pending and rejected join applications are read from a different entity and never enter the current member-home club query",
+    "verified covers repository implementation and Go gates only; no deployment, database migration, registry change, or environment mutation was authorized"
+  ],
+  "implementation_mode": "ai-assisted"
+}

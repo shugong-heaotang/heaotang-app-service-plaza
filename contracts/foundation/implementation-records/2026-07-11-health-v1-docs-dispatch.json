@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-HEALTH-V1-DOCS-DISPATCH",
+  "title": "健康大管家 V1.0 需求策划文档独立派发",
+  "date": "2026-07-11",
+  "status": "verified",
+  "objective": "建立独立文档工作项，使完整 V1.0 PDCAR 策划可治理、提交并在 GitHub Draft PR 评审，而不扩大业务实现权限。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-health-v1-docs-dispatch.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-health-v1-docs-dispatch-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/recursive-project-governance-v1.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-11-health-manager-v1-docs-task-order.md"],
+  "capabilities": ["foundation.ai-collaboration-safety", "foundation.governance-certification", "foundation.ai-engineering-traceability"],
+  "contracts": ["contracts/foundation/agent-collaboration.v1.json"],
+  "decisions": ["docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0018-recursive-project-governance.md"],
+  "changed_areas": ["contracts/foundation/agent-collaboration.v1.json", "docs/project-management/notices/2026-07-11-health-manager-v1-docs-task-order.md", "docs/project-management/service-plaza/health-v1-docs-dispatch-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "verification": ["scripts/Test-AgentDevelopmentPreflight.ps1", "scripts/validate_agent_collaboration.py", "scripts/validate_implementation_records.py", "scripts/validate_governance_exams.py", "scripts/Test-TextEncoding.ps1", "git diff --check"],
+  "evidence": ["contracts/foundation/development-checklists/2026-07-11-health-v1-docs-dispatch.json", "contracts/foundation/governance-exams/2026-07-11-health-v1-docs-dispatch-attempt-1.json", "docs/project-management/service-plaza/health-v1-docs-dispatch-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "premises": ["完整 V1.0 策划范围显著大于旧咨询切片", "文档发布不等于业务开发授权", "Draft PR 不等于合并批准", "未确认需求必须保持 Pending"],
+  "implementation_mode": "ai-assisted"
+}

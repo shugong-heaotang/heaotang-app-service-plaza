@@ -1,0 +1,103 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-LIFE-APPLICATION-HISTORY-M4",
+  "title": "生命导航测试环境部署与 M4 验收记录",
+  "date": "2026-07-11",
+  "status": "verified",
+  "objective": "记录生命导航 M4 本地门禁、测试环境部署、API UAT，以及UTC日自然重置后真实浏览器登录、提交、历史刷新、页面刷新持久和返回服务广场的完整 Go 证据。",
+  "governance_checklist": "docs/project-management/modules/life-navigation/certification/checklists/IR-20260711-LIFE-APPLICATION-HISTORY-M4-checklist.json",
+  "governance_exam": "docs/project-management/modules/life-navigation/certification/exams/IR-20260711-LIFE-APPLICATION-HISTORY-M4-exam-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md",
+    "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json",
+    "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md",
+    "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md",
+    "docs/project-management/modules/life-navigation/README.md",
+    "docs/project-management/notices/2026-07-10-life-navigation-first-phase-task-order.md",
+    "docs/project-management/modules/life-navigation-first-slice-contract-v1.md",
+    "contracts/foundation/module-dependencies/life-navigation.v1.json",
+    "contracts/modules/life-navigation/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-10-life-navigation-first-phase-task-order.md",
+    "docs/project-management/modules/life-navigation-first-slice-contract-v1.md",
+    "docs/project-management/modules/life-navigation/LN-M3-001-handoff.md",
+    "docs/project-management/modules/life-navigation/LN-M4-001-preflight-plan.md"
+  ],
+  "capabilities": [
+    "foundation.identity-api",
+    "foundation.authorization-idempotency",
+    "foundation.app-shell-adapter",
+    "foundation.contract-tooling",
+    "foundation.delivery-recovery",
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification"
+  ],
+  "contracts": [
+    "docs/project-management/modules/life-navigation-first-slice-contract-v1.md",
+    "contracts/foundation/module-dependencies/life-navigation.v1.json",
+    "contracts/modules/life-navigation/internal-dependencies.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/modules/life-navigation/acceptance/LN-M4-001-local-gates.json",
+    "docs/project-management/modules/life-navigation/acceptance/LN-M4-001-deployment-evidence.json",
+    "docs/project-management/modules/life-navigation/acceptance/LN-M4-001-api-acceptance.json",
+    "docs/project-management/modules/life-navigation/acceptance/LN-M4-001-frontend-uat.md",
+    "docs/project-management/modules/life-navigation/acceptance/LN-M4-001-rollback-evidence.json",
+    "docs/project-management/modules/life-navigation/implementation-records/IR-20260711-LIFE-APPLICATION-HISTORY-M4.json",
+    "docs/project-management/modules/life-navigation/LN-M4-001-handoff.md"
+  ],
+  "verification": [
+    "python -X utf8 scripts/validate_implementation_records.py contracts/foundation/implementation-record.v1.schema.json docs/project-management/modules/life-navigation/implementation-records --project-root .",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-TextEncoding.ps1",
+    "git diff --cached --check",
+    "secret-pattern scan over M4 evidence files"
+  ],
+  "evidence": [
+    "docs/project-management/modules/life-navigation/acceptance/LN-M4-001-local-gates.json",
+    "docs/project-management/modules/life-navigation/acceptance/LN-M4-001-deployment-evidence.json",
+    "docs/project-management/modules/life-navigation/acceptance/LN-M4-001-api-acceptance.json",
+    "docs/project-management/modules/life-navigation/acceptance/LN-M4-001-frontend-uat.md",
+    "docs/project-management/modules/life-navigation/acceptance/LN-M4-001-rollback-evidence.json",
+    "docs/project-management/modules/life-navigation/LN-M4-001-handoff.md"
+  ],
+  "premises": [
+    "Deployment and API acceptance passing do not replace authenticated browser UAT; the latter is now independently evidenced.",
+    "The initial failed browser attempt created no life record and did not trigger account rotation, rate-limit changes or data cleanup.",
+    "The successful retest followed UTC daily natural reset and used one AuthPanel send-code with secrets only in memory.",
+    "Successful artifacts are not redeployed unless their identity or readiness state drifts."
+  ],
+  "implementation_mode": "ai-assisted"
+}

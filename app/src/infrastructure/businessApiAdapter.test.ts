@@ -12,6 +12,15 @@ const response = (data: unknown, status = 200) => new Response(JSON.stringify(
     : { success: false, code: "BUSINESS_REJECTED", error: "业务拒绝" },
 ), { status, headers: { "Content-Type": "application/json" } });
 
+const responseWithHeaders = (
+  data: unknown,
+  status: number,
+  headers: Record<string, string>,
+) => new Response(JSON.stringify({ success: true, data }), {
+  status,
+  headers: { "Content-Type": "application/json", ...headers },
+});
+
 describe("businessApiAdapter", () => {
   beforeEach(() => {
     sessionStorage.clear();
@@ -104,6 +113,44 @@ describe("businessApiAdapter", () => {
 
     const headers = fetchMock.mock.calls[0][1]?.headers as Headers;
     expect(headers.get("Idempotency-Key")).toBe("logical-write-001");
+  });
+
+  it("可选元数据调用区分首次创建与幂等重放且不改变原 execute 返回形状", async () => {
+    const fetchMock = vi.spyOn(globalThis, "fetch")
+      .mockResolvedValueOnce(responseWithHeaders(
+        { id: 9 },
+        201,
+        { "X-Request-ID": "created-req-1" },
+      ))
+      .mockResolvedValueOnce(responseWithHeaders(
+        { id: 9 },
+        200,
+        { "X-Request-ID": "replayed-req-1", "Idempotency-Replayed": "true" },
+      ))
+      .mockResolvedValueOnce(response({ id: 10 }, 201));
+    const adapter = createBusinessApiAdapter("example-service");
+    const createRecord = defineBusinessWrite<{ title: string }, { id: number }>({
+      operationId: "create-record",
+      method: "POST",
+      path: () => "/api/v1/example/records",
+      body: (input) => input,
+    });
+
+    await expect(adapter.executeWithMeta(createRecord, { title: "记录" }, {
+      idempotencyKey: "logical-write-001",
+    })).resolves.toEqual({
+      data: { id: 9 },
+      meta: { status: 201, requestId: "created-req-1", idempotencyReplayed: false },
+    });
+    await expect(adapter.executeWithMeta(createRecord, { title: "记录" }, {
+      idempotencyKey: "logical-write-001",
+    })).resolves.toEqual({
+      data: { id: 9 },
+      meta: { status: 200, requestId: "replayed-req-1", idempotencyReplayed: true },
+    });
+    await expect(adapter.execute(createRecord, { title: "另一条" })).resolves.toEqual({ id: 10 });
+
+    expect(fetchMock).toHaveBeenCalledTimes(3);
   });
 
   it("原样保留统一 SDK 的机器错误码与请求 ID", async () => {

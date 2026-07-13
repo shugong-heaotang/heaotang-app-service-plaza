@@ -78,7 +78,7 @@ const createHealthConsultation = defineBusinessWrite<SubmissionInput, WriteRespo
   path: () => "/api/v1/health/consultations",
   body: (input) => ({
     patient_name: input.patientName!.trim(),
-    symptoms: input.symptoms?.trim() || "希望获得健康咨询",
+    symptoms: input.symptoms?.trim() ?? "",
   }),
 });
 

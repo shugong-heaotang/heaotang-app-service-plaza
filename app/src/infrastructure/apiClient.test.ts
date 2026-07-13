@@ -1,5 +1,5 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { apiRequest, tokenStorage } from "./apiClient";
+import { apiRequest, apiRequestWithMeta, tokenStorage } from "./apiClient";
 
 function jsonResponse(body: unknown, status = 200, headers: Record<string, string> = {}): Response {
   return new Response(JSON.stringify(body), {
@@ -58,6 +58,25 @@ describe("apiRequest", () => {
     const secondId = (fetchMock.mock.calls[1][1]?.headers as Headers).get("X-Request-ID");
     expect(firstId).toBeTruthy();
     expect(secondId).toBe(firstId);
+  });
+
+  it("可选元数据接口暴露最终状态、服务端请求 ID 和幂等重放标记", async () => {
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      jsonResponse(
+        { success: true, data: { id: 7 } },
+        200,
+        { "X-Request-ID": "server-replay-001", "Idempotency-Replayed": "true" },
+      ),
+    );
+
+    await expect(apiRequestWithMeta<{ id: number }>("/api/v1/records")).resolves.toEqual({
+      data: { id: 7 },
+      meta: {
+        status: 200,
+        requestId: "server-replay-001",
+        idempotencyReplayed: true,
+      },
+    });
   });
 
   it("沿用调用方 Header 中已有的关联 ID", async () => {

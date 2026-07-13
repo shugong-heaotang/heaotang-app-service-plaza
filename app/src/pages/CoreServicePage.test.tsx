@@ -42,3 +42,19 @@ describe("俱乐部管理试用入口", () => {
     expect(screen.queryByLabelText("选择俱乐部")).not.toBeInTheDocument();
   });
 });
+
+describe("显式服务挂载", () => {
+  afterEach(() => sessionStorage.clear());
+
+  it("无需动态路由参数即可挂载指定服务", () => {
+    render(
+      <MemoryRouter initialEntries={["/module-shell"]}>
+        <AuthProvider>
+          <CoreServicePage serviceKeyOverride="health-manager" />
+        </AuthProvider>
+      </MemoryRouter>,
+    );
+
+    expect(screen.getByRole("heading", { level: 1, name: "健康大管家" })).toBeInTheDocument();
+  });
+});

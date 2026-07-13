@@ -1,0 +1,60 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-PLATFORM-INTEGRATION-DIVERGENCE-RECONCILIATION",
+  "title": "平台本地商城链与远端健康权威链分叉调和",
+  "date": "2026-07-13",
+  "status": "verified",
+  "objective": "保留并调和远端健康 F1 链与本地商城 M1 链，恢复唯一权威集成基线。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-13-platform-integration-divergence-reconciliation.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-13-platform-integration-divergence-reconciliation-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/service-plaza/platform-integration-divergence-reconciliation-2026-07-13.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.ai-engineering-traceability"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklists/2026-07-13-platform-integration-divergence-reconciliation.json",
+    "contracts/foundation/governance-exams/2026-07-13-platform-integration-divergence-reconciliation-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-13-platform-integration-divergence-reconciliation.json",
+    "docs/project-management/service-plaza/platform-integration-divergence-reconciliation-2026-07-13.md"
+  ],
+  "verification": [
+    "preflight ready",
+    "merge-base cd2bbae681767262994f53cd1fecd3c2e35bdd1d",
+    "remote-only commits 5 and local-only commits 6",
+    "only overlapping changed path is contracts/foundation/agent-collaboration.v1.json",
+    "governance checklist 26/26 current",
+    "governance exam 100",
+    "collaboration/checklist/exam/IR/Service Plaza contracts/UTF-8/diff pass"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/platform-integration-divergence-reconciliation-2026-07-13.md",
+    "contracts/foundation/development-checklists/2026-07-13-platform-integration-divergence-reconciliation.json",
+    "contracts/foundation/governance-exams/2026-07-13-platform-integration-divergence-reconciliation-attempt-1.json"
+  ],
+  "premises": [
+    "neither branch may be overwritten or force-pushed",
+    "health F1 and protection mall M1 evidence are both retained as merge ancestry",
+    "no environment, real data, payment, deployment or production action is authorized"
+  ],
+  "implementation_mode": "ai-assisted"
+}

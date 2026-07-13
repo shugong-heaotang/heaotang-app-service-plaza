@@ -1,0 +1,1015 @@
+{
+  "fixture_version": "activity.fixtures.v3",
+  "deterministic": true,
+  "synthetic_only": true,
+  "cases": [
+    {
+      "id": "AC-01-POS",
+      "acceptance_id": 1,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "club-owned-publishing",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-01-NEG",
+      "acceptance_id": 1,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "club-owned-publishing",
+      "rule": "member-direct-platform-publish-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "member-direct-platform-publish-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-02-POS",
+      "acceptance_id": 2,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "natural-language-member-proposal",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-02-NEG",
+      "acceptance_id": 2,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "natural-language-member-proposal",
+      "rule": "non-member-club-proposal-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "non-member-club-proposal-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-03-POS",
+      "acceptance_id": 3,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "club-ai-proposal-review",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-03-NEG",
+      "acceptance_id": 3,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "club-ai-proposal-review",
+      "rule": "ai-cannot-approve",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "ai-cannot-approve"
+        ]
+      }
+    },
+    {
+      "id": "AC-04-POS",
+      "acceptance_id": 4,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "organizer-accountability-display",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-04-NEG",
+      "acceptance_id": 4,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "organizer-accountability-display",
+      "rule": "missing-responsible-club-invalid",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "missing-responsible-club-invalid"
+        ]
+      }
+    },
+    {
+      "id": "AC-05-POS",
+      "acceptance_id": 5,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "ai-draft-confirmation",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-05-NEG",
+      "acceptance_id": 5,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "ai-draft-confirmation",
+      "rule": "unconfirmed-ai-external-action-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "unconfirmed-ai-external-action-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-06-POS",
+      "acceptance_id": 6,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "all-visible-activity-search",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-06-NEG",
+      "acceptance_id": 6,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "all-visible-activity-search",
+      "rule": "sponsored-only-ranking-invalid",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "sponsored-only-ranking-invalid"
+        ]
+      }
+    },
+    {
+      "id": "AC-07-POS",
+      "acceptance_id": 7,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "theme-and-people-explanation",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-07-NEG",
+      "acceptance_id": 7,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "theme-and-people-explanation",
+      "rule": "uncertainty-omission-invalid",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "uncertainty-omission-invalid"
+        ]
+      }
+    },
+    {
+      "id": "AC-08-POS",
+      "acceptance_id": 8,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "self-service-registration",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-08-NEG",
+      "acceptance_id": 8,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "self-service-registration",
+      "rule": "network-introduction-not-required",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "network-introduction-not-required"
+        ]
+      }
+    },
+    {
+      "id": "AC-09-POS",
+      "acceptance_id": 9,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "structured-match-report",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-09-NEG",
+      "acceptance_id": 9,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "structured-match-report",
+      "rule": "conclusion-only-report-invalid",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "conclusion-only-report-invalid"
+        ]
+      }
+    },
+    {
+      "id": "AC-10-POS",
+      "acceptance_id": 10,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "official-member-tier-aggregate",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-10-NEG",
+      "acceptance_id": 10,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "official-member-tier-aggregate",
+      "rule": "inferred-tier-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "inferred-tier-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-11-POS",
+      "acceptance_id": 11,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "consented-relation-aggregate",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-11-NEG",
+      "acceptance_id": 11,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "consented-relation-aggregate",
+      "rule": "stale-or-unconsented-count-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "stale-or-unconsented-count-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-12-POS",
+      "acceptance_id": 12,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "small-cohort-suppression",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-12-NEG",
+      "acceptance_id": 12,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "small-cohort-suppression",
+      "rule": "reidentifiable-exact-count-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "reidentifiable-exact-count-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-13-POS",
+      "acceptance_id": 13,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "granular-consent",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-13-NEG",
+      "acceptance_id": 13,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "granular-consent",
+      "rule": "bundled-consent-invalid",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "bundled-consent-invalid"
+        ]
+      }
+    },
+    {
+      "id": "AC-14-POS",
+      "acceptance_id": 14,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "optional-mutual-introduction",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-14-NEG",
+      "acceptance_id": 14,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "optional-mutual-introduction",
+      "rule": "unilateral-contact-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "unilateral-contact-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-15-POS",
+      "acceptance_id": 15,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "personal-preparation-and-outcome",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-15-NEG",
+      "acceptance_id": 15,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "personal-preparation-and-outcome",
+      "rule": "other-user-outcome-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "other-user-outcome-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-16-POS",
+      "acceptance_id": 16,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "mutual-contact-and-connection",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-16-NEG",
+      "acceptance_id": 16,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "mutual-contact-and-connection",
+      "rule": "single-party-effective-connection-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "single-party-effective-connection-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-17-POS",
+      "acceptance_id": 17,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "approved-order-payment-only",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-17-NEG",
+      "acceptance_id": 17,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "approved-order-payment-only",
+      "rule": "chat-or-points-as-payment-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "chat-or-points-as-payment-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-18-POS",
+      "acceptance_id": 18,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "post-event-asset-package",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-18-NEG",
+      "acceptance_id": 18,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "post-event-asset-package",
+      "rule": "unverified-outcome-invalid",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "unverified-outcome-invalid"
+        ]
+      }
+    },
+    {
+      "id": "AC-19-POS",
+      "acceptance_id": 19,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "reference-existing-club-products",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-19-NEG",
+      "acceptance_id": 19,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "reference-existing-club-products",
+      "rule": "duplicate-product-source-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "duplicate-product-source-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-20-POS",
+      "acceptance_id": 20,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "complete-commercial-disclosure",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-20-NEG",
+      "acceptance_id": 20,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "complete-commercial-disclosure",
+      "rule": "unlabelled-sponsored-product-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "unlabelled-sponsored-product-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-21-POS",
+      "acceptance_id": 21,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "unified-order-and-attribution",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-21-NEG",
+      "acceptance_id": 21,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "unified-order-and-attribution",
+      "rule": "stale-unsaleable-product-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "stale-unsaleable-product-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-22-POS",
+      "acceptance_id": 22,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "user-initiated-commerce",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-22-NEG",
+      "acceptance_id": 22,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "user-initiated-commerce",
+      "rule": "auto-cart-order-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "auto-cart-order-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-23-POS",
+      "acceptance_id": 23,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "club-role-based-dashboard",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-23-NEG",
+      "acceptance_id": 23,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "club-role-based-dashboard",
+      "rule": "personal-spend-leak-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "personal-spend-leak-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-24-POS",
+      "acceptance_id": 24,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "auditable-reversal-and-complaint",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-24-NEG",
+      "acceptance_id": 24,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "auditable-reversal-and-complaint",
+      "rule": "unaudited-state-change-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "unaudited-state-change-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-25-POS",
+      "acceptance_id": 25,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "idempotent-retry",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-25-NEG",
+      "acceptance_id": 25,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "idempotent-retry",
+      "rule": "duplicate-side-effect-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "duplicate-side-effect-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-26-POS",
+      "acceptance_id": 26,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "first-attendee-guide",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-26-NEG",
+      "acceptance_id": 26,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "first-attendee-guide",
+      "rule": "sensitive-newcomer-status-exposure-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "sensitive-newcomer-status-exposure-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-27-POS",
+      "acceptance_id": 27,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "personal-agenda-conflict-check",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-27-NEG",
+      "acceptance_id": 27,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "personal-agenda-conflict-check",
+      "rule": "capacity-or-eligibility-bypass-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "capacity-or-eligibility-bypass-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-28-POS",
+      "acceptance_id": 28,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "scoped-live-operations-dashboard",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-28-NEG",
+      "acceptance_id": 28,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "scoped-live-operations-dashboard",
+      "rule": "unauthorized-consumption-detail-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "unauthorized-consumption-detail-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-29-POS",
+      "acceptance_id": 29,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "reschedule-cancel-calendar-sync",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-29-NEG",
+      "acceptance_id": 29,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "reschedule-cancel-calendar-sync",
+      "rule": "stale-time-display-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "stale-time-display-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-30-POS",
+      "acceptance_id": 30,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "explainable-user-controlled-agenda",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-30-NEG",
+      "acceptance_id": 30,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "explainable-user-controlled-agenda",
+      "rule": "ai-auto-seat-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "ai-auto-seat-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-31-POS",
+      "acceptance_id": 31,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "mutual-meeting-confirmation",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-31-NEG",
+      "acceptance_id": 31,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "mutual-meeting-confirmation",
+      "rule": "one-party-meeting-confirmation-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "one-party-meeting-confirmation-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-32-POS",
+      "acceptance_id": 32,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "participant-initiated-sponsor-lead",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-32-NEG",
+      "acceptance_id": 32,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "participant-initiated-sponsor-lead",
+      "rule": "checkin-as-marketing-consent-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "checkin-as-marketing-consent-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-33-POS",
+      "acceptance_id": 33,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "versioned-series-rerun",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-33-NEG",
+      "acceptance_id": 33,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "versioned-series-rerun",
+      "rule": "carry-forward-stale-risk-rules-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "carry-forward-stale-risk-rules-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-34-POS",
+      "acceptance_id": 34,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "actual-participation-recap",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-34-NEG",
+      "acceptance_id": 34,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "actual-participation-recap",
+      "rule": "unattended-content-as-outcome-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "unattended-content-as-outcome-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-35-POS",
+      "acceptance_id": 35,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "single-attribution-profitability",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-35-NEG",
+      "acceptance_id": 35,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "single-attribution-profitability",
+      "rule": "duplicate-order-attribution-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "duplicate-order-attribution-denied"
+        ]
+      }
+    },
+    {
+      "id": "AC-36-POS",
+      "acceptance_id": 36,
+      "polarity": "positive",
+      "expected_decision": "allow",
+      "capability": "hybrid-parity-and-source-traceability",
+      "rule": "authorized-path",
+      "synthetic_input": {
+        "authorized": true,
+        "confirmed": true,
+        "violated_rules": []
+      }
+    },
+    {
+      "id": "AC-36-NEG",
+      "acceptance_id": 36,
+      "polarity": "negative",
+      "expected_decision": "deny",
+      "capability": "hybrid-parity-and-source-traceability",
+      "rule": "fabricated-ai-summary-source-denied",
+      "synthetic_input": {
+        "authorized": false,
+        "confirmed": false,
+        "violated_rules": [
+          "fabricated-ai-summary-source-denied"
+        ]
+      }
+    }
+  ]
+}

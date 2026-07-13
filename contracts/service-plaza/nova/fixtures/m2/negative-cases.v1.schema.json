@@ -1,0 +1,52 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/schemas/nova-people-tools-negative-fixtures.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "synthetic_only", "cases"],
+  "properties": {
+    "contract_version": {"const": "nova-people-tools-negative-fixtures.v1"},
+    "synthetic_only": {"const": true},
+    "cases": {
+      "type": "array",
+      "minItems": 27,
+      "maxItems": 27,
+      "items": {"$ref": "#/$defs/case"}
+    }
+  },
+  "$defs": {
+    "case": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["case_id", "target", "base_case_ref", "rule_id", "mutation", "expected"],
+      "properties": {
+        "case_id": {"type": "string", "pattern": "^NPM2-N[0-9]{3}$"},
+        "target": {"enum": ["member_search", "connection_draft", "connection_send", "connection_status", "connection_result_callback", "contract"]},
+        "base_case_ref": {"enum": ["NPM2-P001", "NPM2-P002", "NPM2-P003", "NPM2-P004", "NPM2-P005", "contract"]},
+        "rule_id": {"type": "string", "pattern": "^[a-z][a-z0-9_]+$"},
+        "mutation": {"$ref": "#/$defs/mutation"},
+        "expected": {"$ref": "#/$defs/expected"}
+      }
+    },
+    "mutation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["operation", "path"],
+      "properties": {
+        "operation": {"enum": ["set", "remove"]},
+        "path": {"type": "string", "pattern": "^[A-Za-z0-9_.]+$"},
+        "value": {}
+      },
+      "allOf": [
+        {"if": {"properties": {"operation": {"const": "set"}}, "required": ["operation"]}, "then": {"required": ["value"]}},
+        {"if": {"properties": {"operation": {"const": "remove"}}, "required": ["operation"]}, "then": {"not": {"required": ["value"]}}}
+      ]
+    },
+    "expected": {
+      "oneOf": [
+        {"type": "object", "additionalProperties": false, "required": ["result", "error_id"], "properties": {"result": {"const": "reject"}, "error_id": {"type": "string", "pattern": "^NOVA_[A-Z0-9_]+$"}}},
+        {"type": "object", "additionalProperties": false, "required": ["result"], "properties": {"result": {"const": "safe_replay"}}}
+      ]
+    }
+  }
+}

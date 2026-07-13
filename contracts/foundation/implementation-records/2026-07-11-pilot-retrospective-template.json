@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-PILOT-RETROSPECTIVE-TEMPLATE-R2",
+  "title": "首个板块试点复盘模板预制与冻结门禁",
+  "date": "2026-07-11",
+  "status": "implemented",
+  "objective": "补齐后续板块正式派发所依赖的统一试点复盘模板，同时阻止在生命导航二 M4 事实形成前虚假冻结。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-pilot-retrospective-template-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-pilot-retrospective-template-r2-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/governance-reading-list.v1.json", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/recursive-project-governance-v1.md", "docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0018-recursive-project-governance.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-11-health-manager-first-phase-task-order.md", "docs/project-management/notices/2026-07-11-club-alliance-first-phase-task-order.md", "docs/project-management/service-plaza/parallel-module-notice-audit-2026-07-11.md"],
+  "capabilities": ["foundation.ai-engineering-traceability", "foundation.governance-certification", "foundation.recurrence-prevention"],
+  "contracts": ["contracts/foundation/agent-collaboration.v1.json", "docs/project-management/recursive-project-governance-v1.md"],
+  "decisions": ["docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0012-two-strike-root-cause-rule.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0018-recursive-project-governance.md"],
+  "changed_areas": ["contracts/foundation/agent-collaboration.v1.json", "docs/project-management/templates/module-pilot-retrospective-v1.md", "docs/project-management/service-plaza/pilot-retrospective-template-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "verification": ["scripts/Test-ServicePlazaContracts.ps1", "scripts/Test-TextEncoding.ps1", "scripts/validate_implementation_records.py", "git diff --check"],
+  "evidence": ["docs/project-management/templates/module-pilot-retrospective-v1.md", "docs/project-management/service-plaza/pilot-retrospective-template-2026-07-11.md", "contracts/foundation/development-checklists/2026-07-11-pilot-retrospective-template-r2.json", "contracts/foundation/governance-exams/2026-07-11-pilot-retrospective-template-r2-attempt-1.json", "docs/project-management/service-plaza/handoff-log.md"],
+  "premises": ["候选模板不等于已发布冻结模板", "生命导航二 M4 的真实浏览器结果必须先形成，才能完成首次实例和冻结签署", "即使首试点 No-Go 也应按真实事实复盘，不能把模板冻结条件改成必须成功", "模板只固化可复用治理和验收结构，不把生命导航业务细节提升为公共依赖"],
+  "implementation_mode": "ai-assisted"
+}

@@ -1,0 +1,21 @@
+{
+  "contract_version": "club-alliance.relationship.v1",
+  "relationship_kind": "club-federation",
+  "entity_kind": "club_relationship",
+  "source_entity_kind": "club",
+  "target_entity_kind": "club",
+  "policy": {
+    "policy_id": "club-federation-policy",
+    "policy_version": "v1",
+    "config_source_ref": "contracts/foundation/business-variables.v1.json",
+    "missing_config_behavior": "fail-closed",
+    "family_alliance_reuse": "forbidden"
+  },
+  "lifecycle": {
+    "status": "planned",
+    "states": ["proposed", "active", "suspended", "ended"],
+    "write_implementation": "not-authorized-in-h0"
+  },
+  "business_api_authorized": false,
+  "decision_refs": ["D-CA-002"]
+}

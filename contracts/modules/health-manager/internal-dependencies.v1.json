@@ -1,109 +1,419 @@
 {
-  "contract_version": "module-internal-dependencies.v1",
+  "contract_version": "module-internal-dependencies.v2",
   "module_id": "health-manager",
   "module_version": "v1",
-  "slice_id": "personal-consultation-inbox",
-  "development_readiness": "go",
-  "acceptance_readiness": "partial-go",
+  "slice_id": "health-mvp90-m1",
+  "readiness": {
+    "governance": "go",
+    "development": "go",
+    "acceptance": "partial-go",
+    "release": "pending",
+    "operations": "pending"
+  },
   "dependencies": [
     {
-      "dependency_id": "entry.contract",
-      "kind": "interface",
-      "description": "健康大管家入口、返回路径、敏感级别和主动作稳定",
+      "dependency_id": "governance.entry",
+      "kind": "governance",
+      "description": "平台派发、模块 active、最终 R2 current checklist 28/28、考试 100 与 receipt 已完成；入口快照保留为历史证据",
       "status": "verified",
       "required_for_slice": true,
       "depends_on": [],
-      "contracts": ["contracts/service-plaza/service-plaza-actions.v1.json"],
-      "evidence": ["docs/project-management/service-plaza/health-dependency-acceptance-2026-07-10.json"],
-      "unresolved": []
+      "contracts": ["docs/project-management/notices/2026-07-12-health-manager-mvp90-m0-task-order.md"],
+      "evidence": [
+        "contracts/foundation/development-checklists/2026-07-12-health-mvp90-m0-dispatch-r2.json",
+        "contracts/foundation/governance-exams/2026-07-12-health-mvp90-m0-dispatch-r2-attempt-1.json",
+        "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m0.json",
+        "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m0-attempt-1.json",
+        "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m0-r2.json",
+        "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m0-r2-attempt-1.json",
+        "docs/project-management/modules/health-manager/health-manager-mvp90-m0-receipt.md"
+      ],
+      "unresolved": [],
+      "owner": "健康大管家负责人",
+      "blocks": ["object.contract", "state-machines.contract", "role-actions.contract", "synthetic.scenarios", "m0.handoff"],
+      "does_not_block": ["平台派发治理与模块工作树同步"]
     },
     {
-      "dependency_id": "consultation.data",
-      "kind": "data",
-      "description": "咨询姓名、正文、本人归属、pending 状态和创建时间模型",
-      "status": "verified",
-      "required_for_slice": true,
-      "depends_on": ["entry.contract"],
-      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
-      "evidence": ["C:/Users/shugo/Documents/heaotang-main/backend-go/plugins/health-plugin/service.go"],
-      "unresolved": []
-    },
-    {
-      "dependency_id": "consultation.api",
+      "dependency_id": "legacy.personal-consultation",
       "kind": "interface",
-      "description": "本人 POST/GET 咨询接口、分页和稳定错误语义",
+      "description": "旧 personal-consultation-inbox 只提供既有接口和安全事实，不证明 MVP-90 M0 Go；旧图以升级前提交 6dc126f5812795d5fc4624906828de3de2ac77a1 为历史边界",
       "status": "verified",
-      "required_for_slice": true,
-      "depends_on": ["consultation.data"],
+      "required_for_slice": false,
+      "depends_on": [],
       "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
-      "evidence": ["docs/project-management/service-plaza/api-acceptance-2026-07-10-foundation.json"],
-      "unresolved": []
+      "evidence": [
+        "docs/project-management/service-plaza/health-platform-safety-2026-07-11.md",
+        "docs/project-management/service-plaza/health-history-2026-07-11.md"
+      ],
+      "unresolved": [],
+      "owner": "平台集成负责人",
+      "blocks": [],
+      "does_not_block": ["object.contract", "state-machines.contract", "role-actions.contract", "synthetic.scenarios"]
     },
     {
-      "dependency_id": "consultation.ownership",
-      "kind": "policy",
-      "description": "用户身份来自会话且咨询严格跨用户隔离",
+      "dependency_id": "prd.c5",
+      "kind": "contract",
+      "description": "MVP-90 PRD C5 Document Handoff Ready 作为需求证据，不代表专业冻结或实现授权；源分支 codex/health-manager-mvp90-prd，exact commit fdf080f7ab03b2bdba87b77a7b3fd33dbcc8f73c，PRD SHA-256 701ee042f88a156a2c393e7b64bbbea7a4b54c0e94a81be8ea83d8cb05c1e147，Handoff SHA-256 5e9cb98be773c79390136ae80fb60d8617f4a12fefaafdb8dca8ab3f936771f5",
       "status": "verified",
       "required_for_slice": true,
-      "depends_on": ["consultation.data"],
-      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
-      "evidence": ["C:/Users/shugo/Documents/heaotang-main/backend-go/plugins/health-plugin/service_test.go"],
-      "unresolved": []
+      "depends_on": [],
+      "contracts": ["docs/project-management/notices/2026-07-11-health-manager-mvp90-prd-task-order.md"],
+      "evidence": [
+        "docs/project-management/service-plaza/health-mvp90-prd-dispatch-2026-07-11.md",
+        "docs/project-management/service-plaza/handoff-log.md"
+      ],
+      "unresolved": ["HM-R0 Professional Freeze Pending"],
+      "owner": "健康大管家负责人",
+      "blocks": [],
+      "does_not_block": ["object.contract", "state-machines.contract", "role-actions.contract", "synthetic.scenarios"]
     },
     {
-      "dependency_id": "consultation.idempotency",
-      "kind": "policy",
-      "description": "首次、重放、异载荷冲突和一次写入固定",
+      "dependency_id": "object.contract",
+      "kind": "contract",
+      "description": "16 个产品语义对象的版本化合同与 Schema",
       "status": "verified",
       "required_for_slice": true,
-      "depends_on": ["consultation.api"],
-      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
-      "evidence": ["docs/project-management/service-plaza/api-acceptance-2026-07-10-foundation.json"],
-      "unresolved": []
+      "depends_on": ["governance.entry", "prd.c5"],
+      "contracts": ["contracts/modules/health-manager/mvp90/object-model.v1.json", "contracts/modules/health-manager/mvp90/object-model.v1.schema.json"],
+      "evidence": ["docs/project-management/modules/health-manager/health-manager-mvp90-m0-requirements.md", "contracts/modules/health-manager/mvp90/conformance/test_health_mvp90_contracts.py"],
+      "unresolved": [],
+      "owner": "健康大管家负责人",
+      "blocks": ["synthetic.scenarios", "m0.handoff"],
+      "does_not_block": ["state-machines.contract", "role-actions.contract"]
     },
     {
-      "dependency_id": "consultation.ai-boundary",
-      "kind": "policy",
-      "description": "未形成医疗 AI 独立契约前不向 AI 发送咨询正文",
+      "dependency_id": "state-machines.contract",
+      "kind": "contract",
+      "description": "6 组状态机、允许与禁止迁移的版本化合同",
       "status": "verified",
       "required_for_slice": true,
-      "depends_on": ["consultation.api"],
-      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
-      "evidence": ["docs/project-management/service-plaza/health-dependency-acceptance-2026-07-10.json"],
-      "unresolved": []
+      "depends_on": ["governance.entry", "prd.c5"],
+      "contracts": ["contracts/modules/health-manager/mvp90/state-machines.v1.json", "contracts/modules/health-manager/mvp90/state-machines.v1.schema.json"],
+      "evidence": ["docs/project-management/modules/health-manager/health-manager-mvp90-m0-requirements.md", "contracts/modules/health-manager/mvp90/conformance/test_health_mvp90_contracts.py"],
+      "unresolved": [],
+      "owner": "健康大管家负责人",
+      "blocks": ["synthetic.scenarios", "m0.handoff"],
+      "does_not_block": ["object.contract", "role-actions.contract"]
     },
     {
-      "dependency_id": "health.schema",
-      "kind": "data",
-      "description": "咨询及公开健康路由所需表由正式迁移创建",
+      "dependency_id": "role-actions.contract",
+      "kind": "contract",
+      "description": "6 类角色动作、禁止动作和服务端授权前置合同",
       "status": "verified",
       "required_for_slice": true,
-      "depends_on": ["consultation.data"],
-      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
-      "evidence": ["docs/project-management/service-plaza/health-dependency-acceptance-2026-07-10.json"],
-      "unresolved": []
+      "depends_on": ["governance.entry", "prd.c5"],
+      "contracts": ["contracts/modules/health-manager/mvp90/role-actions.v1.json", "contracts/modules/health-manager/mvp90/role-actions.v1.schema.json"],
+      "evidence": ["docs/project-management/modules/health-manager/health-manager-mvp90-m0-requirements.md", "contracts/modules/health-manager/mvp90/conformance/test_health_mvp90_contracts.py"],
+      "unresolved": ["最终平台 scope 名称后置"],
+      "owner": "健康大管家负责人",
+      "blocks": ["synthetic.scenarios", "m0.handoff"],
+      "does_not_block": ["object.contract", "state-machines.contract"]
     },
     {
-      "dependency_id": "history.ui",
-      "kind": "workflow",
-      "description": "页面展示本人咨询历史及空、加载、错误、重放状态",
-      "status": "standardized",
-      "required_for_slice": true,
-      "depends_on": ["consultation.api", "consultation.ownership", "consultation.ai-boundary"],
-      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
+      "dependency_id": "professional.decisions",
+      "kind": "decision",
+      "description": "27 项专业、隐私、容量、时限和商业决策仍 Pending，只能形成不可执行元数据",
+      "status": "blocked-local",
+      "required_for_slice": false,
+      "depends_on": ["prd.c5"],
+      "contracts": [],
       "evidence": [],
-      "unresolved": ["服务广场健康页面尚未展示本人咨询列表"]
+      "unresolved": ["27 项 Pending with owner"],
+      "owner": "和奥堂医生集团专业负责人及各决策责任人",
+      "blocks": ["可执行专业策略", "真实业务实现", "测试环境", "发布"],
+      "does_not_block": ["object.contract", "state-machines.contract", "role-actions.contract", "synthetic.scenarios"]
     },
     {
-      "dependency_id": "medical.disclaimer",
-      "kind": "policy",
-      "description": "页面明确咨询收件不构成诊断、处方或急救服务",
-      "status": "standardized",
+      "dependency_id": "synthetic.scenarios",
+      "kind": "acceptance",
+      "description": "MVP-A001 至 A015 合成 fixtures 与一致性测试，不含真实健康数据",
+      "status": "verified",
       "required_for_slice": true,
-      "depends_on": ["entry.contract"],
-      "contracts": ["docs/project-management/modules/health-manager-first-slice-contract-v1.md"],
-      "evidence": [],
-      "unresolved": ["正式法律文本后续由业务和合规负责人确认"]
+      "depends_on": ["governance.entry", "object.contract", "state-machines.contract", "role-actions.contract"],
+      "contracts": ["contracts/modules/health-manager/mvp90/synthetic-scenarios.v1.json", "contracts/modules/health-manager/mvp90/synthetic-scenarios.v1.schema.json"],
+      "evidence": ["contracts/modules/health-manager/mvp90/conformance/fixtures/mvp90-synthetic-fixtures.v1.json", "contracts/modules/health-manager/mvp90/conformance/test_health_mvp90_contracts.py", "docs/project-management/modules/health-manager/health-manager-mvp90-m0-conformance-report.md"],
+      "unresolved": [],
+      "owner": "健康大管家负责人",
+      "blocks": ["m0.handoff"],
+      "does_not_block": ["professional.decisions"]
+    },
+    {
+      "dependency_id": "m0.handoff",
+      "kind": "handoff",
+      "description": "M0 合同、Schema、conformance、IR 与平台验收交接",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": ["governance.entry", "object.contract", "state-machines.contract", "role-actions.contract", "synthetic.scenarios"],
+      "contracts": ["docs/project-management/modules/health-manager/health-manager-mvp90-m0-handoff.md"],
+      "evidence": ["contracts/modules/health-manager/implementation-records/2026-07-12-health-mvp90-m0-r2.json", "docs/project-management/modules/health-manager/health-manager-mvp90-m0-conformance-report.md"],
+      "unresolved": [],
+      "owner": "健康大管家负责人",
+      "blocks": [],
+      "does_not_block": ["m1.governance-entry", "m1.professional-decisions", "m1.security-authorization"]
+    },
+    {
+      "dependency_id": "m1.governance-entry",
+      "kind": "governance",
+      "description": "HM-MVP90-M1 development-only 已由平台独立激活；只允许合同、Schema、合成 fixtures/conformance、模块依赖、receipt/Handoff 和治理证据",
+      "status": "accepted",
+      "required_for_slice": true,
+      "depends_on": ["m0.handoff"],
+      "contracts": ["docs/project-management/notices/2026-07-12-health-manager-mvp90-m1-task-order.md"],
+      "evidence": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p0-r3.json",
+        "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p0-r3-attempt-1.json",
+        "docs/project-management/modules/health-manager/health-manager-mvp90-m1-receipt.md"
+      ],
+      "unresolved": [],
+      "owner": "健康大管家负责人",
+      "blocks": ["m1.p0-handoff"],
+      "does_not_block": ["C4-L02-L04 隐私法律门禁", "真实数据与生产继续失败关闭"]
+    },
+    {
+      "dependency_id": "m1.professional-decisions",
+      "kind": "decision",
+      "description": "C4-H01、M1-LIFESTYLE-TEMPLATE v1-proposed 和 MVP-A001-A015 已由张树功在 development-only 范围 Accepted，三项均 executable=false；签署引用分别为 item-637、item-645、item-656，专业 source 为 90e52a69aff37ff52fe3d9d9989de2ed793d8901",
+      "status": "accepted",
+      "required_for_slice": true,
+      "depends_on": ["m0.handoff"],
+      "contracts": [
+        "contracts/modules/health-manager/mvp90-m1/readiness/c4-h01-action-boundary-decision.v1.json",
+        "contracts/modules/health-manager/mvp90-m1/readiness/m1-lifestyle-template-signoff.v1.json",
+        "contracts/modules/health-manager/mvp90-m1/readiness/m1-professional-scenario-review.v1.json"
+      ],
+      "evidence": [
+        "docs/project-management/modules/health-manager/health-manager-mvp90-m1-professional-signoff-receipt.md"
+      ],
+      "unresolved": ["全量 C4-H06 仍 Pending", "identity_authority_production 仍 Pending"],
+      "owner": "和奥堂医生集团专业负责人",
+      "blocks": ["m1.p0-handoff"],
+      "does_not_block": ["成年合成会员 development-only 合同与一致性验证"]
+    },
+    {
+      "dependency_id": "m1.security-authorization",
+      "kind": "decision",
+      "description": "C4-S04 已冻结 7 主体、12 资源、11 动作、15 服务端拒绝、审计字段和 10 项威胁模型；source e68b1a0fbe295ba61452d824b0db7dc57cc1f341、integration e547190000cf6337274452336789ac4d3ca88320；合同保持 executable=false",
+      "status": "accepted",
+      "required_for_slice": true,
+      "depends_on": ["m0.handoff", "m1.professional-decisions"],
+      "contracts": [
+        "contracts/modules/health-manager/mvp90-m1/security-authorization.v1.json",
+        "contracts/modules/health-manager/mvp90-m1/security-authorization.v1.schema.json"
+      ],
+      "evidence": [
+        "docs/project-management/modules/health-manager/health-manager-mvp90-m1-security-freeze-receipt.md"
+      ],
+      "unresolved": [],
+      "owner": "平台安全负责人",
+      "blocks": ["m1.p0-handoff"],
+      "does_not_block": ["隐私法律门禁保持独立", "业务实现必须另立工作项"]
+    },
+    {
+      "dependency_id": "m1.privacy-legal",
+      "kind": "decision",
+      "description": "C4-L02-L04 的用途、保留、导出删除和 AI 数据使用仍未冻结，只允许零真实身份、零真实健康数据的合成验证",
+      "status": "blocked-local",
+      "required_for_slice": false,
+      "depends_on": ["prd.c5"],
+      "contracts": [],
+      "evidence": ["docs/project-management/notices/2026-07-12-health-manager-mvp90-m1-task-order.md"],
+      "unresolved": ["C4-L02-L04 Pending with owner"],
+      "owner": "隐私与法律负责人",
+      "blocks": ["真实会员", "真实健康数据", "测试环境真实身份", "部署", "收费", "生产"],
+      "does_not_block": ["合成合同", "Schema", "固定 seed fixtures", "本地 conformance"]
+    },
+    {
+      "dependency_id": "m1.p0-handoff",
+      "kind": "handoff",
+      "description": "M1-P0 激活证据、专业/安全门禁和两层依赖图已由平台独立验收 P0 Go，并受控集成至 07791b9c2bd8310155726988846be8582d21293f",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": ["m1.governance-entry", "m1.professional-decisions", "m1.security-authorization"],
+      "contracts": ["docs/project-management/modules/health-manager/health-manager-mvp90-m1-handoff.md"],
+      "evidence": [
+        "contracts/modules/health-manager/implementation-records/2026-07-12-health-mvp90-m1-p0.json",
+        "docs/project-management/modules/health-manager/health-manager-mvp90-m1-requirements.md",
+        "docs/project-management/modules/health-manager/health-manager-mvp90-m1-receipt.md"
+      ],
+      "unresolved": [],
+      "owner": "健康大管家负责人",
+      "blocks": [],
+      "does_not_block": ["M1-P1 合同与合成一致性检查点"]
+    },
+    {
+      "dependency_id": "m1.vertical-slice-contract",
+      "kind": "contract",
+      "description": "10 个有序步骤覆盖 P-D-C-A-R，引用 M0 对象、状态迁移、角色和 C4-S04 拒绝条件；合同仅用于成年合成会员且 executable=false",
+      "status": "test-verified",
+      "required_for_slice": true,
+      "depends_on": ["m1.p0-handoff", "object.contract", "state-machines.contract", "role-actions.contract"],
+      "contracts": ["contracts/modules/health-manager/mvp90-m1/vertical-slice.v1.json", "contracts/modules/health-manager/mvp90-m1/vertical-slice.v1.schema.json"],
+      "evidence": ["contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_contracts.py", "docs/project-management/modules/health-manager/health-manager-mvp90-m1-conformance-report.md"],
+      "unresolved": [],
+      "owner": "健康大管家负责人",
+      "blocks": ["m1.p1-handoff"],
+      "does_not_block": ["C4-L02-L04 保持独立失败关闭"]
+    },
+    {
+      "dependency_id": "m1.professional-boundaries-contract",
+      "kind": "contract",
+      "description": "17/17 动作逐项忠实映射 C4-H01 的 AI、健康管理师和专业人员决策，不改变签署语义且 executable=false",
+      "status": "test-verified",
+      "required_for_slice": true,
+      "depends_on": ["m1.professional-decisions", "m1.security-authorization"],
+      "contracts": ["contracts/modules/health-manager/mvp90-m1/professional-boundaries.v1.json", "contracts/modules/health-manager/mvp90-m1/professional-boundaries.v1.schema.json"],
+      "evidence": ["contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_contracts.py", "contracts/modules/health-manager/mvp90-m1/readiness/c4-h01-action-boundary-decision.v1.json"],
+      "unresolved": ["全量 C4-H06 仍 Pending"],
+      "owner": "健康大管家负责人",
+      "blocks": ["m1.p1-handoff"],
+      "does_not_block": ["development-only 合成合同验证"]
+    },
+    {
+      "dependency_id": "m1.synthetic-scenarios-contract",
+      "kind": "acceptance",
+      "description": "MVP-A001-A015 与 M0 场景、专业复核、纵切步骤和安全拒绝条件逐项对齐；15 个固定 seed 夹具不含真实身份或健康数据",
+      "status": "test-verified",
+      "required_for_slice": true,
+      "depends_on": ["m1.vertical-slice-contract", "m1.professional-boundaries-contract", "synthetic.scenarios"],
+      "contracts": ["contracts/modules/health-manager/mvp90-m1/synthetic-pdcar-scenarios.v1.json", "contracts/modules/health-manager/mvp90-m1/synthetic-pdcar-scenarios.v1.schema.json"],
+      "evidence": ["contracts/modules/health-manager/mvp90-m1/conformance/fixtures/synthetic-pdcar-fixtures.v1.json", "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_contracts.py", "docs/project-management/modules/health-manager/health-manager-mvp90-m1-conformance-report.md"],
+      "unresolved": [],
+      "owner": "健康大管家负责人",
+      "blocks": ["m1.p1-handoff"],
+      "does_not_block": ["真实数据和环境仍 No-Go"]
+    },
+    {
+      "dependency_id": "m1.p1-handoff",
+      "kind": "handoff",
+      "description": "M1-P1 纵切、专业边界、15 场景、固定 seed 合成夹具与 conformance 已由平台独立验收 P1 Go，并受控集成至 8d6fe1d5fd45a005abf950651b8ddfb23dfbc306",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": ["m1.vertical-slice-contract", "m1.professional-boundaries-contract", "m1.synthetic-scenarios-contract"],
+      "contracts": ["docs/project-management/modules/health-manager/health-manager-mvp90-m1-handoff.md"],
+      "evidence": [
+        "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p1-r3.json",
+        "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p1-r3-attempt-1.json",
+        "contracts/modules/health-manager/implementation-records/2026-07-12-health-mvp90-m1-p1-r3.json",
+        "docs/project-management/modules/health-manager/health-manager-mvp90-m1-conformance-report.md"
+      ],
+      "unresolved": [],
+      "owner": "健康大管家负责人",
+      "blocks": [],
+      "does_not_block": ["平台另行评估 M1-P2 或共享实现独立工作项"]
+    },
+    {
+      "dependency_id": "m1.p2-governance-entry",
+      "kind": "governance",
+      "description": "P2 确定性合成重放已由平台正式激活；仅允许纯 Python、内存内、零网络、零数据库的合同验证成果",
+      "status": "accepted",
+      "required_for_slice": true,
+      "depends_on": ["m1.p1-handoff"],
+      "contracts": ["docs/project-management/notices/2026-07-12-health-manager-mvp90-m1-p2-task-order.md"],
+      "evidence": [
+        "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p2-c1.json",
+        "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p2-c1-attempt-1.json"
+      ],
+      "unresolved": [],
+      "owner": "健康大管家负责人",
+      "blocks": ["m1.p2-replay-plan"],
+      "does_not_block": ["C4-L02-L04、全量 C4-H06、production identity 与真实活动继续失败关闭"]
+    },
+    {
+      "dependency_id": "m1.p2-replay-plan",
+      "kind": "contract",
+      "description": "15/15场景、exact25事件的确定性计划；同资源状态与版本连续，normal PDCAR不生成风险/转人工事件，紧急场景由签署结果闭包至专业风险分类；迁移命令、可选安全授权动作与审计期望分离，所有输出仍synthetic_only=true、executable=false",
+      "status": "test-verified",
+      "required_for_slice": true,
+      "depends_on": ["m1.p2-governance-entry", "m1.vertical-slice-contract", "m1.synthetic-scenarios-contract", "m1.security-authorization"],
+      "contracts": [
+        "contracts/modules/health-manager/mvp90-m1/synthetic-replay-plan.v1.json",
+        "contracts/modules/health-manager/mvp90-m1/synthetic-replay-plan.v1.schema.json"
+      ],
+      "evidence": [
+        "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_p2_replay.py",
+        "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md"
+      ],
+      "unresolved": [],
+      "owner": "健康大管家负责人",
+      "blocks": ["m1.p2-c1-handoff"],
+      "does_not_block": ["真实数据、共享实现、环境、收费和生产继续 No-Go"]
+    },
+    {
+      "dependency_id": "m1.p2-c1-handoff",
+      "kind": "handoff",
+      "description": "P2-C1 replay plan、exact25事件、A001连续重放、A003紧急风险闭包及全部源指针/授权语义已由平台独立验收Go，并squash integration至40a042b",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": ["m1.p2-replay-plan"],
+      "contracts": ["docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-handoff.md"],
+      "evidence": [
+        "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p2-c1-r4.json",
+        "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p2-c1-r4-attempt-1.json",
+        "contracts/modules/health-manager/implementation-records/2026-07-12-health-mvp90-m1-p2-c1-r4.json",
+        "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md"
+      ],
+      "unresolved": [],
+      "owner": "健康大管家负责人",
+      "blocks": ["m1.p2-reference-runner"],
+      "does_not_block": ["C4-L02-L04、全量C4-H06、production identity与真实活动继续失败关闭"]
+    },
+    {
+      "dependency_id": "m1.p2-reference-runner",
+      "kind": "contract",
+      "description": "纯Python、内存内reference runner；以scenario_id+event_id绑定权威事件，执行状态/版本、授权、完整载荷幂等、稳定拒绝与审计原子回滚，不访问文件、网络、数据库、系统时间、随机数或外部模型",
+      "status": "test-verified",
+      "required_for_slice": true,
+      "depends_on": ["m1.p2-c1-handoff"],
+      "contracts": [
+        "contracts/modules/health-manager/mvp90-m1/conformance/synthetic_pdcar_reference.py",
+        "contracts/modules/health-manager/mvp90-m1/synthetic-replay-plan.v1.json"
+      ],
+      "evidence": [
+        "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_p2_replay.py",
+        "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md"
+      ],
+      "unresolved": [],
+      "owner": "健康大管家负责人",
+      "blocks": ["m1.p2-c3-matrix"],
+      "does_not_block": ["其他模块独立工作；真实数据、共享实现、环境、收费和生产继续No-Go"]
+    },
+    {
+      "dependency_id": "m1.p2-c3-matrix",
+      "kind": "acceptance",
+      "description": "15/15正例冻结outcome/error/result count/canonical hash；15/15负例逐项证明稳定拒绝且resource/audit/trace/idempotency无副作用；零外部运行时入口",
+      "status": "test-verified",
+      "required_for_slice": true,
+      "depends_on": ["m1.p2-reference-runner"],
+      "contracts": [
+        "contracts/modules/health-manager/mvp90-m1/conformance/fixtures/synthetic-replay-negative-cases.v1.json",
+        "contracts/modules/health-manager/mvp90-m1/conformance/fixtures/synthetic-replay-negative-cases.v1.schema.json"
+      ],
+      "evidence": [
+        "contracts/modules/health-manager/mvp90-m1/conformance/test_health_mvp90_m1_p2_replay.py",
+        "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md"
+      ],
+      "unresolved": [],
+      "owner": "健康大管家负责人",
+      "blocks": ["m1.p2-c4-handoff"],
+      "does_not_block": ["其他模块独立工作；共享实现、环境、真实数据、收费和生产继续No-Go"]
+    },
+    {
+      "dependency_id": "m1.p2-c4-handoff",
+      "kind": "handoff",
+      "description": "汇总C1-C3 source/integration、19+11回归、15+15矩阵、三项根因关闭、未决风险与No-Go的P2模块最终交接",
+      "status": "implemented",
+      "required_for_slice": true,
+      "depends_on": ["m1.p2-c3-matrix"],
+      "contracts": ["docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-handoff.md"],
+      "evidence": [
+        "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md",
+        "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-receipt.md"
+      ],
+      "unresolved": ["等待平台独立P2 synthetic Go/No-Go与最终受控集成"],
+      "owner": "健康大管家负责人",
+      "blocks": ["P2 work item closeout"],
+      "does_not_block": ["其他模块独立工作；业务实现、环境、release和operations继续Pending/No-Go"]
     }
   ]
 }

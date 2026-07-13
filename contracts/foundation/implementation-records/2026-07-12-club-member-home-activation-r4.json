@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-CLUB-MEMBER-HOME-ACTIVATION-R4",
+  "title": "俱乐部联盟 H2-M0 纯合同范围激活",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "在 H2 派发受控集成后，从 exact integration base 创建干净模块工作树，只激活无页面路径冲突的 H2-M0 需求与机器合同范围。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-club-member-home-activation-r4.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-club-member-home-activation-r4-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/governance-reading-list.v1.json", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/recursive-project-governance-v1.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0018-recursive-project-governance.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-12-club-member-home-h2-task-order.md", "docs/project-management/service-plaza/club-member-home-dispatch-2026-07-12.md"],
+  "capabilities": ["foundation.ai-engineering-traceability", "foundation.ai-collaboration-safety", "foundation.governance-certification"],
+  "contracts": ["contracts/foundation/agent-collaboration.v1.json"],
+  "decisions": ["docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0018-recursive-project-governance.md"],
+  "changed_areas": ["contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/development-checklists/2026-07-12-club-member-home-activation-r4.json", "contracts/foundation/governance-exams/2026-07-12-club-member-home-activation-r4-attempt-1.json", "contracts/foundation/implementation-records/2026-07-12-club-member-home-activation-r4.json"],
+  "verification": ["scripts/validate_development_checklists.py", "scripts/validate_governance_exams.py", "scripts/validate_implementation_records.py", "scripts/validate_agent_collaboration.py", "scripts/Test-TextEncoding.ps1", "git diff --check"],
+  "evidence": ["contracts/foundation/development-checklists/2026-07-12-club-member-home-activation-r4.json", "contracts/foundation/governance-exams/2026-07-12-club-member-home-activation-r4-attempt-1.json", "docs/project-management/notices/2026-07-12-club-member-home-h2-task-order.md"],
+  "premises": ["Integration base is fd79e3d7791f6ea614b8764c055c2883be199efb", "H2-M0 paths do not overlap active CA-SC frontend paths", "H2-M0 excludes frontend runtime, backend, deployment, production and real data"],
+  "implementation_mode": "ai-assisted"
+}

@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-CLUB-H1-DISPATCH",
+  "title": "俱乐部联盟 CA-H1 独立页面壳正式派发",
+  "date": "2026-07-11",
+  "status": "verified",
+  "objective": "在 H0 Full Go 后建立独立 CA-H1 需求、差距、精确实现路径、前端门禁和测试环境 UAT 边界，并预登记独立模块工作项。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-11-club-h1-dispatch.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-11-club-h1-dispatch-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/governance-reading-list.v1.json", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/recursive-project-governance-v1.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0018-recursive-project-governance.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-11-club-alliance-h1-task-order.md", "contracts/modules/club-alliance/homepage.v1.json", "docs/project-management/modules/club-alliance/CA-H0-acceptance-matrix.md"],
+  "capabilities": ["foundation.ai-engineering-traceability", "foundation.governance-certification", "foundation.service-action-contracts", "foundation.app-shell-adapter"],
+  "contracts": ["contracts/service-plaza/service-plaza-actions.v1.json", "contracts/modules/club-alliance/homepage.v1.json", "contracts/modules/club-alliance/category-registry.v1.json"],
+  "decisions": ["docs/project-management/modules/club-alliance/CA-F0-H0-decisions.md", "docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0018-recursive-project-governance.md"],
+  "changed_areas": ["contracts/foundation/agent-collaboration.v1.json", "docs/project-management/notices/2026-07-11-club-alliance-h1-task-order.md", "docs/project-management/service-plaza/club-alliance-h1-dispatch-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "verification": ["scripts/validate_development_checklists.py", "scripts/validate_governance_exams.py", "scripts/validate_implementation_records.py", "scripts/validate_agent_collaboration.py", "scripts/Test-TextEncoding.ps1", "git diff --check"],
+  "evidence": ["contracts/foundation/development-checklists/2026-07-11-club-h1-dispatch.json", "contracts/foundation/governance-exams/2026-07-11-club-h1-dispatch-attempt-1.json", "docs/project-management/service-plaza/club-alliance-h1-dispatch-2026-07-11.md", "docs/project-management/service-plaza/handoff-log.md"],
+  "premises": ["SP-H025 H0 Full remains Go", "service-plaza.action.v1 remains the sole presentation source", "selectors remain executable=false during H1", "environment deployment and UAT require separate authorization"],
+  "implementation_mode": "ai-assisted"
+}

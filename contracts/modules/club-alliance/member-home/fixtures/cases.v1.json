@@ -1,0 +1,169 @@
+{
+  "seed": "HEAOTANG-CMH-20260712-V1",
+  "synthetic_only": true,
+  "environment": "non-production",
+  "cases": [
+    {
+      "case_id": "new-member",
+      "auth": true,
+      "clubs": [],
+      "application_history": [],
+      "membership_history": [],
+      "tasks": [],
+      "activities": [],
+      "expected_state": "empty"
+    },
+    {
+      "case_id": "application-history-only",
+      "auth": true,
+      "clubs": [],
+      "application_history": [
+        {
+          "application_id": "a-p-1",
+          "status": "pending"
+        },
+        {
+          "application_id": "a-r-1",
+          "status": "rejected"
+        }
+      ],
+      "membership_history": [],
+      "expected_state": "empty"
+    },
+    {
+      "case_id": "left-membership-history",
+      "auth": true,
+      "clubs": [],
+      "application_history": [],
+      "membership_history": [
+        {
+          "club_id": "c-h-1",
+          "membership_status": "left",
+          "club_status": "active"
+        }
+      ],
+      "expected_state": "empty"
+    },
+    {
+      "case_id": "suspended-member",
+      "auth": true,
+      "clubs": [
+        {
+          "club_id": "c-sus-1",
+          "type": "standard",
+          "category": "general",
+          "club_status": "active",
+          "membership_status": "suspended",
+          "member_role": "member"
+        }
+      ],
+      "expected_state": "ready"
+    },
+    {
+      "case_id": "dissolved-club-history",
+      "auth": true,
+      "clubs": [],
+      "application_history": [],
+      "membership_history": [
+        {
+          "club_id": "c-dis-1",
+          "membership_status": "left",
+          "club_status": "dissolved"
+        }
+      ],
+      "expected_state": "empty"
+    },
+    {
+      "case_id": "family-member",
+      "auth": true,
+      "clubs": [
+        {
+          "club_id": "c-f-1",
+          "type": "family",
+          "category": "family",
+          "club_status": "active",
+          "membership_status": "active",
+          "member_role": "member"
+        }
+      ],
+      "tasks": [
+        {
+          "task_id": "t-1",
+          "priority": 1,
+          "due_at": "2026-07-13T02:00:00Z"
+        }
+      ],
+      "activities": [],
+      "expected_state": "ready"
+    },
+    {
+      "case_id": "multi-club-member",
+      "auth": true,
+      "clubs": [
+        {
+          "club_id": "c-s-1",
+          "type": "standard",
+          "category": "general",
+          "club_status": "active",
+          "membership_status": "active",
+          "member_role": "member"
+        },
+        {
+          "club_id": "c-p-1",
+          "type": "standard",
+          "category": "charity",
+          "club_status": "active",
+          "membership_status": "active",
+          "member_role": "member"
+        }
+      ],
+      "tasks": [],
+      "activities": [
+        {
+          "activity_id": "a-1",
+          "start_at": "2026-07-14T02:00:00Z"
+        }
+      ],
+      "expected_state": "ready"
+    },
+    {
+      "case_id": "manager",
+      "auth": true,
+      "scopes": [
+        "club:manage"
+      ],
+      "clubs": [
+        {
+          "club_id": "c-s-2",
+          "type": "standard",
+          "category": "general",
+          "club_status": "active",
+          "membership_status": "active",
+          "member_role": "director"
+        }
+      ],
+      "expected_state": "ready"
+    },
+    {
+      "case_id": "partial-failure",
+      "auth": true,
+      "clubs": [
+        {
+          "club_id": "c-s-3",
+          "type": "standard",
+          "category": "general",
+          "club_status": "active",
+          "membership_status": "active",
+          "member_role": "member"
+        }
+      ],
+      "tasks_error": "CMH_TASKS_UNAVAILABLE",
+      "expected_state": "partial-error"
+    },
+    {
+      "case_id": "unauthorized",
+      "auth": false,
+      "expected_state": "unauthorized"
+    }
+  ]
+}

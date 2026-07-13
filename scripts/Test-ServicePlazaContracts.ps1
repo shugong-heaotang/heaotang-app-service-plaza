@@ -8,8 +8,9 @@ $repoRoot = Split-Path $PSScriptRoot -Parent
 $schema = Join-Path $repoRoot "contracts\service-plaza\service-plaza-action.schema.json"
 $baseline = Join-Path $repoRoot "contracts\service-plaza\service-plaza-actions.v1.json"
 $foundationRegistry = Join-Path $repoRoot "contracts\foundation\foundation-capabilities.v1.json"
+$internalDependencyV2Schema = Join-Path $repoRoot "contracts\foundation\module-internal-dependencies.v2.schema.json"
 
-foreach ($path in @($schema, $baseline)) {
+foreach ($path in @($schema, $baseline, $internalDependencyV2Schema)) {
   if (-not (Test-Path -LiteralPath $path)) {
     throw "Service Plaza contract file is missing: $path"
   }
@@ -45,6 +46,7 @@ try {
     (Join-Path $repoRoot "contracts\modules\life-navigation\internal-dependencies.v1.json") `
     (Join-Path $repoRoot "contracts\modules\club-alliance\internal-dependencies.v1.json") `
     (Join-Path $repoRoot "contracts\modules\health-manager\internal-dependencies.v1.json") `
+    (Join-Path $repoRoot "scripts\tests\fixtures\module-internal-dependencies\valid-v2.json") `
     --project-root $repoRoot
   if ($LASTEXITCODE -ne 0) {
     throw "Module internal dependency validation failed."
@@ -55,6 +57,13 @@ try {
     --project-root $repoRoot
   if ($LASTEXITCODE -ne 0) {
     throw "Recurring issue two-strike validation failed."
+  }
+  & python -X utf8 (Join-Path $PSScriptRoot "validate_club_category_filter.py") `
+    (Join-Path $repoRoot "contracts\service-plaza\club-category-filter.v1.schema.json") `
+    (Join-Path $repoRoot "contracts\service-plaza\club-category-filter.v1.json") `
+    (Join-Path $repoRoot "scripts\tests\fixtures\club-category-filter\mixed-dataset.v1.json")
+  if ($LASTEXITCODE -ne 0) {
+    throw "Club category authority contract validation failed."
   }
   & python -X utf8 (Join-Path $PSScriptRoot "validate_agent_collaboration.py") `
     (Join-Path $repoRoot "contracts\foundation\agent-collaboration.v1.schema.json") `

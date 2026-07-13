@@ -1,0 +1,70 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260712-CLUB-SC-FIRST-CLOSURE-DISPATCH-1",
+    "record_id":  "IR-20260712-CLUB-SC-FIRST-CLOSURE-DISPATCH",
+    "actor":  "Codex platform integration agent",
+    "attempt_number":  1,
+    "status":  "passed",
+    "generated_at":  "2026-07-11T22:40:52.9603369Z",
+    "completed_at":  "2026-07-11T22:41:02.5630857Z",
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  100,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "a5db9ef44414b457d8bec993538b1023800ed36bca7cd70c07ba64025fe243ac",
+    "checklist_path":  "contracts/foundation/development-checklists/2026-07-12-club-sc-first-closure-dispatch.json",
+    "checklist_sha256":  "3d16f4d1fba4303fd171d210a64428a7c3c122c79a76bad0e1f28c2b1023f6a3",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-011",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/project-management/module-internal-dependency-standard-v1.md"
+                      },
+                      {
+                          "question_id":  "GQ-006",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/project-management/ai-coding-incident-lessons-2026-07-10.md"
+                      },
+                      {
+                          "question_id":  "GQ-001",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "CONSTRAINTS.md"
+                      },
+                      {
+                          "question_id":  "GQ-013",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0014-ai-development-flight-checklist.md"
+                      },
+                      {
+                          "question_id":  "GQ-008",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0007-stable-foundation-variable-business.md"
+                      },
+                      {
+                          "question_id":  "GQ-005",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+                      },
+                      {
+                          "question_id":  "GQ-016",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0013-mandatory-ai-development-entrypoint.md"
+                      },
+                      {
+                          "question_id":  "GQ-015",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "contracts/foundation/engineering-standards.v1.json"
+                      }
+                  ],
+    "remediation_sources":  [
+
+                            ]
+}

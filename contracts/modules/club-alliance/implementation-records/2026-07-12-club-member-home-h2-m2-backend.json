@@ -1,0 +1,62 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-CLUB-MEMBER-HOME-H2-M2-BACKEND",
+  "title": "俱乐部联盟 H2-M2 会员首页后端实现与独立复核",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "implement and independently verify the authenticated self-only aggregate endpoint",
+  "governance_checklist": "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-h2-m2-backend.json",
+  "governance_exam": "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-h2-m2-backend-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/module-dependencies/club-alliance.v1.json",
+    "contracts/modules/club-alliance/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-club-member-home-m2-runtime-task-order.md",
+    "docs/project-management/modules/club-alliance/member-home/requirements.md"
+  ],
+  "capabilities": [
+    "foundation.identity-api",
+    "foundation.authorization-idempotency",
+    "foundation.ai-engineering-traceability"
+  ],
+  "contracts": [
+    "contracts/modules/club-alliance/member-home/member-home.v1.json",
+    "contracts/modules/club-alliance/member-home/error-catalog.v1.json"
+  ],
+  "decisions": [
+    "docs/project-management/modules/club-alliance/member-home/decisions.md"
+  ],
+  "changed_areas": [
+    "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-h2-m2-backend.json",
+    "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-h2-m2-backend-attempt-1.json",
+    "contracts/modules/club-alliance/implementation-records/2026-07-12-club-member-home-h2-m2-backend.json",
+    "docs/project-management/modules/club-alliance/member-home/handoff-m2-backend.md"
+  ],
+  "verification": [
+    "PASS: implementation commit 9d87240d3b95819d3c6dedb39042193ee0622e33",
+    "PASS: backend controlled integration 97d8bfc5d1396f7907b1e76dfcb7c333a2913436",
+    "PASS: independent targeted MemberHome tests 10/10, including custom-role positive and negative authorization cases",
+    "PASS: independent go test ./...",
+    "PASS: independent go vet ./...",
+    "PASS: independent git diff --check",
+    "PENDING: test-environment deployment and M3 role-based UAT"
+  ],
+  "evidence": [
+    "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-h2-m2-backend.json",
+    "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-h2-m2-backend-attempt-1.json",
+    "docs/project-management/modules/club-alliance/member-home/handoff-m2-backend.md"
+  ],
+  "premises": [
+    "Historical timing deviation is retained: the backend actor initially formed an uncommitted three-file diff after the 100-point exam but before formal implementation Go, then stopped with the state preserved for review.",
+    "The preserved implementation was subsequently independently reviewed, the P1 custom-role authorization gap was fixed with positive and negative cases, and the result was committed and controllably integrated.",
+    "Verified means repository implementation and independent Go gates passed; the endpoint is not marked deployed.",
+    "Real-environment source-table population and semantic coverage remain a deployment risk: repository tests do not prove that test-server member, application, role, activity, task, and feed sources contain the four required UAT identities and relationships.",
+    "M3 deployment and new-member, family-member, multi-club-member, and director/admin browser UAT remain pending."
+  ],
+  "implementation_mode": "ai-assisted"
+}

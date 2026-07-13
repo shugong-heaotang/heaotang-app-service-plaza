@@ -1,0 +1,78 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-CLUB-MEMBER-HOME-DISPATCH",
+  "title": "俱乐部联盟 H2 会员首页需求变更与正式派发",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "在不推翻 CA-H1 已 Go 技术底座且不覆盖 CA-SC 当前活动切片的前提下，冻结会员工作台双层首页需求并建立 H2-M0 至 M3 连续检查点。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-12-club-member-home-dispatch.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-12-club-member-home-dispatch-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-club-member-home-h2-task-order.md",
+    "docs/project-management/modules/club-alliance/CA-F0-H0-requirements.md",
+    "docs/project-management/modules/club-alliance/acceptance/CA-H1-M4-frontend-uat.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.service-action-contracts",
+    "foundation.identity-api",
+    "foundation.authorization-idempotency",
+    "foundation.app-shell-adapter"
+  ],
+  "contracts": [
+    "contracts/service-plaza/service-plaza-actions.v1.json",
+    "contracts/service-plaza/club-category-filter.v1.json",
+    "contracts/modules/club-alliance/homepage.v1.json",
+    "contracts/modules/club-alliance/relationship.v1.json"
+  ],
+  "decisions": [
+    "docs/project-management/modules/club-alliance/CA-F0-H0-decisions.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklists/2026-07-12-club-member-home-dispatch.json",
+    "contracts/foundation/governance-exams/2026-07-12-club-member-home-dispatch-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-12-club-member-home-dispatch.json",
+    "docs/project-management/notices/2026-07-12-club-member-home-h2-task-order.md",
+    "docs/project-management/service-plaza/club-member-home-dispatch-2026-07-12.md",
+    "docs/project-management/service-plaza/handoff-log.md"
+  ],
+  "verification": [
+    "scripts/Test-AgentDevelopmentPreflight.ps1",
+    "scripts/validate_development_checklists.py",
+    "scripts/validate_governance_exams.py",
+    "scripts/validate_implementation_records.py",
+    "scripts/validate_agent_collaboration.py",
+    "scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/foundation/development-checklists/2026-07-12-club-member-home-dispatch.json",
+    "contracts/foundation/governance-exams/2026-07-12-club-member-home-dispatch-attempt-1.json",
+    "docs/project-management/notices/2026-07-12-club-member-home-h2-task-order.md",
+    "docs/project-management/service-plaza/club-member-home-dispatch-2026-07-12.md"
+  ],
+  "premises": [
+    "CA-H1 M1-M4 remains Full Go and is retained as the technical foundation",
+    "club-federation remains a relationship rather than a ClubType",
+    "CA-SC current active work is integrated before H2 page paths are activated",
+    "H2-M0 does not authorize frontend business pages, backend, deployment, production or real data"
+  ],
+  "implementation_mode": "ai-assisted"
+}

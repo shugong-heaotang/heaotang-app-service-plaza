@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/foundation/delivery-flow-policy.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "effective_at", "migration", "wip", "handoff", "continuation", "work_item_model", "business_value_gate", "completion"],
+  "properties": {
+    "contract_version": {"const": "delivery-flow-policy.v1"},
+    "effective_at": {"type": "string", "format": "date-time"},
+    "migration": {
+      "type": "object", "additionalProperties": false,
+      "required": ["legacy_snapshot_commit", "legacy_snapshot_path", "legacy_cutover_work_id", "legacy_work_ids_sha256", "legacy_work_states_sha256", "new_items_require_flow_policy"],
+      "properties": {
+        "legacy_snapshot_commit": {"const": "33f5e45499fbadaac71f07bbe6de5d72579e39c9"},
+        "legacy_snapshot_path": {"const": "contracts/foundation/agent-collaboration.v1.json"},
+        "legacy_cutover_work_id": {"const": "AIW-20260713-PROTECTION-MALL-M2-PORTS-SIMULATION"},
+        "legacy_work_ids_sha256": {"const": "64105cf520b0c971150d0491eba27967d7976aa0bad89400ececd302959d650e"},
+        "legacy_work_states_sha256": {"const": "b7dc23fab67191405a852301ae4f9650164bf3e619bd323587d684f1e5773aaa"},
+        "new_items_require_flow_policy": {"const": true}
+      }
+    },
+    "wip": {
+      "type": "object", "additionalProperties": false,
+      "required": ["max_active_business_streams", "max_active_business_streams_per_module", "legacy_drain_mode", "activation_rule"],
+      "properties": {
+        "max_active_business_streams": {"type": "integer", "minimum": 1},
+        "max_active_business_streams_per_module": {"type": "integer", "minimum": 1},
+        "legacy_drain_mode": {"type": "boolean"},
+        "activation_rule": {"type": "string", "minLength": 1}
+      }
+    },
+    "handoff": {
+      "type": "object", "additionalProperties": false,
+      "required": ["first_response_sla_hours", "decision_sla_hours", "on_expiry", "required_next_owner", "escalation_owner_role"],
+      "properties": {
+        "first_response_sla_hours": {"type": "integer", "minimum": 1, "maximum": 4},
+        "decision_sla_hours": {"type": "integer", "minimum": 1, "maximum": 24},
+        "on_expiry": {"const": "escalate-to-project-owner"},
+        "required_next_owner": {"const": true},
+        "escalation_owner_role": {"const": "项目最高负责人"}
+      }
+    },
+    "continuation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["default", "required_conditions", "stop_conditions"],
+      "properties": {
+        "default": {"const": "auto-continue"},
+        "required_conditions": {"type": "array", "minItems": 4, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "stop_conditions": {"type": "array", "minItems": 7, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "work_item_model": {"type": "object", "additionalProperties": {"const": true}, "minProperties": 4},
+    "business_value_gate": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_for_active_business_stream", "required_fields", "cross_module_value_streams_use_one_end_to_end_owner", "measurement_required_before_completion"],
+      "properties": {
+        "required_for_active_business_stream": {"const": true},
+        "required_fields": {"type": "array", "minItems": 10, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "cross_module_value_streams_use_one_end_to_end_owner": {"const": true},
+        "measurement_required_before_completion": {"const": true}
+      }
+    },
+    "completion": {
+      "type": "object", "additionalProperties": false,
+      "required": ["requires_business_flow_resumed", "requires_independent_acceptance", "commit_or_document_alone_is_not_completion", "requires_value_event_evidence", "accepted_independent_verdicts", "required_metric_evidence_fields"],
+      "properties": {
+        "requires_business_flow_resumed": {"const": true},
+        "requires_independent_acceptance": {"const": true},
+        "commit_or_document_alone_is_not_completion": {"const": true},
+        "requires_value_event_evidence": {"const": true},
+        "accepted_independent_verdicts": {"type": "array", "const": ["go"]},
+        "required_metric_evidence_fields": {"type": "array", "minItems": 5, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    }
+  }
+}

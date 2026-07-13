@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.local/schemas/health-manager/mvp90-m1/c4-h01-action-boundary-decision.v1.schema.json",
+  "title": "C4-H01 action boundary decision",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "decision_id", "decision_status", "executable", "decision_maker", "decision_date", "scope", "version", "premises", "falsification_evidence", "review_trigger", "evidence_references", "signer_role", "signature_reference", "pending_owner", "missing_evidence", "next_checkpoint", "revision_request", "actions"],
+  "properties": {
+    "contract_version": {"const": "health-manager.mvp90-m1.c4-h01-action-boundary-decision.v1"},
+    "decision_id": {"const": "C4-H01"},
+    "decision_status": {"enum": ["Accepted", "Exact revision", "Pending with owner"]},
+    "executable": {"type": "boolean"},
+    "decision_maker": {"type": ["string", "null"]},
+    "decision_date": {"type": ["string", "null"], "format": "date"},
+    "scope": {"const": "HM-MVP90-M1 adult synthetic-member PDCAR vertical slice only"},
+    "version": {"const": "v1-proposed"},
+    "premises": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "falsification_evidence": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "review_trigger": {"type": "object", "additionalProperties": false, "required": ["events", "review_date"], "properties": {"events": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}, "review_date": {"type": ["string", "null"], "format": "date"}}},
+    "evidence_references": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "signer_role": {"const": "和奥堂医生集团专业负责人"},
+    "signature_reference": {"type": ["string", "null"]},
+    "pending_owner": {"type": ["string", "null"]},
+    "missing_evidence": {"type": ["array", "null"], "items": {"type": "string", "minLength": 1}, "minItems": 1, "uniqueItems": true},
+    "next_checkpoint": {"type": ["string", "null"]},
+    "revision_request": {"anyOf": [{"type": "null"}, {"$ref": "#/$defs/revision_request"}]},
+    "actions": {
+      "type": "array", "minItems": 17, "maxItems": 17,
+      "items": {"$ref": "#/$defs/action"},
+      "allOf": [
+        {"contains":{"properties":{"action_id":{"const":"DATA_ORGANIZATION"}},"required":["action_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"action_id":{"const":"ASSESSMENT_DRAFT"}},"required":["action_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"action_id":{"const":"GOAL_PLAN_DRAFT"}},"required":["action_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"action_id":{"const":"PLAN_REVIEW_ACTIVATION"}},"required":["action_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"action_id":{"const":"TASK_EXPLANATION"}},"required":["action_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"action_id":{"const":"FEEDBACK_RECORDING"}},"required":["action_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"action_id":{"const":"PLAN_ADJUSTMENT"}},"required":["action_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"action_id":{"const":"GROWTH_RECORDING"}},"required":["action_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"action_id":{"const":"RISK_IDENTIFICATION"}},"required":["action_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"action_id":{"const":"RISK_CLOSURE"}},"required":["action_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"action_id":{"const":"EMERGENCY_RESPONSE"}},"required":["action_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"action_id":{"const":"DIAGNOSIS"}},"required":["action_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"action_id":{"const":"PRESCRIPTION"}},"required":["action_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"action_id":{"const":"TREATMENT_ADVICE"}},"required":["action_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"action_id":{"const":"REFERRAL"}},"required":["action_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"action_id":{"const":"PROFESSIONAL_REVIEW"}},"required":["action_id"]},"minContains":1,"maxContains":1},
+        {"contains":{"properties":{"action_id":{"const":"SAFE_RESUME_AUTHORIZATION"}},"required":["action_id"]},"minContains":1,"maxContains":1}
+      ]
+    }
+  },
+  "$defs": {
+    "disposition": {"type": "object", "additionalProperties": false, "required": ["proposed_decision", "rationale"], "properties": {"proposed_decision": {"enum": ["allow", "deny", "draft-only", "review-required", "transfer-only"]}, "rationale": {"type": "string", "minLength": 1}}},
+    "revision_request": {"type":"object","additionalProperties":false,"required":["target","replacement_text","professional_reason","owner","reverification_conditions","reverifier"],"properties":{"target":{"type":"string","pattern":"^(\/|section:|action:|scenario:).+"},"replacement_text":{"type":"string","minLength":1},"professional_reason":{"type":"string","minLength":1},"owner":{"type":"string","minLength":1},"reverification_conditions":{"type":"array","minItems":1,"uniqueItems":true,"items":{"type":"string","minLength":1}},"reverifier":{"type":"string","minLength":1}}},
+    "action": {"type": "object", "additionalProperties": false, "required": ["action_id", "action_name_zh", "ai", "health_manager", "doctor", "resource_scope", "authorization_prerequisites", "fail_closed_result", "transfer_escalation_responsibility", "stop_condition", "non_substitutable_boundary"], "properties": {"action_id": {"enum": ["DATA_ORGANIZATION", "ASSESSMENT_DRAFT", "GOAL_PLAN_DRAFT", "PLAN_REVIEW_ACTIVATION", "TASK_EXPLANATION", "FEEDBACK_RECORDING", "PLAN_ADJUSTMENT", "GROWTH_RECORDING", "RISK_IDENTIFICATION", "RISK_CLOSURE", "EMERGENCY_RESPONSE", "DIAGNOSIS", "PRESCRIPTION", "TREATMENT_ADVICE", "REFERRAL", "PROFESSIONAL_REVIEW", "SAFE_RESUME_AUTHORIZATION"]}, "action_name_zh": {"type": "string", "minLength": 1}, "ai": {"$ref": "#/$defs/disposition"}, "health_manager": {"$ref": "#/$defs/disposition"}, "doctor": {"$ref": "#/$defs/disposition"}, "resource_scope": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}}, "authorization_prerequisites": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}}, "fail_closed_result": {"type": "string", "minLength": 1}, "transfer_escalation_responsibility": {"type": "string", "minLength": 1}, "stop_condition": {"type": "string", "minLength": 1}, "non_substitutable_boundary": {"type": "string", "minLength": 1}}}
+  },
+  "allOf": [
+    {"if":{"properties":{"decision_status":{"const":"Pending with owner"}},"required":["decision_status"]},"then":{"properties":{"executable":{"const":false},"decision_maker":{"const":null},"decision_date":{"const":null},"signature_reference":{"const":null},"pending_owner":{"type":"string","minLength":1},"missing_evidence":{"type":"array","minItems":1},"next_checkpoint":{"type":"string","minLength":1},"revision_request":{"const":null}}}},
+    {"if":{"properties":{"decision_status":{"const":"Accepted"}},"required":["decision_status"]},"then":{"properties":{"executable":{"const":false},"decision_maker":{"type":"string","minLength":1},"decision_date":{"type":"string","format":"date"},"signature_reference":{"type":"string","minLength":1},"pending_owner":{"const":null},"missing_evidence":{"const":null},"next_checkpoint":{"const":null},"revision_request":{"const":null}}}},
+    {"if":{"properties":{"decision_status":{"const":"Exact revision"}},"required":["decision_status"]},"then":{"properties":{"executable":{"const":false},"decision_maker":{"type":"string","minLength":1},"decision_date":{"type":"string","format":"date"},"signature_reference":{"type":"string","minLength":1},"pending_owner":{"const":null},"missing_evidence":{"const":null},"next_checkpoint":{"const":null},"revision_request":{"$ref":"#/$defs/revision_request"}}}}
+  ]
+}

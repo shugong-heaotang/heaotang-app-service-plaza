@@ -1,0 +1,37 @@
+{
+  "contract_version": "life-navigation-m4-api-acceptance.v1",
+  "run_id": "life-m4-20260711-015041",
+  "recorded_at": "2026-07-11T01:57:34+08:00",
+  "verdict": "pass",
+  "overall_m4_verdict": "no-go",
+  "accounts": {
+    "owner": "199****9992",
+    "isolation": "199****9994"
+  },
+  "checks": {
+    "ready": 200,
+    "unauthenticated_write": 401,
+    "owner_login": 200,
+    "isolation_login": 200,
+    "first_create": { "status": 201, "record_id": 118 },
+    "idempotency_replay": {
+      "status": 200,
+      "record_id": 118,
+      "same_record": true,
+      "idempotency_replayed_header": true
+    },
+    "idempotency_conflict": {
+      "status": 409,
+      "code": "IDEMPOTENCY_KEY_REUSED"
+    },
+    "owner_history": { "status": 200, "contains_record_id": 118 },
+    "cross_user_history": { "status": 200, "leaked_record": false },
+    "request_id_round_trip": true
+  },
+  "tokens_cleared_after_run": true,
+  "secrets_persisted": false,
+  "notes": [
+    "Both dedicated test-only identities acquired one API session and reused it for the whole API run.",
+    "The API run passed independently of the later authenticated browser UAT blocker."
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-LIFE-APPLICATION-HISTORY-M3",
+  "title": "生命导航申请与个人历史页面闭环",
+  "date": "2026-07-11",
+  "status": "verified",
+  "objective": "在生命导航模块边界内复用共享认证和应用框架，将 M2 真实 API 接入可测试页面，完成未登录交接、个人历史状态、申请提交结果与错误恢复，并导出页面供平台后续路由接线。",
+  "governance_checklist": "docs/project-management/modules/life-navigation/certification/checklists/IR-20260711-LIFE-APPLICATION-HISTORY-M3-checklist.json",
+  "governance_exam": "docs/project-management/modules/life-navigation/certification/exams/IR-20260711-LIFE-APPLICATION-HISTORY-M3-exam-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md",
+    "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json",
+    "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md",
+    "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md",
+    "docs/project-management/modules/life-navigation/README.md",
+    "docs/project-management/notices/2026-07-10-life-navigation-first-phase-task-order.md",
+    "docs/project-management/modules/life-navigation-first-slice-contract-v1.md",
+    "contracts/foundation/module-dependencies/life-navigation.v1.json",
+    "contracts/modules/life-navigation/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-10-life-navigation-first-phase-task-order.md",
+    "docs/project-management/modules/life-navigation-first-slice-contract-v1.md",
+    "docs/project-management/modules/life-navigation/LN-M1-001-interface-facts-and-adapter-design.md",
+    "docs/project-management/modules/life-navigation/LN-ICR-20260711-001.md",
+    "docs/project-management/modules/life-navigation/LN-M2-001-handoff.md"
+  ],
+  "capabilities": [
+    "foundation.identity-api",
+    "foundation.authorization-idempotency",
+    "foundation.app-shell-adapter",
+    "foundation.contract-tooling",
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification"
+  ],
+  "contracts": [
+    "docs/project-management/modules/life-navigation-first-slice-contract-v1.md",
+    "contracts/foundation/module-dependencies/life-navigation.v1.json",
+    "contracts/modules/life-navigation/internal-dependencies.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "app/src/modules/life-navigation/LifeNavigationPage.tsx",
+    "app/src/modules/life-navigation/LifeNavigationPage.css",
+    "app/src/modules/life-navigation/LifeNavigationPage.test.tsx",
+    "app/src/modules/life-navigation/index.ts",
+    "docs/project-management/modules/life-navigation/certification/checklists/IR-20260711-LIFE-APPLICATION-HISTORY-M3-checklist.json",
+    "docs/project-management/modules/life-navigation/certification/exams/IR-20260711-LIFE-APPLICATION-HISTORY-M3-exam-attempt-1.json",
+    "docs/project-management/modules/life-navigation/implementation-records/IR-20260711-LIFE-APPLICATION-HISTORY-M3.json",
+    "docs/project-management/modules/life-navigation/LN-M3-001-handoff.md"
+  ],
+  "verification": [
+    "npm test -- --run src/modules/life-navigation/LifeNavigationPage.test.tsx src/modules/life-navigation/lifeNavigationApi.test.ts src/modules/life-navigation/LifeNavigationModule.test.tsx",
+    "npm test",
+    "npm run build",
+    "python -X utf8 scripts/validate_development_checklists.py contracts/foundation/development-checklist.v1.schema.json <isolated-current-M3-directory> --project-root . --require-current",
+    "python -X utf8 scripts/validate_governance_exams.py contracts/foundation/governance-exam.v1.schema.json contracts/foundation/governance-exam-bank.v1.schema.json contracts/foundation/governance-exam-bank.v1.json docs/project-management/modules/life-navigation/certification/exams --project-root .",
+    "python -X utf8 scripts/validate_implementation_records.py contracts/foundation/implementation-record.v1.schema.json docs/project-management/modules/life-navigation/implementation-records --project-root .",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-ServicePlazaContracts.ps1",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-TextEncoding.ps1",
+    "git diff --check",
+    "git status --short"
+  ],
+  "evidence": [
+    "docs/project-management/modules/life-navigation/certification/checklists/IR-20260711-LIFE-APPLICATION-HISTORY-M3-checklist.json",
+    "docs/project-management/modules/life-navigation/certification/exams/IR-20260711-LIFE-APPLICATION-HISTORY-M3-exam-attempt-1.json",
+    "app/src/modules/life-navigation/LifeNavigationPage.test.tsx",
+    "app/src/modules/life-navigation/lifeNavigationApi.test.ts",
+    "docs/project-management/modules/life-navigation/LN-M3-001-handoff.md"
+  ],
+  "premises": [
+    "平台共享 AuthProvider、AuthPanel 与 AppFrame 保持当前公开接口",
+    "M2 loadLifeNavigationApplicationHistory 与 submitLifeNavigationApplication 是页面生产环境的真实数据边界",
+    "页面只展示 application 记录的已提交状态、时间和说明，不推断审核或完成状态",
+    "读取请求在页面卸载时取消，写请求不因卸载而盲目取消或重复提交",
+    "平台仍须在 App.tsx 或平台等价路由层把 /services/life-navigation 接到已导出的 LifeNavigationPage",
+    "平台路由接线与集成验收未包含在 M3 模块工作树内，测试环境部署和真实登录 UAT 留待后续已授权阶段"
+  ],
+  "implementation_mode": "ai-assisted"
+}

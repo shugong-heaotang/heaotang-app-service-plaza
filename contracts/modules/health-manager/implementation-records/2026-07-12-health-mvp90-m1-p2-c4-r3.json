@@ -1,0 +1,63 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-HEALTH-MVP90-M1-P2-C4-R3",
+  "title": "健康大管家 MVP-90 M1 P2-C4 单一当前状态新鲜度修订",
+  "date": "2026-07-12",
+  "status": "implemented",
+  "objective": "把C1至C3早期等待语句明确标为历史检查点快照，消除与C4最终状态的双真相源，不修改任何实现或测试。",
+  "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p2-c4-r3.json",
+  "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p2-c4-r3-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/modules/health-manager/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-health-manager-mvp90-m1-p2-task-order.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-handoff.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification"
+  ],
+  "contracts": [
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-handoff.md"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-handoff.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-receipt.md",
+    "contracts/modules/health-manager/development-checklists",
+    "contracts/modules/health-manager/governance-exams",
+    "contracts/modules/health-manager/implementation-records"
+  ],
+  "verification": [
+    "conformance report exposes one current C4 status and marks C1 C2 C3 waiting statements as historical",
+    "handoff marks the old C1 matrix gap as historical and closed while preserving continuing No-Go",
+    "receipt marks each old wait statement as the status at that checkpoint",
+    "runner matrix Schema and tests remain unchanged relative to C3 authoritative integration",
+    "P2 nineteen tests and P1 eleven regressions pass"
+  ],
+  "evidence": [
+    "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m1-p2-c4-r3.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m1-p2-c4-r3-attempt-1.json",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-conformance-report.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-handoff.md"
+  ],
+  "premises": [
+    "source 25e586e is an unintegrated C4 freshness failure snapshot",
+    "C1 C2 and C3 remain Go and integrated",
+    "the revision is documentation-only and does not alter runtime semantics",
+    "P2 synthetic Go does not authorize business implementation environment real data charging release or production"
+  ],
+  "implementation_mode": "ai-assisted"
+}

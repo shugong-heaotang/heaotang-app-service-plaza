@@ -1,0 +1,58 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-CLUB-MEMBER-HOME-M3-FIXTURE-EXTENSION",
+  "title": "H2-M3 申请历史与俱乐部生命周期合成 fixture 扩展",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "将批准的 pending、rejected 与 dissolved 合成资料设计实现为可计划、检查、清理和恢复验证的 fixture 场景，不使用真实资料。",
+  "governance_checklist": "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-m3-fixture-extension.json",
+  "governance_exam": "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-m3-fixture-extension-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "docs/project-management/modules/club-alliance/README.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-fixture-handoff.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-plan.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md"
+  ],
+  "capabilities": [
+    "foundation.identity-api",
+    "foundation.authorization-idempotency"
+  ],
+  "contracts": [
+    "contracts/modules/club-alliance/member-home/member-home.v1.json"
+  ],
+  "decisions": [
+    "docs/project-management/modules/club-alliance/member-home/decisions.md"
+  ],
+  "changed_areas": [
+    "scripts/Manage-ClubMemberHomeM3Fixture.ps1",
+    "scripts/Test-ClubMemberHomeM3FixtureSafety.ps1",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-fixture-extension-handoff.md",
+    "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-m3-fixture-extension.json",
+    "contracts/modules/club-alliance/governance-exams/2026-07-12-club-member-home-m3-fixture-extension-attempt-1.json"
+  ],
+  "verification": [
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-ClubMemberHomeM3FixtureSafety.ps1",
+    "ApplicationPending local Apply/Inspect/Cleanup remaining=0",
+    "ApplicationRejected local Apply/Inspect/Cleanup remaining=0",
+    "DissolvedClub local Apply/Inspect/Cleanup remaining=0",
+    "local isolated RestoreVerify integrity and dump SHA-256 match",
+    "scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "scripts/Test-ClubMemberHomeM3FixtureSafety.ps1",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3-fixture-extension-handoff.md"
+  ],
+  "premises": [
+    "Only synthetic identities and run-owned records are permitted",
+    "Local isolated SQLite verification does not authorize test-server execution",
+    "left and suspended remain unsupported without an authoritative membership history/status model",
+    "No production, real member data, OTP, token, cookie, payment or deployment is authorized"
+  ],
+  "implementation_mode": "ai-assisted"
+}

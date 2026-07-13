@@ -1,0 +1,29 @@
+{
+  "contract_version": "module-internal-dependencies.v2",
+  "module_id": "contract-fixture",
+  "module_version": "v1",
+  "slice_id": "five-dimensional-readiness",
+  "readiness": {
+    "governance": "go",
+    "development": "partial-go",
+    "acceptance": "pending",
+    "release": "pending",
+    "operations": "pending"
+  },
+  "dependencies": [
+    {
+      "dependency_id": "decision.local-blocker",
+      "kind": "decision",
+      "description": "A local pending decision that does not block unrelated contract work.",
+      "status": "blocked-local",
+      "required_for_slice": false,
+      "depends_on": [],
+      "contracts": [],
+      "evidence": [],
+      "unresolved": ["fixture-decision"],
+      "owner": "platform-integration-owner",
+      "blocks": ["dependent.selector"],
+      "does_not_block": ["independent.base-conformance"]
+    }
+  ]
+}

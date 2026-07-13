@@ -1,0 +1,25 @@
+{
+  "contract_version": "life-navigation.dimension-directory.v1",
+  "contract_status": "base-contract",
+  "authoritative_business_contract": false,
+  "method": "GET",
+  "path": "/api/v1/life-nav/dimensions",
+  "registry_ref": "dimension-registry.v1.json",
+  "registry_frozen": false,
+  "decision_status": "pending",
+  "executable": false,
+  "allowed_item_fields": ["dimension_id", "dimension_version", "label", "sort_order"],
+  "selection_policy": {
+    "requires_registry_frozen": true,
+    "requires_decision_status": "accepted",
+    "requires_active": true,
+    "requires_executable": true,
+    "failure_mode": "fail-closed"
+  },
+  "base_response": {
+    "availability": "unavailable",
+    "items": [],
+    "error_id": "LN_DIMENSION_REGISTRY_NOT_FROZEN"
+  },
+  "forbidden_fields": ["base_score", "questions", "actions", "routes", "price", "prediction", "professional_conclusion"]
+}

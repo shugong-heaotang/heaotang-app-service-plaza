@@ -1,0 +1,60 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-HEALTH-R0-FORMAL-FREEZE-F0",
+  "title": "健康大管家 HM-R0 R0-F0 开发阶段正式冻结预检",
+  "date": "2026-07-12",
+  "status": "implemented",
+  "objective": "在权威基线 be47cbfb 上完成 HM-R0 正式冻结工作项的治理阅读、当前检查单和100分考试，并维持只读输入与开发阶段边界。",
+  "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-12-health-r0-formal-freeze-f0.json",
+  "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-12-health-r0-formal-freeze-f0-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/modules/health-manager/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-health-r0-formal-freeze-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification"
+  ],
+  "contracts": [
+    "contracts/modules/health-manager/development-checklists/2026-07-12-health-r0-formal-freeze-f0.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-12-health-r0-formal-freeze-f0-attempt-1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md"
+  ],
+  "changed_areas": [
+    "contracts/modules/health-manager/development-checklists/2026-07-12-health-r0-formal-freeze-f0.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-12-health-r0-formal-freeze-f0-attempt-1.json",
+    "contracts/modules/health-manager/implementation-records/2026-07-12-health-r0-formal-freeze-f0.json"
+  ],
+  "verification": [
+    "authoritative worktree branch and HEAD match codex/health-manager-r0-formal-freeze at be47cbfb",
+    "governance reading list and health-manager overlay were read in full and all 28 source hashes match",
+    "current development checklist is completed with 28 of 28 checked items",
+    "governance exam attempt 1 passed with score 100",
+    "only the three R0-F0 governance evidence files are changed"
+  ],
+  "evidence": [
+    "contracts/modules/health-manager/development-checklists/2026-07-12-health-r0-formal-freeze-f0.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-12-health-r0-formal-freeze-f0-attempt-1.json",
+    "contracts/modules/health-manager/implementation-records/2026-07-12-health-r0-formal-freeze-f0.json"
+  ],
+  "premises": [
+    "R5 source 7fcfa7d1 is the accepted governance retry implementation and R4 is a historical No-Go",
+    "HM-R0 authoritative activation HEAD is be47cbfb and the work item is active",
+    "PR number 1 and PR number 2 artifacts are read-only inputs owned by prior work items",
+    "this checkpoint does not freeze HM-R0 content and does not start P3",
+    "production identity real data environments medical services charging funds deployment and production remain No-Go"
+  ],
+  "implementation_mode": "ai-assisted"
+}

@@ -1,0 +1,19 @@
+{
+  "contract_version":"implementation-record.v1",
+  "record_id":"IR-20260712-PROTECTION-MALL-M1-CONTRACTS",
+  "title":"保障商城M1-CP1离线合同与合成一致性",
+  "date":"2026-07-12","status":"implemented",
+  "objective":"冻结责任边界、五类状态机和mall.api.v1安全合同并以正负合成案例验证失败关闭。",
+  "governance_checklist":"contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m1-contracts.json",
+  "governance_exam":"contracts/modules/protection-mall/governance-exams/2026-07-12-protection-mall-m1-contracts-attempt-1.json",
+  "governance_inputs":["AGENTS.md","README.md","CONSTRAINTS.md","contracts/foundation/agent-collaboration.v1.json","docs/decisions/0007-stable-foundation-variable-business.md","docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"],
+  "requirement_sources":["docs/project-management/notices/2026-07-12-protection-mall-m1-contracts-task-order.md"],
+  "capabilities":["foundation.identity-api","foundation.authorization-idempotency","foundation.contract-tooling","foundation.business-variables"],
+  "contracts":["contracts/modules/protection-mall/m1/responsibility.v1.json","contracts/modules/protection-mall/m1/state-machines.v1.json","contracts/modules/protection-mall/m1/api-security.v1.json"],
+  "decisions":["docs/decisions/0007-stable-foundation-variable-business.md","docs/decisions/0008-versioned-business-variables.md","docs/decisions/0011-two-person-config-approval.md"],
+  "changed_areas":["contracts/modules/protection-mall/m1","docs/project-management/modules/protection-mall/m1-contracts.md","docs/project-management/modules/protection-mall/handoff-m1.md","contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m1-contracts.json","contracts/modules/protection-mall/governance-exams/2026-07-12-protection-mall-m1-contracts-attempt-1.json","contracts/modules/protection-mall/implementation-records/2026-07-12-protection-mall-m1-contracts.json"],
+  "verification":["preflight ready","governance exam 100","validate_m1_contracts.py: 3 contracts and 11 cases","UTF-8 and diff gates"],
+  "evidence":["contracts/modules/protection-mall/m1/fixtures/cases.v1.json","docs/project-management/modules/protection-mall/handoff-m1.md"],
+  "premises":["M1-CP1只授权离线合同","真实支付和业务实现继续No-Go","非法转换越权缺ID缺幂等敏感审计和破坏性变更失败关闭"],
+  "implementation_mode":"ai-assisted"
+}

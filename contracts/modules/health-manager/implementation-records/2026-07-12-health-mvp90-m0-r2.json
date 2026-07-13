@@ -1,0 +1,64 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-HEALTH-MVP90-M0-R2",
+  "title": "健康大管家 MVP-90 M0 合同与合成一致性最终收口",
+  "date": "2026-07-12",
+  "status": "verified",
+  "objective": "完成 16 个语义对象、6 个状态机、6 个角色动作边界、15 个确定性合成场景及其 Schema、负例和一致性验证，并以 R2 当前治理证据完成可审计交接。",
+  "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m0-r2.json",
+  "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m0-r2-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json", "AGENTS.md", "README.md", "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md", "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json", "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json", "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md", "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md", "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md", "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md", "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md", "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md", "docs/decisions/0018-recursive-project-governance.md",
+    "contracts/foundation/module-dependencies/health-manager.v1.json", "contracts/modules/health-manager/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-12-health-manager-mvp90-m0-task-order.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m0-requirements.md",
+    "docs/project-management/service-plaza/handoff-log.md"
+  ],
+  "capabilities": ["foundation.ai-engineering-traceability", "foundation.governance-certification", "foundation.contract-tooling", "foundation.authorization-idempotency", "foundation.business-variables"],
+  "contracts": [
+    "contracts/modules/health-manager/mvp90/object-model.v1.json", "contracts/modules/health-manager/mvp90/object-model.v1.schema.json",
+    "contracts/modules/health-manager/mvp90/state-machines.v1.json", "contracts/modules/health-manager/mvp90/state-machines.v1.schema.json",
+    "contracts/modules/health-manager/mvp90/role-actions.v1.json", "contracts/modules/health-manager/mvp90/role-actions.v1.schema.json",
+    "contracts/modules/health-manager/mvp90/synthetic-scenarios.v1.json", "contracts/modules/health-manager/mvp90/synthetic-scenarios.v1.schema.json",
+    "contracts/modules/health-manager/mvp90/conformance/fixtures/mvp90-synthetic-fixtures.v1.json", "contracts/modules/health-manager/mvp90/conformance/fixtures/synthetic-fixtures.v1.schema.json"
+  ],
+  "decisions": ["docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0009-approved-toolchain-per-layer.md", "docs/decisions/0018-recursive-project-governance.md"],
+  "changed_areas": ["contracts/modules/health-manager/mvp90", "contracts/modules/health-manager/internal-dependencies.v1.json", "contracts/modules/health-manager/development-checklists", "contracts/modules/health-manager/governance-exams", "contracts/modules/health-manager/implementation-records", "docs/project-management/modules/health-manager"],
+  "verification": [
+    "python -X utf8 contracts/modules/health-manager/mvp90/conformance/test_health_mvp90_contracts.py",
+    "validate_module_internal_dependencies.py",
+    "validate_development_checklists.py and targeted current-hash validation by New-AgentGovernanceExam.ps1",
+    "validate_governance_exams.py", "validate_implementation_records.py", "validate_agent_collaboration.py",
+    "Test-ServicePlazaContracts.ps1", "Test-TextEncoding.ps1", "git diff --check", "allowed-path and sensitive-pattern scans"
+  ],
+  "evidence": [
+    "contracts/modules/health-manager/development-checklists/2026-07-12-health-mvp90-m0-r2.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-12-health-mvp90-m0-r2-attempt-1.json",
+    "contracts/modules/health-manager/mvp90/conformance/test_health_mvp90_contracts.py",
+    "contracts/modules/health-manager/mvp90/conformance/fixtures/mvp90-synthetic-fixtures.v1.json",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m0-conformance-report.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-m0-handoff.md"
+  ],
+  "premises": [
+    "PRD C5 is Document Handoff Ready but HM-R0 Professional Freeze remains Pending",
+    "27 Pending professional, privacy, commercial and operational decisions remain non-executable metadata",
+    "M0 product semantic contracts are not API or database schemas",
+    "M0 does not authorize business code, environment, real health data, charging or M1",
+    "Deterministic fixtures use the approved Python standard library SHA-256 generator because Faker is not pinned or installed in this governed toolchain",
+    "Platform independent acceptance remains required before M0 Go"
+  ],
+  "implementation_mode": "ai-assisted"
+}

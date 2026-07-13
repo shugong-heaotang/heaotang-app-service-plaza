@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import argparse
+import importlib.util
 import json
 import sys
 from pathlib import Path, PurePosixPath
@@ -56,6 +57,17 @@ def main() -> int:
     parser.add_argument("registry", type=Path)
     args = parser.parse_args()
     errors = validate(args.schema, args.registry)
+    policy_path = args.registry.with_name("delivery-flow-policy.v1.json")
+    policy_schema_path = args.registry.with_name("delivery-flow-policy.v1.schema.json")
+    flow_validator_path = Path(__file__).with_name("validate_delivery_flow_policy.py")
+    if policy_path.exists() or policy_schema_path.exists():
+        if not (policy_path.exists() and policy_schema_path.exists() and flow_validator_path.exists()):
+            errors.append("delivery flow policy gate is incomplete")
+        else:
+            spec = importlib.util.spec_from_file_location("delivery_flow_validator", flow_validator_path)
+            module = importlib.util.module_from_spec(spec)
+            spec.loader.exec_module(module)
+            errors.extend(module.validate(policy_path, policy_schema_path, args.registry))
     if errors:
         for error in errors:
             print(f"ERROR: {error}", file=sys.stderr)
