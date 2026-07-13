@@ -50,3 +50,17 @@
 3. 新建实施记录和 Handoff，明确 direct authority、串行顺序、禁止自增范围及不激活 cross-record 的边界。
 4. agent collaboration、delivery flow、implementation record、governance exam、26/26、总合同、UTF-8、scope、diff、secret 门禁全部通过。
 5. 提交并推送候选后，由 APP 总架构独立验收负责人复核；实施者不自行集成。
+
+## R5 direct-principal 一次性职责扩展（2026-07-14）
+
+项目最高负责人基于“24 小时清零”持续授权，针对 cross-record 实现已以 source `3b4bd0c7c78c78be5b592b894e795053f169fa14` 受控集成为 authority `757de99e4dfa4a7467a0de6e1a66d6e030ba7f09`、但 formal reviewer evidence path 缺失这一具体阻塞，明确批准 dispatch 仅执行一次必要的 supporting-item 登记与激活：
+
+- 新增并激活 `AIW-20260714-PLATFORM-EXAM-IR-CROSS-RECORD-INDEPENDENT-ACCEPTANCE`。
+- owner 为 `Platform governance independent test agent`，owner_role 为 `平台治理独立测试负责人`，reviewer_role 为 `APP总架构独立验收负责人`。
+- allowed scope 仅限 `docs/project-management/independent-acceptance/platform-exam-ir-cross-record-gate/` 下的 `evidence.md`、`task-order.md`、`development-checklist*.json`、`governance-exam*.json`、`implementation-record*.json`。
+- 原 cross-record 工作项仅由 `active` 转为 `handoff-ready`，记录 source、integration、next owner 与 handoff 时间；不得把聊天 Go 写成 formal independent acceptance，也不得标为 integrated。
+- dispatch 只登记授权；本候选不得写 reviewer namespace、不得实现 validator、不得激活 NOVA 或 Telemetry。
+
+本扩展由项目最高负责人直接事前批准，因此在权限链上高于本任务早期“只更新已登记 planned 项”的自限描述；它只纠正当前 formal reviewer evidence 缺口，不构成一般新增业务项、一般 supporting-item 或一般 allowed-path 扩张权。dispatch 自身 `allowed_paths` 不变。
+
+R5 验收要求：authority 原 124 rows 除 cross-record 与 dispatch freshness/授权说明外逐字段不变；仅追加一个精确 supporting item；两个关联工作树均 clean；R5 current checklist 26/26、随机考试 100、IR/Handoff、全合同、UTF-8、scope、diff、secret 门禁通过；提交推送后交由独立验收，实施者不自行集成。
