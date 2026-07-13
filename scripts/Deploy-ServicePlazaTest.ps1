@@ -123,11 +123,29 @@ trap - ERR
     Remove-Item -LiteralPath $remoteInput, $remoteOutput, $remoteError -Force -ErrorAction SilentlyContinue
   }
 
+  $verificationPaths = @(
+    "/app/service-plaza/services/",
+    "/app/service-plaza/services/life-navigation/",
+    "/app/service-plaza/services/club-alliance/",
+    "/app/service-plaza/services/health-manager/",
+    "/app/service-plaza/internal/project-brain/",
+    "/app/service-plaza/unknown-path/"
+  )
   $publicVerified = $false
+  $verifiedPaths = @()
   for ($attempt = 1; $attempt -le 15; $attempt++) {
     try {
-      $publicHtml = (Invoke-WebRequest -UseBasicParsing -Uri "$BaseUrl/app/service-plaza/services/?deployment=$timestamp" -Headers @{ "Cache-Control" = "no-cache" } -TimeoutSec 15).Content
-      if ($publicHtml.Contains($expectedAsset)) {
+      $verifiedPaths = @()
+      foreach ($path in $verificationPaths) {
+        $separator = if ($path.Contains("?")) { "&" } else { "?" }
+        $verificationUrl = "{0}{1}{2}deployment={3}" -f $BaseUrl, $path, $separator, $timestamp
+        $publicHtml = (Invoke-WebRequest -UseBasicParsing -Uri $verificationUrl -Headers @{ "Cache-Control" = "no-cache" } -TimeoutSec 15).Content
+        if (-not $publicHtml.Contains($expectedAsset)) {
+          throw "Deep link $path did not reference the expected entry asset $expectedAsset."
+        }
+        $verifiedPaths += $path
+      }
+      if ($verifiedPaths.Count -eq $verificationPaths.Count) {
         $publicVerified = $true
         break
       }
@@ -152,6 +170,7 @@ trap - ERR
     remote_archive = $remoteArchive
     expected_asset = $expectedAsset
     public_asset_verified = $publicVerified
+    verified_paths = $verifiedPaths
     ready_before = $readyBefore.status
     ready_after = $readyAfter.status
     secrets_persisted = $false

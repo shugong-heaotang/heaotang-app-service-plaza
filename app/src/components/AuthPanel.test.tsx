@@ -31,4 +31,17 @@ describe("AuthPanel", () => {
     expect(await screen.findByText(/页面不会显示验证码/)).toBeInTheDocument();
     expect(screen.queryByText("654321")).not.toBeInTheDocument();
   });
+
+  it("不足六位的验证码不会提交到服务端", async () => {
+    const user = userEvent.setup();
+    const fetchMock = vi.spyOn(globalThis, "fetch");
+    render(<AuthProvider><AuthPanel /></AuthProvider>);
+
+    await user.type(screen.getByLabelText("手机号"), "13800138000");
+    await user.type(screen.getByLabelText("验证码"), "12345");
+    await user.click(screen.getByRole("button", { name: "登录" }));
+
+    expect(screen.getByRole("alert")).toHaveTextContent("6 位数字验证码");
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
 });

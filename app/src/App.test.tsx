@@ -4,13 +4,16 @@ import { MemoryRouter } from "react-router-dom";
 import { afterEach, vi } from "vitest";
 import { AppRoutes } from "./App";
 import { AuthProvider } from "./auth/AuthContext";
+import { ActionRuntimeProvider } from "./auth/ActionRuntimeContext";
 import { tokenStorage } from "./infrastructure/apiClient";
 
 const renderAt = (route: string) =>
   render(
     <MemoryRouter initialEntries={[route]}>
       <AuthProvider>
-        <AppRoutes />
+        <ActionRuntimeProvider>
+          <AppRoutes />
+        </ActionRuntimeProvider>
       </AuthProvider>
     </MemoryRouter>,
   );
@@ -49,6 +52,26 @@ describe("服务广场主链路", () => {
     expect(screen.getByRole("link", { name: "俱乐部联盟" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: /健康大管家/ })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: /活动广场/ })).toBeInTheDocument();
+  });
+
+  it("所有板块共享当前账号和退出入口", async () => {
+    const user = userEvent.setup();
+    setAuthenticatedSession();
+    renderAt("/services");
+
+    expect(await screen.findByLabelText("当前登录账号")).toHaveTextContent("路由测试用户");
+    await user.click(screen.getByRole("button", { name: "退出登录" }));
+    expect(screen.queryByLabelText("当前登录账号")).not.toBeInTheDocument();
+    expect(tokenStorage.get()).toBeNull();
+  });
+
+  it("管理权限不足时提供可见反馈而不是静默无响应", async () => {
+    const user = userEvent.setup();
+    setAuthenticatedSession();
+    renderAt("/services");
+
+    await user.click(await screen.findByRole("link", { name: "管理中心" }));
+    expect(screen.getByRole("alert")).toHaveTextContent("缺少 club:manage 权限");
   });
 
   it("可以进入生命导航、提交申请并返回服务广场", async () => {
@@ -147,6 +170,8 @@ describe("服务广场主链路", () => {
     expect(screen.getByTestId("health-manager-module-route")).toBeInTheDocument();
     expect(screen.getByRole("heading", { level: 1, name: "健康大管家" })).toBeInTheDocument();
     expect(screen.getByRole("link", { name: "← 返回服务广场" })).toBeInTheDocument();
+    expect(screen.queryByLabelText("联调状态切换")).not.toBeInTheDocument();
+    expect(screen.queryByText(/开发联调/)).not.toBeInTheDocument();
   });
 
   it("未知路由提供返回服务广场的恢复路径", () => {

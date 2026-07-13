@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState, type ReactNode } from "react";
 import { actionsInRegion, type ServiceAction } from "../domain/serviceActions";
+import { useOptionalAuth } from "../auth/AuthContext";
 import { serviceCatalogRepository } from "../infrastructure/serviceCatalogRepository";
 import { ActionControl } from "./ActionControl";
 
@@ -18,6 +19,7 @@ const tabIconClass: Record<string, string> = {
 };
 
 export function AppFrame({ children, title = "服务广场", backAction, actions }: AppFrameProps) {
+  const auth = useOptionalAuth();
   const [loadedActions, setLoadedActions] = useState<readonly ServiceAction[]>([]);
   const [actionError, setActionError] = useState("");
 
@@ -68,7 +70,15 @@ export function AppFrame({ children, title = "服务广场", backAction, actions
           )}
         </header>
 
-        <section className="content">{children}</section>
+        <section className="content">
+          {auth?.isAuthenticated && auth.user && (
+            <div className="session-bar" aria-label="当前登录账号">
+              <span>当前用户：{auth.user.nickname || auth.user.phone || `#${auth.user.id}`}</span>
+              <button type="button" onClick={auth.logout}>退出登录</button>
+            </div>
+          )}
+          {children}
+        </section>
 
         <nav className="tabbar" aria-label="主导航">
           {actionError && <span role="status">{actionError}</span>}

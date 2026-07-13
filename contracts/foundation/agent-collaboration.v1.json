@@ -2978,7 +2978,7 @@
                            "title":  "Protection Mall治理读取overlay最小补登记",
                            "owner":  "Platform protection-mall overlay correction agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-platform-protection-mall-overlay-correction",
                            "branch":  "codex/platform-protection-mall-overlay-correction",
@@ -2995,8 +2995,42 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "仅为动态module overlay补登记protection-mall三项既存治理输入并增加正负/回归测试。禁止修改商城Evidence、后端、业务合同、活动、部署或生产。独立reviewer不得参与实现。",
+                           "migration_note":  "仅为动态module overlay补登记protection-mall三项既存治理输入并增加正负/回归测试。禁止修改商城Evidence、后端、业务合同、活动、部署或生产。独立reviewer不得参与实现。2026-07-13 独立复核确认候选 e1c4020 已包含于集成 HEAD，9 项回归和 UTF-8 门禁通过，状态收口为 integrated。",
                            "handoff_record":  "docs/project-management/service-plaza/platform-protection-mall-overlay-correction-handoff.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260713-SERVICE-PLAZA-E2E-UAT-REMEDIATION",
+                           "title":  "服务广场三大核心板块端到端审计与缺陷闭环",
+                           "owner":  "Codex end-to-end UAT remediation agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "handoff-ready",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-app-integration",
+                           "branch":  "codex/e2e-uat-fix-20260713",
+                           "base_commit":  "3edca491e12a475b2bfbae3091ebe52b49899c89",
+                           "allowed_paths":  [
+                                                 "app/src/App.tsx",
+                                                 "app/src/App.test.tsx",
+                                                 "app/src/pages/**",
+                                                 "app/src/auth/**",
+                                                 "app/src/infrastructure/**",
+                                                 "app/src/modules/life-navigation/**",
+                                                 "app/src/modules/club-alliance/**",
+                                                 "app/src/modules/health-manager/**",
+                                                 "app/src/**/*.css",
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-13-service-plaza-e2e-uat-remediation*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-13-service-plaza-e2e-uat-remediation*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-13-service-plaza-e2e-uat-remediation*.json",
+                                                 "docs/project-management/notices/2026-07-13-service-plaza-e2e-uat-remediation-task-order.md",
+                                                 "docs/project-management/service-plaza/service-plaza-e2e-uat-remediation-2026-07-13.md",
+                                                 "scripts/Build-ServicePlazaTestPackage.ps1",
+                                                 "scripts/Deploy-ServicePlazaTest.ps1"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "用户要求多个智能代理从服务广场入口到生命导航、俱乐部联盟、健康大管家逐板块端到端检查，确认问题后立即根因修复。仅允许合成测试账号与测试服务器；禁止真实会员、真实健康数据、支付、生产和不可逆操作。",
+                           "handoff_record":  "docs/project-management/service-plaza/service-plaza-e2e-uat-remediation-2026-07-13.md"
                        }
                    ]
 }

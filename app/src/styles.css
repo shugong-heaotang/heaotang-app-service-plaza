@@ -250,6 +250,35 @@ h2 { font-size: 20px; font-weight: 800; }
 .auth-error, .field-error { color: #8b2f29; font-size: 13px; }
 .session-bar { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; font-size: 13px; }
 .session-bar button { padding: 7px 9px; color: var(--subtle); background: #eef2ef; border-radius: 7px; }
+
+.global-action-notice {
+  position: fixed;
+  z-index: 1000;
+  right: 16px;
+  bottom: 84px;
+  left: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  max-width: 480px;
+  margin: 0 auto;
+  padding: 12px 14px;
+  color: #7a281d;
+  background: #fff4ef;
+  border: 1px solid #edb9aa;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgb(72 33 24 / 18%);
+}
+
+.global-action-notice button {
+  flex: 0 0 auto;
+  padding: 6px 10px;
+  color: inherit;
+  background: transparent;
+  border: 1px solid currentColor;
+  border-radius: 8px;
+}
 .service-form { display: grid; gap: 12px; margin-top: 16px; }
 
 .tabbar {

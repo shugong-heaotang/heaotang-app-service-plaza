@@ -198,6 +198,27 @@ describe("LifeNavigationPage", () => {
     expect(sessionStorage.getItem("heaotang_access_token")).toBeNull();
   });
 
+  it("用户登出再登录时不会恢复上一账号的敏感草稿", async () => {
+    const user = userEvent.setup();
+    vi.spyOn(globalThis, "fetch").mockResolvedValue(
+      new Response(JSON.stringify({ success: true, data: { token: "next-token", user_id: 8, user: { id: 8, nickname: "下一用户", scopes: [] } } }), {
+        status: 200,
+        headers: { "Content-Type": "application/json" },
+      }),
+    );
+    renderPage(createApi());
+    await screen.findByText("暂无申请记录。");
+    await user.type(screen.getByLabelText("申请说明（选填）"), "上一用户的敏感草稿");
+    await user.click(screen.getByRole("button", { name: "退出登录" }));
+
+    await user.type(screen.getByLabelText("手机号"), "13800138000");
+    await user.type(screen.getByLabelText("验证码"), "123456");
+    await user.click(screen.getByRole("button", { name: "登录" }));
+
+    expect(await screen.findByLabelText("申请说明（选填）")).toHaveValue("");
+    expect(screen.queryByText("上一用户的敏感草稿")).not.toBeInTheDocument();
+  });
+
   it("历史加载失败后可以重试恢复", async () => {
     const user = userEvent.setup();
     const loadHistory = vi

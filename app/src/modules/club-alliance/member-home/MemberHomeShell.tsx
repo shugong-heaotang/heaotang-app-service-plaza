@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import { Link } from "react-router-dom";
 import "./MemberHomeShell.css";
 
 export type MemberHomeState = "loading" | "ready" | "empty" | "partial-error" | "error" | "unauthorized" | "maintenance" | "offline";
@@ -42,14 +43,14 @@ export function MemberHomeShell({ model }: { model: MemberHomeModel }) {
       <dl><div><dt>我的俱乐部</dt><dd>{model.joinedClubCount ?? clubs.length}</dd></div><div><dt>今日待办</dt><dd>{model.pendingTaskCount ?? 0}</dd></div><div><dt>未读消息</dt><dd>{model.unreadCount ?? 0}</dd></div></dl>
     </header>
     <Section title="我的俱乐部" label="我的俱乐部">
-      {clubs.length ? <div className="member-home-list">{clubs.map(c => <article key={c.clubId}><div><strong>{c.name}</strong><p>{c.kind} · {c.role} · {clubStatusLabel[c.clubStatus]} · {membershipStatusLabel[c.membershipStatus]}</p></div><a href={c.href}>进入</a></article>)}</div> : <Empty>您还没有加入俱乐部，可以从下方探索。</Empty>}
+      {clubs.length ? <div className="member-home-list">{clubs.map(c => <article key={c.clubId}><div><strong>{c.name}</strong><p>{c.kind} · {c.role} · {clubStatusLabel[c.clubStatus]} · {membershipStatusLabel[c.membershipStatus]}</p></div><Link to={c.href}>进入</Link></article>)}</div> : <Empty>您还没有加入俱乐部，可以从下方探索。</Empty>}
     </Section>
     <div className="member-home-columns">
-      <Section title="今日待办" label="今日待办">{model.sectionErrors?.tasks ? <p role="alert">{model.sectionErrors.tasks}</p> : model.tasks?.length ? <ul>{model.tasks.map(t => <li key={t.taskId}><a href={t.href}>{t.title}</a><span>{t.context}</span></li>)}</ul> : <Empty>今天暂无待办。</Empty>}</Section>
-      <Section title="最近活动" label="最近活动">{model.sectionErrors?.activities ? <p role="alert">{model.sectionErrors.activities}</p> : model.activities?.length ? <ul>{model.activities.map(a => <li key={a.activityId}><a href={a.href}>{a.title}</a><span>{a.timeLabel}</span></li>)}</ul> : <Empty>暂无即将开始的活动。</Empty>}</Section>
+      <Section title="今日待办" label="今日待办">{model.sectionErrors?.tasks ? <p role="alert">{model.sectionErrors.tasks}</p> : model.tasks?.length ? <ul>{model.tasks.map(t => <li key={t.taskId}><Link to={t.href}>{t.title}</Link><span>{t.context}</span></li>)}</ul> : <Empty>今天暂无待办。</Empty>}</Section>
+      <Section title="最近活动" label="最近活动">{model.sectionErrors?.activities ? <p role="alert">{model.sectionErrors.activities}</p> : model.activities?.length ? <ul>{model.activities.map(a => <li key={a.activityId}><Link to={a.href}>{a.title}</Link><span>{a.timeLabel}</span></li>)}</ul> : <Empty>暂无即将开始的活动。</Empty>}</Section>
     </div>
-    {model.sectionErrors?.feed ? <Section title="联盟动态" label="联盟动态"><p role="alert">{model.sectionErrors.feed}</p></Section> : model.feed?.length ? <Section title="联盟动态" label="联盟动态"><ul>{model.feed.map(i => <li key={i.itemId}><a href={i.href}>{i.title}</a></li>)}</ul></Section> : null}
-    <Section title="探索更多" label="探索更多"><nav className="member-home-explore">{model.explore?.map(e => <a key={e.actionId} data-action-id={e.actionId} href={e.href}>{e.label}</a>)}</nav></Section>
-    {model.canManage && <aside className="member-home-management" aria-label="俱乐部联盟管理附属入口"><a href="/services/club-alliance?view=manage">管理中心</a></aside>}
+    {model.sectionErrors?.feed ? <Section title="联盟动态" label="联盟动态"><p role="alert">{model.sectionErrors.feed}</p></Section> : model.feed?.length ? <Section title="联盟动态" label="联盟动态"><ul>{model.feed.map(i => <li key={i.itemId}><Link to={i.href}>{i.title}</Link></li>)}</ul></Section> : null}
+    <Section title="探索更多" label="探索更多"><nav className="member-home-explore">{model.explore?.map(e => <Link key={e.actionId} data-action-id={e.actionId} to={e.href}>{e.label}</Link>)}</nav></Section>
+    {model.canManage && <aside className="member-home-management" aria-label="俱乐部联盟管理附属入口"><Link to="/services/club-alliance?view=manage">管理中心</Link></aside>}
   </main>;
 }

@@ -106,6 +106,7 @@ export const realSubmissionRepository: SubmissionRepository = {
 
     if (service === "health-manager") {
       if (!input.patientName?.trim()) throw new Error("请填写咨询人姓名");
+      if (!input.symptoms?.trim()) throw new Error("请填写健康需求");
       result = await healthManagerApi.execute(createHealthConsultation, input);
     }
 

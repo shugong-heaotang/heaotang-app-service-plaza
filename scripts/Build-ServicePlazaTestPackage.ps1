@@ -51,7 +51,8 @@ $routeDirectories = @(
   "services/club-alliance",
   "services/club-alliance/self-created",
   "services/club-alliance/self-created/applications",
-  "services/health-manager"
+  "services/health-manager",
+  "internal/project-brain"
 )
 
 foreach ($route in $routeDirectories) {
@@ -60,8 +61,14 @@ foreach ($route in $routeDirectories) {
   Copy-Item -LiteralPath (Join-Path $distRoot "index.html") -Destination (Join-Path $targetDirectory "index.html") -Force
 }
 
+$sourceCommit = (& git.exe -C $repoRoot rev-parse HEAD).Trim()
+if ($LASTEXITCODE -ne 0 -or -not $sourceCommit) {
+  throw "Unable to resolve the source commit for the deployment manifest."
+}
+
 $manifest = [ordered]@{
   built_at = [DateTime]::UtcNow.ToString("o")
+  source_commit = $sourceCommit
   public_base = "/app/service-plaza/"
   routes = $routeDirectories
   assets = @(Get-ChildItem -LiteralPath (Join-Path $distRoot "assets") -File | Select-Object -ExpandProperty Name)

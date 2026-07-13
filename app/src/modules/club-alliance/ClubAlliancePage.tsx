@@ -50,6 +50,14 @@ export type ClubAlliancePageProps = {
   onRetry(): void;
 };
 
+const lifecycleLabel: Record<ServiceAction["lifecycle_status"], string> = {
+  active: "入口可访问",
+  preview: "预览中",
+  planned: "规划中",
+  maintenance: "维护中",
+  offline: "已下线",
+};
+
 const backAction = (
   <Link className="back-button" to={clubAllianceReturnRoute} aria-label="返回服务广场">
     ←
@@ -175,7 +183,7 @@ export function ClubAlliancePage({ model, onRetry }: ClubAlliancePageProps) {
               key={action.action_id}
             >
               <span>{action.label}</span>
-              <small>{action.lifecycle_status}</small>
+              <small>{lifecycleLabel[action.lifecycle_status]}</small>
             </ActionControl>
           ))}
         </section>

@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useAuth } from "../auth/AuthContext";
 
 const phonePattern = /^1[3-9]\d{9}$/;
+const codePattern = /^\d{6}$/;
 
 export function AuthPanel() {
   const { sendCode, login } = useAuth();
@@ -30,8 +31,8 @@ export function AuthPanel() {
   };
 
   const submitLogin = async () => {
-    if (!phonePattern.test(phone) || !code.trim()) {
-      setError("请输入手机号和验证码");
+    if (!phonePattern.test(phone) || !codePattern.test(code.trim())) {
+      setError("请输入正确的手机号和 6 位数字验证码");
       return;
     }
     setBusy("login");

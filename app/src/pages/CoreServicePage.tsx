@@ -36,7 +36,7 @@ type CoreServicePageProps = {
 export function CoreServicePage({ serviceKeyOverride }: CoreServicePageProps = {}) {
   const { serviceKey: routeServiceKey } = useParams();
   const serviceKey = serviceKeyOverride ?? routeServiceKey;
-  const { isAuthenticated, user, logout } = useAuth();
+  const { isAuthenticated, user } = useAuth();
   const [searchParams] = useSearchParams();
   const [viewState, setViewState] = useState<ViewState>("normal");
   const [submitting, setSubmitting] = useState(false);
@@ -99,21 +99,16 @@ export function CoreServicePage({ serviceKeyOverride }: CoreServicePageProps = {
         <Link className="back-button" to="/services" aria-label="返回服务广场">←</Link>
       }
     >
-      <div className="integration-banner">
-        第一阶段联调 · {isRealSubmissionMode ? "真实 API 适配层" : "模拟适配层"}
-      </div>
+      {import.meta.env.MODE === "development" && (
+        <div className="integration-banner">
+          开发联调 · {isRealSubmissionMode ? "真实 API 适配层" : "模拟适配层"}
+        </div>
+      )}
 
       {isRealSubmissionMode && !isAuthenticated ? (
         <AuthPanel />
       ) : (
         <>
-          {isRealSubmissionMode && user && (
-            <div className="session-bar">
-              <span>当前用户：{user.nickname || user.phone || `#${user.id}`}</span>
-              <button type="button" onClick={logout}>退出登录</button>
-            </div>
-          )}
-
           <article className={`service-detail theme-${service.theme}`}>
         <div className="service-detail-heading">
           <span className="service-detail-icon" aria-hidden="true">{service.icon}</span>
@@ -186,7 +181,7 @@ export function CoreServicePage({ serviceKeyOverride }: CoreServicePageProps = {
           </div>
         )}
 
-        {!isManageView && <div className="state-switcher" aria-label="联调状态切换">
+        {!isManageView && import.meta.env.MODE === "development" && <div className="state-switcher" aria-label="联调状态切换">
           {([
             ["normal", "正常"],
             ["no-permission", "无权限"],

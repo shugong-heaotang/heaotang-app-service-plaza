@@ -255,6 +255,13 @@ describe("ClubAllianceRoute exact eight-state shell", () => {
     expect(screen.getByRole("region", { name: "俱乐部联盟四类入口" })).toBeInTheDocument();
   });
 
+  it("uses a user-facing lifecycle label instead of exposing internal status text", async () => {
+    renderRoute("/services/club-alliance");
+
+    expect(await screen.findAllByText("入口可访问")).toHaveLength(4);
+    expect(screen.queryByText("active")).not.toBeInTheDocument();
+  });
+
   it.each([
     ["maintenance", "入口维护中"],
     ["offline", "入口已下线"],

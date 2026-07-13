@@ -89,7 +89,7 @@ function ApplicationHistory({ items }: { items: LifeNavigationApplicationRecord[
 }
 
 export function LifeNavigationPage({ api = productionApi }: LifeNavigationPageProps) {
-  const { isAuthenticated, user, logout } = useAuth();
+  const { isAuthenticated, logout } = useAuth();
   const [history, setHistory] = useState<HistoryViewState>({ status: "loading" });
   const [historyRequest, setHistoryRequest] = useState(0);
   const [note, setNote] = useState("");
@@ -100,10 +100,14 @@ export function LifeNavigationPage({ api = productionApi }: LifeNavigationPagePr
   useEffect(() => {
     if (!isAuthenticated) {
       setHistory({ status: "loading" });
+      setNote("");
+      setFeedback(null);
+      setSubmitting(false);
       return;
     }
 
     const controller = new AbortController();
+    setAuthNotice("");
     setHistory({ status: "loading" });
     void api
       .loadHistory({ signal: controller.signal })
@@ -165,13 +169,6 @@ export function LifeNavigationPage({ api = productionApi }: LifeNavigationPagePr
         <AuthPanel />
       ) : (
         <div className="life-navigation-page">
-          {user && (
-            <div className="session-bar">
-              <span>当前用户：{user.nickname || user.phone || `#${user.id}`}</span>
-              <button type="button" onClick={logout}>退出登录</button>
-            </div>
-          )}
-
           <section className="life-navigation-card" aria-labelledby="life-navigation-application-title">
             <p className="section-kicker">生命导航申请</p>
             <h2 id="life-navigation-application-title">提交导航需求</h2>
