@@ -1,0 +1,171 @@
+{
+  "contract_version": "health-manager.r2.dual-channel-record.v1",
+  "module_id": "health-manager",
+  "checkpoint": "R2-C1",
+  "status": "contract-frozen-awaiting-independent-review",
+  "synthetic_only": true,
+  "executable": false,
+  "source": {
+    "path": "C:/Users/shugo/Documents/项目最高负责人/health-cross-module-requirements/健康大管家-大益健康馆-学习广场-健康俱乐部需求补充-v1.0.md",
+    "sha256": "fc07676f9d0ab0dbaf1a4575457e4d1a67d642d1c483187e28a5b2c64e2a9012",
+    "authorization": "synthetic-contract-and-negative-test-only"
+  },
+  "record_authority": {
+    "authority": "health-manager",
+    "subject": "member",
+    "identity_key": "platform_member_id",
+    "record_key": "unified_health_record_id",
+    "invariants": [
+      "one_platform_member_one_master_health_record",
+      "member_remains_record_subject_and_data_rights_holder",
+      "channel_does_not_create_second_identity_or_master_record",
+      "assisting_center_never_becomes_record_owner"
+    ]
+  },
+  "onboarding_channels": [
+    {
+      "channel_id": "member_self_service",
+      "initiator": "member",
+      "steps": [
+        "member_identity_verification",
+        "member_consent_confirmation",
+        "choose_start_or_defer",
+        "member_supplies_material",
+        "system_creates_field_candidates",
+        "member_confirms_each_candidate",
+        "issue_or_reuse_unified_record_id"
+      ],
+      "member_only_actions": ["identity_confirmation", "consent_grant", "candidate_final_confirmation"]
+    },
+    {
+      "channel_id": "dayi_center_assisted",
+      "initiator": "authorized_center_staff",
+      "steps": [
+        "staff_starts_assistance_session",
+        "member_identity_verification",
+        "member_consent_confirmation",
+        "staff_assists_entry_or_upload",
+        "system_marks_each_item_source_and_operator",
+        "member_confirms_each_candidate",
+        "issue_or_reuse_unified_record_id"
+      ],
+      "member_only_actions": ["identity_confirmation", "consent_grant", "candidate_final_confirmation"],
+      "required_assistance_context": [
+        "dayi_center_id",
+        "assisting_staff_id",
+        "responsible_health_manager_id",
+        "authorization_scope",
+        "authorization_version",
+        "authorization_granted_at",
+        "authorization_status"
+      ],
+      "prohibited": [
+        "anonymous_member_registration",
+        "staff_grants_consent_for_member",
+        "staff_final_confirms_for_member",
+        "staff_fabricates_material",
+        "staff_deletes_original_material",
+        "automatic_doctor_relationship"
+      ]
+    }
+  ],
+  "record_item_policy": {
+    "lifecycle": ["candidate", "member_confirmed", "corrected", "superseded_preserved"],
+    "required_provenance": [
+      "source_type",
+      "source_reference",
+      "recorded_by_actor_id",
+      "recorded_by_actor_role",
+      "recorded_at",
+      "member_confirmation_status",
+      "source_version"
+    ],
+    "source_types": ["member_self_report", "center_assisted_entry", "report_upload", "professional_signed_record"],
+    "record_classes": ["member_self_report", "health_management_record", "professional_signed_record", "medical_institution_emr"],
+    "class_separation_required": true,
+    "candidate_rule": "unconfirmed_material_remains_candidate_and_cannot_become_member_confirmed",
+    "professional_record_rule": "professional_identity_credential_practice_relationship_time_source_and_signature_status_required",
+    "medical_record_rule": "only_regulated_medical_institution_may_author_medical_institution_emr"
+  },
+  "correction_policy": {
+    "mode": "append_only_correction",
+    "preserve_original": true,
+    "required_fields": ["correction_id", "target_item_id", "reason", "requested_by", "corrected_at", "previous_version", "new_version"],
+    "prohibited": ["delete_original", "rewrite_source", "erase_audit_history"]
+  },
+  "authorization_policy": {
+    "authority": "member",
+    "versioned": true,
+    "required_fields": ["scope", "purpose", "granted_at", "status", "version"],
+    "statuses": ["pending", "active", "withdrawn", "expired"],
+    "withdrawal_rule": "future_access_stops_while_prior_audit_and_source_history_remain_preserved",
+    "prohibited": ["staff_self_authorization", "implicit_consent", "unversioned_scope_change"]
+  },
+  "audit_policy": {
+    "append_only": true,
+    "required_fields": ["event_id", "actor_id", "actor_role", "action", "occurred_at", "record_version", "source_reference", "authorization_version"],
+    "events": ["record_created_or_reused", "candidate_added", "member_confirmed", "correction_appended", "authorization_changed", "assistance_session_linked"],
+    "prohibited": ["silent_overwrite", "missing_actor", "missing_timestamp", "missing_version"]
+  },
+  "doctor_relationship": {
+    "statuses": ["not_established", "referral_in_progress", "established", "ended"],
+    "default": "not_established",
+    "assisted_onboarding_effect": "no_automatic_relationship"
+  },
+  "ai_boundary": {
+    "allowed": ["organize_synthetic_material", "identify_missing_fields", "create_candidates_for_member_review", "explain_source_and_uncertainty"],
+    "forbidden": [
+      "verify_real_identity",
+      "grant_consent",
+      "final_confirm_candidate",
+      "delete_original_material",
+      "diagnose",
+      "prescribe",
+      "change_medication",
+      "impersonate_doctor",
+      "close_professional_or_emergency_risk"
+    ]
+  },
+  "pending_signoffs": [
+    {"signoff_id": "privacy-legal", "owner": "隐私与法律负责人", "status": "pending-with-owner", "executable": false, "blocks": ["real_identity", "real_health_data", "authorization_runtime"]},
+    {"signoff_id": "medical-quality", "owner": "医生集团医疗质量负责人", "status": "pending-with-owner", "executable": false, "blocks": ["professional_record_runtime", "medical_service"]},
+    {"signoff_id": "platform-security", "owner": "平台安全负责人", "status": "pending-with-owner", "executable": false, "blocks": ["shared_runtime", "database", "environment"]},
+    {"signoff_id": "operations", "owner": "健康馆运营负责人", "status": "pending-with-owner", "executable": false, "blocks": ["real_center_staff", "real_member_pilot"]}
+  ],
+  "acceptance_scenarios": [
+    {"scenario_id": "R2-A001", "polarity": "positive", "assertion": "both_channels_reuse_one_member_and_one_master_record"},
+    {"scenario_id": "R2-A002", "polarity": "positive", "assertion": "assisted_items_preserve_center_staff_source_authorization_and_confirmation"},
+    {"scenario_id": "R2-A003", "polarity": "positive", "assertion": "member_confirmation_promotes_candidate_with_versioned_audit"},
+    {"scenario_id": "R2-A004", "polarity": "positive", "assertion": "correction_appends_new_version_and_preserves_original"},
+    {"scenario_id": "R2-A005", "polarity": "negative", "assertion": "reject_second_master_record_for_same_member"},
+    {"scenario_id": "R2-A006", "polarity": "negative", "assertion": "reject_staff_consent_or_final_confirmation"},
+    {"scenario_id": "R2-A007", "polarity": "negative", "assertion": "reject_unconfirmed_candidate_promotion"},
+    {"scenario_id": "R2-A008", "polarity": "negative", "assertion": "reject_missing_provenance_operator_or_source_version"},
+    {"scenario_id": "R2-A009", "polarity": "negative", "assertion": "reject_original_deletion_or_audit_erasure"},
+    {"scenario_id": "R2-A010", "polarity": "negative", "assertion": "reject_assisted_onboarding_auto_doctor_relationship"},
+    {"scenario_id": "R2-A011", "polarity": "negative", "assertion": "reject_record_class_conflation"},
+    {"scenario_id": "R2-A012", "polarity": "negative", "assertion": "reject_ai_authorization_confirmation_or_medical_action"},
+    {"scenario_id": "R2-A013", "polarity": "negative", "assertion": "reject_unapproved_proxy_onboarding"},
+    {"scenario_id": "R2-A014", "polarity": "negative", "assertion": "reject_real_data_runtime_deployment_or_payment_authorization"}
+  ],
+  "blocks": ["runtime_implementation", "real_identity", "real_health_data", "medical_service", "charging", "deployment", "production"],
+  "does_not_block": ["synthetic_contract_conformance", "negative_test_design", "independent_r2_contract_review"],
+  "no_go": [
+    "business_code",
+    "api",
+    "database",
+    "real_identity",
+    "real_member",
+    "real_health_data",
+    "proxy_onboarding",
+    "internet_medical_service",
+    "diagnosis",
+    "prescription",
+    "medication_change",
+    "charging",
+    "payment",
+    "test_server_deployment",
+    "production",
+    "irreversible_operation"
+  ]
+}

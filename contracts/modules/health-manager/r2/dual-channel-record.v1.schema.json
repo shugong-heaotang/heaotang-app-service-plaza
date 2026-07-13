@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/health-manager/r2/dual-channel-record.v1.schema.json",
+  "title": "Health Manager R2 dual-channel unified health record v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "module_id", "checkpoint", "status", "synthetic_only", "executable", "source", "record_authority", "onboarding_channels", "record_item_policy", "correction_policy", "authorization_policy", "audit_policy", "doctor_relationship", "ai_boundary", "pending_signoffs", "acceptance_scenarios", "blocks", "does_not_block", "no_go"],
+  "properties": {
+    "contract_version": {"const": "health-manager.r2.dual-channel-record.v1"},
+    "module_id": {"const": "health-manager"},
+    "checkpoint": {"const": "R2-C1"},
+    "status": {"const": "contract-frozen-awaiting-independent-review"},
+    "synthetic_only": {"const": true},
+    "executable": {"const": false},
+    "source": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path", "sha256", "authorization"],
+      "properties": {
+        "path": {"const": "C:/Users/shugo/Documents/项目最高负责人/health-cross-module-requirements/健康大管家-大益健康馆-学习广场-健康俱乐部需求补充-v1.0.md"},
+        "sha256": {"const": "fc07676f9d0ab0dbaf1a4575457e4d1a67d642d1c483187e28a5b2c64e2a9012"},
+        "authorization": {"const": "synthetic-contract-and-negative-test-only"}
+      }
+    },
+    "record_authority": {"$ref": "#/$defs/recordAuthority"},
+    "onboarding_channels": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/channel"}},
+    "record_item_policy": {"$ref": "#/$defs/policy"},
+    "correction_policy": {"$ref": "#/$defs/policy"},
+    "authorization_policy": {"$ref": "#/$defs/policy"},
+    "audit_policy": {"$ref": "#/$defs/policy"},
+    "doctor_relationship": {"$ref": "#/$defs/policy"},
+    "ai_boundary": {"$ref": "#/$defs/aiBoundary"},
+    "pending_signoffs": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"$ref": "#/$defs/signoff"}},
+    "acceptance_scenarios": {"type": "array", "minItems": 14, "maxItems": 14, "items": {"$ref": "#/$defs/scenario"}},
+    "blocks": {"$ref": "#/$defs/nonEmptyUniqueStrings"},
+    "does_not_block": {"$ref": "#/$defs/nonEmptyUniqueStrings"},
+    "no_go": {"type": "array", "minItems": 16, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}}
+  },
+  "$defs": {
+    "nonEmptyUniqueStrings": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+    "recordAuthority": {
+      "type": "object", "additionalProperties": false,
+      "required": ["authority", "subject", "identity_key", "record_key", "invariants"],
+      "properties": {
+        "authority": {"const": "health-manager"},
+        "subject": {"const": "member"},
+        "identity_key": {"const": "platform_member_id"},
+        "record_key": {"const": "unified_health_record_id"},
+        "invariants": {"type": "array", "minItems": 4, "uniqueItems": true, "items": {"type": "string"}}
+      }
+    },
+    "channel": {
+      "type": "object", "additionalProperties": false,
+      "required": ["channel_id", "initiator", "steps", "member_only_actions"],
+      "properties": {
+        "channel_id": {"enum": ["member_self_service", "dayi_center_assisted"]},
+        "initiator": {"enum": ["member", "authorized_center_staff"]},
+        "steps": {"type": "array", "minItems": 7, "uniqueItems": true, "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}},
+        "member_only_actions": {"type": "array", "minItems": 3, "uniqueItems": true, "items": {"type": "string"}},
+        "required_assistance_context": {"type": "array", "minItems": 7, "uniqueItems": true, "items": {"type": "string"}},
+        "prohibited": {"type": "array", "minItems": 6, "uniqueItems": true, "items": {"type": "string"}}
+      },
+      "allOf": [
+        {"if": {"properties": {"channel_id": {"const": "dayi_center_assisted"}}}, "then": {"required": ["required_assistance_context", "prohibited"]}}
+      ]
+    },
+    "policy": {"type": "object", "minProperties": 2, "additionalProperties": true},
+    "aiBoundary": {
+      "type": "object", "additionalProperties": false, "required": ["allowed", "forbidden"],
+      "properties": {
+        "allowed": {"type": "array", "minItems": 4, "uniqueItems": true, "items": {"type": "string"}},
+        "forbidden": {"type": "array", "minItems": 9, "uniqueItems": true, "items": {"type": "string"}}
+      }
+    },
+    "signoff": {
+      "type": "object", "additionalProperties": false, "required": ["signoff_id", "owner", "status", "executable", "blocks"],
+      "properties": {
+        "signoff_id": {"enum": ["privacy-legal", "medical-quality", "platform-security", "operations"]},
+        "owner": {"type": "string", "minLength": 2},
+        "status": {"const": "pending-with-owner"},
+        "executable": {"const": false},
+        "blocks": {"$ref": "#/$defs/nonEmptyUniqueStrings"}
+      }
+    },
+    "scenario": {
+      "type": "object", "additionalProperties": false, "required": ["scenario_id", "polarity", "assertion"],
+      "properties": {
+        "scenario_id": {"pattern": "^R2-A0(0[1-9]|1[0-4])$"},
+        "polarity": {"enum": ["positive", "negative"]},
+        "assertion": {"type": "string", "pattern": "^[a-z][a-z0-9_]*$"}
+      }
+    }
+  }
+}
