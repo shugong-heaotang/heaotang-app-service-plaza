@@ -2,9 +2,9 @@
 
 ## 当前结论
 
-- 状态：R4、R6、R8、候选 dadcc42、71889d4 与 5d4d86e 的 independent review 均为 No-Go 且保持不可覆盖；R15/R16 已完成，刷新后的新候选等待第四次独立复验与受控集成
+- 状态：R4、R6、R8、候选 dadcc42、71889d4、5d4d86e、14d209f 与 ed34542 的 independent review 均为 No-Go 且保持不可覆盖；e079f0e 是第四次独立验收 Go 的 candidate，fbf6218 是其受控 integration exact。R21 正在整改 ed34542 唯一 P0 命名授权缺陷，等待第三次独立复验，不包含 independent acceptance 或 integrated 结论。
 - 主因：业务工作被拆成多个长期并行治理项，Handoff 缺少决策时限，范围内下一检查点仍反复等待授权，平台集成负责人形成单点队列；原 R2 又只优化技术流，没有约束客户价值和商业结果。
-- 处置：同步权威 HEAD `094bafdbba48c84f41611ca541c8225e4de4a8dd`，升级 `delivery-flow-policy.v1`、机器校验和商业价值门禁。
+- 处置：以权威 HEAD `fbf621872372f5aac0cad604af1b1a428d5e3b6d` 创建独立 clean worktree，只登记 planned 工作项并刷新当前 next checkpoint；不实现业务代码或 validator。
 
 ## 任务理解回执
 
@@ -179,3 +179,66 @@
 - R17 入口检查单 26/26、考试 100；顶部状态和 registry 均已刷新为第四次独立复验与受控集成。
 - R18 最终 current 检查单 26/26、考试 100；历史 No-Go 正文未覆盖。
 - verdict：新候选仅可提交推送并等待第四次独立验收，实施负责人不得自行集成。
+
+## R19 平台 registry 合法派发候选
+
+### 当前认证
+
+- 权威 base：`fbf621872372f5aac0cad604af1b1a428d5e3b6d`；独立 worktree：`C:/Users/shugo/Documents/worktrees/heaotang-platform-governance-dispatch-20260713`；分支：`codex/platform-governance-dispatch-20260713`。
+- R19 current checklist：26/26；governance exam attempt 1：100 分。
+- 本轮只修改已授权 registry、R19 checklist/exam/IR 与本 Handoff；未修改 R15、R17、R18，未实现业务代码或 validator。
+
+### Planned 授权登记
+
+- `AIW-20260713-DELIVERY-FLOW-OPTIMIZATION-INDEPENDENT-ACCEPTANCE`：独立 reviewer 使用专用 branch/worktree；allowed paths 仅含独立 evidence、task、checklist、exam、IR，不含 registry。激活时必须绑定待验 pushed exact commit。
+- `AIW-20260713-ACTION-TELEMETRY-BUSINESSCONFIG-R2-ACCEPTANCE`：APP 单仓新证据项，只允许平台 owner 写 registry、current checklist/exam/IR/Handoff；后端验收对象为 `a0b21cf37cde5cb17002e08e8c6817527efe8686`，禁止复活旧 integrated evidence item。
+- `AIW-20260713-PLATFORM-EXAM-IR-CROSS-RECORD-GATE-R1`：planned validator repair，目标是让 failed exam 与 IR/Handoff 的 exam100/verified 矛盾失败关闭；其 allowed paths 按审计涉及的 exam validator、IR validator、对应测试、总合同入口及治理证据配置。
+
+### NOVA R2 串行条件
+
+- `AIW-20260713-PLATFORM-NOVA-OVERLAY-R2` 保持 `planned`，owner、branch/worktree、17 项 allowed paths、NOVA 与 Protection Mall 全扫描、第三次复发 ADR/CONSTRAINTS 范围均保留。
+- NOVA R2 与 cross-record gate 共享 `scripts/Test-ServicePlazaContracts.ps1`；二者禁止同时进入 `active` 或 `handoff-ready`，必须由平台 owner 从最新 exact base 串行激活。
+
+### Handoff
+
+- 门禁：agent collaboration、delivery-flow、implementation-record、governance-exam validators 全部通过；delivery-flow 回归 26/26；Service Plaza 总合同通过；UTF-8 1374 文件通过；`git diff --check`、secret 与 allowed scope 检查通过。
+- 当前 verdict：authorization candidate only；等待独立复验，登记负责人不得自行验收或集成。
+- 未写 `independent_acceptance`、`integration_commit` 或任何 `integrated` 状态。
+- next checkpoint：提交并推送 exact candidate，由独立验收负责人复核 registry 字段、串行激活条件、范围、测试与证据新鲜度。
+
+## 14d209f 独立验收 No-Go 与 R20 整改
+
+### 不可覆盖结论
+
+- 验收对象：`14d209feb49c2f92b457e3c727acaeebcfdb3189`；机器门禁全绿，但结论为 No-Go，禁止集成。
+- P0-1：独立验收工作项把 `owner_role` 写成平台集成负责人，并把 reviewer evidence/checklist/exam/IR 放入 `contracts/foundation` 保护 namespace，造成角色冒充。
+- P0-2：独立验收项的 base 不能降到被验 candidate 或其既有 integration；必须在授权整改受控集成后绑定包含该授权项的未来 integration exact。
+
+### 合法 namespace 审计与选型
+
+- 平台保护路径为 `AGENTS.md`、`CONSTRAINTS.md`、`README.md`、`contracts/foundation`、`contracts/service-plaza`、`docs/decisions`、`scripts`；触及这些路径必须由平台集成负责人拥有。
+- 既有合法非平台先例是板块 owner 在 `contracts/modules/<module>/development-checklists|governance-exams|implementation-records` 与 `docs/project-management/modules/.../acceptance` 写本板块证据。
+- 仓库虽有 `docs/project-management/project-brain/m4-independent-acceptance-2026-07-12.md`，但 Project Brain 工作项仍由平台集成负责人拥有，且没有通用 platform reviewer checklist/exam/IR namespace；不得冒用该目录假装已有 reviewer namespace。
+- 因此原 independent acceptance 项改为 `planned reviewer-evidence-namespace/bootstrap`，`owner_role=APP总架构独立验收负责人`；未来 evidence/task/checklist/exam/IR 全部限制在非保护目录 `docs/project-management/independent-acceptance/delivery-flow-optimization/`。本轮只登记，不创建该目录或证据文件。
+
+### Base 与激活顺序
+
+- `14d209f` 只作为 R20 的 clean 整改父候选，并包含 R19 原始登记项；它不是 reviewer 验收 base。
+- 原业务事实分开绑定：第四次验收 candidate=`e079f0e41f375e7988478d428e672695fbdefc2f`；受控 integration=`fbf621872372f5aac0cad604af1b1a428d5e3b6d`。
+- 顺序固定为：R20 candidate 独立复验 Go -> R20 受控集成 -> 平台 owner 将 bootstrap 项 `base_commit` 更新为包含本授权项的未来 integration exact -> 激活 reviewer namespace/bootstrap -> 独立 reviewer 创建证据。任何一步不得跳过。
+
+### 当前结论
+
+- R19 checklist/exam/IR 保持不可修改。
+- R20 checklist 26/26、governance exam attempt 1 为 100；agent collaboration、delivery-flow、implementation-record、governance-exam validators、26项回归、Service Plaza 总合同、UTF-8 1377 文件、diff/scope/secret 门禁全部通过。
+- reviewer namespace 当前不存在；R20 未创建或激活任何 reviewer evidence 文件，planned bootstrap 的 5 项 allowed paths 与平台保护路径重叠数为 0。
+- R20 仅可提交推送等待独立复验；未写 independent acceptance、integration commit 或 integrated 状态。
+
+## ed34542 独立验收 No-Go 与 R21 整改
+
+- 验收对象：`ed345426923b2245a5ea21e8920a3a9616b5b56f`；reviewer bootstrap 角色、非保护 namespace 与未来 integration exact 激活顺序语义已通过复核，唯一 P0 为三份 R20 文件命名超出授权。
+- 原 delivery-flow active item 的既有 wildcard 仅授权 `contracts/foundation/{development-checklists,governance-exams,implementation-records}/2026-07-13-delivery-flow-optimization*.json`；R20 错用 `2026-07-14`，同提交不得追溯扩大 allowed_paths。
+- R21 删除未集成候选中的三份 `2026-07-14` R20 文件，使用既有 wildcard 重新生成 `2026-07-13-delivery-flow-optimization-r21.json` checklist/exam/IR；R19 保持不可修改。
+- reviewer bootstrap 继续保持 planned；owner role、非保护 future namespace、禁止创建 reviewer 文件及受控集成后刷新 future integration exact 的硬激活顺序不变。
+- R21 checklist 26/26、governance exam attempt 1 为 100；agent collaboration、delivery-flow、implementation-record、governance-exam validators、26项回归、Service Plaza 总合同、UTF-8 1377 文件全部通过。从 `fbf6218` 起算的累计差异为 8 个文件，全部命中原 delivery-flow allowed paths，越权数为 0，三份 `2026-07-14` R20 路径为 0。
+- 当前 verdict：R21 仅可提交推送等待第三次独立复验；未写 independent acceptance、integration commit 或 integrated 状态。
