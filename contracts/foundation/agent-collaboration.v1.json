@@ -3170,6 +3170,32 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "exact source 8565f1b43cfa196fdc5546ebf5316da71da8e074 已独立复核 Go；九个模块 blob 精确一致并受控纳入 authority。17/17 conformance、需求 SHA、模块与平台 current 治理证据、两层依赖、总合同、UTF-8、范围、秘密和敏感模式门禁通过。R4 必须另立工作项。",
                            "handoff_record":  "docs/project-management/service-plaza/health-r3-c1-acceptance-2026-07-14.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260714-HEALTH-R4-DOCTOR-DIRECTORY-RECOMMENDATION-CONTRACTS",
+                           "title":  "健康大管家 R4 医生目录与受约束推荐合同和负例",
+                           "owner":  "Health Manager continuous development agent",
+                           "owner_role":  "健康大管家负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r4-doctor-directory-recommendation-contracts",
+                           "branch":  "codex/health-r4-doctor-directory-recommendation-contracts",
+                           "base_commit":  "dfbff8e87792829e3e2dae8010a1ce3cba6b240c",
+                           "allowed_paths":  [
+                                                 "docs/project-management/modules/health-manager/health-manager-r4-doctor-directory-recommendation-contracts.md",
+                                                 "docs/project-management/modules/health-manager/health-manager-r4-doctor-directory-recommendation-receipt.md",
+                                                 "docs/project-management/modules/health-manager/health-manager-r4-doctor-directory-recommendation-handoff.md",
+                                                 "contracts/modules/health-manager/r4/doctor-directory-recommendation.v1.json",
+                                                 "contracts/modules/health-manager/r4/doctor-directory-recommendation.v1.schema.json",
+                                                 "contracts/modules/health-manager/r4/conformance/test_health_r4_doctor_directory_recommendation.py",
+                                                 "contracts/modules/health-manager/development-checklists/2026-07-14-health-r4-doctor-directory-recommendation*.json",
+                                                 "contracts/modules/health-manager/governance-exams/2026-07-14-health-r4-doctor-directory-recommendation*.json",
+                                                 "contracts/modules/health-manager/implementation-records/2026-07-14-health-r4-doctor-directory-recommendation*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "R3 已独立验收并受控集成至 dfbff8e；本工作项只冻结 synthetic_only=true、executable=false 的医生资质/执业/专科硬门禁、质量治理、推荐解释、人工复核、退出和禁止付费改变医疗安全排序，并以正负例验证。真实医生/会员/健康数据、公开排名、互联网诊疗、收费、支付、运行时、部署和生产继续 No-Go。",
+                           "handoff_record":  "docs/project-management/modules/health-manager/health-manager-r4-doctor-directory-recommendation-handoff.md"
                        }
                    ]
 }
