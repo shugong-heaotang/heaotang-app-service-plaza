@@ -15,6 +15,20 @@ FIXTURES = MODULE / "m0-r2" / "fixtures" / "cases.v3.json"
 FOUNDATION = ROOT / "contracts" / "foundation" / "foundation-capabilities.v1.json"
 PLATFORM_DEPS = MODULE / "platform-dependencies.v1.json"
 
+EXPECTED_EXTERNAL_PROJECTS = ["life-navigation", "club-alliance", "member-growth-archive", "protection-mall"]
+EXPECTED_CATALOG_OWNERS = {
+    "knowledge_catalog_owner": "learning-plaza",
+    "non_knowledge_catalog_owner": "protection-mall",
+}
+EXPECTED_BOTH_DISABLED_POLICY = "authorized-publisher-with-mandatory-audit"
+EXPECTED_PORTS = [
+    ("knowledge-base.read.v1", "inbound"),
+    ("live-board.catalog.read.v1", "inbound"),
+    ("nova-ai-engine.assist.v1", "outbound"),
+    ("learning-growth.events.v1", "outbound"),
+    ("order-payment.checkout.v1", "outbound"),
+]
+
 
 def load(path: Path) -> dict:
     return json.loads(path.read_text(encoding="utf-8"))
@@ -71,8 +85,8 @@ def decide(case: dict, contract: dict) -> str:
     return "deny"
 
 
-def validate_contract(contract: dict) -> list[str]:
-    errors = [f"schema: {error.message}" for error in Draft202012Validator(load(SCHEMA)).iter_errors(contract)]
+def validate_invariants(contract: dict) -> list[str]:
+    errors: list[str] = []
     if contract.get("project_type") != "independent-general-learning-platform":
         errors.append("learning plaza must be an independent general learning platform")
     required_internal = {"course", "reading", "exam-certification", "nova-learning-assistant", "content-review-center"}
@@ -80,22 +94,38 @@ def validate_contract(contract: dict) -> list[str]:
         errors.append("internal application registry is incomplete")
     if "nova-ai-engine" not in contract.get("connected_capabilities", []):
         errors.append("Nova AI Engine must remain a connected shared capability")
+    if contract.get("external_projects") != EXPECTED_EXTERNAL_PROJECTS:
+        errors.append("external project registry must remain exact and ordered")
+    ownership = contract.get("ownership", {})
+    if any(ownership.get(field) != owner for field, owner in EXPECTED_CATALOG_OWNERS.items()):
+        errors.append("knowledge and non-knowledge catalog owners must remain separated")
     if contract.get("ownership", {}).get("club_content_ownership_implicit") is not False:
         errors.append("club organization cannot imply content ownership")
     review = contract.get("review_policy", {})
     if review.get("switch_change_policy") != "versioned-maker-checker":
         errors.append("review switches must use versioned maker-checker")
+    if review.get("both_disabled_policy") != EXPECTED_BOTH_DISABLED_POLICY:
+        errors.append("both-disabled review mode must remain authorized and fully audited")
     required_audit_fields = {"publisher_id", "source_refs", "copyright_basis", "content_version", "published_at", "change_log", "takedown_status", "review_trace"}
     if set(review.get("mandatory_audit_fields", [])) != required_audit_fields:
         errors.append("every publish mode must retain the complete audit record")
     event = contract.get("growth_event", {})
     if event.get("source_of_truth") != "learning-plaza" or "never-write-consumer-database" not in event.get("write_policy", ""):
         errors.append("learning facts must remain owned by learning plaza")
-    if any(port.get("failure_policy") != "fail-closed" for port in contract.get("ports", [])):
+    ports = contract.get("ports", [])
+    actual_port_identity = [(port.get("port_id"), port.get("direction")) for port in ports]
+    if actual_port_identity != EXPECTED_PORTS:
+        errors.append("M0-R2 port identities and directions must remain exact and ordered")
+    if any(port.get("failure_policy") != "fail-closed" for port in ports):
         errors.append("all provisional ports must fail closed")
-    if any(port.get("readiness") != "provisional" for port in contract.get("ports", [])):
+    if any(port.get("readiness") != "provisional" for port in ports):
         errors.append("M0-R2 ports must remain provisional")
     return errors
+
+
+def validate_contract(contract: dict) -> list[str]:
+    schema_errors = [f"schema: {error.message}" for error in Draft202012Validator(load(SCHEMA)).iter_errors(contract)]
+    return schema_errors + validate_invariants(contract)
 
 
 def fixture_failures(contract: dict, cases: list[dict]) -> list[str]:
@@ -133,7 +163,7 @@ def validate_mutation_gate(contract: dict, cases: list[dict]) -> list[str]:
     schema = Draft202012Validator(load(SCHEMA))
     for name, mutated in mutations:
         schema_errors = list(schema.iter_errors(mutated))
-        invariant_errors = validate_contract(mutated)
+        invariant_errors = validate_invariants(mutated)
         failed_fixtures = fixture_failures(mutated, cases)
         if not schema_errors or not invariant_errors or not failed_fixtures:
             errors.append(

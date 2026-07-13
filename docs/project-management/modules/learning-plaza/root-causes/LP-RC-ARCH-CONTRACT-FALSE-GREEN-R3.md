@@ -5,8 +5,8 @@
 - pattern_id：`LP-RC-ARCH-CONTRACT-FALSE-GREEN`
 - title：关键架构语义变异未被 Schema、验证器和 fixtures 拒绝
 - owner：学习广场持续开发负责人
-- first_seen / recurrence_count：独立验收首次发现，五类可复现变异
-- affected_checkpoint：M0-R2 架构冻结
+- first_seen / recurrence_count：M0-R2 首次发现；M0-R3 独立复验第二次发现同类假绿
+- affected_checkpoint：M0-R2、M0-R3 架构冻结
 
 ## Evidence
 
@@ -19,7 +19,7 @@
 
 ## Causal chain
 
-因为 Schema 主要限制数组数量而未锁定成员和值，因此语义替换仍合法；因为验证器对目录 owner 和端口 readiness 使用 case 常量而不是合同字段，因此合同漂移不影响判定；因为 fixtures 未逐项引用外部项目和端口 ID，因此关键变异没有可观察失败。最早可控原因是机器契约没有把已冻结的 v3.0 决策编码为精确常量与变异测试。
+M0-R2 的最早可控原因是机器契约没有把已冻结的 v3.0 决策编码为精确常量与变异测试。M0-R3 虽补齐精确 Schema、fixtures 和 mutation gate，但 `validate_contract()` 把 Schema 与手写 invariant 错误合并返回；mutation gate 又把这个混合结果当成独立 `invariant_errors`，造成四类变异只有 Schema 和 fixture 拒绝却显示三层通过。第二次最早可控原因是验证层没有类型隔离，计数名称与实际数据来源不一致。
 
 ## Impact
 
@@ -31,14 +31,14 @@
 ## Resolution
 
 - rejected_workaround_and_reason：不依赖人工阅读替代机器门禁，不只新增文字说明。
-- systemic_fix：Schema 精确冻结全部数组、owner、审核策略、事件、课程顺序和五端口；validator 读取合同字段；fixtures 覆盖四个外部项目和每个端口；内置五类 mutation gate。
+- systemic_fix：保留精确 Schema 与 fixtures；新增只返回手写规则的 `validate_invariants()`，`validate_contract()` 仅负责组合 Schema 与 invariant；mutation gate 分别计算两层，并为外部项目精确集合、目录 owner、双关策略、五端口 ID/direction/readiness 建立独立 invariant。
 - changed_contracts_code_tools：`learning-plaza-architecture.v3.schema.json`、`validate_learning_plaza_m0_r2.py`、`cases.v3.json`。
 - compatibility_or_migration：不改变当前合法 v3 实例，只拒绝此前误放行的非法变异。
 - rollback：回退会恢复假绿，禁止。
 
 ## Prevention and proof
 
-- prevention_gate：有效实例 0 Schema errors、34 条 fixtures、5 类变异均同时触发 Schema/invariant/fixture 拒绝。
+- prevention_gate：有效实例 0 Schema errors、34 条 fixtures；5 类变异的 Schema、独立 invariant、fixture 计数分别非零，禁止混合计数。
 - positive_test：当前 v3 合同通过。
 - negative_test：外部项目、目录 owner、双关策略、端口 readiness、端口 ID 五类变异。
 - regression_set：旧 M0 16 条 fixtures。
@@ -47,6 +47,6 @@
 
 ## Verdict
 
-- 当前：修正实施中。
+- 当前：M0-R4 分层修正实施中，等待新独立验收。
 - unresolved_risk：未来新增应用或端口必须同步升级 Schema 与 mutation gate。
-- next_authorization：R3 独立验收。
+- next_authorization：R4 独立验收。

@@ -1,21 +1,21 @@
-# 学习广场 M0-R3 Handoff
+# 学习广场 M0-R4 Handoff
 
 日期：2026-07-13
 提交方：学习广场持续开发负责人
 接收方：学习广场独立验收负责人
-状态：M0-R2 `53c7c4b` 已独立 No-Go；R3 修正候选待重新独立验收
+状态：M0-R3 `11a1f93` 已独立 No-Go；R4 分层修正候选待重新独立验收
 
 ## 已完成
 
-- 候选已包含最新权威 integration `44325310f4bddfc8ddcb4b1f6e02402cc719c001`。
-- 历史 M0/M0-R2 checklist、exam、IR 原字节移入 invalidated snapshots，不再参与 active 门禁。
-- R3 checklist 28/28 完成后才生成 R3 exam；考试 100/100，时序真实可核对。
+- 候选包含权威 integration `44325310f4bddfc8ddcb4b1f6e02402cc719c001`；集成前须再次校验最新性。
+- 历史 M0/M0-R2/M0-R3 checklist、exam、IR 原字节移入 invalidated snapshots，不再参与 active 门禁。
+- R4 checklist 28/28 完成后才生成 R4 exam；考试 100/100，时序真实可核对。
 - v3 Schema 精确冻结内部应用、连接能力、外部项目、owner、审核、Nova、成长事件、课程闭环和五端口。
-- fixtures 扩展至 34 条；外部项目替换、目录 owner 对调、双关审核绕过、端口提前 verified、端口 ID 漂移五类 mutation 均要求 Schema/invariant/fixture 三重拒绝。
+- fixtures 保持 34 条；Schema 错误与手写 invariant 已拆分计算。外部项目替换、目录 owner 对调、双关审核绕过、端口提前 verified、端口 ID 漂移五类 mutation 均要求 Schema/独立 invariant/fixture 三重拒绝。
 
 ## 未完成与风险
 
-- R3 尚未重新独立验收，因此不能给 M0 Go。
+- R4 尚未重新独立验收，因此不能给 M0 Go。
 - 五个真实连接端口仍无 owner/version 签署，保持 `provisional/fail-closed`。
 - 若权威 integration 在验收前继续前进，必须重新同步并重建最终 current 治理证据。
 - 前端、API、数据库、支付、测试服和生产均未授权。
@@ -36,4 +36,4 @@ git diff --check 44325310f4bddfc8ddcb4b1f6e02402cc719c001...HEAD
 
 ## 下一授权
 
-仅在 R3 独立验收 Go 后，由平台集成负责人从届时最新权威 integration 进行受控合并。随后才可派发 M1 独立项目骨架；部署和上线仍不授权。
+仅在 R4 独立验收 Go 后，由平台集成负责人从届时最新权威 integration 进行受控合并。随后才可派发 M1 独立项目骨架；部署和上线仍不授权。
