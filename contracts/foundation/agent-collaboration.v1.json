@@ -3072,6 +3072,32 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "R1-C1 source e50d48c4dd28307f9f09170ad1466c3b20064b26 已由独立平台验收 Go，并以 source integration candidate 70c261c74525dd5d00534fd38707f921d69520d8 受控纳入 authority；13/13 conformance、需求 SHA、模块 checklist28/28+exam100、平台最终 R3 current checklist/exam、依赖/总合同/UTF-8/范围/安全门禁通过。R2、共享运行时、真实身份/健康数据、医疗、收费、部署和生产继续 No-Go，必须另立工作项。",
                            "handoff_record":  "docs/project-management/modules/health-manager/health-manager-r1-cross-module-freeze-handoff.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260713-HEALTH-R2-DUAL-CHANNEL-RECORD-CONTRACTS",
+                           "title":  "健康大管家 R2 双渠道统一档案合同与负例",
+                           "owner":  "Health Manager continuous development agent",
+                           "owner_role":  "健康大管家负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r2-dual-channel-record-contracts",
+                           "branch":  "codex/health-r2-dual-channel-record-contracts",
+                           "base_commit":  "e892e4ea0919f7c762bd35fc1606ceab946acb4b",
+                           "allowed_paths":  [
+                                                 "docs/project-management/modules/health-manager/health-manager-r2-dual-channel-record-contracts.md",
+                                                 "docs/project-management/modules/health-manager/health-manager-r2-dual-channel-record-receipt.md",
+                                                 "docs/project-management/modules/health-manager/health-manager-r2-dual-channel-record-handoff.md",
+                                                 "contracts/modules/health-manager/r2/dual-channel-record.v1.json",
+                                                 "contracts/modules/health-manager/r2/dual-channel-record.v1.schema.json",
+                                                 "contracts/modules/health-manager/r2/conformance/test_health_r2_dual_channel_record.py",
+                                                 "contracts/modules/health-manager/development-checklists/2026-07-13-health-r2-dual-channel-record*.json",
+                                                 "contracts/modules/health-manager/governance-exams/2026-07-13-health-r2-dual-channel-record*.json",
+                                                 "contracts/modules/health-manager/implementation-records/2026-07-13-health-r2-dual-channel-record*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "R1-C1 已受控集成。R2-C1 只冻结 synthetic_only=true、executable=false 的统一会员主档案、本人自助/健康馆协助两条建档路径、来源、候选确认、纠错、授权和审计合同及正负例；不做前后端、API、数据库、真实身份或健康数据、医疗、收费、部署或生产。",
+                           "handoff_record":  "docs/project-management/modules/health-manager/health-manager-r2-dual-channel-record-handoff.md"
                        }
                    ]
 }
