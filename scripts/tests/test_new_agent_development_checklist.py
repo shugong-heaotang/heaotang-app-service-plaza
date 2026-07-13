@@ -92,11 +92,18 @@ def run_checklist(script: Path, output: Path, module_id: str = "") -> subprocess
 
 
 class DynamicModuleChecklistTests(unittest.TestCase):
-    def test_activity_and_existing_modules_use_registered_overlays(self) -> None:
+    def test_all_registered_modules_use_overlays_with_current_sha(self) -> None:
         reading_list = json.loads(
             (ROOT / "contracts/foundation/governance-reading-list.v1.json").read_text(encoding="utf-8")
         )
-        for module_id in ("activity", "life-navigation", "club-alliance", "health-manager"):
+        for module_id in (
+            "activity",
+            "learning-plaza",
+            "protection-mall",
+            "life-navigation",
+            "club-alliance",
+            "health-manager",
+        ):
             with self.subTest(module_id=module_id), tempfile.TemporaryDirectory() as directory:
                 output = Path(directory) / "checklist.json"
                 result = run_checklist(SCRIPT, output, module_id)
@@ -107,6 +114,9 @@ class DynamicModuleChecklistTests(unittest.TestCase):
                 )
                 self.assertEqual(data["module_id"], module_id)
                 self.assertEqual([item["path"] for item in data["items"]], expected)
+                for item in data["items"]:
+                    expected_sha = hashlib.sha256((ROOT / item["path"]).read_bytes()).hexdigest()
+                    self.assertEqual(item["sha256"], expected_sha, item["path"])
                 self.assertEqual(data["status"], "pending")
                 self.assertTrue(all(not item["checked"] for item in data["items"]))
 
