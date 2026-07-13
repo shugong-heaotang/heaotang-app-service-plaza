@@ -1,0 +1,81 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-HEALTH-R2-C1-ACCEPTANCE-R2",
+  "title": "健康大管家 R2-C1 独立验收与受控集成",
+  "date": "2026-07-13",
+  "status": "verified",
+  "objective": "独立复核并受控集成 R2-C1 双渠道统一档案合同与负例，同时保持运行时、真实数据、医疗、收费、部署和生产 No-Go。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-13-health-r2-c1-acceptance-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-13-health-r2-c1-acceptance-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/module-dependencies/health-manager.v1.json",
+    "contracts/modules/health-manager/internal-dependencies.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-13-health-r2-c1-acceptance-task-order.md",
+    "docs/project-management/notices/2026-07-13-health-r2-dual-channel-record-task-order.md",
+    "C:/Users/shugo/Documents/项目最高负责人/health-cross-module-requirements/健康大管家-大益健康馆-学习广场-健康俱乐部需求补充-v1.0.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.contract-tooling",
+    "foundation.ai-collaboration-safety"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/modules/health-manager/r2/dual-channel-record.v1.json",
+    "contracts/modules/health-manager/r2/dual-channel-record.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklists/2026-07-13-health-r2-c1-acceptance.json",
+    "contracts/foundation/development-checklists/2026-07-13-health-r2-c1-acceptance-r2.json",
+    "contracts/foundation/governance-exams/2026-07-13-health-r2-c1-acceptance-attempt-1.json",
+    "contracts/foundation/governance-exams/2026-07-13-health-r2-c1-acceptance-attempt-2.json",
+    "contracts/foundation/governance-exams/2026-07-13-health-r2-c1-acceptance-r2-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-13-health-r2-c1-acceptance-r2.json",
+    "docs/project-management/service-plaza/health-r2-c1-acceptance-2026-07-13.md",
+    "contracts/modules/health-manager/r2/",
+    "docs/project-management/modules/health-manager/health-manager-r2-dual-channel-record-contracts.md"
+  ],
+  "verification": [
+    "exact source df676a5be4135d6c1e29abc06043b5c1a1cc6842 local and remote match with clean worktree",
+    "requirement supplement SHA-256 fc07676f9d0ab0dbaf1a4575457e4d1a67d642d1c483187e28a5b2c64e2a9012",
+    "source commit 9 paths and 9 blobs exactly preserved",
+    "Health R2 conformance 16 of 16 passed before and after controlled integration",
+    "module checklist 28 of 28 and governance exam score 100",
+    "platform entry attempt 1 score 50 retained; remediation reread completed and attempt 2 score 100",
+    "platform final R2 checklist 28 of 28 current and governance exam score 100",
+    "foundation and health internal dependencies valid",
+    "collaboration, checklist, exam, implementation record, Service Plaza total contract and UTF-8 gates passed",
+    "git diff check, allowed scope, secret and sensitive pattern scans passed"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/health-r2-c1-acceptance-2026-07-13.md",
+    "contracts/modules/health-manager/r2/conformance/test_health_r2_dual_channel_record.py",
+    "contracts/modules/health-manager/implementation-records/2026-07-13-health-r2-dual-channel-record-c1.json",
+    "contracts/foundation/development-checklists/2026-07-13-health-r2-c1-acceptance-r2.json",
+    "contracts/foundation/governance-exams/2026-07-13-health-r2-c1-acceptance-r2-attempt-1.json"
+  ],
+  "premises": [
+    "R2 remains synthetic_only and executable=false",
+    "pending privacy, medical quality, platform security and operations signoffs do not block synthetic contract acceptance",
+    "R2 runtime, R3 active implementation, real data, proxy onboarding, medical service, charging, deployment and production require separate authorization"
+  ],
+  "implementation_mode": "ai-assisted"
+}

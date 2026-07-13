@@ -3078,7 +3078,7 @@
                            "title":  "健康大管家 R2 双渠道统一档案合同与负例",
                            "owner":  "Health Manager continuous development agent",
                            "owner_role":  "健康大管家负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r2-dual-channel-record-contracts",
                            "branch":  "codex/health-r2-dual-channel-record-contracts",
@@ -3096,7 +3096,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "R1-C1 已受控集成。R2-C1 只冻结 synthetic_only=true、executable=false 的统一会员主档案、本人自助/健康馆协助两条建档路径、来源、候选确认、纠错、授权和审计合同及正负例；不做前后端、API、数据库、真实身份或健康数据、医疗、收费、部署或生产。",
+                           "migration_note":  "R2-C1 exact source df676a5be4135d6c1e29abc06043b5c1a1cc6842 已由平台独立复核 Go 并受控纳入 authority；16/16 conformance、需求哈希、模块 checklist/exam100/IR/Handoff、两层依赖、UTF-8、范围与安全门禁通过。仅冻结 synthetic_only=true、executable=false 合同；运行时、真实数据、医疗、收费、部署和生产继续 No-Go。",
                            "handoff_record":  "docs/project-management/modules/health-manager/health-manager-r2-dual-channel-record-handoff.md"
                        },
                        {
@@ -3104,7 +3104,7 @@
                            "title":  "健康大管家 R2-C1 独立验收与受控集成",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r2-c1-acceptance",
                            "branch":  "codex/health-r2-c1-acceptance",
@@ -3119,7 +3119,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "独立复核 exact source df676a5be4135d6c1e29abc06043b5c1a1cc6842；只在 16/16 conformance、当前 checklist/exam100、同 record_id IR/Handoff、依赖、UTF-8、范围与安全门禁全部 Go 后受控集成。禁止修改候选模块产物来换取通过。",
+                           "migration_note":  "exact source df676a5be4135d6c1e29abc06043b5c1a1cc6842 已独立复核 Go；九个模块 blob 精确一致并受控纳入 authority。16/16 conformance、需求 SHA、模块与平台 current 治理证据、两层依赖、总合同、UTF-8、范围、秘密和敏感模式门禁通过。R3 必须另立工作项。",
                            "handoff_record":  "docs/project-management/service-plaza/health-r2-c1-acceptance-2026-07-13.md"
                        }
                    ]

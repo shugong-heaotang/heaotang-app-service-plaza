@@ -1,0 +1,114 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260713-HEALTH-R2-C1-ACCEPTANCE-2",
+    "record_id":  "IR-20260713-HEALTH-R2-C1-ACCEPTANCE",
+    "actor":  "Codex platform integration agent",
+    "attempt_number":  2,
+    "status":  "passed",
+    "generated_at":  "2026-07-13T15:55:04.9745499Z",
+    "completed_at":  "2026-07-13T15:55:15.6020875Z",
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  100,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "b0df386a68e8e00a803a08d0b3e786893a47bad6742dd36a5b6273803b7abcb1",
+    "checklist_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-r2-c1-acceptance/contracts/foundation/development-checklists/2026-07-13-health-r2-c1-acceptance.json",
+    "checklist_sha256":  "62cd1ac9a0a496fbcb33db093046c5a7713048aaa51920a1f8456764b173922a",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-007",
+                          "selected_option":  "A",
+                          "correct":  true,
+                          "source_path":  "AGENTS.md"
+                      },
+                      {
+                          "question_id":  "GQ-004",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+                      },
+                      {
+                          "question_id":  "GQ-012",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "contracts/foundation/agent-collaboration.v1.json"
+                      },
+                      {
+                          "question_id":  "GQ-009",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0010-ai-implementation-records-required.md"
+                      },
+                      {
+                          "question_id":  "GQ-016",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0013-mandatory-ai-development-entrypoint.md"
+                      },
+                      {
+                          "question_id":  "GQ-002",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0008-versioned-business-variables.md"
+                      },
+                      {
+                          "question_id":  "GQ-015",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "contracts/foundation/engineering-standards.v1.json"
+                      },
+                      {
+                          "question_id":  "GQ-006",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/project-management/ai-coding-incident-lessons-2026-07-10.md"
+                      }
+                  ],
+    "remediation_sources":  [
+
+                            ],
+    "previous_attempt_path":  "contracts/foundation/governance-exams/2026-07-13-health-r2-c1-acceptance-attempt-1.json",
+    "previous_attempt_sha256":  "7b21718c3d523511c1cf7218c8d484c07ea35238099f59decdcd5fefd5015567",
+    "remediation_rereads":  [
+                                {
+                                    "source_path":  "docs/decisions/0011-two-person-config-approval.md",
+                                    "presented_at":  "2026-07-13T15:55:04.9522604Z",
+                                    "presentation_sha256":  "2736e5c8584bd69f39bcfeb98dcdbb6c6a69b489f079487136502aff1e3272c1",
+                                    "presentation_nonce":  "45369758d13a462f8f7f704958062b8c",
+                                    "confirmed_at":  "2026-07-13T15:55:04.9602584Z",
+                                    "source_sha256":  "2736e5c8584bd69f39bcfeb98dcdbb6c6a69b489f079487136502aff1e3272c1",
+                                    "confirmed_by":  "Codex platform integration agent",
+                                    "confirmation_method":  "interactive-path-nonce-after-full-output"
+                                },
+                                {
+                                    "source_path":  "docs/decisions/0008-versioned-business-variables.md",
+                                    "presented_at":  "2026-07-13T15:55:04.9632586Z",
+                                    "presentation_sha256":  "0a881479c7d96184098363511d0851181bcad63d1c29443531fc227aa1fe24a8",
+                                    "presentation_nonce":  "94c1c66e0b834a24b0339e6011526f22",
+                                    "confirmed_at":  "2026-07-13T15:55:04.9642581Z",
+                                    "source_sha256":  "0a881479c7d96184098363511d0851181bcad63d1c29443531fc227aa1fe24a8",
+                                    "confirmed_by":  "Codex platform integration agent",
+                                    "confirmation_method":  "interactive-path-nonce-after-full-output"
+                                },
+                                {
+                                    "source_path":  "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+                                    "presented_at":  "2026-07-13T15:55:04.9662578Z",
+                                    "presentation_sha256":  "f15ed305fb096970a5e4580cc3dac41da5082156f80e64759fa9b28529376efd",
+                                    "presentation_nonce":  "9628ae9f1ce4480896e7985788a885ee",
+                                    "confirmed_at":  "2026-07-13T15:55:04.9672585Z",
+                                    "source_sha256":  "f15ed305fb096970a5e4580cc3dac41da5082156f80e64759fa9b28529376efd",
+                                    "confirmed_by":  "Codex platform integration agent",
+                                    "confirmation_method":  "interactive-path-nonce-after-full-output"
+                                },
+                                {
+                                    "source_path":  "contracts/foundation/engineering-standards.v1.json",
+                                    "presented_at":  "2026-07-13T15:55:04.9682598Z",
+                                    "presentation_sha256":  "a8ed703991664849a45d991a8207f33496eaf7f31fe51e4f1c0708d9c1a34232",
+                                    "presentation_nonce":  "a8ca2723112141ddbba657374038167c",
+                                    "confirmed_at":  "2026-07-13T15:55:04.9702594Z",
+                                    "source_sha256":  "a8ed703991664849a45d991a8207f33496eaf7f31fe51e4f1c0708d9c1a34232",
+                                    "confirmed_by":  "Codex platform integration agent",
+                                    "confirmation_method":  "interactive-path-nonce-after-full-output"
+                                }
+                            ]
+}

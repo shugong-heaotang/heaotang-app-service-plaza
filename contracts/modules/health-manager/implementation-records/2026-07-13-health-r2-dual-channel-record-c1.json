@@ -1,0 +1,74 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-HEALTH-R2-DUAL-CHANNEL-RECORD-C1",
+  "title": "健康大管家 R2-C1 双渠道统一档案合同与负例",
+  "date": "2026-07-13",
+  "status": "implemented",
+  "objective": "把本人自助和大益健康馆协助建档冻结为同一会员主档案、逐项来源、候选确认、追加纠错、版本化授权和完整审计的不可执行合同。",
+  "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-13-health-r2-dual-channel-record.json",
+  "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-13-health-r2-dual-channel-record-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/module-dependencies/health-manager.v1.json",
+    "contracts/modules/health-manager/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-13-health-r2-dual-channel-record-task-order.md",
+    "C:/Users/shugo/Documents/项目最高负责人/health-cross-module-requirements/健康大管家-大益健康馆-学习广场-健康俱乐部需求补充-v1.0.md",
+    "contracts/modules/health-manager/r1/cross-module-freeze.v1.json"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.contract-tooling",
+    "foundation.ai-collaboration-safety"
+  ],
+  "contracts": [
+    "contracts/modules/health-manager/r2/dual-channel-record.v1.json",
+    "contracts/modules/health-manager/r2/dual-channel-record.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/modules/health-manager/health-manager-r2-dual-channel-record-contracts.md",
+    "docs/project-management/modules/health-manager/health-manager-r2-dual-channel-record-receipt.md",
+    "docs/project-management/modules/health-manager/health-manager-r2-dual-channel-record-handoff.md",
+    "contracts/modules/health-manager/r2/dual-channel-record.v1.json",
+    "contracts/modules/health-manager/r2/dual-channel-record.v1.schema.json",
+    "contracts/modules/health-manager/r2/conformance/test_health_r2_dual_channel_record.py",
+    "contracts/modules/health-manager/development-checklists/2026-07-13-health-r2-dual-channel-record.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-13-health-r2-dual-channel-record-attempt-1.json",
+    "contracts/modules/health-manager/implementation-records/2026-07-13-health-r2-dual-channel-record-c1.json"
+  ],
+  "verification": [
+    "current checklist completed 28 of 28 and governance exam attempt 1 passed with score 100",
+    "contract validates against draft 2020-12 schema",
+    "both onboarding channels reuse one member identity and one unified master health record",
+    "negative tests reject staff consent, unconfirmed promotion, missing provenance, record class conflation and original deletion",
+    "negative tests reject unversioned authorization, missing audit actor, automatic doctor relationship, AI confirmation, proxy onboarding and real data authorization",
+    "foundation and health internal dependencies remain development Go",
+    "collaboration, Service Plaza total contract, UTF-8, diff, allowed scope and secret scans pass"
+  ],
+  "evidence": [
+    "contracts/modules/health-manager/r2/conformance/test_health_r2_dual_channel_record.py",
+    "docs/project-management/modules/health-manager/health-manager-r2-dual-channel-record-contracts.md",
+    "docs/project-management/modules/health-manager/health-manager-r2-dual-channel-record-receipt.md",
+    "docs/project-management/modules/health-manager/health-manager-r2-dual-channel-record-handoff.md"
+  ],
+  "premises": [
+    "the requirement supplement hash remains exact",
+    "all outputs remain synthetic_only and executable=false",
+    "privacy legal medical quality platform security and operations signoffs remain pending",
+    "runtime real data medical service charging deployment and production require separate authorization"
+  ],
+  "implementation_mode": "ai-assisted"
+}
