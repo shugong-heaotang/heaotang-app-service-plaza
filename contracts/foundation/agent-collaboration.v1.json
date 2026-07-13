@@ -2574,6 +2574,29 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "M0 R3 Go 后激活的合同与离线合成一致性首切片。source 9dc3092 经平台会签和 APP 总架构独立验收 Go，以 b27d75e 受控集成；3份合同、11项合成案例、current checklist、exam100、IR、registry、UTF-8与diff通过。只冻结商品责任、五状态机及 mall.api.v1 安全合同；运行时代码、数据库、支付、真实资金、部署和真实数据继续 No-Go。",
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m1.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260712-PROTECTION-MALL-M1-RUNTIME-DISPATCH",
+                           "title":  "保障商城 M1 领域运行内核与跨仓证据派发",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-m1-runtime-dispatch",
+                           "branch":  "codex/protection-mall-m1-runtime-dispatch",
+                           "base_commit":  "cd2bbae681767262994f53cd1fecd3c2e35bdd1d",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-12-protection-mall-m1-runtime-dispatch*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-12-protection-mall-m1-runtime-dispatch*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-12-protection-mall-m1-runtime-dispatch*.json",
+                                                 "docs/project-management/notices/2026-07-12-protection-mall-m1-runtime-task-order.md",
+                                                 "docs/project-management/service-plaza/protection-mall-m1-runtime-dispatch-2026-07-12.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "Platform dispatch only: create two no-overlap work packages for an in-memory Go domain core and APP-side cross-repository evidence. No runtime code, DB, routes, payment, deployment, real data, Nova, GraphRAG or cross-module orders are authorized by this dispatch item itself.",
+                           "handoff_record":  null
                        }
                    ]
 }
