@@ -163,3 +163,13 @@
 - 结论不变：四身份认证态 member-home DOM 证据仍未取得，当前为 `Conditional No-Go`；三身份可用额度不能替代四身份验收。
 - 根因：测试账号 UTC 日容量尚未自然重置，属于测试执行前置条件，不是产品故障。
 - 最早下一动作：自然 UTC 日切换后先重新只读核对四身份额度；随后仅在本轮明确授权下，以“一身份、一验证码、一浏览器动作”的方式恢复认证态取证。left/suspended/maintenance 继续保持 Unsupported/Unverified。
+
+## 14. 2026-07-13 非图形化认证 API 接续
+
+用户重新明确允许四个既定合成账号各发送一次测试验证码。执行前四身份容量均 `capacity_ready=true`；执行后与各自基线相比恰好各新增一次，没有重复发送，且全程 `secrets=none-recorded`。
+
+两个 Baseline RunId 均完成 Apply/Inspect 后的 Cleanup 与 RestoreVerify，最终所有 run-owned remaining=0、users_deleted=0、integrity=ok、dump SHA match。第一 Run 在新会员登录及 `/auth/me` 后因 PowerShell `$home` 与只读 `$HOME` 大小写不敏感冲突停止；遵守一次授权，没有重发，因此新会员 member-home 保持 Unverified。第二 Run 修正为 `$memberHomeResponse`，家庭普通会员、多俱乐部会员和管理员均真实登录并通过 member-home HTTP 200、预期计数、active/active 状态分层、旧 status 禁止和 `can_manage`/`club:manage` 权限一致性断言。
+
+本地回归为前端 72/72、member-home 合同 15/15、fixture safety passed、test-server build passed、服务广场总合同 passed、UTF-8 941 files passed；关窗 `/ready=ready`、`db=true`、health=ok。完整证据见 `acceptance/m3/2026-07-13-non-gui-authenticated-api-retest.md`。
+
+浏览器控制通道在应用内浏览器会话保持和 Windows URL 可信确认两个入口均复发，按外部工具根因单列；API Pass 不替代 authenticated DOM、viewport、键盘、浏览器网络或 offline。当前 verdict 仍为 `Conditional No-Go`。下一轮只补新会员 member-home 和真实 DOM，不重复部署或重跑已通过的三身份 API。

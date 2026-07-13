@@ -38,6 +38,7 @@
   ],
   "changed_areas": [
     "docs/project-management/modules/club-alliance/member-home/acceptance/m3/2026-07-12-environment-acceptance.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3/2026-07-13-non-gui-authenticated-api-retest.md",
     "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md",
     "docs/project-management/service-plaza/handoff-log.md",
     "contracts/modules/club-alliance/development-checklists/2026-07-12-club-member-home-m3-acceptance.json",
@@ -55,13 +56,16 @@
     "three lifecycle/history fixture Plan Apply Inspect Cleanup RestoreVerify sequences with remaining zero",
     "in-app Browser channel recovered; target URL title DOM viewport and deployed asset hash observed",
     "four synthetic identities OTP capacity ready without reading secrets",
-    "Test-TextEncoding.ps1 and git diff --check"
+    "Test-TextEncoding.ps1 and git diff --check",
+    "2026-07-13 three-role authenticated member-home API and permission matrix; two fixture cleanup and RestoreVerify passes",
+    "2026-07-13 frontend 72 of 72, member-home contracts 15 of 15, test-server build, Service Plaza contracts, UTF-8 941 files and diff check"
   ],
   "evidence": [
     "docs/project-management/modules/club-alliance/member-home/acceptance/m3/2026-07-12-environment-acceptance.md",
     "docs/project-management/modules/club-alliance/member-home/acceptance/m3/2026-07-12-browser-resume.md",
     "docs/project-management/modules/club-alliance/member-home/acceptance/m3/2026-07-12-synthetic-lifecycle-execution.md",
     "docs/project-management/modules/club-alliance/member-home/acceptance/m3/2026-07-12-stage-audit.md",
+    "docs/project-management/modules/club-alliance/member-home/acceptance/m3/2026-07-13-non-gui-authenticated-api-retest.md",
     "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md"
   ],
   "premises": [
@@ -69,10 +73,12 @@
     "No OTP JWT cookie Authorization full phone or full user identifier is persisted",
     "Each fixture scenario has a unique RunId and Cleanup proves all run-owned records are zero",
     "Maintenance remains Unverified because no approved natural condition exists",
-    "Browser control is restored and unauthenticated baseline evidence is recorded; authenticated four-identity browser evidence remains pending explicit OTP-send authorization",
+    "Unauthenticated browser baseline is recorded; authenticated DOM remains pending a control channel that can prove the exact URL and preserve the session",
     "Application pending and rejected plus dissolved club lifecycle fixtures are verified locally and on the approved test server with complete cleanup",
     "Left and suspended remain unsupported because no authoritative membership history or status model exists",
-    "This record is implemented rather than verified because Full Go conditions are not met"
+    "This record is implemented rather than verified because Full Go conditions are not met",
+    "Authenticated API evidence is not accepted as authenticated DOM evidence; browser control remains a separate unresolved gate",
+    "The 2026-07-13 authorization added exactly one send-code request per approved synthetic identity; no identity was retried after its single request"
   ],
   "implementation_mode": "ai-assisted"
 }
