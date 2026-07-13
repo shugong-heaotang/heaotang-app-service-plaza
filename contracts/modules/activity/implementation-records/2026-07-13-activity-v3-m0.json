@@ -1,0 +1,16 @@
+{
+  "contract_version":"implementation-record.v1",
+  "record_id":"IR-20260713-ACTIVITY-V3-M0",
+  "title":"活动板块 V3.0 M0 需求与设计合同化",
+  "date":"2026-07-13",
+  "status":"verified-candidate",
+  "objective":"将活动V3.0基线转为可执行验证的需求、领域、接口、隐私、AI和交易归因合同。",
+  "governance_checklist":"contracts/modules/activity/development-checklists/2026-07-13-activity-v3-m0.json",
+  "governance_exam":"contracts/modules/activity/governance-exams/2026-07-13-activity-v3-m0-attempt-1.json",
+  "requirement_sources":["docs/project-management/notices/2026-07-13-activity-v3-m0-task-order.md","baseline-sha256:838C54AE895D223E66FCA8BE8BB54D588DC3F83234B430B91073B8454E2975E6"],
+  "contracts":["contracts/modules/activity/internal-dependencies.v1.json","contracts/modules/activity/v3/requirements.v3.json","contracts/modules/activity/v3/domain-model.v1.json","contracts/modules/activity/v3/state-machines.v1.json","contracts/modules/activity/v3/api-contracts.v1.json","contracts/modules/activity/v3/safety-matrix.v1.json","contracts/modules/activity/v3/fixtures/cases.v1.json"],
+  "verification":["current checklist 28/28","governance exam 100/100","15 JSON documents validated","72 synthetic inputs evaluated by deterministic decision oracle","fixture-link and synthetic-input mutations rejected","6 embedded dependency schemas pass Draft202012 check and positive/negative instance validation","all 36 traces resolve to semantic API operations","six state machines and guarded transitions validated","UTF-8 passed","exact base-to-candidate diff check passed"],
+  "evidence":["docs/project-management/modules/activity/v3-m0-receipt.md","docs/project-management/modules/activity/v3-m0-requirements.md","docs/project-management/modules/activity/v3-m0-conformance-report.md","docs/project-management/modules/activity/handoff-m0.md"],
+  "premises":["M0 is mock-only and non-production","all six dependency contracts remain provisional","M1 deployment and production require separate authorization"],
+  "implementation_mode":"ai-assisted"
+}
