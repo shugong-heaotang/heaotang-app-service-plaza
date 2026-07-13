@@ -8,15 +8,21 @@
     "contract_version": {"const": "learning-plaza.architecture.v3"},
     "project_id": {"const": "learning-plaza"},
     "project_type": {"const": "independent-general-learning-platform"},
-    "execution": {"type": "object", "additionalProperties": false, "required": ["executable", "mode", "environment"], "properties": {"executable": {"const": false}, "mode": {"const": "mock-only"}, "environment": {"const": "non-production"}}},
-    "internal_apps": {"type": "array", "minItems": 7, "uniqueItems": true},
-    "connected_capabilities": {"type": "array", "minItems": 5, "uniqueItems": true},
-    "external_projects": {"type": "array", "minItems": 4, "uniqueItems": true},
-    "ownership": {"type": "object", "required": ["learning_fact_owner", "club_default_role", "club_content_ownership_implicit", "knowledge_catalog_owner", "non_knowledge_catalog_owner"]},
-    "review_policy": {"type": "object", "required": ["governance_owner", "default_sequence", "switches", "switch_change_policy", "both_disabled_policy", "mandatory_audit_fields"], "properties": {"switch_change_policy": {"const": "versioned-maker-checker"}, "mandatory_audit_fields": {"type": "array", "minItems": 8, "maxItems": 8, "uniqueItems": true}}},
-    "nova_learning_assistant": {"type": "object", "required": ["engine", "allowed_actions", "prohibited_actions", "minimum_citations", "visible_resources_only"], "properties": {"minimum_citations": {"type": "integer", "minimum": 1}, "visible_resources_only": {"const": true}}},
-    "growth_event": {"type": "object", "required": ["event_type", "source_of_truth", "required", "consumers", "write_policy"], "properties": {"source_of_truth": {"const": "learning-plaza"}, "write_policy": {"const": "emit-versioned-event-never-write-consumer-database"}}},
-    "first_course_loop": {"type": "array", "minItems": 9, "maxItems": 9, "uniqueItems": true},
-    "ports": {"type": "array", "minItems": 5, "items": {"type": "object", "required": ["port_id", "direction", "readiness", "failure_policy"], "properties": {"failure_policy": {"const": "fail-closed"}}}}
+    "execution": {"const": {"executable": false, "mode": "mock-only", "environment": "non-production"}},
+    "internal_apps": {"const": ["course", "reading", "exam-certification", "nova-learning-assistant", "learning-record", "growth-archive", "content-review-center"]},
+    "connected_capabilities": {"const": ["knowledge-base", "live-board", "nova-ai-engine", "identity", "order-payment"]},
+    "external_projects": {"const": ["life-navigation", "club-alliance", "member-growth-archive", "protection-mall"]},
+    "ownership": {"const": {"learning_fact_owner": "learning-plaza", "club_default_role": "learning-organizer", "club_content_ownership_implicit": false, "knowledge_catalog_owner": "learning-plaza", "non_knowledge_catalog_owner": "protection-mall"}},
+    "review_policy": {"const": {"governance_owner": "learning-plaza-review-committee", "default_sequence": ["ai-review", "human-final-review"], "switches": ["ai-review-enabled", "human-review-enabled"], "switch_change_policy": "versioned-maker-checker", "both_disabled_policy": "authorized-publisher-with-mandatory-audit", "mandatory_audit_fields": ["publisher_id", "source_refs", "copyright_basis", "content_version", "published_at", "change_log", "takedown_status", "review_trace"]}},
+    "nova_learning_assistant": {"const": {"engine": "nova-ai-engine-port", "allowed_actions": ["recommend-course", "recommend-resource", "answer", "explain", "plan", "summarize", "review", "exam-prepare", "suggest-next-step"], "prohibited_actions": ["enroll", "purchase", "complete-learning", "fabricate-record", "take-exam", "issue-certificate", "bypass-review"], "minimum_citations": 1, "visible_resources_only": true}},
+    "growth_event": {"const": {"event_type": "learning.growth.recorded.v1", "source_of_truth": "learning-plaza", "required": ["event_id", "idempotency_key", "user_id", "learning_object_id", "recorded_at", "evidence_refs", "event_version"], "consumers": ["life-navigation", "club-alliance", "member-growth-archive"], "write_policy": "emit-versioned-event-never-write-consumer-database"}},
+    "first_course_loop": {"const": ["course-submitted", "reviewed", "published", "nova-recommended", "learning-started", "progress-recorded", "completed", "growth-event-emitted", "projection-acknowledged"]},
+    "ports": {"const": [
+      {"port_id": "knowledge-base.read.v1", "direction": "inbound", "readiness": "provisional", "failure_policy": "fail-closed"},
+      {"port_id": "live-board.catalog.read.v1", "direction": "inbound", "readiness": "provisional", "failure_policy": "fail-closed"},
+      {"port_id": "nova-ai-engine.assist.v1", "direction": "outbound", "readiness": "provisional", "failure_policy": "fail-closed"},
+      {"port_id": "learning-growth.events.v1", "direction": "outbound", "readiness": "provisional", "failure_policy": "fail-closed"},
+      {"port_id": "order-payment.checkout.v1", "direction": "outbound", "readiness": "provisional", "failure_policy": "fail-closed"}
+    ]}
   }
 }

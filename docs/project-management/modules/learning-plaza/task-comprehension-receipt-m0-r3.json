@@ -1,0 +1,18 @@
+{
+  "receipt_version": "task-comprehension-receipt.v1",
+  "work_id": "AIW-20260713-LEARNING-PLAZA-M0",
+  "record_id": "IR-20260713-LEARNING-PLAZA-M0-R3",
+  "actor": "Learning Plaza continuous development agent",
+  "understood_goal": "关闭独立验收No-Go：同步最新权威基线、恢复真实治理时序、消除v3架构机器门禁假绿。",
+  "non_goals": ["不合并PR", "不激活M1", "不修改共享前后端", "不部署", "不触达真实用户、数据、消息或资金"],
+  "allowed_paths": ["contracts/modules/learning-plaza/**", "docs/project-management/modules/learning-plaza/**"],
+  "forbidden_actions": ["改写历史失败考试或时间戳", "关闭current校验", "以人工阅读替代架构变异门禁", "修改foundation或其他模块"],
+  "dependencies": ["latest authoritative integration 44325310f4bddfc8ddcb4b1f6e02402cc719c001", "foundation L0-L5", "independent reviewer re-acceptance"],
+  "risks": ["integration再次前进导致R3 SHA漂移", "精确Schema与未来扩展冲突", "旧失效证据被误当作active"],
+  "stop_conditions": ["最新integration不再是候选祖先", "R3考试早于checklist完成", "五类非法变异任一假绿", "需要越权路径或真实环境"],
+  "developer_role": "学习广场持续开发负责人",
+  "reviewer_role": "学习广场独立验收负责人",
+  "approver_role": "项目最高负责人",
+  "acceptance_evidence": ["R3 checklist 28/28 current", "R3 exam 100 with causal ordering", "valid schema 0 errors", "fixtures 34/34", "critical mutations 5/5 rejected by schema invariant and fixtures", "old M0 regression", "independent Go"],
+  "created_at": "2026-07-13T14:37:00+08:00"
+}
