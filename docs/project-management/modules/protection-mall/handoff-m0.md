@@ -31,7 +31,7 @@ base：`de31a235b9679698b9de4e33faa6ab980e0461f6`
 - `docs/project-management/modules/protection-mall/source-inventory-and-migration-matrix-m0-cp1.md`
 - `docs/project-management/modules/protection-mall/service-plaza-access-card-m0-cp1.md`
 - `docs/project-management/modules/protection-mall/mall-api-v1-freeze-proposal-m0-cp1.md`
-- `contracts/modules/protection-mall/internal-dependencies.v1.json`
+- `contracts/modules/protection-mall/internal-dependencies.v2.json`
 - `contracts/modules/protection-mall/mall-api.v1.json`
 
 ## 未迁移内容
@@ -43,6 +43,13 @@ base：`de31a235b9679698b9de4e33faa6ab980e0461f6`
 - 商城模块尚未写入平台统一 module overlay；本次使用平台 core checklist，并额外全文读取任务书和商城官方方案。后续由平台受保护路径工作项决定是否登记 overlay。
 - `development_readiness=partial-go`：M0 文档与契约工作可继续，但 M1 业务依赖仍为 draft。
 - 支付安全、资金状态机、回调验签和对账未 Go，继续阻塞上线。
+
+## 平台会签退回与修复
+
+- 第一次会签结论：暂时 No-Go；v1 草案缺少 v2 依赖合同必需字段，且 `evidence:null` 会导致专用验证器失败。
+- 根因：只做了 JSON 语法解析，没有运行 `validate_module_internal_dependencies.py` 专用机器合同门禁。
+- 修复：删除无效 v1 草案，建立五维 readiness 的 `internal-dependencies.v2.json`；M0 三项为 required，M1/release 项为非 required 且明确阻塞关系。
+- R2 checklist/exam 保持不可修改；修复完成后以 R3 current checklist/exam/IR 重新申请会签。
 
 ## 禁止事项
 

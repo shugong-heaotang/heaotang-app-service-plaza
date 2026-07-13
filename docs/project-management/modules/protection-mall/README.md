@@ -26,7 +26,7 @@
 1. 根 `AGENTS.md`、`README.md` 和 `CONSTRAINTS.md`。
 2. `docs/project-management/notices/2026-07-12-protection-mall-m0-task-order.md`。
 3. 本 README、官方方案、来源迁移矩阵、接入卡和契约冻结提案。
-4. `contracts/modules/protection-mall/internal-dependencies.v1.json` 与 `mall-api.v1.json`。
+4. `contracts/modules/protection-mall/internal-dependencies.v2.json` 与 `mall-api.v1.json`。
 5. `docs/project-management/modules/protection-mall/handoff-m0.md`。
 
 ## 冻结边界
