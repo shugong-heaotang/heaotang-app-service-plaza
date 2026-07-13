@@ -1,0 +1,65 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-PLATFORM-PROTECTION-MALL-OVERLAY-CORRECTION",
+  "title": "Protection Mall动态治理overlay最小补登记",
+  "date": "2026-07-13",
+  "status": "implemented",
+  "objective": "在已集成的动态模块机制中补登记protection-mall三项既存治理输入，使商城M2能够生成带正确module_id和current SHA的检查单。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-13-platform-protection-mall-overlay-correction.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-13-platform-protection-mall-overlay-correction-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-13-platform-protection-mall-overlay-correction-task-order.md",
+    "docs/project-management/notices/2026-07-13-protection-mall-m2-offline-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.governance-certification",
+    "foundation.ai-collaboration-safety",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/development-checklist.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "scripts/tests/test_new_agent_development_checklist.py",
+    "contracts/foundation/development-checklists/2026-07-13-platform-protection-mall-overlay-correction.json",
+    "contracts/foundation/governance-exams/2026-07-13-platform-protection-mall-overlay-correction-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-13-platform-protection-mall-overlay-correction.json",
+    "docs/project-management/notices/2026-07-13-platform-protection-mall-overlay-correction-task-order.md",
+    "docs/project-management/service-plaza/platform-protection-mall-overlay-correction-handoff.md"
+  ],
+  "verification": [
+    "protection-mall checklist command succeeds with module_id=protection-mall and 29 current inputs",
+    "README, M2 task order and internal-dependencies.v2 paths exist and SHA-256 values match",
+    "unknown module, empty overlay and missing overlay file fail closed",
+    "life-navigation, club-alliance, health-manager, activity, learning-plaza and protection-mall regressions pass",
+    "randomized governance exam attempt 1 passes with score 100",
+    "registry schema, active overlap and git diff checks pass"
+  ],
+  "evidence": [
+    "scripts/tests/test_new_agent_development_checklist.py",
+    "contracts/foundation/development-checklists/2026-07-13-platform-protection-mall-overlay-correction.json",
+    "contracts/foundation/governance-exams/2026-07-13-platform-protection-mall-overlay-correction-attempt-1.json",
+    "docs/project-management/service-plaza/platform-protection-mall-overlay-correction-handoff.md"
+  ],
+  "premises": [
+    "dynamic module support is already integrated and this correction only registers a missing overlay",
+    "the three protection-mall overlay inputs already exist in the authoritative repository",
+    "this correction does not authorize商城业务代码、真实数据、支付、网络、部署或上线"
+  ],
+  "implementation_mode": "ai-assisted"
+}

@@ -51,6 +51,11 @@
     "learning-plaza": [
       "docs/project-management/notices/2026-07-13-learning-plaza-m0-task-order.md",
       "docs/project-management/notices/2026-07-13-learning-plaza-m0-bootstrap-readme.md"
+    ],
+    "protection-mall": [
+      "docs/project-management/modules/protection-mall/README.md",
+      "docs/project-management/notices/2026-07-13-protection-mall-m2-offline-task-order.md",
+      "contracts/modules/protection-mall/internal-dependencies.v2.json"
     ]
   }
 }

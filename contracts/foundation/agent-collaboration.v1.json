@@ -2972,6 +2972,31 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "planned; activate only after frontend Handoff. Route wiring only; no activity business implementation.",
                            "handoff_record":  null
+                       },
+                       {
+                           "work_id":  "AIW-20260713-PLATFORM-PROTECTION-MALL-OVERLAY-CORRECTION",
+                           "title":  "Protection Mall治理读取overlay最小补登记",
+                           "owner":  "Platform protection-mall overlay correction agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-platform-protection-mall-overlay-correction",
+                           "branch":  "codex/platform-protection-mall-overlay-correction",
+                           "base_commit":  "029650f79c1d1cefa57b316df75af1c4c592c746",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/governance-reading-list.v1.json",
+                                                 "scripts/tests/test_new_agent_development_checklist.py",
+                                                 "contracts/foundation/development-checklists/2026-07-13-platform-protection-mall-overlay-correction*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-13-platform-protection-mall-overlay-correction*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-13-platform-protection-mall-overlay-correction*.json",
+                                                 "docs/project-management/notices/2026-07-13-platform-protection-mall-overlay-correction-task-order.md",
+                                                 "docs/project-management/service-plaza/platform-protection-mall-overlay-correction-handoff.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "仅为动态module overlay补登记protection-mall三项既存治理输入并增加正负/回归测试。禁止修改商城Evidence、后端、业务合同、活动、部署或生产。独立reviewer不得参与实现。",
+                           "handoff_record":  "docs/project-management/service-plaza/platform-protection-mall-overlay-correction-handoff.md"
                        }
                    ]
 }
