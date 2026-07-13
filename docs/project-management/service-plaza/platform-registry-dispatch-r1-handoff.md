@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-`Base refresh candidate R4 / Independent acceptance Pending`。
+`Independent-acceptance supporting-item authorization candidate R5 / Independent acceptance Pending`。
 
 root-of-trust 已受控集成到权威 `edf2133e171bce31a68e2e535f94eac20d04d03b`。R3 候选执行首个受控派发交易：仅将 `AIW-20260713-PLATFORM-EXAM-IR-CROSS-RECORD-GATE-R1` 从 `planned` 激活为 `active` 并绑定 edf exact clean worktree；NOVA overlay 与 Telemetry 保持 `planned`。本候选不实现业务或 validator，不授权部署、生产、真实数据或真实资金。
 
@@ -49,6 +49,21 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R4-1`，attempt-1，100 分
 - 禁止项：未实现 validator，未激活 NOVA/Telemetry，未修改业务、部署、生产、真实数据或真实资金路径。
 
+## R5 一次性 formal reviewer supporting-item 授权
+
+- authority：`757de99e4dfa4a7467a0de6e1a66d6e030ba7f09`，受控集成 source `3b4bd0c7c78c78be5b592b894e795053f169fa14`。
+- 缺口：authority 中不存在 cross-record formal reviewer evidence path，因此聊天 Go 不能作为 `independent_acceptance`，原工作项不能标为 integrated。
+- direct principal：项目最高负责人明确一次性扩展 active dispatch 职责，仅允许登记并激活 `AIW-20260714-PLATFORM-EXAM-IR-CROSS-RECORD-INDEPENDENT-ACCEPTANCE`；不构成一般新增业务项或 supporting-item 权限。
+- 原 cross-record：`active` → `handoff-ready`，next owner=`平台治理独立测试负责人`，记录 handoff 时间与 integration commit；不写虚假 independent acceptance。
+- reviewer item：owner=`Platform governance independent test agent`，owner_role=`平台治理独立测试负责人`，base=`757de99e`，status=`active`；allowed scope 仅五个 `docs/project-management/independent-acceptance/platform-exam-ir-cross-record-gate/` 证据模式，不含 registry、contracts/foundation、scripts 或 validator。
+- reviewer worktree：`C:/Users/shugo/Documents/worktrees/heaotang-platform-exam-ir-cross-record-independent-acceptance`，branch=`codex/platform-exam-ir-cross-record-independent-acceptance`，HEAD=`757de99e`，clean。
+- source worktree：`C:/Users/shugo/Documents/worktrees/heaotang-platform-exam-ir-cross-record-gate-r1`，branch=`codex/platform-exam-ir-cross-record-gate-r1`，HEAD=`3b4bd0c7`，clean。
+- 本候选 reviewer namespace 零写入；dispatch 只写 registry、自身 task-order、R5 checklist/exam/IR/Handoff。
+- NOVA overlay 与 Telemetry 保持 `planned`；未实现 validator，未接触部署、生产、真实数据或真实资金。
+- record：`IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R5`
+- checklist：`FC-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R5`，26/26 current
+- exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R5-1`，attempt-1，100 分
+
 ## 修改范围
 
 - `contracts/foundation/agent-collaboration.v1.json`
@@ -66,6 +81,9 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r4.json`
 - `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r4-attempt-1.json`
 - `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r4.json`
+- `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r5.json`
+- `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r5-attempt-1.json`
+- `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r5.json`
 
 ## 停止线
 
@@ -89,7 +107,12 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - R4：delivery-flow 永久回归 26/26、Service Plaza 总合同通过、UTF-8 1407 files 通过。
 - R4：authority/candidate 均为 124 rows，仅 cross-record row 的 `base_commit`、`updated_at`、`next_checkpoint`、`status_expires_at` 变化；status 持续 active，其他 123 rows 逐字段不变。
 - R4 target worktree：HEAD=`2535a6bf0b59a308dce0e73fd58071be52353ed8`、branch=`codex/platform-exam-ir-cross-record-gate-r1`、clean；本地 registry 可见 cross-record active。
+- R5：preflight ready；agent collaboration、delivery flow、implementation record、governance exam、development checklist validators 全部通过。
+- R5：delivery-flow + governance-exam + implementation-record 永久回归共 34 项通过；Service Plaza 总合同通过；UTF-8 1416 files 通过。
+- R5 registry：authority 124 rows、candidate 125 rows；仅 cross-record lifecycle/handoff 字段和 dispatch migration/freshness 字段变化，并追加一个精确 independent-acceptance supporting item。
+- R5 worktrees：source `3b4bd0c7` 与 reviewer `757de99e` 均 branch 正确、clean；reviewer namespace 候选写入数 0。
+- R5 边界：NOVA/Telemetry 逐字段不变且保持 planned；未设置 `independent_acceptance`，未把 cross-record 标为 integrated，未修改 validator、业务或部署。
 
 ## 下一步
 
-运行全量门禁、提交并推送 exact R4 base-refresh candidate；由 APP 总架构独立验收负责人给出 Go/No-Go。只有独立 Go 且受控集成后，cross-record 实施负责人才能从包含 R4 的最新权威 exact 同步工作树，再完成自身 current checklist、考试与 validator 实现。
+运行全量门禁、提交并推送 exact R5 supporting-item authorization candidate；由 APP 总架构独立验收负责人给出 Go/No-Go。只有该候选独立 Go 且受控集成后，独立测试负责人才能在 reviewer namespace 内生成自己的 current checklist、考试、IR、task-order 与 formal evidence；dispatch 不代写 reviewer evidence，也不自行集成。
