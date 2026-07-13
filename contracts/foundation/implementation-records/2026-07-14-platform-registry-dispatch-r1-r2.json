@@ -1,0 +1,72 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R2",
+  "title": "平台注册表串行派发 root-of-trust 授权记录 R2",
+  "date": "2026-07-14",
+  "status": "verified",
+  "objective": "在 exact base 384304a 无 active 或 handoff-ready registry owner 的空档中，记录由项目最高负责人事前批准、平台集成负责人执行、APP总架构独立验收负责人复核的唯一最小平台注册交易，恢复后续 cross-record 再 NOVA 的受控串行派发能力。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "平台注册表唯一新增工作项",
+    "平台注册派发任务通知",
+    "R2 current checklist、100分考试、实施记录与Handoff",
+    "R1无效证据原字节快照与原因manifest"
+  ],
+  "verification": [
+    "R2 current checklist 26/26 with exact attestation and current SHA-256",
+    "R2 governance exam attempt-1 passed with score 100",
+    "semantic registry comparison requires all original 123 rows to remain field-for-field unchanged",
+    "validate_agent_collaboration.py: pass",
+    "validate_delivery_flow_policy.py: pass",
+    "validate_implementation_records.py: pass",
+    "validate_governance_exams.py: pass",
+    "validate_development_checklists.py: pass",
+    "scripts.tests.test_validate_delivery_flow_policy: 26/26 pass",
+    "Test-ServicePlazaContracts.ps1: pass",
+    "Test-TextEncoding.ps1: 1399 files pass",
+    "semantic registry audit: base 123, current 124, changed original rows 0",
+    "scope audit: 7 authorized path groups, out-of-scope 0",
+    "git diff --check: pass; secret suspects: 0"
+  ],
+  "evidence": [
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md",
+    "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md",
+    "contracts/foundation/invalidated-snapshots/platform-registry-dispatch-r1/manifest.json"
+  ],
+  "premises": [
+    "项目最高负责人在当前24小时项目会话中明确授权/root监督并安排负责人持续推进",
+    "exact base 384304a的active和handoff-ready项均不拥有agent-collaboration registry路径",
+    "本候选只记录授权，不激活cross-record或NOVA，不实现业务或validator",
+    "invalidated-snapshot目录的单次扩展由/root在项目最高负责人授权链中明确批准，不构成一般自扩权",
+    "独立验收和受控集成通过前，不得使用本候选派发下游"
+  ],
+  "implementation_mode": "ai-assisted"
+}
