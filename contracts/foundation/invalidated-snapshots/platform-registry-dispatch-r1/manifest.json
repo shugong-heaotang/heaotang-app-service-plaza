@@ -1,0 +1,23 @@
+{
+  "snapshot_id": "platform-registry-dispatch-r1-attestation-correction",
+  "status": "invalidated-preserved-original-bytes",
+  "authorized_by": "/root supervisor in the 项目最高负责人 authorization chain",
+  "authorized_at": "2026-07-14T06:07:00+08:00",
+  "reason": "R1 checklist used a custom attestation. Attempt-1 passed with score 100 and bound the exact R1 checklist hash, but the development-checklist validator requires a fixed attestation. Correcting the checklist would make the completed exam hash stale, so both original byte streams are preserved and excluded from current evidence. A new R2 record is required.",
+  "not_general_scope_expansion": true,
+  "preserved_files": [
+    {
+      "path": "contracts/foundation/invalidated-snapshots/platform-registry-dispatch-r1/2026-07-14-platform-registry-dispatch-r1-checklist-original.json",
+      "sha256": "3c2d73899bd67e3dfe87f94bece1e2c787edaba512692c9084a9c2c1a53f5ea6"
+    },
+    {
+      "path": "contracts/foundation/invalidated-snapshots/platform-registry-dispatch-r1/2026-07-14-platform-registry-dispatch-r1-attempt-1-original.json",
+      "sha256": "52714be58417e6f988bcbde8cd08d109c83f7c5126161b940864f83c0fdb4bb4"
+    }
+  ],
+  "current_replacement": {
+    "record_id": "IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R2",
+    "checklist": "contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r2.json",
+    "exam": "contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r2-attempt-1.json"
+  }
+}
