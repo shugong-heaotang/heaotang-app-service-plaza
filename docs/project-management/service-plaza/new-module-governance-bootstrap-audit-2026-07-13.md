@@ -29,8 +29,8 @@
 1. 新增模块从 reading list 动态注册，不再维护第二份硬编码名单。
 2. 模块目录下完成态检查单必须设置非空、已注册的 `module_id`。
 3. 其 items 必须包含对应 overlay。
-4. 上表四份历史例外使用精确路径固定；例外集合增加、减少或被静默改写都会使测试失败。
-5. 平台级任务继续兼容 `module_id=null`，但不能把模块证据写入 foundation 目录以规避模块门禁。
+4. 上表四份历史例外同时固定精确路径、SHA-256、`completed/null` 身份和 26 项 core-only 顺序；例外集合或字节被静默改写都会使测试失败。
+5. 以 R1 激活提交 `03ab808f4a21f8a9585ed8aeefeb55e98c5434af` 作为共享门禁迁移基线；此后新增到 foundation 的完成态 checklist 必须能关联 registry 中的平台工作项、被 allowed paths 授权，并由任务单明确声明 `platform scope` 与 `module_id=null`。模块工作项把 null checklist 放入 foundation 会失败关闭。
 
 ## 后续责任
 

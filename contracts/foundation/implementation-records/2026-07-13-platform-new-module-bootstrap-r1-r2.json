@@ -63,7 +63,7 @@
     "shared module checklist gate rejects any new completed module checklist with null or unregistered module_id",
     "legacy exception set is exactly four immutable network and protection-mall checklist paths",
     "original activity command produces pending module_id=activity checklist with 28 unchecked items",
-    "related Python regression suite passes 45 tests",
+    "corrected Python regression suite passes 48 tests, including foundation-path bypass rejection and immutable legacy SHA/shape checks",
     "text encoding gate passes 1275 files",
     "recurring issue validator passes mandatory two-strike rule",
     "R2 current checklist matches all 26 current governance hashes",

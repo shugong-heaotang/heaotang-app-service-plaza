@@ -22,7 +22,8 @@
 
 ## 待完成
 
-- 全套相关回归 45/45、编码 1275 文件、recurring issue 和 diff 门禁已通过。
+- 首轮独立验收 No-Go 指出 foundation 路径绕过和历史例外未锁字节；两项均已修复并增加负向门禁。
+- 修正后全套相关回归 48/48、编码 1278 文件、recurring issue 和 diff 门禁已通过。
 - R2 current checklist 26/26、随机治理考试 100 分和 implementation record 已生成。
 - 独立测试负责人 Go。
 - 受控集成后更新 activity worktree，并重跑原 `ModuleId=activity` 命令。
