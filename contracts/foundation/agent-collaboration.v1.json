@@ -2835,7 +2835,7 @@
                            "title":  "保障商城 M2 目录方案跨仓合同与治理证据",
                            "owner":  "Protection Mall M2 catalog evidence agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "cancelled",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-m2-catalog-evidence",
                            "branch":  "codex/protection-mall-m2-catalog-evidence",
@@ -2851,7 +2851,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "冻结versioned catalog contract/schema/fixtures，完成current checklist、exam100、同record_id IR、后端exact commit映射与Handoff；不得写后端代码、不得调用真实外围。",
+                           "migration_note":  "f332c7e结构门禁通过但与backend 22073cd8存在scope、稳定错误、fixture与validator语义漂移，结论No-Go；旧工作项停止写入并由独立R2工作项接管，禁止集成或双owner。",
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m2.md"
                        },
                        {
@@ -2997,6 +2997,30 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "仅为动态module overlay补登记protection-mall三项既存治理输入并增加正负/回归测试。禁止修改商城Evidence、后端、业务合同、活动、部署或生产。独立reviewer不得参与实现。",
                            "handoff_record":  "docs/project-management/service-plaza/platform-protection-mall-overlay-correction-handoff.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260713-PROTECTION-MALL-M2-CATALOG-EVIDENCE-R2",
+                           "title":  "保障商城M2目录Evidence语义一致性R2修正",
+                           "owner":  "Protection Mall M2 evidence correction agent",
+                           "owner_role":  "商城M2 Evidence负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-m2-catalog-evidence-r2",
+                           "branch":  "codex/protection-mall-m2-catalog-evidence-r2",
+                           "base_commit":  "f332c7e45bc09b520505f5c4a509c567e16f2ffa",
+                           "allowed_paths":  [
+                                                 "contracts/modules/protection-mall/m2/catalog/catalog.v1.json",
+                                                 "contracts/modules/protection-mall/m2/catalog/catalog.v1.schema.json",
+                                                 "contracts/modules/protection-mall/m2/catalog/fixtures/cases.v1.json",
+                                                 "contracts/modules/protection-mall/m2/catalog/validate_catalog_contracts.py",
+                                                 "docs/project-management/modules/protection-mall/m2-catalog-evidence.md",
+                                                 "docs/project-management/modules/protection-mall/handoff-m2.md",
+                                                 "contracts/modules/protection-mall/implementation-records/2026-07-13-protection-mall-m2-catalog-r2.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "实施owner=商城M2 Evidence负责人；reviewer=平台集成负责人；approver=APP总架构独立验收。仅修正f332与backend 22073cd8之间8项语义漂移，补完整fixture和validator强断言；原checklist/exam不可修改，f332保持No-Go。",
+                           "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m2.md"
                        }
                    ]
 }
