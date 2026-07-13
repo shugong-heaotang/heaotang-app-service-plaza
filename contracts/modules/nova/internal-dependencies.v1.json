@@ -1,0 +1,48 @@
+{
+  "contract_version": "module-internal-dependencies.v1",
+  "module_id": "nova",
+  "module_version": "m1",
+  "slice_id": "runtime-and-tool-contracts",
+  "development_readiness": "no-go",
+  "acceptance_readiness": "no-go",
+  "dependencies": [
+    {
+      "dependency_id": "governance.m0",
+      "kind": "gate",
+      "description": "M0 checklist, 100-point exam and Handoff receive project-owner Go",
+      "status": "in-progress",
+      "required_for_slice": true,
+      "depends_on": [],
+      "unresolved": ["NOVA-M0-001 has not received project-owner Go"]
+    },
+    {
+      "dependency_id": "runtime.contracts",
+      "kind": "interface",
+      "description": "Versioned chat, task, step, event, confirmation, recovery and tool protocols",
+      "status": "planned",
+      "required_for_slice": true,
+      "depends_on": ["governance.m0"],
+      "unresolved": ["M1 implementation is not yet authorized"]
+    },
+    {
+      "dependency_id": "people.real-tools",
+      "kind": "external-module",
+      "description": "People identity, relationship, search, disclosure, introduction and feedback tools",
+      "status": "unknown",
+      "required_for_slice": false,
+      "required_for_stage": "M2",
+      "depends_on": ["runtime.contracts"],
+      "unresolved": ["Real people-module tool contracts and development Go are not yet evidenced"]
+    },
+    {
+      "dependency_id": "events.real-tools",
+      "kind": "external-module",
+      "description": "Event draft, roster, registration, invitation, check-in and retrospective tools",
+      "status": "unknown",
+      "required_for_slice": false,
+      "required_for_stage": "M3",
+      "depends_on": ["runtime.contracts"],
+      "unresolved": ["Real event-module tool contracts and development Go are not yet evidenced"]
+    }
+  ]
+}

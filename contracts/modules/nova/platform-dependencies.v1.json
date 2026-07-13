@@ -1,0 +1,20 @@
+{
+  "contract_version": "module-platform-dependencies.v1",
+  "module_id": "nova",
+  "module_version": "m1",
+  "development_readiness": "go",
+  "basis": "M0 governance work and later mock-based M1 protocol development only; this does not authorize M1 implementation or real business closure",
+  "requires": [
+    { "capability_id": "foundation.ai-engineering-traceability", "minimum_version": "v1", "status": "verified" },
+    { "capability_id": "foundation.governance-certification", "minimum_version": "v1", "status": "verified" },
+    { "capability_id": "foundation.identity-api", "minimum_version": "v1", "status": "verified" },
+    { "capability_id": "foundation.authorization-idempotency", "minimum_version": "v1", "status": "verified" },
+    { "capability_id": "foundation.contract-tooling", "minimum_version": "v1", "status": "verified" },
+    { "capability_id": "foundation.observability-config", "minimum_version": "v1", "status": "verified" },
+    { "capability_id": "foundation.business-variables", "minimum_version": "v1", "status": "verified" },
+    { "capability_id": "foundation.delivery-recovery", "minimum_version": "v1", "status": "verified" }
+  ],
+  "unresolved": [
+    "The governance checklist generator has no NOVA module overlay; the current task must supplement the core checklist with explicit NOVA-source reads."
+  ]
+}
