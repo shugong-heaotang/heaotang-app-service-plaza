@@ -1,0 +1,14 @@
+{
+  "contract_version": "activity.internal-dependencies.v1",
+  "module_id": "activity",
+  "execution": {"executable": false, "mode": "mock-only", "environment": "non-production"},
+  "dependencies": [
+    {"id":"club-alliance","owner":"Club Alliance 接口所有者","version":"provisional-v1","request_schema":"club_id,member_id,proposal,role","response_schema":"membership,role,approval,status","errors":["CLUB_NOT_FOUND","MEMBERSHIP_REQUIRED","APPROVAL_REQUIRED"],"permission":"club-resource-scope","fixture":"club-approved-001","readiness":"provisional"},
+    {"id":"mall-order-payment","owner":"商城/订单/支付接口所有者","version":"provisional-v1","request_schema":"club_id,product_id,activity_context","response_schema":"product_snapshot,order_reference,refund_status","errors":["PRODUCT_NOT_SALEABLE","ATTRIBUTION_CONFLICT","PAYMENT_NOT_AUTHORIZED"],"permission":"seller-and-order-scope","fixture":"mall-product-001","readiness":"provisional"},
+    {"id":"nova","owner":"NOVA 接口所有者","version":"provisional-v1","request_schema":"user_goal,visible_activity_scope,consents","response_schema":"ranked_explanations,draft_actions,uncertainty","errors":["CONSENT_REQUIRED","INSUFFICIENT_DATA","ACTION_CONFIRMATION_REQUIRED"],"permission":"user-visible-and-consented-data-only","fixture":"ai-match-001","readiness":"provisional"},
+    {"id":"member-relationship","owner":"会员/关系接口所有者","version":"provisional-v1","request_schema":"viewer_id,event_id,consent_scope","response_schema":"official_tier,aggregate_relations,visibility","errors":["RELATION_SCOPE_DENIED","PRIVACY_THRESHOLD_NOT_MET"],"permission":"field-consent-and-event-scope","fixture":"relations-aggregate-001","readiness":"provisional"},
+    {"id":"message","owner":"消息接口所有者","version":"provisional-v1","request_schema":"audience,template,frequency,confirmation","response_schema":"draft_id,send_audit","errors":["UNSUBSCRIBED","FREQUENCY_LIMITED","CONFIRMATION_REQUIRED"],"permission":"explicit-subscription-and-operator-confirmation","fixture":"message-draft-001","readiness":"provisional"},
+    {"id":"auth-privacy","owner":"鉴权/隐私接口所有者","version":"provisional-v1","request_schema":"actor,resource,action,consent","response_schema":"allow,scope,retention","errors":["UNAUTHENTICATED","FORBIDDEN","CONSENT_REVOKED"],"permission":"deny-by-default","fixture":"privacy-deny-001","readiness":"provisional"}
+  ]
+}
+

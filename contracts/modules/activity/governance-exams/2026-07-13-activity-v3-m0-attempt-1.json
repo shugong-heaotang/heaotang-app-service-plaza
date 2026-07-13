@@ -1,0 +1,70 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260713-ACTIVITY-V3-M0-1",
+    "record_id":  "IR-20260713-ACTIVITY-V3-M0",
+    "actor":  "Activity V3 continuous development agent",
+    "attempt_number":  1,
+    "status":  "passed",
+    "generated_at":  "2026-07-13T03:41:01.0291842Z",
+    "completed_at":  "2026-07-13T03:41:09.7839136Z",
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  100,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "fa36c97f81600087475aaf04194ae4ca0e44f2e67067d43d8dd6149ce6135637",
+    "checklist_path":  "C:/Users/shugo/Documents/worktrees/heaotang-activity-v3-m0/contracts/modules/activity/development-checklists/2026-07-13-activity-v3-m0.json",
+    "checklist_sha256":  "8e9627ed5f8cfc26fbb23bc2a518ca7839407b3080d22155aaf261f6e62c8ef9",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-011",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/project-management/module-internal-dependency-standard-v1.md"
+                      },
+                      {
+                          "question_id":  "GQ-016",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0013-mandatory-ai-development-entrypoint.md"
+                      },
+                      {
+                          "question_id":  "GQ-001",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "CONSTRAINTS.md"
+                      },
+                      {
+                          "question_id":  "GQ-004",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+                      },
+                      {
+                          "question_id":  "GQ-009",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0010-ai-implementation-records-required.md"
+                      },
+                      {
+                          "question_id":  "GQ-010",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0012-two-strike-root-cause-rule.md"
+                      },
+                      {
+                          "question_id":  "GQ-002",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0008-versioned-business-variables.md"
+                      },
+                      {
+                          "question_id":  "GQ-005",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+                      }
+                  ],
+    "remediation_sources":  [
+
+                            ]
+}

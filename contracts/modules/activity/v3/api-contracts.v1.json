@@ -1,0 +1,15 @@
+{
+  "contract_version":"activity.api-contracts.v1",
+  "execution":{"executable":false,"mode":"mock-only","environment":"non-production"},
+  "endpoints":[
+    {"operation":"submitProposal","scope":"activity:proposal:create","input":["club_id","member_id","proposal","idempotency_key"],"output":["proposal_id","status"],"errors":["MEMBERSHIP_REQUIRED","CLUB_PROPOSALS_DISABLED","DUPLICATE_REQUEST"]},
+    {"operation":"searchActivities","scope":"activity:read","input":["user_goal","visible_scope","preferences"],"output":["ranked_activities","explanations","uncertainty"],"errors":["VISIBLE_SCOPE_REQUIRED"]},
+    {"operation":"getMatchReport","scope":"activity:match:read","input":["activity_id","viewer_id","consent_scope"],"output":["recommendation","theme_help","participant_structure","relationship_opportunities","advice","data_timestamp","completeness"],"errors":["CONSENT_REQUIRED","PRIVACY_THRESHOLD_NOT_MET"]},
+    {"operation":"register","scope":"activity:register","input":["activity_id","member_id","ticket_type","consents","idempotency_key"],"output":["registration_id","status"],"errors":["CAPACITY_FULL","ELIGIBILITY_REQUIRED","DUPLICATE_REQUEST"]},
+    {"operation":"requestIntroduction","scope":"activity:introduction:request","input":["requester_id","target_id","activity_id","purpose"],"output":["introduction_id","status"],"errors":["TARGET_NOT_VISIBLE","MUTUAL_CONSENT_REQUIRED"]},
+    {"operation":"listActivityProducts","scope":"activity:commerce:read","input":["activity_id"],"output":["external_product_references","seller","price","inventory","promotion_label","refund_and_fulfilment"],"errors":["PRODUCT_NOT_SALEABLE"]},
+    {"operation":"createOrderRedirect","scope":"activity:commerce:initiate","input":["activity_id","club_id","product_id","placement_id","source","idempotency_key"],"output":["commerce_checkout_reference"],"errors":["PAYMENT_NOT_AUTHORIZED","ATTRIBUTION_CONFLICT","DUPLICATE_REQUEST"]}
+  ],
+  "global_error_semantics":{"UNAUTHENTICATED":401,"FORBIDDEN":403,"NOT_FOUND":404,"CONFLICT":409,"CONSENT_REQUIRED":412,"RATE_LIMITED":429,"DEPENDENCY_UNAVAILABLE":503}
+}
+

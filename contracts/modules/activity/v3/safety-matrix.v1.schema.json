@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"Activity safety matrix","type":"object","required":["contract_version","execution","boundaries"],"properties":{"boundaries":{"type":"array","minItems":5,"items":{"type":"object","required":["area","deny"]}}}}

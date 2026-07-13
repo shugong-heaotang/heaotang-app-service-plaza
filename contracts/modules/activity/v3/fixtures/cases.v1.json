@@ -1,0 +1,17 @@
+{
+  "fixture_version":"activity.fixtures.v1",
+  "deterministic":true,
+  "synthetic_only":true,
+  "cases":[
+    {"id":"club-approved-001","expect":"proposal-approved","club_membership":true,"club_approval":true},
+    {"id":"member-direct-publish-denied","expect":"FORBIDDEN","club_approval":false},
+    {"id":"ai-match-001","expect":"report","visible_activities":3,"consented_aggregate":6,"data_timestamp":"2026-07-13T00:00:00Z"},
+    {"id":"privacy-small-cohort","expect":"suppressed","aggregate_count":1,"display":"现场存在相关参与者"},
+    {"id":"mutual-introduction","expect":"connected","requester":true,"counterparty":true},
+    {"id":"unilateral-introduction","expect":"MUTUAL_CONSENT_REQUIRED","requester":true,"counterparty":false},
+    {"id":"mall-product-001","expect":"external-reference","product_source":"mall","saleable":true},
+    {"id":"duplicate-attribution","expect":"ATTRIBUTION_CONFLICT","order_id":"order-synthetic-001","candidate_activity_count":2},
+    {"id":"retry-idempotent","expect":"single-side-effect","same_idempotency_key_attempts":2,"created_count":1}
+  ]
+}
+

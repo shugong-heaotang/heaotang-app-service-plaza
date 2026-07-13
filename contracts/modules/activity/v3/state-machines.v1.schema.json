@@ -1,0 +1,1 @@
+{"$schema":"https://json-schema.org/draft/2020-12/schema","title":"Activity state machines","type":"object","required":["contract_version","machines","guards"],"properties":{"machines":{"type":"object","required":["activity","proposal","registration","introduction","meeting","intent"]},"guards":{"type":"array","minItems":6}}}

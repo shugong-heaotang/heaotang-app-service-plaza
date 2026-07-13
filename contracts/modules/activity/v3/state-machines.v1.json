@@ -1,0 +1,13 @@
+{
+  "contract_version":"activity.state-machines.v1",
+  "machines":{
+    "activity":["draft","club_review","approved","published","registration_open","in_progress","completed","archived","cancelled"],
+    "proposal":["draft","submitted","changes_requested","approved","rejected","withdrawn"],
+    "registration":["initiated","pending_review","confirmed","waitlisted","checked_in","completed","cancelled","refunded"],
+    "introduction":["suggested","requester_confirmed","counterparty_confirmed","connected","declined","revoked"],
+    "meeting":["requested","accepted","rescheduled","completed","cancelled"],
+    "intent":["draft","shared","mutually_accepted","routed_to_standard_order","cooperation_item","closed"]
+  },
+  "guards":["club_approval_before_publish","human_confirmation_before_external_action","mutual_consent_before_connection","counterparty_acceptance_before_meeting","approved-commerce-flow-before-transaction","idempotency-key-on-side-effect"]
+}
+
