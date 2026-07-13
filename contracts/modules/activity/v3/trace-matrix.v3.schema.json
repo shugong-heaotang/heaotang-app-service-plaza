@@ -10,7 +10,7 @@
   ],
   "properties": {
     "contract_version": {
-      "const": "activity.trace-matrix.v3"
+      "const": "activity.trace-matrix.v4"
     },
     "execution": {
       "$ref": "#/$defs/execution"
@@ -98,17 +98,7 @@
             "pattern": "\\.json$"
           }
         },
-        "api_operation": {
-          "enum": [
-            "submitProposal",
-            "searchActivities",
-            "getMatchReport",
-            "register",
-            "requestIntroduction",
-            "createOrderRedirect",
-            "listActivityProducts"
-          ]
-        },
+        "api_operation": {"type": "string", "pattern": "^[a-z][A-Za-z]{5,}$"},
         "positive_fixture": {
           "type": "string",
           "pattern": "^AC-[0-9]{2}-POS$"
@@ -120,10 +110,7 @@
         "assertions": {
           "type": "array",
           "minItems": 4,
-          "items": {
-            "type": "string",
-            "minLength": 10
-          }
+          "items": {"enum": ["capability_matches_requirement", "positive_oracle_allows", "negative_oracle_denies", "negative_rule_matches_requirement"]}
         }
       }
     }

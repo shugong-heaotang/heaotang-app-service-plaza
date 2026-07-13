@@ -1,13 +1,18 @@
 import json
 import copy
 from pathlib import Path
-from jsonschema import validate
+from jsonschema import Draft202012Validator, ValidationError, validate
 
 ROOT = Path(__file__).resolve().parent
 MODULE = ROOT.parent
 
 def load(path):
     return json.loads(path.read_text(encoding="utf-8"))
+
+def decision_oracle(synthetic_input):
+    if synthetic_input["violated_rules"] or not synthetic_input["authorized"] or not synthetic_input["confirmed"]:
+        return "deny"
+    return "allow"
 
 def validate_trace_semantics(req, trace_doc, fixture_doc):
     cases = {x["id"]: x for x in fixture_doc["cases"]}
@@ -19,8 +24,9 @@ def validate_trace_semantics(req, trace_doc, fixture_doc):
         assert positive["acceptance_id"] == negative["acceptance_id"] == trace["acceptance_id"]
         assert positive["capability"] == negative["capability"] == trace["capability"]
         assert trace["capability"] == req["acceptance"][trace["acceptance_id"] - 1]["capability"]
-        assert (positive["polarity"], positive["decision"]) == ("positive", "allow")
-        assert (negative["polarity"], negative["decision"]) == ("negative", "deny")
+        assert trace["assertions"] == ["capability_matches_requirement", "positive_oracle_allows", "negative_oracle_denies", "negative_rule_matches_requirement"]
+        assert positive["polarity"] == "positive" and decision_oracle(positive["synthetic_input"]) == positive["expected_decision"] == "allow"
+        assert negative["polarity"] == "negative" and decision_oracle(negative["synthetic_input"]) == negative["expected_decision"] == "deny"
         assert negative["rule"] == req["acceptance"][trace["acceptance_id"] - 1]["negative"]
 
 def main():
@@ -47,6 +53,17 @@ def main():
     assert len(deps["dependencies"]) == 6
     required = {"owner","version","request_schema","response_schema","errors","permission","fixture","readiness"}
     assert all(required <= set(x) and x["readiness"] == "provisional" for x in deps["dependencies"])
+    for dependency in deps["dependencies"]:
+        for embedded in (dependency["request_schema"], dependency["response_schema"]):
+            Draft202012Validator.check_schema(embedded)
+            valid_instance = {field: "synthetic" for field in embedded["required"]}
+            validate(valid_instance, embedded)
+            try:
+                validate({**valid_instance, "unexpected": "denied"}, embedded)
+            except ValidationError:
+                pass
+            else:
+                raise AssertionError(f"dependency schema accepted unexpected property: {dependency['id']}")
     for doc in docs.values():
         if "execution" in doc:
             assert doc["execution"] == {"executable": False, "mode": "mock-only", "environment": "non-production"}
@@ -68,14 +85,16 @@ def main():
     else:
         raise AssertionError("trace fixture mutation accepted")
     mutated_negative = copy.deepcopy(fixtures)
-    mutated_negative["cases"][1]["decision"] = "allow"
+    mutated_negative["cases"][1]["synthetic_input"] = {"authorized": True, "confirmed": True, "violated_rules": []}
     try:
         validate_trace_semantics(req, trace_doc, mutated_negative)
     except AssertionError:
         pass
     else:
-        raise AssertionError("negative decision mutation accepted")
-    print(f"PASS activity V3 M0: {len(files)} JSON files, 36 executable positive + 36 negative traces, schema and mutation guards")
+        raise AssertionError("synthetic-input mutation accepted")
+    api_operations = {item["operation"] for item in docs["v3/api-contracts.v1.json"]["endpoints"]}
+    assert all(trace["api_operation"] in api_operations for trace in trace_doc["traces"])
+    print(f"PASS activity V3 M0: {len(files)} JSON files, 72 oracle-executed cases, 6 usable dependency schemas, semantic APIs and mutation guards")
 
 if __name__ == "__main__":
     main()

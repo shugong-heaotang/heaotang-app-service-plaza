@@ -11,7 +11,7 @@
   ],
   "properties": {
     "fixture_version": {
-      "const": "activity.fixtures.v2"
+      "const": "activity.fixtures.v3"
     },
     "deterministic": {
       "const": true
@@ -30,7 +30,7 @@
           "id",
           "acceptance_id",
           "polarity",
-          "decision",
+          "expected_decision",
           "capability",
           "rule",
           "synthetic_input"
@@ -51,7 +51,7 @@
               "negative"
             ]
           },
-          "decision": {
+          "expected_decision": {
             "enum": [
               "allow",
               "deny"
@@ -66,7 +66,14 @@
             "minLength": 5
           },
           "synthetic_input": {
-            "type": "object"
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["authorized", "confirmed", "violated_rules"],
+            "properties": {
+              "authorized": {"type": "boolean"},
+              "confirmed": {"type": "boolean"},
+              "violated_rules": {"type": "array", "uniqueItems": true, "items": {"type": "string", "minLength": 5}}
+            }
           }
         }
       }

@@ -10,15 +10,14 @@
   ],
   "properties": {
     "contract_version": {
-      "const": "activity.api-contracts.v1"
+      "const": "activity.api-contracts.v2"
     },
     "execution": {
       "type": "object"
     },
     "endpoints": {
       "type": "array",
-      "minItems": 7,
-      "maxItems": 7,
+      "minItems": 20,
       "items": {
         "type": "object",
         "additionalProperties": false,
@@ -30,17 +29,7 @@
           "errors"
         ],
         "properties": {
-          "operation": {
-            "enum": [
-              "submitProposal",
-              "searchActivities",
-              "getMatchReport",
-              "register",
-              "requestIntroduction",
-              "listActivityProducts",
-              "createOrderRedirect"
-            ]
-          },
+          "operation": {"type": "string", "pattern": "^[a-z][A-Za-z]{5,}$"},
           "scope": {
             "type": "string",
             "pattern": "^activity:"
