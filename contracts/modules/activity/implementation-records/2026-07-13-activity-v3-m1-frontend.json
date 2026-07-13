@@ -1,0 +1,73 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-ACTIVITY-V3-M1-FRONTEND",
+  "title": "活动板块 V3.0 M1 前端最小闭环",
+  "date": "2026-07-13",
+  "status": "implemented",
+  "objective": "在不挂共享路由、不连接真实后端或外围系统的前提下，实现活动公开发现、详情、本人提案审核状态和免费报名状态的严格 mock-only 前端候选。",
+  "governance_checklist": "contracts/modules/activity/development-checklists/2026-07-13-activity-v3-m1-frontend.json",
+  "governance_exam": "contracts/modules/activity/governance-exams/2026-07-13-activity-v3-m1-frontend-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-13-activity-v3-m1-task-order.md",
+    "docs/project-management/modules/activity/README.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-13-activity-v3-m1-task-order.md",
+    "docs/project-management/modules/activity/v3-m0-requirements.md",
+    "contracts/modules/activity/v3/requirements.v3.json"
+  ],
+  "capabilities": [
+    "foundation.app-shell-adapter",
+    "foundation.authorization-idempotency",
+    "foundation.governance-certification"
+  ],
+  "contracts": [
+    "contracts/modules/activity/v3/requirements.v3.json",
+    "contracts/modules/activity/v3/domain-model.v1.json",
+    "contracts/modules/activity/v3/state-machines.v1.json",
+    "contracts/modules/activity/v3/api-contracts.v1.json",
+    "contracts/modules/activity/v3/safety-matrix.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "changed_areas": [
+    "app/src/modules/activity/activityModels.ts",
+    "app/src/modules/activity/activityAdapter.ts",
+    "app/src/modules/activity/activityMockRepository.ts",
+    "app/src/modules/activity/ActivityM1.tsx",
+    "app/src/modules/activity/ActivityM1.css",
+    "app/src/modules/activity/activityAdapter.test.ts",
+    "app/src/modules/activity/ActivityM1.test.tsx",
+    "app/src/modules/activity/index.ts",
+    "contracts/modules/activity/governance-exams/2026-07-13-activity-v3-m1-frontend-attempt-1.json",
+    "contracts/modules/activity/implementation-records/2026-07-13-activity-v3-m1-frontend.json",
+    "docs/project-management/modules/activity/handoff-m1-frontend.md"
+  ],
+  "verification": [
+    "governance checklist completed and attempt 1 exam score 100",
+    "activity focused tests 25 of 25 passed",
+    "frontend full tests 256 of 256 passed",
+    "frontend production build passed with 68 modules transformed",
+    "activity V3 M0 validator passed 15 JSON files and 72 deterministic oracle cases",
+    "strict adapter rejects non-public lifecycle, non-free price, self approval, unknown fields, external routes, invalid dates and inconsistent capacity"
+  ],
+  "evidence": [
+    "app/src/modules/activity/activityAdapter.test.ts",
+    "app/src/modules/activity/ActivityM1.test.tsx",
+    "docs/project-management/modules/activity/handoff-m1-frontend.md"
+  ],
+  "premises": [
+    "This checkpoint is mock-only non-production and not mounted into the shared application route",
+    "No backend API database network real authentication user message AI commerce order payment deployment or production action is authorized",
+    "Independent acceptance is required before shared route activation",
+    "Backend activation remains conditional on Club Alliance and Auth Privacy owner Go"
+  ],
+  "implementation_mode": "ai-assisted"
+}
