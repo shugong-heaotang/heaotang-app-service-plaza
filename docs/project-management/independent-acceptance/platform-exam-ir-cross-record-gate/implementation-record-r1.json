@@ -1,0 +1,78 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260714-PLATFORM-EXAM-IR-CROSS-RECORD-INDEPENDENT-ACCEPTANCE-R1",
+  "title": "治理考试与实施记录跨记录门禁独立验收证据文件化",
+  "date": "2026-07-14",
+  "status": "verified",
+  "objective": "将 exact source 3b4bd0c7、controlled integration 757de99e、authorization 60ff58d0 与独立失败关闭复验固化为可审计证据，不修改 validator 或平台工作项状态。",
+  "governance_checklist": "docs/project-management/independent-acceptance/platform-exam-ir-cross-record-gate/development-checklist-r1.json",
+  "governance_exam": "docs/project-management/independent-acceptance/platform-exam-ir-cross-record-gate/governance-exam-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/independent-acceptance/platform-exam-ir-cross-record-gate/task-order.md",
+    "docs/project-management/notices/2026-07-13-platform-exam-ir-cross-record-gate-r1-task-order.md",
+    "docs/project-management/service-plaza/platform-exam-ir-cross-record-gate-r1-handoff.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json",
+    "contracts/foundation/implementation-record.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/independent-acceptance/platform-exam-ir-cross-record-gate/evidence.md",
+    "docs/project-management/independent-acceptance/platform-exam-ir-cross-record-gate/task-order.md",
+    "docs/project-management/independent-acceptance/platform-exam-ir-cross-record-gate/development-checklist-r1.json",
+    "docs/project-management/independent-acceptance/platform-exam-ir-cross-record-gate/governance-exam-attempt-1.json",
+    "docs/project-management/independent-acceptance/platform-exam-ir-cross-record-gate/implementation-record-r1.json"
+  ],
+  "verification": [
+    "source 3b4bd0c7 is an ancestor and second parent of controlled integration 757de99e",
+    "authorization 60ff58d0 contains reviewed integration 757de99e and the active reviewer work item",
+    "same-record passed100 positive and failed75, record mismatch, missing exam negative regressions pass",
+    "Activity non-canonical record is discovered and failed75 is rejected without whole-record exemption",
+    "Protection Mall validator exits 1 and dirty9 fingerprint remains ae3f55b13652daa4597c6b5ca79ab415d6e675e51696fa6825cd73cc27ea954d before and after",
+    "source full Python governance suite 79 tests: 78 pass and one exact-base-identical inventory test failure",
+    "controlled integration full Python governance suite 79 tests: 78 pass and the same inventory test category fails",
+    "Service Plaza total contract recursively validates foundation and module exams and implementation records",
+    "reviewer current checklist 26/26 and governance exam attempt 1 score 100",
+    "explicit exact reviewer checklist, exam and implementation-record validators",
+    "JSON parse, UTF-8, git diff --check, allowed scope, secret-pattern and remote consistency gates"
+  ],
+  "evidence": [
+    "docs/project-management/independent-acceptance/platform-exam-ir-cross-record-gate/evidence.md",
+    "docs/project-management/independent-acceptance/platform-exam-ir-cross-record-gate/task-order.md",
+    "docs/project-management/independent-acceptance/platform-exam-ir-cross-record-gate/development-checklist-r1.json",
+    "docs/project-management/independent-acceptance/platform-exam-ir-cross-record-gate/governance-exam-attempt-1.json"
+  ],
+  "premises": [
+    "The owner did not implement source 3b4bd0c7, did not execute integration 757de99e and will not integrate this evidence branch",
+    "The Go verdict is limited to the exact reviewed source and integration and does not authorize production, real data, payment, funds or NOVA activation",
+    "The historical foundation platform-scope inventory test remains a separately owned governance debt and is not hidden or weakened",
+    "The Service Plaza total contract does not automatically scan this reviewer namespace; explicit exact-file validators provide the claimed reviewer evidence coverage",
+    "This evidence commit does not update registry or mark either work item integrated"
+  ],
+  "implementation_mode": "ai-assisted"
+}
