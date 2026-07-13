@@ -2788,7 +2788,7 @@
                            "title": "平台新模块治理冷启动动态注册修复",
                            "owner": "Platform governance bootstrap agent",
                            "owner_role": "平台集成负责人",
-                           "status": "active",
+                           "status": "integrated",
                            "repository_root": "C:/Users/shugo/Documents/APP系统",
                            "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-platform-new-module-bootstrap-r1",
                            "branch": "codex/platform-new-module-bootstrap-r1",
@@ -2808,7 +2808,7 @@
                            ],
                            "started_with_clean_worktree": true,
                            "preexisting_changes_acknowledged": false,
-                           "migration_note": "第二次 GOV-NEW-MODULE-BOOTSTRAP-001 复发的系统修复；计划态尚未创建工作树，激活时必须从最新干净权威基线重建并重新核验。平台治理实施主体受平台集成负责人角色的受保护路径约束；实施、活动负责人和独立测试负责人必须分离；禁止活动 M0、业务代码、部署、真实触达、验证码、支付和生产变更。 R2已由独立验证Go并集成，registry已释放；activation_base=ac417ed2da3a80637fbc4b72376df92c7296fb04。独立验证负责人=平台治理独立测试负责人；活动V3持续负责人仅在修复合入后复验。next_gate=complete-current-checklist-and-exam-100。",
+                           "migration_note": "第二次 GOV-NEW-MODULE-BOOTSTRAP-001 复发的系统修复；计划态尚未创建工作树，激活时必须从最新干净权威基线重建并重新核验。平台治理实施主体受平台集成负责人角色的受保护路径约束；实施、活动负责人和独立测试负责人必须分离；禁止活动 M0、业务代码、部署、真实触达、验证码、支付和生产变更。 R2已由独立验证Go并集成，registry已释放；activation_base=ac417ed2da3a80637fbc4b72376df92c7296fb04。独立验证负责人=平台治理独立测试负责人；活动V3持续负责人仅在修复合入后复验。next_gate=complete-current-checklist-and-exam-100。首轮候选0fb3fc4因foundation路径绕过与历史例外未锁字节被独立No-Go；修正候选66285ecd415cd696a0f4534211efa8591a15854d经独立复验Go，48项测试、总合同、UTF-8、activity原命令和R2 current证据通过；merge_commit=5f8274a30d22bbd0031a3c25466dc8af6c8bfe1f。",
                            "handoff_record": "docs/project-management/service-plaza/platform-new-module-bootstrap-r1-handoff.md"
                        },
                        {
