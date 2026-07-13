@@ -54,7 +54,7 @@
     "docs/project-management/service-plaza/delivery-flow-optimization-2026-07-13.md",
     "contracts/foundation/development-checklists/2026-07-13-delivery-flow-optimization-r11.json",
     "contracts/foundation/governance-exams/2026-07-13-delivery-flow-optimization-r11.json",
-    "scripts/tests/test_validate_agent_collaboration.py"
+    "scripts/tests/test_validate_delivery_flow_policy.py"
   ],
   "premises": [
     "repository_root identifies the authoritative Git object database for each work item",

@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-- 状态：R4、R6、R8 independent review 均为 No-Go 且保持不可覆盖；R11 完成跨仓 base commit 存在性整改，等待最终 current 认证、提交和独立复验
+- 状态：R4、R6、R8 与候选 dadcc42 的 independent review 均为 No-Go 且保持不可覆盖；R13 根因整改与 R14 最终 current 认证已完成，等待新候选 exact commit 的第二次独立复验
 - 主因：业务工作被拆成多个长期并行治理项，Handoff 缺少决策时限，范围内下一检查点仍反复等待授权，平台集成负责人形成单点队列；原 R2 又只优化技术流，没有约束客户价值和商业结果。
 - 处置：同步权威 HEAD `094bafdbba48c84f41611ca541c8225e4de4a8dd`，升级 `delivery-flow-policy.v1`、机器校验和商业价值门禁。
 
@@ -125,3 +125,33 @@
 - independent reviewer：APP 总架构独立验收负责人。
 - verdict：候选测试 Go；集成保持 Pending，必须绑定推送后的 exact commit 独立复验。
 - next gate：最终 current checklist/exam 100，IR、diff/secret 复核、commit/push，随后独立验收；实施负责人不得自行集成。
+
+## dadcc42 独立验收 No-Go 与 R13 整改
+
+### 不可覆盖结论
+
+- 验收对象：dadcc42c76e1dbc008d13780a19d248d11c54fb6。
+- 结论：No-Go，禁止集成。
+- P0-1：新增 scripts/tests/test_validate_agent_collaboration.py 不在父提交既有 allowed paths；同提交向 registry 添加自身路径不能追溯授权该提交。
+- P0-2：planned NOVA overlay R2 的 owner、title、business stream、next checkpoint、阻塞范围和 allowed paths 未逐字段采用平台负责人原案。
+
+### R13 根因整改
+
+- 从累计候选差异中删除越权新增测试文件，也删除 delivery-flow 工作项对该文件的同提交自增授权。
+- 5 个 base commit 负向/边界测试迁入父提交已经授权的 scripts/tests/test_validate_delivery_flow_policy.py。
+- NOVA R2 按平台负责人建议修正 owner、title、business_stream_id、next_checkpoint、blocks、does_not_block 和完整 allowed paths。
+- NOVA R2 实施范围不包含 registry；registry 的登记与未来状态切换继续由当前 delivery-flow owner 执行。
+- 后续共享 overlay 完整性门禁必须扫描所有 active 模块，并同时发现 active Protection Mall 缺 overlay；只让 NOVA 通过仍属失败。
+- R13 入口检查单：26/26；考试 attempt 1：100 分。
+- 下一门禁：R13 IR、R14 最终 current 认证、25 项回归、总合同、UTF-8、范围/diff/secret、提交推送及第二次独立验收。
+
+## R14 最终 current 认证与候选交接
+
+- R14 checklist：26/26 current 哈希一致；精确 attestation 已通过总合同校验。
+- R14 governance exam：attempt 1，100 分；exam 与修正后的 checklist SHA-256 一致。
+- 跨仓 base commit 与 delivery-flow 回归：25/25 通过。
+- `validate_agent_collaboration.py`、`validate_delivery_flow_policy.py`、implementation-record validator：全部通过。
+- Service Plaza 总合同：通过；UTF-8：1359 个文件通过。
+- 累计候选不再包含 `scripts/tests/test_validate_agent_collaboration.py`；5 个 base commit 负例已位于父提交授权的 `scripts/tests/test_validate_delivery_flow_policy.py`。
+- NOVA overlay R2：平台建议字段已逐项采用，allowed paths 为 17 项，且实施 Agent 不拥有 registry。
+- verdict：候选具备提交与推送条件；`dadcc42` 继续禁止集成，新候选仍为 Pending，必须由 APP 总架构独立验收负责人绑定远端 exact commit 复验。

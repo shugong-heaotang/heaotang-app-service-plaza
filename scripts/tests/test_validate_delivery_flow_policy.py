@@ -12,6 +12,12 @@ ROOT = Path(__file__).resolve().parents[2]
 SPEC = importlib.util.spec_from_file_location("flow", ROOT / "scripts" / "validate_delivery_flow_policy.py")
 FLOW = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(FLOW)
+COLLAB_SPEC = importlib.util.spec_from_file_location(
+    "collaboration", ROOT / "scripts" / "validate_agent_collaboration.py"
+)
+COLLABORATION = importlib.util.module_from_spec(COLLAB_SPEC)
+COLLAB_SPEC.loader.exec_module(COLLABORATION)
+COLLABORATION_SCHEMA = ROOT / "contracts" / "foundation" / "agent-collaboration.v1.schema.json"
 
 
 class DeliveryFlowPolicyTests(unittest.TestCase):
@@ -286,6 +292,90 @@ class DeliveryFlowPolicyTests(unittest.TestCase):
         item.pop("next_checkpoint")
         errors = self.run_validation(registry=registry)
         self.assertTrue(any("missing flow fields" in e for e in errors))
+
+
+class AgentCollaborationBaseCommitTests(unittest.TestCase):
+    def setUp(self):
+        self.temp = tempfile.TemporaryDirectory()
+        self.root = Path(self.temp.name)
+        self.repo_a, self.commit_a = self.new_repo("repo-a")
+        self.repo_b, self.commit_b = self.new_repo("repo-b")
+
+    def tearDown(self):
+        self.temp.cleanup()
+
+    def git(self, repo, *args):
+        return subprocess.run(
+            ["git", "-C", str(repo), *args],
+            check=True,
+            capture_output=True,
+            text=True,
+            encoding="utf-8",
+        ).stdout.strip()
+
+    def new_repo(self, name):
+        repo = self.root / name
+        repo.mkdir()
+        self.git(repo, "init")
+        self.git(repo, "config", "user.email", "validator@example.invalid")
+        self.git(repo, "config", "user.name", "Validator Test")
+        (repo / "seed.txt").write_text(name + "\n", encoding="utf-8")
+        self.git(repo, "add", "seed.txt")
+        self.git(repo, "commit", "-m", "seed")
+        return repo, self.git(repo, "rev-parse", "HEAD")
+
+    def item(self, work_id, status, repository_root, base_commit):
+        return {
+            "work_id": work_id,
+            "title": work_id,
+            "owner": "test owner",
+            "owner_role": "module owner",
+            "status": status,
+            "repository_root": repository_root.as_posix(),
+            "workspace_path": (self.root / ("workspace-" + work_id.lower())).as_posix(),
+            "branch": "codex/" + work_id.lower(),
+            "base_commit": base_commit,
+            "allowed_paths": ["modules/" + work_id.lower()],
+            "started_with_clean_worktree": True,
+            "preexisting_changes_acknowledged": False,
+            "migration_note": None,
+            "handoff_record": None,
+        }
+
+    def validate(self, items):
+        registry = self.root / "registry.json"
+        registry.write_text(
+            json.dumps({
+                "contract_version": "agent-collaboration.v1",
+                "integration_owner_role": "platform owner",
+                "workspace_policy": "isolated-branch-and-worktree",
+                "protected_paths": ["contracts/foundation"],
+                "work_items": items,
+            }),
+            encoding="utf-8",
+        )
+        return COLLABORATION.validate(COLLABORATION_SCHEMA, registry)
+
+    def test_active_commit_is_checked_in_its_own_cross_repository_root(self):
+        item = self.item("AIW-20260713-CROSS-REPO", "active", self.repo_b, self.commit_b)
+        self.assertEqual([], self.validate([item]))
+
+    def test_active_commit_from_another_repository_is_rejected(self):
+        item = self.item("AIW-20260713-WRONG-REPO", "active", self.repo_b, self.commit_a)
+        self.assertTrue(any("does not exist as a commit" in error for error in self.validate([item])))
+
+    def test_handoff_ready_missing_commit_is_rejected(self):
+        item = self.item("AIW-20260713-HANDOFF", "handoff-ready", self.repo_a, "0" * 40)
+        self.assertTrue(any("does not exist as a commit" in error for error in self.validate([item])))
+
+    def test_planned_and_cancelled_legacy_rows_do_not_require_local_objects(self):
+        planned = self.item("AIW-20260713-PLANNED", "planned", self.root / "gone-a", "1" * 40)
+        cancelled = self.item("AIW-20260713-CANCELLED", "cancelled", self.root / "gone-b", "2" * 40)
+        self.assertEqual([], self.validate([planned, cancelled]))
+
+    def test_active_missing_repository_root_is_rejected(self):
+        item = self.item("AIW-20260713-MISSING-ROOT", "active", self.root / "gone", "3" * 40)
+        self.assertTrue(any("repository_root does not exist" in error for error in self.validate([item])))
 
 
 if __name__ == "__main__":
