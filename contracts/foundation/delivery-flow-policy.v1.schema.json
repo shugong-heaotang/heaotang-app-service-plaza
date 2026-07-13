@@ -1,0 +1,41 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/foundation/delivery-flow-policy.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "effective_at", "wip", "handoff", "continuation", "work_item_model", "completion"],
+  "properties": {
+    "contract_version": {"const": "delivery-flow-policy.v1"},
+    "effective_at": {"type": "string", "format": "date-time"},
+    "wip": {
+      "type": "object", "additionalProperties": false,
+      "required": ["max_active_business_streams", "max_active_business_streams_per_module", "legacy_drain_mode", "activation_rule"],
+      "properties": {
+        "max_active_business_streams": {"type": "integer", "minimum": 1},
+        "max_active_business_streams_per_module": {"type": "integer", "minimum": 1},
+        "legacy_drain_mode": {"type": "boolean"},
+        "activation_rule": {"type": "string", "minLength": 1}
+      }
+    },
+    "handoff": {
+      "type": "object", "additionalProperties": false,
+      "required": ["decision_sla_hours", "on_expiry", "required_next_owner"],
+      "properties": {
+        "decision_sla_hours": {"type": "integer", "minimum": 1, "maximum": 24},
+        "on_expiry": {"const": "escalate-to-project-owner"},
+        "required_next_owner": {"const": true}
+      }
+    },
+    "continuation": {
+      "type": "object", "additionalProperties": false,
+      "required": ["default", "required_conditions", "stop_conditions"],
+      "properties": {
+        "default": {"const": "auto-continue"},
+        "required_conditions": {"type": "array", "minItems": 4, "uniqueItems": true, "items": {"type": "string", "minLength": 1}},
+        "stop_conditions": {"type": "array", "minItems": 7, "uniqueItems": true, "items": {"type": "string", "minLength": 1}}
+      }
+    },
+    "work_item_model": {"type": "object", "additionalProperties": {"const": true}, "minProperties": 4},
+    "completion": {"type": "object", "additionalProperties": {"const": true}, "minProperties": 3}
+  }
+}

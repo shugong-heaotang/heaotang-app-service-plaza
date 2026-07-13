@@ -1,0 +1,44 @@
+{
+  "contract_version": "delivery-flow-policy.v1",
+  "effective_at": "2026-07-13T09:00:00+08:00",
+  "wip": {
+    "max_active_business_streams": 3,
+    "max_active_business_streams_per_module": 1,
+    "legacy_drain_mode": true,
+    "activation_rule": "No new business stream may activate while the unique active business-stream count exceeds the limit. Existing isolated work drains without forced interruption."
+  },
+  "handoff": {
+    "decision_sla_hours": 24,
+    "on_expiry": "escalate-to-project-owner",
+    "required_next_owner": true
+  },
+  "continuation": {
+    "default": "auto-continue",
+    "required_conditions": [
+      "current checkpoint evidence passed",
+      "next checkpoint is inside the original allowed paths and risk envelope",
+      "worktree is clean or contains only owned changes",
+      "no stop condition is present"
+    ],
+    "stop_conditions": [
+      "production access",
+      "real money",
+      "real health or member data",
+      "irreversible data change",
+      "authority or scope expansion",
+      "security or legal escalation",
+      "independent acceptance failure"
+    ]
+  },
+  "work_item_model": {
+    "one_business_outcome_one_work_item": true,
+    "supporting_evidence_is_checkpoint": true,
+    "independent_acceptance_required": true,
+    "developer_reviewer_approver_separation_for_high_risk": true
+  },
+  "completion": {
+    "requires_business_flow_resumed": true,
+    "requires_independent_acceptance": true,
+    "commit_or_document_alone_is_not_completion": true
+  }
+}
