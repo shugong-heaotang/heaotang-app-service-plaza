@@ -64,3 +64,8 @@
   - reason: 防止平台负责人代做所有业务形成瓶颈，也防止板块完工后才暴露大量系统性问题。
   - date: 2026-07-10
   - known_risk: 增加阶段交接次数，需要把检查点控制为精简且可测试的最小成果。
+
+- 模块工作项进入 `active` 或 `handoff-ready` 前，非 `platform` 的 `module_id` 必须已经在唯一 `governance-reading-list.v1` 注册非空、文件存在的 overlay；共享总门禁动态扫描 registry 并失败关闭，禁止先激活再补课、维护第二份模块硬编码名单或以 core-only 检查单替代模块治理输入。
+  - reason: NOVA 在 activity 系统修复后仍因缺少 overlay 无法生成 current checklist，且同一权威中 active Protection Mall 也缺 overlay，证明仅在生成器调用时校验不能阻止错误生命周期状态进入 registry。
+  - date: 2026-07-14
+  - known_risk: 历史工作项可能缺少 `module_id`，只能按 ADR 0019 的迁移边界保留；新派发必须显式填写，不能继续扩大 legacy 集合。

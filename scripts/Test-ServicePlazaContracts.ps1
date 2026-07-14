@@ -58,6 +58,14 @@ try {
   if ($LASTEXITCODE -ne 0) {
     throw "Recurring issue two-strike validation failed."
   }
+  & python -X utf8 (Join-Path $PSScriptRoot "validate_governance_reading_list.py") `
+    (Join-Path $repoRoot "contracts\foundation\governance-reading-list.v1.schema.json") `
+    (Join-Path $repoRoot "contracts\foundation\governance-reading-list.v1.json") `
+    --project-root $repoRoot `
+    --registry (Join-Path $repoRoot "contracts\foundation\agent-collaboration.v1.json")
+  if ($LASTEXITCODE -ne 0) {
+    throw "Governance reading-list and module activation gate validation failed."
+  }
   & python -X utf8 (Join-Path $PSScriptRoot "validate_club_category_filter.py") `
     (Join-Path $repoRoot "contracts\service-plaza\club-category-filter.v1.schema.json") `
     (Join-Path $repoRoot "contracts\service-plaza\club-category-filter.v1.json") `

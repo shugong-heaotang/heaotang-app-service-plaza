@@ -1,0 +1,95 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-PLATFORM-NOVA-OVERLAY-R2-R2",
+  "title": "NOVA与Protection Mall模块overlay激活前共享门禁第三次复发闭环",
+  "date": "2026-07-14",
+  "status": "implemented",
+  "objective": "以带Schema的唯一reading list、registry生命周期扫描和总合同门禁阻止任何显式active/handoff-ready模块在缺少治理overlay时进入实施，并补齐NOVA与全依赖审计发现的Protection Mall最小overlay。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-13-platform-nova-overlay-r2-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-13-platform-nova-overlay-r2-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-13-platform-nova-overlay-r2-task-order.md",
+    "docs/project-management/notices/2026-07-12-nova-m1-task-order.md",
+    "docs/project-management/notices/2026-07-13-protection-mall-m2-offline-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.recurrence-prevention",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/governance-reading-list.v1.schema.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/recurring-issues.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0019-module-overlay-registration-before-activation.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/governance-reading-list.v1.schema.json",
+    "scripts/validate_governance_reading_list.py",
+    "scripts/New-AgentDevelopmentChecklist.ps1",
+    "scripts/Test-ServicePlazaContracts.ps1",
+    "scripts/tests/test_new_agent_development_checklist.py",
+    "scripts/tests/test_validate_governance_reading_list.py",
+    "docs/project-management/notices/2026-07-13-nova-phase5-m1-bootstrap-readme.md",
+    "docs/project-management/service-plaza/new-module-governance-bootstrap-audit-2026-07-13.md",
+    "contracts/foundation/recurring-issues.v1.json",
+    "CONSTRAINTS.md",
+    "docs/decisions/0019-module-overlay-registration-before-activation.md",
+    "contracts/foundation/development-checklists/2026-07-13-platform-nova-overlay-r2.json",
+    "contracts/foundation/development-checklists/2026-07-13-platform-nova-overlay-r2-r2.json",
+    "contracts/foundation/governance-exams/2026-07-13-platform-nova-overlay-r2-attempt-1.json",
+    "contracts/foundation/governance-exams/2026-07-13-platform-nova-overlay-r2-r2-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-13-platform-nova-overlay-r2-r2.json",
+    "docs/project-management/notices/2026-07-13-platform-nova-overlay-r2-task-order.md",
+    "docs/project-management/service-plaza/platform-nova-overlay-r2-handoff.md"
+  ],
+  "verification": [
+    "preflight ready, clean isolated worktree, active local registry item and zero shared allowed-path conflicts",
+    "initial and final R2 current checklists each contain 26 completed governance inputs; final R2 reflects the three changed core hashes",
+    "initial and final R2 randomized governance exams both passed attempt 1 with score 100",
+    "reading-list and generator targeted suite passes 16 tests including NOVA and Protection Mall active-module negative cases",
+    "complete scripts/tests suite passes 86 tests",
+    "Service Plaza total contract gate passes with reading-list schema, file integrity and registry activation scan",
+    "module checklist audit remains exactly 67 total, 66 completed and four immutable completed/null legacy exceptions",
+    "foundation migration cutoff inventory preserves 29 historical files and 30 findings; post-cutoff synthetic platform-scope negative remains fail-closed",
+    "text encoding gate passes 1434 files",
+    "allowed-path scope scan reports zero unauthorized paths and git diff check passes"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/new-module-governance-bootstrap-audit-2026-07-13.md",
+    "docs/project-management/service-plaza/platform-nova-overlay-r2-handoff.md",
+    "contracts/foundation/development-checklists/2026-07-13-platform-nova-overlay-r2-r2.json",
+    "contracts/foundation/governance-exams/2026-07-13-platform-nova-overlay-r2-r2-attempt-1.json",
+    "scripts/tests/test_validate_governance_reading_list.py",
+    "scripts/tests/test_new_agent_development_checklist.py"
+  ],
+  "premises": [
+    "governance-reading-list.v1.json is the only module overlay authority",
+    "new module dispatch records explicitly set module_id before active or handoff-ready transition",
+    "fb29b857a5476a62cc882bf6bf407e67febcacf9 is a one-time immutable migration cutoff and cannot be moved later",
+    "Protection Mall overlay registration changes no Mall business, evidence, registry status or release conclusion",
+    "implementation is not verified or integrated until an independent reviewer accepts the exact candidate and the platform owner performs controlled integration"
+  ],
+  "implementation_mode": "ai-assisted"
+}

@@ -27,7 +27,7 @@ LEGACY_CORE_ONLY_SHA256 = {
     "contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m1-domain-evidence.json": "b8a7e9ece9b9333144229aef4d0df77a6cdc48dadd23eb13f48f085ecf86276a",
 }
 
-FOUNDATION_GATE_BASE = "03ab808f4a21f8a9585ed8aeefeb55e98c5434af"
+FOUNDATION_GATE_BASE = "fb29b857a5476a62cc882bf6bf407e67febcacf9"
 
 
 def platform_scope_errors(root: Path, relative: str, data: dict, registry: dict) -> list[str]:
@@ -92,11 +92,18 @@ def run_checklist(script: Path, output: Path, module_id: str = "") -> subprocess
 
 
 class DynamicModuleChecklistTests(unittest.TestCase):
-    def test_activity_and_existing_modules_use_registered_overlays(self) -> None:
+    def test_all_registered_modules_use_overlays_with_current_sha(self) -> None:
         reading_list = json.loads(
             (ROOT / "contracts/foundation/governance-reading-list.v1.json").read_text(encoding="utf-8")
         )
-        for module_id in ("activity", "life-navigation", "club-alliance", "health-manager"):
+        for module_id in (
+            "activity",
+            "nova",
+            "protection-mall",
+            "life-navigation",
+            "club-alliance",
+            "health-manager",
+        ):
             with self.subTest(module_id=module_id), tempfile.TemporaryDirectory() as directory:
                 output = Path(directory) / "checklist.json"
                 result = run_checklist(SCRIPT, output, module_id)
@@ -107,6 +114,9 @@ class DynamicModuleChecklistTests(unittest.TestCase):
                 )
                 self.assertEqual(data["module_id"], module_id)
                 self.assertEqual([item["path"] for item in data["items"]], expected)
+                for item in data["items"]:
+                    expected_sha = hashlib.sha256((ROOT / item["path"]).read_bytes()).hexdigest()
+                    self.assertEqual(item["sha256"], expected_sha, item["path"])
                 self.assertEqual(data["status"], "pending")
                 self.assertTrue(all(not item["checked"] for item in data["items"]))
 
@@ -114,7 +124,7 @@ class DynamicModuleChecklistTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             result = run_checklist(SCRIPT, Path(directory) / "checklist.json", "unknown-module")
             self.assertNotEqual(result.returncode, 0)
-            self.assertIn("Unknown module overlay", result.stderr + result.stdout)
+            self.assertRegex(result.stderr + result.stdout, r"(?i)unknown module overlay.*unknown-module")
 
     def _temporary_repository(self, overlay: list[str]) -> tuple[tempfile.TemporaryDirectory, Path]:
         context = tempfile.TemporaryDirectory()
@@ -123,6 +133,14 @@ class DynamicModuleChecklistTests(unittest.TestCase):
         (root / "contracts/foundation").mkdir(parents=True)
         shutil.copy2(SCRIPT, root / "scripts/New-AgentDevelopmentChecklist.ps1")
         shutil.copy2(ROOT / "scripts/Initialize-PowerShellUtf8.ps1", root / "scripts/Initialize-PowerShellUtf8.ps1")
+        shutil.copy2(
+            ROOT / "scripts/validate_governance_reading_list.py",
+            root / "scripts/validate_governance_reading_list.py",
+        )
+        shutil.copy2(
+            ROOT / "contracts/foundation/governance-reading-list.v1.schema.json",
+            root / "contracts/foundation/governance-reading-list.v1.schema.json",
+        )
         (root / "core.md").write_text("core\n", encoding="utf-8")
         reading_list = {
             "contract_version": "governance-reading-list.v1",
@@ -139,14 +157,14 @@ class DynamicModuleChecklistTests(unittest.TestCase):
         with context:
             result = run_checklist(root / "scripts/New-AgentDevelopmentChecklist.ps1", root / "out.json", "activity")
             self.assertNotEqual(result.returncode, 0)
-            self.assertIn("must contain at least one", result.stderr + result.stdout)
+            self.assertRegex(result.stderr + result.stdout, r"(?i)module_overlays/activity.*non-empty")
 
     def test_missing_overlay_file_fails_closed(self) -> None:
         context, root = self._temporary_repository(["missing.md"])
         with context:
             result = run_checklist(root / "scripts/New-AgentDevelopmentChecklist.ps1", root / "out.json", "activity")
             self.assertNotEqual(result.returncode, 0)
-            self.assertIn("Required governance input is missing", result.stderr + result.stdout)
+            self.assertRegex(result.stderr + result.stdout, r"(?i)module_overlays/activity.*missing")
 
 
 class SharedModuleChecklistGateTests(unittest.TestCase):
@@ -228,7 +246,7 @@ class SharedModuleChecklistGateTests(unittest.TestCase):
                 errors.extend(platform_scope_errors(ROOT, relative, data, registry))
         self.assertEqual(errors, [])
 
-    def test_module_null_checklist_cannot_hide_in_foundation(self) -> None:
+    def test_post_cutoff_module_null_checklist_cannot_hide_in_foundation(self) -> None:
         fake = {
             "record_id": "IR-20260713-ACTIVITY-V3-M0",
             "module_id": None,

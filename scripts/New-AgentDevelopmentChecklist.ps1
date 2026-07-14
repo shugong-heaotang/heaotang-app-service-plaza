@@ -10,6 +10,10 @@ $ErrorActionPreference = "Stop"
 . (Join-Path $PSScriptRoot "Initialize-PowerShellUtf8.ps1") -Quiet
 $root = Split-Path $PSScriptRoot -Parent
 $readingListPath = Join-Path $root "contracts\foundation\governance-reading-list.v1.json"
+$readingListSchemaPath = Join-Path $root "contracts\foundation\governance-reading-list.v1.schema.json"
+$readingListValidator = Join-Path $root "scripts\validate_governance_reading_list.py"
+& python -X utf8 $readingListValidator $readingListSchemaPath $readingListPath --project-root $root
+if ($LASTEXITCODE -ne 0) { throw "Governance reading list validation failed." }
 $readingList = Get-Content -LiteralPath $readingListPath -Raw -Encoding UTF8 | ConvertFrom-Json
 $paths = @($readingList.core)
 if ($ModuleId) {
