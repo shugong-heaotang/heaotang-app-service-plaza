@@ -90,3 +90,31 @@ R10 只允许以下原子登记语义：
 - reviewer worktree 必须为 `C:/Users/shugo/Documents/worktrees/heaotang-platform-nova-overlay-r2-independent-acceptance`，branch `codex/platform-nova-overlay-r2-independent-acceptance`，HEAD `0c420c3` 且 clean。
 
 R10 必须新建 current checklist 26/26、随机考试 100、IR/Handoff，并通过 agent collaboration、delivery flow、implementation record、governance exam、development checklist、总合同、UTF-8、scope、diff 与 secret 门禁。dispatch 不得写 reviewer evidence namespace、validator、业务、部署、生产、真实数据或真实资金；候选只提交推送，不自行集成。
+
+## R11 六项生命周期新鲜度原子修复（2026-07-14）
+
+authority `dc8a52a4bcc130c6cdb4da55d5d015cdf501ba16` 在当前时钟运行总合同时精确出现四个 `DELIVERY_STATUS_EXPIRED` 和一个 `DELIVERY_HANDOFF_RESPONSE_SLA_EXCEEDED`。项目最高负责人授权 dispatch 执行一次最小原子 transaction；本 R11 不改变产品、证据内容或既有 integration，只修复真实生命周期登记：
+
+1. `AIW-20260713-ACTIVITY-V3-M0`：`active` → `handoff-ready`，绑定已推送 exact `9d474ee7f340af543bbcb06da1a6b6dd9d00a94b`，转交 APP 总架构独立验收。
+2. `AIW-20260713-PROTECTION-MALL-M2-CATALOG-SOLUTION`：`active` → `handoff-ready`，绑定已推送 exact `22073cd8ddeff48a4f679ffcd41a2686d8ea3ba5`；R2 evidence 必须先在自身授权工作项中合法修复并远端固化 exact，再进行完整证据复核。
+3. `AIW-20260712-NOVA-PHASE5-M1-RUNTIME`：保持 `active`；只有 NOVA Overlay formal evidence 在 R11 新 authority 下取得 fresh Go，才可执行 TaskRuntime → ToolRuntime synthetic E2E。
+4. `AIW-20260712-NOVA-API-CONTRACT-SIGNOFF`：`active` → `handoff-ready`；APP 总架构复核 authority 内 artifact `f5546f25b9b023cb43b9f61c78b837b7e5cb67eb`、五个当前等价 blob 与历史自登记边界。
+5. `AIW-20260714-PLATFORM-EXAM-IR-CROSS-RECORD-INDEPENDENT-ACCEPTANCE`：`handoff-ready` → `cancelled/superseded`；保留真实 request `2026-07-14T07:53:56+08:00`，记录真实迟到 response/decision `14:26/14:27` 与 `no-go`。source `efad99b` 是 artifact `dafdd09f` 的祖先，evidence SHA-256=`f8a247a68532f2d198ffea4a8acc0724849099a1832a36282537b01e798c38e9`；主 cross-record integrated item不变。
+6. dispatch 只刷新 R11 授权、当前时间、next checkpoint、expiry 与 blocks。
+
+R11 registry candidate 必须仍为 126 rows；changed IDs 精确为上述五项加 dispatch，其他 120 rows 逐字段零变化。registry 内容稳定后才生成全新 `IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R11` 的 current checklist、attempt-1、IR 与 Handoff。必须运行 agent collaboration、delivery flow、implementation record、governance exam、development checklist 五个 validator，34 项永久回归、Service Plaza 总合同、UTF-8、diff、scope 和高置信 secret scan；总合同必须 exit 0。候选提交推送后交 APP 总架构独立验收，实施者禁止自行集成。
+
+本 R11 不修改 reviewer evidence namespace、validator、实现、部署、生产、真实数据、真实资金或不可逆路径；任何独立验收失败保持 No-Go，不得绕过或倒填生命周期。
+
+## R11-R2 direct-principal 裁决：保留 legacy 状态并规划显式迁移（2026-07-14）
+
+R11 初稿按原要求把 Activity 与 Mall 两个 candidate 由 `active` 转为 `handoff-ready`；首轮 agent/delivery validator 正确返回 `DELIVERY_LEGACY_EXTERNAL_SNAPSHOT_MISMATCH` 与 `DELIVERY_LEGACY_STATE_CHANGED_WITHOUT_MIGRATION`。只读根因确认：两项分别位于 external snapshot/cutover prefix 的 index 109 与 111，现有 policy 固定前 115 行 `(work_id,status)` 及 `legacy_work_states_sha256`，dispatch 不拥有 policy/validator/snapshot/hash，不能合法迁移。初稿未生成 checklist/exam/IR、未提交、未推送，也未执行第二次盲重试。
+
+项目最高负责人据此直接裁决并授权 R11-R2：
+
+- Activity 与 Mall 完全撤销初稿 status/handoff/next-owner 变化，保持 `active`；仅以真实 transaction 时间刷新 migration note、next checkpoint、blocks、does-not-block、updated/expiry（两小时内），明确 exact candidate ready 但 legacy migration 阻断。
+- NOVA Runtime 保持 active freshness refresh；NOVA API 仍转 handoff-ready；cross-record reviewer supporting item仍真实取消/superseded；dispatch freshness按R11-R2刷新。
+- registry 末尾只新增一个 `planned / P0` 工作项 `AIW-20260714-PLATFORM-LEGACY-STATE-MIGRATION-R1`。它只规划显式 legacy state migration contract、受控 anchor/hash 演进和永久回归，不在 R11-R2 中激活或实施；禁止直接改 immutable snapshot、豁免 validator 或删除历史。
+- 新工作项由 `Platform delivery-flow legacy migration agent` / 平台集成负责人拥有，base=`dc8a52a4bcc130c6cdb4da55d5d015cdf501ba16`，branch=`codex/platform-legacy-state-migration-r1`，workspace=`C:/Users/shugo/Documents/worktrees/heaotang-platform-legacy-state-migration-r1`。仅授权 registry、delivery-flow policy、validator及其测试、总合同入口、ADR0021 和精确 task-order/checklist/exam/IR/Handoff 路径。
+
+R11-R2 registry 稳定后必须生成全新 record `IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R11-R2` 的 current checklist、attempt-1、IR 与 Handoff；不复用任何未生成的 R11 证据。五个 validator、34项永久回归、Service Plaza 总合同、UTF-8、diff、scope、secret 与语义审计必须全绿；新增 planned item 若仍被 current policy 拒绝则立即 No-Go。候选只提交推送，实施者禁止自行集成。

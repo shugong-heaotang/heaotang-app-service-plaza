@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-`NOVA Overlay R2 formal reviewer supporting-item authorization R10 / Independent acceptance Pending`。
+`Platform lifecycle freshness transaction R11-R2 / Independent acceptance Pending`。
 
 root-of-trust 已受控集成到权威 `edf2133e171bce31a68e2e535f94eac20d04d03b`。R3 候选执行首个受控派发交易：仅将 `AIW-20260713-PLATFORM-EXAM-IR-CROSS-RECORD-GATE-R1` 从 `planned` 激活为 `active` 并绑定 edf exact clean worktree；NOVA overlay 与 Telemetry 保持 `planned`。本候选不实现业务或 validator，不授权部署、生产、真实数据或真实资金。
 
@@ -118,6 +118,19 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R10-1`，attempt-1，100 分
 - 边界：dispatch 未写 reviewer namespace、validator、业务或部署；未接触生产、真实数据、真实资金；本候选只提交推送，不自行集成。
 
+## R11-R2 生命周期新鲜度修复与 legacy migration 规划
+
+- authority：`dc8a52a4bcc130c6cdb4da55d5d015cdf501ba16`；初始 current-clock 总合同精确报告4个status expiry和1个cross-record reviewer response SLA超时。
+- R11 初稿 No-Go：Activity(index109)与Mall(index111)位于external legacy snapshot/cutover的前115行；直接 `active` → `handoff-ready` 触发 `DELIVERY_LEGACY_EXTERNAL_SNAPSHOT_MISMATCH` 与 `DELIVERY_LEGACY_STATE_CHANGED_WITHOUT_MIGRATION`。初稿未生成治理证据、未提交、未推送，未改validator/snapshot/hash。
+- R11-R2裁决：Activity与Mall保持 `active`，移除初稿全部 handoff/next-owner 字段；只刷新 candidate-ready事实、2小时expiry、legacy migration blocker和does-not-block。Activity exact=`9d474ee7f340af543bbcb06da1a6b6dd9d00a94b`，Mall exact=`22073cd8ddeff48a4f679ffcd41a2686d8ea3ba5`，两者均remote exact、clean。
+- NOVA Runtime：保持 `active`；Overlay formal evidence fresh Go后才可执行 TaskRuntime → ToolRuntime synthetic E2E，expiry为2小时。
+- NOVA API：`active` → `handoff-ready`；artifact `f5546f25b9b023cb43b9f61c78b837b7e5cb67eb` 是authority祖先，Handoff、contract、schema、invalid fixture、test五个blob在f554与dc8a byte-identical；APP总架构必须复核历史自登记边界。
+- cross-record reviewer supporting item：`handoff-ready` → `cancelled/superseded`；保留request=`2026-07-14T07:53:56+08:00`，真实迟到response=`14:26`、decision=`14:27/no-go`。source `efad99b` 是artifact `dafdd09f`祖先，evidence SHA-256=`f8a247a68532f2d198ffea4a8acc0724849099a1832a36282537b01e798c38e9`；主cross-record integrated item逐字段不变。
+- 新增且只新增planned `AIW-20260714-PLATFORM-LEGACY-STATE-MIGRATION-R1`：base=`dc8a52a`，只规划显式migration contract、anchor/hash演进、ADR0021和永久回归；未激活、未创建工作树、未实施，不得直接改immutable snapshot或豁免validator。
+- registry semantic：authority 126 rows、candidate 127 rows；六个existing target rows变化并追加一个planned item，其他120 rows逐字段不变。
+- current governance：record=`IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R11-R2`；checklist 26/26、current mismatch0、SHA-256=`45e52008ff12c3dcb3466edead3ae5332ee967408263586cf5fa7764d5cd63ad`；exam attempt-1=100。
+- 边界：未写reviewer evidence namespace、policy、validator、snapshot、业务、部署、生产、真实数据、真实资金或不可逆路径；候选只提交推送，不自行集成。
+
 ## 修改范围
 
 - `contracts/foundation/agent-collaboration.v1.json`
@@ -150,6 +163,9 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r10.json`
 - `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r10-attempt-1.json`
 - `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r10.json`
+- `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r11-r2.json`
+- `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r11-r2-attempt-1.json`
+- `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r11-r2.json`
 
 ## 停止线
 
@@ -196,7 +212,11 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - R10 registry：authority 125 rows、candidate 126 rows；changed IDs 精确为 NOVA implementation、dispatch 与唯一新增 NOVA reviewer item；NOVA 与 dispatch changed fields 符合授权，其余 123 rows 逐字段不变。
 - R10 ancestry/worktree：`59a988d` → `81f6bc8` → `0c420c3` 两段祖先关系成立；reviewer worktree branch/HEAD 与登记一致且 clean。
 - R10 scope：仅 registry、task-order、R10 checklist/exam/IR 与本 Handoff；reviewer namespace 写入 0；`git diff --check` 与高置信 secret scan 通过。
+- R11-R2：agent collaboration、delivery flow、development checklist、governance exam、implementation record 五个 validators 全部 exit 0；delivery-flow/governance-exam/implementation-record 永久回归 34/34 通过。
+- R11-R2：Service Plaza 总合同 exit 0；UTF-8 1448 files 通过；`git diff --check` 通过。
+- R11-R2 registry：authority 126 rows、candidate 127 rows；六个existing目标rows变化、唯一新增planned legacy migration item，其他120 rows逐字段不变；Activity/Mall status均保持active且无handoff字段，immutable legacy prefix未变。
+- R11-R2 scope：6/6变更路径全部命中dispatch既有allowed patterns，越界0；reviewer evidence、policy、validator、snapshot与业务namespace写入0；高置信secret命中0。
 
 ## 下一步
 
-提交并推送 exact R10 NOVA reviewer supporting-item authorization candidate，由 APP 总架构独立验收负责人给出 Go/No-Go。实施者不得自行集成；只有本候选独立 Go 且受控集成后，reviewer 才能在 exact `0c420c3` 派生的授权工作树中写 formal evidence。
+完成 R11-R2 全门禁、scope/secret与remote exact后提交候选，由 APP 总架构独立验收负责人给出 Go/No-Go。实施者不得自行集成；只有本候选独立 Go 且受控集成后，才能从新authority刷新并激活planned legacy migration工作项，且NOVA formal evidence必须基于新authority重新做fresh final review。
