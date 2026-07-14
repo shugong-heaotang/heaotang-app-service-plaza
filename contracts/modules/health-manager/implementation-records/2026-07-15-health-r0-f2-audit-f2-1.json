@@ -1,0 +1,84 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-HEALTH-R0-F2-AUDIT-F2-1",
+  "title": "健康大管家 HM-R0 F2-1 六域责任审计",
+  "date": "2026-07-15",
+  "status": "implemented",
+  "objective": "在不提升未知状态且不授权真实活动的前提下，形成六域责任矩阵、fail-closed Schema 和合成回归证据。",
+  "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-15-health-r0-f2-audit-f2-1.json",
+  "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-15-health-r0-f2-audit-f2-1-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/module-dependencies/health-manager.v1.json",
+    "contracts/modules/health-manager/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/modules/health-manager/health-manager-r0-f2-audit.md",
+    "contracts/modules/health-manager/hm-r0-formal-freeze.v1.json"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.ai-collaboration-safety",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/modules/health-manager/hm-r0-f2-1-audit.v1.json",
+    "contracts/modules/health-manager/hm-r0-f2-1-audit.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/modules/health-manager/health-manager-r0-f2-1-audit.md",
+    "docs/project-management/modules/health-manager/health-manager-r0-f2-1-handoff.md",
+    "contracts/modules/health-manager/hm-r0-f2-1-audit.v1.json",
+    "contracts/modules/health-manager/hm-r0-f2-1-audit.v1.schema.json",
+    "contracts/modules/health-manager/fixtures/hm-r0-f2-1-audit/synthetic-positive-contract.json",
+    "contracts/modules/health-manager/fixtures/hm-r0-f2-1-audit/synthetic-invalid-executable.json",
+    "contracts/modules/health-manager/fixtures/hm-r0-f2-1-audit/synthetic-invalid-real-data.json",
+    "contracts/modules/health-manager/fixtures/hm-r0-f2-1-audit/synthetic-invalid-missing-domain.json",
+    "contracts/modules/health-manager/fixtures/hm-r0-f2-1-audit/synthetic-invalid-pending-without-owner.json",
+    "contracts/modules/health-manager/fixtures/hm-r0-f2-1-audit/synthetic-invalid-accepted-without-evidence.json",
+    "contracts/modules/health-manager/development-checklists/2026-07-15-health-r0-f2-audit-f2-1.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-15-health-r0-f2-audit-f2-1-attempt-1.json",
+    "contracts/modules/health-manager/implementation-records/2026-07-15-health-r0-f2-audit-f2-1.json"
+  ],
+  "verification": [
+    "implementation base equals 974ada3382004c9b5a7b2aa30b766a36ab5ac403",
+    "work item AIW-20260715-HEALTH-R0-F2-AUDIT-F2-1 is the unique active authority for the exact allowed paths",
+    "current checklist completed 28 of 28 with current hashes",
+    "pre-exam staged diff, encoding and one-final-newline checks passed",
+    "governance exam attempt 1 passed with score 100",
+    "six required audit domains are present in fixed order and remain Pending with owner",
+    "synthetic_only is true, executable is false and all real activity authorizations are false",
+    "valid contract accepted and five synthetic negative mutations rejected",
+    "independent review remains pending"
+  ],
+  "evidence": [
+    "docs/project-management/modules/health-manager/health-manager-r0-f2-1-audit.md",
+    "docs/project-management/modules/health-manager/health-manager-r0-f2-1-handoff.md",
+    "contracts/modules/health-manager/hm-r0-f2-1-audit.v1.json",
+    "contracts/modules/health-manager/hm-r0-f2-1-audit.v1.schema.json",
+    "contracts/modules/health-manager/fixtures/hm-r0-f2-1-audit/",
+    "contracts/modules/health-manager/development-checklists/2026-07-15-health-r0-f2-audit-f2-1.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-15-health-r0-f2-audit-f2-1-attempt-1.json"
+  ],
+  "premises": [
+    "F2-1 is audit-only and synthetic-only",
+    "unknown evidence remains Pending with owner",
+    "the highest responsible person supervises blockage and decision rights but does not replace functional or independent signoff",
+    "real data, production, medical service, charging, funds and deployment remain No-Go"
+  ],
+  "implementation_mode": "ai-assisted"
+}

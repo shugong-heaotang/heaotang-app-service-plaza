@@ -77,3 +77,124 @@ R8 candidate `6eabd60ba1b33e6608cdc3ded7d735ac18622b47` 被 APP 总架构独立�
 - 原 supporting item 仅从 `handoff-ready` 转为 `cancelled/superseded`，记录真实迟到的 first response 与 `no-go` decision；禁止回填虚假准时响应，禁止修改主 delivery-flow implementation/acceptance 结论或删除已集成 artifact。
 - R9 只改该 supporting item、dispatch freshness、本任务通知、R9 checklist/exam/IR 与 Handoff；不得恢复 R8 的 NOVA supporting-item 变更，不得写 reviewer namespace、validator、业务、部署、生产、真实数据或真实资金路径。
 - R9 必须 current checklist 26/26、随机考试 100、全量门禁通过、独立验收 Go 后才允许受控集成。R9 集成后，R8 必须从新的 authority 重新生成 checklist、重新考试和重新验收。
+
+## R10 NOVA Overlay formal reviewer supporting-item 重新授权（2026-07-14）
+
+R9 exact candidate `104a50cbb9e97cc3bab8250a388b0f98ee318a6c` 已由 APP 总架构独立验收负责人 Go，并以双父 no-ff integration `0c420c3448a9e6399410cb6c230b43c243b0471c` 进入 authority。项目最高负责人随后明确要求从该新 authority 重新建立 NOVA Overlay R2 formal reviewer supporting-item 授权候选；旧 R8 `6eabd60ba1b33e6608cdc3ded7d735ac18622b47` 持续 No-Go，其 checklist、exam、IR 均不得复用。
+
+R10 只允许以下原子登记语义：
+
+- `AIW-20260713-PLATFORM-NOVA-OVERLAY-R2` 从 `active` 转为 `handoff-ready`，记录 implementation source `59a988df0d7d1a13ac4dd9ad48da62d5c0340534`、integration `81f6bc8a7e1bc872f1689099a704768495deb009` 及当前 authority 祖先链；不得提前写 `independent_acceptance` 或标为 `integrated`。
+- 追加且只追加唯一 `AIW-20260714-PLATFORM-NOVA-OVERLAY-R2-INDEPENDENT-ACCEPTANCE`，状态 `active`，base 为 `0c420c3448a9e6399410cb6c230b43c243b0471c`，owner 为平台治理独立测试负责人，allowed scope 仅 `docs/project-management/independent-acceptance/platform-nova-overlay-r2/` 下五类证据文件。
+- dispatch 只刷新本次 direct-principal 授权说明、时间、next checkpoint、expiry 与 blocks；其余 123 个既有 rows 逐字段不变。
+- reviewer worktree 必须为 `C:/Users/shugo/Documents/worktrees/heaotang-platform-nova-overlay-r2-independent-acceptance`，branch `codex/platform-nova-overlay-r2-independent-acceptance`，HEAD `0c420c3` 且 clean。
+
+R10 必须新建 current checklist 26/26、随机考试 100、IR/Handoff，并通过 agent collaboration、delivery flow、implementation record、governance exam、development checklist、总合同、UTF-8、scope、diff 与 secret 门禁。dispatch 不得写 reviewer evidence namespace、validator、业务、部署、生产、真实数据或真实资金；候选只提交推送，不自行集成。
+
+## R12-B lifecycle deadlock repair（2026-07-15）
+
+项目最高负责人从已获独立技术 Go 的 test-repair exact
+`73b64b03627f37cd34f5bbbad1802fa08a20dd1f` 直接授权 R12-B。R12-B
+沿用 work_id `AIW-20260714-PLATFORM-REGISTRY-DISPATCH-R1`，工作树改为
+`heaotang-platform-registry-dispatch-r12b`，分支改为
+`codex/platform-registry-dispatch-r12b`。本次只允许 registry、现有 task-order、
+现有 Handoff 及 R12-B 新 checklist/exam/IR 六类路径；不得修改 test、validator、
+policy、业务或 reviewer evidence，不得推送、集成、自行验收或接触生产、真实数据、
+资金。
+
+R12-B 原子 registry 语义：
+
+- 以真实当前时间刷新 Activity、Mall Catalog Solution、NOVA Runtime、NOVA API、
+  NOVA Overlay、dispatch 与 NOVA reviewer 的监督窗口；NOVA API 只转
+  `handoff-ready`，不标记 integrated。
+- 对 cross-record duplicate reviewer checkpoint 记录真实迟到 first response 和
+  `no-go/superseded` decision，不回填虚假及时响应，不修改主 integrated outcome。
+- Telemetry R2 保持 `planned`，刷新真实监督时间和激活条件，并明确记录 delivery-flow
+  v1 不报告 planned 过期的监督盲点；本候选不修改 validator，也不激活 Telemetry。
+- 新增 `AIW-20260715-PLATFORM-DELIVERY-FLOW-LEGACY-MIGRATION-V2` 与
+  `AIW-20260715-PLATFORM-ACTIVITY-MALL-M2-LEGACY-TRANSITION-R1`，两者只能
+  `planned`。其 `base_commit` 只记录当前 authority `73b64b0`；未知的 R12-B
+  双提交链 integration SHA 不得伪造，必须在未来激活前刷新。
+- Legacy Migration V2 必须产出 fixed receipt，并保持 anchor、path、cutover、hash
+  不漂移；它阻塞 atomic transition。
+- Atomic transition 只有在 A integration、fixed receipt、Mall Catalog Solution 与
+  Evidence 双 formal Go、相关 exact worktree clean 后才可激活。未来事务必须一次完成
+  五行切换：Activity `active -> handoff-ready`，Catalog Solution/Evidence
+  `active -> integrated`，Order/Ports `planned -> active`。transition hash 固定为
+  `5dfa87a441a04eb8a24e3a4de883648780b6eaeddf2c870d831fa6ed29620939`，
+  post effective-state hash 固定为
+  `7f1991952dea49dff84e6378dbdc4edd22f4bf72334e0a8c08a36474fb984ec6`；
+  R12-B 不执行该事务。
+
+为避免 registry 输出使入口 checklist 自失效，R12-B 必须形成双提交链：第一提交固定
+registry transaction 与入口治理证据；第二提交从第一 exact 重新全文读取并形成 final
+current checklist、exam100、IR/Handoff。任一提交独立验收失败，整条链保持 No-Go。
+
+## R12-D direct-principal registry activation（2026-07-15）
+
+R12-B 双提交链已由独立验收 Go 并受控集成为 authority
+`e7c5b61b9905e11f1be3267ea1544610a3cd064f`。后续 R12-C 候选因删除或改写已通过的
+governance exam 证据而被判定 No-Go，且权威 registry 仍指向旧 `r12b` 工作树。项目最高负责人因此直接授权
+R12-D 以同一 work_id 执行一次最小 registry activation transaction；该授权只修复所有权接续与并行派发，
+不追认 R12-C，也不允许复用、删除或改写其通过后证据。
+
+R12-D 必须采用严格两阶段不可变证据：
+
+1. 先从 `e7c5b61` 生成并保留 entry record
+   `IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12D` 的全新 checklist 和 governance exam；
+   任何 failed/passed attempt 均永久保留，不得删除或改写。
+2. registry transaction 与本 task-order 进入 commit-1；Legacy Migration V2 与
+   Activity/Mall Legacy Transition 只保持 `planned` 并刷新 base 到 `e7c5b61`。
+3. commit-1 只激活三个 clean、互不重叠工作面：existing Telemetry R2 Acceptance、
+   new Network Read Provider Evidence R2、new Health R0 F2 Audit F2-1。Telemetry 必须移除 registry
+   allowed path；Network 只读绑定 backend `f6ba650c`；Health 必须保持
+   `synthetic_only=true`、`executable=false`。
+4. 基于 commit-1 重新全文读取并生成 final record
+   `IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12D-R2` 的全新 checklist、exam100、IR 和 Handoff，
+   进入 commit-2。entry 证据不得因 final 证据出现而失效、删除或被改写。
+
+R12-D 仅允许六类 dispatch 路径：registry、现有 task-order、现有 dispatch Handoff、R12-D checklist、
+R12-D governance exam、R12-D implementation record。禁止修改 validator、policy、test、业务或 reviewer
+evidence；禁止新增 Social/Club 工作项；禁止推送、自验收或自行集成。Social 与 Club 只在 Handoff
+中列为下一轮 dispatch。任一提交独立验收失败，整条两提交链保持 No-Go。
+
+## R12-F authority base refresh 与 pre-exam staged gate（2026-07-15）
+
+R12-D 已受控集成为 authority `974ada3382004c9b5a7b2aa30b766a36ab5ac403`。项目最高负责人直接授权
+R12-F 只执行一次 authority base refresh：dispatch、Legacy Migration V2、Activity/Mall Legacy
+Transition、Telemetry R2、Network Evidence R2、Health F2-1 六项的 `base_commit` 精确刷新到
+`974ada3`；除 dispatch 自身 current 证据授权迁移和时效/next checkpoint 外，状态、owner、paths 与
+其他字段逐字段不变。
+
+dispatch 自身三类治理 globs 从 `r12d*.json` 精确迁移为 `r12f*.json`；registry、既有 task-order、
+既有 Handoff 三路径不变。该迁移只授权本轮 R12-F checklist、exam 与 implementation record，不扩大到
+其他目录或工作项。
+
+R12-F 强制采用以下不可逆次序：
+
+1. 生成、全文读取并完成 entry checklist。
+2. 在任何 governance exam 生成前，先把 entry checklist、本 task-order 和 registry candidate 暂存，
+   并运行 cached diff check、UTF-8、one-final-newline 字节检查、JSON 与 validator；任一不绿不得出卷。
+3. entry exam 通过后不得删除或改写，并与 registry transaction 一起进入 commit-1。
+4. 从 commit-1 生成全新 `IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12F-R2` checklist、exam100、
+   IR 与 Handoff，形成且只形成 commit-2。
+5. 最终对 authority `974ada3..HEAD` 整段执行 diff/encoding/scope/secret 与全部治理门禁；实施者不得
+   推送、集成或自验收。
+
+## R12-G post-cutover closeout stage 1（2026-07-15）
+
+项目最高负责人从 clean authority `2ea278918c00d9fd18b999ee743bb31227cc6a7f`
+直接授权 dispatch 执行严格两阶段 closeout 的第一阶段。本阶段只允许三条 post-cutover
+工作项原子地从 `active` 进入 `handoff-ready`：Telemetry R2 Acceptance、Network
+Evidence R2 与 Health F2-1。不得直接进入 `integrated`，不得创建或伪造
+`independent_acceptance`，不得把 backend authority SHA 写成 APP `integration_commit`。
+
+已存在的 source / APP merge 事实分别为：Telemetry `5cf87e27` / `a1ac334f`，Network
+`5c48677c` / `610ba656`，Health `bfa8ec69` / `28dd038b`；Telemetry 与 Network 可在
+checkpoint 正文中引用 backend authority integration `091c9be9`。Health 的
+`synthetic_only=true`、`executable=false` 边界必须保持不变。
+
+本阶段沿用 dispatch 唯一 active owner，六类 allowed paths 仅切换至 R12-G S1 当前
+checklist、exam 与 implementation record。Legacy rows、Migration Drill index 92、Legacy A/B
+planned、业务代码、validator、policy、生产、真实数据和资金均不得修改。形成 exact commit 后
+必须停止，由不同 Agent 独立验收；只有真实验收 evidence 已落盘后，新的单写者才可执行第二阶段。

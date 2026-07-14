@@ -1,0 +1,53 @@
+{
+  "contract_version": "network.nova-introduction-migration.v1",
+  "module_id": "network",
+  "scope": "temporary-or-explicit-test-database-only",
+  "executable": false,
+  "source": {
+    "table": "introductions",
+    "identity": "id",
+    "required_fields": ["id", "from_user_id", "to_user_id", "status", "tenant_id", "created_at"]
+  },
+  "target": {
+    "table": "introduction_requests",
+    "identity": "id",
+    "legacy_key": "legacy_source_id",
+    "run_key": "migration_run_id",
+    "required_fields": ["legacy_source_id", "migration_run_id", "tenant_id", "from_member_id", "to_member_id", "status", "created_at"]
+  },
+  "status_mapping": {
+    "pending": "pending",
+    "accepted": "accepted",
+    "rejected": "rejected"
+  },
+  "quarantine": {
+    "table": "nova_introduction_quarantine",
+    "reasons": ["unknown_tenant", "invalid_participant", "invalid_status", "duplicate_semantics"],
+    "automatic_tenant_assignment": false
+  },
+  "phases": ["Plan", "Apply", "Inspect", "Cleanup", "RestoreVerify"],
+  "safety": {
+    "unique_run_id_required": true,
+    "explicit_test_confirmation_required": true,
+    "test_database_marker_required": true,
+    "plan_mutation_count": 0,
+    "backup_required_before_apply": true,
+    "single_transaction_apply": true,
+    "double_write_allowed": false,
+    "legacy_write_trigger_required": true,
+    "cleanup_may_reenable_legacy_writes": false,
+    "restore_may_reenable_legacy_writes": false,
+    "production_paths_forbidden": true
+  },
+  "legacy_routes": [
+    {"method": "POST", "path": "/api/v1/network/introductions", "sunset_status": 410, "successor": "people.connection_send"},
+    {"method": "PUT", "path": "/api/v1/network/introductions/{id}", "sunset_status": 410, "successor": "people.connection_status"},
+    {"method": "POST", "path": "/api/v1/network/referral", "sunset_status": 410, "successor": "people.connection_draft"}
+  ],
+  "rollback": {
+    "restore_target": "isolated-copy",
+    "legacy_write_authority_after_restore": "forbidden",
+    "unsafe_route_status_after_restore": 410,
+    "reverse_write_to_legacy": false
+  }
+}

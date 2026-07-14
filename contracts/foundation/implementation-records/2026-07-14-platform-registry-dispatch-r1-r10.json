@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R10",
+  "title": "NOVA Overlay R2 formal reviewer supporting-item authorization R10",
+  "date": "2026-07-14",
+  "status": "verified",
+  "objective": "从新 authority 0c420c3 重新建立唯一 NOVA Overlay R2 formal reviewer supporting-item 授权，将实现项真实转交独立证据负责人；不复用 No-Go R8 证据，不代写 reviewer evidence，不提前宣称 integrated。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r10.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r10-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "docs/decisions/0014-ai-development-flight-checklist.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md", "docs/decisions/0017-readme-course-and-random-governance-exam.md", "docs/decisions/0018-recursive-project-governance.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md"],
+  "capabilities": ["foundation.ai-collaboration-safety", "foundation.governance-certification"],
+  "contracts": ["contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/delivery-flow-policy.v1.json", "contracts/foundation/development-checklist.v1.schema.json", "contracts/foundation/governance-exam.v1.schema.json"],
+  "decisions": ["docs/decisions/0014-ai-development-flight-checklist.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md", "docs/decisions/0017-readme-course-and-random-governance-exam.md", "docs/decisions/0018-recursive-project-governance.md"],
+  "changed_areas": ["NOVA Overlay implementation active to handoff-ready lifecycle fields", "dispatch R10 renewed authority and freshness fields", "one unique NOVA independent-acceptance supporting item", "R10 current checklist, governance exam, implementation record and Handoff"],
+  "verification": ["R9 candidate 104a50c is integrated by no-ff authority 0c420c3", "NOVA source 59a988d is an ancestor of integration 81f6bc8 and 81f6bc8 is an ancestor of authority 0c420c3", "reviewer worktree branch is codex/platform-nova-overlay-r2-independent-acceptance at exact clean base 0c420c3", "R8 exact 6eabd60 remains No-Go and its checklist, exam and IR are not reused", "R10 current checklist 26/26 with registry candidate hash 647fb5703e97a2c728c852ec76a06ec6484dbe6ab765ab36718f758a9ab2abaf and governance exam attempt-1 score 100", "registry changes only NOVA implementation lifecycle, dispatch freshness/authorization, and one unique reviewer supporting item; other 123 rows are byte-semantically unchanged", "agent collaboration, delivery flow, implementation record, governance exam, aggregate contract, UTF-8, scope, diff and secret gates"],
+  "evidence": ["docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md", "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md"],
+  "premises": ["authority 0c420c3 contains NOVA integration 81f6bc8 and the independently accepted R9 closeout", "the project principal explicitly renewed this one-time supporting-item authorization after R8 No-Go", "file-backed reviewer evidence remains a supporting checkpoint and cannot create a second business completion entity", "dispatch never writes the reviewer namespace or formal evidence", "production, real data, funds, deployment and irreversible operations remain No-Go"],
+  "implementation_mode": "ai-assisted"
+}

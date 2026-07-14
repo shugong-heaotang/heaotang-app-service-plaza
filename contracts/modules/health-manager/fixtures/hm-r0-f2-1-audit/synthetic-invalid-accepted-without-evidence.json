@@ -1,0 +1,13 @@
+{
+  "case_id": "reject-accepted-without-evidence",
+  "mutation": {
+    "path": "/domains/1",
+    "values": {
+      "status": "Accepted",
+      "evidence": [],
+      "missing_evidence": [],
+      "accepted_scope": "synthetic audit"
+    }
+  },
+  "expected_valid": false
+}

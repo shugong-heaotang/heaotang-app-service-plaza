@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-`Delivery Flow reviewer supporting-item SLA closeout R9 / Independent acceptance Pending`。
+`NOVA Overlay R2 formal reviewer supporting-item authorization R10 / Independent acceptance Pending`。
 
 root-of-trust 已受控集成到权威 `edf2133e171bce31a68e2e535f94eac20d04d03b`。R3 候选执行首个受控派发交易：仅将 `AIW-20260713-PLATFORM-EXAM-IR-CROSS-RECORD-GATE-R1` 从 `planned` 激活为 `active` 并绑定 edf exact clean worktree；NOVA overlay 与 Telemetry 保持 `planned`。本候选不实现业务或 validator，不授权部署、生产、真实数据或真实资金。
 
@@ -104,6 +104,20 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - checklist：`FC-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R9`，26/26 current
 - exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R9-1`，attempt-1，100 分
 
+## R10 NOVA Overlay R2 formal reviewer supporting-item 重新授权
+
+- authority：`0c420c3448a9e6399410cb6c230b43c243b0471c`；R9 exact `104a50cbb9e97cc3bab8250a388b0f98ee318a6c` 已独立 Go 并受控集成。
+- R8：exact `6eabd60ba1b33e6608cdc3ded7d735ac18622b47` 持续 No-Go；旧 R8 checklist、exam、IR 均未复用。
+- ancestry：implementation source `59a988df0d7d1a13ac4dd9ad48da62d5c0340534` 是 integration `81f6bc8a7e1bc872f1689099a704768495deb009` 的祖先，后者是 authority `0c420c3` 的祖先。
+- NOVA implementation：`active` → `handoff-ready`；记录真实既有 read-only independent Go handoff，等待文件化 formal evidence，不提前写 `independent_acceptance` 或 `integrated`。
+- reviewer supporting item：唯一追加 `AIW-20260714-PLATFORM-NOVA-OVERLAY-R2-INDEPENDENT-ACCEPTANCE`，status=`active`，base=`0c420c3`；allowed scope 仅 `docs/project-management/independent-acceptance/platform-nova-overlay-r2/` 五类证据文件。
+- reviewer worktree：`C:/Users/shugo/Documents/worktrees/heaotang-platform-nova-overlay-r2-independent-acceptance`，branch=`codex/platform-nova-overlay-r2-independent-acceptance`，HEAD=`0c420c3`，clean。
+- registry：authority 125 rows、candidate 126 rows；仅 NOVA implementation、dispatch freshness/authorization 与唯一新增 reviewer item 变化，其余 123 rows 逐字段不变。
+- record：`IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R10`
+- checklist：`FC-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R10`，26/26 current，registry SHA-256=`647fb5703e97a2c728c852ec76a06ec6484dbe6ab765ab36718f758a9ab2abaf`
+- exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R10-1`，attempt-1，100 分
+- 边界：dispatch 未写 reviewer namespace、validator、业务或部署；未接触生产、真实数据、真实资金；本候选只提交推送，不自行集成。
+
 ## 修改范围
 
 - `contracts/foundation/agent-collaboration.v1.json`
@@ -133,6 +147,9 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r9.json`
 - `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r9-attempt-1.json`
 - `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r9.json`
+- `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r10.json`
+- `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r10-attempt-1.json`
+- `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r10.json`
 
 ## 停止线
 
@@ -175,7 +192,163 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - R9 registry：authority/candidate 均 125 rows；仅 Delivery Flow reviewer bootstrap lifecycle 与 dispatch freshness/authorization 两行变化，其他 123 rows 逐字段不变。
 - R9 evidence：`f1db5d43` 是 `25b6cd75` 祖先；evidence SHA-256=`21bfe6cb4dab21db4072bb5a4335c5f2ff85cd85f8a971cd0deb8265466cbd86`；主 Delivery Flow integrated item逐字段不变。
 - R9 current governance：checklist 26/26，registry hash=`c699355a678dbf12e0b408af23b89382c2bc840abef504917073a0eafa497d21`；exam attempt-1=100。
+- R10：结构化 checklist、agent collaboration、delivery flow、implementation record、governance exam validators 全部通过；永久回归 34/34 通过；Service Plaza 总合同通过；UTF-8 1445 files 通过。
+- R10 registry：authority 125 rows、candidate 126 rows；changed IDs 精确为 NOVA implementation、dispatch 与唯一新增 NOVA reviewer item；NOVA 与 dispatch changed fields 符合授权，其余 123 rows 逐字段不变。
+- R10 ancestry/worktree：`59a988d` → `81f6bc8` → `0c420c3` 两段祖先关系成立；reviewer worktree branch/HEAD 与登记一致且 clean。
+- R10 scope：仅 registry、task-order、R10 checklist/exam/IR 与本 Handoff；reviewer namespace 写入 0；`git diff --check` 与高置信 secret scan 通过。
 
 ## 下一步
 
-提交并推送 exact R9 SLA-closeout candidate，由 APP 总架构独立验收负责人给出 Go/No-Go。只有 R9 独立 Go 且受控集成后，才能从新 authority 重新生成 NOVA R8 supporting-item 授权的 current checklist、考试和 exact candidate；不得复用 No-Go R8 证据。
+提交并推送 exact R10 NOVA reviewer supporting-item authorization candidate，由 APP 总架构独立验收负责人给出 Go/No-Go。实施者不得自行集成；只有本候选独立 Go 且受控集成后，reviewer 才能在 exact `0c420c3` 派生的授权工作树中写 formal evidence。
+
+# R12-B 生命周期修复候选 Handoff（2026-07-15）
+
+## 候选与职责边界
+
+- authority base：`73b64b03627f37cd34f5bbbad1802fa08a20dd1f`。
+- implementation commit：`ed29897e3b4fd93028cdb1c1613944a4f46f399d`。
+- current record：`IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12B-R2`。
+- current checklist：26/26；current exam：attempt-1，100/100。
+- 本实施负责人只提交本地候选，不自行独立验收、推送或集成；最终 Go/No-Go 由平台治理独立测试负责人给出。
+
+## 精确变更
+
+- registry 从 126 rows 增至 128 rows：精确修改 9 个既有 work IDs，新增 2 个 planned work IDs。
+- Activity 与 Protection Mall Catalog Solution 均保持 `active`，只刷新真实 checkpoint 与时效字段，不虚构生命周期跃迁。
+- NOVA API implementation 从 `active` 进入 `handoff-ready`；该状态仅表示等待独立验收，不等同于 integrated。
+- cross-record independent-acceptance supporting item 从 `handoff-ready` 进入 `cancelled`，记录真实迟到首次响应和 No-Go；主工作项 integrated 事实保持不变，禁止补写虚假及时证据。
+- Telemetry R2 保持 `planned`，明确记录 planned expiry 目前不被 validator 阻断的盲点，并要求激活前刷新 authority base、时间和激活条件。
+- dispatch 自身授权收敛为 6 类路径：registry、既有 task order、既有 Handoff、新 R12B checklist、exam、implementation record。
+- 新增 planned 工作项 A：`AIW-20260715-PLATFORM-DELIVERY-FLOW-LEGACY-MIGRATION-V2`；其激活必须以最终 R12B 双提交集成事实为准，并在激活前刷新 base。
+- 新增 planned 工作项 B：`AIW-20260715-PLATFORM-ACTIVITY-MALL-M2-LEGACY-TRANSITION-R1`；其激活还必须满足 A 已集成、固定 receipt、Mall 双重正式 Go 与 exact clean 条件。
+- B 的 transition hash 固定为 `5dfa87a441a04eb8a24e3a4de883648780b6eaeddf2c870d831fa6ed29620939`，post hash 固定为 `7f1991952dea49dff84e6378dbdc4edd22f4bf72334e0a8c08a36474fb984ec6`。
+
+## 边界与停止线
+
+- 未修改测试、validator、policy、业务、部署或 reviewer evidence；未伪造未来提交 SHA。
+- A/B 当前只登记为 `planned`，不得在 R12-B 中提前实施、激活或迁移数据。
+- authority anchor、allowed paths、cutover/hash 任一漂移，或发现 partial migration，立即停止并保持 No-Go。
+- 生产、真实数据、真实资金与不可逆操作持续禁止。
+
+## 独立验收要求
+
+- 独立验收负责人应从 authority base 复核双提交链、registry 126→128 的精确语义差异、6 类路径范围与 current evidence。
+- 重新运行 34 项永久回归、5 个结构 validator、Service Plaza 总合同、UTF-8、`git diff --check`、范围与高置信 secret scan。
+- 特别确认 Activity/Mall 未虚假跃迁、API 仅 handoff-ready、cross-record 迟到事实未被回填、Telemetry planned 盲点已明确、A/B 未被误激活。
+
+## R12-D 两阶段 registry activation Handoff（2026-07-15）
+
+- 实施者：Platform registry dispatch agent。
+- 接收者 / 独立验收人：APP 总架构独立验收负责人。
+- approver：项目最高负责人。
+- base：`e7c5b61b9905e11f1be3267ea1544610a3cd064f`。
+- commit-1：`2c7d6639dd604491398407a2ddd8392ce97ba342`。
+- 当前结论：implementation complete，等待独立验收；实施者未自验收、未推送、未集成。
+
+### 不可变入口证据
+
+- entry checklist：
+  `contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12d.json`，
+  SHA-256 `988ce0f8e36ab6b56978dfd6a7f2b5e4df0b4e6f1ae03d23220334a27ec7de9a`。
+- entry attempt-1：score 75 / failed，SHA-256
+  `e3db01fcc2ed3d31c4055940031d59c42cf71fbb09859987c53a693b6c00812e`；原样保留。
+- entry attempt-2：score 100 / passed，SHA-256
+  `5fa7fdde87875296c11541c7418220414e3e9714d0baa650f01c6e19c4d03f1b`；原样保留。
+- final record：`IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12D-R2`，使用 commit-1 后全新
+  26/26 checklist 与 exam100，不复用 entry checklist。
+
+### Registry transaction
+
+- dispatch self 切换到 `codex/platform-registry-dispatch-r12d` / clean worktree /
+  base `e7c5b61`，仅六类 dispatch paths。
+- Legacy Migration V2 与 Activity/Mall Legacy Transition 均保持 `planned`，仅 base 刷新为
+  `e7c5b61`。
+- Telemetry R2 Acceptance 从 planned 激活为 active；删除 registry allowed path，改用 2026-07-15
+  checklist/exam/IR 与既有 Handoff，独立复验 backend exact `a0b21cf`，禁止业务修改。
+- 新增并激活 Network Read Provider Evidence R2；工作树 clean at `e7c5b61`，只读绑定 backend
+  exact `f6ba650c`，禁止 registry/shared-validator/backend implementation 修改。
+- 新增并激活 Health R0 F2 Audit F2-1；旧 legacy F2 row 逐字段不变，child 使用
+  `hm-r0-f2-1-audit.v1` 版本化路径，必须 `synthetic_only=true`、`executable=false`，
+  禁止真实健康/会员数据、生产或临床执行。
+- registry 相对 base 仅四个既有 row 变化，并只新增上述 Network 与 Health 两个 row；Social/Club 未新增。
+
+### 验证
+
+- 34/34 delivery-flow、governance-exam、implementation-record 永久回归通过。
+- agent collaboration、delivery flow、development checklist、governance exam、implementation record
+  五结构门禁通过。
+- Service Plaza 总合同通过；UTF-8、`git diff --check`、六类范围和高置信 secret scan 通过。
+- 三个被派发工作树均在激活前 clean 且 HEAD 为 `e7c5b61`。
+
+### 未完成、阻塞与下一派发
+
+- 本候选仍需 APP 总架构独立验收；任一两阶段提交验收失败，整条链保持 No-Go。
+- 实施者不执行推送或集成。
+- 下一轮 registry dispatch 才可考虑 Social backend/evidence 与 Club browser evidence；R12-D
+  未登记、未激活它们。
+
+## R12-F authority base refresh Handoff（2026-07-15）
+
+- 实施者：Platform registry dispatch agent。
+- 接收者 / 独立验收人：APP 总架构独立验收负责人。
+- authority base：`974ada3382004c9b5a7b2aa30b766a36ab5ac403`。
+- commit-1：`ec458ea7f5aab1892a5c0b727de14aae64c41e06`。
+- 当前结论：implementation complete，等待独立验收；未推送、未集成、未自验收。
+
+### Pre-exam staged gate 与不可变证据
+
+- entry checklist 在任何考试生成前与 task-order、registry candidate 一起暂存。
+- cached diff check、UTF-8 无 BOM、LF、恰好一个终止换行、JSON、registry validator 与 checklist
+  validator 均在出卷前通过。
+- entry checklist SHA-256：
+  `6a5eb7668541a5cd92e6257f17286601e990282b62abf0309790266f13329a0d`。
+- entry exam attempt-1：score 100 / passed，SHA-256：
+  `8c9be178ca7dca0385b4ce3f25052dfdb3571cac820d87cde6e98df369ee45e1`。
+- final R12F-R2 使用 commit-1 后全新 26/26 checklist 和 exam100，不复用 entry checklist。
+
+### 精确语义
+
+- 相对 authority 只改变 dispatch、Legacy A/B、Telemetry、Network、Health 六行；无新增或删除。
+- 五个非 dispatch 行只把 `base_commit` 刷新为 `974ada3`，状态、paths、owner 逐字段不变。
+- dispatch 切换到 R12-F clean worktree/branch/base，三类 current evidence globs 从 r12d 精确切换为
+  r12f；registry、既有 task-order、既有 Handoff 路径不变。
+- dispatch status/owner 不变；只刷新时效与 next checkpoint。
+
+### 验证与边界
+
+- 34/34 永久回归、五结构门禁、Service Plaza 总合同、UTF-8、authority..HEAD range diff、scope 与
+  high-confidence secret scan 全绿。
+- 仅六类 dispatch 路径；未修改 validator、policy、test、业务或 reviewer evidence。
+- 任一 commit 独立验收失败则双提交链 No-Go；实施者不得追加第三提交修补 final evidence。
+
+### 下一步
+
+将且只将 commit-1 与 final commit-2 双提交链交由 APP 总架构独立验收负责人给出 Go/No-Go；实施负责人不得推送或集成。
+
+## R12-G post-cutover closeout stage 1 Handoff（2026-07-15）
+
+- 实施者：Platform registry dispatch agent。
+- 接收者：APP 总架构独立验收负责人；Health 同时要求健康专业与平台联合独立验收。
+- authority base：`2ea278918c00d9fd18b999ee743bb31227cc6a7f`。
+- 当前结论：stage-1 implementation complete；仅等待 exact commit 独立验收，未推送、未集成、未自验收。
+
+### 原子状态事务
+
+- Telemetry R2 Acceptance：`active -> handoff-ready`；source `5cf87e27c122f4cd1db0f4d3c46fdeaa31659484`，APP merge `a1ac334f63d9ae18a6bf9f58d0e03bc441812c33`。
+- Network Evidence R2：`active -> handoff-ready`；source `5c48677c5a0428dc32dea29b84d94a129a649f92`，APP merge `610ba65680123758a53badde0fa8dc0cf52e7f20`。
+- Health F2-1：`active -> handoff-ready`；source `bfa8ec69bc77faad6fb5a0a8b78698866b8fbb2e`，APP merge `28dd038b75432ae140b79f5113bffe69cbedb847`；`synthetic_only=true`、`executable=false` 边界不变。
+- backend authority integration `091c9be9db8c58e780cf2543f8a6731faab076d2` 只作为 Telemetry/Network checkpoint 上下文，不写成 APP `integration_commit`。
+
+### 不变量与停止线
+
+- 未写 `independent_acceptance`、review verdict、decision 或 `integrated` 状态。
+- Legacy rows、Migration Drill index 92、Legacy A/B planned、业务代码、validator、policy、生产、真实数据与资金均未修改。
+- stage-2 必须由不同单写者在真实独立验收 evidence 落盘后执行；exact commit 变化或任一验收 No-Go 时禁止继续。
+
+### 当前治理证据
+
+- record：`IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12G-S1`。
+- checklist：26/26 current。
+- governance exam：attempt-1，100/100。
+- 验证：34/34 永久回归、Service Plaza 总合同、UTF-8 1504 files、`git diff --check` 与精确四行 registry 语义断言均通过。
+- 本候选只允许提交本地 exact commit，不推送、不集成。
