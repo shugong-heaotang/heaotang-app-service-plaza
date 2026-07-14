@@ -118,3 +118,9 @@ R11 初稿按原要求把 Activity 与 Mall 两个 candidate 由 `active` 转为
 - 新工作项由 `Platform delivery-flow legacy migration agent` / 平台集成负责人拥有，base=`dc8a52a4bcc130c6cdb4da55d5d015cdf501ba16`，branch=`codex/platform-legacy-state-migration-r1`，workspace=`C:/Users/shugo/Documents/worktrees/heaotang-platform-legacy-state-migration-r1`。仅授权 registry、delivery-flow policy、validator及其测试、总合同入口、ADR0021 和精确 task-order/checklist/exam/IR/Handoff 路径。
 
 R11-R2 registry 稳定后必须生成全新 record `IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R11-R2` 的 current checklist、attempt-1、IR 与 Handoff；不复用任何未生成的 R11 证据。五个 validator、34项永久回归、Service Plaza 总合同、UTF-8、diff、scope、secret 与语义审计必须全绿；新增 planned item 若仍被 current policy 拒绝则立即 No-Go。候选只提交推送，实施者禁止自行集成。
+
+### R11-R2-R2 关闭门禁证据重建
+
+R11-R2 first candidate `a8b2563` 在提交后远端回读确认其 checklist 末尾多一个空白行；`git diff --check dc8a52a..a8b2563` 因 `new blank line at EOF` 失败。该提交因此保持 **No-Go**，不得集成。passed exam 绑定原 checklist SHA，禁止直接修改二者；原字节和成绩由不可变 Git commit `a8b2563` 保留，current candidate 从tip移除该三份证据，不改写为通过。
+
+R11-R2-R2 不改变 registry、task scope或业务语义，只重新使用 record `IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R11-R2-R2` 完成26/26 current checklist、全新attempt-1=100、IR与Handoff。关闭门禁必须使用相对authority的全范围 `git diff --check dc8a52a..candidate`，不得只检查未提交diff；五validators、34项回归、总合同、UTF-8、scope、secret与remote exact仍必须全绿。候选只提交推送，不自行集成。

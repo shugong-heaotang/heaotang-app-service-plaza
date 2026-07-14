@@ -1,0 +1,70 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R11-R2-R2-1",
+    "record_id":  "IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R11-R2-R2",
+    "actor":  "Platform registry dispatch agent",
+    "attempt_number":  1,
+    "status":  "passed",
+    "generated_at":  "2026-07-14T07:17:25.4908103Z",
+    "completed_at":  "2026-07-14T07:17:32.1520679Z",
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  100,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "6f83e140d1e55fe35d1520c13eed55717a812bb21464c59441947c05d7f3b9a6",
+    "checklist_path":  "contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r11-r2-r2.json",
+    "checklist_sha256":  "f55a6ed3a2cd80e36b953d58f9c6ac41de8e84807fb6fe6fde7aa71962c72fe0",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-013",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0014-ai-development-flight-checklist.md"
+                      },
+                      {
+                          "question_id":  "GQ-001",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "CONSTRAINTS.md"
+                      },
+                      {
+                          "question_id":  "GQ-009",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0010-ai-implementation-records-required.md"
+                      },
+                      {
+                          "question_id":  "GQ-016",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0013-mandatory-ai-development-entrypoint.md"
+                      },
+                      {
+                          "question_id":  "GQ-002",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0008-versioned-business-variables.md"
+                      },
+                      {
+                          "question_id":  "GQ-008",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0007-stable-foundation-variable-business.md"
+                      },
+                      {
+                          "question_id":  "GQ-015",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "contracts/foundation/engineering-standards.v1.json"
+                      },
+                      {
+                          "question_id":  "GQ-007",
+                          "selected_option":  "A",
+                          "correct":  true,
+                          "source_path":  "AGENTS.md"
+                      }
+                  ],
+    "remediation_sources":  [
+
+                            ]
+}

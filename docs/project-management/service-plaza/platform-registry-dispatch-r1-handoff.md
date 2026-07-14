@@ -128,7 +128,8 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - cross-record reviewer supporting item：`handoff-ready` → `cancelled/superseded`；保留request=`2026-07-14T07:53:56+08:00`，真实迟到response=`14:26`、decision=`14:27/no-go`。source `efad99b` 是artifact `dafdd09f`祖先，evidence SHA-256=`f8a247a68532f2d198ffea4a8acc0724849099a1832a36282537b01e798c38e9`；主cross-record integrated item逐字段不变。
 - 新增且只新增planned `AIW-20260714-PLATFORM-LEGACY-STATE-MIGRATION-R1`：base=`dc8a52a`，只规划显式migration contract、anchor/hash演进、ADR0021和永久回归；未激活、未创建工作树、未实施，不得直接改immutable snapshot或豁免validator。
 - registry semantic：authority 126 rows、candidate 127 rows；六个existing target rows变化并追加一个planned item，其他120 rows逐字段不变。
-- current governance：record=`IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R11-R2`；checklist 26/26、current mismatch0、SHA-256=`45e52008ff12c3dcb3466edead3ae5332ee967408263586cf5fa7764d5cd63ad`；exam attempt-1=100。
+- R11-R2 first candidate：`a8b2563` 因 checklist line171 `new blank line at EOF` 导致full-range diff-check失败，保持 **No-Go / 禁止集成**。其passed exam绑定原checklist SHA，未改写；三份原始治理证据由Git commit `a8b2563`永久保留并从current tip移除。
+- current governance：record=`IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R11-R2-R2`；checklist 26/26、current mismatch0、SHA-256=`f55a6ed3a2cd80e36b953d58f9c6ac41de8e84807fb6fe6fde7aa71962c72fe0`；全新exam attempt-1=100。
 - 边界：未写reviewer evidence namespace、policy、validator、snapshot、业务、部署、生产、真实数据、真实资金或不可逆路径；候选只提交推送，不自行集成。
 
 ## 修改范围
@@ -163,9 +164,9 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r10.json`
 - `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r10-attempt-1.json`
 - `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r10.json`
-- `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r11-r2.json`
-- `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r11-r2-attempt-1.json`
-- `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r11-r2.json`
+- `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r11-r2-r2.json`
+- `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r11-r2-r2-attempt-1.json`
+- `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r11-r2-r2.json`
 
 ## 停止线
 
@@ -212,8 +213,9 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - R10 registry：authority 125 rows、candidate 126 rows；changed IDs 精确为 NOVA implementation、dispatch 与唯一新增 NOVA reviewer item；NOVA 与 dispatch changed fields 符合授权，其余 123 rows 逐字段不变。
 - R10 ancestry/worktree：`59a988d` → `81f6bc8` → `0c420c3` 两段祖先关系成立；reviewer worktree branch/HEAD 与登记一致且 clean。
 - R10 scope：仅 registry、task-order、R10 checklist/exam/IR 与本 Handoff；reviewer namespace 写入 0；`git diff --check` 与高置信 secret scan 通过。
-- R11-R2：agent collaboration、delivery flow、development checklist、governance exam、implementation record 五个 validators 全部 exit 0；delivery-flow/governance-exam/implementation-record 永久回归 34/34 通过。
-- R11-R2：Service Plaza 总合同 exit 0；UTF-8 1448 files 通过；`git diff --check` 通过。
+- R11-R2 first candidate：`a8b2563` full-range diff-check No-Go；未集成，原治理证据不作为current。
+- R11-R2-R2：agent collaboration、delivery flow、development checklist、governance exam、implementation record 五validators全部exit0；34/34永久回归、Service Plaza总合同、UTF-8 1448 files与相对authority的full-range diff-check全部通过。
+- R11-R2-R2：最终candidate路径6/6命中dispatch既有allowed patterns，scope_bad=0；high-confidence secret hits=0；registry 126→127、6个existing目标rows+1个planned item、其他120 rows逐字段不变。
 - R11-R2 registry：authority 126 rows、candidate 127 rows；六个existing目标rows变化、唯一新增planned legacy migration item，其他120 rows逐字段不变；Activity/Mall status均保持active且无handoff字段，immutable legacy prefix未变。
 - R11-R2 scope：6/6变更路径全部命中dispatch既有allowed patterns，越界0；reviewer evidence、policy、validator、snapshot与业务namespace写入0；高置信secret命中0。
 
