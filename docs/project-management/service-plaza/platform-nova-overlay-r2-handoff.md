@@ -52,7 +52,7 @@
 - negative_test：删 NOVA、删 Mall、empty、missing、unsafe、duplicate、unknown 与 post-cutoff foundation null 均失败。
 - regression_set：修订后定向22/22；全量92/92；Service Plaza total contract pass。
 - environment_retest：UTF-8 1434 files pass；scope bad=0；`git diff --check` pass。
-- evidence_paths_and_exact_commits：实现记录、R2 checklist/exam、审计与本Handoff；候选 exact 在提交后由接收人核对。
+- evidence_paths_and_exact_commits：实现记录、R2 checklist/exam、审计与本Handoff；implementation exact `60a0694`，central authority `ea3c70c8bea4904b455455ffc7c6e29821de2705`。
 
 ### Recurrence action
 
@@ -60,8 +60,8 @@
 
 ### Verdict
 
-- Conditional Pass：本地实现和回归通过。
-- unresolved_risk：第一次 central 临时集成发现并关闭 R7 固定短语误报；修订候选仍需再次对 `ea3c70c8bea4904b455455ffc7c6e29821de2705` 跑完整临时集成态门禁，随后仍需独立 reviewer Go。
+- Conditional Pass：本地实现、回归和 central 临时集成态均通过。
+- unresolved_risk：尚需平台治理独立测试负责人对推送后的 exact candidate 给出 Go；实施者不自验收。
 - next_authorization：独立 reviewer 只读复验 exact candidate；Go 后由平台集成负责人受控集成，不由实施者改 registry。
 
 ## 精确变更边界
@@ -80,6 +80,6 @@ git diff --check
 
 ## 下一步
 
-1. 形成 exact candidate，执行 central authority merge-tree 与临时集成态全门禁。
-2. 如集成态发现 `fb29b857` 后新增文件不合规，保持 No-Go 并修复当前门禁；禁止把 cutoff 后移。
-3. 临时集成态通过后推送候选，交独立 reviewer；未得 Go 前不得声称 verified/integrated。
+1. 推送 evidence-closeout candidate，核对远端 exact。
+2. 交独立 reviewer 复验 implementation exact `60a0694` 及其证据子提交；未得 Go 前不得声称 verified/integrated。
+3. reviewer Go 后由平台集成负责人受控集成并更新 registry；实施者不修改 registry。

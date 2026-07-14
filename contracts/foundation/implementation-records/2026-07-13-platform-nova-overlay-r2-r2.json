@@ -75,7 +75,8 @@
     "foundation migration cutoff inventory preserves 29 historical files and 30 findings; post-cutoff synthetic platform-scope negative remains fail-closed",
     "text encoding gate passes 1434 files",
     "allowed-path scope scan reports zero unauthorized paths and git diff check passes",
-    "first ea3 central integration simulation found one R7 brittle-marker false positive without moving the cutoff; the gate now requires null checklist, unique registry mapping, exact platform integration owner, allowed path, module_id=platform and matching platform or registry-only task order identity"
+    "first ea3 central integration simulation found one R7 brittle-marker false positive without moving the cutoff; the gate now requires null checklist, unique registry mapping, exact platform integration owner, allowed path, module_id=platform and matching platform or registry-only task order identity",
+    "implementation exact 60a0694 merges cleanly into central authority ea3c70c8; central integration-state targeted 22, full 92, Service Plaza total contract, UTF-8 1439 and diff checks all pass"
   ],
   "evidence": [
     "docs/project-management/service-plaza/new-module-governance-bootstrap-audit-2026-07-13.md",

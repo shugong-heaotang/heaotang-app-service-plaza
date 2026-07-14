@@ -58,6 +58,7 @@
 - `contracts/modules/*/development-checklists/*.json`：67份，66份 completed；completed/null 仍恰好为上表4份，未增加 legacy exception。
 - Foundation migration inventory：从旧 `03ab808f` 到 `fb29b857` 有32份 completed foundation checklist；其中29份旧文件产生30条新规则 finding（一份 NOVA API evidence 同时缺 allowed-path 与固定 task-order短语）。这些字节不在本项授权范围且属于历史快照，保留 finding、不追认新规则、不回写；cutoff 后合成负例继续证明新违规会失败。
 - Central authority 首次临时集成：`ea3c70c8...` 无合并冲突，reading-list registry gate通过；cutoff 后 R7 暴露“结构化平台身份齐全但固定英文短语缺失”的单一测试问题。修复验证结构化 registry/task-order事实且未移动cutoff，模块伪装负例继续失败。
+- Central authority 修订后复验：implementation exact `60a0694` 与 `ea3c70c8...` merge-tree及无提交合并均无冲突；临时集成态定向22/22、全量92/92、Service Plaza总合同、UTF-8 1439和diff全部通过。
 
 ### Overlay 只读审计
 
