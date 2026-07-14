@@ -3319,23 +3319,22 @@
                        {
                            "work_id": "AIW-20260713-ACTION-TELEMETRY-BUSINESSCONFIG-R2-ACCEPTANCE",
                            "title": "动作遥测 BusinessConfig R2 独立证据刷新与验收",
-                           "owner": "Codex platform integration acceptance agent",
+                           "owner": "平台API验收负责人",
                            "owner_role": "平台集成负责人",
-                           "status": "planned",
+                           "status": "active",
                            "repository_root": "C:/Users/shugo/Documents/APP系统",
                            "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-action-telemetry-businessconfig-r2-acceptance",
                            "branch": "codex/action-telemetry-businessconfig-r2-acceptance",
-                           "base_commit": "73b64b03627f37cd34f5bbbad1802fa08a20dd1f",
+                           "base_commit": "e7c5b61b9905e11f1be3267ea1544610a3cd064f",
                            "allowed_paths": [
-                               "contracts/foundation/agent-collaboration.v1.json",
-                               "contracts/foundation/development-checklists/2026-07-13-action-telemetry-businessconfig-r2-acceptance*.json",
-                               "contracts/foundation/governance-exams/2026-07-13-action-telemetry-businessconfig-r2-acceptance*.json",
-                               "contracts/foundation/implementation-records/2026-07-13-action-telemetry-businessconfig-r2-acceptance*.json",
+                               "contracts/foundation/development-checklists/2026-07-15-action-telemetry-businessconfig-r2-acceptance*.json",
+                               "contracts/foundation/governance-exams/2026-07-15-action-telemetry-businessconfig-r2-acceptance*.json",
+                               "contracts/foundation/implementation-records/2026-07-15-action-telemetry-businessconfig-r2-acceptance*.json",
                                "docs/project-management/service-plaza/action-telemetry-businessconfig-r2-acceptance.md"
                            ],
                            "started_with_clean_worktree": true,
                            "preexisting_changes_acknowledged": false,
-                           "migration_note": "R12-B records a supervision blind spot: delivery-flow v1 current-clock expiry validation does not report stale planned items. This row remains planned and is refreshed without activation. Before activation, the registry owner must refresh base_commit to the then-current integrated authority, create fresh checklist/exam/IR/Handoff, confirm shared registry-path release, and independently reverify backend exact a0b21cf37cde5cb17002e08e8c6817527efe8686. This slice does not change the validator, business code or integrated evidence.",
+                           "migration_note": "R12-D activates the existing acceptance row from integrated authority e7c5b61b9905e11f1be3267ea1544610a3cd064f after confirming the dedicated worktree is clean at that exact base. The old shared registry path and 2026-07-13 evidence globs are removed. This work item may create only fresh 2026-07-15 governance evidence and Handoff while independently reverifying backend exact a0b21cf37cde5cb17002e08e8c6817527efe8686; business code, registry, validator, production, real data and funds remain forbidden.",
                            "handoff_record": "docs/project-management/service-plaza/action-telemetry-businessconfig-r2-acceptance.md",
                            "flow_policy_version": "delivery-flow-policy.v1",
                            "flow_class": "supporting-checkpoint",
@@ -3343,27 +3342,28 @@
                            "module_id": "platform",
                            "priority": "P0",
                            "risk_level": "medium",
-                           "updated_at": "2026-07-15T05:43:07+08:00",
-                           "target_date": "2026-07-15T17:43:07+08:00",
-                           "next_checkpoint": "Remain planned; after shared registry release, refresh activation base to current authority and independently verify unknown-key fail-closed behavior.",
-                           "status_expires_at": "2026-07-15T17:43:07+08:00",
-                           "developer_role": "动作遥测后端实施负责人",
-                           "reviewer_role": "APP平台独立验收负责人",
+                           "updated_at": "2026-07-15T06:12:53+08:00",
+                           "target_date": "2026-07-15T10:12:53+08:00",
+                           "next_checkpoint": "Create a fresh current checklist and exam100 from e7c5b61, independently reverify backend exact a0b21cf including unknown-key fail-closed and zero-write behavior, then submit IR/Handoff for APP architecture review.",
+                           "status_expires_at": "2026-07-15T10:12:53+08:00",
+                           "developer_role": "平台API验收负责人",
+                           "reviewer_role": "APP总架构独立验收负责人",
                            "approver_role": "项目最高负责人",
                            "blocks": [
-                               "shared registry path release",
-                               "action telemetry BusinessConfig R2 governance acceptance"
+                               "action telemetry BusinessConfig R2 independent acceptance"
                            ],
                            "does_not_block": [
+                               "Network Evidence R2",
+                               "Health F2-1 synthetic audit",
                                "backend exact commit preservation",
                                "unrelated platform work"
                            ],
                            "auto_continue": true,
                            "stop_conditions": [
-                               "old integrated item reactivation",
-                               "business code edit",
+                               "registry or business code edit",
                                "authority expansion",
-                               "independent acceptance failure"
+                               "independent acceptance failure",
+                               "production real-data or funds access"
                            ]
                        },
                        {
@@ -3431,20 +3431,20 @@
                            "owner_role": "平台集成负责人",
                            "status": "active",
                            "repository_root": "C:/Users/shugo/Documents/APP系统",
-                           "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-platform-registry-dispatch-r12b",
-                           "branch": "codex/platform-registry-dispatch-r12b",
-                           "base_commit": "73b64b03627f37cd34f5bbbad1802fa08a20dd1f",
+                           "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-platform-registry-dispatch-r12d",
+                           "branch": "codex/platform-registry-dispatch-r12d",
+                           "base_commit": "e7c5b61b9905e11f1be3267ea1544610a3cd064f",
                            "allowed_paths": [
                                "contracts/foundation/agent-collaboration.v1.json",
                                "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md",
                                "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md",
-                               "contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12b*.json",
-                               "contracts/foundation/governance-exams/2026-07-15-platform-registry-dispatch-r1-r12b*.json",
-                               "contracts/foundation/implementation-records/2026-07-15-platform-registry-dispatch-r1-r12b*.json"
+                               "contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12d*.json",
+                               "contracts/foundation/governance-exams/2026-07-15-platform-registry-dispatch-r1-r12d*.json",
+                               "contracts/foundation/implementation-records/2026-07-15-platform-registry-dispatch-r1-r12d*.json"
                            ],
                            "started_with_clean_worktree": true,
                            "preexisting_changes_acknowledged": false,
-                           "migration_note": "Direct-principal bootstrap history is preserved. At 2026-07-15T05:43:07+08:00 the project principal authorized R12-B from independently technical-Go test-repair base 73b64b03627f37cd34f5bbbad1802fa08a20dd1f: one atomic registry transaction clears the nine existing current-clock/SLA failures, records the Telemetry planned-state blind spot, and registers only two planned successor transactions. R12-B uses fresh governance evidence, edits no test/validator/policy/business/reviewer evidence, cannot self-review/integrate/push, and does not invent a future integration SHA.",
+                           "migration_note": "R12-B controlled integration e7c5b61b9905e11f1be3267ea1544610a3cd064f is preserved. At 2026-07-15T06:12:53+08:00 the project principal directly authorized R12-D because this registry row still named r12b and the intervening R12-C candidate was No-Go after a passed governance exam was deleted or rewritten. R12-D preserves all entry and failed exam evidence, uses a strict two-commit chain, changes only six dispatch path classes, activates three clean non-overlapping worktrees, keeps Legacy A/B planned, and cannot self-review, push or integrate.",
                            "handoff_record": "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md",
                            "flow_policy_version": "delivery-flow-policy.v1",
                            "flow_class": "governance-repair",
@@ -3452,16 +3452,15 @@
                            "module_id": "platform",
                            "priority": "P0",
                            "risk_level": "high",
-                           "updated_at": "2026-07-15T05:43:07+08:00",
-                           "target_date": "2026-07-15T09:43:07+08:00",
-                           "next_checkpoint": "Complete fresh R12-B checklist, exam100, IR/Handoff and all gates; create the local two-commit candidate for independent review. No push or integration by implementer.",
-                           "status_expires_at": "2026-07-15T09:43:07+08:00",
+                           "updated_at": "2026-07-15T06:12:53+08:00",
+                           "target_date": "2026-07-15T10:12:53+08:00",
+                           "next_checkpoint": "Commit the registry transaction with immutable entry checklist and exams; from that exact commit create a new R12D-R2 checklist, exam100, IR and Handoff, run all gates, then submit both local commits for independent review.",
+                           "status_expires_at": "2026-07-15T10:12:53+08:00",
                            "developer_role": "平台注册表派发授权记录人",
                            "reviewer_role": "APP总架构独立验收负责人",
                            "approver_role": "项目最高负责人",
                            "blocks": [
-                               "R12-B lifecycle transaction independent acceptance",
-                               "fresh authority for planned migration activation"
+                               "R12-D two-commit activation transaction independent acceptance"
                            ],
                            "does_not_block": [
                                "unrelated isolated module work",
@@ -3471,7 +3470,8 @@
                            "auto_continue": true,
                            "stop_conditions": [
                                "self-expansion beyond the six authorized path classes",
-                               "partial lifecycle transaction",
+                               "entry or passed exam deletion or rewrite",
+                               "partial activation transaction",
                                "business test validator policy or reviewer-evidence edit",
                                "fabricated future integration SHA",
                                "production real-data or funds access",
@@ -3590,7 +3590,7 @@
                            "repository_root": "C:/Users/shugo/Documents/APP系统",
                            "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-platform-delivery-flow-legacy-migration-v2",
                            "branch": "codex/platform-delivery-flow-legacy-migration-v2",
-                           "base_commit": "73b64b03627f37cd34f5bbbad1802fa08a20dd1f",
+                           "base_commit": "e7c5b61b9905e11f1be3267ea1544610a3cd064f",
                            "allowed_paths": [
                                "contracts/foundation/delivery-flow-policy.v2.json",
                                "contracts/foundation/delivery-flow-policy.v2.schema.json",
@@ -3650,7 +3650,7 @@
                            "repository_root": "C:/Users/shugo/Documents/APP系统",
                            "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-platform-activity-mall-m2-legacy-transition-r1",
                            "branch": "codex/platform-activity-mall-m2-legacy-transition-r1",
-                           "base_commit": "73b64b03627f37cd34f5bbbad1802fa08a20dd1f",
+                           "base_commit": "e7c5b61b9905e11f1be3267ea1544610a3cd064f",
                            "allowed_paths": [
                                "contracts/foundation/agent-collaboration.v1.json",
                                "docs/project-management/notices/2026-07-15-platform-activity-mall-m2-legacy-transition-r1-task-order.md",
@@ -3694,6 +3694,109 @@
                                "transition or effective-state hash mismatch",
                                "production real-data funds access",
                                "self-acceptance"
+                           ]
+                       },
+                       {
+                           "work_id": "AIW-20260715-NOVA-M2-NETWORK-READ-PROVIDER-EVIDENCE-R2",
+                           "title": "NOVA M2 Network Read Provider Evidence R2",
+                           "owner": "NOVA network read provider agent",
+                           "owner_role": "NOVA network read provider agent",
+                           "status": "active",
+                           "repository_root": "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-nova-m2-network-read-provider-evidence-r2",
+                           "branch": "codex/nova-m2-network-read-provider-evidence-r2",
+                           "base_commit": "e7c5b61b9905e11f1be3267ea1544610a3cd064f",
+                           "allowed_paths": [
+                               "docs/project-management/modules/network/network-read-provider-r2-handoff.md",
+                               "contracts/modules/network/development-checklists/2026-07-15-nova-m2-network-read-provider-evidence-r2*.json",
+                               "contracts/modules/network/governance-exams/2026-07-15-nova-m2-network-read-provider-evidence-r2*.json",
+                               "contracts/modules/network/implementation-records/2026-07-15-nova-m2-network-read-provider-evidence-r2*.json"
+                           ],
+                           "started_with_clean_worktree": true,
+                           "preexisting_changes_acknowledged": false,
+                           "migration_note": "R12-D registers a fresh evidence-only work item from clean integrated authority e7c5b61b9905e11f1be3267ea1544610a3cd064f. It binds read-only verification to backend exact f6ba650c and may write only its Handoff plus fresh module checklist, exam and implementation record. Registry, shared validators, backend implementation, deployment, production, real data and funds are outside scope.",
+                           "handoff_record": "docs/project-management/modules/network/network-read-provider-r2-handoff.md",
+                           "flow_policy_version": "delivery-flow-policy.v1",
+                           "flow_class": "supporting-checkpoint",
+                           "business_stream_id": "nova-network-read-provider",
+                           "module_id": "nova",
+                           "priority": "P0",
+                           "risk_level": "medium",
+                           "updated_at": "2026-07-15T06:12:53+08:00",
+                           "target_date": "2026-07-15T10:12:53+08:00",
+                           "next_checkpoint": "Create fresh module governance evidence, read-only verify backend exact f6ba650c, and submit the evidence-only Handoff for platform backend independent acceptance.",
+                           "status_expires_at": "2026-07-15T10:12:53+08:00",
+                           "developer_role": "NOVA network read provider agent",
+                           "reviewer_role": "平台后端独立验收负责人",
+                           "approver_role": "项目最高负责人",
+                           "blocks": [
+                               "Network Read Provider R2 independent acceptance"
+                           ],
+                           "does_not_block": [
+                               "Telemetry R2 acceptance",
+                               "Health F2-1 synthetic audit",
+                               "unrelated isolated module work"
+                           ],
+                           "auto_continue": true,
+                           "stop_conditions": [
+                               "registry shared-validator or backend implementation edit",
+                               "backend exact mismatch",
+                               "independent acceptance failure",
+                               "production real-data or funds access"
+                           ]
+                       },
+                       {
+                           "work_id": "AIW-20260715-HEALTH-R0-F2-AUDIT-F2-1",
+                           "title": "Health R0 F2 Audit F2-1 Synthetic Evidence",
+                           "owner": "健康大管家负责人",
+                           "owner_role": "健康大管家负责人",
+                           "status": "active",
+                           "repository_root": "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-health-r0-f2-audit-f2-1",
+                           "branch": "codex/health-manager-r0-f2-audit-f2-1",
+                           "base_commit": "e7c5b61b9905e11f1be3267ea1544610a3cd064f",
+                           "allowed_paths": [
+                               "docs/project-management/modules/health-manager/health-manager-r0-f2-1-audit.md",
+                               "docs/project-management/modules/health-manager/health-manager-r0-f2-1-handoff.md",
+                               "contracts/modules/health-manager/hm-r0-f2-1-audit.v1.json",
+                               "contracts/modules/health-manager/hm-r0-f2-1-audit.v1.schema.json",
+                               "contracts/modules/health-manager/fixtures/hm-r0-f2-1-audit/synthetic-*.json",
+                               "contracts/modules/health-manager/development-checklists/2026-07-15-health-r0-f2-audit-f2-1*.json",
+                               "contracts/modules/health-manager/governance-exams/2026-07-15-health-r0-f2-audit-f2-1*.json",
+                               "contracts/modules/health-manager/implementation-records/2026-07-15-health-r0-f2-audit-f2-1*.json"
+                           ],
+                           "started_with_clean_worktree": true,
+                           "preexisting_changes_acknowledged": false,
+                           "migration_note": "R12-D registers an audit-only post-cutover child from clean integrated authority e7c5b61b9905e11f1be3267ea1544610a3cd064f. The immutable legacy AIW-20260713-HEALTH-R0-F2-AUDIT row remains handoff-ready and field-for-field unchanged; this child uses versioned F2-1 contract and fixture paths that do not overlap the legacy scope. The new audit contract must remain synthetic_only=true and executable=false. It may not access production, real health or member data, execute clinical behavior, modify registry or shared validators, or claim professional approval.",
+                           "handoff_record": "docs/project-management/modules/health-manager/health-manager-r0-f2-1-handoff.md",
+                           "flow_policy_version": "delivery-flow-policy.v1",
+                           "flow_class": "governance-repair",
+                           "business_stream_id": "health-r0-f2-audit",
+                           "module_id": "health-manager",
+                           "priority": "P1",
+                           "risk_level": "high",
+                           "updated_at": "2026-07-15T06:12:53+08:00",
+                           "target_date": "2026-07-15T10:12:53+08:00",
+                           "next_checkpoint": "Create fresh health-manager governance evidence, prove synthetic_only=true and executable=false with positive and fail-closed fixtures, then submit audit and Handoff for joint health-professional and platform independent review.",
+                           "status_expires_at": "2026-07-15T10:12:53+08:00",
+                           "developer_role": "健康大管家负责人",
+                           "reviewer_role": "健康专业与平台联合独立验收负责人",
+                           "approver_role": "项目最高负责人",
+                           "blocks": [
+                               "Health F2-1 joint independent acceptance"
+                           ],
+                           "does_not_block": [
+                               "Telemetry R2 acceptance",
+                               "Network Evidence R2",
+                               "unrelated isolated module work"
+                           ],
+                           "auto_continue": true,
+                           "stop_conditions": [
+                               "synthetic_only not true",
+                               "executable not false",
+                               "production real-health or member-data access",
+                               "registry or shared-validator edit",
+                               "independent acceptance failure"
                            ]
                        }
                    ]

@@ -129,3 +129,31 @@ R12-B 原子 registry 语义：
 为避免 registry 输出使入口 checklist 自失效，R12-B 必须形成双提交链：第一提交固定
 registry transaction 与入口治理证据；第二提交从第一 exact 重新全文读取并形成 final
 current checklist、exam100、IR/Handoff。任一提交独立验收失败，整条链保持 No-Go。
+
+## R12-D direct-principal registry activation（2026-07-15）
+
+R12-B 双提交链已由独立验收 Go 并受控集成为 authority
+`e7c5b61b9905e11f1be3267ea1544610a3cd064f`。后续 R12-C 候选因删除或改写已通过的
+governance exam 证据而被判定 No-Go，且权威 registry 仍指向旧 `r12b` 工作树。项目最高负责人因此直接授权
+R12-D 以同一 work_id 执行一次最小 registry activation transaction；该授权只修复所有权接续与并行派发，
+不追认 R12-C，也不允许复用、删除或改写其通过后证据。
+
+R12-D 必须采用严格两阶段不可变证据：
+
+1. 先从 `e7c5b61` 生成并保留 entry record
+   `IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12D` 的全新 checklist 和 governance exam；
+   任何 failed/passed attempt 均永久保留，不得删除或改写。
+2. registry transaction 与本 task-order 进入 commit-1；Legacy Migration V2 与
+   Activity/Mall Legacy Transition 只保持 `planned` 并刷新 base 到 `e7c5b61`。
+3. commit-1 只激活三个 clean、互不重叠工作面：existing Telemetry R2 Acceptance、
+   new Network Read Provider Evidence R2、new Health R0 F2 Audit F2-1。Telemetry 必须移除 registry
+   allowed path；Network 只读绑定 backend `f6ba650c`；Health 必须保持
+   `synthetic_only=true`、`executable=false`。
+4. 基于 commit-1 重新全文读取并生成 final record
+   `IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12D-R2` 的全新 checklist、exam100、IR 和 Handoff，
+   进入 commit-2。entry 证据不得因 final 证据出现而失效、删除或被改写。
+
+R12-D 仅允许六类 dispatch 路径：registry、现有 task-order、现有 dispatch Handoff、R12-D checklist、
+R12-D governance exam、R12-D implementation record。禁止修改 validator、policy、test、业务或 reviewer
+evidence；禁止新增 Social/Club 工作项；禁止推送、自验收或自行集成。Social 与 Club 只在 Handoff
+中列为下一轮 dispatch。任一提交独立验收失败，整条两提交链保持 No-Go。

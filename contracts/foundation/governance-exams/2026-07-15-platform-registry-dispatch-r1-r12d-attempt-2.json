@@ -1,0 +1,94 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12D-2",
+    "record_id":  "IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12D",
+    "actor":  "Platform registry dispatch agent",
+    "attempt_number":  2,
+    "status":  "passed",
+    "generated_at":  "2026-07-14T22:12:17.2447155Z",
+    "completed_at":  "2026-07-14T22:12:22.3556307Z",
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  100,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "6f83e140d1e55fe35d1520c13eed55717a812bb21464c59441947c05d7f3b9a6",
+    "checklist_path":  "contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12d.json",
+    "checklist_sha256":  "988ce0f8e36ab6b56978dfd6a7f2b5e4df0b4e6f1ae03d23220334a27ec7de9a",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-013",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0014-ai-development-flight-checklist.md"
+                      },
+                      {
+                          "question_id":  "GQ-007",
+                          "selected_option":  "A",
+                          "correct":  true,
+                          "source_path":  "AGENTS.md"
+                      },
+                      {
+                          "question_id":  "GQ-006",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/project-management/ai-coding-incident-lessons-2026-07-10.md"
+                      },
+                      {
+                          "question_id":  "GQ-015",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "contracts/foundation/engineering-standards.v1.json"
+                      },
+                      {
+                          "question_id":  "GQ-005",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+                      },
+                      {
+                          "question_id":  "GQ-004",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+                      },
+                      {
+                          "question_id":  "GQ-011",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/project-management/module-internal-dependency-standard-v1.md"
+                      },
+                      {
+                          "question_id":  "GQ-002",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0008-versioned-business-variables.md"
+                      }
+                  ],
+    "remediation_sources":  [
+
+                            ],
+    "previous_attempt_path":  "contracts/foundation/governance-exams/2026-07-15-platform-registry-dispatch-r1-r12d-attempt-1.json",
+    "previous_attempt_sha256":  "e3db01fcc2ed3d31c4055940031d59c42cf71fbb09859987c53a693b6c00812e",
+    "remediation_rereads":  [
+                                {
+                                    "source_path":  "AGENTS.md",
+                                    "presented_at":  "2026-07-14T22:12:17.2271935Z",
+                                    "presentation_sha256":  "242fb10e0e85b9336e774c30e512275a3d139b4c7b71a74583884753417e9881",
+                                    "presentation_nonce":  "e059bffc157a44f4904987026b952b28",
+                                    "confirmed_at":  "2026-07-14T22:12:17.2367192Z",
+                                    "source_sha256":  "242fb10e0e85b9336e774c30e512275a3d139b4c7b71a74583884753417e9881",
+                                    "confirmed_by":  "Platform registry dispatch agent",
+                                    "confirmation_method":  "interactive-path-nonce-after-full-output"
+                                },
+                                {
+                                    "source_path":  "docs/decisions/0014-ai-development-flight-checklist.md",
+                                    "presented_at":  "2026-07-14T22:12:17.2407183Z",
+                                    "presentation_sha256":  "30293518f9f2c2f2545e697b1fefb76da6dd41e18a66872487bb271251d0d53c",
+                                    "presentation_nonce":  "d7c41aa829694a1a8692d8a6627542e3",
+                                    "confirmed_at":  "2026-07-14T22:12:17.2407183Z",
+                                    "source_sha256":  "30293518f9f2c2f2545e697b1fefb76da6dd41e18a66872487bb271251d0d53c",
+                                    "confirmed_by":  "Platform registry dispatch agent",
+                                    "confirmation_method":  "interactive-path-nonce-after-full-output"
+                                }
+                            ]
+}
