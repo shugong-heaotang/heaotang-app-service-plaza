@@ -90,3 +90,42 @@ R10 只允许以下原子登记语义：
 - reviewer worktree 必须为 `C:/Users/shugo/Documents/worktrees/heaotang-platform-nova-overlay-r2-independent-acceptance`，branch `codex/platform-nova-overlay-r2-independent-acceptance`，HEAD `0c420c3` 且 clean。
 
 R10 必须新建 current checklist 26/26、随机考试 100、IR/Handoff，并通过 agent collaboration、delivery flow、implementation record、governance exam、development checklist、总合同、UTF-8、scope、diff 与 secret 门禁。dispatch 不得写 reviewer evidence namespace、validator、业务、部署、生产、真实数据或真实资金；候选只提交推送，不自行集成。
+
+## R12-B lifecycle deadlock repair（2026-07-15）
+
+项目最高负责人从已获独立技术 Go 的 test-repair exact
+`73b64b03627f37cd34f5bbbad1802fa08a20dd1f` 直接授权 R12-B。R12-B
+沿用 work_id `AIW-20260714-PLATFORM-REGISTRY-DISPATCH-R1`，工作树改为
+`heaotang-platform-registry-dispatch-r12b`，分支改为
+`codex/platform-registry-dispatch-r12b`。本次只允许 registry、现有 task-order、
+现有 Handoff 及 R12-B 新 checklist/exam/IR 六类路径；不得修改 test、validator、
+policy、业务或 reviewer evidence，不得推送、集成、自行验收或接触生产、真实数据、
+资金。
+
+R12-B 原子 registry 语义：
+
+- 以真实当前时间刷新 Activity、Mall Catalog Solution、NOVA Runtime、NOVA API、
+  NOVA Overlay、dispatch 与 NOVA reviewer 的监督窗口；NOVA API 只转
+  `handoff-ready`，不标记 integrated。
+- 对 cross-record duplicate reviewer checkpoint 记录真实迟到 first response 和
+  `no-go/superseded` decision，不回填虚假及时响应，不修改主 integrated outcome。
+- Telemetry R2 保持 `planned`，刷新真实监督时间和激活条件，并明确记录 delivery-flow
+  v1 不报告 planned 过期的监督盲点；本候选不修改 validator，也不激活 Telemetry。
+- 新增 `AIW-20260715-PLATFORM-DELIVERY-FLOW-LEGACY-MIGRATION-V2` 与
+  `AIW-20260715-PLATFORM-ACTIVITY-MALL-M2-LEGACY-TRANSITION-R1`，两者只能
+  `planned`。其 `base_commit` 只记录当前 authority `73b64b0`；未知的 R12-B
+  双提交链 integration SHA 不得伪造，必须在未来激活前刷新。
+- Legacy Migration V2 必须产出 fixed receipt，并保持 anchor、path、cutover、hash
+  不漂移；它阻塞 atomic transition。
+- Atomic transition 只有在 A integration、fixed receipt、Mall Catalog Solution 与
+  Evidence 双 formal Go、相关 exact worktree clean 后才可激活。未来事务必须一次完成
+  五行切换：Activity `active -> handoff-ready`，Catalog Solution/Evidence
+  `active -> integrated`，Order/Ports `planned -> active`。transition hash 固定为
+  `5dfa87a441a04eb8a24e3a4de883648780b6eaeddf2c870d831fa6ed29620939`，
+  post effective-state hash 固定为
+  `7f1991952dea49dff84e6378dbdc4edd22f4bf72334e0a8c08a36474fb984ec6`；
+  R12-B 不执行该事务。
+
+为避免 registry 输出使入口 checklist 自失效，R12-B 必须形成双提交链：第一提交固定
+registry transaction 与入口治理证据；第二提交从第一 exact 重新全文读取并形成 final
+current checklist、exam100、IR/Handoff。任一提交独立验收失败，整条链保持 No-Go。

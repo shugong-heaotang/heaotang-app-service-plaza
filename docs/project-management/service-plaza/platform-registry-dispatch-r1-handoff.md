@@ -200,3 +200,42 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 ## 下一步
 
 提交并推送 exact R10 NOVA reviewer supporting-item authorization candidate，由 APP 总架构独立验收负责人给出 Go/No-Go。实施者不得自行集成；只有本候选独立 Go 且受控集成后，reviewer 才能在 exact `0c420c3` 派生的授权工作树中写 formal evidence。
+
+# R12-B 生命周期修复候选 Handoff（2026-07-15）
+
+## 候选与职责边界
+
+- authority base：`73b64b03627f37cd34f5bbbad1802fa08a20dd1f`。
+- implementation commit：`ed29897e3b4fd93028cdb1c1613944a4f46f399d`。
+- current record：`IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12B-R2`。
+- current checklist：26/26；current exam：attempt-1，100/100。
+- 本实施负责人只提交本地候选，不自行独立验收、推送或集成；最终 Go/No-Go 由平台治理独立测试负责人给出。
+
+## 精确变更
+
+- registry 从 126 rows 增至 128 rows：精确修改 9 个既有 work IDs，新增 2 个 planned work IDs。
+- Activity 与 Protection Mall Catalog Solution 均保持 `active`，只刷新真实 checkpoint 与时效字段，不虚构生命周期跃迁。
+- NOVA API implementation 从 `active` 进入 `handoff-ready`；该状态仅表示等待独立验收，不等同于 integrated。
+- cross-record independent-acceptance supporting item 从 `handoff-ready` 进入 `cancelled`，记录真实迟到首次响应和 No-Go；主工作项 integrated 事实保持不变，禁止补写虚假及时证据。
+- Telemetry R2 保持 `planned`，明确记录 planned expiry 目前不被 validator 阻断的盲点，并要求激活前刷新 authority base、时间和激活条件。
+- dispatch 自身授权收敛为 6 类路径：registry、既有 task order、既有 Handoff、新 R12B checklist、exam、implementation record。
+- 新增 planned 工作项 A：`AIW-20260715-PLATFORM-DELIVERY-FLOW-LEGACY-MIGRATION-V2`；其激活必须以最终 R12B 双提交集成事实为准，并在激活前刷新 base。
+- 新增 planned 工作项 B：`AIW-20260715-PLATFORM-ACTIVITY-MALL-M2-LEGACY-TRANSITION-R1`；其激活还必须满足 A 已集成、固定 receipt、Mall 双重正式 Go 与 exact clean 条件。
+- B 的 transition hash 固定为 `5dfa87a441a04eb8a24e3a4de883648780b6eaeddf2c870d831fa6ed29620939`，post hash 固定为 `7f1991952dea49dff84e6378dbdc4edd22f4bf72334e0a8c08a36474fb984ec6`。
+
+## 边界与停止线
+
+- 未修改测试、validator、policy、业务、部署或 reviewer evidence；未伪造未来提交 SHA。
+- A/B 当前只登记为 `planned`，不得在 R12-B 中提前实施、激活或迁移数据。
+- authority anchor、allowed paths、cutover/hash 任一漂移，或发现 partial migration，立即停止并保持 No-Go。
+- 生产、真实数据、真实资金与不可逆操作持续禁止。
+
+## 独立验收要求
+
+- 独立验收负责人应从 authority base 复核双提交链、registry 126→128 的精确语义差异、6 类路径范围与 current evidence。
+- 重新运行 34 项永久回归、5 个结构 validator、Service Plaza 总合同、UTF-8、`git diff --check`、范围与高置信 secret scan。
+- 特别确认 Activity/Mall 未虚假跃迁、API 仅 handoff-ready、cross-record 迟到事实未被回填、Telemetry planned 盲点已明确、A/B 未被误激活。
+
+## 下一步
+
+生成仅包含 current R12B-R2 checklist、exam、implementation record 与本 Handoff 的第二个本地提交；随后将双提交链交由平台治理独立测试负责人给出 Go/No-Go。实施负责人不得自行推送或集成。
