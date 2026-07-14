@@ -2774,13 +2774,13 @@
                            "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-activity-v3-m0",
                            "branch": "codex/activity-v3-m0",
                            "base_commit": "485601cb4b40025ce5b96fc746b9996bbf80250d",
-                           "allowed_paths":  [
+                           "allowed_paths": [
                                "contracts/modules/activity/**",
                                "docs/project-management/modules/activity/**"
                            ],
                            "started_with_clean_worktree": true,
                            "preexisting_changes_acknowledged": false,
-                           "migration_note": "用户曾于2026-07-13要求活动需求重新打磨完成前先不要动，工作项一度只读冻结。用户随后明确要求继续技术开发并持续推进活动V3.0目标；原始可追溯派发基线为485601cb4b40025ce5b96fc746b9996bbf80250d，平台新模块治理R1独立Go并集成后，activity worktree以reactivation_base=5d6d22b51b65abf87a5f7c9b9bdd419ce04dfd40受控恢复。现为active，仅授权M0合同化范围；M1、部署、真实触达、验证码、消息、支付与生产仍禁止。next_gate=complete-current-activity-checklist-and-exam-100。",
+                           "migration_note": "Activity V3 M0 exact 9d474ee7f340af543bbcb06da1a6b6dd9d00a94b remains preserved. This immutable legacy-prefix row cannot change status under v1 without an explicit fixed migration receipt. R12-B keeps it active, refreshes truthful supervision timing, and delegates migration only to planned AIW-20260715-PLATFORM-DELIVERY-FLOW-LEGACY-MIGRATION-V2. No handoff-ready claim, M1 activation, deployment, production, real outreach, real data or funds is authorized.",
                            "handoff_record": "docs/project-management/modules/activity/handoff-m0.md",
                            "flow_policy_version": "delivery-flow-policy.v1",
                            "flow_class": "business-stream",
@@ -2788,17 +2788,33 @@
                            "module_id": "activity",
                            "priority": "P0",
                            "risk_level": "high",
-                           "updated_at": "2026-07-13T13:00:00+08:00",
-                           "target_date": "2026-07-14T18:00:00+08:00",
-                           "next_checkpoint": "冻结活动到俱乐部到商城的合成价值事件、归因和无资金履约验收合同",
-                           "status_expires_at": "2026-07-14T13:00:00+08:00",
+                           "updated_at": "2026-07-15T05:43:07+08:00",
+                           "target_date": "2026-07-15T09:43:07+08:00",
+                           "next_checkpoint": "After Legacy Migration V2 integration and fixed receipt, use a separate registry transaction to move Activity to handoff-ready, then independently review exact 9d474ee7.",
+                           "status_expires_at": "2026-07-15T09:43:07+08:00",
                            "developer_role": "活动板块V3持续负责人",
                            "reviewer_role": "APP总架构独立验收负责人",
                            "approver_role": "项目最高负责人",
-                           "blocks": ["activity M1 activation", "cross-module commercial pilot"],
-                           "does_not_block": ["existing M0 conformance", "mall catalog isolated implementation"],
+                           "blocks": [
+                               "AIW-20260715-PLATFORM-DELIVERY-FLOW-LEGACY-MIGRATION-V2",
+                               "Activity V3 M0 independent acceptance",
+                               "activity M1 activation",
+                               "cross-module commercial pilot"
+                           ],
+                           "does_not_block": [
+                               "exact 9d474ee7 candidate preservation",
+                               "existing M0 conformance",
+                               "mall catalog isolated implementation",
+                               "unrelated isolated module work"
+                           ],
                            "auto_continue": true,
-                           "stop_conditions": ["provisional business decision unresolved", "real payment", "real member outreach", "production access", "scope expansion"],
+                           "stop_conditions": [
+                               "provisional business decision unresolved",
+                               "real payment",
+                               "real member outreach",
+                               "production access",
+                               "scope expansion"
+                           ],
                            "customer_segment": "有明确活动需求并属于俱乐部的会员",
                            "customer_problem": "活动发现、报名、俱乐部承接、商品引用和后续履约彼此割裂",
                            "value_event": "会员在授权范围内完成活动匹配并形成可追溯的无资金履约意向",
@@ -2808,7 +2824,12 @@
                            "end_to_end_owner_role": "活动板块V3持续负责人",
                            "commercial_hypothesis": "以活动为需求入口、俱乐部为信任承接、商城为履约出口，可在不接真实支付时先验证跨板块商业闭环",
                            "kill_condition": "无法证明唯一主办责任、唯一订单归因或失败关闭时停止进入M1",
-                           "journey_scope": ["activity discovery", "club approval and participation", "mall catalog reference", "synthetic fulfillment intent"]
+                           "journey_scope": [
+                               "activity discovery",
+                               "club approval and participation",
+                               "mall catalog reference",
+                               "synthetic fulfillment intent"
+                           ]
                        },
                                               {
                            "work_id": "AIW-20260713-PLATFORM-NEW-MODULE-BOOTSTRAP-R1",
@@ -2854,7 +2875,7 @@
                            ],
                            "started_with_clean_worktree": true,
                            "preexisting_changes_acknowledged": false,
-                           "migration_note": "首检查点2-4小时：纯Go领域与内存repository实现统一商品/服务/课程/活动目录、场景馆、会员方案组合/替换/预算校验、价格权益快照及责任主体校验。只用合成fixture，不挂路由、不接DB/网络/支付/真实数据。blocks=M2订单履约实现；独立验收=APP总架构独立验收Agent。",
+                           "migration_note": "Protection Mall M2 catalog exact 22073cd8ddeff48a4f679ffcd41a2686d8ea3ba5 remains preserved. This immutable legacy-prefix row cannot change status under v1 without the fixed migration receipt. R12-B keeps it active and delegates migration only to planned AIW-20260715-PLATFORM-DELIVERY-FLOW-LEGACY-MIGRATION-V2. Catalog Solution and Evidence require two formal Go decisions before the five-row transaction; no order activation, real payment, production, real data or funds is authorized.",
                            "handoff_record": "docs/project-management/modules/protection-mall/handoff-m2.md",
                            "flow_policy_version": "delivery-flow-policy.v1",
                            "flow_class": "business-stream",
@@ -2862,17 +2883,33 @@
                            "module_id": "protection-mall",
                            "priority": "P0",
                            "risk_level": "high",
-                           "updated_at": "2026-07-13T13:00:00+08:00",
-                           "target_date": "2026-07-14T18:00:00+08:00",
-                           "next_checkpoint": "以活动场景验证目录、责任主体、权益和价格快照的合成价值闭环",
-                           "status_expires_at": "2026-07-14T13:00:00+08:00",
+                           "updated_at": "2026-07-15T05:43:07+08:00",
+                           "target_date": "2026-07-15T09:43:07+08:00",
+                           "next_checkpoint": "Require Legacy Migration V2 fixed receipt plus formal Go for Mall Catalog Solution and Evidence before the five-row atomic transition.",
+                           "status_expires_at": "2026-07-15T09:43:07+08:00",
                            "developer_role": "商城M2目录方案唯一负责人",
                            "reviewer_role": "APP总架构独立验收负责人",
                            "approver_role": "项目最高负责人",
-                           "blocks": ["M2 order fulfillment activation"],
-                           "does_not_block": ["activity M0 contracts", "non-payment synthetic fixtures"],
+                           "blocks": [
+                               "AIW-20260715-PLATFORM-DELIVERY-FLOW-LEGACY-MIGRATION-V2",
+                               "M2 catalog independent acceptance",
+                               "M2 catalog evidence dual formal Go",
+                               "AIW-20260715-PLATFORM-ACTIVITY-MALL-M2-LEGACY-TRANSITION-R1"
+                           ],
+                           "does_not_block": [
+                               "exact 22073cd8 candidate preservation",
+                               "activity M0 contracts",
+                               "non-payment synthetic fixtures",
+                               "unrelated isolated module work"
+                           ],
                            "auto_continue": true,
-                           "stop_conditions": ["responsible party missing", "price or entitlement snapshot mutable", "real payment", "real data", "production access"],
+                           "stop_conditions": [
+                               "responsible party missing",
+                               "price or entitlement snapshot mutable",
+                               "real payment",
+                               "real data",
+                               "production access"
+                           ],
                            "customer_segment": "需要组合服务、课程、活动或商品方案的会员",
                            "customer_problem": "目录、权益、价格和责任主体分散，无法形成可信方案与后续履约",
                            "value_event": "会员需求被转换为责任主体明确且快照不可变的合成方案",
@@ -2882,7 +2919,12 @@
                            "end_to_end_owner_role": "商城M2目录方案唯一负责人",
                            "commercial_hypothesis": "先验证可组合方案和责任归属，再接订单与支付，可减少错误商品、错误权益和无责任履约返工",
                            "kill_condition": "目录不能稳定映射责任主体或价格权益快照不可追溯时停止订单履约激活",
-                           "journey_scope": ["member need", "catalog composition", "responsible party validation", "price and entitlement snapshot"]
+                           "journey_scope": [
+                               "member need",
+                               "catalog composition",
+                               "responsible party validation",
+                               "price and entitlement snapshot"
+                           ]
                        },
                        {
                            "work_id": "AIW-20260713-PROTECTION-MALL-M2-CATALOG-EVIDENCE",
@@ -3065,7 +3107,7 @@
                            ],
                            "started_with_clean_worktree": true,
                            "preexisting_changes_acknowledged": true,
-                           "migration_note": "Repository-correct replacement for the cancelled APP dispatch; current authority reconciliation migrates it into the delivery-flow business-value gate without authorizing production or real data.",
+                           "migration_note": "Repository-correct replacement remains active. NOVA Overlay source 59a988df0d7d1a13ac4dd9ad48da62d5c0340534 was controlled-integrated as 81f6bc8a7e1bc872f1689099a704768495deb009. Network backend exact f6ba650c has technical Go, but old evidence candidate 5eb27542 contains an unauthorized registry diff and is wholly No-Go. Current-authority evidence must be rebuilt only in the four legal evidence path classes and independently accepted before runtime implementation may continue. No production, real member data, funds, deployment or authority expansion is authorized.",
                            "handoff_record": "C:/Users/shugo/Documents/worktrees/heaotang-nova-phase5-m1-runtime/docs/project-management/modules/nova/m0-handoff.md",
                            "flow_policy_version": "delivery-flow-policy.v1",
                            "flow_class": "business-stream",
@@ -3073,17 +3115,30 @@
                            "module_id": "nova",
                            "priority": "P1",
                            "risk_level": "high",
-                           "updated_at": "2026-07-13T13:30:00+08:00",
-                           "target_date": "2026-07-15T18:00:00+08:00",
-                           "next_checkpoint": "可恢复任务运行时与统一工具网关的合成端到端证据",
-                           "status_expires_at": "2026-07-14T13:30:00+08:00",
+                           "updated_at": "2026-07-15T05:43:07+08:00",
+                           "target_date": "2026-07-15T11:43:07+08:00",
+                           "next_checkpoint": "从 current authority 仅以四类合法 evidence 路径重建 Network backend f6ba650c 技术 Go 证据并取得 fresh independent Go；随后实施 TaskRuntime 到 ToolRuntime 统一网关合成E2E",
+                           "status_expires_at": "2026-07-15T11:43:07+08:00",
                            "developer_role": "Nova运行时实施负责人",
                            "reviewer_role": "APP公共契约独立验收负责人",
                            "approver_role": "项目最高负责人",
-                           "blocks": ["Nova Phase 5 M1 completion"],
-                           "does_not_block": ["read-only contract review", "synthetic fixture preparation"],
+                           "blocks": [
+                               "clean four-path Network backend evidence rebuild",
+                               "fresh independent Go",
+                               "TaskRuntime to ToolRuntime synthetic E2E",
+                               "Nova Phase 5 M1 completion"
+                           ],
+                           "does_not_block": [
+                               "read-only contract review",
+                               "synthetic fixture preparation"
+                           ],
                            "auto_continue": true,
-                           "stop_conditions": ["production access", "real member data", "authority expansion", "independent acceptance failure"],
+                           "stop_conditions": [
+                               "production access",
+                               "real member data",
+                               "authority expansion",
+                               "independent acceptance failure"
+                           ],
                            "customer_segment": "需要可恢复智能任务编排的和合堂会员与运营人员",
                            "customer_problem": "跨模块任务缺少统一、可恢复且可审计的工具执行入口",
                            "value_event": "合成任务经统一网关完成授权工具调用并可从中断点恢复",
@@ -3093,14 +3148,19 @@
                            "end_to_end_owner_role": "Nova + AI 板块负责人",
                            "commercial_hypothesis": "可靠可恢复的任务执行能减少人工重做并提高跨板块服务完成率",
                            "kill_condition": "任一越权调用成功、恢复后重复副作用或真实数据被使用",
-                           "journey_scope": ["任务创建", "授权工具调用", "中断恢复", "结果审计"]
+                           "journey_scope": [
+                               "任务创建",
+                               "授权工具调用",
+                               "中断恢复",
+                               "结果审计"
+                           ]
                        },
                        {
                            "work_id": "AIW-20260712-NOVA-API-CONTRACT-SIGNOFF",
                            "title": "APP 公共 /api/nova v1 契约边界会签",
                            "owner": "Codex platform integration agent",
                            "owner_role": "平台集成负责人",
-                           "status": "active",
+                           "status": "handoff-ready",
                            "repository_root": "C:/Users/shugo/Documents/APP系统",
                            "workspace_path": "C:/Users/shugo/Documents/项目最高负责人/worktrees/heaotang-nova-api-contract-signoff",
                            "branch": "codex/nova-api-contract-signoff",
@@ -3112,7 +3172,7 @@
                            ],
                            "started_with_clean_worktree": true,
                            "preexisting_changes_acknowledged": false,
-                           "migration_note": "Independent protected-path signoff supporting the single Nova Phase 5 M1 business stream; it does not count as a second business outcome.",
+                           "migration_note": "Historical API signoff artifact f5546f25b9b023cb43b9f61c78b837b7e5cb67eb is an ancestor of authority dc8a52a4bcc130c6cdb4da55d5d015cdf501ba16, and its signed contract, schema, fixture, contract test and Handoff blobs are byte-identical to authority. Because that historical artifact self-registered before the current delivery-flow lifecycle was enforced, R12 moves it only to handoff-ready for independent review; it does not mark this supporting checkpoint integrated or broaden NOVA M1 authority.",
                            "handoff_record": "docs/project-management/service-plaza/nova-api-contract-signoff.md",
                            "flow_policy_version": "delivery-flow-policy.v1",
                            "flow_class": "supporting-checkpoint",
@@ -3120,17 +3180,28 @@
                            "module_id": "nova",
                            "priority": "P1",
                            "risk_level": "high",
-                           "updated_at": "2026-07-13T13:30:00+08:00",
-                           "target_date": "2026-07-14T13:30:00+08:00",
-                           "next_checkpoint": "公共API契约与Nova运行时实现的双向一致性复验",
-                           "status_expires_at": "2026-07-14T13:30:00+08:00",
+                           "updated_at": "2026-07-15T05:43:07+08:00",
+                           "target_date": "2026-07-15T09:43:07+08:00",
+                           "next_checkpoint": "APP总架构独立验收负责人核对 authority 中 f5546f25 artifact、五个等价 blob、历史自登记边界及与NOVA ToolRuntime E2E的双向一致性",
+                           "status_expires_at": "2026-07-15T09:43:07+08:00",
                            "developer_role": "Nova公共契约实施负责人",
                            "reviewer_role": "APP总架构独立验收负责人",
                            "approver_role": "项目最高负责人",
-                           "blocks": ["Nova public API integration"],
-                           "does_not_block": ["Nova internal synthetic tests"],
+                           "blocks": [
+                               "NOVA API signoff independent acceptance",
+                               "Nova public API integration"
+                           ],
+                           "does_not_block": [
+                               "Nova internal synthetic tests"
+                           ],
                            "auto_continue": true,
-                           "stop_conditions": ["contract implementation mismatch", "authority expansion", "production access"]
+                           "stop_conditions": [
+                               "contract implementation mismatch",
+                               "authority expansion",
+                               "production access"
+                           ],
+                           "next_owner_role": "APP总架构独立验收负责人",
+                           "handoff_requested_at": "2026-07-15T05:43:07+08:00"
                        },
                        {
                            "work_id": "AIW-20260713-PLATFORM-NOVA-OVERLAY-R2",
@@ -3163,7 +3234,7 @@
                            ],
                            "started_with_clean_worktree": true,
                            "preexisting_changes_acknowledged": false,
-                           "migration_note": "RI-NEW-MODULE-CHECKLIST-BOOTSTRAP 第三次复发的系统修复；NOVA 与 Protection Mall overlay、共享激活门禁、ADR0019、CONSTRAINTS、recurring issue、依赖审计和永久负例已在 exact source 59a988df0d7d1a13ac4dd9ad48da62d5c0340534 完成。平台治理独立测试负责人只读复验 Go，source 已以双父 no-ff integration 81f6bc8a7e1bc872f1689099a704768495deb009 进入权威历史；当前 authority 0c420c3448a9e6399410cb6c230b43c243b0471c 保留该祖先链。聊天 Go 不替代文件化 evidence；本项转 handoff-ready 等待独立 evidence supporting item，不提前写 independent_acceptance 或 integrated。禁止业务代码以外的权限扩张、部署、生产、真实数据和资金操作。",
+                           "migration_note": "RI-NEW-MODULE-CHECKLIST-BOOTSTRAP systemic fix remains at source 59a988df0d7d1a13ac4dd9ad48da62d5c0340534 and integration 81f6bc8a7e1bc872f1689099a704768495deb009. Formal reviewer worktree is clean at exact b609b375b2a8eacfaef7ccb1aee88cc989bb781b, but R12 does not reuse expired lifecycle evidence or self-accept it. It remains handoff-ready pending fresh independent review from the R12 authority; no integrated claim, deployment, production, real data or funds authorization.",
                            "handoff_record": "docs/project-management/service-plaza/platform-nova-overlay-r2-handoff.md",
                            "flow_policy_version": "delivery-flow-policy.v1",
                            "flow_class": "governance-repair",
@@ -3171,17 +3242,30 @@
                            "module_id": "platform",
                            "priority": "P0",
                            "risk_level": "high",
-                           "updated_at": "2026-07-14T10:10:00+08:00",
-                           "target_date": "2026-07-14T03:00:00+08:00",
-                           "next_checkpoint": "平台治理独立测试负责人从 exact authority 0c420c3 在授权 namespace 固化 source 59a988d / integration 81f6bc8 的正式 evidence；artifact 集成和 SHA-256 核对后才允许 registry-only closeout",
-                           "status_expires_at": "2026-07-14T22:10:00+08:00",
+                           "updated_at": "2026-07-15T05:43:07+08:00",
+                           "target_date": "2026-07-15T09:43:07+08:00",
+                           "next_checkpoint": "APP总架构独立验收负责人从 R12 authority 复核 exact b609b375 reviewer artifact；fresh Go、artifact集成和SHA-256核对后才允许 registry-only closeout",
+                           "status_expires_at": "2026-07-15T09:43:07+08:00",
                            "developer_role": "平台治理实施负责人",
                            "reviewer_role": "平台治理独立测试负责人",
                            "approver_role": "项目最高负责人",
-                           "blocks": ["formal independent acceptance evidence and NOVA overlay lifecycle closure"],
-                           "does_not_block": ["NOVA既有28项离线回归", "APP公共契约只读复核", "其他无重叠板块", "Activity base修正", "exact integration 81f6bc8 preservation"],
+                           "blocks": [
+                               "formal independent acceptance evidence and NOVA overlay lifecycle closure"
+                           ],
+                           "does_not_block": [
+                               "NOVA既有28项离线回归",
+                               "APP公共契约只读复核",
+                               "其他无重叠板块",
+                               "Activity base修正",
+                               "exact integration 81f6bc8 preservation"
+                           ],
                            "auto_continue": true,
-                           "stop_conditions": ["protected path overlap", "authority expansion", "production or real-data access", "independent acceptance failure"],
+                           "stop_conditions": [
+                               "protected path overlap",
+                               "authority expansion",
+                               "production or real-data access",
+                               "independent acceptance failure"
+                           ],
                            "next_owner_role": "平台治理独立测试负责人",
                            "handoff_requested_at": "2026-07-14T09:17:00+08:00",
                            "handoff_first_response_at": "2026-07-14T09:24:00+08:00",
@@ -3241,7 +3325,7 @@
                            "repository_root": "C:/Users/shugo/Documents/APP系统",
                            "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-action-telemetry-businessconfig-r2-acceptance",
                            "branch": "codex/action-telemetry-businessconfig-r2-acceptance",
-                           "base_commit": "fbf621872372f5aac0cad604af1b1a428d5e3b6d",
+                           "base_commit": "73b64b03627f37cd34f5bbbad1802fa08a20dd1f",
                            "allowed_paths": [
                                "contracts/foundation/agent-collaboration.v1.json",
                                "contracts/foundation/development-checklists/2026-07-13-action-telemetry-businessconfig-r2-acceptance*.json",
@@ -3251,7 +3335,7 @@
                            ],
                            "started_with_clean_worktree": true,
                            "preexisting_changes_acknowledged": false,
-                           "migration_note": "APP 单仓证据项，只允许平台 owner 为后端 exact a0b21cf37cde5cb17002e08e8c6817527efe8686 创建新的 current checklist、100分考试、IR、Handoff 和 registry 状态证据；不得修改业务代码，不得改写或复活已 integrated 的 AIW-20260711-ACTION-TELEMETRY-BUSINESSCONFIG-EVIDENCE。",
+                           "migration_note": "R12-B records a supervision blind spot: delivery-flow v1 current-clock expiry validation does not report stale planned items. This row remains planned and is refreshed without activation. Before activation, the registry owner must refresh base_commit to the then-current integrated authority, create fresh checklist/exam/IR/Handoff, confirm shared registry-path release, and independently reverify backend exact a0b21cf37cde5cb17002e08e8c6817527efe8686. This slice does not change the validator, business code or integrated evidence.",
                            "handoff_record": "docs/project-management/service-plaza/action-telemetry-businessconfig-r2-acceptance.md",
                            "flow_policy_version": "delivery-flow-policy.v1",
                            "flow_class": "supporting-checkpoint",
@@ -3259,17 +3343,28 @@
                            "module_id": "platform",
                            "priority": "P0",
                            "risk_level": "medium",
-                           "updated_at": "2026-07-13T23:20:00+08:00",
-                           "target_date": "2026-07-14T03:00:00+08:00",
-                           "next_checkpoint": "从 exact APP base 激活证据项并独立复验后端 a0b21cf 的未知键失败关闭行为",
-                           "status_expires_at": "2026-07-14T11:20:00+08:00",
+                           "updated_at": "2026-07-15T05:43:07+08:00",
+                           "target_date": "2026-07-15T17:43:07+08:00",
+                           "next_checkpoint": "Remain planned; after shared registry release, refresh activation base to current authority and independently verify unknown-key fail-closed behavior.",
+                           "status_expires_at": "2026-07-15T17:43:07+08:00",
                            "developer_role": "动作遥测后端实施负责人",
                            "reviewer_role": "APP平台独立验收负责人",
                            "approver_role": "项目最高负责人",
-                           "blocks": ["action telemetry BusinessConfig R2 governance acceptance"],
-                           "does_not_block": ["backend exact commit preservation", "unrelated platform work"],
+                           "blocks": [
+                               "shared registry path release",
+                               "action telemetry BusinessConfig R2 governance acceptance"
+                           ],
+                           "does_not_block": [
+                               "backend exact commit preservation",
+                               "unrelated platform work"
+                           ],
                            "auto_continue": true,
-                           "stop_conditions": ["old integrated item reactivation", "business code edit", "authority expansion", "independent acceptance failure"]
+                           "stop_conditions": [
+                               "old integrated item reactivation",
+                               "business code edit",
+                               "authority expansion",
+                               "independent acceptance failure"
+                           ]
                        },
                        {
                            "work_id": "AIW-20260713-PLATFORM-EXAM-IR-CROSS-RECORD-GATE-R1",
@@ -3336,21 +3431,20 @@
                            "owner_role": "平台集成负责人",
                            "status": "active",
                            "repository_root": "C:/Users/shugo/Documents/APP系统",
-                           "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-platform-registry-dispatch-r1",
-                           "branch": "codex/platform-registry-dispatch-r1",
-                           "base_commit": "384304a87e2a6965dc6cb3cdcafd2a92eef7d101",
+                           "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-platform-registry-dispatch-r12b",
+                           "branch": "codex/platform-registry-dispatch-r12b",
+                           "base_commit": "73b64b03627f37cd34f5bbbad1802fa08a20dd1f",
                            "allowed_paths": [
                                "contracts/foundation/agent-collaboration.v1.json",
                                "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md",
-                               "contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1*.json",
-                               "contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1*.json",
-                               "contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1*.json",
-                               "contracts/foundation/invalidated-snapshots/platform-registry-dispatch-r1/",
-                               "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md"
+                               "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md",
+                               "contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12b*.json",
+                               "contracts/foundation/governance-exams/2026-07-15-platform-registry-dispatch-r1-r12b*.json",
+                               "contracts/foundation/implementation-records/2026-07-15-platform-registry-dispatch-r1-r12b*.json"
                            ],
                            "started_with_clean_worktree": true,
                            "preexisting_changes_acknowledged": false,
-                           "migration_note": "Direct-principal bootstrap transaction explicitly authorized in the current 24-hour project conversation by the 项目最高负责人 and recorded by the 平台集成负责人 because exact base 384304a contains no active or handoff-ready work item that owns contracts/foundation/agent-collaboration.v1.json. This item serially activates or updates governed platform work and does not implement business code or validators. After cross-record source 3b4bd0c7 was integrated as 757de99e but formal reviewer evidence remained absent, the 项目最高负责人 explicitly granted one additional direct-principal exception on 2026-07-14: register and activate only AIW-20260714-PLATFORM-EXAM-IR-CROSS-RECORD-INDEPENDENT-ACCEPTANCE as the necessary non-protected supporting item. R9 records the platform integration owner's explicit late handoff response and terminal decision for AIW-20260713-DELIVERY-FLOW-OPTIMIZATION-INDEPENDENT-ACCEPTANCE after exact source/artifact/hash verification. After R8 exact 6eabd60 was independently No-Go and fully reverted, the 项目最高负责人 explicitly re-authorized R10 from authority 0c420c3448a9e6399410cb6c230b43c243b0471c to register only AIW-20260714-PLATFORM-NOVA-OVERLAY-R2-INDEPENDENT-ACCEPTANCE, move NOVA implementation active to handoff-ready, and refresh dispatch fields. This renewed exception does not reuse R8 checklist/exam, grant general supporting-item creation, permit reviewer evidence writes by dispatch, or authorize business, validator, Telemetry, deployment, production, real-data or funds changes.",
+                           "migration_note": "Direct-principal bootstrap history is preserved. At 2026-07-15T05:43:07+08:00 the project principal authorized R12-B from independently technical-Go test-repair base 73b64b03627f37cd34f5bbbad1802fa08a20dd1f: one atomic registry transaction clears the nine existing current-clock/SLA failures, records the Telemetry planned-state blind spot, and registers only two planned successor transactions. R12-B uses fresh governance evidence, edits no test/validator/policy/business/reviewer evidence, cannot self-review/integrate/push, and does not invent a future integration SHA.",
                            "handoff_record": "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md",
                            "flow_policy_version": "delivery-flow-policy.v1",
                            "flow_class": "governance-repair",
@@ -3358,24 +3452,38 @@
                            "module_id": "platform",
                            "priority": "P0",
                            "risk_level": "high",
-                           "updated_at": "2026-07-14T10:10:00+08:00",
-                           "target_date": "2026-07-14T08:00:00+08:00",
-                           "next_checkpoint": "完成全新 R10 current checklist、exam100、IR/Handoff 和全门禁后提交 NOVA handoff-ready / reviewer active 原子登记候选；不得复用 No-Go R8 证据或代写 reviewer evidence",
-                           "status_expires_at": "2026-07-14T22:10:00+08:00",
+                           "updated_at": "2026-07-15T05:43:07+08:00",
+                           "target_date": "2026-07-15T09:43:07+08:00",
+                           "next_checkpoint": "Complete fresh R12-B checklist, exam100, IR/Handoff and all gates; create the local two-commit candidate for independent review. No push or integration by implementer.",
+                           "status_expires_at": "2026-07-15T09:43:07+08:00",
                            "developer_role": "平台注册表派发授权记录人",
                            "reviewer_role": "APP总架构独立验收负责人",
                            "approver_role": "项目最高负责人",
-                           "blocks": ["NOVA overlay formal reviewer evidence authorization until this R10 registry transaction is independently accepted and integrated"],
-                           "does_not_block": ["unrelated isolated module work", "read-only evidence review", "existing offline regression"],
+                           "blocks": [
+                               "R12-B lifecycle transaction independent acceptance",
+                               "fresh authority for planned migration activation"
+                           ],
+                           "does_not_block": [
+                               "unrelated isolated module work",
+                               "read-only evidence review",
+                               "existing offline regression"
+                           ],
                            "auto_continue": true,
-                           "stop_conditions": ["self-expansion of allowed_paths", "simultaneous activation of shared paths", "business or validator implementation", "production or real-data access", "independent acceptance failure"]
+                           "stop_conditions": [
+                               "self-expansion beyond the six authorized path classes",
+                               "partial lifecycle transaction",
+                               "business test validator policy or reviewer-evidence edit",
+                               "fabricated future integration SHA",
+                               "production real-data or funds access",
+                               "independent acceptance failure"
+                           ]
                        },
                        {
                            "work_id": "AIW-20260714-PLATFORM-EXAM-IR-CROSS-RECORD-INDEPENDENT-ACCEPTANCE",
                            "title": "治理考试与实施记录跨记录门禁独立验收证据",
                            "owner": "Platform governance independent test agent",
                            "owner_role": "平台治理独立测试负责人",
-                           "status": "handoff-ready",
+                           "status": "cancelled",
                            "repository_root": "C:/Users/shugo/Documents/APP系统",
                            "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-platform-exam-ir-cross-record-independent-acceptance",
                            "branch": "codex/platform-exam-ir-cross-record-independent-acceptance",
@@ -3389,7 +3497,7 @@
                            ],
                            "started_with_clean_worktree": true,
                            "preexisting_changes_acknowledged": false,
-                           "migration_note": "The 项目最高负责人 granted a one-time direct-principal exception because implementation source 3b4bd0c7c78c78be5b592b894e795053f169fa14 was integrated as 757de99e4dfa4a7467a0de6e1a66d6e030ba7f09 without a formal independent-review evidence namespace. Reviewer source efad99b7536c2b776bf3ed8cce1b42d2b4bd9264 created the authorized formal evidence and artifact dafdd09f3c806a12ab3d3a6ed4ade15a0d5d6421 integrated it. This supporting item now hands the artifact to the platform integration owner without falsely claiming its own integrated lifecycle. It never owns registry, contracts/foundation, scripts, validator implementation, business code, deployment, NOVA or Telemetry.",
+                           "migration_note": "Reviewer source efad99b7536c2b776bf3ed8cce1b42d2b4bd9264 remains an ancestor of evidence artifact dafdd09f3c806a12ab3d3a6ed4ade15a0d5d6421, while the primary cross-record item already owns the integrated outcome. R12-B records the real late platform-integration response and no-go/superseded decision at 2026-07-15T05:43:07+08:00; it does not backfill a timely response, mutate formal evidence, reactivate the duplicate checkpoint, or alter the primary result.",
                            "handoff_record": "docs/project-management/independent-acceptance/platform-exam-ir-cross-record-gate/evidence.md",
                            "flow_policy_version": "delivery-flow-policy.v1",
                            "flow_class": "supporting-checkpoint",
@@ -3397,19 +3505,31 @@
                            "module_id": "platform",
                            "priority": "P0",
                            "risk_level": "high",
-                           "updated_at": "2026-07-14T07:53:56+08:00",
+                           "updated_at": "2026-07-15T05:43:07+08:00",
                            "target_date": "2026-07-14T09:00:00+08:00",
-                           "next_checkpoint": "平台集成负责人核对 reviewer source efad99b、artifact dafdd09f 与 evidence SHA-256 后作 supporting-item lifecycle 决定；不得改写 formal evidence",
-                           "status_expires_at": "2026-07-14T19:53:56+08:00",
+                           "next_checkpoint": "none; reviewer evidence checkpoint was consumed by the integrated primary cross-record work item and this duplicate supporting lifecycle is superseded",
+                           "status_expires_at": "2026-07-15T05:43:07+08:00",
                            "developer_role": "平台治理独立测试负责人",
                            "reviewer_role": "APP总架构独立验收负责人",
                            "approver_role": "项目最高负责人",
-                           "blocks": ["formal independent acceptance evidence and cross-record lifecycle closure"],
-                           "does_not_block": ["integrated implementation exact preservation", "unrelated isolated module work", "read-only review preparation"],
-                           "auto_continue": true,
-                           "stop_conditions": ["registry or protected-path write", "validator or business implementation", "reviewer independence failure", "formal evidence mutation", "production or real-data access"],
+                           "blocks": [],
+                           "does_not_block": [
+                               "integrated implementation exact preservation",
+                               "unrelated isolated module work",
+                               "read-only review preparation"
+                           ],
+                           "auto_continue": false,
+                           "stop_conditions": [
+                               "reactivation of superseded supporting item",
+                               "claiming this cancelled checkpoint as integrated",
+                               "formal evidence mutation",
+                               "production or real-data access"
+                           ],
                            "next_owner_role": "平台集成负责人",
-                           "handoff_requested_at": "2026-07-14T07:53:56+08:00"
+                           "handoff_requested_at": "2026-07-14T07:53:56+08:00",
+                           "handoff_first_response_at": "2026-07-15T05:43:07+08:00",
+                           "handoff_decided_at": "2026-07-15T05:43:07+08:00",
+                           "handoff_decision": "no-go"
                        },
                        {
                            "work_id": "AIW-20260714-PLATFORM-NOVA-OVERLAY-R2-INDEPENDENT-ACCEPTANCE",
@@ -3430,7 +3550,7 @@
                            ],
                            "started_with_clean_worktree": true,
                            "preexisting_changes_acknowledged": false,
-                           "migration_note": "The 项目最高负责人 granted a renewed one-time direct-principal exception from authority 0c420c3448a9e6399410cb6c230b43c243b0471c because NOVA Overlay R2 source 59a988df0d7d1a13ac4dd9ad48da62d5c0340534 received exact read-only independent Go and was controlled-integrated as 81f6bc8a7e1bc872f1689099a704768495deb009, while delivery-flow completion still requires a file-backed evidence path and SHA-256. R8 exact 6eabd60 was No-Go and reverted; none of its checklist or exam evidence authorizes this R10 item. This supporting item owns only its non-protected reviewer namespace. It must independently rerun gates and never owns registry, contracts/foundation, scripts, NOVA business code, deployment, production, real data or funds.",
+                           "migration_note": "The one-time reviewer namespace remains active only for fresh independent evidence. Its worktree/branch is clean at exact b609b375b2a8eacfaef7ccb1aee88cc989bb781b, but R12 does not reuse the expired R10/R11 lifecycle evidence or treat it as current Go. The reviewer must re-anchor from R12 authority, rerun its authorized evidence gates, and never write registry, contracts/foundation, scripts, NOVA business code, deployment, production, real data or funds.",
                            "handoff_record": "docs/project-management/independent-acceptance/platform-nova-overlay-r2/evidence.md",
                            "flow_policy_version": "delivery-flow-policy.v1",
                            "flow_class": "supporting-checkpoint",
@@ -3438,17 +3558,143 @@
                            "module_id": "platform",
                            "priority": "P0",
                            "risk_level": "high",
-                           "updated_at": "2026-07-14T10:10:00+08:00",
-                           "target_date": "2026-07-14T12:00:00+08:00",
-                           "next_checkpoint": "在 exact base 0c420c3 完成全新 current checklist、exam100、只读复验并固化 source 59a988d / integration 81f6bc8 的 evidence；不得改 registry",
-                           "status_expires_at": "2026-07-14T22:10:00+08:00",
+                           "updated_at": "2026-07-15T05:43:07+08:00",
+                           "target_date": "2026-07-15T09:43:07+08:00",
+                           "next_checkpoint": "R12 authority 受控集成后，在既有 reviewer namespace 生成全新 current evidence 并复验 source 59a988d / integration 81f6bc8 / reviewer exact b609b375；不得改 registry",
+                           "status_expires_at": "2026-07-15T09:43:07+08:00",
                            "developer_role": "平台治理独立测试负责人",
                            "reviewer_role": "APP总架构独立验收负责人",
                            "approver_role": "项目最高负责人",
-                           "blocks": ["formal independent acceptance evidence and NOVA overlay lifecycle closure"],
-                           "does_not_block": ["integrated source and authority preservation", "unrelated isolated module work", "NOVA existing offline regression"],
+                           "blocks": [
+                               "formal independent acceptance evidence and NOVA overlay lifecycle closure"
+                           ],
+                           "does_not_block": [
+                               "integrated source and authority preservation",
+                               "unrelated isolated module work",
+                               "NOVA existing offline regression"
+                           ],
                            "auto_continue": true,
-                           "stop_conditions": ["registry or protected-path write", "implementation mutation", "reviewer independence failure", "production or real-data access"]
+                           "stop_conditions": [
+                               "registry or protected-path write",
+                               "implementation mutation",
+                               "reviewer independence failure",
+                               "production or real-data access"
+                           ]
+                       },
+                       {
+                           "work_id": "AIW-20260715-PLATFORM-DELIVERY-FLOW-LEGACY-MIGRATION-V2",
+                           "title": "Platform Delivery Flow Legacy Lifecycle Migration V2",
+                           "owner": "Platform delivery-flow legacy migration v2 agent",
+                           "owner_role": "平台集成负责人",
+                           "status": "planned",
+                           "repository_root": "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-platform-delivery-flow-legacy-migration-v2",
+                           "branch": "codex/platform-delivery-flow-legacy-migration-v2",
+                           "base_commit": "73b64b03627f37cd34f5bbbad1802fa08a20dd1f",
+                           "allowed_paths": [
+                               "contracts/foundation/delivery-flow-policy.v2.json",
+                               "contracts/foundation/delivery-flow-policy.v2.schema.json",
+                               "contracts/foundation/legacy-lifecycle-migration.v1.schema.json",
+                               "contracts/foundation/agent-collaboration.v1.schema.json",
+                               "scripts/validate_delivery_flow_policy.py",
+                               "scripts/tests/test_validate_delivery_flow_policy.py",
+                               "scripts/Test-ServicePlazaContracts.ps1",
+                               "docs/decisions/0021*",
+                               "docs/project-management/notices/2026-07-15-platform-delivery-flow-legacy-migration-v2-task-order.md",
+                               "contracts/foundation/development-checklists/2026-07-15-platform-delivery-flow-legacy-migration-v2*.json",
+                               "contracts/foundation/governance-exams/2026-07-15-platform-delivery-flow-legacy-migration-v2*.json",
+                               "contracts/foundation/implementation-records/2026-07-15-platform-delivery-flow-legacy-migration-v2*.json",
+                               "docs/project-management/service-plaza/platform-delivery-flow-legacy-migration-v2-handoff.md",
+                               "contracts/foundation/legacy-lifecycle-migrations/LLM-20260715-ACTIVITY-MALL-M2-R1.json"
+                           ],
+                           "started_with_clean_worktree": true,
+                           "preexisting_changes_acknowledged": false,
+                           "migration_note": "R12-B registers planning only from current authority 73b64b03627f37cd34f5bbbad1802fa08a20dd1f. Before activation, base_commit must be refreshed to the exact R12-B two-commit-chain integration authority; no future SHA is fabricated. V2 must preserve and verify anchor, paths, cutover and hashes, create the fixed receipt, and add permanent positive/negative regression. No partial migration, history rewrite, production, real data, funds or self-acceptance.",
+                           "handoff_record": "docs/project-management/service-plaza/platform-delivery-flow-legacy-migration-v2-handoff.md",
+                           "flow_policy_version": "delivery-flow-policy.v1",
+                           "flow_class": "governance-repair",
+                           "business_stream_id": "platform-delivery-flow",
+                           "module_id": "platform",
+                           "priority": "P0",
+                           "risk_level": "critical",
+                           "updated_at": "2026-07-15T05:43:07+08:00",
+                           "target_date": "2026-07-15T17:43:07+08:00",
+                           "next_checkpoint": "After controlled R12-B two-commit integration, refresh base_commit to that exact authority; then complete fresh governance, V2 policy/schema, fixed receipt and permanent regression before independent review.",
+                           "status_expires_at": "2026-07-15T17:43:07+08:00",
+                           "developer_role": "平台交付流治理实施负责人",
+                           "reviewer_role": "平台治理独立测试负责人",
+                           "approver_role": "项目最高负责人",
+                           "blocks": [
+                               "AIW-20260715-PLATFORM-ACTIVITY-MALL-M2-LEGACY-TRANSITION-R1"
+                           ],
+                           "does_not_block": [
+                               "existing exact read-only review",
+                               "Activity and Mall candidate preservation",
+                               "unrelated isolated work"
+                           ],
+                           "auto_continue": false,
+                           "stop_conditions": [
+                               "legacy anchor path cutover or hash drift",
+                               "partial migration",
+                               "receipt mismatch",
+                               "production real-data or funds access",
+                               "self-acceptance"
+                           ]
+                       },
+                       {
+                           "work_id": "AIW-20260715-PLATFORM-ACTIVITY-MALL-M2-LEGACY-TRANSITION-R1",
+                           "title": "Activity and Protection Mall M2 Atomic Legacy Transition R1",
+                           "owner": "Platform legacy transition transaction agent",
+                           "owner_role": "平台集成负责人",
+                           "status": "planned",
+                           "repository_root": "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-platform-activity-mall-m2-legacy-transition-r1",
+                           "branch": "codex/platform-activity-mall-m2-legacy-transition-r1",
+                           "base_commit": "73b64b03627f37cd34f5bbbad1802fa08a20dd1f",
+                           "allowed_paths": [
+                               "contracts/foundation/agent-collaboration.v1.json",
+                               "docs/project-management/notices/2026-07-15-platform-activity-mall-m2-legacy-transition-r1-task-order.md",
+                               "contracts/foundation/development-checklists/2026-07-15-platform-activity-mall-m2-legacy-transition-r1*.json",
+                               "contracts/foundation/governance-exams/2026-07-15-platform-activity-mall-m2-legacy-transition-r1*.json",
+                               "contracts/foundation/implementation-records/2026-07-15-platform-activity-mall-m2-legacy-transition-r1*.json",
+                               "docs/project-management/service-plaza/platform-activity-mall-m2-legacy-transition-r1-handoff.md"
+                           ],
+                           "started_with_clean_worktree": true,
+                           "preexisting_changes_acknowledged": false,
+                           "migration_note": "R12-B registers planning only from current authority 73b64b03627f37cd34f5bbbad1802fa08a20dd1f; base_commit must be refreshed before activation, so no future SHA is fabricated. Activation requires A integration, fixed receipt, Mall dual formal Go and clean exact worktrees. The later transaction must atomically change exactly five rows: Activity active->handoff-ready, Catalog Solution/Evidence active->integrated, Order/Ports planned->active. transition hash=5dfa87a441a04eb8a24e3a4de883648780b6eaeddf2c870d831fa6ed29620939; post effective-state hash=7f1991952dea49dff84e6378dbdc4edd22f4bf72334e0a8c08a36474fb984ec6. R12-B does not execute it.",
+                           "handoff_record": "docs/project-management/service-plaza/platform-activity-mall-m2-legacy-transition-r1-handoff.md",
+                           "flow_policy_version": "delivery-flow-policy.v1",
+                           "flow_class": "governance-repair",
+                           "business_stream_id": "platform-delivery-flow",
+                           "module_id": "platform",
+                           "priority": "P0",
+                           "risk_level": "critical",
+                           "updated_at": "2026-07-15T05:43:07+08:00",
+                           "target_date": "2026-07-16T05:43:07+08:00",
+                           "next_checkpoint": "Only after A integration, fixed receipt, Mall dual formal Go and clean exacts: refresh activation base, verify transition hash 5dfa87a4... and effective-state hash 7f199195..., then execute all five row changes atomically.",
+                           "status_expires_at": "2026-07-16T05:43:07+08:00",
+                           "developer_role": "平台注册表迁移执行负责人",
+                           "reviewer_role": "APP总架构独立验收负责人",
+                           "approver_role": "项目最高负责人",
+                           "blocks": [
+                               "Activity/Mall M2 lifecycle transition completion",
+                               "M2 order and ports activation"
+                           ],
+                           "does_not_block": [
+                               "existing exact read-only review",
+                               "current offline evidence preservation",
+                               "unrelated isolated work"
+                           ],
+                           "auto_continue": false,
+                           "stop_conditions": [
+                               "Legacy Migration V2 integration or fixed receipt missing",
+                               "Mall dual formal Go missing",
+                               "dirty Mall worktree or exact mismatch",
+                               "partial five-row transaction",
+                               "transition or effective-state hash mismatch",
+                               "production real-data funds access",
+                               "self-acceptance"
+                           ]
                        }
                    ]
 }
