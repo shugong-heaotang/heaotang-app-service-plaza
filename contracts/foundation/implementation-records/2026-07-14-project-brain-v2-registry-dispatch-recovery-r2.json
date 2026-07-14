@@ -1,0 +1,73 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260714-PROJECT-BRAIN-V2-REGISTRY-DISPATCH-RECOVERY-R2",
+  "title": "Project Brain v2 planned registry dispatch recovery final current snapshot",
+  "date": "2026-07-14",
+  "status": "verified",
+  "objective": "从最新权威远端基线恢复 Project Brain v2 的单一 registry-dispatch，只登记 recovery handoff-ready 与 operations planned，冻结 M0 边界和 M1-M5 No-Go，不实现、不集成、不部署。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-14-project-brain-v2-registry-dispatch-recovery-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-14-project-brain-v2-registry-dispatch-recovery-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-14-project-brain-v2-m0-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.schema.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json",
+    "contracts/foundation/implementation-record.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-14-project-brain-v2-m0-task-order.md",
+    "contracts/foundation/development-checklists/2026-07-14-project-brain-v2-registry-dispatch-recovery.json",
+    "contracts/foundation/development-checklists/2026-07-14-project-brain-v2-registry-dispatch-recovery-r2.json",
+    "contracts/foundation/governance-exams/2026-07-14-project-brain-v2-registry-dispatch-recovery-attempt-1.json",
+    "contracts/foundation/governance-exams/2026-07-14-project-brain-v2-registry-dispatch-recovery-r2-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-14-project-brain-v2-registry-dispatch-recovery-r2.json"
+  ],
+  "verification": [
+    "python -X utf8 scripts/validate_agent_collaboration.py contracts/foundation/agent-collaboration.v1.schema.json contracts/foundation/agent-collaboration.v1.json",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-AgentDevelopmentPreflight.ps1",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-ServicePlazaContracts.ps1",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-TextEncoding.ps1",
+    "python -X utf8 scripts/validate_implementation_records.py contracts/foundation/implementation-record.v1.schema.json contracts/foundation/implementation-records",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-IntegrationPushFreshness.ps1 -ProjectRoot <recovery-worktree> -ExpectedRemoteHead 09cbdc5d7f21c81e8bd3ddb52216392f68caa834 -CandidateRef HEAD"
+  ],
+  "evidence": [
+    "docs/project-management/notices/2026-07-14-project-brain-v2-m0-task-order.md",
+    "contracts/foundation/development-checklists/2026-07-14-project-brain-v2-registry-dispatch-recovery-r2.json",
+    "contracts/foundation/governance-exams/2026-07-14-project-brain-v2-registry-dispatch-recovery-r2-attempt-1.json",
+    "contracts/foundation/agent-collaboration.v1.json"
+  ],
+  "premises": [
+    "origin/codex/service-plaza-phase1-integration 的执行时 exact HEAD 为 09cbdc5d7f21c81e8bd3ddb52216392f68caa834；若变化，平台集成负责人必须重新执行 freshness 与受控集成判断。",
+    "AIW-20260714-PROJECT-BRAIN-V2-OPERATIONS 保持 planned，不能据此开始 M0；激活仍需治理 overlay、最新基线、干净工作树和无冲突范围。",
+    "本提交不触达 Project Brain v1、SC remediation、App、scripts、真实数据、环境、部署或 production。",
+    "代码或治理分支被集成不等于 v2 生产启用；M1-M5 均需后续独立门禁与授权。"
+  ],
+  "implementation_mode": "ai-assisted"
+}

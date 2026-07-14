@@ -3268,6 +3268,58 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "exact source eebc197837d85d68c471299eb94bc80778697949 已独立复核 Go；十个模块 blob 精确一致并受控纳入 authority。23/23 conformance、需求 SHA、模块与平台 current 治理证据、两层依赖、总合同、UTF-8、范围、秘密和敏感模式门禁通过。R1-R5 离线合成阶段完成，真实数据、医疗服务、收费、部署和生产继续 No-Go。",
                            "handoff_record":  "docs/project-management/service-plaza/health-r5-c1-acceptance-2026-07-14.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260714-PROJECT-BRAIN-V2-REGISTRY-DISPATCH-RECOVERY",
+                           "title":  "Project Brain v2 planned 登记恢复派发",
+                           "owner":  "Project Brain v2 registry recovery agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "handoff-ready",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-registry-dispatch-recovery",
+                           "branch":  "codex/project-brain-v2-registry-dispatch-recovery",
+                           "base_commit":  "09cbdc5d7f21c81e8bd3ddb52216392f68caa834",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "docs/project-management/notices/2026-07-14-project-brain-v2-m0-task-order.md",
+                                                 "contracts/foundation/development-checklists/2026-07-14-project-brain-v2-registry-dispatch-recovery*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-14-project-brain-v2-registry-dispatch-recovery*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-14-project-brain-v2-registry-dispatch-recovery*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "原 registry-dispatch 通道等待系统审批超过5分钟，项目最高负责人将单一执行权转移到本 recovery。仅登记 recovery 与 operations planned、冻结M0边界；不实现v2、不集成、不触碰原停滞工作树。developer=平台集成负责人授权的 registry-dispatch 恢复负责人；reviewer=independent Project Brain v2 reviewer；approver=项目最高负责人；integration owner=平台集成负责人。current checklist、exam100、协作schema、总合同、范围、UTF-8、秘密与freshness证据随本分支交付；平台集成负责人必须独立复跑后才可集成。blocks=operations从planned进入active；does_not_block=其他隔离工作项、Project Brain v1与SC remediation。停止条件=远端漂移、路径冲突、门禁失败、真实数据/凭据/环境/部署/生产需求或同一命令连续失败两次。",
+                           "handoff_record":  "docs/project-management/notices/2026-07-14-project-brain-v2-m0-task-order.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260714-PROJECT-BRAIN-V2-OPERATIONS",
+                           "title":  "Project Brain v2 经营管理接入 M0 治理冻结",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "planned",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-operations",
+                           "branch":  "codex/project-brain-v2-operations",
+                           "base_commit":  "09cbdc5d7f21c81e8bd3ddb52216392f68caa834",
+                           "allowed_paths":  [
+                                                 "docs/project-management/notices/2026-07-14-project-brain-v2-operations-task-order.md",
+                                                 "docs/project-management/project-brain-v2/README.md",
+                                                 "docs/project-management/project-brain-v2/task-comprehension-receipt-m0.md",
+                                                 "docs/project-management/project-brain-v2/requirements-v2.md",
+                                                 "docs/project-management/project-brain-v2/architecture-v2.md",
+                                                 "docs/project-management/project-brain-v2/data-classification-v2.md",
+                                                 "docs/project-management/project-brain-v2/delivery-plan-v2.md",
+                                                 "docs/project-management/project-brain-v2/acceptance-v2.md",
+                                                 "docs/project-management/project-brain-v2/handoff-v2.md",
+                                                 "docs/decisions/0021-project-brain-v2-operational-read-model.md",
+                                                 "contracts/foundation/development-checklists/2026-07-14-project-brain-v2-m0*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-14-project-brain-v2-m0*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-14-project-brain-v2-m0*.json"
+                                             ],
+                           "started_with_clean_worktree":  false,
+                           "preexisting_changes_acknowledged":  true,
+                           "migration_note":  "Conditional Go仅覆盖M0治理冻结；planned工作树尚未创建，故started_with_clean_worktree=false并显式确认该事实；激活前必须由平台集成负责人重新确认exact base、创建干净专用工作树、验证路径无冲突并注册project-brain-v2治理overlay。M1去标识经营事实合同须待M0独立Go后另行授权；M2-M5均No-Go。App、scripts、registry、Project Brain v1和SC remediation均排除。调度器与老板驾驶舱必须只读、不回写、Unknown显式、失败关闭；行级会员/健康/交易/客服、真实数据、凭据、环境、部署和production全部禁止。developer=Project Brain v2 project owner；reviewer=independent Project Brain v2 reviewer；approver=项目最高负责人；integration owner=平台集成负责人。blocks=M1-M5；does_not_block=Project Brain v1、其他隔离模块、SC remediation。停止条件=M0未独立Go、overlay/基线/路径未就绪或触达明确禁止范围。",
+                           "handoff_record":  "docs/project-management/project-brain-v2/handoff-v2.md"
                        }
                    ]
 }
