@@ -1,0 +1,86 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260714-PLATFORM-NOVA-OVERLAY-R2-INDEPENDENT-ACCEPTANCE-R1",
+  "title": "NOVA Overlay R2 独立验收正式证据",
+  "date": "2026-07-14",
+  "status": "verified",
+  "objective": "对 exact source 59a988d、controlled integration 81f6bc8 和 R10 reviewer authorization 链进行独立复验并固化文件证据，不修改 registry、实现或 authority。",
+  "governance_checklist": "docs/project-management/independent-acceptance/platform-nova-overlay-r2/development-checklist-r1.json",
+  "governance_exam": "docs/project-management/independent-acceptance/platform-nova-overlay-r2/governance-exam-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/task-order.md",
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md",
+    "docs/project-management/service-plaza/platform-nova-overlay-r2-handoff.md",
+    "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json",
+    "contracts/foundation/implementation-record.v1.schema.json",
+    "contracts/foundation/governance-reading-list.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/evidence.md",
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/task-order.md",
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/development-checklist-r1.json",
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/governance-exam-attempt-1.json",
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/implementation-record-r1.json"
+  ],
+  "verification": [
+    "reviewer base is exact 0c420c3 on the registered branch and started clean",
+    "R8 exact 6eabd60 remains No-Go and revert 76f90aa restores the authority tree; no R8 checklist exam or IR is reused",
+    "R10 source 854863f is controlled-integrated by dc8a52a and activates only the formal reviewer supporting item",
+    "source 59a988d changes 19 files and all 19 match the 17 registered allowed patterns",
+    "registry bytes are identical between implementation base fb29b857 and source 59a988d",
+    "all 19 source blobs are identical in controlled integration 81f6bc8",
+    "source targeted regression passes 22 of 22 and full Python regression passes 92 of 92",
+    "source UTF-8 1436 files and diff checks pass",
+    "reviewer base 0c420c3 and current authority dc8a52a Service Plaza total contracts pass",
+    "historical source current-clock total reports only DELIVERY_HANDOFF_RESPONSE_SLA_EXCEEDED on an unrelated delivery-flow supporting item; source commit-clock structural and flow errors are zero and current authority closes the condition",
+    "source is the second parent and ancestor of 81f6bc8; integration is an ancestor of remote authority dc8a52a",
+    "reviewer current checklist is 26/26 and governance exam attempt 1 is passed with score 100",
+    "final exact-file validators, JSON, UTF-8, scope, registry-zero-write, secret, diff, remote-exact and clean gates"
+  ],
+  "evidence": [
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/evidence.md",
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/task-order.md",
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/development-checklist-r1.json",
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/governance-exam-attempt-1.json"
+  ],
+  "premises": [
+    "The owner did not implement source 59a988d, did not execute integration 81f6bc8 and will not integrate this evidence branch",
+    "The technical Go verdict is limited to the exact reviewed source and integration and requires APP total architecture adjudication of the disclosed historical-clock qualification",
+    "A historical source snapshot can become red under a later wall clock without the candidate introducing that lifecycle state; current authority evidence is required and is green",
+    "This reviewer namespace is explicitly validated because the aggregate total gate does not automatically scan independent-acceptance records",
+    "No registry, validator, business implementation, deployment, production, real-data, payment or funds authority is granted"
+  ],
+  "implementation_mode": "ai-assisted"
+}
