@@ -1,0 +1,158 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.local/contracts/health-manager/hm-r0-f2-1-audit.v1.schema.json",
+  "title": "Health Manager R0 F2-1 six-domain audit",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "audit_id",
+    "status",
+    "synthetic_only",
+    "executable",
+    "authorizations",
+    "domains"
+  ],
+  "properties": {
+    "contract_version": { "const": "hm-r0-f2-1-audit.v1" },
+    "audit_id": { "const": "HM-R0-F2-1" },
+    "status": { "enum": ["implemented-awaiting-independent-review", "independently-accepted"] },
+    "synthetic_only": { "const": true },
+    "executable": { "const": false },
+    "authorizations": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["real_data", "production", "medical_service", "charging", "deployment"],
+      "properties": {
+        "real_data": { "const": false },
+        "production": { "const": false },
+        "medical_service": { "const": false },
+        "charging": { "const": false },
+        "deployment": { "const": false }
+      }
+    },
+    "domains": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "prefixItems": [
+        { "$ref": "#/$defs/professionalRoles" },
+        { "$ref": "#/$defs/riskEscalation" },
+        { "$ref": "#/$defs/qualificationCapacity" },
+        { "$ref": "#/$defs/dataRights" },
+        { "$ref": "#/$defs/mvpSafety" },
+        { "$ref": "#/$defs/accountabilitySignoff" }
+      ],
+      "items": false
+    }
+  },
+  "$defs": {
+    "domain": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "domain_id",
+        "name",
+        "status",
+        "owner",
+        "responsibility_boundary",
+        "linked_decisions",
+        "evidence",
+        "missing_evidence",
+        "blocks",
+        "does_not_block"
+      ],
+      "properties": {
+        "domain_id": { "type": "string" },
+        "name": { "type": "string", "minLength": 1 },
+        "status": { "enum": ["Pending with owner", "Accepted"] },
+        "owner": { "type": "string", "minLength": 1 },
+        "responsibility_boundary": { "type": "string", "minLength": 1 },
+        "linked_decisions": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^C4-[A-Z][0-9]{2}$|^MVP-A[0-9]{3}$" }
+        },
+        "evidence": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "missing_evidence": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "minLength": 1 }
+        },
+        "accepted_scope": { "type": "string", "minLength": 1 },
+        "blocks": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["development", "real-data-environment", "release", "production"] }
+        },
+        "does_not_block": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "enum": ["synthetic-audit", "synthetic-contract-validation"] }
+        }
+      },
+      "allOf": [
+        {
+          "if": { "properties": { "status": { "const": "Pending with owner" } } },
+          "then": {
+            "properties": { "missing_evidence": { "minItems": 1 } },
+            "not": { "required": ["accepted_scope"] }
+          }
+        },
+        {
+          "if": { "properties": { "status": { "const": "Accepted" } } },
+          "then": {
+            "required": ["accepted_scope"],
+            "properties": {
+              "evidence": { "minItems": 1 },
+              "missing_evidence": { "maxItems": 0 }
+            }
+          }
+        }
+      ]
+    },
+    "professionalRoles": {
+      "allOf": [
+        { "$ref": "#/$defs/domain" },
+        { "properties": { "domain_id": { "const": "professional-role-boundaries" } } }
+      ]
+    },
+    "riskEscalation": {
+      "allOf": [
+        { "$ref": "#/$defs/domain" },
+        { "properties": { "domain_id": { "const": "risk-stop-escalation-handoff" } } }
+      ]
+    },
+    "qualificationCapacity": {
+      "allOf": [
+        { "$ref": "#/$defs/domain" },
+        { "properties": { "domain_id": { "const": "qualification-supervision-capacity" } } }
+      ]
+    },
+    "dataRights": {
+      "allOf": [
+        { "$ref": "#/$defs/domain" },
+        { "properties": { "domain_id": { "const": "data-rights-consent-access" } } }
+      ]
+    },
+    "mvpSafety": {
+      "allOf": [
+        { "$ref": "#/$defs/domain" },
+        { "properties": { "domain_id": { "const": "mvp-a001-a015-safety-baseline" } } }
+      ]
+    },
+    "accountabilitySignoff": {
+      "allOf": [
+        { "$ref": "#/$defs/domain" },
+        { "properties": { "domain_id": { "const": "cross-function-accountability-signoff" } } }
+      ]
+    }
+  }
+}

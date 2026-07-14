@@ -1,0 +1,5 @@
+{
+  "case_id": "reject-executable",
+  "mutation": { "path": "/executable", "value": true },
+  "expected_valid": false
+}

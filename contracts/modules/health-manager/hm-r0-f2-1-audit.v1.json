@@ -1,0 +1,88 @@
+{
+  "contract_version": "hm-r0-f2-1-audit.v1",
+  "audit_id": "HM-R0-F2-1",
+  "status": "implemented-awaiting-independent-review",
+  "synthetic_only": true,
+  "executable": false,
+  "authorizations": {
+    "real_data": false,
+    "production": false,
+    "medical_service": false,
+    "charging": false,
+    "deployment": false
+  },
+  "domains": [
+    {
+      "domain_id": "professional-role-boundaries",
+      "name": "AI、健康管理师、医生与医生集团的专业角色边界",
+      "status": "Pending with owner",
+      "owner": "和奥堂医生集团专业负责人",
+      "responsibility_boundary": "AI仅辅助整理和提示；健康管理师不得诊断或处方；医生承担医疗判断；医生集团承担专业制度、监督和升级承接。",
+      "linked_decisions": ["C4-H01", "C4-H07", "C4-S05"],
+      "evidence": ["C4-H01仅在既有非执行窄范围内Accepted"],
+      "missing_evidence": ["四类角色逐项RACI", "专业表述清单与越界示例", "AI输出复核和拦截规则"],
+      "blocks": ["development", "real-data-environment", "release", "production"],
+      "does_not_block": ["synthetic-audit", "synthetic-contract-validation"]
+    },
+    {
+      "domain_id": "risk-stop-escalation-handoff",
+      "name": "风险识别、停止、升级、紧急响应与交接",
+      "status": "Pending with owner",
+      "owner": "医生集团医疗质量负责人",
+      "responsibility_boundary": "医疗质量负责人定义风险目录和停止线；医生集团提供值班承接；平台仅实现已签署规则，不自行作出医疗裁决。",
+      "linked_decisions": ["C4-H02", "C4-H03"],
+      "evidence": [],
+      "missing_evidence": ["风险等级和停止规则", "值班与无法联系分支", "升级时限、渠道、回执和关闭责任链"],
+      "blocks": ["development", "real-data-environment", "release", "production"],
+      "does_not_block": ["synthetic-audit", "synthetic-contract-validation"]
+    },
+    {
+      "domain_id": "qualification-supervision-capacity",
+      "name": "资格、监督、工作量与容量边界",
+      "status": "Pending with owner",
+      "owner": "健康管理专业负责人",
+      "responsibility_boundary": "专业负责人定义准入、培训、抽检和升级清单；运营负责人提供容量模型；未证明安全容量前不得承接真实会员。",
+      "linked_decisions": ["C4-H04", "C4-O01", "C4-O06"],
+      "evidence": [],
+      "missing_evidence": ["岗位资格与考核标准", "监督抽检和不合格处置", "复杂度权重、安全利用率与主备交接演练"],
+      "blocks": ["real-data-environment", "release", "production"],
+      "does_not_block": ["synthetic-audit", "synthetic-contract-validation"]
+    },
+    {
+      "domain_id": "data-rights-consent-access",
+      "name": "数据权利、同意撤回、最小访问与特殊人群",
+      "status": "Pending with owner",
+      "owner": "隐私与法律负责人",
+      "responsibility_boundary": "隐私与法律负责人决定处理依据、权利响应和代理规则；平台按批准的最小字段和权限实施；专业方不得绕过同意与撤回。",
+      "linked_decisions": ["C4-L02", "C4-L03", "C4-L04", "C4-L05", "C4-L06", "C4-S07"],
+      "evidence": [],
+      "missing_evidence": ["数据分类和处理清单", "同意、撤回、代理及冲突规则", "最小字段、最小访问、保留删除和供应商退出证明"],
+      "blocks": ["real-data-environment", "release", "production"],
+      "does_not_block": ["synthetic-audit", "synthetic-contract-validation"]
+    },
+    {
+      "domain_id": "mvp-a001-a015-safety-baseline",
+      "name": "MVP-A001至MVP-A015安全基线",
+      "status": "Pending with owner",
+      "owner": "健康专业与平台联合负责人",
+      "responsibility_boundary": "十五项MVP安全点必须由专业方定义含义、平台方证明可验证实现，并由独立验收逐项签署；本审计不替代任何签署。",
+      "linked_decisions": ["MVP-A001", "MVP-A002", "MVP-A003", "MVP-A004", "MVP-A005", "MVP-A006", "MVP-A007", "MVP-A008", "MVP-A009", "MVP-A010", "MVP-A011", "MVP-A012", "MVP-A013", "MVP-A014", "MVP-A015"],
+      "evidence": [],
+      "missing_evidence": ["A001-A015逐项定义、owner、验收方法和失败停止线", "专业与平台双签证据", "独立回归证据"],
+      "blocks": ["development", "real-data-environment", "release", "production"],
+      "does_not_block": ["synthetic-audit", "synthetic-contract-validation"]
+    },
+    {
+      "domain_id": "cross-function-accountability-signoff",
+      "name": "产品、专业、平台、隐私法律、运营商业的问责与签署",
+      "status": "Pending with owner",
+      "owner": "项目最高负责人",
+      "responsibility_boundary": "各职能只签署本职证据；最高负责人监督阻塞和决策权，不代替专业、隐私法律、平台或独立验收签字。",
+      "linked_decisions": ["C4-P08", "C4-O02", "C4-O03", "C4-O04", "C4-O05", "C4-O07", "C4-T03", "C4-T04", "C4-T05", "C4-T06"],
+      "evidence": ["C4-T06仅维持Exact revision且不得自动合并"],
+      "missing_evidence": ["六类职能RACI与决策权", "逐门禁签署顺序和拒签处理", "独立验收人与最终Go/No-Go证据"],
+      "blocks": ["development", "real-data-environment", "release", "production"],
+      "does_not_block": ["synthetic-audit", "synthetic-contract-validation"]
+    }
+  ]
+}

@@ -1,0 +1,5 @@
+{
+  "case_id": "reject-pending-without-owner",
+  "mutation": { "path": "/domains/1/owner", "value": "" },
+  "expected_valid": false
+}
