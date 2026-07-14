@@ -1,0 +1,170 @@
+{
+    "contract_version":  "development-checklist.v1",
+    "checklist_id":  "FC-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R9",
+    "record_id":  "IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R9",
+    "task":  "取消已被主工作项吸收的重复 Delivery Flow evidence bootstrap，关闭逾期 handoff 并恢复权威总合同绿灯",
+    "actor":  "平台注册表派发授权记录人",
+    "module_id":  null,
+    "status":  "completed",
+    "created_at":  "2026-07-14T01:56:47.9573901Z",
+    "completed_at":  "2026-07-14T01:57:00.0000000Z",
+    "items":  [
+                  {
+                      "path":  "contracts/foundation/governance-reading-list.v1.json",
+                      "sha256":  "6f83e140d1e55fe35d1520c13eed55717a812bb21464c59441947c05d7f3b9a6",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "AGENTS.md",
+                      "sha256":  "242fb10e0e85b9336e774c30e512275a3d139b4c7b71a74583884753417e9881",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "README.md",
+                      "sha256":  "f199b00864ff616b99ce6c635ed62286b71b5a02fb8d7bb3f9f6cbb46fdde31a",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "CONSTRAINTS.md",
+                      "sha256":  "5ac9febcc7b5108dee83057810bfb9d2bf7d7184f0d09e931b15e044c74b5076",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "docs/project-management/service-plaza/project-status-one-page.md",
+                      "sha256":  "d3b0dc5b79048e0b3c00eb53082ee73e8585e3e6ac1067d13d6beaca6c3e3f09",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "docs/project-management/dependency-driven-master-plan-v1.md",
+                      "sha256":  "57d397bc72eaa0e5b65f72bc2dce950bf721862508986b6be9bfb157ec3842a0",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "contracts/foundation/foundation-capabilities.v1.json",
+                      "sha256":  "1a17bdf3417465706b9d8994afa312289bda99df30102b78d535209af34c67bd",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "contracts/foundation/engineering-standards.v1.json",
+                      "sha256":  "a8ed703991664849a45d991a8207f33496eaf7f31fe51e4f1c0708d9c1a34232",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "contracts/foundation/recurring-issues.v1.json",
+                      "sha256":  "4e2c230e3cf353c494b9b47d8d74ad49d772d6ec87a2142764c4466d49226dac",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "contracts/foundation/agent-collaboration.v1.json",
+                      "sha256":  "c699355a678dbf12e0b408af23b89382c2bc840abef504917073a0eafa497d21",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+                      "sha256":  "f15ed305fb096970a5e4580cc3dac41da5082156f80e64759fa9b28529376efd",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "docs/project-management/recursive-project-governance-v1.md",
+                      "sha256":  "48913b35710b97db895e417c334084db8ce31ee4a4ec1c3d9e6f10ddeeb9402c",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "docs/project-management/foundation-dependency-standard-v1.md",
+                      "sha256":  "380cfac43ded93775b49cb95884f2b4f32b62c386698458d2ccf519694abd65b",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "docs/project-management/module-internal-dependency-standard-v1.md",
+                      "sha256":  "2daffbc1c66da051bfe862358c0d8b995cef5a57ca12ef960548b249397e1801",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "docs/decisions/0007-stable-foundation-variable-business.md",
+                      "sha256":  "207667809e2b740ba9d409bcbb16807faf0c5fc8c543aefe95fb7444faa5c42b",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "docs/decisions/0008-versioned-business-variables.md",
+                      "sha256":  "0a881479c7d96184098363511d0851181bcad63d1c29443531fc227aa1fe24a8",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "docs/decisions/0009-approved-toolchain-per-layer.md",
+                      "sha256":  "89fa3e84a6b63d03554edfbeba3054a2328def81611db42663ffb9f0bb88b4ff",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "docs/decisions/0010-ai-implementation-records-required.md",
+                      "sha256":  "0c78d9add0caee675d8270f7d509991dc2c9cd406f79a43eb71ee2c593e75965",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "docs/decisions/0011-two-person-config-approval.md",
+                      "sha256":  "2736e5c8584bd69f39bcfeb98dcdbb6c6a69b489f079487136502aff1e3272c1",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "docs/decisions/0012-two-strike-root-cause-rule.md",
+                      "sha256":  "4207186ddd332684a8b8bbf7276b2fdca333898a6fbce1643e2d5e9b5f3dd4da",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+                      "sha256":  "b25ef41ab97b9fa513d7733ba3aaf8622c84380b8c1b1fce12bd1c47917d01e2",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "docs/decisions/0014-ai-development-flight-checklist.md",
+                      "sha256":  "30293518f9f2c2f2545e697b1fefb76da6dd41e18a66872487bb271251d0d53c",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+                      "sha256":  "00e4d9aedea1c6a0ae1098dfc796acba6d29f9341a44a2a76e458671f0e0efc5",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+                      "sha256":  "8cc790901187e5d810b3a4fec2b0d1dacba16eaf273628ced752e1ee74fada01",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+                      "sha256":  "b27a7a7d0d1b6e7ad2d315ad359605dff71b00b7b92df734645bd414d115142a",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  },
+                  {
+                      "path":  "docs/decisions/0018-recursive-project-governance.md",
+                      "sha256":  "fcbe62bdc09fb605a4e162cf2540e37234cbe4f16fd9e2dabb3547b2ac56067d",
+                      "checked":  true,
+                      "checked_at":  "2026-07-14T01:57:00.0000000Z"
+                  }
+              ],
+    "attestation":  "I read and applied every checked governance input to this implementation."
+}
