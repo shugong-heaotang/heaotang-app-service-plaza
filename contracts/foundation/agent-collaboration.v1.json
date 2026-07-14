@@ -3274,7 +3274,7 @@
                            "title":  "Project Brain v2 planned 登记恢复派发",
                            "owner":  "Project Brain v2 registry recovery agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "handoff-ready",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-registry-dispatch-recovery",
                            "branch":  "codex/project-brain-v2-registry-dispatch-recovery",
@@ -3288,7 +3288,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "原 registry-dispatch 通道等待系统审批超过5分钟，项目最高负责人将单一执行权转移到本 recovery。仅登记 recovery 与 operations planned、冻结M0边界；不实现v2、不集成、不触碰原停滞工作树。developer=平台集成负责人授权的 registry-dispatch 恢复负责人；reviewer=independent Project Brain v2 reviewer；approver=项目最高负责人；integration owner=平台集成负责人。current checklist、exam100、协作schema、总合同、范围、UTF-8、秘密与freshness证据随本分支交付；平台集成负责人必须独立复跑后才可集成。blocks=operations从planned进入active；does_not_block=其他隔离工作项、Project Brain v1与SC remediation。停止条件=远端漂移、路径冲突、门禁失败、真实数据/凭据/环境/部署/生产需求或同一命令连续失败两次。",
+                           "migration_note":  "原 registry-dispatch 通道等待系统审批超过5分钟，项目最高负责人将单一执行权转移到本 recovery。exact source ab1f58b07e0f18ae59a43fbfc13420a8340671df 已由内部平台集成 Agent 从权威 base 09cbdc5d7f21c81e8bd3ddb52216392f68caa834 独立复跑并以 fast-forward 保留父链纳入；R3 current checklist、exam100、协作schema、总合同、范围、UTF-8、秘密与freshness门禁通过。仅完成 recovery 集成与 operations planned 登记；不实现v2、不触碰原停滞工作树。developer=平台集成负责人授权的 registry-dispatch 恢复负责人；reviewer=independent Project Brain v2 reviewer；approver=项目最高负责人；integration owner=平台集成负责人。blocks=operations从planned进入active；does_not_block=其他隔离工作项、Project Brain v1与SC remediation。真实数据、凭据、环境、部署和production继续No-Go。",
                            "handoff_record":  "docs/project-management/notices/2026-07-14-project-brain-v2-m0-task-order.md"
                        },
                        {

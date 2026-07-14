@@ -86,3 +86,13 @@ M1 经营事实合同必须等待 M0 独立 Go 后另行授权；M2 定时刷新
 Recovery 必须依次完成 current checklist、考试 100 分、collaboration/schema/总合同/范围/UTF-8/秘密检查、freshness gate、实施记录、提交和仅推送 recovery 专用分支。任一门禁失败即停止；同一命令连续失败两次立即升级，不得弱化标准或改写失败证据。
 
 Recovery 完成后只可转为 `handoff-ready`，不得自行集成。Operations 继续保持 `planned`。
+
+## 8. 受控集成记录
+
+- 权威起点：`09cbdc5d7f21c81e8bd3ddb52216392f68caa834`
+- exact recovery source：`ab1f58b07e0f18ae59a43fbfc13420a8340671df`
+- 纳入方式：在全新内部集成工作树使用 `fast-forward`，保留 source 父链；未使用 reset、force-push 或覆盖。
+- R3 current 证据：`IR-20260714-PROJECT-BRAIN-V2-REGISTRY-DISPATCH-RECOVERY-R3`，检查单 completed、随机考试 100 分。
+- registry 结论：recovery=`integrated`；operations=`planned`。
+- 边界：本次只完成 registry dispatch 受控集成；operations 工作树、M0 实现、App、scripts、SC remediation、Project Brain v1、真实数据、环境、部署和 production 均未授权。
+- 推送条件：仅当最终 collaboration/schema、总合同、范围、秘密、UTF-8、IR 与 freshness 全部门禁通过，且远端仍精确等于权威起点时，才允许普通 fast-forward push。
