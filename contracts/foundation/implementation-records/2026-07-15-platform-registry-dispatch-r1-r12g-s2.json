@@ -1,0 +1,82 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12G-S2",
+  "title": "R12-G post-cutover closeout stage-2 registry transaction",
+  "date": "2026-07-15",
+  "status": "implemented",
+  "objective": "From clean authority 9090fb5338a10d838cdea7ac75d0c61cdc0285a9, record fresh independent review: close Telemetry R2 Acceptance and Network Evidence R2 as integrated, preserve Health F2-1 handoff-ready with a real No-Go, and repair only the Overlay reviewer R2 immutable-path authorization.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12g-s2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-15-platform-registry-dispatch-r1-r12g-s2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md",
+    "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md",
+    "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/delivery-flow-policy.v1.json",
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json",
+    "contracts/foundation/implementation-record.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md",
+    "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md",
+    "contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12g-s2*.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-registry-dispatch-r1-r12g-s2*.json",
+    "contracts/foundation/implementation-records/2026-07-15-platform-registry-dispatch-r1-r12g-s2*.json"
+  ],
+  "verification": [
+    "current R12G-S2 checklist is 26/26, exact-attested, and binds registry candidate SHA cdacf712f9065514914887e48706fda8580ba60d40d30aa25acb0eceb347defd",
+    "R12G-S2 governance exam attempt-1 passed with score 100 and checklist SHA 5758e83e4226f1fb3fc8614072c1459e11e7a36d69d25c16669e568010395b5c",
+    "fresh review evidence is file-backed by dispatch Handoff SHA 2de166bf142061106b9ea295141901c538a8f4999d092ba0b445d0cbd513c661",
+    "Telemetry accepted exact 5cf87e27 is an ancestor of APP integration a1ac334f and records the registered APP architecture reviewer Go",
+    "Network accepted exact 5c48677c is an ancestor of APP integration 610ba656 and records the registered platform backend reviewer Go",
+    "Health remains handoff-ready with no independent_acceptance or integration_commit; its registered joint reviewer No-Go records the six-domain evidence and joint-signoff closure conditions",
+    "Overlay reviewer row remains active; only base, two R2 paths, migration note and next checkpoint change after clean re-anchor exact 86f7fdc2",
+    "registry semantic diff changes exactly dispatch, Telemetry, Network, Health and Overlay reviewer rows; all other rows including API Signoff, legacy rows, Migration Drill index 92 and Legacy A/B are unchanged",
+    "delivery-flow validator, governance evidence validators, Service Plaza aggregate contracts and UTF-8 checks pass"
+  ],
+  "evidence": [
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md",
+    "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md",
+    "contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12g-s2.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-registry-dispatch-r1-r12g-s2-attempt-1.json"
+  ],
+  "premises": [
+    "fresh reviewer conclusions were supplied independently and are recorded without writer self-acceptance",
+    "the dispatch Handoff is the legal review evidence path and its final byte hash is used by both accepted rows without registry self-reference",
+    "Health technical pass does not satisfy missing professional, privacy/legal, operations and platform signoff evidence",
+    "Overlay R2 authorization repair does not change Overlay lifecycle status or create an acceptance verdict",
+    "the implementer does not push, integrate or independently accept this candidate"
+  ],
+  "implementation_mode": "ai-assisted"
+}
