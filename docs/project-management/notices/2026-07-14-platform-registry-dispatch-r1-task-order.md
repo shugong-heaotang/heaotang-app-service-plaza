@@ -180,3 +180,21 @@ R12-F 强制采用以下不可逆次序：
    IR 与 Handoff，形成且只形成 commit-2。
 5. 最终对 authority `974ada3..HEAD` 整段执行 diff/encoding/scope/secret 与全部治理门禁；实施者不得
    推送、集成或自验收。
+
+## R12-G post-cutover closeout stage 1（2026-07-15）
+
+项目最高负责人从 clean authority `2ea278918c00d9fd18b999ee743bb31227cc6a7f`
+直接授权 dispatch 执行严格两阶段 closeout 的第一阶段。本阶段只允许三条 post-cutover
+工作项原子地从 `active` 进入 `handoff-ready`：Telemetry R2 Acceptance、Network
+Evidence R2 与 Health F2-1。不得直接进入 `integrated`，不得创建或伪造
+`independent_acceptance`，不得把 backend authority SHA 写成 APP `integration_commit`。
+
+已存在的 source / APP merge 事实分别为：Telemetry `5cf87e27` / `a1ac334f`，Network
+`5c48677c` / `610ba656`，Health `bfa8ec69` / `28dd038b`；Telemetry 与 Network 可在
+checkpoint 正文中引用 backend authority integration `091c9be9`。Health 的
+`synthetic_only=true`、`executable=false` 边界必须保持不变。
+
+本阶段沿用 dispatch 唯一 active owner，六类 allowed paths 仅切换至 R12-G S1 当前
+checklist、exam 与 implementation record。Legacy rows、Migration Drill index 92、Legacy A/B
+planned、业务代码、validator、policy、生产、真实数据和资金均不得修改。形成 exact commit 后
+必须停止，由不同 Agent 独立验收；只有真实验收 evidence 已落盘后，新的单写者才可执行第二阶段。

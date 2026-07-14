@@ -324,3 +324,31 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 ### 下一步
 
 将且只将 commit-1 与 final commit-2 双提交链交由 APP 总架构独立验收负责人给出 Go/No-Go；实施负责人不得推送或集成。
+
+## R12-G post-cutover closeout stage 1 Handoff（2026-07-15）
+
+- 实施者：Platform registry dispatch agent。
+- 接收者：APP 总架构独立验收负责人；Health 同时要求健康专业与平台联合独立验收。
+- authority base：`2ea278918c00d9fd18b999ee743bb31227cc6a7f`。
+- 当前结论：stage-1 implementation complete；仅等待 exact commit 独立验收，未推送、未集成、未自验收。
+
+### 原子状态事务
+
+- Telemetry R2 Acceptance：`active -> handoff-ready`；source `5cf87e27c122f4cd1db0f4d3c46fdeaa31659484`，APP merge `a1ac334f63d9ae18a6bf9f58d0e03bc441812c33`。
+- Network Evidence R2：`active -> handoff-ready`；source `5c48677c5a0428dc32dea29b84d94a129a649f92`，APP merge `610ba65680123758a53badde0fa8dc0cf52e7f20`。
+- Health F2-1：`active -> handoff-ready`；source `bfa8ec69bc77faad6fb5a0a8b78698866b8fbb2e`，APP merge `28dd038b75432ae140b79f5113bffe69cbedb847`；`synthetic_only=true`、`executable=false` 边界不变。
+- backend authority integration `091c9be9db8c58e780cf2543f8a6731faab076d2` 只作为 Telemetry/Network checkpoint 上下文，不写成 APP `integration_commit`。
+
+### 不变量与停止线
+
+- 未写 `independent_acceptance`、review verdict、decision 或 `integrated` 状态。
+- Legacy rows、Migration Drill index 92、Legacy A/B planned、业务代码、validator、policy、生产、真实数据与资金均未修改。
+- stage-2 必须由不同单写者在真实独立验收 evidence 落盘后执行；exact commit 变化或任一验收 No-Go 时禁止继续。
+
+### 当前治理证据
+
+- record：`IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12G-S1`。
+- checklist：26/26 current。
+- governance exam：attempt-1，100/100。
+- 验证：34/34 永久回归、Service Plaza 总合同、UTF-8 1504 files、`git diff --check` 与精确四行 registry 语义断言均通过。
+- 本候选只允许提交本地 exact commit，不推送、不集成。
