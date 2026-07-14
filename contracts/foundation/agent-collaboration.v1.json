@@ -3321,7 +3321,7 @@
                            "title": "动作遥测 BusinessConfig R2 独立证据刷新与验收",
                            "owner": "平台API验收负责人",
                            "owner_role": "平台集成负责人",
-                           "status": "handoff-ready",
+                           "status": "integrated",
                            "repository_root": "C:/Users/shugo/Documents/APP系统",
                            "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-action-telemetry-businessconfig-r2-acceptance",
                            "branch": "codex/action-telemetry-businessconfig-r2-acceptance",
@@ -3342,31 +3342,42 @@
                            "module_id": "platform",
                            "priority": "P0",
                            "risk_level": "medium",
-                           "updated_at": "2026-07-15T07:13:00+08:00",
+                           "updated_at": "2026-07-15T07:32:05+08:00",
                            "target_date": "2026-07-15T10:12:53+08:00",
-                           "next_checkpoint": "Implementation source 5cf87e27c122f4cd1db0f4d3c46fdeaa31659484 is integrated by APP merge a1ac334f63d9ae18a6bf9f58d0e03bc441812c33 and backend authority integration 091c9be9db8c58e780cf2543f8a6731faab076d2 is available. Await exact R12-G stage-1 independent acceptance evidence before any integrated transition.",
-                           "status_expires_at": "2026-07-15T11:13:00+08:00",
+                           "next_checkpoint": "none; fresh independent Go accepted exact 5cf87e27 and controlled APP integration a1ac334f closes this supporting checkpoint; backend authority 091c9be9 remains context only",
+                           "status_expires_at": "2026-07-15T07:32:06+08:00",
                            "developer_role": "平台API验收负责人",
                            "reviewer_role": "APP总架构独立验收负责人",
                            "approver_role": "项目最高负责人",
                            "next_owner_role": "APP总架构独立验收负责人",
                            "handoff_requested_at": "2026-07-15T07:13:00+08:00",
-                           "blocks": [
-                               "action telemetry BusinessConfig R2 independent acceptance"
-                           ],
+                           "blocks": [],
                            "does_not_block": [
                                "Network Evidence R2",
                                "Health F2-1 synthetic audit",
                                "backend exact commit preservation",
                                "unrelated platform work"
                            ],
-                           "auto_continue": true,
+                           "auto_continue": false,
                            "stop_conditions": [
                                "registry or business code edit",
                                "authority expansion",
                                "independent acceptance failure",
-                               "production real-data or funds access"
-                           ]
+                               "production real-data or funds access",
+                               "reactivation without a new governed work item"
+                           ],
+                           "handoff_first_response_at": "2026-07-15T07:32:05+08:00",
+                           "handoff_decided_at": "2026-07-15T07:32:05+08:00",
+                           "handoff_decision": "go",
+                           "independent_acceptance": {
+                               "exact_commit": "5cf87e27c122f4cd1db0f4d3c46fdeaa31659484",
+                               "reviewer_role": "APP总架构独立验收负责人",
+                               "verdict": "go",
+                               "reviewed_at": "2026-07-15T07:32:05+08:00",
+                               "evidence_path": "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md",
+                               "evidence_sha256": "2de166bf142061106b9ea295141901c538a8f4999d092ba0b445d0cbd513c661"
+                           },
+                           "integration_commit": "a1ac334f63d9ae18a6bf9f58d0e03bc441812c33"
                        },
                        {
                            "work_id": "AIW-20260713-PLATFORM-EXAM-IR-CROSS-RECORD-GATE-R1",
@@ -3433,20 +3444,20 @@
                            "owner_role": "平台集成负责人",
                            "status": "active",
                            "repository_root": "C:/Users/shugo/Documents/APP系统",
-                           "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-platform-r12g-closeout-stage1",
-                           "branch": "codex/platform-r12g-closeout-stage1",
-                           "base_commit": "2ea278918c00d9fd18b999ee743bb31227cc6a7f",
+                           "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-platform-r12g-closeout-stage2",
+                           "branch": "codex/platform-r12g-closeout-stage2",
+                           "base_commit": "9090fb5338a10d838cdea7ac75d0c61cdc0285a9",
                            "allowed_paths": [
                                "contracts/foundation/agent-collaboration.v1.json",
                                "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md",
                                "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md",
-                               "contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12g-s1*.json",
-                               "contracts/foundation/governance-exams/2026-07-15-platform-registry-dispatch-r1-r12g-s1*.json",
-                               "contracts/foundation/implementation-records/2026-07-15-platform-registry-dispatch-r1-r12g-s1*.json"
+                               "contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12g-s2*.json",
+                               "contracts/foundation/governance-exams/2026-07-15-platform-registry-dispatch-r1-r12g-s2*.json",
+                               "contracts/foundation/implementation-records/2026-07-15-platform-registry-dispatch-r1-r12g-s2*.json"
                            ],
                            "started_with_clean_worktree": true,
                            "preexisting_changes_acknowledged": false,
-                           "migration_note": "R12-G is directly authorized by the project principal from clean authority 2ea278918c00d9fd18b999ee743bb31227cc6a7f. Stage 1 changes exactly Telemetry R2 Acceptance, Network Evidence R2 and Health F2-1 from active to handoff-ready after their source candidates were integrated. It does not create or claim independent acceptance, does not transition any row to integrated, preserves all legacy rows, Migration Drill index 92 and Legacy A/B planned rows, and cannot push, integrate or self-review.",
+                           "migration_note": "R12-G stage 2 is directly authorized by the project principal from clean authority 9090fb5338a10d838cdea7ac75d0c61cdc0285a9. It records fresh independent review at 2026-07-15T07:32:05+08:00: Telemetry and Network Go to integrated; Health remains handoff-ready with a real No-Go and no independent_acceptance. The same pre-exam single-write window repairs only the Overlay reviewer R2 immutable-path authorization and base re-anchor. Legacy rows, Migration Drill index 92, Legacy A/B planned rows and business code remain unchanged; the writer cannot push, integrate or self-review.",
                            "handoff_record": "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md",
                            "flow_policy_version": "delivery-flow-policy.v1",
                            "flow_class": "governance-repair",
@@ -3454,15 +3465,15 @@
                            "module_id": "platform",
                            "priority": "P0",
                            "risk_level": "high",
-                           "updated_at": "2026-07-15T07:13:00+08:00",
+                           "updated_at": "2026-07-15T07:32:05+08:00",
                            "target_date": "2026-07-15T11:13:00+08:00",
-                           "next_checkpoint": "Commit only the stage-1 active-to-handoff-ready transaction with current checklist, exam100, implementation record and Handoff; then stop for a different independent reviewer to assess the exact commit before any stage-2 writer records a real verdict.",
+                           "next_checkpoint": "Commit only the R12-G stage-2 registry-only candidate with current checklist, exam100, implementation record and Handoff; then stop for a different independent reviewer to assess the unpushed exact commit.",
                            "status_expires_at": "2026-07-15T11:13:00+08:00",
                            "developer_role": "平台注册表派发授权记录人",
                            "reviewer_role": "APP总架构独立验收负责人",
                            "approver_role": "项目最高负责人",
                            "blocks": [
-                               "R12-G stage-1 exact commit independent acceptance"
+                               "R12-G stage-2 exact commit independent acceptance"
                            ],
                            "does_not_block": [
                                "unrelated isolated module work",
@@ -3473,8 +3484,9 @@
                            "stop_conditions": [
                                "self-expansion beyond the six authorized path classes",
                                "entry or passed exam deletion or rewrite",
-                               "partial three-row stage-1 transaction",
-                               "independent acceptance fabrication or integrated transition in stage 1",
+                               "partial Telemetry and Network terminal transaction",
+                               "Health independent acceptance fabrication or integrated transition",
+                               "Overlay state or non-authorized-field mutation",
                                "business test validator policy or reviewer-evidence edit",
                                "fabricated future integration SHA",
                                "production real-data or funds access",
@@ -3543,17 +3555,19 @@
                            "repository_root": "C:/Users/shugo/Documents/APP系统",
                            "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-platform-nova-overlay-r2-independent-acceptance",
                            "branch": "codex/platform-nova-overlay-r2-independent-acceptance",
-                           "base_commit": "0c420c3448a9e6399410cb6c230b43c243b0471c",
+                           "base_commit": "9090fb5338a10d838cdea7ac75d0c61cdc0285a9",
                            "allowed_paths": [
                                "docs/project-management/independent-acceptance/platform-nova-overlay-r2/evidence.md",
                                "docs/project-management/independent-acceptance/platform-nova-overlay-r2/task-order.md",
+                               "docs/project-management/independent-acceptance/platform-nova-overlay-r2/evidence-r2.md",
+                               "docs/project-management/independent-acceptance/platform-nova-overlay-r2/task-order-r2.md",
                                "docs/project-management/independent-acceptance/platform-nova-overlay-r2/development-checklist*.json",
                                "docs/project-management/independent-acceptance/platform-nova-overlay-r2/governance-exam*.json",
                                "docs/project-management/independent-acceptance/platform-nova-overlay-r2/implementation-record*.json"
                            ],
                            "started_with_clean_worktree": true,
                            "preexisting_changes_acknowledged": false,
-                           "migration_note": "The one-time reviewer namespace remains active only for fresh independent evidence. Its worktree/branch is clean at exact b609b375b2a8eacfaef7ccb1aee88cc989bb781b, but R12 does not reuse the expired R10/R11 lifecycle evidence or treat it as current Go. The reviewer must re-anchor from R12 authority, rerun its authorized evidence gates, and never write registry, contracts/foundation, scripts, NOVA business code, deployment, production, real data or funds.",
+                           "migration_note": "The one-time reviewer namespace remains active only for fresh independent evidence. It was cleanly re-anchored from authority 9090fb5338a10d838cdea7ac75d0c61cdc0285a9 at exact merge 86f7fdc218252cb6333f39850112f7e03d35128c, with old reviewer exact b609b375b2a8eacfaef7ccb1aee88cc989bb781b preserved as the other parent. Relative to authority, the re-anchor retains only the five existing R1 reviewer namespace files and has zero registry, scripts or source diff. Fresh R2 must use only the newly authorized evidence-r2.md and task-order-r2.md plus the existing checklist, exam and IR globs; expired R1 evidence is not current Go. Registry, contracts/foundation, scripts, NOVA business code, deployment, production, real data and funds remain forbidden.",
                            "handoff_record": "docs/project-management/independent-acceptance/platform-nova-overlay-r2/evidence.md",
                            "flow_policy_version": "delivery-flow-policy.v1",
                            "flow_class": "supporting-checkpoint",
@@ -3563,7 +3577,7 @@
                            "risk_level": "high",
                            "updated_at": "2026-07-15T05:43:07+08:00",
                            "target_date": "2026-07-15T09:43:07+08:00",
-                           "next_checkpoint": "R12 authority 受控集成后，在既有 reviewer namespace 生成全新 current evidence 并复验 source 59a988d / integration 81f6bc8 / reviewer exact b609b375；不得改 registry",
+                           "next_checkpoint": "From clean re-anchor exact 86f7fdc218252cb6333f39850112f7e03d35128c, create fresh R2 task-order/evidence plus current checklist, exam100 and IR; reverify source 59a988d and integration 81f6bc8 without changing registry, implementation or R1 immutable evidence.",
                            "status_expires_at": "2026-07-15T09:43:07+08:00",
                            "developer_role": "平台治理独立测试负责人",
                            "reviewer_role": "APP总架构独立验收负责人",
@@ -3704,7 +3718,7 @@
                            "title": "NOVA M2 Network Read Provider Evidence R2",
                            "owner": "NOVA network read provider agent",
                            "owner_role": "NOVA network read provider agent",
-                           "status": "handoff-ready",
+                           "status": "integrated",
                            "repository_root": "C:/Users/shugo/Documents/APP系统",
                            "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-nova-m2-network-read-provider-evidence-r2",
                            "branch": "codex/nova-m2-network-read-provider-evidence-r2",
@@ -3725,30 +3739,41 @@
                            "module_id": "nova",
                            "priority": "P0",
                            "risk_level": "medium",
-                           "updated_at": "2026-07-15T07:13:00+08:00",
+                           "updated_at": "2026-07-15T07:32:05+08:00",
                            "target_date": "2026-07-15T10:12:53+08:00",
-                           "next_checkpoint": "Implementation source 5c48677c5a0428dc32dea29b84d94a129a649f92 is integrated by APP merge 610ba65680123758a53badde0fa8dc0cf52e7f20 and backend authority integration 091c9be9db8c58e780cf2543f8a6731faab076d2 is available. Await exact R12-G stage-1 independent acceptance evidence before any integrated transition.",
-                           "status_expires_at": "2026-07-15T11:13:00+08:00",
+                           "next_checkpoint": "none; fresh independent Go accepted exact 5c48677c and controlled APP integration 610ba656 closes this supporting checkpoint; backend authority 091c9be9 remains context only",
+                           "status_expires_at": "2026-07-15T07:32:06+08:00",
                            "developer_role": "NOVA network read provider agent",
                            "reviewer_role": "平台后端独立验收负责人",
                            "approver_role": "项目最高负责人",
                            "next_owner_role": "平台后端独立验收负责人",
                            "handoff_requested_at": "2026-07-15T07:13:00+08:00",
-                           "blocks": [
-                               "Network Read Provider R2 independent acceptance"
-                           ],
+                           "blocks": [],
                            "does_not_block": [
                                "Telemetry R2 acceptance",
                                "Health F2-1 synthetic audit",
                                "unrelated isolated module work"
                            ],
-                           "auto_continue": true,
+                           "auto_continue": false,
                            "stop_conditions": [
                                "registry shared-validator or backend implementation edit",
                                "backend exact mismatch",
                                "independent acceptance failure",
-                               "production real-data or funds access"
-                           ]
+                               "production real-data or funds access",
+                               "reactivation without a new governed work item"
+                           ],
+                           "handoff_first_response_at": "2026-07-15T07:32:05+08:00",
+                           "handoff_decided_at": "2026-07-15T07:32:05+08:00",
+                           "handoff_decision": "go",
+                           "independent_acceptance": {
+                               "exact_commit": "5c48677c5a0428dc32dea29b84d94a129a649f92",
+                               "reviewer_role": "平台后端独立验收负责人",
+                               "verdict": "go",
+                               "reviewed_at": "2026-07-15T07:32:05+08:00",
+                               "evidence_path": "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md",
+                               "evidence_sha256": "2de166bf142061106b9ea295141901c538a8f4999d092ba0b445d0cbd513c661"
+                           },
+                           "integration_commit": "610ba65680123758a53badde0fa8dc0cf52e7f20"
                        },
                        {
                            "work_id": "AIW-20260715-HEALTH-R0-F2-AUDIT-F2-1",
@@ -3780,9 +3805,9 @@
                            "module_id": "health-manager",
                            "priority": "P1",
                            "risk_level": "high",
-                           "updated_at": "2026-07-15T07:13:00+08:00",
+                           "updated_at": "2026-07-15T07:32:05+08:00",
                            "target_date": "2026-07-15T10:12:53+08:00",
-                           "next_checkpoint": "Implementation source bfa8ec69bc77faad6fb5a0a8b78698866b8fbb2e is integrated by APP merge 28dd038b75432ae140b79f5113bffe69cbedb847. The synthetic_only=true and executable=false boundary remains unchanged; await exact R12-G stage-1 joint independent acceptance evidence before any integrated transition.",
+                           "next_checkpoint": "Fresh joint review is No-Go: preserve Pending with owner, synthetic_only=true, executable=false and all real-activity authorizations false; obtain locatable evidence for all six domain owners, joint professional/platform signed scope and an independent final review before any new lifecycle transition.",
                            "status_expires_at": "2026-07-15T11:13:00+08:00",
                            "developer_role": "健康大管家负责人",
                            "reviewer_role": "健康专业与平台联合独立验收负责人",
@@ -3790,7 +3815,9 @@
                            "next_owner_role": "健康专业与平台联合独立验收负责人",
                            "handoff_requested_at": "2026-07-15T07:13:00+08:00",
                            "blocks": [
-                               "Health F2-1 joint independent acceptance"
+                               "six-domain owner locatable evidence",
+                               "joint professional and platform signed scope",
+                               "independent final review conclusion"
                            ],
                            "does_not_block": [
                                "Telemetry R2 acceptance",
@@ -3804,7 +3831,10 @@
                                "production real-health or member-data access",
                                "registry or shared-validator edit",
                                "independent acceptance failure"
-                           ]
+                           ],
+                           "handoff_first_response_at": "2026-07-15T07:32:05+08:00",
+                           "handoff_decided_at": "2026-07-15T07:32:05+08:00",
+                           "handoff_decision": "no-go"
                        }
                    ]
 }

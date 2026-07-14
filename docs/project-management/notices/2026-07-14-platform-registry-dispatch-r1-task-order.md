@@ -198,3 +198,33 @@ checkpoint 正文中引用 backend authority integration `091c9be9`。Health 的
 checklist、exam 与 implementation record。Legacy rows、Migration Drill index 92、Legacy A/B
 planned、业务代码、validator、policy、生产、真实数据和资金均不得修改。形成 exact commit 后
 必须停止，由不同 Agent 独立验收；只有真实验收 evidence 已落盘后，新的单写者才可执行第二阶段。
+
+## R12-G post-cutover closeout stage 2（2026-07-15）
+
+项目最高负责人从 clean authority `9090fb5338a10d838cdea7ac75d0c61cdc0285a9`
+直接授权同一 dispatch owner 在新 clean worktree
+`C:/Users/shugo/Documents/worktrees/heaotang-platform-r12g-closeout-stage2`、branch
+`codex/platform-r12g-closeout-stage2` 执行 registry-only 单写事务。必须先把三项
+`2026-07-15T07:32:05+08:00` fresh 独立复验结论文件化到本 dispatch Handoff，随后才可：
+
+- Telemetry R2 Acceptance：以 reviewer `APP总架构独立验收负责人` 对 exact
+  `5cf87e27c122f4cd1db0f4d3c46fdeaa31659484` 的 Go，记录 APP integration
+  `a1ac334f63d9ae18a6bf9f58d0e03bc441812c33`，从 `handoff-ready` 原子转为
+  `integrated`。
+- Network Evidence R2：以 reviewer `平台后端独立验收负责人` 对 exact
+  `5c48677c5a0428dc32dea29b84d94a129a649f92` 的 Go，记录 APP integration
+  `610ba65680123758a53badde0fa8dc0cf52e7f20`，从 `handoff-ready` 原子转为
+  `integrated`。
+- Health F2-1：以 reviewer `健康专业与平台联合独立验收负责人` 的真实 No-Go
+  记录 first response、decision 和关闭条件；状态保持 `handoff-ready`，不得写
+  `independent_acceptance` 或 `integration_commit`。
+
+同一未通过的 current checklist 窗口内，精确修复 Overlay reviewer R1 immutable-path
+授权缺口：只新增 `evidence-r2.md`、`task-order-r2.md` 两个 allowed paths，把 reviewer
+row 的 `base_commit` 刷新为 `9090fb5338a10d838cdea7ac75d0c61cdc0285a9`，并记录 clean
+re-anchor exact `86f7fdc218252cb6333f39850112f7e03d35128c`。Overlay 状态及其余字段不变。
+
+Stage 2 只允许 registry、现有 dispatch task order/Handoff 以及 fresh R12G-S2 checklist、
+exam、IR。禁止修改 legacy rows、Legacy A/B、业务代码、validators、passed evidence，禁止
+生产、真实数据、资金、部署、push、integration 或 self-review。候选必须停在未推送 exact，
+交由不同 Agent 独立验收。
