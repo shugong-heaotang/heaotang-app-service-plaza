@@ -1,0 +1,80 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-PLATFORM-NOVA-OVERLAY-R2-INDEPENDENT-ACCEPTANCE-R2",
+  "title": "NOVA Overlay R2 fresh independent acceptance No-Go evidence",
+  "date": "2026-07-15",
+  "status": "implemented",
+  "objective": "Create fresh current-authority independent evidence for source 59a988d and integration 81f6bc8 without modifying the registry, scripts, implementation or immutable R1 artifacts.",
+  "governance_checklist": "docs/project-management/independent-acceptance/platform-nova-overlay-r2/development-checklist-r2.json",
+  "governance_exam": "docs/project-management/independent-acceptance/platform-nova-overlay-r2/governance-exam-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/task-order-r2.md",
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md",
+    "docs/project-management/service-plaza/platform-nova-overlay-r2-handoff.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json",
+    "contracts/foundation/implementation-record.v1.schema.json",
+    "contracts/foundation/governance-reading-list.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/evidence-r2.md",
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/task-order-r2.md",
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/development-checklist-r2.json",
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/governance-exam-r2-attempt-1.json",
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/implementation-record-r2.json"
+  ],
+  "verification": [
+    "current authority 640738097102820f2e53ac8a2a0e465fa7acea58 and registry sha256 cdacf712f9065514914887e48706fda8580ba60d40d30aa25acb0eceb347defd are bound",
+    "source 59a988d is an ancestor of integration 81f6bc8 and integration is an ancestor of current authority",
+    "source scope passes 19 of 19 and all 19 source blobs match controlled integration",
+    "fresh checklist is completed 26 of 26 and fresh governance exam attempt 1 passes with score 100",
+    "focused regression fails 19 of 22 with three current-authority consistency failures",
+    "complete Python regression fails 89 of 92 with the same three failures",
+    "Service Plaza total contract passes",
+    "text encoding passes for 1517 files",
+    "final_verdict=no-go; technical acceptance is not verified"
+  ],
+  "evidence": [
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/evidence-r2.md",
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/task-order-r2.md",
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/development-checklist-r2.json",
+    "docs/project-management/independent-acceptance/platform-nova-overlay-r2/governance-exam-r2-attempt-1.json"
+  ],
+  "premises": [
+    "Governance checklist and exam success do not override failed technical gates",
+    "The reviewer must not repair current authority by modifying registry scripts historical checklists or source",
+    "All five R1 artifacts remain byte-for-byte unchanged and are not cited as current pass evidence",
+    "No push integration lifecycle transition deployment production real data or funds action is authorized"
+  ],
+  "implementation_mode": "ai-assisted"
+}
