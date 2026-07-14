@@ -60,23 +60,45 @@ assert len(contract['legacy_routes'])==3 and all(x['sunset_status']==410 for x i
   $writeProbe = @'
 import sqlite3,sys
 con=sqlite3.connect(sys.argv[1])
+operation=sys.argv[2]
 try:
- con.execute("INSERT INTO introductions(id,from_user_id,to_user_id,status,tenant_id,created_at) VALUES(999,1,2,'pending','tenant-alpha','2026-07-12T00:00:00Z')")
+ if operation == 'insert':
+  con.execute("INSERT INTO introductions(id,from_user_id,to_user_id,status,tenant_id,created_at) VALUES(999,1,2,'pending','tenant-alpha','2026-07-12T00:00:00Z')")
+ elif operation == 'update':
+  con.execute("UPDATE introductions SET status='accepted' WHERE id=101")
+ elif operation == 'delete':
+  con.execute("DELETE FROM introductions WHERE id=101")
+ else:
+  raise RuntimeError('UNKNOWN_WRITE_PROBE')
  con.commit();raise SystemExit(2)
 except sqlite3.DatabaseError as exc:
  assert 'NOVA_LEGACY_WRITE_FORBIDDEN' in str(exc)
 finally:con.close()
 '@
-  $writeProbe | & $pythonCommand.Source -X utf8 - $db
-  if ($LASTEXITCODE -ne 0) { throw 'Legacy write blocking probe failed.' }
+  foreach ($operation in @('insert', 'update', 'delete')) {
+    $writeProbe | & $pythonCommand.Source -X utf8 - $db $operation
+    if ($LASTEXITCODE -ne 0) { throw "Legacy $operation blocking probe failed." }
+  }
 
   $cleanup = powershell -NoProfile -ExecutionPolicy Bypass -File $manager -Phase Cleanup -DatabasePath $db -RunId $runId -BackupPath $backup -ConfirmTestDatabase | ConvertFrom-Json
   if ($cleanup.migrated_count -ne 0 -or $cleanup.quarantine_count -ne 0 -or $cleanup.legacy_writes_reopened) { throw 'Cleanup did not remain run-bound and fail-closed.' }
-  $writeProbe | & $pythonCommand.Source -X utf8 - $db
-  if ($LASTEXITCODE -ne 0) { throw 'Cleanup reopened legacy writes.' }
+  foreach ($operation in @('insert', 'update', 'delete')) {
+    $writeProbe | & $pythonCommand.Source -X utf8 - $db $operation
+    if ($LASTEXITCODE -ne 0) { throw "Cleanup reopened legacy $operation writes." }
+  }
 
   $restore = powershell -NoProfile -ExecutionPolicy Bypass -File $manager -Phase RestoreVerify -DatabasePath $db -RunId $runId -BackupPath $backup -ConfirmTestDatabase | ConvertFrom-Json
   if (-not $restore.restore_verified -or $restore.legacy_writes_reopened) { throw 'Restore verification did not preserve the write prohibition.' }
+
+  $unmarkedDb = Join-Path $root 'nova-unmarked.drill.db'
+  $missingMarkerSetup = @'
+import sqlite3,sys
+con=sqlite3.connect(sys.argv[1])
+con.execute('CREATE TABLE introductions(id INTEGER PRIMARY KEY)')
+con.commit();con.close()
+'@
+  $missingMarkerSetup | & $pythonCommand.Source -X utf8 - $unmarkedDb
+  if ($LASTEXITCODE -ne 0) { throw 'Missing-marker fixture setup failed.' }
 
   $negativeResults = @()
   $previousErrorAction = $ErrorActionPreference
@@ -85,8 +107,17 @@ finally:con.close()
   if ($LASTEXITCODE -eq 0) { $negativeResults += 'missing-confirmation-failed' } else { $negativeResults += 'missing-confirmation-rejected' }
   & powershell -NoProfile -ExecutionPolicy Bypass -File $manager -Phase Plan -DatabasePath 'C:\production\heao.db' -RunId $runId -BackupPath $backup -ConfirmTestDatabase 2>$null | Out-Null
   if ($LASTEXITCODE -eq 0) { $negativeResults += 'production-path-failed' } else { $negativeResults += 'production-path-rejected' }
+  & powershell -NoProfile -ExecutionPolicy Bypass -File $manager -Phase Plan -DatabasePath $unmarkedDb -RunId $runId -BackupPath $backup -ConfirmTestDatabase 2>$null | Out-Null
+  if ($LASTEXITCODE -eq 0) { $negativeResults += 'missing-test-marker-failed' } else { $negativeResults += 'missing-test-marker-rejected' }
+  $backupHashBefore = (Get-FileHash -LiteralPath $backup -Algorithm SHA256).Hash
+  & powershell -NoProfile -ExecutionPolicy Bypass -File $manager -Phase Apply -DatabasePath $db -RunId $runId -BackupPath $backup -ConfirmTestDatabase 2>$null | Out-Null
+  $backupHashAfter = (Get-FileHash -LiteralPath $backup -Algorithm SHA256).Hash
+  if ($LASTEXITCODE -eq 0 -or $backupHashBefore -ne $backupHashAfter) { $negativeResults += 'existing-backup-failed' } else { $negativeResults += 'existing-backup-rejected' }
   $ErrorActionPreference = $previousErrorAction
-  if ($negativeResults -contains 'missing-confirmation-failed' -or $negativeResults -contains 'production-path-failed') { throw 'Safety negative case was accepted.' }
+  if ($negativeResults -contains 'missing-confirmation-failed' -or
+      $negativeResults -contains 'production-path-failed' -or
+      $negativeResults -contains 'missing-test-marker-failed' -or
+      $negativeResults -contains 'existing-backup-failed') { throw 'Safety negative case was accepted.' }
 
   [ordered]@{
     status = 'PASS'
@@ -96,6 +127,7 @@ finally:con.close()
     quarantined = 2
     routes_410 = 3
     double_write_rejected = $true
+    insert_update_delete_rejected = $true
     cleanup_run_bound = $true
     restore_verified = $true
     legacy_writes_reopened = $false

@@ -1,0 +1,94 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260712-NOVA-M2-MIGRATION-DISABLE-DRILL-R2",
+  "title": "NOVA M2 migration disable drill R2 永久负例与 PowerShell 编码修复",
+  "date": "2026-07-15",
+  "status": "implemented",
+  "objective": "修复 R1 独立复核发现的混合换行和安全负例证据缺口，永久验证 legacy insert/update/delete 均失败关闭、缺 test marker 拒绝以及既有 backup 不被覆盖。",
+  "governance_checklist": "contracts/modules/network/development-checklists/2026-07-12-nova-m2-migration-disable-r2.json",
+  "governance_exam": "contracts/modules/network/governance-exams/2026-07-12-nova-m2-migration-disable-r2-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md",
+    "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json",
+    "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md",
+    "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/modules/network/migration-drill-report.md",
+    "docs/project-management/modules/network/migration-drill-handoff.md",
+    "contracts/modules/network/implementation-records/2026-07-12-nova-m2-migration-disable-r1.json"
+  ],
+  "capabilities": [
+    "foundation.governance-utf8",
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.contract-tooling",
+    "foundation.delivery-recovery"
+  ],
+  "contracts": [
+    "contracts/modules/network/migration/nova-introduction-migration.v1.json",
+    "contracts/modules/network/migration/nova-introduction-migration.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "changed_areas": [
+    "scripts/Manage-NovaPeopleMigrationDrill.ps1",
+    "scripts/Test-NovaPeopleMigrationDrillSafety.ps1",
+    "docs/project-management/modules/network/migration-drill-report.md",
+    "docs/project-management/modules/network/migration-drill-handoff.md",
+    "contracts/modules/network/development-checklists/2026-07-12-nova-m2-migration-disable-r2.json",
+    "contracts/modules/network/governance-exams/2026-07-12-nova-m2-migration-disable-r2-attempt-1.json",
+    "contracts/modules/network/implementation-records/2026-07-12-nova-m2-migration-disable-r2.json"
+  ],
+  "verification": [
+    "Test-NovaPeopleMigrationDrillSafety.ps1",
+    "insert/update/delete legacy writes rejected before and after Cleanup",
+    "missing test marker rejected",
+    "existing backup rejected and backup SHA-256 unchanged",
+    "PowerShell 5.1 parser",
+    "UTF-8 BOM and CRLF byte verification",
+    "governance checklist/exam/implementation-record validators",
+    "Test-ServicePlazaContracts.ps1",
+    "Test-TextEncoding.ps1",
+    "git diff --check, allowed-path scope and changed-file secret scan"
+  ],
+  "evidence": [
+    "docs/project-management/modules/network/migration-drill-report.md",
+    "docs/project-management/modules/network/migration-drill-handoff.md",
+    "contracts/modules/network/development-checklists/2026-07-12-nova-m2-migration-disable-r2.json",
+    "contracts/modules/network/governance-exams/2026-07-12-nova-m2-migration-disable-r2-attempt-1.json"
+  ],
+  "premises": [
+    "only temporary synthetic SQLite databases are authorized",
+    "real history migration, deployed route changes, production, real members and real messages remain No-Go",
+    "R2 implementation evidence does not replace independent acceptance",
+    "registry lifecycle and integration remain owned by the platform integration path"
+  ],
+  "implementation_mode": "ai-assisted"
+}
