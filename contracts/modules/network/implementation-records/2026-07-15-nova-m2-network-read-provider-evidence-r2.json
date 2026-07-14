@@ -1,0 +1,76 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-NOVA-M2-NETWORK-READ-PROVIDER-EVIDENCE-R2",
+  "title": "NOVA M2 Network Read Provider Evidence R2",
+  "date": "2026-07-15",
+  "status": "implemented",
+  "objective": "Create fresh evidence-only governance from implementation base 974ada3382004c9b5a7b2aa30b766a36ab5ac403 and independently reverify backend exact f6ba650c44230bb9ff2b2322e276d0bc1ae89e21 without modifying registry, shared validators or Go source.",
+  "governance_checklist": "contracts/modules/network/development-checklists/2026-07-15-nova-m2-network-read-provider-evidence-r2.json",
+  "governance_exam": "contracts/modules/network/governance-exams/2026-07-15-nova-m2-network-read-provider-evidence-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-12-nova-m1-task-order.md",
+    "docs/project-management/notices/2026-07-13-nova-phase5-m1-bootstrap-readme.md",
+    "docs/project-management/modules/network/README.md",
+    "docs/project-management/modules/network/task-receipt.md",
+    "contracts/modules/network/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/modules/network/README.md",
+    "docs/project-management/modules/network/task-receipt.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/modules/network/internal-dependencies.v1.json",
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json",
+    "contracts/foundation/implementation-record.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/modules/network/network-read-provider-r2-handoff.md",
+    "contracts/modules/network/development-checklists/2026-07-15-nova-m2-network-read-provider-evidence-r2*.json",
+    "contracts/modules/network/governance-exams/2026-07-15-nova-m2-network-read-provider-evidence-r2*.json",
+    "contracts/modules/network/implementation-records/2026-07-15-nova-m2-network-read-provider-evidence-r2*.json"
+  ],
+  "verification": [
+    "pre-exam staged diff, UTF-8 without BOM, LF and exactly one final newline gates passed before the governance exam was generated",
+    "current network overlay checklist is 28/28 and governance exam attempt-1 is score 100",
+    "backend local HEAD, tracking branch and live origin branch all equal f6ba650c44230bb9ff2b2322e276d0bc1ae89e21",
+    "backend commit changes exactly backend-go/plugins/network-plugin/nova_member_search_provider.go and backend-go/plugins/network-plugin/nova_member_search_provider_test.go",
+    "go test ./plugins/network-plugin -run '^TestNovaMemberSearchProvider' -count=1 passed",
+    "go test -race ./plugins/network-plugin -run '^TestNovaMemberSearchProvider' -count=1 passed",
+    "go test ./... -count=1 passed",
+    "go vet ./... passed",
+    "gofmt -d on the two exact files returned no diff",
+    "git diff --check f6ba650c^ f6ba650c passed and high-confidence secret scan returned no match",
+    "the old evidence commit 5eb2754 is not an ancestor of implementation base 974ada3 and no artifact was copied from it"
+  ],
+  "evidence": [
+    "docs/project-management/modules/network/network-read-provider-r2-handoff.md",
+    "contracts/modules/network/development-checklists/2026-07-15-nova-m2-network-read-provider-evidence-r2.json",
+    "contracts/modules/network/governance-exams/2026-07-15-nova-m2-network-read-provider-evidence-r2-attempt-1.json"
+  ],
+  "premises": [
+    "this slice is evidence-only and cannot modify registry, foundation, shared validators or Go source",
+    "backend exact f6ba650c is the only implementation candidate under review",
+    "the four backend tests and full repository gates prove technical behavior but final acceptance remains with the platform backend independent reviewer",
+    "production, real member data and real messages remain outside authorization"
+  ],
+  "implementation_mode": "ai-assisted"
+}
