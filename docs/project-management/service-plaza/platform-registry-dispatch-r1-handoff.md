@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-`NOVA formal reviewer supporting-item dispatch candidate R8 / Independent acceptance Pending`。
+`NOVA active authority base-refresh candidate R7 / Independent acceptance Pending`。
 
 root-of-trust 已受控集成到权威 `edf2133e171bce31a68e2e535f94eac20d04d03b`。R3 候选执行首个受控派发交易：仅将 `AIW-20260713-PLATFORM-EXAM-IR-CROSS-RECORD-GATE-R1` 从 `planned` 激活为 `active` 并绑定 edf exact clean worktree；NOVA overlay 与 Telemetry 保持 `planned`。本候选不实现业务或 validator，不授权部署、生产、真实数据或真实资金。
 
@@ -90,19 +90,6 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R7-1`，attempt-1，100 分
 - 边界：本候选不实施 NOVA，不修改 NOVA namespace、validator、业务或部署，不触碰生产、真实数据或资金。
 
-## R8 NOVA formal reviewer supporting-item 授权
-
-- authority：`81f6bc8a7e1bc872f1689099a704768495deb009`，双父为 `ea3c70c8bea4904b455455ffc7c6e29821de2705` 与 exact source `59a988df0d7d1a13ac4dd9ad48da62d5c0340534`，远端回读一致。
-- source reviewer verdict：平台治理独立测试负责人只读 Go；19/19 scope、checklist 26/26、exam100、IR/Handoff、targeted 22/22、full 92/92、总合同、UTF-8 1436、diff、secret、remote exact、clean 全部通过；Blocker/Major/Minor 均为 0。
-- 生命周期缺口：聊天 Go 不是 delivery-flow `evidence_path + evidence_sha256`，原 NOVA Overlay 项不得直接转 integrated。
-- direct principal：项目最高负责人基于“24小时项目”清零授权，批准 dispatch 一次性登记 `AIW-20260714-PLATFORM-NOVA-OVERLAY-R2-INDEPENDENT-ACCEPTANCE`；不构成一般 supporting-item 创建权限。
-- 原 NOVA：`active` → `handoff-ready`，记录 source、integration、next owner 与 handoff 时间；未写 `independent_acceptance` 或 `integration_commit`，避免在 evidence 落盘前伪造完成。
-- reviewer supporting item：`active`，base=`81f6bc8`，branch=`codex/platform-nova-overlay-r2-independent-acceptance`，worktree clean；仅拥有 `docs/project-management/independent-acceptance/platform-nova-overlay-r2/` 下五个证据模式。
-- dispatch 本候选不写 reviewer namespace，不改 NOVA 实现、共享 validator、Telemetry、业务、部署、生产、真实数据或资金。
-- record：`IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R8`
-- checklist：`FC-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R8`，26/26 current
-- exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R8-1`，attempt-1，100 分
-
 ## 修改范围
 
 - `contracts/foundation/agent-collaboration.v1.json`
@@ -129,15 +116,12 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r7.json`
 - `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r7-attempt-1.json`
 - `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r7.json`
-- `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r8.json`
-- `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r8-attempt-1.json`
-- `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r8.json`
 
 ## 停止线
 
 - 禁止自行再增加 allowed paths。
 - 禁止同时激活共享路径工作项。
-- 本 R8 候选只允许把 NOVA 转为 `handoff-ready` 并登记一个 formal reviewer supporting item；禁止再次激活其他实施项或 Telemetry。
+- 本候选只允许激活 cross-record；禁止激活 NOVA 或 Telemetry。
 - 独立验收失败或 exact candidate 变化即保持 No-Go。
 - 生产、真实数据、真实资金与不可逆操作持续禁止。
 
@@ -170,11 +154,7 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - R7：delivery-flow + governance-exam + implementation-record 永久回归共 34 项通过；Service Plaza 总合同通过；UTF-8 1427 files 通过。
 - R7 registry：authority/candidate 均 125 rows；仅 NOVA row 的 `base_commit`、`updated_at`、`next_checkpoint`、`status_expires_at` 变化，status 持续 active；dispatch、Telemetry 与其余 122 rows 逐字段不变。
 - R7 worktree：NOVA HEAD=`fb29b857a5476a62cc882bf6bf407e67febcacf9`、branch=`codex/platform-nova-overlay-r2`、clean，NOVA namespace/实现写入 0。
-- R8：preflight ready；delivery-flow + governance-exam + implementation-record 永久回归共 34 项通过；Service Plaza 总合同通过；UTF-8 1442 files 通过；`git diff --check` 通过。
-- R8 registry：authority 125 rows、candidate 126 rows；仅 NOVA lifecycle/handoff 字段和 dispatch migration/freshness 字段变化，并追加一个 exact independent-acceptance supporting item；其他 123 rows 逐字段不变。
-- R8 边界：reviewer namespace 候选写入数 0；未设置 `independent_acceptance`，未把 NOVA 标为 integrated，未修改 NOVA 实现、共享 validator、Telemetry、业务或部署。
-- R8 reviewer worktree：HEAD=`81f6bc8a7e1bc872f1689099a704768495deb009`、branch=`codex/platform-nova-overlay-r2-independent-acceptance`、clean。
 
 ## 下一步
 
-提交并推送 exact R8 dispatch candidate，由 APP 总架构独立验收负责人给出 Go/No-Go。只有 R8 独立 Go 且受控集成后，平台治理独立测试负责人才能在正式授权的 reviewer worktree 内落盘 NOVA formal evidence；dispatch 不写 reviewer evidence、不实施 NOVA，也不自行集成。
+运行全量门禁、提交并推送 exact R7 base-refresh candidate；由 APP 总架构独立验收负责人给出 Go/No-Go。只有该候选独立 Go 且受控集成后，NOVA 实施负责人才能按权威 registry 与 fb29b857 clean worktree 完成自身 current checklist、考试和 scoped implementation；dispatch 不实施 NOVA，也不自行集成。
