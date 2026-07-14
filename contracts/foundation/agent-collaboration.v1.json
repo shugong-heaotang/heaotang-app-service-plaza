@@ -3292,15 +3292,37 @@
                            "handoff_record":  "docs/project-management/notices/2026-07-14-project-brain-v2-m0-task-order.md"
                        },
                        {
+                           "work_id":  "AIW-20260714-PROJECT-BRAIN-V2-M0-ACTIVATION",
+                           "title":  "Project Brain v2 M0 合法激活与工作树派发",
+                           "owner":  "Project Brain v2 M0 activation dispatch agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "handoff-ready",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-m0-activation",
+                           "branch":  "codex/project-brain-v2-m0-activation",
+                           "base_commit":  "36b245871dd95d53964fb20cf4c30a05ceb89a77",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "docs/project-management/notices/2026-07-14-project-brain-v2-m0-activation-task-order.md",
+                                                 "contracts/foundation/development-checklists/2026-07-14-project-brain-v2-m0-activation*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-14-project-brain-v2-m0-activation*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-14-project-brain-v2-m0-activation*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "仅授权从权威 exact base 36b245871dd95d53964fb20cf4c30a05ceb89a77 创建 operations 专用工作树并把既有 planned operations 合法激活；不实现 M0 内容。developer=Project Brain v2 M0 activation dispatch agent；reviewer=independent Project Brain v2 reviewer；approver=项目最高负责人；integration owner=平台集成负责人。blocks=operations M0 开始治理冻结；does_not_block=Project Brain v1、SC remediation、其他隔离模块。M1-M5、App、scripts、真实数据、凭据、环境、部署与 production 均 No-Go。activation preflight、两工作树 bootstrap、current checklist、exam100、IR、协作/总合同/UTF-8/scope/secret/freshness 门禁完成后仅进入 handoff-ready；下一检查点=独立 reviewer 复核后由平台集成负责人受控集成；状态到期=2026-07-15T23:59:59+08:00。",
+                           "handoff_record":  "docs/project-management/notices/2026-07-14-project-brain-v2-m0-activation-task-order.md"
+                       },
+                       {
                            "work_id":  "AIW-20260714-PROJECT-BRAIN-V2-OPERATIONS",
                            "title":  "Project Brain v2 经营管理接入 M0 治理冻结",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "planned",
+                           "status":  "active",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-operations",
                            "branch":  "codex/project-brain-v2-operations",
-                           "base_commit":  "09cbdc5d7f21c81e8bd3ddb52216392f68caa834",
+                           "base_commit":  "36b245871dd95d53964fb20cf4c30a05ceb89a77",
                            "allowed_paths":  [
                                                  "docs/project-management/notices/2026-07-14-project-brain-v2-operations-task-order.md",
                                                  "docs/project-management/project-brain-v2/README.md",
@@ -3316,9 +3338,9 @@
                                                  "contracts/foundation/governance-exams/2026-07-14-project-brain-v2-m0*.json",
                                                  "contracts/foundation/implementation-records/2026-07-14-project-brain-v2-m0*.json"
                                              ],
-                           "started_with_clean_worktree":  false,
-                           "preexisting_changes_acknowledged":  true,
-                           "migration_note":  "Conditional Go仅覆盖M0治理冻结；planned工作树尚未创建，故started_with_clean_worktree=false并显式确认该事实；激活前必须由平台集成负责人重新确认exact base、创建干净专用工作树、验证路径无冲突并注册project-brain-v2治理overlay。M1去标识经营事实合同须待M0独立Go后另行授权；M2-M5均No-Go。App、scripts、registry、Project Brain v1和SC remediation均排除。调度器与老板驾驶舱必须只读、不回写、Unknown显式、失败关闭；行级会员/健康/交易/客服、真实数据、凭据、环境、部署和production全部禁止。developer=Project Brain v2 project owner；reviewer=independent Project Brain v2 reviewer；approver=项目最高负责人；integration owner=平台集成负责人。blocks=M1-M5；does_not_block=Project Brain v1、其他隔离模块、SC remediation。停止条件=M0未独立Go、overlay/基线/路径未就绪或触达明确禁止范围。",
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "Conditional Go仅覆盖M0治理冻结；平台集成负责人已于2026-07-14重新确认权威 exact base 36b245871dd95d53964fb20cf4c30a05ceb89a77，创建干净专用 operations 工作树并验证M0允许路径与15个active/handoff-ready/blocked工作项均无冲突。仅激活原M0 allowed_paths，不扩大范围。M1去标识经营事实合同须待M0独立Go后另行授权；M2-M5均No-Go。App、scripts、registry、Project Brain v1和SC remediation均排除。调度器与老板驾驶舱必须只读、不回写、Unknown显式、失败关闭；行级会员/健康/交易/客服、真实数据、凭据、环境、部署和production全部禁止。developer=Project Brain v2 project owner；reviewer=independent Project Brain v2 reviewer；approver=项目最高负责人；integration owner=平台集成负责人。blocks=M1-M5；does_not_block=Project Brain v1、其他隔离模块、SC remediation。下一检查点=完成M0任务理解回执、章程、ADR与数据分级并交独立验收；状态到期=2026-07-15T23:59:59+08:00。停止条件=M0未独立Go、基线/路径漂移或触达明确禁止范围。",
                            "handoff_record":  "docs/project-management/project-brain-v2/handoff-v2.md"
                        }
                    ]
