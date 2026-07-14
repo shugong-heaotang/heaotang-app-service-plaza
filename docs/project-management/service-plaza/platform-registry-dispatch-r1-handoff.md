@@ -236,6 +236,57 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - 重新运行 34 项永久回归、5 个结构 validator、Service Plaza 总合同、UTF-8、`git diff --check`、范围与高置信 secret scan。
 - 特别确认 Activity/Mall 未虚假跃迁、API 仅 handoff-ready、cross-record 迟到事实未被回填、Telemetry planned 盲点已明确、A/B 未被误激活。
 
+## R12-D 两阶段 registry activation Handoff（2026-07-15）
+
+- 实施者：Platform registry dispatch agent。
+- 接收者 / 独立验收人：APP 总架构独立验收负责人。
+- approver：项目最高负责人。
+- base：`e7c5b61b9905e11f1be3267ea1544610a3cd064f`。
+- commit-1：`2c7d6639dd604491398407a2ddd8392ce97ba342`。
+- 当前结论：implementation complete，等待独立验收；实施者未自验收、未推送、未集成。
+
+### 不可变入口证据
+
+- entry checklist：
+  `contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12d.json`，
+  SHA-256 `988ce0f8e36ab6b56978dfd6a7f2b5e4df0b4e6f1ae03d23220334a27ec7de9a`。
+- entry attempt-1：score 75 / failed，SHA-256
+  `e3db01fcc2ed3d31c4055940031d59c42cf71fbb09859987c53a693b6c00812e`；原样保留。
+- entry attempt-2：score 100 / passed，SHA-256
+  `5fa7fdde87875296c11541c7418220414e3e9714d0baa650f01c6e19c4d03f1b`；原样保留。
+- final record：`IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12D-R2`，使用 commit-1 后全新
+  26/26 checklist 与 exam100，不复用 entry checklist。
+
+### Registry transaction
+
+- dispatch self 切换到 `codex/platform-registry-dispatch-r12d` / clean worktree /
+  base `e7c5b61`，仅六类 dispatch paths。
+- Legacy Migration V2 与 Activity/Mall Legacy Transition 均保持 `planned`，仅 base 刷新为
+  `e7c5b61`。
+- Telemetry R2 Acceptance 从 planned 激活为 active；删除 registry allowed path，改用 2026-07-15
+  checklist/exam/IR 与既有 Handoff，独立复验 backend exact `a0b21cf`，禁止业务修改。
+- 新增并激活 Network Read Provider Evidence R2；工作树 clean at `e7c5b61`，只读绑定 backend
+  exact `f6ba650c`，禁止 registry/shared-validator/backend implementation 修改。
+- 新增并激活 Health R0 F2 Audit F2-1；旧 legacy F2 row 逐字段不变，child 使用
+  `hm-r0-f2-1-audit.v1` 版本化路径，必须 `synthetic_only=true`、`executable=false`，
+  禁止真实健康/会员数据、生产或临床执行。
+- registry 相对 base 仅四个既有 row 变化，并只新增上述 Network 与 Health 两个 row；Social/Club 未新增。
+
+### 验证
+
+- 34/34 delivery-flow、governance-exam、implementation-record 永久回归通过。
+- agent collaboration、delivery flow、development checklist、governance exam、implementation record
+  五结构门禁通过。
+- Service Plaza 总合同通过；UTF-8、`git diff --check`、六类范围和高置信 secret scan 通过。
+- 三个被派发工作树均在激活前 clean 且 HEAD 为 `e7c5b61`。
+
+### 未完成、阻塞与下一派发
+
+- 本候选仍需 APP 总架构独立验收；任一两阶段提交验收失败，整条链保持 No-Go。
+- 实施者不执行推送或集成。
+- 下一轮 registry dispatch 才可考虑 Social backend/evidence 与 Club browser evidence；R12-D
+  未登记、未激活它们。
+
 ## 下一步
 
-生成仅包含 current R12B-R2 checklist、exam、implementation record 与本 Handoff 的第二个本地提交；随后将双提交链交由平台治理独立测试负责人给出 Go/No-Go。实施负责人不得自行推送或集成。
+固定仅包含 current R12D-R2 checklist、exam、implementation record 与本 Handoff 的第二个本地提交；随后将 commit-1 与 commit-2 双提交链交由 APP 总架构独立验收负责人给出 Go/No-Go。实施负责人不得自行推送或集成。

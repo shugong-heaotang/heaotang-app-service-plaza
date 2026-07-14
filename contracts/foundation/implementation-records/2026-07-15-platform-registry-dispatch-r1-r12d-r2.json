@@ -1,0 +1,85 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12D-R2",
+  "title": "R12-D final current registry activation evidence",
+  "date": "2026-07-15",
+  "status": "implemented",
+  "objective": "From commit-1 2c7d6639dd604491398407a2ddd8392ce97ba342, prove the immutable two-stage R12-D registry transaction that activates Telemetry R2, Network Evidence R2 and Health F2-1 while keeping both legacy transactions planned.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12d-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-15-platform-registry-dispatch-r1-r12d-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/delivery-flow-policy.v1.json",
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json",
+    "contracts/foundation/implementation-record.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md",
+    "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md",
+    "contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12d*.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-registry-dispatch-r1-r12d*.json",
+    "contracts/foundation/implementation-records/2026-07-15-platform-registry-dispatch-r1-r12d*.json"
+  ],
+  "verification": [
+    "commit-1 2c7d6639dd604491398407a2ddd8392ce97ba342 contains the registry transaction, task-order and immutable entry governance evidence",
+    "entry checklist SHA-256 is 988ce0f8e36ab6b56978dfd6a7f2b5e4df0b4e6f1ae03d23220334a27ec7de9a",
+    "entry failed attempt-1 score 75 SHA-256 is e3db01fcc2ed3d31c4055940031d59c42cf71fbb09859987c53a693b6c00812e",
+    "entry passed attempt-2 score 100 SHA-256 is 5fa7fdde87875296c11541c7418220414e3e9714d0baa650f01c6e19c4d03f1b",
+    "final R12D-R2 checklist is 26/26 against commit-1 registry SHA-256 e344e2636f09909a5e3376c13b112079cbe345a5ec14b9c95fc94e1fcecb1190",
+    "final R12D-R2 governance exam attempt-1 is 100",
+    "registry changes exactly four existing rows and adds exactly Network Evidence R2 and Health F2-1",
+    "Telemetry is active without any registry allowed path and remains evidence-only against backend exact a0b21cf",
+    "Network Evidence R2 is active and read-only against backend exact f6ba650c",
+    "Health F2-1 is active on versioned non-overlapping paths and requires synthetic_only=true and executable=false",
+    "Legacy Migration V2 and Activity/Mall Legacy Transition remain planned with base e7c5b61",
+    "34 permanent regressions, structure validators, Service Plaza aggregate contract, UTF-8, diff, scope and secret gates pass"
+  ],
+  "evidence": [
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md",
+    "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md",
+    "contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12d.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-registry-dispatch-r1-r12d-attempt-1.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-registry-dispatch-r1-r12d-attempt-2.json",
+    "contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12d-r2.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-registry-dispatch-r1-r12d-r2-attempt-1.json"
+  ],
+  "premises": [
+    "the project principal directly authorized R12-D because authority still named r12b after the R12-C passed-exam immutability No-Go",
+    "entry failed and passed exam artifacts are immutable historical evidence and remain byte-identical in commit-2",
+    "the old Health F2 legacy row is immutable and unchanged; the F2-1 child uses non-overlapping versioned contract and fixture paths",
+    "Social and Club are not registered by this transaction and remain next-dispatch items only",
+    "developer, reviewer and approver remain separate; the implementer does not push, integrate or independently accept"
+  ],
+  "implementation_mode": "ai-assisted"
+}
