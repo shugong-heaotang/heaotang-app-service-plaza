@@ -1,0 +1,5 @@
+{
+  "case_id": "reject-missing-domain",
+  "mutation": { "path": "/domains", "operation": "remove-last" },
+  "expected_valid": false
+}

@@ -1,0 +1,5 @@
+{
+  "case_id": "positive-contract",
+  "source": "contracts/modules/health-manager/hm-r0-f2-1-audit.v1.json",
+  "expected_valid": true
+}

@@ -1,0 +1,5 @@
+{
+  "case_id": "reject-real-data-authorization",
+  "mutation": { "path": "/authorizations/real_data", "value": true },
+  "expected_valid": false
+}
