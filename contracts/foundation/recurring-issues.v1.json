@@ -159,22 +159,28 @@
     {
       "pattern_id": "RI-NEW-MODULE-CHECKLIST-BOOTSTRAP",
       "title": "新模块因检查单硬编码枚举和缺失 overlay 被迫生成 core-only 证据",
-      "occurrence_count": 2,
+      "occurrence_count": 3,
       "status": "implemented",
       "owner_role": "平台集成负责人",
-      "root_cause": "New-AgentDevelopmentChecklist.ps1 维护了独立于 governance-reading-list 的 ValidateSet，且新模块正式产物必须在考试后创建，形成模块 overlay 与检查单的冷启动循环；历史执行者因此省略 ModuleId，生成 module_id=null 的 core-only 完成态快照。",
+      "root_cause": "第一轮修复移除了 New-AgentDevelopmentChecklist.ps1 的硬编码 ValidateSet 并在调用生成器时校验显式 ModuleId，但 registry 生命周期没有在 active/handoff-ready 入口动态要求模块 overlay；因此新模块仍可先激活、后发现无法生成 current checklist，同一权威还可同时存在多个缺 overlay 的 active 模块。",
       "occurrences": [
         { "date": "2026-07-12", "summary": "network 与 protection-mall 四份模块检查单以 module_id=null、26项 core-only 状态完成", "evidence": "docs/project-management/service-plaza/new-module-governance-bootstrap-audit-2026-07-13.md" },
-        { "date": "2026-07-13", "summary": "activity V3 M0 使用 ModuleId=activity 时被硬编码 ValidateSet 拒绝，且 reading list 尚无 activity bootstrap overlay", "evidence": "docs/project-management/notices/2026-07-13-platform-new-module-bootstrap-r1-task-order.md" }
+        { "date": "2026-07-13", "summary": "activity V3 M0 使用 ModuleId=activity 时被硬编码 ValidateSet 拒绝，且 reading list 尚无 activity bootstrap overlay", "evidence": "docs/project-management/notices/2026-07-13-platform-new-module-bootstrap-r1-task-order.md" },
+        { "date": "2026-07-14", "summary": "activity 修复后 NOVA 仍缺 overlay 而无法生成 current checklist；全依赖审计同时发现 active Protection Mall 缺 overlay，证明激活前共享门禁缺失", "evidence": "docs/project-management/notices/2026-07-13-platform-nova-overlay-r2-task-order.md" }
       ],
-      "systemic_fix": "模块 ID 只从 governance-reading-list 动态解析；为 activity 建立平台 bootstrap overlay；未知、空和缺失 overlay 失败关闭；共享测试门禁拒绝新增模块目录下 module_id=null 或缺失注册 overlay 的完成态检查单。",
+      "systemic_fix": "以带 Schema 的 governance-reading-list 作为唯一模块课程注册表；generator 与独立 validator 共用该契约；Service Plaza 总门禁动态扫描 registry，拒绝任意 active/handoff-ready 非平台模块缺少非空、文件存在的 overlay；补齐 NOVA 与审计发现的 Protection Mall 最小 overlay，并以 ADR 0019、CONSTRAINTS、全依赖审计和 cutoff 后永久负例固化激活前顺序。",
       "prevention_gates": [
+        "contracts/foundation/governance-reading-list.v1.schema.json",
+        "scripts/validate_governance_reading_list.py",
         "scripts/New-AgentDevelopmentChecklist.ps1",
-        "scripts/tests/test_new_agent_development_checklist.py"
+        "scripts/tests/test_new_agent_development_checklist.py",
+        "scripts/tests/test_validate_governance_reading_list.py",
+        "scripts/Test-ServicePlazaContracts.ps1"
       ],
       "regression_evidence": [
         "docs/project-management/service-plaza/new-module-governance-bootstrap-audit-2026-07-13.md",
-        "docs/project-management/service-plaza/platform-new-module-bootstrap-r1-handoff.md"
+        "docs/project-management/service-plaza/platform-new-module-bootstrap-r1-handoff.md",
+        "docs/decisions/0019-module-overlay-registration-before-activation.md"
       ]
     }
   ]

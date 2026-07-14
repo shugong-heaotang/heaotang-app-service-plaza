@@ -27,7 +27,7 @@ LEGACY_CORE_ONLY_SHA256 = {
     "contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m1-domain-evidence.json": "b8a7e9ece9b9333144229aef4d0df77a6cdc48dadd23eb13f48f085ecf86276a",
 }
 
-FOUNDATION_GATE_BASE = "03ab808f4a21f8a9585ed8aeefeb55e98c5434af"
+FOUNDATION_GATE_BASE = "fb29b857a5476a62cc882bf6bf407e67febcacf9"
 
 
 def platform_scope_errors(root: Path, relative: str, data: dict, registry: dict) -> list[str]:
@@ -46,8 +46,8 @@ def platform_scope_errors(root: Path, relative: str, data: dict, registry: dict)
     )
     if item is None:
         return [f"{relative}: no registry work item proves platform scope for {data.get('record_id')}"]
-    if "平台" not in str(item.get("owner_role", "")):
-        errors.append(f"{relative}: registry owner_role is not platform scoped")
+    if item.get("owner_role") != "平台集成负责人":
+        errors.append(f"{relative}: registry owner_role is not the platform integration owner")
     allowed = [str(pattern) for pattern in item.get("allowed_paths", [])]
     if not any(fnmatch.fnmatchcase(relative, pattern) for pattern in allowed):
         errors.append(f"{relative}: registry allowed_paths do not authorize this checklist")
@@ -61,7 +61,18 @@ def platform_scope_errors(root: Path, relative: str, data: dict, registry: dict)
         if not task_order.is_file():
             continue
         text = task_order.read_text(encoding="utf-8")
-        if text.startswith("# 平台") and "platform scope" in text and "module_id=null" in text:
+        has_legacy_marker = "platform scope" in text and "module_id=null" in text
+        has_platform_scope_marker = (
+            "platform scope" in text
+            or "registry-only" in text
+            or "平台注册表" in text
+        )
+        has_structured_platform_identity = (
+            item.get("module_id") == "platform"
+            and str(item.get("work_id", "")) in text
+            and has_platform_scope_marker
+        )
+        if text.startswith("# 平台") and (has_legacy_marker or has_structured_platform_identity):
             explicit = True
             break
     if not explicit:
@@ -92,11 +103,18 @@ def run_checklist(script: Path, output: Path, module_id: str = "") -> subprocess
 
 
 class DynamicModuleChecklistTests(unittest.TestCase):
-    def test_activity_and_existing_modules_use_registered_overlays(self) -> None:
+    def test_all_registered_modules_use_overlays_with_current_sha(self) -> None:
         reading_list = json.loads(
             (ROOT / "contracts/foundation/governance-reading-list.v1.json").read_text(encoding="utf-8")
         )
-        for module_id in ("activity", "life-navigation", "club-alliance", "health-manager"):
+        for module_id in (
+            "activity",
+            "nova",
+            "protection-mall",
+            "life-navigation",
+            "club-alliance",
+            "health-manager",
+        ):
             with self.subTest(module_id=module_id), tempfile.TemporaryDirectory() as directory:
                 output = Path(directory) / "checklist.json"
                 result = run_checklist(SCRIPT, output, module_id)
@@ -107,6 +125,9 @@ class DynamicModuleChecklistTests(unittest.TestCase):
                 )
                 self.assertEqual(data["module_id"], module_id)
                 self.assertEqual([item["path"] for item in data["items"]], expected)
+                for item in data["items"]:
+                    expected_sha = hashlib.sha256((ROOT / item["path"]).read_bytes()).hexdigest()
+                    self.assertEqual(item["sha256"], expected_sha, item["path"])
                 self.assertEqual(data["status"], "pending")
                 self.assertTrue(all(not item["checked"] for item in data["items"]))
 
@@ -114,7 +135,7 @@ class DynamicModuleChecklistTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             result = run_checklist(SCRIPT, Path(directory) / "checklist.json", "unknown-module")
             self.assertNotEqual(result.returncode, 0)
-            self.assertIn("Unknown module overlay", result.stderr + result.stdout)
+            self.assertRegex(result.stderr + result.stdout, r"(?i)unknown module overlay.*unknown-module")
 
     def _temporary_repository(self, overlay: list[str]) -> tuple[tempfile.TemporaryDirectory, Path]:
         context = tempfile.TemporaryDirectory()
@@ -123,6 +144,14 @@ class DynamicModuleChecklistTests(unittest.TestCase):
         (root / "contracts/foundation").mkdir(parents=True)
         shutil.copy2(SCRIPT, root / "scripts/New-AgentDevelopmentChecklist.ps1")
         shutil.copy2(ROOT / "scripts/Initialize-PowerShellUtf8.ps1", root / "scripts/Initialize-PowerShellUtf8.ps1")
+        shutil.copy2(
+            ROOT / "scripts/validate_governance_reading_list.py",
+            root / "scripts/validate_governance_reading_list.py",
+        )
+        shutil.copy2(
+            ROOT / "contracts/foundation/governance-reading-list.v1.schema.json",
+            root / "contracts/foundation/governance-reading-list.v1.schema.json",
+        )
         (root / "core.md").write_text("core\n", encoding="utf-8")
         reading_list = {
             "contract_version": "governance-reading-list.v1",
@@ -139,14 +168,14 @@ class DynamicModuleChecklistTests(unittest.TestCase):
         with context:
             result = run_checklist(root / "scripts/New-AgentDevelopmentChecklist.ps1", root / "out.json", "activity")
             self.assertNotEqual(result.returncode, 0)
-            self.assertIn("must contain at least one", result.stderr + result.stdout)
+            self.assertRegex(result.stderr + result.stdout, r"(?i)module_overlays/activity.*non-empty")
 
     def test_missing_overlay_file_fails_closed(self) -> None:
         context, root = self._temporary_repository(["missing.md"])
         with context:
             result = run_checklist(root / "scripts/New-AgentDevelopmentChecklist.ps1", root / "out.json", "activity")
             self.assertNotEqual(result.returncode, 0)
-            self.assertIn("Required governance input is missing", result.stderr + result.stdout)
+            self.assertRegex(result.stderr + result.stdout, r"(?i)module_overlays/activity.*missing")
 
 
 class SharedModuleChecklistGateTests(unittest.TestCase):
@@ -228,7 +257,7 @@ class SharedModuleChecklistGateTests(unittest.TestCase):
                 errors.extend(platform_scope_errors(ROOT, relative, data, registry))
         self.assertEqual(errors, [])
 
-    def test_module_null_checklist_cannot_hide_in_foundation(self) -> None:
+    def test_post_cutoff_module_null_checklist_cannot_hide_in_foundation(self) -> None:
         fake = {
             "record_id": "IR-20260713-ACTIVITY-V3-M0",
             "module_id": None,
@@ -245,6 +274,78 @@ class SharedModuleChecklistGateTests(unittest.TestCase):
         )
         self.assertTrue(errors)
         self.assertTrue(any("platform" in error or "authorize" in error for error in errors))
+
+    def test_platform_title_without_structured_platform_identity_fails(self) -> None:
+        fake = {
+            "record_id": "IR-20260713-ACTIVITY-V3-M0",
+            "module_id": None,
+            "status": "completed",
+        }
+        registry = json.loads(
+            (ROOT / "contracts/foundation/agent-collaboration.v1.json").read_text(encoding="utf-8")
+        )
+        item = next(entry for entry in registry["work_items"] if entry["work_id"] == "AIW-20260713-ACTIVITY-V3-M0")
+        self.assertNotEqual(item.get("module_id"), "platform")
+        errors = platform_scope_errors(
+            ROOT,
+            "contracts/foundation/development-checklists/2026-07-13-activity-v3-m0.json",
+            fake,
+            registry,
+        )
+        self.assertTrue(any("platform scope" in error for error in errors))
+
+    def _synthetic_platform_scope_errors(
+        self,
+        *,
+        owner_role: str = "平台集成负责人",
+        module_id: str = "platform",
+        allowed_pattern: str = "contracts/foundation/development-checklists/*.json",
+        task_work_id: str = "AIW-20260714-PLATFORM-SYNTHETIC",
+        task_scope: str = "registry-only 平台注册表治理",
+    ) -> list[str]:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            task_order = root / "docs/task-order.md"
+            task_order.parent.mkdir(parents=True)
+            task_order.write_text(
+                f"# 平台合成治理任务\n\n{task_work_id}\n\n{task_scope}\n",
+                encoding="utf-8",
+            )
+            registry = {
+                "work_items": [
+                    {
+                        "work_id": "AIW-20260714-PLATFORM-SYNTHETIC",
+                        "owner_role": owner_role,
+                        "module_id": module_id,
+                        "allowed_paths": [allowed_pattern, "docs/task-order.md"],
+                    }
+                ]
+            }
+            return platform_scope_errors(
+                root,
+                "contracts/foundation/development-checklists/synthetic.json",
+                {"record_id": "IR-20260714-PLATFORM-SYNTHETIC", "module_id": None, "status": "completed"},
+                registry,
+            )
+
+    def test_r7_style_structured_platform_identity_passes(self) -> None:
+        self.assertEqual(self._synthetic_platform_scope_errors(), [])
+
+    def test_non_platform_owner_with_null_checklist_fails(self) -> None:
+        errors = self._synthetic_platform_scope_errors(owner_role="模块负责人")
+        self.assertTrue(any("platform integration owner" in error for error in errors))
+
+    def test_task_order_missing_or_mismatched_work_id_fails(self) -> None:
+        errors = self._synthetic_platform_scope_errors(task_work_id="AIW-WRONG")
+        self.assertTrue(any("task order" in error for error in errors))
+
+    def test_checklist_outside_allowed_paths_fails(self) -> None:
+        errors = self._synthetic_platform_scope_errors(allowed_pattern="contracts/foundation/other/*.json")
+        self.assertTrue(any("allowed_paths" in error for error in errors))
+
+    def test_module_semantics_cannot_masquerade_as_platform(self) -> None:
+        errors = self._synthetic_platform_scope_errors(module_id="nova")
+        self.assertTrue(any("task order" in error for error in errors))
 
 
 if __name__ == "__main__":
