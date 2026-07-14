@@ -1,0 +1,70 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R7-1",
+    "record_id":  "IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R7",
+    "actor":  "Platform registry dispatch agent",
+    "attempt_number":  1,
+    "status":  "passed",
+    "generated_at":  "2026-07-14T00:05:27.9576787Z",
+    "completed_at":  "2026-07-14T00:05:37.6894466Z",
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  100,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "fa36c97f81600087475aaf04194ae4ca0e44f2e67067d43d8dd6149ce6135637",
+    "checklist_path":  "contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r7.json",
+    "checklist_sha256":  "bcd5575d0464b40c50f52f2f7959c6186b7b171c2684fbcf4df7675c6d620471",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-008",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0007-stable-foundation-variable-business.md"
+                      },
+                      {
+                          "question_id":  "GQ-001",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "CONSTRAINTS.md"
+                      },
+                      {
+                          "question_id":  "GQ-004",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+                      },
+                      {
+                          "question_id":  "GQ-016",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0013-mandatory-ai-development-entrypoint.md"
+                      },
+                      {
+                          "question_id":  "GQ-011",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/project-management/module-internal-dependency-standard-v1.md"
+                      },
+                      {
+                          "question_id":  "GQ-003",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0011-two-person-config-approval.md"
+                      },
+                      {
+                          "question_id":  "GQ-007",
+                          "selected_option":  "A",
+                          "correct":  true,
+                          "source_path":  "AGENTS.md"
+                      },
+                      {
+                          "question_id":  "GQ-006",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/project-management/ai-coding-incident-lessons-2026-07-10.md"
+                      }
+                  ],
+    "remediation_sources":  [
+
+                            ]
+}

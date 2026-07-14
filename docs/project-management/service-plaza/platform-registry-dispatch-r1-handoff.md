@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-`Atomic serial lifecycle switch candidate R6 / Independent acceptance Pending`。
+`NOVA active authority base-refresh candidate R7 / Independent acceptance Pending`。
 
 root-of-trust 已受控集成到权威 `edf2133e171bce31a68e2e535f94eac20d04d03b`。R3 候选执行首个受控派发交易：仅将 `AIW-20260713-PLATFORM-EXAM-IR-CROSS-RECORD-GATE-R1` 从 `planned` 激活为 `active` 并绑定 edf exact clean worktree；NOVA overlay 与 Telemetry 保持 `planned`。本候选不实现业务或 validator，不授权部署、生产、真实数据或真实资金。
 
@@ -78,6 +78,18 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - checklist：`FC-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R6`，26/26 current
 - exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R6-1`，attempt-1，100 分
 
+## R7 NOVA active authority base refresh
+
+- authority：`fb29b857a5476a62cc882bf6bf407e67febcacf9`，已受控集成 R6。
+- dispatch worktree：从 `4d788720` 经 `--ff-only` 到 `fb29b857`，clean；未修改 dispatch registry row。
+- NOVA worktree：从 `dafdd09f` 经 `--ff-only` 到 `fb29b857`，branch=`codex/platform-nova-overlay-r2`，clean，零实现写入。
+- registry-only：NOVA status 持续 `active`，仅 `base_commit` 从 `dafdd09f` 更新为 `fb29b857`，并更新 `updated_at`、`next_checkpoint`、`status_expires_at`。
+- 其他 124 rows：逐字段不变；dispatch 无需 freshness 更新；Telemetry 持续 `planned`。
+- record：`IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R7`
+- checklist：`FC-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R7`，26/26 current
+- exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R7-1`，attempt-1，100 分
+- 边界：本候选不实施 NOVA，不修改 NOVA namespace、validator、业务或部署，不触碰生产、真实数据或资金。
+
 ## 修改范围
 
 - `contracts/foundation/agent-collaboration.v1.json`
@@ -101,6 +113,9 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r6.json`
 - `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r6-attempt-1.json`
 - `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r6.json`
+- `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r7.json`
+- `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r7-attempt-1.json`
+- `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r7.json`
 
 ## 停止线
 
@@ -135,7 +150,11 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - R6 registry：authority/candidate 均 125 rows；仅 cross-record、reviewer supporting item、NOVA overlay 与 dispatch freshness 四行变化；Telemetry 与其余 121 rows 逐字段不变。
 - R6 worktree：NOVA HEAD=`dafdd09f3c806a12ab3d3a6ed4ade15a0d5d6421`、branch=`codex/platform-nova-overlay-r2`、clean，NOVA namespace/实现写入 0。
 - R6 共享路径：cross-record=`integrated`、NOVA=`active`，不存在同时 active/handoff-ready；reviewer supporting item=`handoff-ready` 且只拥有独立证据 namespace。
+- R7：preflight ready；agent collaboration、delivery flow、implementation record、governance exam、development checklist validators 全部通过。
+- R7：delivery-flow + governance-exam + implementation-record 永久回归共 34 项通过；Service Plaza 总合同通过；UTF-8 1427 files 通过。
+- R7 registry：authority/candidate 均 125 rows；仅 NOVA row 的 `base_commit`、`updated_at`、`next_checkpoint`、`status_expires_at` 变化，status 持续 active；dispatch、Telemetry 与其余 122 rows 逐字段不变。
+- R7 worktree：NOVA HEAD=`fb29b857a5476a62cc882bf6bf407e67febcacf9`、branch=`codex/platform-nova-overlay-r2`、clean，NOVA namespace/实现写入 0。
 
 ## 下一步
 
-运行全量门禁、提交并推送 exact R6 atomic serial switch candidate；由 APP 总架构独立验收负责人给出 Go/No-Go。只有该候选独立 Go 且受控集成后，NOVA 实施负责人才能从已登记的 dafdd09f exact clean worktree 完成自身 current checklist、考试和 scoped implementation；dispatch 不实施 NOVA，也不自行集成。
+运行全量门禁、提交并推送 exact R7 base-refresh candidate；由 APP 总架构独立验收负责人给出 Go/No-Go。只有该候选独立 Go 且受控集成后，NOVA 实施负责人才能按权威 registry 与 fb29b857 clean worktree 完成自身 current checklist、考试和 scoped implementation；dispatch 不实施 NOVA，也不自行集成。
