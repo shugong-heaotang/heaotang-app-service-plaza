@@ -174,7 +174,12 @@ class DeliveryFlowPolicyTests(unittest.TestCase):
 
     def test_rejects_status_expired_against_current_clock(self):
         registry = copy.deepcopy(self.registry)
-        item = next(i for i in registry["work_items"] if i.get("flow_policy_version"))
+        item = next(
+            i for i in registry["work_items"]
+            if i.get("flow_policy_version") and i.get("status") in {"active", "handoff-ready"}
+        )
+        item["updated_at"] = "2026-07-14T23:00:00+00:00"
+        item["status_expires_at"] = "2026-07-14T23:30:00+00:00"
         errors = self.run_validation(
             registry=registry,
             now=datetime(2026, 7, 15, 0, 0, tzinfo=timezone.utc),
