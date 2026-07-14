@@ -77,3 +77,16 @@ R8 candidate `6eabd60ba1b33e6608cdc3ded7d735ac18622b47` 被 APP 总架构独立�
 - 原 supporting item 仅从 `handoff-ready` 转为 `cancelled/superseded`，记录真实迟到的 first response 与 `no-go` decision；禁止回填虚假准时响应，禁止修改主 delivery-flow implementation/acceptance 结论或删除已集成 artifact。
 - R9 只改该 supporting item、dispatch freshness、本任务通知、R9 checklist/exam/IR 与 Handoff；不得恢复 R8 的 NOVA supporting-item 变更，不得写 reviewer namespace、validator、业务、部署、生产、真实数据或真实资金路径。
 - R9 必须 current checklist 26/26、随机考试 100、全量门禁通过、独立验收 Go 后才允许受控集成。R9 集成后，R8 必须从新的 authority 重新生成 checklist、重新考试和重新验收。
+
+## R10 NOVA Overlay formal reviewer supporting-item 重新授权（2026-07-14）
+
+R9 exact candidate `104a50cbb9e97cc3bab8250a388b0f98ee318a6c` 已由 APP 总架构独立验收负责人 Go，并以双父 no-ff integration `0c420c3448a9e6399410cb6c230b43c243b0471c` 进入 authority。项目最高负责人随后明确要求从该新 authority 重新建立 NOVA Overlay R2 formal reviewer supporting-item 授权候选；旧 R8 `6eabd60ba1b33e6608cdc3ded7d735ac18622b47` 持续 No-Go，其 checklist、exam、IR 均不得复用。
+
+R10 只允许以下原子登记语义：
+
+- `AIW-20260713-PLATFORM-NOVA-OVERLAY-R2` 从 `active` 转为 `handoff-ready`，记录 implementation source `59a988df0d7d1a13ac4dd9ad48da62d5c0340534`、integration `81f6bc8a7e1bc872f1689099a704768495deb009` 及当前 authority 祖先链；不得提前写 `independent_acceptance` 或标为 `integrated`。
+- 追加且只追加唯一 `AIW-20260714-PLATFORM-NOVA-OVERLAY-R2-INDEPENDENT-ACCEPTANCE`，状态 `active`，base 为 `0c420c3448a9e6399410cb6c230b43c243b0471c`，owner 为平台治理独立测试负责人，allowed scope 仅 `docs/project-management/independent-acceptance/platform-nova-overlay-r2/` 下五类证据文件。
+- dispatch 只刷新本次 direct-principal 授权说明、时间、next checkpoint、expiry 与 blocks；其余 123 个既有 rows 逐字段不变。
+- reviewer worktree 必须为 `C:/Users/shugo/Documents/worktrees/heaotang-platform-nova-overlay-r2-independent-acceptance`，branch `codex/platform-nova-overlay-r2-independent-acceptance`，HEAD `0c420c3` 且 clean。
+
+R10 必须新建 current checklist 26/26、随机考试 100、IR/Handoff，并通过 agent collaboration、delivery flow、implementation record、governance exam、development checklist、总合同、UTF-8、scope、diff 与 secret 门禁。dispatch 不得写 reviewer evidence namespace、validator、业务、部署、生产、真实数据或真实资金；候选只提交推送，不自行集成。

@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-`Delivery Flow reviewer supporting-item SLA closeout R9 / Independent acceptance Pending`。
+`NOVA Overlay R2 formal reviewer supporting-item authorization R10 / Independent acceptance Pending`。
 
 root-of-trust 已受控集成到权威 `edf2133e171bce31a68e2e535f94eac20d04d03b`。R3 候选执行首个受控派发交易：仅将 `AIW-20260713-PLATFORM-EXAM-IR-CROSS-RECORD-GATE-R1` 从 `planned` 激活为 `active` 并绑定 edf exact clean worktree；NOVA overlay 与 Telemetry 保持 `planned`。本候选不实现业务或 validator，不授权部署、生产、真实数据或真实资金。
 
@@ -104,6 +104,20 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - checklist：`FC-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R9`，26/26 current
 - exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R9-1`，attempt-1，100 分
 
+## R10 NOVA Overlay R2 formal reviewer supporting-item 重新授权
+
+- authority：`0c420c3448a9e6399410cb6c230b43c243b0471c`；R9 exact `104a50cbb9e97cc3bab8250a388b0f98ee318a6c` 已独立 Go 并受控集成。
+- R8：exact `6eabd60ba1b33e6608cdc3ded7d735ac18622b47` 持续 No-Go；旧 R8 checklist、exam、IR 均未复用。
+- ancestry：implementation source `59a988df0d7d1a13ac4dd9ad48da62d5c0340534` 是 integration `81f6bc8a7e1bc872f1689099a704768495deb009` 的祖先，后者是 authority `0c420c3` 的祖先。
+- NOVA implementation：`active` → `handoff-ready`；记录真实既有 read-only independent Go handoff，等待文件化 formal evidence，不提前写 `independent_acceptance` 或 `integrated`。
+- reviewer supporting item：唯一追加 `AIW-20260714-PLATFORM-NOVA-OVERLAY-R2-INDEPENDENT-ACCEPTANCE`，status=`active`，base=`0c420c3`；allowed scope 仅 `docs/project-management/independent-acceptance/platform-nova-overlay-r2/` 五类证据文件。
+- reviewer worktree：`C:/Users/shugo/Documents/worktrees/heaotang-platform-nova-overlay-r2-independent-acceptance`，branch=`codex/platform-nova-overlay-r2-independent-acceptance`，HEAD=`0c420c3`，clean。
+- registry：authority 125 rows、candidate 126 rows；仅 NOVA implementation、dispatch freshness/authorization 与唯一新增 reviewer item 变化，其余 123 rows 逐字段不变。
+- record：`IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R10`
+- checklist：`FC-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R10`，26/26 current，registry SHA-256=`647fb5703e97a2c728c852ec76a06ec6484dbe6ab765ab36718f758a9ab2abaf`
+- exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R10-1`，attempt-1，100 分
+- 边界：dispatch 未写 reviewer namespace、validator、业务或部署；未接触生产、真实数据、真实资金；本候选只提交推送，不自行集成。
+
 ## 修改范围
 
 - `contracts/foundation/agent-collaboration.v1.json`
@@ -133,6 +147,9 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r9.json`
 - `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r9-attempt-1.json`
 - `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r9.json`
+- `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r10.json`
+- `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r10-attempt-1.json`
+- `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r10.json`
 
 ## 停止线
 
@@ -175,7 +192,11 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - R9 registry：authority/candidate 均 125 rows；仅 Delivery Flow reviewer bootstrap lifecycle 与 dispatch freshness/authorization 两行变化，其他 123 rows 逐字段不变。
 - R9 evidence：`f1db5d43` 是 `25b6cd75` 祖先；evidence SHA-256=`21bfe6cb4dab21db4072bb5a4335c5f2ff85cd85f8a971cd0deb8265466cbd86`；主 Delivery Flow integrated item逐字段不变。
 - R9 current governance：checklist 26/26，registry hash=`c699355a678dbf12e0b408af23b89382c2bc840abef504917073a0eafa497d21`；exam attempt-1=100。
+- R10：结构化 checklist、agent collaboration、delivery flow、implementation record、governance exam validators 全部通过；永久回归 34/34 通过；Service Plaza 总合同通过；UTF-8 1445 files 通过。
+- R10 registry：authority 125 rows、candidate 126 rows；changed IDs 精确为 NOVA implementation、dispatch 与唯一新增 NOVA reviewer item；NOVA 与 dispatch changed fields 符合授权，其余 123 rows 逐字段不变。
+- R10 ancestry/worktree：`59a988d` → `81f6bc8` → `0c420c3` 两段祖先关系成立；reviewer worktree branch/HEAD 与登记一致且 clean。
+- R10 scope：仅 registry、task-order、R10 checklist/exam/IR 与本 Handoff；reviewer namespace 写入 0；`git diff --check` 与高置信 secret scan 通过。
 
 ## 下一步
 
-提交并推送 exact R9 SLA-closeout candidate，由 APP 总架构独立验收负责人给出 Go/No-Go。只有 R9 独立 Go 且受控集成后，才能从新 authority 重新生成 NOVA R8 supporting-item 授权的 current checklist、考试和 exact candidate；不得复用 No-Go R8 证据。
+提交并推送 exact R10 NOVA reviewer supporting-item authorization candidate，由 APP 总架构独立验收负责人给出 Go/No-Go。实施者不得自行集成；只有本候选独立 Go 且受控集成后，reviewer 才能在 exact `0c420c3` 派生的授权工作树中写 formal evidence。
