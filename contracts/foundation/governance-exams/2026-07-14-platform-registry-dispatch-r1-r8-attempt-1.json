@@ -1,0 +1,70 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R8-1",
+    "record_id":  "IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R8",
+    "actor":  "Platform registry dispatch agent",
+    "attempt_number":  1,
+    "status":  "passed",
+    "generated_at":  "2026-07-14T01:32:11.5552289Z",
+    "completed_at":  "2026-07-14T01:32:21.3967447Z",
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  100,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "6f83e140d1e55fe35d1520c13eed55717a812bb21464c59441947c05d7f3b9a6",
+    "checklist_path":  "contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r8.json",
+    "checklist_sha256":  "34712a310a528ead38b5495b6845e1327af8abc6ab8114532155f52261b43183",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-013",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0014-ai-development-flight-checklist.md"
+                      },
+                      {
+                          "question_id":  "GQ-006",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/project-management/ai-coding-incident-lessons-2026-07-10.md"
+                      },
+                      {
+                          "question_id":  "GQ-005",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+                      },
+                      {
+                          "question_id":  "GQ-003",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0011-two-person-config-approval.md"
+                      },
+                      {
+                          "question_id":  "GQ-015",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "contracts/foundation/engineering-standards.v1.json"
+                      },
+                      {
+                          "question_id":  "GQ-002",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0008-versioned-business-variables.md"
+                      },
+                      {
+                          "question_id":  "GQ-014",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "contracts/foundation/recurring-issues.v1.json"
+                      },
+                      {
+                          "question_id":  "GQ-009",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0010-ai-implementation-records-required.md"
+                      }
+                  ],
+    "remediation_sources":  [
+
+                            ]
+}

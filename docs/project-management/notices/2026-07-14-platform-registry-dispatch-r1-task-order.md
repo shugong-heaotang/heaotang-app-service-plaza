@@ -64,3 +64,15 @@
 本扩展由项目最高负责人直接事前批准，因此在权限链上高于本任务早期“只更新已登记 planned 项”的自限描述；它只纠正当前 formal reviewer evidence 缺口，不构成一般新增业务项、一般 supporting-item 或一般 allowed-path 扩张权。dispatch 自身 `allowed_paths` 不变。
 
 R5 验收要求：authority 原 124 rows 除 cross-record 与 dispatch freshness/授权说明外逐字段不变；仅追加一个精确 supporting item；两个关联工作树均 clean；R5 current checklist 26/26、随机考试 100、IR/Handoff、全合同、UTF-8、scope、diff、secret 门禁通过；提交推送后交由独立验收，实施者不自行集成。
+
+## R8 direct-principal 一次性职责扩展（2026-07-14）
+
+项目最高负责人继续执行“24 小时项目”并要求清零全部已授权工作。NOVA Overlay R2 exact source `59a988df0d7d1a13ac4dd9ad48da62d5c0340534` 已由平台治理独立测试负责人只读复验 Go，并以双父受控集成 `81f6bc8a7e1bc872f1689099a704768495deb009` 进入权威分支；但聊天验收不是 `delivery-flow-policy.v1` 接受的文件化 evidence，原实现项不得直接伪造 `integrated`。
+
+本次一次性授权 dispatch 只执行以下原子登记：
+
+1. 新增并激活 `AIW-20260714-PLATFORM-NOVA-OVERLAY-R2-INDEPENDENT-ACCEPTANCE`，owner 为 `Platform governance independent test agent`，只允许写入 `docs/project-management/independent-acceptance/platform-nova-overlay-r2/` 下的任务书、current checklist、考试、实施记录和 `evidence.md`。
+2. 将原 `AIW-20260713-PLATFORM-NOVA-OVERLAY-R2` 从 `active` 转为 `handoff-ready`，记录 exact source、受控 integration、next owner 和 handoff 时间；正式 evidence 未落盘前不得写 `independent_acceptance` 或转 `integrated`。
+3. dispatch 自身只更新本通知、R8 current checklist/exam/IR/Handoff 和 registry；不得代 reviewer 写 evidence，不得改 NOVA 实现、共享 validator、Telemetry、部署、生产、真实数据或资金路径。
+
+R8 验收要求：authority 原 125 rows 除 NOVA 与 dispatch 的 lifecycle/freshness 字段外逐字段不变；仅追加一个精确 supporting item；reviewer 工作树从 `81f6bc8...` 创建并保持 clean；R8 checklist 26/26、exam100、IR/Handoff、agent/delivery-flow/exam/IR validators、总合同、UTF-8、scope、diff、secret 全部通过；候选推送后由 APP 总架构独立验收负责人复核，dispatch 不自行集成。
