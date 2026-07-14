@@ -50,7 +50,7 @@
 - prevention_gate：`scripts/validate_governance_reading_list.py` + `scripts/Test-ServicePlazaContracts.ps1`。
 - positive_test：正式权威6个overlay、所有显式 active module gate通过；NOVA/Protection Mall generator路径与SHA正确。
 - negative_test：删 NOVA、删 Mall、empty、missing、unsafe、duplicate、unknown 与 post-cutoff foundation null 均失败。
-- regression_set：定向16/16；全量86/86；Service Plaza total contract pass。
+- regression_set：修订后定向22/22；全量92/92；Service Plaza total contract pass。
 - environment_retest：UTF-8 1434 files pass；scope bad=0；`git diff --check` pass。
 - evidence_paths_and_exact_commits：实现记录、R2 checklist/exam、审计与本Handoff；候选 exact 在提交后由接收人核对。
 
@@ -61,7 +61,7 @@
 ### Verdict
 
 - Conditional Pass：本地实现和回归通过。
-- unresolved_risk：尚需对 central authority `ea3c70c8bea4904b455455ffc7c6e29821de2705` 做 merge-tree 与临时集成态全门禁；随后仍需独立 reviewer Go。
+- unresolved_risk：第一次 central 临时集成发现并关闭 R7 固定短语误报；修订候选仍需再次对 `ea3c70c8bea4904b455455ffc7c6e29821de2705` 跑完整临时集成态门禁，随后仍需独立 reviewer Go。
 - next_authorization：独立 reviewer 只读复验 exact candidate；Go 后由平台集成负责人受控集成，不由实施者改 registry。
 
 ## 精确变更边界

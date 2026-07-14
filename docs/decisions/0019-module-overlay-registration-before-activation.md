@@ -21,9 +21,9 @@
 
 ## Foundation checklist 迁移 cutoff
 
-旧 `test_new_agent_development_checklist.py` 从 `03ab808f` 回扫时，对 implementation base `fb29b857a5476a62cc882bf6bf407e67febcacf9` 之前的完成态 foundation checklists 得到 **30 条 finding、涉及 29 个不可变历史文件**：一份 NOVA API evidence 有两条 finding，22 份 delivery-flow R2–R19/R21–R24 与 6 份 registry-dispatch 证据使用了后来才固定的 task-order短语或旧 record-id 映射。
+旧 `test_new_agent_development_checklist.py` 从 `03ab808f` 回扫时，对 implementation base `fb29b857a5476a62cc882bf6bf407e67febcacf9` 之前的完成态 foundation checklists 得到 **30 条 finding、涉及 29 个不可变历史文件**：一份 NOVA API evidence 有两条 finding，22 份 delivery-flow R2–R19/R21–R24 与 6 份 registry-dispatch 证据使用了后来才固定的 task-order短语或旧 record-id 映射。对 central authority `ea3c70c8...` 的第一次临时集成测试又发现 cutoff 后 R7 具有结构化 `module_id=platform`、平台 owner、allowed path、`# 平台`任务单和匹配 work_id，却没有冗余英文固定短语；因此门禁改为验证这些结构化事实或兼容旧标记，不再把文案当作唯一权限证据。
 
-这些历史文件已经通过各自当时的 checklist/exam/IR 生命周期且不在本项 allowed paths；回写会破坏不可变证据，不能作为本项修复。故 `fb29b857...` 是一次性 migration cutoff：保留旧字节与审计 finding，不追认其满足新短语，也不把 cutoff 推到更晚提交。cutoff 后新增或修改的 foundation completed checklist 必须由 registry allowed path、平台 owner role 和明确写有 `platform scope`、`module_id=null` 的 task order 同时证明；合成永久负例保证缺任一证据仍失败。
+这些历史文件已经通过各自当时的 checklist/exam/IR 生命周期且不在本项 allowed paths；回写会破坏不可变证据，不能作为本项修复。故 `fb29b857...` 是一次性 migration cutoff：保留旧字节与审计 finding，不追认其满足新规则，也不把 cutoff 推到更晚提交。cutoff 后新增或修改的 foundation completed checklist 必须由 registry allowed path、平台 owner role、`module_id=platform`、`# 平台`任务单和任务单中的匹配 work_id共同证明；旧 `platform scope/module_id=null` 标记仅保留兼容。合成永久负例保证模块伪装、缺授权或缺平台身份仍失败。
 
 ## 全依赖审计结论
 

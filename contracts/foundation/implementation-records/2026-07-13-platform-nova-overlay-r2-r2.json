@@ -68,13 +68,14 @@
     "preflight ready, clean isolated worktree, active local registry item and zero shared allowed-path conflicts",
     "initial and final R2 current checklists each contain 26 completed governance inputs; final R2 reflects the three changed core hashes",
     "initial and final R2 randomized governance exams both passed attempt 1 with score 100",
-    "reading-list and generator targeted suite passes 16 tests including NOVA and Protection Mall active-module negative cases",
-    "complete scripts/tests suite passes 86 tests",
+    "reading-list and generator targeted suite passes 22 tests including NOVA and Protection Mall active-module negatives plus post-cutoff R7 structured platform identity and five anti-masquerade conditions",
+    "complete scripts/tests suite passes 92 tests",
     "Service Plaza total contract gate passes with reading-list schema, file integrity and registry activation scan",
     "module checklist audit remains exactly 67 total, 66 completed and four immutable completed/null legacy exceptions",
     "foundation migration cutoff inventory preserves 29 historical files and 30 findings; post-cutoff synthetic platform-scope negative remains fail-closed",
     "text encoding gate passes 1434 files",
-    "allowed-path scope scan reports zero unauthorized paths and git diff check passes"
+    "allowed-path scope scan reports zero unauthorized paths and git diff check passes",
+    "first ea3 central integration simulation found one R7 brittle-marker false positive without moving the cutoff; the gate now requires null checklist, unique registry mapping, exact platform integration owner, allowed path, module_id=platform and matching platform or registry-only task order identity"
   ],
   "evidence": [
     "docs/project-management/service-plaza/new-module-governance-bootstrap-audit-2026-07-13.md",

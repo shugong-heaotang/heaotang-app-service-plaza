@@ -30,7 +30,7 @@
 2. 模块目录下完成态检查单必须设置非空、已注册的 `module_id`。
 3. 其 items 必须包含对应 overlay。
 4. 上表四份历史例外同时固定精确路径、SHA-256、`completed/null` 身份和 26 项 core-only 顺序；例外集合或字节被静默改写都会使测试失败。
-5. R2 全依赖审计发现旧 R1 基线 `03ab808f4a21f8a9585ed8aeefeb55e98c5434af` 会把后来形成但早于本修复授权基线的不可变历史证据按新短语回扫为30条 finding。ADR 0019 将本项 implementation base `fb29b857a5476a62cc882bf6bf407e67febcacf9` 固定为一次性 migration cutoff；此后新增到 foundation 的完成态 checklist 必须能关联 registry 中的平台工作项、被 allowed paths 授权，并由任务单明确声明 `platform scope` 与 `module_id=null`。cutoff 不得再向后推；模块工作项把 null checklist 放入 foundation 仍失败关闭。
+5. R2 全依赖审计发现旧 R1 基线 `03ab808f4a21f8a9585ed8aeefeb55e98c5434af` 会把后来形成但早于本修复授权基线的不可变历史证据按新短语回扫为30条 finding。ADR 0019 将本项 implementation base `fb29b857a5476a62cc882bf6bf407e67febcacf9` 固定为一次性 migration cutoff；此后新增到 foundation 的完成态 checklist 必须能关联 registry 中的平台工作项、被 allowed paths 授权，并由 `module_id=platform`、`# 平台`任务单和匹配 work_id证明结构化平台身份；旧英文固定标记仅兼容。cutoff 不得再向后推；模块工作项把 null checklist 放入 foundation 仍失败关闭。
 
 ## 后续责任
 
@@ -57,6 +57,7 @@
 - 显式非平台 active/handoff-ready 工作项：activity 1、Protection Mall 1、NOVA 2；正式 reading list 均已有非空 overlay。
 - `contracts/modules/*/development-checklists/*.json`：67份，66份 completed；completed/null 仍恰好为上表4份，未增加 legacy exception。
 - Foundation migration inventory：从旧 `03ab808f` 到 `fb29b857` 有32份 completed foundation checklist；其中29份旧文件产生30条新规则 finding（一份 NOVA API evidence 同时缺 allowed-path 与固定 task-order短语）。这些字节不在本项授权范围且属于历史快照，保留 finding、不追认新规则、不回写；cutoff 后合成负例继续证明新违规会失败。
+- Central authority 首次临时集成：`ea3c70c8...` 无合并冲突，reading-list registry gate通过；cutoff 后 R7 暴露“结构化平台身份齐全但固定英文短语缺失”的单一测试问题。修复验证结构化 registry/task-order事实且未移动cutoff，模块伪装负例继续失败。
 
 ### Overlay 只读审计
 

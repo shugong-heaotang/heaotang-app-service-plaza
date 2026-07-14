@@ -46,8 +46,8 @@ def platform_scope_errors(root: Path, relative: str, data: dict, registry: dict)
     )
     if item is None:
         return [f"{relative}: no registry work item proves platform scope for {data.get('record_id')}"]
-    if "平台" not in str(item.get("owner_role", "")):
-        errors.append(f"{relative}: registry owner_role is not platform scoped")
+    if item.get("owner_role") != "平台集成负责人":
+        errors.append(f"{relative}: registry owner_role is not the platform integration owner")
     allowed = [str(pattern) for pattern in item.get("allowed_paths", [])]
     if not any(fnmatch.fnmatchcase(relative, pattern) for pattern in allowed):
         errors.append(f"{relative}: registry allowed_paths do not authorize this checklist")
@@ -61,7 +61,18 @@ def platform_scope_errors(root: Path, relative: str, data: dict, registry: dict)
         if not task_order.is_file():
             continue
         text = task_order.read_text(encoding="utf-8")
-        if text.startswith("# 平台") and "platform scope" in text and "module_id=null" in text:
+        has_legacy_marker = "platform scope" in text and "module_id=null" in text
+        has_platform_scope_marker = (
+            "platform scope" in text
+            or "registry-only" in text
+            or "平台注册表" in text
+        )
+        has_structured_platform_identity = (
+            item.get("module_id") == "platform"
+            and str(item.get("work_id", "")) in text
+            and has_platform_scope_marker
+        )
+        if text.startswith("# 平台") and (has_legacy_marker or has_structured_platform_identity):
             explicit = True
             break
     if not explicit:
@@ -263,6 +274,78 @@ class SharedModuleChecklistGateTests(unittest.TestCase):
         )
         self.assertTrue(errors)
         self.assertTrue(any("platform" in error or "authorize" in error for error in errors))
+
+    def test_platform_title_without_structured_platform_identity_fails(self) -> None:
+        fake = {
+            "record_id": "IR-20260713-ACTIVITY-V3-M0",
+            "module_id": None,
+            "status": "completed",
+        }
+        registry = json.loads(
+            (ROOT / "contracts/foundation/agent-collaboration.v1.json").read_text(encoding="utf-8")
+        )
+        item = next(entry for entry in registry["work_items"] if entry["work_id"] == "AIW-20260713-ACTIVITY-V3-M0")
+        self.assertNotEqual(item.get("module_id"), "platform")
+        errors = platform_scope_errors(
+            ROOT,
+            "contracts/foundation/development-checklists/2026-07-13-activity-v3-m0.json",
+            fake,
+            registry,
+        )
+        self.assertTrue(any("platform scope" in error for error in errors))
+
+    def _synthetic_platform_scope_errors(
+        self,
+        *,
+        owner_role: str = "平台集成负责人",
+        module_id: str = "platform",
+        allowed_pattern: str = "contracts/foundation/development-checklists/*.json",
+        task_work_id: str = "AIW-20260714-PLATFORM-SYNTHETIC",
+        task_scope: str = "registry-only 平台注册表治理",
+    ) -> list[str]:
+        with tempfile.TemporaryDirectory() as directory:
+            root = Path(directory)
+            task_order = root / "docs/task-order.md"
+            task_order.parent.mkdir(parents=True)
+            task_order.write_text(
+                f"# 平台合成治理任务\n\n{task_work_id}\n\n{task_scope}\n",
+                encoding="utf-8",
+            )
+            registry = {
+                "work_items": [
+                    {
+                        "work_id": "AIW-20260714-PLATFORM-SYNTHETIC",
+                        "owner_role": owner_role,
+                        "module_id": module_id,
+                        "allowed_paths": [allowed_pattern, "docs/task-order.md"],
+                    }
+                ]
+            }
+            return platform_scope_errors(
+                root,
+                "contracts/foundation/development-checklists/synthetic.json",
+                {"record_id": "IR-20260714-PLATFORM-SYNTHETIC", "module_id": None, "status": "completed"},
+                registry,
+            )
+
+    def test_r7_style_structured_platform_identity_passes(self) -> None:
+        self.assertEqual(self._synthetic_platform_scope_errors(), [])
+
+    def test_non_platform_owner_with_null_checklist_fails(self) -> None:
+        errors = self._synthetic_platform_scope_errors(owner_role="模块负责人")
+        self.assertTrue(any("platform integration owner" in error for error in errors))
+
+    def test_task_order_missing_or_mismatched_work_id_fails(self) -> None:
+        errors = self._synthetic_platform_scope_errors(task_work_id="AIW-WRONG")
+        self.assertTrue(any("task order" in error for error in errors))
+
+    def test_checklist_outside_allowed_paths_fails(self) -> None:
+        errors = self._synthetic_platform_scope_errors(allowed_pattern="contracts/foundation/other/*.json")
+        self.assertTrue(any("allowed_paths" in error for error in errors))
+
+    def test_module_semantics_cannot_masquerade_as_platform(self) -> None:
+        errors = self._synthetic_platform_scope_errors(module_id="nova")
+        self.assertTrue(any("task order" in error for error in errors))
 
 
 if __name__ == "__main__":
