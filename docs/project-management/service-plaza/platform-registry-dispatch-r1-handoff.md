@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-`Independent-acceptance supporting-item authorization candidate R5 / Independent acceptance Pending`。
+`Atomic serial lifecycle switch candidate R6 / Independent acceptance Pending`。
 
 root-of-trust 已受控集成到权威 `edf2133e171bce31a68e2e535f94eac20d04d03b`。R3 候选执行首个受控派发交易：仅将 `AIW-20260713-PLATFORM-EXAM-IR-CROSS-RECORD-GATE-R1` 从 `planned` 激活为 `active` 并绑定 edf exact clean worktree；NOVA overlay 与 Telemetry 保持 `planned`。本候选不实现业务或 validator，不授权部署、生产、真实数据或真实资金。
 
@@ -64,6 +64,20 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - checklist：`FC-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R5`，26/26 current
 - exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R5-1`，attempt-1，100 分
 
+## R6 cross-record 收口与 NOVA 原子串行激活
+
+- authority：`dafdd09f3c806a12ab3d3a6ed4ade15a0d5d6421`。
+- evidence：`docs/project-management/independent-acceptance/platform-exam-ir-cross-record-gate/evidence.md`，SHA-256=`f8a247a68532f2d198ffea4a8acc0724849099a1832a36282537b01e798c38e9`。
+- ancestor：cross source `3b4bd0c7` 是 implementation integration `757de99e` 的祖先；reviewer source `efad99b` 是 evidence artifact `dafdd09f` 的祖先。
+- cross-record：`handoff-ready` → `integrated`；formal acceptance exact=`3b4bd0c7`、reviewer role=`平台治理独立测试负责人`、verdict=`go`、reviewed_at=`2026-07-14T07:46:00+08:00`；terminal blocks/auto-continue/next/expiry/stop conditions 已真实收口。
+- reviewer supporting item：`active` → `handoff-ready`，记录 source `efad99b`、artifact `dafdd09f`、next owner=`平台集成负责人` 与 handoff 时间；不伪装为 integrated。
+- NOVA overlay R2：`planned` → `active`，base=`dafdd09f`；worktree=`C:/Users/shugo/Documents/worktrees/heaotang-platform-nova-overlay-r2`，branch=`codex/platform-nova-overlay-r2`，HEAD=`dafdd09f`，clean。
+- 原子完成态：cross-record 已 integrated，NOVA 才 active；共享 `scripts/Test-ServicePlazaContracts.ps1` 不存在两个 active/handoff-ready owner。
+- NOVA namespace/实现写入数 0；Telemetry 逐字段不变并保持 planned；dispatch 不实施 NOVA。
+- record：`IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R6`
+- checklist：`FC-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R6`，26/26 current
+- exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R6-1`，attempt-1，100 分
+
 ## 修改范围
 
 - `contracts/foundation/agent-collaboration.v1.json`
@@ -84,6 +98,9 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r5.json`
 - `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r5-attempt-1.json`
 - `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r5.json`
+- `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r6.json`
+- `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r6-attempt-1.json`
+- `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r6.json`
 
 ## 停止线
 
@@ -112,7 +129,13 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - R5 registry：authority 124 rows、candidate 125 rows；仅 cross-record lifecycle/handoff 字段和 dispatch migration/freshness 字段变化，并追加一个精确 independent-acceptance supporting item。
 - R5 worktrees：source `3b4bd0c7` 与 reviewer `757de99e` 均 branch 正确、clean；reviewer namespace 候选写入数 0。
 - R5 边界：NOVA/Telemetry 逐字段不变且保持 planned；未设置 `independent_acceptance`，未把 cross-record 标为 integrated，未修改 validator、业务或部署。
+- R6：preflight ready；agent collaboration、delivery flow、implementation record、governance exam、development checklist validators 全部通过。
+- R6：delivery-flow + governance-exam + implementation-record 永久回归共 34 项通过；Service Plaza 总合同通过；UTF-8 1424 files 通过。
+- R6 evidence：formal evidence SHA-256、3b4→757 与 efad→dafd 两条 ancestor 关系均通过精确复核。
+- R6 registry：authority/candidate 均 125 rows；仅 cross-record、reviewer supporting item、NOVA overlay 与 dispatch freshness 四行变化；Telemetry 与其余 121 rows 逐字段不变。
+- R6 worktree：NOVA HEAD=`dafdd09f3c806a12ab3d3a6ed4ade15a0d5d6421`、branch=`codex/platform-nova-overlay-r2`、clean，NOVA namespace/实现写入 0。
+- R6 共享路径：cross-record=`integrated`、NOVA=`active`，不存在同时 active/handoff-ready；reviewer supporting item=`handoff-ready` 且只拥有独立证据 namespace。
 
 ## 下一步
 
-运行全量门禁、提交并推送 exact R5 supporting-item authorization candidate；由 APP 总架构独立验收负责人给出 Go/No-Go。只有该候选独立 Go 且受控集成后，独立测试负责人才能在 reviewer namespace 内生成自己的 current checklist、考试、IR、task-order 与 formal evidence；dispatch 不代写 reviewer evidence，也不自行集成。
+运行全量门禁、提交并推送 exact R6 atomic serial switch candidate；由 APP 总架构独立验收负责人给出 Go/No-Go。只有该候选独立 Go 且受控集成后，NOVA 实施负责人才能从已登记的 dafdd09f exact clean worktree 完成自身 current checklist、考试和 scoped implementation；dispatch 不实施 NOVA，也不自行集成。
