@@ -157,3 +157,26 @@ R12-D 仅允许六类 dispatch 路径：registry、现有 task-order、现有 di
 R12-D governance exam、R12-D implementation record。禁止修改 validator、policy、test、业务或 reviewer
 evidence；禁止新增 Social/Club 工作项；禁止推送、自验收或自行集成。Social 与 Club 只在 Handoff
 中列为下一轮 dispatch。任一提交独立验收失败，整条两提交链保持 No-Go。
+
+## R12-F authority base refresh 与 pre-exam staged gate（2026-07-15）
+
+R12-D 已受控集成为 authority `974ada3382004c9b5a7b2aa30b766a36ab5ac403`。项目最高负责人直接授权
+R12-F 只执行一次 authority base refresh：dispatch、Legacy Migration V2、Activity/Mall Legacy
+Transition、Telemetry R2、Network Evidence R2、Health F2-1 六项的 `base_commit` 精确刷新到
+`974ada3`；除 dispatch 自身 current 证据授权迁移和时效/next checkpoint 外，状态、owner、paths 与
+其他字段逐字段不变。
+
+dispatch 自身三类治理 globs 从 `r12d*.json` 精确迁移为 `r12f*.json`；registry、既有 task-order、
+既有 Handoff 三路径不变。该迁移只授权本轮 R12-F checklist、exam 与 implementation record，不扩大到
+其他目录或工作项。
+
+R12-F 强制采用以下不可逆次序：
+
+1. 生成、全文读取并完成 entry checklist。
+2. 在任何 governance exam 生成前，先把 entry checklist、本 task-order 和 registry candidate 暂存，
+   并运行 cached diff check、UTF-8、one-final-newline 字节检查、JSON 与 validator；任一不绿不得出卷。
+3. entry exam 通过后不得删除或改写，并与 registry transaction 一起进入 commit-1。
+4. 从 commit-1 生成全新 `IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12F-R2` checklist、exam100、
+   IR 与 Handoff，形成且只形成 commit-2。
+5. 最终对 authority `974ada3..HEAD` 整段执行 diff/encoding/scope/secret 与全部治理门禁；实施者不得
+   推送、集成或自验收。

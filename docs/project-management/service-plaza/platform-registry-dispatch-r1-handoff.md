@@ -287,6 +287,40 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - 下一轮 registry dispatch 才可考虑 Social backend/evidence 与 Club browser evidence；R12-D
   未登记、未激活它们。
 
-## 下一步
+## R12-F authority base refresh Handoff（2026-07-15）
 
-固定仅包含 current R12D-R2 checklist、exam、implementation record 与本 Handoff 的第二个本地提交；随后将 commit-1 与 commit-2 双提交链交由 APP 总架构独立验收负责人给出 Go/No-Go。实施负责人不得自行推送或集成。
+- 实施者：Platform registry dispatch agent。
+- 接收者 / 独立验收人：APP 总架构独立验收负责人。
+- authority base：`974ada3382004c9b5a7b2aa30b766a36ab5ac403`。
+- commit-1：`ec458ea7f5aab1892a5c0b727de14aae64c41e06`。
+- 当前结论：implementation complete，等待独立验收；未推送、未集成、未自验收。
+
+### Pre-exam staged gate 与不可变证据
+
+- entry checklist 在任何考试生成前与 task-order、registry candidate 一起暂存。
+- cached diff check、UTF-8 无 BOM、LF、恰好一个终止换行、JSON、registry validator 与 checklist
+  validator 均在出卷前通过。
+- entry checklist SHA-256：
+  `6a5eb7668541a5cd92e6257f17286601e990282b62abf0309790266f13329a0d`。
+- entry exam attempt-1：score 100 / passed，SHA-256：
+  `8c9be178ca7dca0385b4ce3f25052dfdb3571cac820d87cde6e98df369ee45e1`。
+- final R12F-R2 使用 commit-1 后全新 26/26 checklist 和 exam100，不复用 entry checklist。
+
+### 精确语义
+
+- 相对 authority 只改变 dispatch、Legacy A/B、Telemetry、Network、Health 六行；无新增或删除。
+- 五个非 dispatch 行只把 `base_commit` 刷新为 `974ada3`，状态、paths、owner 逐字段不变。
+- dispatch 切换到 R12-F clean worktree/branch/base，三类 current evidence globs 从 r12d 精确切换为
+  r12f；registry、既有 task-order、既有 Handoff 路径不变。
+- dispatch status/owner 不变；只刷新时效与 next checkpoint。
+
+### 验证与边界
+
+- 34/34 永久回归、五结构门禁、Service Plaza 总合同、UTF-8、authority..HEAD range diff、scope 与
+  high-confidence secret scan 全绿。
+- 仅六类 dispatch 路径；未修改 validator、policy、test、业务或 reviewer evidence。
+- 任一 commit 独立验收失败则双提交链 No-Go；实施者不得追加第三提交修补 final evidence。
+
+### 下一步
+
+将且只将 commit-1 与 final commit-2 双提交链交由 APP 总架构独立验收负责人给出 Go/No-Go；实施负责人不得推送或集成。

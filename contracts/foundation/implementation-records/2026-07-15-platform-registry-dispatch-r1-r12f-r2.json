@@ -1,0 +1,81 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12F-R2",
+  "title": "R12-F final current authority base refresh evidence",
+  "date": "2026-07-15",
+  "status": "implemented",
+  "objective": "From commit-1 ec458ea7f5aab1892a5c0b727de14aae64c41e06, prove the exact six-row authority base refresh to 974ada3382004c9b5a7b2aa30b766a36ab5ac403 and preserve the mandatory pre-exam staged gate evidence.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12f-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-15-platform-registry-dispatch-r1-r12f-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/delivery-flow-policy.v1.json",
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json",
+    "contracts/foundation/implementation-record.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md",
+    "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md",
+    "contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12f*.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-registry-dispatch-r1-r12f*.json",
+    "contracts/foundation/implementation-records/2026-07-15-platform-registry-dispatch-r1-r12f*.json"
+  ],
+  "verification": [
+    "commit-1 ec458ea7f5aab1892a5c0b727de14aae64c41e06 contains the six-row base refresh, task-order, entry checklist and immutable passed entry exam",
+    "entry checklist SHA-256 is 6a5eb7668541a5cd92e6257f17286601e990282b62abf0309790266f13329a0d",
+    "entry passed exam SHA-256 is 8c9be178ca7dca0385b4ce3f25052dfdb3571cac820d87cde6e98df369ee45e1",
+    "pre-exam cached diff, UTF-8 without BOM, LF, exactly one final newline, JSON, registry validator and checklist validator all passed before the entry exam was generated",
+    "final R12F-R2 checklist is 26/26 against registry SHA-256 c615dfddbcef44765fdd877ac17d40f6131e24b3f1ae4e70f113284d5a407e96",
+    "final R12F-R2 governance exam attempt-1 is 100",
+    "relative to authority 974ada3, exactly dispatch, Legacy A, Legacy B, Telemetry, Network and Health rows change and no row is added or removed",
+    "the five non-dispatch rows change only base_commit to 974ada3382004c9b5a7b2aa30b766a36ab5ac403",
+    "dispatch changes only base, workspace, branch, three current-evidence globs, time fields and next checkpoint; status, owner and all non-evidence paths remain unchanged",
+    "34 permanent regressions, five structural gates, Service Plaza aggregate contract, UTF-8, range diff, scope and secret gates pass"
+  ],
+  "evidence": [
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md",
+    "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md",
+    "contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12f.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-registry-dispatch-r1-r12f-attempt-1.json",
+    "contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12f-r2.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-registry-dispatch-r1-r12f-r2-attempt-1.json"
+  ],
+  "premises": [
+    "authority 974ada3382004c9b5a7b2aa30b766a36ab5ac403 is the exact clean base for all six refreshed rows",
+    "entry checklist and passed exam remain immutable after commit-1",
+    "R12-F does not change any status, owner or non-dispatch allowed path",
+    "developer, reviewer and approver remain separate; the implementer does not push, integrate or independently accept"
+  ],
+  "implementation_mode": "ai-assisted"
+}
