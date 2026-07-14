@@ -352,3 +352,59 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - governance exam：attempt-1，100/100。
 - 验证：34/34 永久回归、Service Plaza 总合同、UTF-8 1504 files、`git diff --check` 与精确四行 registry 语义断言均通过。
 - 本候选只允许提交本地 exact commit，不推送、不集成。
+
+## R12-G post-cutover closeout stage 2 fresh review evidence（2026-07-15）
+
+### Telemetry R2 Acceptance — Go
+
+- reviewed_at：`2026-07-15T07:32:05+08:00`
+- reviewer_role：`APP总架构独立验收负责人`
+- accepted exact：`5cf87e27c122f4cd1db0f4d3c46fdeaa31659484`
+- controlled APP integration：`a1ac334f63d9ae18a6bf9f58d0e03bc441812c33`
+- identity：accepted exact 是 integration commit 的祖先，二者均是 authority
+  `9090fb5338a10d838cdea7ac75d0c61cdc0285a9` 的祖先。
+- fresh review basis：current checklist 26/26、exam attempt-1 100、五路径 exact audit、
+  targeted/race/full Go tests、`go vet`、`gofmt`、unknown-key HTTP 404
+  `BUSINESS_VARIABLE_NOT_FOUND` 与 zero-write 证据均通过；无 production、真实数据、资金或部署。
+- verdict：`Go`。允许本单写事务把该 supporting checkpoint 从 `handoff-ready` 关闭为
+  `integrated`；不得扩大为 production/release Go。
+
+### Network Evidence R2 — Go
+
+- reviewed_at：`2026-07-15T07:32:05+08:00`
+- reviewer_role：`平台后端独立验收负责人`
+- accepted exact：`5c48677c5a0428dc32dea29b84d94a129a649f92`
+- controlled APP integration：`610ba65680123758a53badde0fa8dc0cf52e7f20`
+- identity：accepted exact 是 integration commit 的祖先，二者均是 authority
+  `9090fb5338a10d838cdea7ac75d0c61cdc0285a9` 的祖先。
+- fresh review basis：current checklist 28/28、exam attempt-1 100、两路径 exact audit、
+  targeted/race/full Go tests、`go vet`、`gofmt`、跨 tenant、非法请求、rate limit 与畸形
+  provider fail-closed 均通过；旧污染证据 `5eb2754` 未被复用。
+- verdict：`Go`。允许本单写事务把该 supporting checkpoint 从 `handoff-ready` 关闭为
+  `integrated`；不得扩大为 production/release Go。
+
+### Health F2-1 — No-Go, remains handoff-ready
+
+- reviewed_at：`2026-07-15T07:32:05+08:00`
+- reviewer_role：`健康专业与平台联合独立验收负责人`
+- reviewed exact：`bfa8ec69bc77faad6fb5a0a8b78698866b8fbb2e`
+- APP source integration：`28dd038b75432ae140b79f5113bffe69cbedb847`
+- technical evidence：source 与 integration 均是 authority `9090fb5` 的祖先；checklist/exam/IR
+  schema 0 error、28/28、SHA 绑定一致、exam 100；六域均为 `Pending with owner`；
+  `synthetic_only=true`、`executable=false`；五类真实活动授权全为 false；fixture 复跑为
+  1 个正例 Pass、5 个负例 Reject。
+- No-Go root cause：合同仍为 `implemented-awaiting-independent-review`，模块 Handoff 仍为
+  `awaiting independent review`；审计正文没有新增专业、隐私法律、运营或平台签署证据，且缺少
+  独立验收人签署的最终范围结论。
+- close condition：补齐六域 owner 可定位证据、联合专业/平台签署范围与独立复核结论；此前保持
+  `Pending`、synthetic-only、non-executable 和 `handoff-ready`，不写
+  `independent_acceptance` 或 `integration_commit`。
+
+### Overlay reviewer R2 authorization repair
+
+- reviewer branch 已从 authority `9090fb5338a10d838cdea7ac75d0c61cdc0285a9` clean re-anchor；
+  exact merge 为 `86f7fdc218252cb6333f39850112f7e03d35128c`，parents 为旧 reviewer exact
+  `b609b375b2a8eacfaef7ccb1aee88cc989bb781b` 与 authority `9090fb5`。
+- 相对 authority 仅保留五个既有 R1 reviewer namespace 文件，registry、scripts 和 source diff 为零。
+- 本事务只新增 `evidence-r2.md`、`task-order-r2.md` 的精确授权并刷新 base；Overlay reviewer
+  状态保持 `active`，不改变任何验收结论。
