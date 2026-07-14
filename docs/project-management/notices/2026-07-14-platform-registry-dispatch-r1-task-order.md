@@ -64,3 +64,16 @@
 本扩展由项目最高负责人直接事前批准，因此在权限链上高于本任务早期“只更新已登记 planned 项”的自限描述；它只纠正当前 formal reviewer evidence 缺口，不构成一般新增业务项、一般 supporting-item 或一般 allowed-path 扩张权。dispatch 自身 `allowed_paths` 不变。
 
 R5 验收要求：authority 原 124 rows 除 cross-record 与 dispatch freshness/授权说明外逐字段不变；仅追加一个精确 supporting item；两个关联工作树均 clean；R5 current checklist 26/26、随机考试 100、IR/Handoff、全合同、UTF-8、scope、diff、secret 门禁通过；提交推送后交由独立验收，实施者不自行集成。
+
+## R9 Delivery Flow handoff SLA 阻滞清除（2026-07-14）
+
+R8 candidate `6eabd60ba1b33e6608cdc3ded7d735ac18622b47` 被 APP 总架构独立验收负责人 No-Go：其 checklist 绑定修改前 registry hash，且 authority `81f6bc8a7e1bc872f1689099a704768495deb009` 已因 `AIW-20260713-DELIVERY-FLOW-OPTIMIZATION-INDEPENDENT-ACCEPTANCE` first-response SLA 逾期而总合同转红。R8 已以 revert `76f90aaf2abd118c27d8d4264269f09096eae9b4` 完整恢复 authority tree；旧 checklist/exam/IR 保留在 Git 历史，不改写、不作为 current。
+
+项目最高负责人要求 24 小时项目不得因单项阻塞停止其他工作，并授权平台集成负责人持续清除已授权剩余任务。该 handoff 的 `next_owner_role` 已明确为平台集成负责人，因此 R9 只执行最小、真实的 lifecycle closeout：
+
+- business owner：平台交付流负责人；blockage/decision owner：平台集成负责人；verifier：APP 总架构独立验收负责人。
+- evidence source `f1db5d43da40bfab33004776a4b903e78f86ec7c` 是 artifact `25b6cd753d2194efa2c0b4faab3dff0357805a93` 的祖先；evidence SHA-256 必须等于已登记 `21bfe6cb4dab21db4072bb5a4335c5f2ff85cd85f8a971cd0deb8265466cbd86`。
+- 政策的 `one_business_outcome_one_work_item=true` 与 `supporting_evidence_is_checkpoint=true` 禁止把 evidence bootstrap 变成第二个 integrated 完成实体；否则会产生对验收证据的递归验收。
+- 原 supporting item 仅从 `handoff-ready` 转为 `cancelled/superseded`，记录真实迟到的 first response 与 `no-go` decision；禁止回填虚假准时响应，禁止修改主 delivery-flow implementation/acceptance 结论或删除已集成 artifact。
+- R9 只改该 supporting item、dispatch freshness、本任务通知、R9 checklist/exam/IR 与 Handoff；不得恢复 R8 的 NOVA supporting-item 变更，不得写 reviewer namespace、validator、业务、部署、生产、真实数据或真实资金路径。
+- R9 必须 current checklist 26/26、随机考试 100、全量门禁通过、独立验收 Go 后才允许受控集成。R9 集成后，R8 必须从新的 authority 重新生成 checklist、重新考试和重新验收。

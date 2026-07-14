@@ -2,7 +2,7 @@
 
 ## 当前结论
 
-`NOVA active authority base-refresh candidate R7 / Independent acceptance Pending`。
+`Delivery Flow reviewer supporting-item SLA closeout R9 / Independent acceptance Pending`。
 
 root-of-trust 已受控集成到权威 `edf2133e171bce31a68e2e535f94eac20d04d03b`。R3 候选执行首个受控派发交易：仅将 `AIW-20260713-PLATFORM-EXAM-IR-CROSS-RECORD-GATE-R1` 从 `planned` 激活为 `active` 并绑定 edf exact clean worktree；NOVA overlay 与 Telemetry 保持 `planned`。本候选不实现业务或 validator，不授权部署、生产、真实数据或真实资金。
 
@@ -90,6 +90,20 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R7-1`，attempt-1，100 分
 - 边界：本候选不实施 NOVA，不修改 NOVA namespace、validator、业务或部署，不触碰生产、真实数据或资金。
 
+## R9 Delivery Flow reviewer supporting-item SLA 收口
+
+- severity：`L1 Local`；blocked outcome 是 R8 及后续受控集成无法通过 Service Plaza 总合同。
+- primary blockage：process / responsibility handoff aging；目标项在 `2026-07-14T05:41:23+08:00` 请求平台集成接管，但未在 SLA 内记录 first response。
+- business owner：平台交付流负责人；blockage/decision owner：平台集成负责人；verifier：APP 总架构独立验收负责人。
+- source `f1db5d43da40bfab33004776a4b903e78f86ec7c` 是 artifact `25b6cd753d2194efa2c0b4faab3dff0357805a93` 的祖先；evidence SHA-256=`21bfe6cb4dab21db4072bb5a4335c5f2ff85cd85f8a971cd0deb8265466cbd86`。
+- supporting item：`handoff-ready` → `cancelled/superseded`；policy 明确 supporting evidence 只是主工作项检查点，不得形成第二个 integrated 完成实体或递归验收。
+- first response=`2026-07-14T09:47:00+08:00`、decision=`2026-07-14T09:48:00+08:00` / `no-go`，保留迟到事实，不回填虚假准时响应；主 delivery-flow integrated 结论与 artifact 不变。
+- R8 exact `6eabd60` 的 No-Go 与 revert `76f90aa` 均保留；旧 R8 checklist/exam/IR 不作为 current，也不进入 R9。
+- registry 只允许目标 supporting item lifecycle 和 dispatch freshness/authorization 字段变化；NOVA、Telemetry 和其他 rows 逐字段不变。
+- record：`IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R9`
+- checklist：`FC-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R9`，26/26 current
+- exam：`EX-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R9-1`，attempt-1，100 分
+
 ## 修改范围
 
 - `contracts/foundation/agent-collaboration.v1.json`
@@ -116,12 +130,15 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r7.json`
 - `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r7-attempt-1.json`
 - `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r7.json`
+- `contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r9.json`
+- `contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r9-attempt-1.json`
+- `contracts/foundation/implementation-records/2026-07-14-platform-registry-dispatch-r1-r9.json`
 
 ## 停止线
 
 - 禁止自行再增加 allowed paths。
 - 禁止同时激活共享路径工作项。
-- 本候选只允许激活 cross-record；禁止激活 NOVA 或 Telemetry。
+- 本 R9 候选只允许取消已被主工作项吸收的 Delivery Flow reviewer bootstrap，并刷新 dispatch 自身字段；禁止携带 R8、NOVA 或 Telemetry 变更。
 - 独立验收失败或 exact candidate 变化即保持 No-Go。
 - 生产、真实数据、真实资金与不可逆操作持续禁止。
 
@@ -154,7 +171,11 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 - R7：delivery-flow + governance-exam + implementation-record 永久回归共 34 项通过；Service Plaza 总合同通过；UTF-8 1427 files 通过。
 - R7 registry：authority/candidate 均 125 rows；仅 NOVA row 的 `base_commit`、`updated_at`、`next_checkpoint`、`status_expires_at` 变化，status 持续 active；dispatch、Telemetry 与其余 122 rows 逐字段不变。
 - R7 worktree：NOVA HEAD=`fb29b857a5476a62cc882bf6bf407e67febcacf9`、branch=`codex/platform-nova-overlay-r2`、clean，NOVA namespace/实现写入 0。
+- R9：34/34 delivery-flow/governance-exam/implementation-record 回归通过；Service Plaza 总合同通过；UTF-8 1442 files 通过；`git diff --check` 通过。
+- R9 registry：authority/candidate 均 125 rows；仅 Delivery Flow reviewer bootstrap lifecycle 与 dispatch freshness/authorization 两行变化，其他 123 rows 逐字段不变。
+- R9 evidence：`f1db5d43` 是 `25b6cd75` 祖先；evidence SHA-256=`21bfe6cb4dab21db4072bb5a4335c5f2ff85cd85f8a971cd0deb8265466cbd86`；主 Delivery Flow integrated item逐字段不变。
+- R9 current governance：checklist 26/26，registry hash=`c699355a678dbf12e0b408af23b89382c2bc840abef504917073a0eafa497d21`；exam attempt-1=100。
 
 ## 下一步
 
-运行全量门禁、提交并推送 exact R7 base-refresh candidate；由 APP 总架构独立验收负责人给出 Go/No-Go。只有该候选独立 Go 且受控集成后，NOVA 实施负责人才能按权威 registry 与 fb29b857 clean worktree 完成自身 current checklist、考试和 scoped implementation；dispatch 不实施 NOVA，也不自行集成。
+提交并推送 exact R9 SLA-closeout candidate，由 APP 总架构独立验收负责人给出 Go/No-Go。只有 R9 独立 Go 且受控集成后，才能从新 authority 重新生成 NOVA R8 supporting-item 授权的 current checklist、考试和 exact candidate；不得复用 No-Go R8 证据。
