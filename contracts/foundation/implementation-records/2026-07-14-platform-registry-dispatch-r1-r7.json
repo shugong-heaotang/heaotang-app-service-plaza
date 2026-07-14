@@ -1,0 +1,66 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R7",
+  "title": "NOVA overlay active authority base refresh R7",
+  "date": "2026-07-14",
+  "status": "verified",
+  "objective": "将已激活 NOVA overlay R2 的 registry base 从 R6 前权威 dafdd09f 刷新到已集成 R6 的权威 fb29b857，并保持 NOVA 工作树 HEAD、分支、clean 状态与准入 authority 一致。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r7.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-14-platform-registry-dispatch-r1-r7-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "NOVA overlay R2 active registry base and freshness fields",
+    "R7 current checklist and 100-point governance exam",
+    "R7 implementation record and Handoff"
+  ],
+  "verification": [
+    "dispatch and NOVA branches fast-forwarded without reset or deletion to exact fb29b857",
+    "NOVA worktree branch codex/platform-nova-overlay-r2 at exact fb29b857 and clean",
+    "NOVA namespace and implementation writes are zero",
+    "R7 current checklist 26/26 with exact attestation and current SHA-256",
+    "R7 governance exam attempt-1 passed with score 100",
+    "semantic registry comparison: authority and candidate both 125 rows, only NOVA base_commit, updated_at, next_checkpoint and status_expires_at changed",
+    "NOVA remains active; Telemetry and all other 124 rows remain field-for-field unchanged",
+    "dispatch row requires no freshness change and remains unchanged",
+    "agent collaboration, delivery flow, implementation record, governance exam, development checklist, aggregate contract, UTF-8, scope, diff and secret gates"
+  ],
+  "evidence": [
+    "docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md",
+    "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md"
+  ],
+  "premises": [
+    "fb29b857 is the controlled integration authority containing R6",
+    "both worktrees were clean before fast-forward and fb29b857 descends from their previous heads",
+    "NOVA status remains active and this transaction does not implement NOVA",
+    "Telemetry remains planned and unchanged",
+    "independent acceptance and controlled integration of R7 are required before NOVA implementation preflight"
+  ],
+  "implementation_mode": "ai-assisted"
+}
