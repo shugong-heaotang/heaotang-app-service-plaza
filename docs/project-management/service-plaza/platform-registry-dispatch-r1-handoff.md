@@ -249,7 +249,7 @@ R1 checklist 26/26 后使用了非门禁精确 attestation，随后 attempt-1 �
 
 - entry checklist：
   `contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12d.json`，
-  SHA-256 `988ce0f8e36ab6b56978dfd6a7f2b5e4df0b4e6f1ae03d23220334a27ec7de9`。
+  SHA-256 `988ce0f8e36ab6b56978dfd6a7f2b5e4df0b4e6f1ae03d23220334a27ec7de9a`。
 - entry attempt-1：score 75 / failed，SHA-256
   `e3db01fcc2ed3d31c4055940031d59c42cf71fbb09859987c53a693b6c00812e`；原样保留。
 - entry attempt-2：score 100 / passed，SHA-256

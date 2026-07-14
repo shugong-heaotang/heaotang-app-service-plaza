@@ -53,7 +53,7 @@
   ],
   "verification": [
     "commit-1 2c7d6639dd604491398407a2ddd8392ce97ba342 contains the registry transaction, task-order and immutable entry governance evidence",
-    "entry checklist SHA-256 is 988ce0f8e36ab6b56978dfd6a7f2b5e4df0b4e6f1ae03d23220334a27ec7de9",
+    "entry checklist SHA-256 is 988ce0f8e36ab6b56978dfd6a7f2b5e4df0b4e6f1ae03d23220334a27ec7de9a",
     "entry failed attempt-1 score 75 SHA-256 is e3db01fcc2ed3d31c4055940031d59c42cf71fbb09859987c53a693b6c00812e",
     "entry passed attempt-2 score 100 SHA-256 is 5fa7fdde87875296c11541c7418220414e3e9714d0baa650f01c6e19c4d03f1b",
     "final R12D-R2 checklist is 26/26 against commit-1 registry SHA-256 e344e2636f09909a5e3376c13b112079cbe345a5ec14b9c95fc94e1fcecb1190",
