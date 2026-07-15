@@ -1,0 +1,82 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-PLATFORM-REGISTRY-R12N-R2-APPLICATION-ACTIVATION",
+  "title": "R12-N-R2 application R4 and No-Write R12-O activation",
+  "date": "2026-07-15",
+  "status": "implemented",
+  "objective": "Use the controlled-integrated R3.1 live-registry compatibility gate to activate isolated Legacy Lifecycle Application R4, cancel R3 without a false integrated claim, and transfer unique registry ownership to a pre-registered No-Write R12-O while preserving every receipt audit row and protected business state.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-15-platform-registry-r12n-r2-application-activation.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-15-platform-registry-r12n-r2-application-activation-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0021-versioned-legacy-lifecycle-receipts.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-15-platform-registry-r12n-r2-application-activation-task-order.md",
+    "contracts/foundation/implementation-records/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3-1.json",
+    "docs/project-management/service-plaza/platform-legacy-lifecycle-receipt-generalization-r3-handoff.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.delivery-recovery"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/delivery-flow-policy.v3.json",
+    "contracts/foundation/legacy-lifecycle-migration.v2.schema.json",
+    "contracts/foundation/legacy-lifecycle-migrations/LLM-20260715-TECHNICAL-SOCIAL-BATCH-R2.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0021-versioned-legacy-lifecycle-receipts.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-15-platform-registry-r12n-r2-application-activation-task-order.md",
+    "contracts/foundation/development-checklists/2026-07-15-platform-registry-r12n-r2-application-activation.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-registry-r12n-r2-application-activation-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-15-platform-registry-r12n-r2-application-activation.json",
+    "docs/project-management/service-plaza/platform-registry-r12n-r2-application-activation-handoff.md"
+  ],
+  "verification": [
+    "R12-N-R2 R4 and R12-O worktrees are clean at exact authority 9f79d06d502bf11ad0bb7f6dc74c80c0175f01d3 before edits",
+    "fresh R12-N-R2 checklist is 26 of 26 complete and fresh exam attempt 1 passed with score 100",
+    "the frozen first R12-N semantic registry diff produces exactly DELIVERY_LEGACY_CURRENT_REGISTRY_DRIFT under old v3 validator 06047119",
+    "the same frozen semantic registry diff produces no error under controlled-integrated R3.1 authority 9f79d06",
+    "only existing rows136 and137 change and exactly R4 R12-N-R2 R12-O are appended",
+    "audit rows47 88 89 90 92 132 retain complete canonical equality with authority",
+    "row133 and Activity Mall rows109 111 112 113 114 are byte-semantically unchanged",
+    "row136 is cancelled as superseded-by-R4 and releases all twelve implementation paths without a false integrated claim",
+    "row137 remains active over five immutable governance paths and releases only the registry",
+    "R4 owns exactly twelve paths without active overlap",
+    "R12-N-R2 owns only five fresh governance paths and R12-O is the unique registry owner",
+    "R12-O remains explicit No-Write until R4 content-addressed intent and policy independent acceptance plus controlled integration and separate authorization",
+    "Activity Mall receipt SHA256 remains 5e85735d7c70a942efca1b8a8c6d9aecee4805a40282ae8cfbac27beab3207b1 and Batch receipt SHA256 remains 13b5096c9af214b9f5c010b0ece65802cdbcef7fb19602c76aa8c6e0c9873cf6",
+    "platform identity targeted gate total contracts encoding scope secret and diff gates pass before exact candidate handoff"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/platform-registry-r12n-r2-application-activation-handoff.md",
+    "contracts/foundation/development-checklists/2026-07-15-platform-registry-r12n-r2-application-activation.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-registry-r12n-r2-application-activation-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3-1.json"
+  ],
+  "premises": [
+    "R3.1 permits governance-only live registry evolution only when the complete historical work-id prefix and all six audit rows remain fail-closed",
+    "authority-state row137 and the highest project owner authorize this R12-N-R2 candidate before post-integration ownership passes to R12-O",
+    "R4 activation does not authorize receipt or application execution",
+    "R12-O pre-registration is No-Write and requires R4 content-addressed intent integration plus separate authorization",
+    "developer does not push independently accept integrate deploy or access production real data or funds"
+  ],
+  "implementation_mode": "ai-assisted"
+}
