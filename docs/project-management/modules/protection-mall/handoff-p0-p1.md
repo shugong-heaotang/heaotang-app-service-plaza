@@ -10,12 +10,13 @@
 - 所有网络访问只经过共享 `businessApiAdapter`；未登录不发请求，卸载或切换场景会取消旧请求。
 - 页面覆盖 loading、empty、ready、error，错误不使用示例商品兜底，并保留请求编号和可聚焦重试入口。
 - 请求序号隔离迟到响应，加载期间抑制同一场景重复请求。
+- 价格使用 BigInt 按币种标准 minor-unit 位数拆分，不先转换为浮点主单位，最大安全整数保持精确。
 - 场景按钮具有 `aria-pressed`、键盘激活、可见焦点和至少 44px 触控高度；结果区提供 live/busy 语义。
 
 ## 验证证据
 
-- 模块测试：3 files / 17 tests passed。
-- APP 全量回归：26 files / 248 tests passed。
+- 模块测试：3 files / 18 tests passed。
+- APP 全量回归：26 files / 249 tests passed。
 - 生产构建：`tsc -b && vite build` passed。
 - 当前 implementation record：`IR-20260715-PROTECTION-MALL-P0-P1-RUNTIME-R3`。
 

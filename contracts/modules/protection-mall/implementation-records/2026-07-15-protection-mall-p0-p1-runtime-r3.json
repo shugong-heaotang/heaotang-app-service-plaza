@@ -44,11 +44,12 @@
     "docs/project-management/modules/protection-mall/handoff-p0-p1.md"
   ],
   "verification": [
-    "protection-mall module tests: 3 files and 17 tests passed",
-    "APP full regression: 26 files and 248 tests passed",
+    "protection-mall module tests: 3 files and 18 tests passed",
+    "APP full regression: 26 files and 249 tests passed",
     "APP production build with TypeScript and Vite passed",
     "cancellation is proven while fetch is pending and stale scene responses cannot replace current state",
-    "unauthenticated rendering does not issue a catalog request and authentication expiry returns to the real login handoff"
+    "unauthenticated rendering does not issue a catalog request and authentication expiry returns to the real login handoff",
+    "Number.MAX_SAFE_INTEGER minor units render exactly through BigInt currency-part replacement without floating-point division"
   ],
   "evidence": [
     "app/src/modules/protection-mall/ProtectionMallPage.test.tsx",
