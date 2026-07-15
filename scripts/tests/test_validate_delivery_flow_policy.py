@@ -5,6 +5,7 @@ import json
 import subprocess
 import tempfile
 import unittest
+from unittest import mock
 from datetime import datetime, timezone
 from pathlib import Path
 
@@ -342,6 +343,161 @@ class DeliveryFlowPolicyTests(unittest.TestCase):
         item.pop("next_checkpoint")
         errors = self.run_validation(registry=registry)
         self.assertTrue(any("missing flow fields" in e for e in errors))
+
+
+class DeliveryFlowPolicyV3ReceiptTests(unittest.TestCase):
+    def setUp(self):
+        self.policy_path = ROOT / "contracts/foundation/delivery-flow-policy.v3.json"
+        self.schema_path = ROOT / "contracts/foundation/delivery-flow-policy.v3.schema.json"
+        self.registry_path = ROOT / "contracts/foundation/agent-collaboration.v1.json"
+        self.receipt_path = ROOT / "contracts/foundation/legacy-lifecycle-migrations/LLM-20260715-TECHNICAL-SOCIAL-BATCH-R2.json"
+        self.receipt_schema_path = ROOT / "contracts/foundation/legacy-lifecycle-migration.v2.schema.json"
+        self.policy = json.loads(self.policy_path.read_text(encoding="utf-8"))
+        self.registry_bytes = self.registry_path.read_bytes()
+        self.registry = json.loads(self.registry_bytes.decode("utf-8"))
+
+    def run_policy(self, policy):
+        with tempfile.TemporaryDirectory() as tmp:
+            policy_path = Path(tmp) / "policy.json"
+            policy_path.write_text(json.dumps(policy, ensure_ascii=False), encoding="utf-8")
+            return FLOW.validate(
+                policy_path,
+                self.schema_path,
+                self.registry_path,
+                now=datetime(2026, 7, 15, 12, 50, tzinfo=timezone.utc),
+                repo_root=ROOT,
+            )
+
+    def run_batch_mutation(self, mutate, registry_bytes=None):
+        receipt = json.loads(self.receipt_path.read_text(encoding="utf-8"))
+        mutate(receipt)
+        schema = json.loads(self.receipt_schema_path.read_text(encoding="utf-8"))
+        registration = copy.deepcopy(self.policy["migration"]["receipts"][1])
+        registration["receipt_path"] = "tmp-receipt.json"
+        registration["schema_path"] = "tmp-schema.json"
+        with tempfile.TemporaryDirectory() as tmp:
+            tmp_root = Path(tmp)
+            receipt_file = tmp_root / "receipt.json"
+            schema_file = tmp_root / "schema.json"
+            encoded = (json.dumps(receipt, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
+            receipt_file.write_bytes(encoded)
+            schema_file.write_text(json.dumps(schema), encoding="utf-8")
+            registration["receipt_sha256"] = hashlib.sha256(encoded).hexdigest()
+            original = FLOW.safe_repo_file
+
+            def resolve(_root, relative):
+                if relative == "tmp-receipt.json":
+                    return receipt_file
+                if relative == "tmp-schema.json":
+                    return schema_file
+                return original(_root, relative)
+
+            with mock.patch.object(FLOW, "safe_repo_file", side_effect=resolve):
+                return FLOW.validate_v2_receipt(
+                    registration,
+                    ROOT,
+                    self.registry,
+                    registry_bytes if registry_bytes is not None else self.registry_bytes,
+                )[0]
+
+    def test_v3_current_registry_and_both_registered_receipts_pass(self):
+        self.assertEqual([], self.run_policy(self.policy))
+
+    def test_v1_policy_and_receipt_bytes_remain_compatible(self):
+        v2 = json.loads((ROOT / "contracts/foundation/delivery-flow-policy.v2.json").read_text(encoding="utf-8"))
+        activity = ROOT / v2["migration"]["receipt_path"]
+        self.assertEqual(v2["migration"]["receipt_sha256"], hashlib.sha256(activity.read_bytes()).hexdigest())
+        old = DeliveryFlowPolicyTests()
+        old.setUp()
+        self.assertEqual([], old.run_validation())
+
+    def test_rejects_duplicate_and_overlapping_receipt_registration(self):
+        policy = copy.deepcopy(self.policy)
+        policy["migration"]["receipts"].append(copy.deepcopy(policy["migration"]["receipts"][1]))
+        errors = self.run_policy(policy)
+        self.assertIn("DELIVERY_LEGACY_RECEIPT_REGISTRATION_DUPLICATE", errors)
+        self.assertIn("DELIVERY_LEGACY_RECEIPT_ROW_OVERLAP", errors)
+
+    def test_rejects_unregistered_version_and_arbitrary_receipt_substitution(self):
+        policy = copy.deepcopy(self.policy)
+        policy["migration"]["receipts"][1]["contract_version"] = "legacy-lifecycle-migration.v999"
+        self.assertIn("DELIVERY_LEGACY_RECEIPT_VERSION_UNSUPPORTED", self.run_policy(policy))
+        substituted = copy.deepcopy(self.policy)
+        activity = substituted["migration"]["receipts"][0]
+        batch = substituted["migration"]["receipts"][1]
+        batch["receipt_path"] = activity["receipt_path"]
+        batch["receipt_sha256"] = activity["receipt_sha256"]
+        self.assertIn("DELIVERY_LEGACY_RECEIPT_REGISTRATION_MISMATCH", self.run_policy(substituted))
+
+    def test_rejects_current_registry_drift_and_false_applied_state(self):
+        self.assertIn(
+            "DELIVERY_LEGACY_CURRENT_REGISTRY_DRIFT",
+            self.run_batch_mutation(lambda _receipt: None, self.registry_bytes + b" "),
+        )
+        self.assertIn(
+            "DELIVERY_LEGACY_RECEIPT_FALSE_AUTHORIZATION",
+            self.run_batch_mutation(lambda receipt: receipt.update({"applied": True})),
+        )
+
+    def test_rejects_audit_scope_omission_and_partial_atomic_group(self):
+        self.assertIn(
+            "DELIVERY_LEGACY_AUDIT_SCOPE_INVALID",
+            self.run_batch_mutation(
+                lambda receipt: receipt.__setitem__(
+                    "audit_scope", [row for row in receipt["audit_scope"] if row["registry_index"] != 92]
+                )
+            ),
+        )
+
+        def drop_atomic_member(receipt):
+            receipt["transitions"] = [row for row in receipt["transitions"] if row["registry_index"] != 132]
+            canonical = "".join(
+                f"{row['registry_index']}\t{row['work_id']}\t{row['from_status']}\t{row['to_status']}\n"
+                for row in receipt["transitions"]
+            )
+            receipt["transition_sha256"] = hashlib.sha256(canonical.encode("utf-8")).hexdigest()
+
+        errors = self.run_batch_mutation(drop_atomic_member)
+        self.assertIn("DELIVERY_LEGACY_ATOMIC_GROUP_INVALID", errors)
+        self.assertIn("DELIVERY_LEGACY_AUDIT_SCOPE_INVALID", errors)
+
+    def test_rejects_commit_path_bytes_and_blob_substitution(self):
+        def wrong_commit(receipt):
+            target = next(row for row in receipt["evidence_files"] if row["path"].endswith("platform-registry-dispatch-r1-handoff.md"))
+            target["authority_commit"] = "610ba65680123758a53badde0fa8dc0cf52e7f20"
+
+        self.assertIn("DELIVERY_LEGACY_EVIDENCE_COMMIT_BYTES_INVALID", self.run_batch_mutation(wrong_commit))
+
+        def wrong_blob(receipt):
+            receipt["transitions"][0]["blob_equivalence"][0]["source_blob"] = "0" * 40
+
+        self.assertIn("DELIVERY_LEGACY_BLOB_EQUIVALENCE_INVALID", self.run_batch_mutation(wrong_blob))
+
+    def test_rejects_non_go_role_and_reviewed_at_acceptance(self):
+        def non_go(receipt):
+            receipt["transitions"][0]["projection_basis"]["accepted_verdict"] = "no-go"
+
+        self.assertIn("DELIVERY_LEGACY_INDEPENDENT_ACCEPTANCE_INVALID", self.run_batch_mutation(non_go))
+
+        def wrong_role(receipt):
+            receipt["transitions"][0]["projection_basis"]["reviewer_role"] = "实施负责人"
+
+        self.assertIn("DELIVERY_LEGACY_INDEPENDENT_ACCEPTANCE_INVALID", self.run_batch_mutation(wrong_role))
+
+        def no_reviewed_at(receipt):
+            receipt["transitions"][0]["projection_basis"]["reviewed_at"] = None
+
+        self.assertIn("DELIVERY_LEGACY_INDEPENDENT_ACCEPTANCE_INVALID", self.run_batch_mutation(no_reviewed_at))
+
+    def test_rejects_transition_and_projected_state_hash_tampering(self):
+        self.assertIn(
+            "DELIVERY_LEGACY_TRANSITION_HASH_INVALID",
+            self.run_batch_mutation(lambda receipt: receipt.update({"transition_sha256": "0" * 64})),
+        )
+        self.assertIn(
+            "DELIVERY_LEGACY_POST_STATES_HASH_INVALID",
+            self.run_batch_mutation(lambda receipt: receipt.update({"post_effective_states_sha256": "0" * 64})),
+        )
 
 
 class AgentCollaborationBaseCommitTests(unittest.TestCase):

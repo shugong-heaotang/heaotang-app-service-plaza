@@ -1,29 +1,12 @@
 {
-  "artifact_version": "legacy-lifecycle-transaction-design-draft.v1",
-  "artifact_kind": "non-contract-transaction-design",
-  "artifact_id": "LLM-20260715-TECHNICAL-SOCIAL-BATCH-R2",
-  "state": "draft-not-registered",
-  "executable": false,
-  "authorization": null,
+  "contract_version": "legacy-lifecycle-migration.v2",
+  "receipt_id": "LLM-20260715-TECHNICAL-SOCIAL-BATCH-R2",
+  "state": "authorized-not-applied",
+  "execution_enabled": false,
   "applied": false,
   "post_registry_sha256": null,
   "review": null,
   "integration": null,
-  "schema_registration": {
-    "registered": false,
-    "schema_path": null,
-    "reference_only_schema_path": "contracts/foundation/legacy-lifecycle-migration.v1.schema.json",
-    "reference_only_reason": "The existing v1 schema is fixed to the Activity/Mall R1 receipt id, five transitions, indices at most 114 and fixed hashes; it cannot validate this batch and is not modified by this work item.",
-    "minimum_future_requirements": [
-      "register a generalized receipt schema and policy path without weakening the existing Activity/Mall receipt",
-      "validate source and current registry commit, bytes SHA and per-row canonical SHA before any transition",
-      "validate source implementation Git objects and exact allowed-path blob equivalence against the named backend authority",
-      "validate file-backed independent acceptance and controlled APP integration for integrated projections",
-      "validate the Social 90 and 132 transitions as one inseparable atomic group",
-      "reject omitted row 92 until a file-backed independent Go exists",
-      "reject before/after mixtures, registry drift, evidence hash drift, missing Git objects and any unregistered state"
-    ]
-  },
   "implementation_base_chain": {
     "registered_base": "d7d57bdb2f9b7fc90038d92a522e56393de1f22a",
     "r12l_candidate": "8f8f2f6e90ec11610ff73562979c64c3acbaabfe",
@@ -34,13 +17,13 @@
   },
   "source_registry": {
     "path": "contracts/foundation/agent-collaboration.v1.json",
-    "commit": "05bbf6465edecaa97af5d82792db868ece4f42e8",
-    "sha256": "1b880e0e46c5875163798183adf6661bcaaa09a4d3e7dfe6cec66ca7d9523c04"
+    "commit": "d079e98ee1a4954bceb6c01eedce71371c187bd8",
+    "sha256": "483148084b5515735d6d6d39f10dc667f3e37139e9ebd57005b6939a1bd71f68"
   },
   "current_registry_precondition": {
     "path": "contracts/foundation/agent-collaboration.v1.json",
-    "commit": "05bbf6465edecaa97af5d82792db868ece4f42e8",
-    "sha256": "1b880e0e46c5875163798183adf6661bcaaa09a4d3e7dfe6cec66ca7d9523c04"
+    "commit": "d079e98ee1a4954bceb6c01eedce71371c187bd8",
+    "sha256": "483148084b5515735d6d6d39f10dc667f3e37139e9ebd57005b6939a1bd71f68"
   },
   "task_order": {
     "path": "docs/project-management/notices/2026-07-15-platform-legacy-lifecycle-batch-r2-task-order.md",
@@ -48,6 +31,24 @@
   },
   "canonical_transition_format": "registry_index<TAB>work_id<TAB>from_status<TAB>to_status<LF> in ascending registry index order",
   "canonical_effective_state_format": "registry_index<TAB>work_id<TAB>effective_status<LF> for every source registry row in ascending registry index order",
+  "repositories": {
+    "backend": "C:/Users/shugo/Documents/heaotang-main",
+    "app": "C:/Users/shugo/Documents/APP系统"
+  },
+  "audit_scope": [
+    {"registry_index": 47, "work_id": "AIW-20260711-ACTION-TELEMETRY-BUSINESSCONFIG-BACKEND"},
+    {"registry_index": 88, "work_id": "AIW-20260712-NOVA-M2-NETWORK-READ-PROVIDER-BACKEND"},
+    {"registry_index": 89, "work_id": "AIW-20260712-NOVA-M2-NETWORK-READ-PROVIDER-EVIDENCE"},
+    {"registry_index": 90, "work_id": "AIW-20260712-NOVA-M2-SOCIAL-WRITE-PROVIDER-BACKEND"},
+    {"registry_index": 92, "work_id": "AIW-20260712-NOVA-M2-MIGRATION-DISABLE-DRILL"},
+    {"registry_index": 132, "work_id": "AIW-20260715-NOVA-M2-SOCIAL-WRITE-PROVIDER-BACKEND-R2"}
+  ],
+  "atomic_groups": [
+    {
+      "group_id": "social-owner-switch-90-132",
+      "members": [90, 132]
+    }
+  ],
   "transitions": [
     {
       "registry_index": 47,
@@ -63,17 +64,24 @@
         "backend_authority_commit": "091c9be9db8c58e780cf2543f8a6731faab076d2",
         "commit_is_authority_ancestor": false,
         "all_authorized_path_blobs_equal": true,
-        "accepted_evidence_commit": "5cf87e27c122f4cd1db0f4d3c46fdeaa31659484",
+        "acceptance_subject_commit": "5cf87e27c122f4cd1db0f4d3c46fdeaa31659484",
+        "acceptance_registry_index": 121,
+        "acceptance_work_id": "AIW-20260713-ACTION-TELEMETRY-BUSINESSCONFIG-R2-ACCEPTANCE",
+        "accepted_evidence_commit": "86d68db24268592418ea94b43d2580a89f11f488",
+        "accepted_verdict": "go",
+        "reviewer_role": "APP总架构独立验收负责人",
+        "reviewed_at": "2026-07-15T07:32:05+08:00",
+        "acceptance_evidence_path": "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md",
         "app_integration_commit": "a1ac334f63d9ae18a6bf9f58d0e03bc441812c33",
         "final_evidence_commit": "86d68db24268592418ea94b43d2580a89f11f488",
         "required_future_rule": "Integrated is lawful only if a future validator independently proves every listed source blob equals the backend authority blob and verifies the fresh acceptance and APP integration evidence."
       },
       "blob_equivalence": [
-        {"path": "backend-go/internal/businessconfig/businessconfig.go", "source_blob": "088ef7e54158d80c3516d0a1a730491dfbab3d50", "authority_blob": "088ef7e54158d80c3516d0a1a730491dfbab3d50"},
-        {"path": "backend-go/internal/businessconfig/businessconfig_test.go", "source_blob": "f299c60952eafe4aebc242f6d7cb78f84fea8374", "authority_blob": "f299c60952eafe4aebc242f6d7cb78f84fea8374"},
-        {"path": "backend-go/plugins/config-plugin/plugin_test.go", "source_blob": "3bc3df2646950758bee34c2af6e945b90c3e0c64", "authority_blob": "3bc3df2646950758bee34c2af6e945b90c3e0c64"},
-        {"path": "backend-go/plugins/service-plaza-plugin/infrastructure.go", "source_blob": "6edd5656022404535b72f6f1aa877e659dfc3d88", "authority_blob": "6edd5656022404535b72f6f1aa877e659dfc3d88"},
-        {"path": "backend-go/plugins/service-plaza-plugin/infrastructure_test.go", "source_blob": "fe170d44240f0091534acd96a11209d9beceb3e1", "authority_blob": "fe170d44240f0091534acd96a11209d9beceb3e1"}
+        {"repository_id": "backend", "path": "backend-go/internal/businessconfig/businessconfig.go", "source_blob": "088ef7e54158d80c3516d0a1a730491dfbab3d50", "authority_blob": "088ef7e54158d80c3516d0a1a730491dfbab3d50"},
+        {"repository_id": "backend", "path": "backend-go/internal/businessconfig/businessconfig_test.go", "source_blob": "f299c60952eafe4aebc242f6d7cb78f84fea8374", "authority_blob": "f299c60952eafe4aebc242f6d7cb78f84fea8374"},
+        {"repository_id": "backend", "path": "backend-go/plugins/config-plugin/plugin_test.go", "source_blob": "3bc3df2646950758bee34c2af6e945b90c3e0c64", "authority_blob": "3bc3df2646950758bee34c2af6e945b90c3e0c64"},
+        {"repository_id": "backend", "path": "backend-go/plugins/service-plaza-plugin/infrastructure.go", "source_blob": "6edd5656022404535b72f6f1aa877e659dfc3d88", "authority_blob": "6edd5656022404535b72f6f1aa877e659dfc3d88"},
+        {"repository_id": "backend", "path": "backend-go/plugins/service-plaza-plugin/infrastructure_test.go", "source_blob": "fe170d44240f0091534acd96a11209d9beceb3e1", "authority_blob": "fe170d44240f0091534acd96a11209d9beceb3e1"}
       ]
     },
     {
@@ -90,14 +98,21 @@
         "backend_authority_commit": "091c9be9db8c58e780cf2543f8a6731faab076d2",
         "commit_is_authority_ancestor": false,
         "all_authorized_path_blobs_equal": true,
-        "accepted_evidence_commit": "5c48677c5a0428dc32dea29b84d94a129a649f92",
+        "acceptance_subject_commit": "5c48677c5a0428dc32dea29b84d94a129a649f92",
+        "acceptance_registry_index": 128,
+        "acceptance_work_id": "AIW-20260715-NOVA-M2-NETWORK-READ-PROVIDER-EVIDENCE-R2",
+        "accepted_evidence_commit": "86d68db24268592418ea94b43d2580a89f11f488",
+        "accepted_verdict": "go",
+        "reviewer_role": "平台后端独立验收负责人",
+        "reviewed_at": "2026-07-15T07:32:05+08:00",
+        "acceptance_evidence_path": "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md",
         "app_integration_commit": "610ba65680123758a53badde0fa8dc0cf52e7f20",
         "final_evidence_commit": "86d68db24268592418ea94b43d2580a89f11f488",
         "required_future_rule": "Integrated is lawful only if a future validator independently proves every listed source blob equals the backend authority blob and verifies the fresh acceptance and APP integration evidence."
       },
       "blob_equivalence": [
-        {"path": "backend-go/plugins/network-plugin/nova_member_search_provider.go", "source_blob": "4d32e68b10298b85fdfcabcf4a0a74c275b6d1bb", "authority_blob": "4d32e68b10298b85fdfcabcf4a0a74c275b6d1bb"},
-        {"path": "backend-go/plugins/network-plugin/nova_member_search_provider_test.go", "source_blob": "339b09d084f747b2eee56e079853f7265293ff20", "authority_blob": "339b09d084f747b2eee56e079853f7265293ff20"}
+        {"repository_id": "backend", "path": "backend-go/plugins/network-plugin/nova_member_search_provider.go", "source_blob": "4d32e68b10298b85fdfcabcf4a0a74c275b6d1bb", "authority_blob": "4d32e68b10298b85fdfcabcf4a0a74c275b6d1bb"},
+        {"repository_id": "backend", "path": "backend-go/plugins/network-plugin/nova_member_search_provider_test.go", "source_blob": "339b09d084f747b2eee56e079853f7265293ff20", "authority_blob": "339b09d084f747b2eee56e079853f7265293ff20"}
       ]
     },
     {
@@ -153,7 +168,7 @@
     }
   ],
   "transition_sha256": "c07aa77b651359e21bfa6f4c0b4f36f7124ecfd340633a536aee373c71156389",
-  "post_effective_states_sha256": "ca98833e1ab7a0728ba9ff7764e30607474eec6abfc388743f06cf7aa765e9bd",
+  "post_effective_states_sha256": "ce58c460ce9805192dc5bdb25ad2a88942a70bda1a2a2dfb10dd1357c4ede7e4",
   "evidence_files": [
     {"path": "contracts/foundation/development-checklists/2026-07-15-action-telemetry-businessconfig-r2-acceptance.json", "sha256": "2e1d5bafdd04ca830799aa87deb4b05b078a8723679ddcebf29ed41d3c91562e", "authority_commit": "5cf87e27c122f4cd1db0f4d3c46fdeaa31659484"},
     {"path": "contracts/foundation/implementation-records/2026-07-15-action-telemetry-businessconfig-r2-acceptance.json", "sha256": "b4ea3b24a3a529b6f8af3e906b7e7512a35446f9ab9c05d688f799703b7d400f", "authority_commit": "5cf87e27c122f4cd1db0f4d3c46fdeaa31659484"},
