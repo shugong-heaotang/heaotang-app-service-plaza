@@ -1,0 +1,66 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-PROTECTION-MALL-P0-P1-RUNTIME-R3",
+  "title": "保障商城 P0/P1 模块运行时产品化 R3",
+  "date": "2026-07-15",
+  "status": "verified",
+  "objective": "在不开放后端写入、支付和部署的前提下，实现保障商城只读目录的严格解码、真实四态、取消与迟到响应隔离、可恢复错误和无障碍交互。",
+  "governance_checklist": "contracts/modules/protection-mall/development-checklists/2026-07-15-protection-mall-p0-p1-runtime-r3.json",
+  "governance_exam": "contracts/modules/protection-mall/governance-exams/2026-07-15-protection-mall-p0-p1-runtime-r3-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-15-protection-mall-p0-p1-productization-task-order.md",
+    "contracts/modules/protection-mall/m2/catalog/catalog.v1.schema.json"
+  ],
+  "capabilities": [
+    "foundation.authorization-idempotency",
+    "foundation.contract-tooling",
+    "foundation.frontend-shell"
+  ],
+  "contracts": [
+    "contracts/modules/protection-mall/m2/catalog/catalog.v1.json",
+    "contracts/modules/protection-mall/m2/catalog/catalog.v1.schema.json",
+    "contracts/modules/protection-mall/internal-dependencies.v2.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md"
+  ],
+  "changed_areas": [
+    "app/src/modules/protection-mall/",
+    "contracts/modules/protection-mall/internal-dependencies.v2.json",
+    "contracts/modules/protection-mall/development-checklists/2026-07-15-protection-mall-p0-p1-runtime*.json",
+    "contracts/modules/protection-mall/governance-exams/2026-07-15-protection-mall-p0-p1-runtime*.json",
+    "docs/project-management/modules/protection-mall/handoff-p0-p1.md"
+  ],
+  "verification": [
+    "protection-mall module tests: 3 files and 17 tests passed",
+    "APP full regression: 26 files and 248 tests passed",
+    "APP production build with TypeScript and Vite passed",
+    "cancellation is proven while fetch is pending and stale scene responses cannot replace current state",
+    "unauthenticated rendering does not issue a catalog request and authentication expiry returns to the real login handoff"
+  ],
+  "evidence": [
+    "app/src/modules/protection-mall/ProtectionMallPage.test.tsx",
+    "app/src/modules/protection-mall/protectionMallApi.test.ts",
+    "app/src/modules/protection-mall/protectionMallContract.test.ts",
+    "docs/project-management/modules/protection-mall/handoff-p0-p1.md"
+  ],
+  "premises": [
+    "the shared App route and CI remain owned by the planned platform wiring work item",
+    "the catalog HTTP route is not available yet and the frontend must fail closed",
+    "backend routes database writes orders payment funds real benefits real data deployment and production remain No-Go",
+    "independent review must return Go before controlled integration"
+  ],
+  "implementation_mode": "ai-assisted"
+}

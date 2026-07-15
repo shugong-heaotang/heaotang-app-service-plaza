@@ -1,0 +1,159 @@
+.protection-mall-page {
+  display: grid;
+  gap: 1.25rem;
+  width: min(100%, 72rem);
+  margin: 0 auto;
+}
+
+.protection-mall-intro,
+.protection-mall-results {
+  padding: clamp(1rem, 3vw, 1.75rem);
+  border: 1px solid #d9e3dc;
+  border-radius: 1.25rem;
+  background: #fff;
+}
+
+.protection-mall-intro h2 {
+  margin: 0.25rem 0 0.5rem;
+  color: #163a2d;
+  font-size: clamp(1.6rem, 5vw, 2.5rem);
+}
+
+.protection-mall-intro p {
+  margin: 0.25rem 0;
+  color: #52665d;
+}
+
+.protection-mall-filter {
+  display: flex;
+  gap: 0.6rem;
+  overflow-x: auto;
+  padding: 0.25rem 0.1rem;
+}
+
+.protection-mall-filter button {
+  min-height: 2.75rem;
+  flex: 0 0 auto;
+  padding: 0.65rem 1rem;
+  border: 1px solid #9db7aa;
+  border-radius: 999px;
+  background: #fff;
+  color: #173b2e;
+  font: inherit;
+  cursor: pointer;
+}
+
+.protection-mall-filter button[aria-pressed="true"] {
+  border-color: #176b4a;
+  background: #176b4a;
+  color: #fff;
+}
+
+.protection-mall-filter button:focus-visible,
+.protection-mall-state button:focus-visible {
+  outline: 3px solid #f0a33a;
+  outline-offset: 3px;
+}
+
+.protection-mall-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  gap: 1rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.protection-mall-item {
+  padding: 1rem;
+  border: 1px solid #d9e3dc;
+  border-radius: 1rem;
+  background: #f8fbf9;
+}
+
+.protection-mall-item-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.protection-mall-item-heading span,
+.protection-mall-scenes span {
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  background: #e4f1ea;
+  color: #20583f;
+  font-size: 0.85rem;
+}
+
+.protection-mall-item h3 {
+  margin: 0.8rem 0 0.5rem;
+  font-size: 1.15rem;
+}
+
+.protection-mall-item p {
+  margin: 0.35rem 0;
+  color: #52665d;
+}
+
+.protection-mall-scenes {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin-top: 0.75rem;
+}
+
+.protection-mall-item .protection-mall-assurance {
+  margin-top: 0.85rem;
+  padding: 0.65rem;
+  border-left: 4px solid #c87b19;
+  background: #fff4e4;
+  color: #6b4317;
+}
+
+.protection-mall-state {
+  display: grid;
+  justify-items: start;
+  gap: 0.5rem;
+  min-height: 10rem;
+  align-content: center;
+}
+
+.protection-mall-state h3,
+.protection-mall-state p {
+  margin: 0;
+}
+
+.protection-mall-state button {
+  min-height: 2.75rem;
+  margin-top: 0.5rem;
+  padding: 0.65rem 1rem;
+  border: 0;
+  border-radius: 0.75rem;
+  background: #176b4a;
+  color: #fff;
+  font: inherit;
+  cursor: pointer;
+}
+
+.protection-mall-error {
+  color: #7a251f;
+}
+
+@media (max-width: 40rem) {
+  .protection-mall-page {
+    gap: 0.9rem;
+  }
+
+  .protection-mall-intro,
+  .protection-mall-results {
+    border-radius: 0.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .protection-mall-filter {
+    scroll-behavior: auto;
+  }
+}

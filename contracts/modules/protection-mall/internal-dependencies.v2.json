@@ -2,10 +2,10 @@
   "contract_version": "module-internal-dependencies.v2",
   "module_id": "protection-mall",
   "module_version": "v1",
-  "slice_id": "m0-r3-correction",
+  "slice_id": "p0-p1-runtime",
   "readiness": {
     "governance": "go",
-    "development": "partial-go",
+    "development": "go",
     "acceptance": "no-go",
     "release": "no-go",
     "operations": "no-go"
@@ -14,100 +14,214 @@
     {
       "dependency_id": "pm.governance-entry",
       "kind": "governance",
-      "description": "R3 active work item, isolated clean worktree, current module checklist, 100-point exam and same-record implementation evidence",
+      "description": "P0/P1 runtime has an active isolated work item, exact task order, completed entry checklist and 100-point exam",
       "status": "verified",
       "required_for_slice": true,
       "depends_on": [],
-      "contracts": ["docs/project-management/notices/2026-07-12-protection-mall-m0-task-order.md"],
-      "evidence": ["contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m0-r3-correction.json", "contracts/modules/protection-mall/governance-exams/2026-07-12-protection-mall-m0-r3-correction-attempt-1.json"],
-      "unresolved": ["platform signoff and independent M0 acceptance pending"],
-      "owner": "商城板块唯一负责人",
-      "blocks": ["pm.m1-activation"],
-      "does_not_block": ["pm.source-boundary", "pm.service-boundary", "pm.api-boundary"]
+      "contracts": [
+        "docs/project-management/notices/2026-07-15-protection-mall-p0-p1-productization-task-order.md"
+      ],
+      "evidence": [
+        "contracts/modules/protection-mall/development-checklists/2026-07-15-protection-mall-p0-p1-runtime-r2.json",
+        "contracts/modules/protection-mall/governance-exams/2026-07-15-protection-mall-p0-p1-runtime-r2-attempt-1.json"
+      ],
+      "unresolved": [],
+      "owner": "商城前端产品化唯一负责人",
+      "blocks": [
+        "pm.runtime-implementation"
+      ],
+      "does_not_block": [
+        "pm.source-boundary",
+        "pm.service-boundary",
+        "pm.shared-adapter",
+        "pm.catalog-contract"
+      ]
     },
     {
       "dependency_id": "pm.source-boundary",
       "kind": "governance",
-      "description": "Legacy mall workspace remains untrusted read-only input; immutable invalidated evidence is owned by the platform evidence work item",
+      "description": "Legacy mall workspace remains untrusted read-only input and cannot be copied into the official APP",
       "status": "accepted",
       "required_for_slice": true,
-      "depends_on": ["pm.governance-entry"],
-      "contracts": ["docs/project-management/modules/protection-mall/handoff-m0.md"],
-      "evidence": ["docs/project-management/modules/protection-mall/handoff-m0.md"],
+      "depends_on": [
+        "pm.governance-entry"
+      ],
+      "contracts": [
+        "docs/project-management/modules/protection-mall/handoff-m0.md"
+      ],
+      "evidence": [
+        "docs/project-management/modules/protection-mall/handoff-m0.md"
+      ],
       "unresolved": [],
-      "owner": "商城板块唯一负责人",
-      "blocks": ["pm.controlled-migration"],
-      "does_not_block": ["pm.service-boundary", "pm.api-boundary"]
+      "owner": "商城前端产品化唯一负责人",
+      "blocks": [
+        "pm.legacy-copy"
+      ],
+      "does_not_block": [
+        "pm.runtime-implementation"
+      ]
     },
     {
       "dependency_id": "pm.service-boundary",
       "kind": "interface",
-      "description": "Service Plaza entry remains protection-mall at /services/protection-mall with shared session, /services return, fixed telemetry and planned lifecycle",
-      "status": "standardized",
+      "description": "Protection Mall remains at /services/protection-mall with shared session and a return path to /services",
+      "status": "verified",
       "required_for_slice": true,
-      "depends_on": ["pm.governance-entry"],
-      "contracts": ["docs/project-management/notices/2026-07-12-protection-mall-m0-task-order.md"],
-      "evidence": ["docs/project-management/modules/protection-mall/handoff-m0.md"],
-      "unresolved": ["lifecycle may change only through a later platform-owned signoff"],
+      "depends_on": [
+        "pm.governance-entry"
+      ],
+      "contracts": [
+        "docs/project-management/notices/2026-07-15-protection-mall-p0-p1-productization-task-order.md"
+      ],
+      "evidence": [
+        "docs/project-management/modules/protection-mall/handoff-p0-p1.md"
+      ],
+      "unresolved": [
+        "shared App route is owned by the planned platform wiring work item"
+      ],
       "owner": "平台集成负责人",
-      "blocks": ["pm.m1-activation"],
-      "does_not_block": ["pm.source-boundary", "pm.api-boundary"]
+      "blocks": [
+        "pm.shared-route"
+      ],
+      "does_not_block": [
+        "pm.runtime-implementation"
+      ]
     },
     {
-      "dependency_id": "pm.api-boundary",
+      "dependency_id": "pm.shared-adapter",
+      "kind": "interface",
+      "description": "All module network access uses the platform businessApiAdapter for auth, strict envelopes, correlation, timeout, cancellation and retry",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": [
+        "pm.service-boundary"
+      ],
+      "contracts": [
+        "docs/project-management/notices/2026-07-15-protection-mall-p0-p1-productization-task-order.md"
+      ],
+      "evidence": [
+        "app/src/infrastructure/businessApiAdapter.ts"
+      ],
+      "unresolved": [],
+      "owner": "平台前端负责人",
+      "blocks": [
+        "pm.runtime-implementation"
+      ],
+      "does_not_block": [
+        "pm.catalog-contract"
+      ]
+    },
+    {
+      "dependency_id": "pm.catalog-contract",
       "kind": "contract",
-      "description": "mall.api.v1 must use the platform envelope, request and correlation IDs, real authorization sources, atomic idempotency, redacted audit, fail-closed configuration and compatible evolution",
+      "description": "M2 exact mall.catalog.v1 contract, schema, fixtures and deterministic concurrency evidence are integrated",
+      "status": "verified",
+      "required_for_slice": true,
+      "depends_on": [
+        "pm.shared-adapter"
+      ],
+      "contracts": [
+        "contracts/modules/protection-mall/m2/catalog/catalog.v1.json",
+        "contracts/modules/protection-mall/m2/catalog/catalog.v1.schema.json"
+      ],
+      "evidence": [
+        "docs/project-management/modules/protection-mall/m2-catalog-evidence.md"
+      ],
+      "unresolved": [
+        "HTTP catalog route is not implemented; the frontend must fail closed and expose a recoverable error"
+      ],
+      "owner": "商城M2目录方案唯一负责人",
+      "blocks": [
+        "pm.runtime-implementation"
+      ],
+      "does_not_block": [
+        "pm.frontend-states",
+        "pm.frontend-decoder"
+      ]
+    },
+    {
+      "dependency_id": "pm.runtime-boundary",
+      "kind": "contract",
+      "description": "The runtime slice is read-only and must implement strict decoding, four UI states, cancellation, stale-response isolation and accessibility",
       "status": "standardized",
       "required_for_slice": true,
-      "depends_on": ["pm.governance-entry", "pm.service-boundary"],
-      "contracts": ["docs/project-management/modules/protection-mall/商城会员店方案吸收与1.0服务广场接入收口方案.md"],
-      "evidence": ["docs/project-management/modules/protection-mall/handoff-m0.md"],
-      "unresolved": ["concrete scope names require platform authorization-source signoff in M1"],
-      "owner": "商城板块唯一负责人",
-      "blocks": ["pm.m1-activation"],
-      "does_not_block": ["pm.source-boundary"]
+      "depends_on": [
+        "pm.catalog-contract"
+      ],
+      "contracts": [
+        "docs/project-management/notices/2026-07-15-protection-mall-p0-p1-productization-task-order.md"
+      ],
+      "evidence": [
+        "app/src/modules/protection-mall/protectionMallContract.ts",
+        "app/src/modules/protection-mall/protectionMallApi.ts",
+        "app/src/modules/protection-mall/useProtectionMallCatalog.ts",
+        "app/src/modules/protection-mall/ProtectionMallPage.tsx",
+        "app/src/modules/protection-mall/ProtectionMallPage.test.tsx",
+        "contracts/modules/protection-mall/implementation-records/2026-07-15-protection-mall-p0-p1-runtime-r3.json",
+        "docs/project-management/modules/protection-mall/handoff-p0-p1.md"
+      ],
+      "unresolved": [
+        "independent runtime acceptance is pending"
+      ],
+      "owner": "商城前端产品化唯一负责人",
+      "blocks": [
+        "pm.runtime-acceptance",
+        "pm.shared-route"
+      ],
+      "does_not_block": [
+        "pm.payment-security"
+      ]
     },
     {
-      "dependency_id": "pm.domain-state-machines",
-      "kind": "workflow",
-      "description": "Product responsibility, inventory, order, fulfillment, after-sale and assurance-benefit rollback state machines",
-      "status": "draft",
+      "dependency_id": "pm.shared-route",
+      "kind": "interface",
+      "description": "App route and CI are platform-owned and activate only after runtime independent Go",
+      "status": "planned",
       "required_for_slice": false,
-      "depends_on": ["pm.api-boundary"],
-      "contracts": ["docs/project-management/modules/protection-mall/商城会员店方案吸收与1.0服务广场接入收口方案.md"],
+      "depends_on": [
+        "pm.runtime-boundary"
+      ],
+      "contracts": [
+        "docs/project-management/notices/2026-07-15-protection-mall-p0-p1-productization-task-order.md"
+      ],
       "evidence": [],
-      "unresolved": ["M1 domain contract, conformance cases and code work item are not authorized"],
-      "owner": "商城板块唯一负责人",
-      "blocks": ["pm.m1-business-code", "pm.acceptance"],
-      "does_not_block": ["pm.m0-r3-signoff"]
+      "unresolved": [
+        "platform wiring work item is planned"
+      ],
+      "owner": "平台集成负责人",
+      "blocks": [
+        "pm.test-server-uat"
+      ],
+      "does_not_block": [
+        "pm.runtime-implementation"
+      ]
     },
     {
       "dependency_id": "pm.payment-security",
       "kind": "acceptance",
-      "description": "Payment security, fund state machine, callback signature verification, replay protection and reconciliation",
+      "description": "Payment, funds, callbacks, refunds and reconciliation remain outside this read-only slice",
       "status": "pending",
       "required_for_slice": false,
-      "depends_on": ["pm.domain-state-machines"],
-      "contracts": ["docs/project-management/notices/2026-07-12-protection-mall-m0-task-order.md"],
+      "depends_on": [
+        "pm.runtime-boundary"
+      ],
+      "contracts": [
+        "docs/project-management/notices/2026-07-15-protection-mall-p0-p1-productization-task-order.md"
+      ],
       "evidence": [],
-      "unresolved": ["independent payment and finance acceptance work items are required"],
+      "unresolved": [
+        "independent payment and finance work items are required"
+      ],
       "owner": "平台安全与财务负责人",
-      "blocks": ["pm.real-payment", "pm.release", "pm.operations"],
-      "does_not_block": ["pm.m0-r3-signoff", "pm.non-payment-design"]
-    },
-    {
-      "dependency_id": "pm.final-handoff",
-      "kind": "handoff",
-      "description": "R3 correction must receive platform signoff and independent architecture acceptance before M1 activation",
-      "status": "implemented",
-      "required_for_slice": false,
-      "depends_on": ["pm.governance-entry", "pm.source-boundary", "pm.service-boundary", "pm.api-boundary"],
-      "contracts": ["docs/project-management/modules/protection-mall/handoff-m0.md"],
-      "evidence": ["contracts/modules/protection-mall/implementation-records/2026-07-12-protection-mall-m0-r3-correction.json"],
-      "unresolved": ["platform signoff pending", "independent architecture acceptance pending"],
-      "owner": "商城板块唯一负责人",
-      "blocks": ["pm.m1-activation"],
-      "does_not_block": ["other-module-non-overlapping-work"]
+      "blocks": [
+        "pm.write-capability",
+        "pm.release",
+        "pm.operations"
+      ],
+      "does_not_block": [
+        "pm.runtime-implementation",
+        "pm.runtime-acceptance"
+      ]
     }
   ]
 }
