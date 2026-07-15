@@ -10,6 +10,7 @@ import {
   selfCreatedClubRootRoute,
 } from "./self-created/selfCreatedClubContract";
 import { MemberHomeShell, type MemberHomeModel } from "./member-home";
+import { PublicWelfareRegionalPanel } from "./public-welfare-regional";
 import "./ClubAlliancePage.css";
 
 type BaseReadyModel = { actions: readonly ServiceAction[] };
@@ -173,6 +174,9 @@ export function ClubAlliancePage({ model, onRetry }: ClubAlliancePageProps) {
               进入自建俱乐部
             </Link>
           )}
+          {selectedActionId === "public-benefit-club" && (
+            <p>公益俱乐部采用申请创办制，不提供普通直接创建入口。</p>
+          )}
         </header>
 
         <section className="club-alliance-grid" aria-label="俱乐部联盟四类入口">
@@ -195,6 +199,16 @@ export function ClubAlliancePage({ model, onRetry }: ClubAlliancePageProps) {
           </div>
           <ActionControl action={model.management} />
         </aside>
+
+        {selectedActionId === "public-benefit-club" && (
+          <PublicWelfareRegionalPanel mode="public-welfare" />
+        )}
+        {selectedActionId === "club-federation" && (
+          <PublicWelfareRegionalPanel mode="regional-public" />
+        )}
+        {selectedActionId === "club-manage" && (
+          <PublicWelfareRegionalPanel mode="management" />
+        )}
 
         <Link className="club-alliance-return" to={clubAllianceReturnRoute}>
           ← 返回服务广场

@@ -1,0 +1,37 @@
+{
+  "contract_version": "club-alliance.public-welfare-regional.v1",
+  "classification": {
+    "public_welfare_type": "standard",
+    "public_welfare_category": "charity",
+    "direct_create_allowed": false
+  },
+  "workflows": {
+    "establishment_application": {
+      "states": ["draft", "submitted", "under_review", "approved", "rejected", "withdrawn"],
+      "transitions": ["draft->submitted", "submitted->under_review", "submitted->withdrawn", "under_review->approved", "under_review->rejected"],
+      "approval_effect": "Atomically create one standard+charity club, grant the applicant founder role, record audit evidence, and then allow external publication."
+    },
+    "regional_role_application": {
+      "states": ["draft", "submitted", "under_review", "approved", "rejected", "withdrawn"],
+      "transitions": ["draft->submitted", "submitted->under_review", "submitted->withdrawn", "under_review->approved", "under_review->rejected"],
+      "approval_effect": "Grant exactly the approved regional director or deputy-director role for the reviewed administrative area and record audit evidence."
+    }
+  },
+  "roles": ["regional_director", "regional_deputy_director"],
+  "center_search": {
+    "filters": ["province", "city", "district", "query"],
+    "kinds": ["regional_management_center", "public_welfare_service_center"]
+  },
+  "api": [
+    { "operation_id": "submit-public-welfare-establishment", "method": "POST", "path": "/api/v1/clubs/public-welfare-establishment-applications", "auth": "shared-session", "idempotent": true },
+    { "operation_id": "list-my-public-welfare-establishments", "method": "GET", "path": "/api/v1/clubs/public-welfare-establishment-applications/my", "auth": "shared-session", "idempotent": true },
+    { "operation_id": "list-public-welfare-establishments", "method": "GET", "path": "/api/v1/clubs/public-welfare-establishment-applications", "auth": "club:manage", "idempotent": true },
+    { "operation_id": "review-public-welfare-establishment", "method": "POST", "path": "/api/v1/clubs/public-welfare-establishment-applications/{application_id}/review", "auth": "club:manage", "idempotent": true },
+    { "operation_id": "withdraw-public-welfare-establishment", "method": "POST", "path": "/api/v1/clubs/public-welfare-establishment-applications/{application_id}/withdraw", "auth": "shared-session", "idempotent": true },
+    { "operation_id": "submit-regional-role-application", "method": "POST", "path": "/api/v1/club-alliance/regional-role-applications", "auth": "shared-session", "idempotent": true },
+    { "operation_id": "list-my-regional-role-applications", "method": "GET", "path": "/api/v1/club-alliance/regional-role-applications/my", "auth": "shared-session", "idempotent": true },
+    { "operation_id": "list-regional-role-applications", "method": "GET", "path": "/api/v1/club-alliance/regional-role-applications", "auth": "club:manage", "idempotent": true },
+    { "operation_id": "review-regional-role-application", "method": "POST", "path": "/api/v1/club-alliance/regional-role-applications/{application_id}/review", "auth": "club:manage", "idempotent": true },
+    { "operation_id": "search-club-alliance-centers", "method": "GET", "path": "/api/v1/club-alliance/service-centers", "auth": "anonymous", "idempotent": true }
+  ]
+}

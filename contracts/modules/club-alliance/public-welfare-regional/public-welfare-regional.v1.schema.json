@@ -1,0 +1,84 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.example/contracts/club-alliance/public-welfare-regional.v1.schema.json",
+  "title": "Club Alliance public-welfare establishment and regional-center contract",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "classification", "workflows", "roles", "center_search", "api"],
+  "properties": {
+    "contract_version": { "const": "club-alliance.public-welfare-regional.v1" },
+    "classification": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["public_welfare_type", "public_welfare_category", "direct_create_allowed"],
+      "properties": {
+        "public_welfare_type": { "const": "standard" },
+        "public_welfare_category": { "const": "charity" },
+        "direct_create_allowed": { "const": false }
+      }
+    },
+    "workflows": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["establishment_application", "regional_role_application"],
+      "properties": {
+        "establishment_application": { "$ref": "#/$defs/workflow" },
+        "regional_role_application": { "$ref": "#/$defs/workflow" }
+      }
+    },
+    "roles": {
+      "type": "array",
+      "minItems": 2,
+      "uniqueItems": true,
+      "items": { "enum": ["regional_director", "regional_deputy_director"] }
+    },
+    "center_search": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["filters", "kinds"],
+      "properties": {
+        "filters": { "const": ["province", "city", "district", "query"] },
+        "kinds": {
+          "type": "array",
+          "minItems": 2,
+          "uniqueItems": true,
+          "items": { "enum": ["regional_management_center", "public_welfare_service_center"] }
+        }
+      }
+    },
+    "api": {
+      "type": "array",
+      "minItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["operation_id", "method", "path", "auth", "idempotent"],
+        "properties": {
+          "operation_id": { "type": "string", "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$" },
+          "method": { "enum": ["GET", "POST"] },
+          "path": { "type": "string", "pattern": "^/api/v1/" },
+          "auth": { "enum": ["anonymous", "shared-session", "club:manage"] },
+          "idempotent": { "type": "boolean" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "workflow": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["states", "transitions", "approval_effect"],
+      "properties": {
+        "states": {
+          "const": ["draft", "submitted", "under_review", "approved", "rejected", "withdrawn"]
+        },
+        "transitions": {
+          "type": "array",
+          "minItems": 5,
+          "items": { "type": "string", "pattern": "^[a-z_]+->[a-z_]+$" }
+        },
+        "approval_effect": { "type": "string", "minLength": 1 }
+      }
+    }
+  }
+}

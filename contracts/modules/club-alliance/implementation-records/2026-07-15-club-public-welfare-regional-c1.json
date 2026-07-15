@@ -1,0 +1,63 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-CLUB-PUBLIC-WELFARE-REGIONAL-C1",
+  "title": "公益俱乐部创办审批与区域管理中心 C1 合同及前端闭环",
+  "date": "2026-07-15",
+  "status": "verified",
+  "objective": "冻结公益创办申请制、区域角色申请审批和两类中心地址搜索合同，并实现用户端、联盟端与管理端前端闭环。",
+  "governance_checklist": "contracts/modules/club-alliance/development-checklists/2026-07-15-club-public-welfare-regional-c1-r2.json",
+  "governance_exam": "contracts/modules/club-alliance/governance-exams/2026-07-15-club-public-welfare-regional-c1-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/module-dependencies/club-alliance.v1.json",
+    "contracts/modules/club-alliance/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-15-club-public-welfare-regional-task-order.md",
+    "docs/project-management/modules/club-alliance/public-welfare-regional/requirements.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.service-action-contracts",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/modules/club-alliance/public-welfare-regional/public-welfare-regional.v1.json",
+    "contracts/modules/club-alliance/public-welfare-regional/public-welfare-regional.v1.schema.json"
+  ],
+  "decisions": [
+    "公益俱乐部唯一语义为standard+charity且不得直接创建",
+    "区域管理中心与公益服务中心是两种可统一检索的中心",
+    "主任和副主任审批结果必须形成精确区域授权"
+  ],
+  "changed_areas": [
+    "contracts/modules/club-alliance/public-welfare-regional",
+    "app/src/modules/club-alliance/public-welfare-regional",
+    "app/src/modules/club-alliance/ClubAlliancePage.tsx",
+    "docs/project-management/modules/club-alliance/public-welfare-regional"
+  ],
+  "verification": [
+    "contract assertions 3/3",
+    "targeted Vitest 46/46",
+    "full Vitest 243/243",
+    "npm run build",
+    "npm run build:test-server",
+    "scripts/Test-ServicePlazaContracts.ps1"
+  ],
+  "evidence": [
+    "contracts/modules/club-alliance/development-checklists/2026-07-15-club-public-welfare-regional-c1-r2.json",
+    "contracts/modules/club-alliance/governance-exams/2026-07-15-club-public-welfare-regional-c1-r2-attempt-1.json",
+    "docs/project-management/modules/club-alliance/public-welfare-regional/handoff.md"
+  ],
+  "premises": [
+    "本检查点仅证明本地合同和实现，不代表测试服或生产发布",
+    "管理审批继续使用平台现有管理入口和失败关闭权限判断",
+    "服务中心资料由后续受控配置能力维护"
+  ],
+  "implementation_mode": "ai-assisted"
+}

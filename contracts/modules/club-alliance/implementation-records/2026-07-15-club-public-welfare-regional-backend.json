@@ -1,0 +1,60 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-CLUB-PUBLIC-WELFARE-REGIONAL-BACKEND",
+  "title": "公益创办审批与区域中心后端闭环",
+  "date": "2026-07-15",
+  "status": "verified",
+  "objective": "实现批准后原子创建公益俱乐部、区域角色真实授权、中心搜索、审计、maker-checker和幂等写入。",
+  "governance_checklist": "contracts/modules/club-alliance/development-checklists/2026-07-15-club-public-welfare-regional-backend-r2.json",
+  "governance_exam": "contracts/modules/club-alliance/governance-exams/2026-07-15-club-public-welfare-regional-backend-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/module-dependencies/club-alliance.v1.json",
+    "contracts/modules/club-alliance/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "contracts/modules/club-alliance/public-welfare-regional/public-welfare-regional.v1.json",
+    "docs/project-management/modules/club-alliance/public-welfare-regional/requirements.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/modules/club-alliance/public-welfare-regional/public-welfare-regional.v1.json",
+    "backend commit 388846597131d75aafc54081070fe5fc0bf3ecd0"
+  ],
+  "decisions": [
+    "提交申请不得创建公益俱乐部",
+    "批准创办在单一事务中创建俱乐部、owner关系、申请回写和审计",
+    "申请人和审核人必须不同",
+    "区域岗位批准写入精确行政区域角色"
+  ],
+  "changed_areas": [
+    "backend-go/plugins/club-plugin/plugin.go",
+    "backend-go/plugins/club-plugin/public_welfare_regional.go",
+    "backend-go/plugins/club-plugin/public_welfare_regional_test.go"
+  ],
+  "verification": [
+    "go test ./plugins/club-plugin",
+    "go test ./...",
+    "go vet ./...",
+    "gofmt",
+    "git diff --check"
+  ],
+  "evidence": [
+    "contracts/modules/club-alliance/development-checklists/2026-07-15-club-public-welfare-regional-backend-r2.json",
+    "contracts/modules/club-alliance/governance-exams/2026-07-15-club-public-welfare-regional-backend-r2-attempt-1.json",
+    "docs/project-management/modules/club-alliance/public-welfare-regional/handoff-backend.md"
+  ],
+  "premises": [
+    "后端基线为e41265905815082433e040412f3dd6b6b33dfede",
+    "实现提交为388846597131d75aafc54081070fe5fc0bf3ecd0",
+    "尚未部署到测试服或生产"
+  ],
+  "implementation_mode": "ai-assisted"
+}

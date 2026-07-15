@@ -2999,11 +2999,58 @@
                            "handoff_record":  "docs/project-management/service-plaza/platform-protection-mall-overlay-correction-handoff.md"
                        },
                        {
+                           "work_id":  "AIW-20260715-CLUB-PUBLIC-WELFARE-REGIONAL-CENTER",
+                           "title":  "俱乐部联盟公益创办审批与区域管理中心首闭环",
+                           "owner":  "Club Alliance public-welfare and regional-center agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "handoff-ready",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-public-welfare-regional-center",
+                           "branch":  "codex/club-public-welfare-regional-center",
+                           "base_commit":  "5c1069b134747ae5a702ae677457c2422d3137da",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/modules/club-alliance/public-welfare-regional/**",
+                                                 "contracts/modules/club-alliance/development-checklists/2026-07-15-club-public-welfare-regional*.json",
+                                                 "contracts/modules/club-alliance/governance-exams/2026-07-15-club-public-welfare-regional*.json",
+                                                 "contracts/modules/club-alliance/implementation-records/2026-07-15-club-public-welfare-regional*.json",
+                                                 "docs/project-management/notices/2026-07-15-club-public-welfare-regional-task-order.md",
+                                                 "docs/project-management/modules/club-alliance/public-welfare-regional/**",
+                                                 "app/src/modules/club-alliance/public-welfare-regional/**",
+                                                 "app/src/modules/club-alliance/ClubAlliancePage.tsx",
+                                                 "app/src/modules/club-alliance/ClubAlliancePage.test.tsx"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "用户于2026-07-15明确确认公益创办审批与区域管理中心需求。C1已冻结机器合同并实现公益申请、区域中心查询、主任/副主任申请、联盟审批前端；合同断言3/3、定向46/46、全量前端243/243、production与test-server build通过。后端exact commit=388846597131d75aafc54081070fe5fc0bf3ecd0，全量Go tests与vet通过。当前结论为handoff-ready，禁止生产、支付、真实通知和不可逆数据操作。",
+                           "handoff_record":  "docs/project-management/modules/club-alliance/public-welfare-regional/handoff.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260715-CLUB-PUBLIC-WELFARE-REGIONAL-BACKEND",
+                           "title":  "公益俱乐部创办审批与区域中心后端闭环",
+                           "owner":  "Club Alliance public-welfare backend agent",
+                           "owner_role":  "俱乐部联盟公益与区域中心后端负责人",
+                           "status":  "handoff-ready",
+                           "repository_root":  "C:/Users/shugo/Documents/heaotang-main",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-public-welfare-regional-backend",
+                           "branch":  "codex/club-public-welfare-regional-backend",
+                           "base_commit":  "e41265905815082433e040412f3dd6b6b33dfede",
+                           "allowed_paths":  [
+                                                 "backend-go/plugins/club-plugin/public_welfare_regional.go",
+                                                 "backend-go/plugins/club-plugin/public_welfare_regional_test.go",
+                                                 "backend-go/plugins/club-plugin/plugin.go"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "从backend权威提交e412659创建独立clean工作树；实现提交388846597131d75aafc54081070fe5fc0bf3ecd0。公益提交不创建、审批原子创建standard+charity、maker-checker、幂等重放、区域角色真实授权、中心地址搜索、审计及普通公益直建拒绝均有回归；定向club-plugin、全量go test ./...与go vet ./...通过，现handoff-ready。不得修改其他插件、支付、部署或生产数据。",
+                           "handoff_record":  "docs/project-management/modules/club-alliance/public-welfare-regional/handoff-backend.md"
+                       },
+                       {
                            "work_id":  "AIW-20260713-SERVICE-PLAZA-E2E-UAT-REMEDIATION",
                            "title":  "服务广场三大核心板块端到端审计与缺陷闭环",
                            "owner":  "Codex end-to-end UAT remediation agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "handoff-ready",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-app-integration",
                            "branch":  "codex/e2e-uat-fix-20260713",
@@ -3029,7 +3076,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "用户要求多个智能代理从服务广场入口到生命导航、俱乐部联盟、健康大管家逐板块端到端检查，确认问题后立即根因修复。仅允许合成测试账号与测试服务器；禁止真实会员、真实健康数据、支付、生产和不可逆操作。候选 74d3876 与发布证据 79b8d2f 已完成；独立复验发现旧 IR 与 R2 checklist record_id 不一致，R3 current checklist 26/26、exam100 和 exact record_id 根因修复后，总合同、23/237 前端测试、test-server build、部署安全及 UTF-8 1331 文件门禁全部通过，现重新 handoff-ready。",
+                           "migration_note":  "用户要求多个智能代理从服务广场入口到生命导航、俱乐部联盟、健康大管家逐板块端到端检查，确认问题后立即根因修复。仅允许合成测试账号与测试服务器；禁止真实会员、真实健康数据、支付、生产和不可逆操作。候选74d3876、发布证据79b8d2f和治理收口5c1069b已位于本后续切片的精确祖先链；2026-07-15 后续平台集成负责人独立核对实际路径并复跑前端243/243与test-server build通过，正式采用5c1069b为串行基线并释放旧宽范围，状态收口integrated。",
                            "handoff_record":  "docs/project-management/service-plaza/service-plaza-e2e-uat-remediation-2026-07-13.md"
                        }
                    ]
