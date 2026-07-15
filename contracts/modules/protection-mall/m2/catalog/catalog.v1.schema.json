@@ -1,0 +1,118 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "catalog_kinds", "responsibility", "catalog_entry", "snapshots", "membership_plan", "repository", "error_codes", "no_go"],
+  "properties": {
+    "contract_version": {"const": "protection-mall.catalog.v1"},
+    "catalog_kinds": {"type": "array", "const": ["product", "service", "course", "activity"]},
+    "responsibility": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_fields", "kind_product_type", "assurance_policy", "failure_mode"],
+      "properties": {
+        "required_fields": {"const": ["mall_type", "product_type", "seller_id", "fulfillment_owner_id", "after_sale_owner_id"]},
+        "kind_product_type": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["product", "service", "course", "activity"],
+          "properties": {
+            "product": {"const": "physical"},
+            "service": {"const": "service"},
+            "course": {"const": "service"},
+            "activity": {"const": "service"}
+          }
+        },
+        "assurance_policy": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["protection_mall", "club_mall"],
+          "properties": {
+            "protection_mall": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["catalog_snapshot", "real_grant_gate"],
+              "properties": {
+                "catalog_snapshot": {"const": "permitted"},
+                "real_grant_gate": {"const": "order_completed && after_sale_closed"}
+              }
+            },
+            "club_mall": {
+              "type": "object",
+              "additionalProperties": false,
+              "required": ["catalog_snapshot", "error_code"],
+              "properties": {
+                "catalog_snapshot": {"const": "forbidden"},
+                "error_code": {"const": "MALL_BENEFIT_FORBIDDEN"}
+              }
+            }
+          }
+        },
+        "failure_mode": {"const": "fail_closed"}
+      }
+    },
+    "catalog_entry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_fields", "scene_ids", "publish_scope", "cross_seller_scope"],
+      "properties": {
+        "required_fields": {"const": ["contract_version", "id", "kind", "title", "scene_ids", "responsibility", "price_snapshot", "benefit_snapshot"]},
+        "scene_ids": {"const": "non_empty_unique_strings"},
+        "publish_scope": {"const": "catalog:write"},
+        "cross_seller_scope": {"const": "catalog:write:any"}
+      }
+    },
+    "snapshots": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["price", "benefit", "mutation_policy", "copy_policy"],
+      "properties": {
+        "price": {"const": ["snapshot_id", "version", "currency", "amount_minor"]},
+        "benefit": {"const": ["snapshot_id", "version", "grants"]},
+        "mutation_policy": {"const": "immutable_after_first_save"},
+        "copy_policy": {"const": "detached_copy"}
+      }
+    },
+    "membership_plan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["required_scope", "owner", "operations", "budget", "currency_policy", "overflow_policy", "replacement_policy"],
+      "properties": {
+        "required_scope": {"const": "catalog:plan"},
+        "owner": {"const": "authenticated_actor"},
+        "operations": {"const": ["compose", "replace"]},
+        "budget": {"const": "non_negative_int64_minor_units"},
+        "currency_policy": {"const": "single_currency"},
+        "overflow_policy": {"const": "fail_closed"},
+        "replacement_policy": {"const": "rebuild_and_revalidate"}
+      }
+    },
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["implementation", "concurrency", "external_io"],
+      "properties": {
+        "implementation": {"const": "in_memory_only"},
+        "concurrency": {"const": "safe_for_parallel_read_write"},
+        "external_io": {"const": false}
+      }
+    },
+    "error_codes": {
+      "const": [
+        "MALL_CATALOG_INVALID_ARGUMENT",
+        "MALL_CATALOG_UNTRUSTED_SCOPE",
+        "MALL_CATALOG_FORBIDDEN",
+        "MALL_CATALOG_RESPONSIBILITY_MISSING",
+        "MALL_CATALOG_NOT_FOUND",
+        "MALL_CATALOG_SNAPSHOT_IMMUTABLE",
+        "MALL_CATALOG_BUDGET_EXCEEDED",
+        "MALL_CATALOG_CURRENCY_MISMATCH",
+        "MALL_CATALOG_ARITHMETIC_OVERFLOW",
+        "MALL_CATALOG_REPLACEMENT_NOT_FOUND",
+        "MALL_CATALOG_DUPLICATE_PLAN_ITEM",
+        "MALL_BENEFIT_FORBIDDEN"
+      ]
+    },
+    "no_go": {"const": ["database", "route", "network", "payment", "refund", "reconciliation", "real_data", "deployment", "production"]}
+  }
+}

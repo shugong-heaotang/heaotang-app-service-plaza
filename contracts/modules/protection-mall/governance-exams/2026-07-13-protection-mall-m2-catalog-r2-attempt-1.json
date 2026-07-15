@@ -1,0 +1,71 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260713-PROTECTION-MALL-M2-CATALOG-R2-1",
+    "record_id":  "IR-20260713-PROTECTION-MALL-M2-CATALOG-R2",
+    "actor":  "Protection Mall M2 catalog evidence agent",
+    "attempt_number":  1,
+    "status":  "failed",
+    "generated_at":  "2026-07-13T12:56:54.0199017Z",
+    "completed_at":  "2026-07-13T12:56:54.3653813Z",
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  75,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "b0df386a68e8e00a803a08d0b3e786893a47bad6742dd36a5b6273803b7abcb1",
+    "checklist_path":  "contracts/modules/protection-mall/development-checklists/2026-07-13-protection-mall-m2-catalog-r2.json",
+    "checklist_sha256":  "88795fe208bee2fd1a0c00e4c630744b798c6b265ec50eefd40ec59a519a8097",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-011",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/project-management/module-internal-dependency-standard-v1.md"
+                      },
+                      {
+                          "question_id":  "GQ-004",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+                      },
+                      {
+                          "question_id":  "GQ-005",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+                      },
+                      {
+                          "question_id":  "GQ-010",
+                          "selected_option":  "B",
+                          "correct":  false,
+                          "source_path":  "docs/decisions/0012-two-strike-root-cause-rule.md"
+                      },
+                      {
+                          "question_id":  "GQ-016",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0013-mandatory-ai-development-entrypoint.md"
+                      },
+                      {
+                          "question_id":  "GQ-008",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0007-stable-foundation-variable-business.md"
+                      },
+                      {
+                          "question_id":  "GQ-002",
+                          "selected_option":  "A",
+                          "correct":  false,
+                          "source_path":  "docs/decisions/0008-versioned-business-variables.md"
+                      },
+                      {
+                          "question_id":  "GQ-013",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0014-ai-development-flight-checklist.md"
+                      }
+                  ],
+    "remediation_sources":  [
+                                "docs/decisions/0012-two-strike-root-cause-rule.md",
+                                "docs/decisions/0008-versioned-business-variables.md"
+                            ]
+}
