@@ -1,0 +1,180 @@
+{
+  "artifact_version": "legacy-lifecycle-transaction-design-draft.v1",
+  "artifact_kind": "non-contract-transaction-design",
+  "artifact_id": "LLM-20260715-TECHNICAL-SOCIAL-BATCH-R2",
+  "state": "draft-not-registered",
+  "executable": false,
+  "authorization": null,
+  "applied": false,
+  "post_registry_sha256": null,
+  "review": null,
+  "integration": null,
+  "schema_registration": {
+    "registered": false,
+    "schema_path": null,
+    "reference_only_schema_path": "contracts/foundation/legacy-lifecycle-migration.v1.schema.json",
+    "reference_only_reason": "The existing v1 schema is fixed to the Activity/Mall R1 receipt id, five transitions, indices at most 114 and fixed hashes; it cannot validate this batch and is not modified by this work item.",
+    "minimum_future_requirements": [
+      "register a generalized receipt schema and policy path without weakening the existing Activity/Mall receipt",
+      "validate source and current registry commit, bytes SHA and per-row canonical SHA before any transition",
+      "validate source implementation Git objects and exact allowed-path blob equivalence against the named backend authority",
+      "validate file-backed independent acceptance and controlled APP integration for integrated projections",
+      "validate the Social 90 and 132 transitions as one inseparable atomic group",
+      "reject omitted row 92 until a file-backed independent Go exists",
+      "reject before/after mixtures, registry drift, evidence hash drift, missing Git objects and any unregistered state"
+    ]
+  },
+  "implementation_base_chain": {
+    "registered_base": "d7d57bdb2f9b7fc90038d92a522e56393de1f22a",
+    "r12l_candidate": "8f8f2f6e90ec11610ff73562979c64c3acbaabfe",
+    "controlled_integration": "05bbf6465edecaa97af5d82792db868ece4f42e8",
+    "authorized_ff_only_implementation_base": "05bbf6465edecaa97af5d82792db868ece4f42e8",
+    "branch": "codex/platform-legacy-lifecycle-batch-r2",
+    "worktree_was_clean_after_ff_only": true
+  },
+  "source_registry": {
+    "path": "contracts/foundation/agent-collaboration.v1.json",
+    "commit": "05bbf6465edecaa97af5d82792db868ece4f42e8",
+    "sha256": "1b880e0e46c5875163798183adf6661bcaaa09a4d3e7dfe6cec66ca7d9523c04"
+  },
+  "current_registry_precondition": {
+    "path": "contracts/foundation/agent-collaboration.v1.json",
+    "commit": "05bbf6465edecaa97af5d82792db868ece4f42e8",
+    "sha256": "1b880e0e46c5875163798183adf6661bcaaa09a4d3e7dfe6cec66ca7d9523c04"
+  },
+  "task_order": {
+    "path": "docs/project-management/notices/2026-07-15-platform-legacy-lifecycle-batch-r2-task-order.md",
+    "sha256": "c89576be54b21b3ef393c7ae1343cae23f41fb1c20f95ab6bbc3e81249f68080"
+  },
+  "canonical_transition_format": "registry_index<TAB>work_id<TAB>from_status<TAB>to_status<LF> in ascending registry index order",
+  "canonical_effective_state_format": "registry_index<TAB>work_id<TAB>effective_status<LF> for every source registry row in ascending registry index order",
+  "transitions": [
+    {
+      "registry_index": 47,
+      "work_id": "AIW-20260711-ACTION-TELEMETRY-BUSINESSCONFIG-BACKEND",
+      "from_status": "active",
+      "to_status": "integrated",
+      "source_row_sha256": "dad8972c849cf2b2e14ff6506ab3bb493bd2e46c55fb369f80a3e00d95ac4aff",
+      "current_row_sha256": "dad8972c849cf2b2e14ff6506ab3bb493bd2e46c55fb369f80a3e00d95ac4aff",
+      "before_state_sha256": "b507065c9580fd812bd24db40b475c41d8fd835326bbf1acb69983ce7e763cd7",
+      "after_state_sha256": "4e640fa0abdfe6d586e6b3522386e97fc83fb3a02a3682cbd9f80ee35768cb44",
+      "projection_basis": {
+        "implementation_commit": "a0b21cf37cde5cb17002e08e8c6817527efe8686",
+        "backend_authority_commit": "091c9be9db8c58e780cf2543f8a6731faab076d2",
+        "commit_is_authority_ancestor": false,
+        "all_authorized_path_blobs_equal": true,
+        "accepted_evidence_commit": "5cf87e27c122f4cd1db0f4d3c46fdeaa31659484",
+        "app_integration_commit": "a1ac334f63d9ae18a6bf9f58d0e03bc441812c33",
+        "final_evidence_commit": "86d68db24268592418ea94b43d2580a89f11f488",
+        "required_future_rule": "Integrated is lawful only if a future validator independently proves every listed source blob equals the backend authority blob and verifies the fresh acceptance and APP integration evidence."
+      },
+      "blob_equivalence": [
+        {"path": "backend-go/internal/businessconfig/businessconfig.go", "source_blob": "088ef7e54158d80c3516d0a1a730491dfbab3d50", "authority_blob": "088ef7e54158d80c3516d0a1a730491dfbab3d50"},
+        {"path": "backend-go/internal/businessconfig/businessconfig_test.go", "source_blob": "f299c60952eafe4aebc242f6d7cb78f84fea8374", "authority_blob": "f299c60952eafe4aebc242f6d7cb78f84fea8374"},
+        {"path": "backend-go/plugins/config-plugin/plugin_test.go", "source_blob": "3bc3df2646950758bee34c2af6e945b90c3e0c64", "authority_blob": "3bc3df2646950758bee34c2af6e945b90c3e0c64"},
+        {"path": "backend-go/plugins/service-plaza-plugin/infrastructure.go", "source_blob": "6edd5656022404535b72f6f1aa877e659dfc3d88", "authority_blob": "6edd5656022404535b72f6f1aa877e659dfc3d88"},
+        {"path": "backend-go/plugins/service-plaza-plugin/infrastructure_test.go", "source_blob": "fe170d44240f0091534acd96a11209d9beceb3e1", "authority_blob": "fe170d44240f0091534acd96a11209d9beceb3e1"}
+      ]
+    },
+    {
+      "registry_index": 88,
+      "work_id": "AIW-20260712-NOVA-M2-NETWORK-READ-PROVIDER-BACKEND",
+      "from_status": "active",
+      "to_status": "integrated",
+      "source_row_sha256": "74cb87246a499199f35bf9cf2b3120903d4dba5cbd14d99f09ad7696fe0d461f",
+      "current_row_sha256": "74cb87246a499199f35bf9cf2b3120903d4dba5cbd14d99f09ad7696fe0d461f",
+      "before_state_sha256": "9a626efe551090769d8bd2134c88555e52ff626a436516e4981af58223e2fca1",
+      "after_state_sha256": "2a72f635f59fe4f2df05f467098e83eb2f49cc1023ff809351d5220c93017a00",
+      "projection_basis": {
+        "implementation_commit": "f6ba650c44230bb9ff2b2322e276d0bc1ae89e21",
+        "backend_authority_commit": "091c9be9db8c58e780cf2543f8a6731faab076d2",
+        "commit_is_authority_ancestor": false,
+        "all_authorized_path_blobs_equal": true,
+        "accepted_evidence_commit": "5c48677c5a0428dc32dea29b84d94a129a649f92",
+        "app_integration_commit": "610ba65680123758a53badde0fa8dc0cf52e7f20",
+        "final_evidence_commit": "86d68db24268592418ea94b43d2580a89f11f488",
+        "required_future_rule": "Integrated is lawful only if a future validator independently proves every listed source blob equals the backend authority blob and verifies the fresh acceptance and APP integration evidence."
+      },
+      "blob_equivalence": [
+        {"path": "backend-go/plugins/network-plugin/nova_member_search_provider.go", "source_blob": "4d32e68b10298b85fdfcabcf4a0a74c275b6d1bb", "authority_blob": "4d32e68b10298b85fdfcabcf4a0a74c275b6d1bb"},
+        {"path": "backend-go/plugins/network-plugin/nova_member_search_provider_test.go", "source_blob": "339b09d084f747b2eee56e079853f7265293ff20", "authority_blob": "339b09d084f747b2eee56e079853f7265293ff20"}
+      ]
+    },
+    {
+      "registry_index": 89,
+      "work_id": "AIW-20260712-NOVA-M2-NETWORK-READ-PROVIDER-EVIDENCE",
+      "from_status": "active",
+      "to_status": "cancelled",
+      "source_row_sha256": "c33489e26ba9b740d0fe63e89bc66430e52925e82ec1e434546dcd924fd8174d",
+      "current_row_sha256": "c33489e26ba9b740d0fe63e89bc66430e52925e82ec1e434546dcd924fd8174d",
+      "before_state_sha256": "a7ba58b09b10b236fa712895934869820e53b10c63d7496c72f456cd7047de37",
+      "after_state_sha256": "205abbb726ff49dcfe7057631b420ea78b0ab95abb91313b01bd5c743ab43ad9",
+      "projection_basis": {
+        "rejected_candidate_commit": "5eb275428382215973e9bba60aac049843407489",
+        "rejected_candidate_verdict": "whole-candidate-no-go-unauthorized-registry-diff",
+        "replacement_registry_index": 128,
+        "replacement_work_id": "AIW-20260715-NOVA-M2-NETWORK-READ-PROVIDER-EVIDENCE-R2",
+        "replacement_accepted_commit": "5c48677c5a0428dc32dea29b84d94a129a649f92",
+        "replacement_app_integration_commit": "610ba65680123758a53badde0fa8dc0cf52e7f20",
+        "replacement_final_evidence_commit": "86d68db24268592418ea94b43d2580a89f11f488"
+      }
+    },
+    {
+      "registry_index": 90,
+      "work_id": "AIW-20260712-NOVA-M2-SOCIAL-WRITE-PROVIDER-BACKEND",
+      "from_status": "active",
+      "to_status": "cancelled",
+      "atomic_group": "social-owner-switch-90-132",
+      "source_row_sha256": "80f1c97c8dc6aaf582de647d0fe7c2417cb2cceea1ba7f67b901fb75a60eaa31",
+      "current_row_sha256": "80f1c97c8dc6aaf582de647d0fe7c2417cb2cceea1ba7f67b901fb75a60eaa31",
+      "before_state_sha256": "63e4b63aea90741f2631d1bfc9c0d9f6d2e8f6c7007185ed97c3e14cb469d9b9",
+      "after_state_sha256": "5c0f89cbac764919d6895e9342afb9abee46fa4e1287c69deca5c05876e034d6",
+      "projection_basis": {
+        "legacy_implementation_commit": "70fb18b82c20be1927d8b39abd530aa30d40f8a3",
+        "backend_authority_commit": "091c9be9db8c58e780cf2543f8a6731faab076d2",
+        "commit_is_authority_ancestor": false,
+        "reason": "Release stale legacy ownership only in the same transaction that activates the reserved R2 child."
+      }
+    },
+    {
+      "registry_index": 132,
+      "work_id": "AIW-20260715-NOVA-M2-SOCIAL-WRITE-PROVIDER-BACKEND-R2",
+      "from_status": "planned",
+      "to_status": "active",
+      "atomic_group": "social-owner-switch-90-132",
+      "source_row_sha256": "efb99367307b04ea2ec43a5d306a33bfe0cd30381a517a77a15d47a1262e08df",
+      "current_row_sha256": "efb99367307b04ea2ec43a5d306a33bfe0cd30381a517a77a15d47a1262e08df",
+      "before_state_sha256": "c084f5505a8c8cffdcd2d8b12433ee1312c5bf63a45db75af9374a67366b37ed",
+      "after_state_sha256": "258546fa8d905e6316090496d5a520bd1c0a3059463c966027ab8ca8ffa2f06d",
+      "projection_basis": {
+        "registered_base": "091c9be9db8c58e780cf2543f8a6731faab076d2",
+        "reason": "Activate the clean reserved R2 owner only while cancelling legacy index 90 atomically."
+      }
+    }
+  ],
+  "transition_sha256": "c07aa77b651359e21bfa6f4c0b4f36f7124ecfd340633a536aee373c71156389",
+  "post_effective_states_sha256": "ca98833e1ab7a0728ba9ff7764e30607474eec6abfc388743f06cf7aa765e9bd",
+  "evidence_files": [
+    {"path": "contracts/foundation/development-checklists/2026-07-15-action-telemetry-businessconfig-r2-acceptance.json", "sha256": "2e1d5bafdd04ca830799aa87deb4b05b078a8723679ddcebf29ed41d3c91562e", "authority_commit": "5cf87e27c122f4cd1db0f4d3c46fdeaa31659484"},
+    {"path": "contracts/foundation/implementation-records/2026-07-15-action-telemetry-businessconfig-r2-acceptance.json", "sha256": "b4ea3b24a3a529b6f8af3e906b7e7512a35446f9ab9c05d688f799703b7d400f", "authority_commit": "5cf87e27c122f4cd1db0f4d3c46fdeaa31659484"},
+    {"path": "docs/project-management/service-plaza/action-telemetry-businessconfig-r2-acceptance.md", "sha256": "ed07050c9c53fd2fcba0d16e69a5cd6f31ec9ac1a3c6ab54d82c536e96b5250e", "authority_commit": "5cf87e27c122f4cd1db0f4d3c46fdeaa31659484"},
+    {"path": "contracts/modules/network/development-checklists/2026-07-15-nova-m2-network-read-provider-evidence-r2.json", "sha256": "50f7223ecc9b662f109b9b3e8a1d986adb2691ec0b01caa383e6505f6d41d554", "authority_commit": "5c48677c5a0428dc32dea29b84d94a129a649f92"},
+    {"path": "contracts/modules/network/implementation-records/2026-07-15-nova-m2-network-read-provider-evidence-r2.json", "sha256": "cd90e5ab1e8e32aa33d4060911ea85941f4d34c057916a0d3fa9ab685e5cc9de", "authority_commit": "5c48677c5a0428dc32dea29b84d94a129a649f92"},
+    {"path": "docs/project-management/modules/network/network-read-provider-r2-handoff.md", "sha256": "f921e42ace1017523528aef34a6b0f53972c1db67b26158d95c5be343b5bb03d", "authority_commit": "5c48677c5a0428dc32dea29b84d94a129a649f92"},
+    {"path": "docs/project-management/service-plaza/platform-registry-dispatch-r1-handoff.md", "sha256": "2de166bf142061106b9ea295141901c538a8f4999d092ba0b445d0cbd513c661", "authority_commit": "86d68db24268592418ea94b43d2580a89f11f488"},
+    {"path": "docs/project-management/notices/2026-07-15-platform-registry-r12l-parallel-activation-task-order.md", "sha256": "74740c0660aec5c114e3962862d19af8ceb66d592c439ffbd16ecfac8196d044", "authority_commit": "8f8f2f6e90ec11610ff73562979c64c3acbaabfe"},
+    {"path": "contracts/foundation/implementation-records/2026-07-15-platform-registry-r12l-parallel-activation.json", "sha256": "5f4b8c5c1d67e14cbc070c916afa14a400ff2244f736fc4efb744d40bc024a4e", "authority_commit": "8f8f2f6e90ec11610ff73562979c64c3acbaabfe"},
+    {"path": "docs/project-management/service-plaza/platform-registry-r12l-parallel-activation-handoff.md", "sha256": "7549cd6ee1c21846da608ce818545bdf447b774ffadc81dcc367cba4f587c88b", "authority_commit": "8f8f2f6e90ec11610ff73562979c64c3acbaabfe"}
+  ],
+  "omitted_rows": [
+    {
+      "registry_index": 92,
+      "work_id": "AIW-20260712-NOVA-M2-MIGRATION-DISABLE-DRILL",
+      "reason": "The current Handoff is implementer-authored and explicitly requests independent review; no file-backed independent Go exists.",
+      "evidence": [
+        {"path": "docs/project-management/modules/network/migration-drill-handoff.md", "sha256": "80f48c39ffcd001a47acaa7e026d108bef391e72234a182b1c3c7bce6e4a1bc8"},
+        {"path": "contracts/modules/network/implementation-records/2026-07-12-nova-m2-migration-disable-r2.json", "sha256": "dc6719cbdbb52008c4785d63b22430b9b2efe0e10f9b61dad41c4dfd762cb21d"}
+      ]
+    }
+  ]
+}
