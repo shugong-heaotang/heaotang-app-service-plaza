@@ -1,0 +1,100 @@
+{
+  "contract_version": "legacy-lifecycle-migration.v1",
+  "receipt_id": "LLM-20260715-ACTIVITY-MALL-M2-R1",
+  "operation": "legacy_status_transition",
+  "state": "authorized-not-applied",
+  "applied": false,
+  "legacy_anchor": {
+    "snapshot_commit": "33f5e45499fbadaac71f07bbe6de5d72579e39c9",
+    "snapshot_path": "contracts/foundation/agent-collaboration.v1.json",
+    "cutover_work_id": "AIW-20260713-PROTECTION-MALL-M2-PORTS-SIMULATION",
+    "work_ids_sha256": "64105cf520b0c971150d0491eba27967d7976aa0bad89400ececd302959d650e",
+    "work_states_sha256": "b7dc23fab67191405a852301ae4f9650164bf3e619bd323587d684f1e5773aaa"
+  },
+  "source_registry": {
+    "path": "contracts/foundation/agent-collaboration.v1.json",
+    "commit": "8776166a52249c673ecaa24b4cd6b0522f4aba59",
+    "sha256": "d961e0b3e11f00c115bdd98f6d1216e2552bd83015c6339ce1774ef9c7a222d5"
+  },
+  "post_registry_sha256": null,
+  "task_order": {
+    "path": "docs/project-management/notices/2026-07-15-platform-delivery-flow-legacy-migration-v2-task-order.md",
+    "sha256": "95abc227e5b35b85495b283e587cd8893ff910d92140c4b174be4f7fdb9fcbaf"
+  },
+  "canonical_transition_format": "work_id<TAB>from_status<TAB>to_status<LF> in ascending legacy index order",
+  "transitions": [
+    {
+      "legacy_index": 109,
+      "work_id": "AIW-20260713-ACTIVITY-V3-M0",
+      "from_status": "active",
+      "to_status": "handoff-ready",
+      "source_row_sha256": "34689a44c37900f16b718bb8a86d47ba9c26d4eaaf0cfc61a816c1b683e7f929",
+      "before_state_sha256": "ff07c3544cda523d2a18dfac2509948ca32a77393851c88d5c1d91931a227ba8",
+      "after_state_sha256": "b5b30770349323bf0f4a9e8d127e4f107111bac6960c6295e82a81358ee175a2"
+    },
+    {
+      "legacy_index": 111,
+      "work_id": "AIW-20260713-PROTECTION-MALL-M2-CATALOG-SOLUTION",
+      "from_status": "active",
+      "to_status": "integrated",
+      "source_row_sha256": "9e12b7edfcce481a0f48e1a1fd93c6c40df2cfae8c1a32b3d1eceeb17b867d8e",
+      "before_state_sha256": "0bcc199416d1696f2d1bc0e9d3507ceab228690b499cc9182c535997bb7f3d69",
+      "after_state_sha256": "f4f58c6c1a39a890ff8d346d8011095d5b7ed649afad9a0b68aa238885a967fe"
+    },
+    {
+      "legacy_index": 112,
+      "work_id": "AIW-20260713-PROTECTION-MALL-M2-CATALOG-EVIDENCE",
+      "from_status": "active",
+      "to_status": "integrated",
+      "source_row_sha256": "64eb1cf61ef679f4637c32ffe47dec25d8f50aeb96e58137418ee4e8864e5bb7",
+      "before_state_sha256": "1f6c7f072f9fa7d7e25795a36bf8b9efd1a8504fc1e9d7786a0239bfbe5e8069",
+      "after_state_sha256": "b59b7f1a4687d1eaa5bb2664271ac0e957c26d3ec2f9692208dffbe9435a9322"
+    },
+    {
+      "legacy_index": 113,
+      "work_id": "AIW-20260713-PROTECTION-MALL-M2-ORDER-FULFILLMENT",
+      "from_status": "planned",
+      "to_status": "active",
+      "source_row_sha256": "cee4b150123b4eafdaddd1c505eca3a38a29787a5d0051f5ae86a931e5eca54b",
+      "before_state_sha256": "654a5c13c6ed1782882056af5b4afd7d988a17d0b0b59323f2a17677e303b5d8",
+      "after_state_sha256": "34a476fc0d795fa63898b28fb35034a489e95bf0822696b2ade27802530f9731"
+    },
+    {
+      "legacy_index": 114,
+      "work_id": "AIW-20260713-PROTECTION-MALL-M2-PORTS-SIMULATION",
+      "from_status": "planned",
+      "to_status": "active",
+      "source_row_sha256": "4526ad58d3ba274cd5de9aa159907cb51acfa3d002e6975fc53935251320bc53",
+      "before_state_sha256": "2df71c5eacf35b60c8662b0fccc1333e5279f134dce18a07d7c9629f9a403fad",
+      "after_state_sha256": "267e5405e58d3dcbbaedbd4c99acfbb6f2531131145c26c6f5ca2dc23612f73a"
+    }
+  ],
+  "transition_sha256": "5dfa87a441a04eb8a24e3a4de883648780b6eaeddf2c870d831fa6ed29620939",
+  "post_effective_states_sha256": "7f1991952dea49dff84e6378dbdc4edd22f4bf72334e0a8c08a36474fb984ec6",
+  "checklist_compatibility": [
+    {"path":"contracts/modules/network/development-checklists/2026-07-12-network-canonical-owner-r1.json","sha256":"dacb7ffd020dc501f4bf9fbc233030f0ab3885a9c1a7ce8547a02eeed21b2293","record_id":"IR-20260712-NETWORK-CANONICAL-OWNER-DECISION-R1","work_id":"AIW-20260712-NETWORK-CANONICAL-OWNER-DECISION","scope":"legacy-core-only-module","authority_commit":"7b07895cb076cbfe44e61b6df4755f345b4248d3","task_order_path":null},
+    {"path":"contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m0-r3-correction.json","sha256":"4aa3de76d86099dbc55474c61d35e4bc133b2babd5641bb81f40b52121d5318a","record_id":"IR-20260712-PROTECTION-MALL-M0-R3-CORRECTION","work_id":"AIW-20260712-PROTECTION-MALL-M0-R3-CORRECTION","scope":"legacy-core-only-module","authority_commit":"73cf4a3abfa65c21348a7e2116c19a0cc1b07ddb","task_order_path":null},
+    {"path":"contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m1-contracts.json","sha256":"693dda7450d6d8dc7f10b7c9ed7a38952424671dad80c9d6b0b2767bf13addac","record_id":"IR-20260712-PROTECTION-MALL-M1-CONTRACTS","work_id":"AIW-20260712-PROTECTION-MALL-M1-CONTRACTS","scope":"legacy-core-only-module","authority_commit":"9dc3092e53cfbb6d04f6857554bf718eb16aeb67","task_order_path":null},
+    {"path":"contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m1-domain-evidence.json","sha256":"b8a7e9ece9b9333144229aef4d0df77a6cdc48dadd23eb13f48f085ecf86276a","record_id":"IR-20260712-PROTECTION-MALL-M1-DOMAIN-EVIDENCE","work_id":"AIW-20260712-PROTECTION-MALL-M1-DOMAIN-EVIDENCE","scope":"legacy-core-only-module","authority_commit":"27d60cda1bbab448ebb8aba276e21ed8bd80fdff","task_order_path":null},
+    {"path":"contracts/modules/network/development-checklists/2026-07-12-nova-m2-migration-disable-r1.json","sha256":"40785be79df71eecd5915ef88d96ae8419ab2b99372e3f2a4e7127a95cebf6bb","record_id":"IR-20260712-NOVA-M2-MIGRATION-DISABLE-DRILL-R1","work_id":"AIW-20260712-NOVA-M2-MIGRATION-DISABLE-DRILL","scope":"legacy-core-only-module","authority_commit":"9867554fb5d2a6b7aed97ea21209cbedd8fb6287","task_order_path":null},
+    {"path":"contracts/modules/network/development-checklists/2026-07-12-nova-m2-migration-disable-r2.json","sha256":"349ea7d42bf4f5d0ac9a8e8d90180456153df96cacbb6b3a96cc458b69ad44fc","record_id":"IR-20260712-NOVA-M2-MIGRATION-DISABLE-DRILL-R2","work_id":"AIW-20260712-NOVA-M2-MIGRATION-DISABLE-DRILL","scope":"legacy-core-only-module","authority_commit":"6b145abdc740b60273a7b5241caad82d3f9a212f","task_order_path":null},
+    {"path":"contracts/foundation/development-checklists/2026-07-13-platform-nova-overlay-r2-r2.json","sha256":"62528293a0a4c71bba50bfb0a7689a7e344b658af5ea4361289408ffbfc1948b","record_id":"IR-20260713-PLATFORM-NOVA-OVERLAY-R2-R2","work_id":"AIW-20260713-PLATFORM-NOVA-OVERLAY-R2","scope":"platform","authority_commit":"dad951e9dc6cf7669439f6e65ebe19a49366e2b7","task_order_path":"docs/project-management/notices/2026-07-13-platform-nova-overlay-r2-task-order.md"},
+    {"path":"contracts/foundation/development-checklists/2026-07-13-platform-nova-overlay-r2.json","sha256":"4fc5e9e2a78f171dce979a8a7357026976e6a45d9ac5a1611596be1069d372c3","record_id":"IR-20260713-PLATFORM-NOVA-OVERLAY-R2","work_id":"AIW-20260713-PLATFORM-NOVA-OVERLAY-R2","scope":"platform","authority_commit":"dad951e9dc6cf7669439f6e65ebe19a49366e2b7","task_order_path":"docs/project-management/notices/2026-07-13-platform-nova-overlay-r2-task-order.md"},
+    {"path":"contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r10.json","sha256":"b521fde8674ba04ed4018fc76e8272428c6ba6e2719b5b13e6f70f1304132c2f","record_id":"IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R10","work_id":"AIW-20260714-PLATFORM-REGISTRY-DISPATCH-R1","scope":"platform","authority_commit":"854863f0c7649838e44128743fa3e24ff89bc638","task_order_path":"docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md"},
+    {"path":"contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r7.json","sha256":"bcd5575d0464b40c50f52f2f7959c6186b7b171c2684fbcf4df7675c6d620471","record_id":"IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R7","work_id":"AIW-20260714-PLATFORM-REGISTRY-DISPATCH-R1","scope":"platform","authority_commit":"f65c0ec1c5b27b28aafba7204f5689dcaea6e54e","task_order_path":"docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md"},
+    {"path":"contracts/foundation/development-checklists/2026-07-14-platform-registry-dispatch-r1-r9.json","sha256":"f12707c961a6383c6a8c9e6d8285af3c616ea783af38381f278a861a1830365f","record_id":"IR-20260714-PLATFORM-REGISTRY-DISPATCH-R1-R9","work_id":"AIW-20260714-PLATFORM-REGISTRY-DISPATCH-R1","scope":"platform","authority_commit":"104a50cbb9e97cc3bab8250a388b0f98ee318a6c","task_order_path":"docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md"},
+    {"path":"contracts/foundation/development-checklists/2026-07-15-action-telemetry-businessconfig-r2-acceptance.json","sha256":"2e1d5bafdd04ca830799aa87deb4b05b078a8723679ddcebf29ed41d3c91562e","record_id":"IR-20260715-ACTION-TELEMETRY-BUSINESSCONFIG-R2-ACCEPTANCE","work_id":"AIW-20260713-ACTION-TELEMETRY-BUSINESSCONFIG-R2-ACCEPTANCE","scope":"platform","authority_commit":"5cf87e27c122f4cd1db0f4d3c46fdeaa31659484","task_order_path":null},
+    {"path":"contracts/foundation/development-checklists/2026-07-15-platform-delivery-flow-expiry-regression-r1.json","sha256":"16061616d31580d9bd6befa695556a67cc3e8b964e570ccfcda503240e7933ab","record_id":"IR-20260715-PLATFORM-DELIVERY-FLOW-EXPIRY-REGRESSION-R1","work_id":"AIW-20260715-PLATFORM-DELIVERY-FLOW-EXPIRY-REGRESSION-R1","scope":"platform","authority_commit":"73b64b03627f37cd34f5bbbad1802fa08a20dd1f","task_order_path":"docs/project-management/notices/2026-07-15-platform-delivery-flow-expiry-regression-r1-task-order.md"},
+    {"path":"contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12b-r2.json","sha256":"5197d480687aa74a6501d05bf02a2eabc1f47b2dca6804a42c6c306c20d7b906","record_id":"IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12B-R2","work_id":"AIW-20260714-PLATFORM-REGISTRY-DISPATCH-R1","scope":"platform","authority_commit":"66e800926b48f1e81c24ff689e21e9948f44afcf","task_order_path":"docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md"},
+    {"path":"contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12b.json","sha256":"d626fc33e10ae9f50181d608da0a9b342cf3b5c9ee35c184f89ce06312133502","record_id":"IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12B","work_id":"AIW-20260714-PLATFORM-REGISTRY-DISPATCH-R1","scope":"platform","authority_commit":"ed29897e3b4fd93028cdb1c1613944a4f46f399d","task_order_path":"docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md"},
+    {"path":"contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12d-r2.json","sha256":"71ff665ae3368b1d38fc5108b54614d088c22e7d75d7c33b9ba93a5c2759a013","record_id":"IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12D-R2","work_id":"AIW-20260714-PLATFORM-REGISTRY-DISPATCH-R1","scope":"platform","authority_commit":"77298c2b334030ab1fa15b341a781461f78ce351","task_order_path":"docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md"},
+    {"path":"contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12d.json","sha256":"988ce0f8e36ab6b56978dfd6a7f2b5e4df0b4e6f1ae03d23220334a27ec7de9a","record_id":"IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12D","work_id":"AIW-20260714-PLATFORM-REGISTRY-DISPATCH-R1","scope":"platform","authority_commit":"2c7d6639dd604491398407a2ddd8392ce97ba342","task_order_path":"docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md"},
+    {"path":"contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12f-r2.json","sha256":"6b4c40ec159a02d1500c682218d38f398dd5582578f2516fd66470d3a132c5b8","record_id":"IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12F-R2","work_id":"AIW-20260714-PLATFORM-REGISTRY-DISPATCH-R1","scope":"platform","authority_commit":"5aec3953e0b55d3857dcf178035c7e906561e30f","task_order_path":"docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md"},
+    {"path":"contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12f.json","sha256":"6a5eb7668541a5cd92e6257f17286601e990282b62abf0309790266f13329a0d","record_id":"IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12F","work_id":"AIW-20260714-PLATFORM-REGISTRY-DISPATCH-R1","scope":"platform","authority_commit":"ec458ea7f5aab1892a5c0b727de14aae64c41e06","task_order_path":"docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md"},
+    {"path":"contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12g-s1.json","sha256":"02a6f088bd957810ae80321b86711db0fd4c82c83cada76f492e6ed309e24dfe","record_id":"IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12G-S1","work_id":"AIW-20260714-PLATFORM-REGISTRY-DISPATCH-R1","scope":"platform","authority_commit":"09efd7ee416908882c00ff69b44e9cbc542e606e","task_order_path":"docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md"},
+    {"path":"contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r1-r12g-s2.json","sha256":"5758e83e4226f1fb3fc8614072c1459e11e7a36d69d25c16669e568010395b5c","record_id":"IR-20260715-PLATFORM-REGISTRY-DISPATCH-R1-R12G-S2","work_id":"AIW-20260714-PLATFORM-REGISTRY-DISPATCH-R1","scope":"platform","authority_commit":"86d68db24268592418ea94b43d2580a89f11f488","task_order_path":"docs/project-management/notices/2026-07-14-platform-registry-dispatch-r1-task-order.md"},
+    {"path":"contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r12j-entry.json","sha256":"974391e125fa1da9448176e761a222533f2da23d3e8189de8da5fbfccc8f7557","record_id":"IR-20260715-PLATFORM-REGISTRY-DISPATCH-R12J-ENTRY","work_id":"AIW-20260714-PLATFORM-REGISTRY-DISPATCH-R1","scope":"platform","authority_commit":"8776166a52249c673ecaa24b4cd6b0522f4aba59","task_order_path":"docs/project-management/notices/2026-07-15-platform-registry-dispatch-r12j-task-order.md"}
+  ],
+  "review": null,
+  "integration": null
+}

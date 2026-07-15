@@ -23,6 +23,8 @@ REQUIRED_BUSINESS_FIELDS = {
 }
 LEGACY_SNAPSHOT_COMMIT = "33f5e45499fbadaac71f07bbe6de5d72579e39c9"
 LEGACY_SNAPSHOT_PATH = "contracts/foundation/agent-collaboration.v1.json"
+LEGACY_TRANSITION_SHA256 = "5dfa87a441a04eb8a24e3a4de883648780b6eaeddf2c870d831fa6ed29620939"
+LEGACY_POST_STATES_SHA256 = "7f1991952dea49dff84e6378dbdc4edd22f4bf72334e0a8c08a36474fb984ec6"
 
 
 def parse_time(value: str) -> datetime:
@@ -76,6 +78,126 @@ def git_json_at_commit(repo_root: Path, commit: str, path: str) -> dict | None:
         return None
 
 
+def git_bytes_at_commit(repo_root: Path, commit: str, path: str) -> bytes | None:
+    result = subprocess.run(
+        ["git", "-C", str(repo_root), "show", f"{commit}:{path}"],
+        capture_output=True,
+    )
+    return result.stdout if result.returncode == 0 else None
+
+
+def canonical_row_sha256(row: dict) -> str:
+    payload = json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def validate_legacy_receipt(policy: dict, repo_root: Path, registry: dict) -> tuple[list[str], dict | None]:
+    if policy.get("contract_version") != "delivery-flow-policy.v2":
+        return [], None
+    errors: list[str] = []
+    migration = policy.get("migration", {})
+    receipt_rel = migration.get("receipt_path", "")
+    schema_rel = migration.get("receipt_schema_path", "")
+    try:
+        receipt_path = (repo_root / receipt_rel).resolve()
+        schema_path = (repo_root / schema_rel).resolve()
+        receipt_path.relative_to(repo_root)
+        schema_path.relative_to(repo_root)
+    except (ValueError, TypeError):
+        return ["DELIVERY_LEGACY_RECEIPT_PATH_INVALID"], None
+    if not receipt_path.is_file() or not schema_path.is_file():
+        return ["DELIVERY_LEGACY_RECEIPT_OR_SCHEMA_MISSING"], None
+    receipt_bytes = receipt_path.read_bytes()
+    if hashlib.sha256(receipt_bytes).hexdigest() != migration.get("receipt_sha256"):
+        errors.append("DELIVERY_LEGACY_RECEIPT_HASH_MISMATCH")
+    try:
+        receipt = json.loads(receipt_bytes.decode("utf-8"))
+        receipt_schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        return errors + ["DELIVERY_LEGACY_RECEIPT_JSON_INVALID"], None
+    errors.extend(
+        f"DELIVERY_LEGACY_RECEIPT_SCHEMA: {error.message}"
+        for error in Draft202012Validator(receipt_schema, format_checker=FormatChecker()).iter_errors(receipt)
+    )
+    task = receipt.get("task_order", {})
+    if not evidence_hash_matches(repo_root, task.get("path", ""), task.get("sha256", "")):
+        errors.append("DELIVERY_LEGACY_RECEIPT_TASK_ORDER_INVALID")
+    source = receipt.get("source_registry", {})
+    source_bytes = git_bytes_at_commit(repo_root, source.get("commit", ""), source.get("path", ""))
+    if source_bytes is None or hashlib.sha256(source_bytes).hexdigest() != source.get("sha256"):
+        errors.append("DELIVERY_LEGACY_RECEIPT_SOURCE_REGISTRY_INVALID")
+        return errors, receipt
+    try:
+        source_registry = json.loads(source_bytes.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        return errors + ["DELIVERY_LEGACY_RECEIPT_SOURCE_REGISTRY_INVALID"], receipt
+    transitions = receipt.get("transitions", [])
+    canonical = "".join(
+        f"{entry.get('work_id')}\t{entry.get('from_status')}\t{entry.get('to_status')}\n"
+        for entry in transitions
+    )
+    if hashlib.sha256(canonical.encode("utf-8")).hexdigest() != LEGACY_TRANSITION_SHA256:
+        errors.append("DELIVERY_LEGACY_TRANSITION_HASH_INVALID")
+    source_items = source_registry.get("work_items", [])
+    current_items = registry.get("work_items", [])
+    if [entry.get("legacy_index") for entry in transitions] != sorted(entry.get("legacy_index") for entry in transitions):
+        errors.append("DELIVERY_LEGACY_TRANSITION_ORDER_INVALID")
+    transition_by_index = {entry.get("legacy_index"): entry for entry in transitions}
+    state_modes: set[str] = set()
+    for index, entry in transition_by_index.items():
+        if not isinstance(index, int) or index >= len(source_items) or index >= len(current_items):
+            errors.append("DELIVERY_LEGACY_TRANSITION_INDEX_INVALID")
+            continue
+        before = source_items[index]
+        current = current_items[index]
+        if before.get("work_id") != entry.get("work_id") or before.get("status") != entry.get("from_status"):
+            errors.append("DELIVERY_LEGACY_TRANSITION_BEFORE_MISMATCH")
+        if canonical_row_sha256(before) != entry.get("source_row_sha256"):
+            errors.append("DELIVERY_LEGACY_TRANSITION_SOURCE_ROW_HASH_INVALID")
+        before_state = f"{entry.get('work_id')}\t{entry.get('from_status')}\n".encode("utf-8")
+        after_state = f"{entry.get('work_id')}\t{entry.get('to_status')}\n".encode("utf-8")
+        if hashlib.sha256(before_state).hexdigest() != entry.get("before_state_sha256"):
+            errors.append("DELIVERY_LEGACY_TRANSITION_BEFORE_STATE_HASH_INVALID")
+        if hashlib.sha256(after_state).hexdigest() != entry.get("after_state_sha256"):
+            errors.append("DELIVERY_LEGACY_TRANSITION_AFTER_STATE_HASH_INVALID")
+        if current.get("status") == entry.get("from_status"):
+            state_modes.add("before")
+        elif current.get("status") == entry.get("to_status"):
+            state_modes.add("after")
+        else:
+            state_modes.add("invalid")
+    if state_modes not in ({"before"}, {"after"}):
+        errors.append("DELIVERY_LEGACY_PARTIAL_TRANSITION")
+    effective = []
+    for index, row in enumerate(source_items[:115]):
+        transition = transition_by_index.get(index)
+        status = transition.get("to_status") if transition else row.get("status")
+        effective.append(f"{row.get('work_id')}\t{status}\n")
+    if hashlib.sha256("".join(effective).encode("utf-8")).hexdigest() != LEGACY_POST_STATES_SHA256:
+        errors.append("DELIVERY_LEGACY_POST_STATES_HASH_INVALID")
+    for entry in receipt.get("checklist_compatibility", []):
+        path = repo_root / entry.get("path", "")
+        if not path.is_file() or hashlib.sha256(path.read_bytes()).hexdigest() != entry.get("sha256"):
+            errors.append(f"{entry.get('path')}: DELIVERY_CHECKLIST_PROVENANCE_HASH_INVALID")
+            continue
+        try:
+            checklist = json.loads(path.read_text(encoding="utf-8"))
+        except json.JSONDecodeError:
+            errors.append(f"{entry.get('path')}: DELIVERY_CHECKLIST_PROVENANCE_JSON_INVALID")
+            continue
+        if checklist.get("record_id") != entry.get("record_id") or checklist.get("status") != "completed":
+            errors.append(f"{entry.get('path')}: DELIVERY_CHECKLIST_PROVENANCE_ID_INVALID")
+        if entry.get("scope") == "legacy-core-only-module" and checklist.get("module_id") is not None:
+            errors.append(f"{entry.get('path')}: DELIVERY_CHECKLIST_PROVENANCE_SCOPE_INVALID")
+        authority_bytes = git_bytes_at_commit(repo_root, entry.get("authority_commit", ""), entry.get("path", ""))
+        if authority_bytes is None or hashlib.sha256(authority_bytes).hexdigest() != entry.get("sha256"):
+            errors.append(f"{entry.get('path')}: DELIVERY_CHECKLIST_PROVENANCE_AUTHORITY_INVALID")
+        task_path = entry.get("task_order_path")
+        if task_path and git_bytes_at_commit(repo_root, entry.get("authority_commit", ""), task_path) is None:
+            errors.append(f"{entry.get('path')}: DELIVERY_CHECKLIST_PROVENANCE_TASK_ORDER_INVALID")
+    return errors, receipt
+
+
 def metric_target_met(metric: dict) -> bool:
     actual = metric["actual_value"]
     target = metric["target_value"]
@@ -102,6 +224,8 @@ def validate(
     if now.tzinfo is None:
         raise ValueError("validation clock must be timezone-aware")
     work_items = registry["work_items"]
+    receipt_errors, receipt = validate_legacy_receipt(policy, repo_root, registry)
+    errors.extend(receipt_errors)
     cutover_id = policy.get("migration", {}).get("legacy_cutover_work_id")
     snapshot = git_json_at_commit(repo_root, LEGACY_SNAPSHOT_COMMIT, LEGACY_SNAPSHOT_PATH)
     if snapshot is None:
@@ -120,7 +244,15 @@ def validate(
                 (item.get("work_id"), item.get("status"))
                 for item in work_items[:len(snapshot_prefix)]
             ]
-            if current_prefix != snapshot_prefix:
+            allowed_prefixes = [snapshot_prefix]
+            if receipt:
+                projected = list(snapshot_prefix)
+                for entry in receipt.get("transitions", []):
+                    index = entry.get("legacy_index")
+                    if isinstance(index, int) and index < len(projected):
+                        projected[index] = (entry.get("work_id"), entry.get("to_status"))
+                allowed_prefixes.append(projected)
+            if current_prefix not in allowed_prefixes:
                 errors.append("DELIVERY_LEGACY_EXTERNAL_SNAPSHOT_MISMATCH")
     if (
         policy.get("migration", {}).get("legacy_snapshot_commit") != LEGACY_SNAPSHOT_COMMIT
@@ -141,13 +273,18 @@ def validate(
             f"{item['work_id']}\t{item['status']}" for item in work_items[:cutover_index + 1]
         ) + "\n"
         actual_state_hash = hashlib.sha256(legacy_states.encode("utf-8")).hexdigest()
-        if actual_state_hash != policy["migration"]["legacy_work_states_sha256"]:
+        allowed_state_hashes = {policy["migration"]["legacy_work_states_sha256"]}
+        if receipt:
+            allowed_state_hashes.add(receipt.get("post_effective_states_sha256"))
+        if actual_state_hash not in allowed_state_hashes:
             errors.append("DELIVERY_LEGACY_STATE_CHANGED_WITHOUT_MIGRATION")
+        compatible_versions = set(policy.get("compatible_item_policy_versions", [policy.get("contract_version")]))
         for item in work_items[cutover_index + 1:]:
-            if item.get("flow_policy_version") != policy.get("contract_version"):
+            if item.get("flow_policy_version") not in compatible_versions:
                 errors.append(f"{item['work_id']}: DELIVERY_NEW_ITEM_POLICY_REQUIRED")
 
-    governed = [i for i in work_items if i.get("flow_policy_version") == policy.get("contract_version")]
+    compatible_versions = set(policy.get("compatible_item_policy_versions", [policy.get("contract_version")]))
+    governed = [i for i in work_items if i.get("flow_policy_version") in compatible_versions]
     for item in governed:
         missing = sorted(REQUIRED_FLOW_FIELDS - item.keys())
         if missing:

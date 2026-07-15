@@ -1,0 +1,120 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/foundation/legacy-lifecycle-migration.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "contract_version",
+    "receipt_id",
+    "operation",
+    "state",
+    "applied",
+    "legacy_anchor",
+    "source_registry",
+    "post_registry_sha256",
+    "task_order",
+    "canonical_transition_format",
+    "transitions",
+    "transition_sha256",
+    "post_effective_states_sha256",
+    "checklist_compatibility",
+    "review",
+    "integration"
+  ],
+  "properties": {
+    "contract_version": {"const": "legacy-lifecycle-migration.v1"},
+    "receipt_id": {"const": "LLM-20260715-ACTIVITY-MALL-M2-R1"},
+    "operation": {"const": "legacy_status_transition"},
+    "state": {"const": "authorized-not-applied"},
+    "applied": {"const": false},
+    "legacy_anchor": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "snapshot_commit",
+        "snapshot_path",
+        "cutover_work_id",
+        "work_ids_sha256",
+        "work_states_sha256"
+      ],
+      "properties": {
+        "snapshot_commit": {"const": "33f5e45499fbadaac71f07bbe6de5d72579e39c9"},
+        "snapshot_path": {"const": "contracts/foundation/agent-collaboration.v1.json"},
+        "cutover_work_id": {"const": "AIW-20260713-PROTECTION-MALL-M2-PORTS-SIMULATION"},
+        "work_ids_sha256": {"const": "64105cf520b0c971150d0491eba27967d7976aa0bad89400ececd302959d650e"},
+        "work_states_sha256": {"const": "b7dc23fab67191405a852301ae4f9650164bf3e619bd323587d684f1e5773aaa"}
+      }
+    },
+    "source_registry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "commit", "sha256"],
+      "properties": {
+        "path": {"const": "contracts/foundation/agent-collaboration.v1.json"},
+        "commit": {"const": "8776166a52249c673ecaa24b4cd6b0522f4aba59"},
+        "sha256": {"const": "d961e0b3e11f00c115bdd98f6d1216e2552bd83015c6339ce1774ef9c7a222d5"}
+      }
+    },
+    "post_registry_sha256": {"type": "null"},
+    "task_order": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["path", "sha256"],
+      "properties": {
+        "path": {"const": "docs/project-management/notices/2026-07-15-platform-delivery-flow-legacy-migration-v2-task-order.md"},
+        "sha256": {"pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    "canonical_transition_format": {"const": "work_id<TAB>from_status<TAB>to_status<LF> in ascending legacy index order"},
+    "transitions": {
+      "type": "array",
+      "minItems": 5,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "legacy_index",
+          "work_id",
+          "from_status",
+          "to_status",
+          "source_row_sha256",
+          "before_state_sha256",
+          "after_state_sha256"
+        ],
+        "properties": {
+          "legacy_index": {"type": "integer", "minimum": 0, "maximum": 114},
+          "work_id": {"type": "string", "pattern": "^AIW-[0-9]{8}-[A-Z0-9-]+$"},
+          "from_status": {"enum": ["planned", "active", "handoff-ready", "integrated", "cancelled"]},
+          "to_status": {"enum": ["planned", "active", "handoff-ready", "integrated", "cancelled"]},
+          "source_row_sha256": {"pattern": "^[a-f0-9]{64}$"},
+          "before_state_sha256": {"pattern": "^[a-f0-9]{64}$"},
+          "after_state_sha256": {"pattern": "^[a-f0-9]{64}$"}
+        }
+      }
+    },
+    "transition_sha256": {"const": "5dfa87a441a04eb8a24e3a4de883648780b6eaeddf2c870d831fa6ed29620939"},
+    "post_effective_states_sha256": {"const": "7f1991952dea49dff84e6378dbdc4edd22f4bf72334e0a8c08a36474fb984ec6"},
+    "checklist_compatibility": {
+      "type": "array",
+      "minItems": 18,
+      "uniqueItems": true,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["path", "sha256", "record_id", "work_id", "scope", "authority_commit", "task_order_path"],
+        "properties": {
+          "path": {"type": "string", "pattern": "^contracts/(foundation|modules/[a-z0-9-]+)/development-checklists/.+\\.json$"},
+          "sha256": {"pattern": "^[a-f0-9]{64}$"},
+          "record_id": {"type": "string", "pattern": "^IR-[A-Z0-9-]+$"},
+          "work_id": {"type": "string", "pattern": "^AIW-[0-9]{8}-[A-Z0-9-]+$"},
+          "scope": {"enum": ["platform", "legacy-core-only-module"]},
+          "authority_commit": {"pattern": "^[a-f0-9]{40}$"},
+          "task_order_path": {"type": ["string", "null"]}
+        }
+      }
+    },
+    "review": {"type": "null"},
+    "integration": {"type": "null"}
+  }
+}

@@ -8,6 +8,8 @@ import unittest
 from datetime import datetime, timezone
 from pathlib import Path
 
+from jsonschema import Draft202012Validator
+
 ROOT = Path(__file__).resolve().parents[2]
 SPEC = importlib.util.spec_from_file_location("flow", ROOT / "scripts" / "validate_delivery_flow_policy.py")
 FLOW = importlib.util.module_from_spec(SPEC)
@@ -22,8 +24,8 @@ COLLABORATION_SCHEMA = ROOT / "contracts" / "foundation" / "agent-collaboration.
 
 class DeliveryFlowPolicyTests(unittest.TestCase):
     def setUp(self):
-        self.policy = json.loads((ROOT / "contracts/foundation/delivery-flow-policy.v1.json").read_text(encoding="utf-8"))
-        self.schema = ROOT / "contracts/foundation/delivery-flow-policy.v1.schema.json"
+        self.policy = json.loads((ROOT / "contracts/foundation/delivery-flow-policy.v2.json").read_text(encoding="utf-8"))
+        self.schema = ROOT / "contracts/foundation/delivery-flow-policy.v2.schema.json"
         self.registry = json.loads((ROOT / "contracts/foundation/agent-collaboration.v1.json").read_text(encoding="utf-8"))
         self.repo_commit = subprocess.run(
             ["git", "-C", str(ROOT), "rev-parse", "HEAD"],
@@ -81,6 +83,30 @@ class DeliveryFlowPolicyTests(unittest.TestCase):
 
     def test_current_registry_passes(self):
         self.assertEqual([], self.run_validation())
+        post_cutover = copy.deepcopy(self.registry)
+        item = next(
+            row for row in post_cutover["work_items"]
+            if row["work_id"] == "AIW-20260715-PLATFORM-DELIVERY-FLOW-LEGACY-MIGRATION-V2"
+        )
+        item["flow_policy_version"] = "delivery-flow-policy.v2"
+        self.assertEqual([], self.run_validation(registry=post_cutover))
+        receipt = json.loads((ROOT / self.policy["migration"]["receipt_path"]).read_text(encoding="utf-8"))
+        canonical = "".join(
+            f"{entry['work_id']}\t{entry['from_status']}\t{entry['to_status']}\n"
+            for entry in receipt["transitions"]
+        )
+        self.assertEqual(hashlib.sha256(canonical.encode("utf-8")).hexdigest(), FLOW.LEGACY_TRANSITION_SHA256)
+        projected = []
+        by_index = {entry["legacy_index"]: entry for entry in receipt["transitions"]}
+        for index, row in enumerate(self.registry["work_items"][:115]):
+            projected.append(f"{row['work_id']}\t{by_index.get(index, {}).get('to_status', row['status'])}\n")
+        self.assertEqual(hashlib.sha256("".join(projected).encode("utf-8")).hexdigest(), FLOW.LEGACY_POST_STATES_SHA256)
+        schema = json.loads((ROOT / self.policy["migration"]["receipt_schema_path"]).read_text(encoding="utf-8"))
+        receipt["transitions"].pop()
+        receipt["review"] = {"verdict": "go"}
+        messages = [error.message for error in Draft202012Validator(schema).iter_errors(receipt)]
+        self.assertTrue(any("too short" in message for message in messages), messages)
+        self.assertTrue(any("not of type 'null'" in message for message in messages), messages)
 
     def test_rejects_expired_status_contract(self):
         registry = copy.deepcopy(self.registry)
@@ -130,6 +156,9 @@ class DeliveryFlowPolicyTests(unittest.TestCase):
         registry["work_items"].append(item)
         errors = self.run_validation(registry=registry)
         self.assertTrue(any("DELIVERY_NEW_ITEM_POLICY_REQUIRED" in e for e in errors))
+        unknown = copy.deepcopy(self.registry)
+        unknown["work_items"][-1]["flow_policy_version"] = "delivery-flow-policy.v999"
+        self.assertTrue(any("DELIVERY_NEW_ITEM_POLICY_REQUIRED" in e for e in self.run_validation(registry=unknown)))
 
     def test_rejects_legacy_status_change_without_migration(self):
         registry = copy.deepcopy(self.registry)
@@ -137,6 +166,11 @@ class DeliveryFlowPolicyTests(unittest.TestCase):
         item["status"] = "active"
         errors = self.run_validation(registry=registry)
         self.assertIn("DELIVERY_LEGACY_STATE_CHANGED_WITHOUT_MIGRATION", errors)
+        partial = copy.deepcopy(self.registry)
+        receipt = json.loads((ROOT / self.policy["migration"]["receipt_path"]).read_text(encoding="utf-8"))
+        first = receipt["transitions"][0]
+        partial["work_items"][first["legacy_index"]]["status"] = first["to_status"]
+        self.assertIn("DELIVERY_LEGACY_PARTIAL_TRANSITION", self.run_validation(registry=partial))
 
     def test_rejects_legacy_self_rehashed_policy(self):
         registry = copy.deepcopy(self.registry)
@@ -153,6 +187,9 @@ class DeliveryFlowPolicyTests(unittest.TestCase):
             ("\n".join(rows) + "\n").encode("utf-8")
         ).hexdigest()
         self.assertTrue(self.run_validation(policy=policy, registry=registry))
+        receipt_tamper = copy.deepcopy(self.policy)
+        receipt_tamper["migration"]["receipt_sha256"] = "0" * 64
+        self.assertIn("DELIVERY_LEGACY_RECEIPT_HASH_MISMATCH", self.run_validation(policy=receipt_tamper))
 
     def test_rejects_registry_policy_schema_triple_tamper(self):
         registry = copy.deepcopy(self.registry)
@@ -192,6 +229,14 @@ class DeliveryFlowPolicyTests(unittest.TestCase):
         item["status"] = "handoff-ready"
         errors = self.run_validation(registry=registry)
         self.assertTrue(any("DELIVERY_HANDOFF_OWNER_OR_REQUEST_MISSING" in e for e in errors))
+        projected = copy.deepcopy(self.registry)
+        receipt = json.loads((ROOT / self.policy["migration"]["receipt_path"]).read_text(encoding="utf-8"))
+        for entry in receipt["transitions"]:
+            projected["work_items"][entry["legacy_index"]]["status"] = entry["to_status"]
+        projected_errors = self.run_validation(registry=projected)
+        self.assertFalse(any("LEGACY" in error for error in projected_errors), projected_errors)
+        self.assertTrue(any("HANDOFF_OWNER_OR_REQUEST_MISSING" in error for error in projected_errors), projected_errors)
+        self.assertTrue(any("INDEPENDENT_ACCEPTANCE_REQUIRED" in error for error in projected_errors), projected_errors)
 
     def test_rejects_overdue_handoff_sla(self):
         registry = copy.deepcopy(self.registry)
