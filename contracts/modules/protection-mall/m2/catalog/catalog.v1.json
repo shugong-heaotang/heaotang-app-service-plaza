@@ -10,13 +10,19 @@
       "activity": "service"
     },
     "assurance_policy": {
-      "protection_mall": "allowed",
-      "club_mall": "forbidden"
+      "protection_mall": {
+        "catalog_snapshot": "permitted",
+        "real_grant_gate": "order_completed && after_sale_closed"
+      },
+      "club_mall": {
+        "catalog_snapshot": "forbidden",
+        "error_code": "MALL_BENEFIT_FORBIDDEN"
+      }
     },
     "failure_mode": "fail_closed"
   },
   "catalog_entry": {
-    "required_fields": ["id", "kind", "scene_ids", "responsibility", "price_snapshot", "benefit_snapshot"],
+    "required_fields": ["contract_version", "id", "kind", "title", "scene_ids", "responsibility", "price_snapshot", "benefit_snapshot"],
     "scene_ids": "non_empty_unique_strings",
     "publish_scope": "catalog:write",
     "cross_seller_scope": "catalog:write:any"
@@ -28,7 +34,7 @@
     "copy_policy": "detached_copy"
   },
   "membership_plan": {
-    "required_scope": "catalog:read",
+    "required_scope": "catalog:plan",
     "owner": "authenticated_actor",
     "operations": ["compose", "replace"],
     "budget": "non_negative_int64_minor_units",
@@ -43,11 +49,17 @@
   },
   "error_codes": [
     "MALL_CATALOG_INVALID_ARGUMENT",
-    "MALL_CATALOG_PERMISSION_DENIED",
+    "MALL_CATALOG_UNTRUSTED_SCOPE",
+    "MALL_CATALOG_FORBIDDEN",
     "MALL_CATALOG_RESPONSIBILITY_MISSING",
     "MALL_CATALOG_NOT_FOUND",
     "MALL_CATALOG_SNAPSHOT_IMMUTABLE",
-    "MALL_CATALOG_BUDGET_EXCEEDED"
+    "MALL_CATALOG_BUDGET_EXCEEDED",
+    "MALL_CATALOG_CURRENCY_MISMATCH",
+    "MALL_CATALOG_ARITHMETIC_OVERFLOW",
+    "MALL_CATALOG_REPLACEMENT_NOT_FOUND",
+    "MALL_CATALOG_DUPLICATE_PLAN_ITEM",
+    "MALL_BENEFIT_FORBIDDEN"
   ],
   "no_go": ["database", "route", "network", "payment", "refund", "reconciliation", "real_data", "deployment", "production"]
 }

@@ -1,0 +1,71 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-PROTECTION-MALL-M2-CATALOG-R3",
+  "title": "保障商城 M2 Catalog Evidence 接管收口 R3",
+  "date": "2026-07-15",
+  "status": "verified",
+  "objective": "接管并保全既有 M2 Catalog Evidence 变更，以新的 current checklist 和 100 分考试纠正 R2 失实治理结论，并把合同、Schema、合成夹具和验证器逐字段绑定后端精确提交 22073cd8。",
+  "governance_checklist": "contracts/modules/protection-mall/development-checklists/2026-07-13-protection-mall-m2-catalog-r3.json",
+  "governance_exam": "contracts/modules/protection-mall/governance-exams/2026-07-13-protection-mall-m2-catalog-r3-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "docs/project-management/modules/protection-mall/README.md",
+    "contracts/modules/protection-mall/internal-dependencies.v2.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-13-protection-mall-m2-offline-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.recurrence-prevention",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/modules/protection-mall/m2/catalog/catalog.v1.json",
+    "contracts/modules/protection-mall/m2/catalog/catalog.v1.schema.json",
+    "contracts/modules/protection-mall/m2/catalog/fixtures/cases.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/modules/protection-mall/m2/catalog/",
+    "contracts/modules/protection-mall/development-checklists/2026-07-13-protection-mall-m2-catalog-r3.json",
+    "contracts/modules/protection-mall/governance-exams/2026-07-13-protection-mall-m2-catalog-r3-attempt-1.json",
+    "contracts/modules/protection-mall/implementation-records/2026-07-13-protection-mall-m2-catalog-r2.json",
+    "docs/project-management/modules/protection-mall/m2-catalog-evidence.md",
+    "docs/project-management/modules/protection-mall/handoff-m2.md"
+  ],
+  "verification": [
+    "R3 current checklist 29 of 29 complete",
+    "R3 governance exam attempt 1 passed with score 100",
+    "catalog contract Schema and 18 exact synthetic fixtures pass",
+    "backend exact commit 22073cd8 reviewed with a clean worktree",
+    "targeted Go test and race test pass",
+    "full Go test and vet pass",
+    "gofmt and git diff check pass"
+  ],
+  "evidence": [
+    "docs/project-management/modules/protection-mall/m2-catalog-evidence.md",
+    "docs/project-management/modules/protection-mall/handoff-m2.md"
+  ],
+  "premises": [
+    "R2 failed exam and superseded implementation record remain immutable historical evidence",
+    "this slice is offline contracts and in-memory domain evidence only",
+    "database, route, network, payment, real data, deployment and production remain No-Go",
+    "protection mall real assurance grant remains gated by order_completed and after_sale_closed",
+    "independent acceptance is still required before controlled integration"
+  ],
+  "implementation_mode": "ai-assisted"
+}

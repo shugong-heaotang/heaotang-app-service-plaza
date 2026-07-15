@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-PROTECTION-MALL-M2-CATALOG-R2",
+  "title": "保障商城 M2 统一目录与会员方案离线领域核 R2 语义对齐",
+  "date": "2026-07-13",
+  "status": "superseded",
+  "objective": "将商城 M2 目录合同、Schema、夹具和离线验证器逐字段对齐后端精确提交 22073cd8，关闭 f332c7e 仅结构校验导致的语义漂移。",
+  "governance_checklist": "contracts/modules/protection-mall/development-checklists/2026-07-13-protection-mall-m2-catalog-r2.json",
+  "governance_exam": null,
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/agent-collaboration.v1.json", "docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-13-protection-mall-m2-offline-task-order.md"],
+  "capabilities": ["foundation.authorization-idempotency", "foundation.business-variables", "foundation.contract-tooling"],
+  "contracts": ["contracts/modules/protection-mall/m2/catalog/catalog.v1.json", "contracts/modules/protection-mall/m2/catalog/catalog.v1.schema.json", "contracts/modules/protection-mall/m2/catalog/fixtures/cases.v1.json"],
+  "decisions": ["docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0008-versioned-business-variables.md", "docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"],
+  "changed_areas": ["contracts/modules/protection-mall/m2/catalog/", "docs/project-management/modules/protection-mall/m2-catalog-evidence.md", "docs/project-management/modules/protection-mall/handoff-m2.md"],
+  "verification": ["preflight ready", "R2 governance exam attempt 1 failed with score 75 and remains immutable", "superseded by IR-20260713-PROTECTION-MALL-M2-CATALOG-R3 before implementation closure"],
+  "evidence": ["docs/project-management/modules/protection-mall/m2-catalog-evidence.md", "docs/project-management/modules/protection-mall/handoff-m2.md"],
+  "premises": ["f332c7e remains an immutable superseded snapshot", "this slice is offline contracts and in-memory domain only", "database, route, network, payments, real data, deployment and production remain No-Go", "protection mall real assurance grant remains gated by M1 order_completed and after_sale_closed"],
+  "implementation_mode": "ai-assisted"
+}
