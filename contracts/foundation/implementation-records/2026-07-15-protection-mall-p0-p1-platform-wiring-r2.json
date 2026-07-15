@@ -1,18 +1,19 @@
 {
   "contract_version": "implementation-record.v1",
-  "record_id": "IR-20260715-PROTECTION-MALL-P0-P1-PLATFORM-WIRING",
-  "title": "保障商城 P0/P1 共享路由与质量 CI 接线",
+  "record_id": "IR-20260715-PROTECTION-MALL-P0-P1-PLATFORM-WIRING-R2",
+  "title": "保障商城 P0/P1 共享路由与质量 CI 接线 R2",
   "date": "2026-07-15",
-  "status": "superseded",
-  "objective": "在 Runtime Independent Go 后，将保障商城挂载到共享 APP 精确路由，增加路由级真实契约验证，并建立锁文件测试、构建和 UTF-8 质量 CI。",
-  "governance_checklist": "contracts/foundation/development-checklists/2026-07-15-protection-mall-p0-p1-platform-wiring.json",
-  "governance_exam": "contracts/foundation/governance-exams/2026-07-15-protection-mall-p0-p1-platform-wiring-attempt-1.json",
+  "status": "verified",
+  "objective": "在 Runtime 与焦点竞态修复均获 Independent Go 后，完成保障商城精确共享路由、真实路由测试和稳定的锁文件 APP 质量 CI。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-15-protection-mall-p0-p1-platform-wiring-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-15-protection-mall-p0-p1-platform-wiring-r2-attempt-1.json",
   "governance_inputs": [
     "AGENTS.md",
     "README.md",
     "CONSTRAINTS.md",
     "contracts/foundation/agent-collaboration.v1.json",
     "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
     "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
     "docs/decisions/0017-readme-course-and-random-governance-exam.md"
   ],
@@ -30,6 +31,7 @@
   ],
   "decisions": [
     "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
     "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
     "docs/decisions/0017-readme-course-and-random-governance-exam.md"
   ],
@@ -37,28 +39,30 @@
     "app/src/App.tsx",
     "app/src/App.test.tsx",
     ".github/workflows/app-quality.yml",
-    "contracts/foundation/development-checklists/2026-07-15-protection-mall-p0-p1-platform-wiring.json",
-    "contracts/foundation/governance-exams/2026-07-15-protection-mall-p0-p1-platform-wiring-attempt-1.json",
+    "contracts/foundation/development-checklists/2026-07-15-protection-mall-p0-p1-platform-wiring*.json",
+    "contracts/foundation/governance-exams/2026-07-15-protection-mall-p0-p1-platform-wiring*.json",
+    "contracts/foundation/implementation-records/2026-07-15-protection-mall-p0-p1-platform-wiring*.json",
     "docs/project-management/modules/protection-mall/handoff-p0-p1.md"
   ],
   "verification": [
-    "foundation checklist is complete and current with governance exam score 100",
+    "R2 foundation checklist is current 26 of 26 and governance exam passed with score 100",
     "the exact protection mall route precedes the generic serviceKey route",
-    "route-level test proves mall.catalog.v1 rendering and shared Authorization forwarding",
-    "App route tests passed 8 of 8 and APP full regression passed 26 files and 250 tests",
+    "route-level test proves mall.catalog.v1 rendering shared Authorization and non-generic page behavior",
+    "after integrating focus stabilization five consecutive full rounds passed 26 files and 250 tests each for 1250 passing test executions",
     "TypeScript and Vite production build passed",
     "APP quality CI uses npm ci and runs tests build and UTF-8 validation with read-only contents permission"
   ],
   "evidence": [
     "app/src/App.test.tsx",
     ".github/workflows/app-quality.yml",
+    "contracts/modules/protection-mall/implementation-records/2026-07-15-protection-mall-runtime-test-stability.json",
     "docs/project-management/modules/protection-mall/handoff-p0-p1.md"
   ],
   "premises": [
-    "runtime source 6ea6be4 has Independent Go and is already integrated",
-    "the platform work item does not modify protection mall business code",
+    "runtime source 6ea6be4 and focus stability source ab1be6c have Independent Go and are integrated",
+    "the platform work item does not modify protection mall production business code",
     "backend routes database writes orders payment deployment and production remain No-Go",
-    "independent review must return Go before controlled integration"
+    "final independent review must return Go before controlled integration"
   ],
   "implementation_mode": "ai-assisted"
 }
