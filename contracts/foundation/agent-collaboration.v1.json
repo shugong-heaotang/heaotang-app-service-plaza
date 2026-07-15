@@ -3320,6 +3320,53 @@
                            "preexisting_changes_acknowledged":  true,
                            "migration_note":  "Conditional Go仅覆盖M0治理冻结；planned工作树尚未创建，故started_with_clean_worktree=false并显式确认该事实；激活前必须由平台集成负责人重新确认exact base、创建干净专用工作树、验证路径无冲突并注册project-brain-v2治理overlay。M1去标识经营事实合同须待M0独立Go后另行授权；M2-M5均No-Go。App、scripts、registry、Project Brain v1和SC remediation均排除。调度器与老板驾驶舱必须只读、不回写、Unknown显式、失败关闭；行级会员/健康/交易/客服、真实数据、凭据、环境、部署和production全部禁止。developer=Project Brain v2 project owner；reviewer=independent Project Brain v2 reviewer；approver=项目最高负责人；integration owner=平台集成负责人。blocks=M1-M5；does_not_block=Project Brain v1、其他隔离模块、SC remediation。停止条件=M0未独立Go、overlay/基线/路径未就绪或触达明确禁止范围。",
                            "handoff_record":  "docs/project-management/project-brain-v2/handoff-v2.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260715-PROTECTION-MALL-P0-P1-RUNTIME",
+                           "title":  "保障商城 P0/P1 模块运行时产品化",
+                           "owner":  "Protection Mall frontend productization agent",
+                           "owner_role":  "商城前端产品化唯一负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-p0-p1-runtime-r2",
+                           "branch":  "codex/protection-mall-p0-p1-runtime-r2",
+                           "base_commit":  "4e40a45b2f1eab932d1f5607534028a57b15cf0b",
+                           "allowed_paths":  [
+                                                 "app/src/modules/protection-mall/**",
+                                                 "contracts/modules/protection-mall/development-checklists/2026-07-15-protection-mall-p0-p1-runtime*.json",
+                                                 "contracts/modules/protection-mall/governance-exams/2026-07-15-protection-mall-p0-p1-runtime*.json",
+                                                 "contracts/modules/protection-mall/implementation-records/2026-07-15-protection-mall-p0-p1-runtime*.json",
+                                                 "docs/project-management/notices/2026-07-15-protection-mall-p0-p1-productization-task-order.md",
+                                                 "docs/project-management/modules/protection-mall/handoff-p0-p1.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "项目最高负责人授权在M2目录与Evidence受控集成后立即继续全部P0/P1。首检查点仅模块路径：共享businessApiAdapter、严格目录解码、loading/empty/error/success、取消与迟到响应隔离、重复请求抑制、无障碍和模块测试。后端路由、共享App、CI、写入、支付、部署与生产未授权。",
+                           "handoff_record":  "docs/project-management/modules/protection-mall/handoff-p0-p1.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260715-PROTECTION-MALL-P0-P1-PLATFORM-WIRING",
+                           "title":  "保障商城 P0/P1 共享路由与质量 CI 接线",
+                           "owner":  "Codex platform integration agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "planned",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-p0-p1-platform-wiring",
+                           "branch":  "codex/protection-mall-p0-p1-platform-wiring",
+                           "base_commit":  "4e40a45b2f1eab932d1f5607534028a57b15cf0b",
+                           "allowed_paths":  [
+                                                 "app/src/App.tsx",
+                                                 "app/src/App.test.tsx",
+                                                 ".github/workflows/app-quality.yml",
+                                                 "contracts/foundation/development-checklists/2026-07-15-protection-mall-p0-p1-platform-wiring*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-15-protection-mall-p0-p1-platform-wiring*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-15-protection-mall-p0-p1-platform-wiring*.json",
+                                                 "docs/project-management/modules/protection-mall/handoff-p0-p1.md"
+                                             ],
+                           "started_with_clean_worktree":  false,
+                           "preexisting_changes_acknowledged":  true,
+                           "migration_note":  "planned；仅在runtime独立Go后从最新authority创建干净工作树并激活。只负责App路由、路由测试和质量CI，不重写商城业务。部署、测试服发布与生产继续No-Go。",
+                           "handoff_record":  "docs/project-management/modules/protection-mall/handoff-p0-p1.md"
                        }
                    ]
 }
