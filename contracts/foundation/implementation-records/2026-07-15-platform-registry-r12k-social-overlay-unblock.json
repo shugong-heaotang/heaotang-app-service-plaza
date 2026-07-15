@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-PLATFORM-REGISTRY-R12K-SOCIAL-OVERLAY-UNBLOCK",
+  "title": "R12-K current-clock refresh and Overlay path release",
+  "date": "2026-07-15",
+  "status": "implemented",
+  "objective": "Cancel two superseded Overlay non-terminal rows using preserved fresh No-Go evidence and refresh all other 18:30 non-terminal target rows without applying the Legacy five-row transaction or fabricating independent acceptance.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-15-platform-registry-r12k-social-overlay-unblock.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-15-platform-registry-r12k-social-overlay-unblock-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/governance-reading-list.v1.json", "contracts/foundation/agent-collaboration.v1.json", "docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0014-ai-development-flight-checklist.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md", "docs/decisions/0017-readme-course-and-random-governance-exam.md", "docs/decisions/0018-recursive-project-governance.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-15-platform-registry-r12k-social-overlay-unblock-task-order.md"],
+  "capabilities": ["foundation.ai-collaboration-safety", "foundation.governance-certification", "foundation.recurrence-prevention"],
+  "contracts": ["contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/delivery-flow-policy.v2.json"],
+  "decisions": ["docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"],
+  "changed_areas": ["contracts/foundation/agent-collaboration.v1.json", "docs/project-management/notices/2026-07-15-platform-registry-r12k-social-overlay-unblock-task-order.md", "contracts/foundation/development-checklists/2026-07-15-platform-registry-r12k-social-overlay-unblock.json", "contracts/foundation/governance-exams/2026-07-15-platform-registry-r12k-social-overlay-unblock-attempt-1.json", "contracts/foundation/implementation-records/2026-07-15-platform-registry-r12k-social-overlay-unblock.json", "docs/project-management/service-plaza/platform-registry-r12k-social-overlay-unblock-handoff.md"],
+  "verification": ["clean authority and merge-base equal 92ce89eab132ef5326f49de3fa3e619f1b949fb2", "current checklist completed 26 of 26 and governance exam attempt 1 passed with score 100", "indices 119 and 125 are cancelled using preserved d09d5d0 No-Go", "indices 109 111 117 123 and 126 remain active with current-clock refresh", "collaboration and Delivery Flow V2 validators pass", "Social R2 and the Legacy five-row transaction are excluded"],
+  "evidence": ["docs/project-management/service-plaza/platform-registry-r12k-social-overlay-unblock-handoff.md", "docs/project-management/independent-acceptance/platform-nova-overlay-r2/evidence-r2.md", "contracts/foundation/development-checklists/2026-07-15-platform-registry-r12k-social-overlay-unblock.json", "contracts/foundation/governance-exams/2026-07-15-platform-registry-r12k-social-overlay-unblock-attempt-1.json"],
+  "premises": ["d09d5d0 remains No-Go and is not converted to Go", "J2 lacks file-backed independent Go evidence in authority so index 126 cannot be integrated", "the fixed receipt remains authorized-not-applied", "developer does not push integrate or independently accept this candidate"],
+  "implementation_mode": "ai-assisted"
+}
