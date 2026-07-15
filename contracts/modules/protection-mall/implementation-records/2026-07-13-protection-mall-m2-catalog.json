@@ -1,0 +1,64 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260713-PROTECTION-MALL-M2-CATALOG",
+  "title": "保障商城 M2 统一目录与会员方案离线领域核",
+  "date": "2026-07-13",
+  "status": "verified",
+  "objective": "冻结并验证统一商品、服务、课程、活动目录、场景馆、会员方案组合替换预算、价格权益快照和责任主体失败关闭的离线领域合同。",
+  "governance_checklist": "contracts/modules/protection-mall/development-checklists/2026-07-13-protection-mall-m2-catalog.json",
+  "governance_exam": "contracts/modules/protection-mall/governance-exams/2026-07-13-protection-mall-m2-catalog-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-13-protection-mall-m2-offline-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.authorization-idempotency",
+    "foundation.business-variables",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/modules/protection-mall/m2/catalog/catalog.v1.json",
+    "contracts/modules/protection-mall/m2/catalog/catalog.v1.schema.json",
+    "contracts/modules/protection-mall/m2/catalog/fixtures/cases.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+  ],
+  "changed_areas": [
+    "backend-go/plugins/mall-plugin/catalog_m2.go@22073cd8ddeff48a4f679ffcd41a2686d8ea3ba5",
+    "backend-go/plugins/mall-plugin/catalog_m2_test.go@22073cd8ddeff48a4f679ffcd41a2686d8ea3ba5",
+    "contracts/modules/protection-mall/m2/catalog/",
+    "docs/project-management/modules/protection-mall/m2-catalog-evidence.md",
+    "docs/project-management/modules/protection-mall/handoff-m2.md"
+  ],
+  "verification": [
+    "preflight ready",
+    "governance exam 100",
+    "go test ./plugins/mall-plugin -run M2Catalog -count=1 passed",
+    "go test -race ./plugins/mall-plugin -run M2Catalog -count=1 passed",
+    "go test ./... passed",
+    "go vet ./... passed",
+    "gofmt -d and git diff --check passed",
+    "validate_catalog_contracts.py passed"
+  ],
+  "evidence": [
+    "docs/project-management/modules/protection-mall/m2-catalog-evidence.md",
+    "docs/project-management/modules/protection-mall/handoff-m2.md"
+  ],
+  "premises": [
+    "本切片只授权纯 Go 内存领域核和合成 fixture",
+    "数据库路由网络支付真实资金真实数据部署和上线继续 No-Go",
+    "M2 订单履约只能在本切片受控集成后另立工作项激活"
+  ],
+  "implementation_mode": "ai-assisted"
+}
