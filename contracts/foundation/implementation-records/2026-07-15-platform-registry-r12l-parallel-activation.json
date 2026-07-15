@@ -1,0 +1,20 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-PLATFORM-REGISTRY-R12L-PARALLEL-ACTIVATION",
+  "title": "R12-L two-stage parallel child registration",
+  "date": "2026-07-15",
+  "status": "implemented",
+  "objective": "Register two planned Social R2 children and activate isolated Legacy V2 independent-review and Legacy Lifecycle Batch R2 preparation children without changing legacy rows or executing a migration.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-15-platform-registry-r12l-parallel-activation.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-15-platform-registry-r12l-parallel-activation-attempt-1.json",
+  "governance_inputs": ["AGENTS.md", "README.md", "CONSTRAINTS.md", "contracts/foundation/governance-reading-list.v1.json", "contracts/foundation/agent-collaboration.v1.json", "docs/project-management/ai-coding-incident-lessons-2026-07-10.md", "docs/project-management/recursive-project-governance-v1.md", "docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0014-ai-development-flight-checklist.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md", "docs/decisions/0017-readme-course-and-random-governance-exam.md", "docs/decisions/0018-recursive-project-governance.md"],
+  "requirement_sources": ["docs/project-management/notices/2026-07-15-platform-registry-r12l-parallel-activation-task-order.md"],
+  "capabilities": ["foundation.ai-collaboration-safety", "foundation.governance-certification", "foundation.recurrence-prevention"],
+  "contracts": ["contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/delivery-flow-policy.v2.json", "contracts/foundation/legacy-lifecycle-migration.v1.schema.json"],
+  "decisions": ["docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md", "docs/decisions/0021-versioned-legacy-lifecycle-receipts.md"],
+  "changed_areas": ["contracts/foundation/agent-collaboration.v1.json", "docs/project-management/notices/2026-07-15-platform-registry-r12l-parallel-activation-task-order.md", "contracts/foundation/development-checklists/2026-07-15-platform-registry-r12l-parallel-activation.json", "contracts/foundation/governance-exams/2026-07-15-platform-registry-r12l-parallel-activation-attempt-1.json", "contracts/foundation/implementation-records/2026-07-15-platform-registry-r12l-parallel-activation.json", "docs/project-management/service-plaza/platform-registry-r12l-parallel-activation-handoff.md"],
+  "verification": ["clean APP authority and merge-base equal d7d57bdb2f9b7fc90038d92a522e56393de1f22a", "backend R2 worktree is clean at 091c9be9db8c58e780cf2543f8a6731faab076d2", "R12-L checklist completed 26 of 26 and exam attempt 1 passed with score 100", "legacy rows 90 91 and 126 are byte-semantically unchanged from base", "Social Backend R2 and Evidence R2 are planned and have no write authorization", "Legacy V2 reviewer and Batch R2 are active in isolated clean APP worktrees through 2026-07-16T08:00:00+08:00", "collaboration and Delivery Flow V2 validators pass"],
+  "evidence": ["docs/project-management/service-plaza/platform-registry-r12l-parallel-activation-handoff.md", "contracts/foundation/development-checklists/2026-07-15-platform-registry-r12l-parallel-activation.json", "contracts/foundation/governance-exams/2026-07-15-platform-registry-r12l-parallel-activation-attempt-1.json"],
+  "premises": ["new children and R12-L are excluded from the original 23 denominator", "planned Social children cannot write", "Batch R2 may prepare only an authorized-not-applied receipt and cannot execute it", "the Legacy reviewer cannot modify J2 old Handoff receipts validators scripts or registry", "the developer does not push independently accept or integrate this candidate"],
+  "implementation_mode": "ai-assisted"
+}
