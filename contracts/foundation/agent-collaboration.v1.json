@@ -2816,7 +2816,7 @@
                            "title":  "保障商城 M2 统一目录与会员方案离线领域核",
                            "owner":  "Protection Mall M2 catalog agent",
                            "owner_role":  "商城M2目录方案唯一负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/heaotang-main",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-m2-catalog-solution",
                            "branch":  "codex/protection-mall-m2-catalog-solution",
@@ -2827,7 +2827,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "首检查点2-4小时：纯Go领域与内存repository实现统一商品/服务/课程/活动目录、场景馆、会员方案组合/替换/预算校验、价格权益快照及责任主体校验。只用合成fixture，不挂路由、不接DB/网络/支付/真实数据。blocks=M2订单履约实现；独立验收=APP总架构独立验收Agent。",
+                           "migration_note":  "source b81be1e5c1ee8d237674bf060b5dd342b6779bdd 已完成纯Go领域核与确定性16x16读写交叠证明，第三轮独立验收Go；定向、GOMAXPROCS=1 count100、race、全量test、vet、gofmt、diff通过并受控纳入后端integration。未挂路由、DB、网络、支付、真实数据、部署或生产。",
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m2.md"
                        },
                        {
@@ -3003,7 +3003,7 @@
                            "title":  "保障商城M2目录Evidence语义一致性R2修正",
                            "owner":  "Protection Mall M2 evidence correction agent",
                            "owner_role":  "商城M2 Evidence负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-m2-catalog-evidence-r2",
                            "branch":  "codex/protection-mall-m2-catalog-evidence-r2",
@@ -3021,7 +3021,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "实施owner=商城M2 Evidence负责人；reviewer=平台集成负责人；approver=APP总架构独立验收。仅修正f332与backend 22073cd8之间8项语义漂移，补完整fixture和validator强断言；原checklist/exam不可修改，f332保持No-Go。",
+                           "migration_note":  "exact source b02fc0dc423445e4afaae1b901dd00ca106a77ae 与 backend b81be1e5c1ee8d237674bf060b5dd342b6779bdd 经三轮独立验收最终Go并受控纳入authority。首轮关闭Schema/fixture/版本/Handoff/并发缺口，次轮增加ready barrier与active读写交叠探针；19 exact fixtures、四类Schema与三类fixture负向突变、checklist29/29、exam100、IR、总合同、UTF-8、scope、secret、diff及Go全门禁通过。原f332继续cancelled/No-Go；部署和上线未授权。",
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-m2.md"
                        },
                        {

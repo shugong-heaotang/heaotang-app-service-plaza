@@ -2,7 +2,7 @@
 
 ## 结论
 
-`R2 remediation candidate / pending independent re-review`。原 Evidence `f332c7e45bc09b520505f5c4a509c567e16f2ffa` 仅通过结构检查，但与后端稳定 scope、错误码和权益语义存在漂移，已被 R2 取代且不得集成。后端候选更新为 `b81be1e5c1ee8d237674bf060b5dd342b6779bdd`，其中 `22073cd8ddeff48a4f679ffcd41a2686d8ea3ba5` 的领域实现保持不变，仅追加确定性读写交叠并发回归。
+`Go / controlled integration complete`。原 Evidence `f332c7e45bc09b520505f5c4a509c567e16f2ffa` 仅通过结构检查，但与后端稳定 scope、错误码和权益语义存在漂移，已被 R2 取代且不得集成。后端 exact source 为 `b81be1e5c1ee8d237674bf060b5dd342b6779bdd`，其中 `22073cd8ddeff48a4f679ffcd41a2686d8ea3ba5` 的领域实现保持不变，仅追加确定性读写交叠并发回归。
 
 ## 已验证范围
 
@@ -25,6 +25,7 @@
 - `gofmt -d`、`git diff --check`：通过。
 - `validate_catalog_contracts.py`：合同/schema、完整稳定错误集合和 19 个逐项强断言合成 fixture 通过；篡改 rule/input、快照、repository 或 No-Go 将失败关闭。
 - R2 只修改登记的 7 条 Evidence 路径；旧 checklist/exam 保持不可变。
+- 第三轮独立复验结论为 Go；APP exact source `b02fc0dc423445e4afaae1b901dd00ca106a77ae` 与后端 exact source `b81be1e5c1ee8d237674bf060b5dd342b6779bdd` 已进入受控 integration。
 
 ## No-Go
 
