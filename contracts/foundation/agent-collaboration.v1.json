@@ -3374,7 +3374,7 @@
                            "title":  "保障商城 Runtime 焦点测试稳定性修复",
                            "owner":  "Protection Mall test stability agent",
                            "owner_role":  "商城前端测试稳定性唯一负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-runtime-test-stability",
                            "branch":  "codex/protection-mall-runtime-test-stability",
@@ -3387,7 +3387,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "Platform Wiring candidate d4f7819 独立审查首次全量249/250、同命令第二次250/250，定位为ProtectionMallPage焦点useEffect断言竞态。专用修复只允许等待最终焦点状态并补稳定性证据；不得修改业务实现、平台路由、CI、Handoff、后端、部署或生产。完成后需连续多轮全量PASS并Independent Go，再由集成负责人回写Handoff与恢复Platform Wiring复审。",
+                           "migration_note":  "Platform Wiring candidate d4f7819 独立审查首次全量249/250、同命令第二次250/250，定位为ProtectionMallPage焦点useEffect断言竞态。修复source ab1be6c3d1fc2d01ad8c715458dfc858af099806 仅用waitFor等待最终焦点；实现方与独立Reviewer各连续5轮全量249/249，共各1245项PASS，build/contracts/UTF8/checklist29/29/exam100/scope/secret通过并Independent Go。受控集成aa7dfb1；不得扩大为业务实现、后端、部署或生产。Platform Wiring可吸收本修复后恢复复审。",
                            "handoff_record":  "contracts/modules/protection-mall/implementation-records/2026-07-15-protection-mall-runtime-test-stability.json"
                        }
                    ]
