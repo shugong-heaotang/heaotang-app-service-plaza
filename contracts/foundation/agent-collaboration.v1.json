@@ -3368,6 +3368,27 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "Runtime source 6ea6be4 已Independent Go并集成至authority 16523bc；本工作项据此从精确最新authority创建干净专用工作树并激活。只负责App路由、路由测试和质量CI，不重写商城业务。必须先完成foundation current checklist与exam100；部署、测试服发布与生产继续No-Go。",
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-p0-p1.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260715-PROTECTION-MALL-RUNTIME-TEST-STABILITY",
+                           "title":  "保障商城 Runtime 焦点测试稳定性修复",
+                           "owner":  "Protection Mall test stability agent",
+                           "owner_role":  "商城前端测试稳定性唯一负责人",
+                           "status":  "integrated",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-runtime-test-stability",
+                           "branch":  "codex/protection-mall-runtime-test-stability",
+                           "base_commit":  "8af6fed987832db6e4219201de1794e584ab4918",
+                           "allowed_paths":  [
+                                                 "app/src/modules/protection-mall/ProtectionMallPage.test.tsx",
+                                                 "contracts/modules/protection-mall/development-checklists/2026-07-15-protection-mall-runtime-test-stability*.json",
+                                                 "contracts/modules/protection-mall/governance-exams/2026-07-15-protection-mall-runtime-test-stability*.json",
+                                                 "contracts/modules/protection-mall/implementation-records/2026-07-15-protection-mall-runtime-test-stability*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "Platform Wiring candidate d4f7819 独立审查首次全量249/250、同命令第二次250/250，定位为ProtectionMallPage焦点useEffect断言竞态。修复source ab1be6c3d1fc2d01ad8c715458dfc858af099806 仅用waitFor等待最终焦点；实现方与独立Reviewer各连续5轮全量249/249，共各1245项PASS，build/contracts/UTF8/checklist29/29/exam100/scope/secret通过并Independent Go。受控集成aa7dfb1；不得扩大为业务实现、后端、部署或生产。Platform Wiring可吸收本修复后恢复复审。",
+                           "handoff_record":  "contracts/modules/protection-mall/implementation-records/2026-07-15-protection-mall-runtime-test-stability.json"
                        }
                    ]
 }
