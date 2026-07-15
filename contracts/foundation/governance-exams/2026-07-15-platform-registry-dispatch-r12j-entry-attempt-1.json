@@ -1,0 +1,70 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260715-PLATFORM-REGISTRY-DISPATCH-R12J-ENTRY-1",
+    "record_id":  "IR-20260715-PLATFORM-REGISTRY-DISPATCH-R12J-ENTRY",
+    "actor":  "Platform registry dispatch agent",
+    "attempt_number":  1,
+    "status":  "passed",
+    "generated_at":  "2026-07-15T08:52:38.7915658Z",
+    "completed_at":  "2026-07-15T08:52:44.0037559Z",
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  100,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "6f83e140d1e55fe35d1520c13eed55717a812bb21464c59441947c05d7f3b9a6",
+    "checklist_path":  "contracts/foundation/development-checklists/2026-07-15-platform-registry-dispatch-r12j-entry.json",
+    "checklist_sha256":  "974391e125fa1da9448176e761a222533f2da23d3e8189de8da5fbfccc8f7557",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-006",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/project-management/ai-coding-incident-lessons-2026-07-10.md"
+                      },
+                      {
+                          "question_id":  "GQ-015",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "contracts/foundation/engineering-standards.v1.json"
+                      },
+                      {
+                          "question_id":  "GQ-010",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0012-two-strike-root-cause-rule.md"
+                      },
+                      {
+                          "question_id":  "GQ-002",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0008-versioned-business-variables.md"
+                      },
+                      {
+                          "question_id":  "GQ-016",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0013-mandatory-ai-development-entrypoint.md"
+                      },
+                      {
+                          "question_id":  "GQ-007",
+                          "selected_option":  "A",
+                          "correct":  true,
+                          "source_path":  "AGENTS.md"
+                      },
+                      {
+                          "question_id":  "GQ-005",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+                      },
+                      {
+                          "question_id":  "GQ-004",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+                      }
+                  ],
+    "remediation_sources":  [
+
+                            ]
+}
