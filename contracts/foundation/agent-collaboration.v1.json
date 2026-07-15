@@ -1202,7 +1202,7 @@
                            "title":  "动作遥测 boolean 业务变量与 service-plaza 适配",
                            "owner":  "Backend platform agent",
                            "owner_role":  "后端平台负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/heaotang-main",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-action-telemetry-businessconfig",
                            "branch":  "codex/action-telemetry-businessconfig",
@@ -3342,7 +3342,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "项目最高负责人授权在M2目录与Evidence受控集成后立即继续全部P0/P1。入口检查发现internal-dependencies仍停留M0 partial-go，先精确更新该overlay并重新生成R2 current checklist/exam100，再开始模块代码。首检查点：共享businessApiAdapter、严格目录解码、loading/empty/error/success、取消与迟到响应隔离、重复请求抑制、无障碍和模块测试。后端路由、共享App、CI、写入、支付、部署与生产未授权。",
+                           "migration_note":  "项目最高负责人授权在M2目录与Evidence受控集成后立即继续全部P0/P1。Runtime source ffb8b93b35624795a5805184be28cff844d13833 经独立审查发现minor-unit精度P1阻断；修复source 6ea6be49887c4cf14ca08e972ed31a568d6d14e3 使用BigInt并新增MAX_SAFE回归，复审Independent Go。受控集成提交d8c6b9a与a1f0763；模块18 tests、APP全量249 tests、build、ServicePlazaContracts、UTF-8、R3 checklist 29/29与No-Go边界通过。Runtime已integrated；后端路由、共享App/CI（由下一工作项负责）、写入、支付、部署与生产未授权。",
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-p0-p1.md"
                        },
                        {

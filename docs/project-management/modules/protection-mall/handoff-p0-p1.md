@@ -1,6 +1,6 @@
 # 保障商城 P0/P1 产品化 Handoff
 
-状态：runtime candidate ready for independent review；shared route/CI planned。
+状态：runtime integrated；shared route/CI planned。
 
 当前只授权模块运行时首检查点。共享路由、CI、后端路由、数据库、写操作、支付、真实数据、部署和上线均未随本文件自动授权。
 
@@ -22,8 +22,8 @@
 
 ## 下一检查点
 
-1. 平台独立审查 Runtime 候选，只接受明确 Go 后进入集成。
-2. Runtime Go 后激活独立的 Platform Wiring 工作项，修改共享路由、路由测试和 CI。
+1. Runtime source `6ea6be4` 已获 Independent Go，并由 `d8c6b9a`、`a1f0763` 受控集成。
+2. 激活独立的 Platform Wiring 工作项，修改共享路由、路由测试和 CI。
 3. HTTP 目录路由未实现时，真实页面必须保持可恢复错误态；不得伪造成功目录。
 
 ## 持续 No-Go
