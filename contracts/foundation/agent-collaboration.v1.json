@@ -3350,7 +3350,7 @@
                            "title":  "保障商城 P0/P1 共享路由与质量 CI 接线",
                            "owner":  "Codex platform integration agent",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-p0-p1-platform-wiring",
                            "branch":  "codex/protection-mall-p0-p1-platform-wiring",
@@ -3366,7 +3366,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "Runtime source 6ea6be4 已Independent Go并集成至authority 16523bc；本工作项据此从精确最新authority创建干净专用工作树并激活。只负责App路由、路由测试和质量CI，不重写商城业务。必须先完成foundation current checklist与exam100；部署、测试服发布与生产继续No-Go。",
+                           "migration_note":  "Runtime source 6ea6be4 已Independent Go并集成。Platform source d4f7819 首次独立审查因既有焦点测试竞态No-Go；稳定性source ab1be6c获Go并以aa7dfb1受控集成后，R2 source bdef31a 连续5轮250/250并经独立Reviewer再连续5轮250/250，最终Independent Go。受控集成630de21与20fe60d；R2 checklist26/26 current、exam100、ServicePlazaContracts、build、UTF8、scope/secret通过。共享精确路由、真实路由测试与APP quality CI已integrated；HTTP后端目录、数据库、写入、支付、部署与生产继续No-Go。",
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-p0-p1.md"
                        },
                        {

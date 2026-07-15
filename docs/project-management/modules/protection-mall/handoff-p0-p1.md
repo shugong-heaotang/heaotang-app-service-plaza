@@ -1,6 +1,6 @@
 # 保障商城 P0/P1 产品化 Handoff
 
-状态：runtime integrated；shared route/CI candidate ready for independent review。
+状态：runtime integrated；shared route/CI integrated；P0/P1 productization checkpoint closed。
 
 当前只授权模块运行时首检查点。共享路由、CI、后端路由、数据库、写操作、支付、真实数据、部署和上线均未随本文件自动授权。
 
@@ -35,7 +35,8 @@
 1. Runtime source `6ea6be4` 已获 Independent Go，并由 `d8c6b9a`、`a1f0763` 受控集成。
 2. Platform Wiring 已在通用 `:serviceKey` 之前挂载 `/services/protection-mall`，并以真实 `mall.catalog.v1` 信封验证路由、共享会话和非通用页边界。
 3. `.github/workflows/app-quality.yml` 使用 Node 20 和锁文件安装，执行全量测试、生产构建及 UTF-8 门禁。
-4. Platform Wiring 仍须 Independent Go 后受控集成；HTTP 目录路由未实现时，真实页面必须保持可恢复错误态，不得伪造成功目录。
+4. Platform Wiring R2 `bdef31a` 已获 Independent Go，并由 `630de21`、`20fe60d` 受控集成。
+5. HTTP 目录路由未实现时，真实页面必须保持可恢复错误态，不得伪造成功目录。
 
 ## 持续 No-Go
 
