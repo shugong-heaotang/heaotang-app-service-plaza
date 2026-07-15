@@ -1,0 +1,78 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-PLATFORM-REGISTRY-R12M-LEGACY-GENERALIZATION-ACTIVATION",
+  "title": "R12-M Legacy mechanism closeout and receipt generalization R3 activation",
+  "date": "2026-07-15",
+  "status": "implemented",
+  "objective": "Atomically terminalize the independently accepted Legacy V2 mechanism, cancel the non-contract Batch R2 design, transfer registry ownership from R12-L, activate isolated Receipt Generalization R3 and refresh truthful current-clock rows without executing any receipt.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-15-platform-registry-r12m-legacy-generalization-activation.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-15-platform-registry-r12m-legacy-generalization-activation-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0021-versioned-legacy-lifecycle-receipts.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-15-platform-registry-r12m-legacy-generalization-activation-task-order.md",
+    "docs/project-management/independent-acceptance/platform-delivery-flow-legacy-v2-r1/evidence.md",
+    "docs/project-management/service-plaza/platform-legacy-lifecycle-batch-r2-handoff.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.delivery-recovery"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/delivery-flow-policy.v2.json",
+    "contracts/foundation/legacy-lifecycle-migration.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0021-versioned-legacy-lifecycle-receipts.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-15-platform-registry-r12m-legacy-generalization-activation-task-order.md",
+    "contracts/foundation/development-checklists/2026-07-15-platform-registry-r12m-legacy-generalization-activation.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-registry-r12m-legacy-generalization-activation-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-15-platform-registry-r12m-legacy-generalization-activation.json",
+    "docs/project-management/service-plaza/platform-registry-r12m-legacy-generalization-activation-handoff.md"
+  ],
+  "verification": [
+    "clean R12-M and R3 worktrees both start from exact authority dbfec2713542c9993508be1d69b12208dcf34edd",
+    "current checklist is 26 of 26 completed in UTF-8 without BOM and LF-only; exam attempt 1 passed with score 100",
+    "row126 source d9822e1 is ancestor-preserved and file-backed evidence bytes SHA f565074b match exact controlled integration f986734",
+    "row126 is integrated while the Activity/Mall receipt remains byte-identical authorized-not-applied and unapplied",
+    "row135 is cancelled as superseded-by-new-R3 and is not classified Go or integrated",
+    "row126 and row135 implementation receipt validator exam IR and Handoff paths are released; unique non-write tombstones plus immutable task-order/checklist provenance remain to satisfy schema minItems and the shared historical checklist gate",
+    "row131 remains active after releasing only the registry path; unique R12-M self owns registry and fresh governance",
+    "R3 is active with no path overlap against rows126 135 or any active work item",
+    "rows47 88 89 90 92 and Social132 133 are byte-semantically unchanged; no receipt transaction is executed",
+    "rows109 111 117 123 130 131 134 and new active rows are current through 2026-07-16T08:00:00+08:00",
+    "registry Delivery Flow total contracts encoding scope secret and diff gates pass"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/platform-registry-r12m-legacy-generalization-activation-handoff.md",
+    "contracts/foundation/development-checklists/2026-07-15-platform-registry-r12m-legacy-generalization-activation.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-registry-r12m-legacy-generalization-activation-attempt-1.json",
+    "docs/project-management/independent-acceptance/platform-delivery-flow-legacy-v2-r1/evidence.md"
+  ],
+  "premises": [
+    "the highest project owner explicitly authorized the unique R12-M bootstrap self item because it did not exist before its own atomic transaction",
+    "terminal release tombstones are non-file markers only and grant no write authority; retained task-order/checklist patterns are immutable provenance only",
+    "R3 may prepare an authorized-not-applied receipt only after generalized schema and validator proof and may not execute it",
+    "Activity/Mall five-row states and Social 90/132 states are unchanged",
+    "developer does not push independently accept integrate deploy or access production real data or funds"
+  ],
+  "implementation_mode": "ai-assisted"
+}
