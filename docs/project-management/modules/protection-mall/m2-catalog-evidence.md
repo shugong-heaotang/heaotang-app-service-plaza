@@ -2,7 +2,7 @@
 
 ## R3 结论
 
-`R3 candidate / awaiting independent acceptance`。后端候选 `22073cd8ddeff48a4f679ffcd41a2686d8ea3ba5` 相对基线 `7745174024c2b80403ddfebcf29cd1b563eef6d7` 只修改获准的 `catalog_m2.go` 与 `catalog_m2_test.go`，工作树干净。
+`R3 independent acceptance Go / awaiting controlled integration`。后端候选 `22073cd8ddeff48a4f679ffcd41a2686d8ea3ba5` 相对基线 `7745174024c2b80403ddfebcf29cd1b563eef6d7` 只修改获准的 `catalog_m2.go` 与 `catalog_m2_test.go`，工作树干净；APP Evidence 精确候选为 `673447d7df28fdcb8db75bd837cf9519f496d7df`。
 
 前序 Evidence 提交 `f332c7e45bc09b520505f5c4a509c567e16f2ffa` 仅通过结构性校验，未精确映射后端已冻结的 scope、错误码、权益和所有者语义。R2 虽补齐语义，但治理考试仅 75 分；失败试卷保持不可变，R2 实施记录标记为 superseded。本 R3 重新完成 29/29 current checklist 与 100 分考试后接管收口。
 
@@ -26,8 +26,19 @@
 - `validate_catalog_contracts.py`：Schema、12 个稳定错误码和 18 个具名合成 fixture 均逐项断言，涵盖不可信 scope、类型映射、跨卖家、权益、快照、预算、币种、溢出、重复、替换、所有者和并发。
 - R3 checklist：29/29 current；R3 exam attempt 1：100 分。
 
-独立验收尚未给出 Go；在独立复跑通过前，本证据只代表可审候选，不代表已集成。
+## 独立验收记录
+
+- reviewer role：`APP总架构独立验收负责人`。
+- reviewed at：`2026-07-15T23:18:15+08:00`。
+- verdict：后端 exact `22073cd8ddeff48a4f679ffcd41a2686d8ea3ba5` 为 Go；APP Evidence exact `673447d7df28fdcb8db75bd837cf9519f496d7df` 为 Go。
+- 来源与隔离：后端从 Git object 导出 exact `backend-go` 快照验收，未采用已经前进的工作树 HEAD；相对登记基线只包含获准的两个 Catalog 文件。APP Evidence 工作树在验收时 HEAD exact、clean，其自身提交相对 parent 的 12 个路径全部位于 row112 授权范围。
+- 后端亲跑门禁：Catalog 定向 9 项通过；`go test ./...`、Catalog race、`go vet ./...`、`gofmt -d`、`git diff --check`、scope 与 secret scan 均通过。
+- APP 亲跑门禁：Catalog 合同验证通过，包含 1 个版本化合同、12 个稳定错误码与 18 个精确合成案例；Service Plaza 总合同、registry、checklist、exam、IR、Handoff、1328 文件编码、development preflight 与 secret scan 均通过。
+- R3 身份语义：可信 scope 来源失败关闭；ActorID、SellerID、FulfillmentOwnerID、AfterSaleOwnerID 与 plan OwnerID 分离；跨卖家授权独立；`catalog:plan:any` 代办不改变原 plan OwnerID；快照保持不可变。
+- 治理证据：R3 current checklist 29/29、exam attempt 1 为 100 分；R2 的 75 分失败试卷保持不可变，R2 IR 保持 superseded。
+
+本 Go 只绑定上述两个 exact SHA，表示可进入后续受控集成，不表示已经集成，也不授权生命周期或 registry 写入。
 
 ## No-Go
 
-未挂路由、未连接数据库或网络、未触碰支付/退款/对账/回调、真实资金、真实会员或商家数据、短信、生产 Nova、部署和上线。上述范围必须另立工作项并独立验收。
+未挂路由、未连接数据库或网络、未触碰支付/退款/对账/回调、真实资金、真实会员或商家数据、短信、生产 Nova、部署和上线。本 Go 不授权上述范围，也不授权 lifecycle、registry transaction 或 B 激活；上述范围必须另立工作项并独立验收。
