@@ -1,0 +1,70 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260715-PROJECT-BRAIN-V2-M0-ACTIVATION-RECONCILIATION-R1-1",
+    "record_id":  "IR-20260715-PROJECT-BRAIN-V2-M0-ACTIVATION-RECONCILIATION-R1",
+    "actor":  "Project Brain v2 activation reconciliation R1 owner",
+    "attempt_number":  1,
+    "status":  "passed",
+    "generated_at":  "2026-07-15T14:47:41.0868673Z",
+    "completed_at":  "2026-07-15T14:47:53.3739249Z",
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  100,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "b0df386a68e8e00a803a08d0b3e786893a47bad6742dd36a5b6273803b7abcb1",
+    "checklist_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-m0-activation-reconcile-5d5a462/contracts/foundation/development-checklists/2026-07-15-project-brain-v2-m0-activation-reconciliation-r1.json",
+    "checklist_sha256":  "1e33a9cb9c6451a926d570dccf9f7e2dd904b8410b962c7a505df9837e1a8f78",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-009",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0010-ai-implementation-records-required.md"
+                      },
+                      {
+                          "question_id":  "GQ-015",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "contracts/foundation/engineering-standards.v1.json"
+                      },
+                      {
+                          "question_id":  "GQ-002",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0008-versioned-business-variables.md"
+                      },
+                      {
+                          "question_id":  "GQ-010",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0012-two-strike-root-cause-rule.md"
+                      },
+                      {
+                          "question_id":  "GQ-013",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0014-ai-development-flight-checklist.md"
+                      },
+                      {
+                          "question_id":  "GQ-003",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0011-two-person-config-approval.md"
+                      },
+                      {
+                          "question_id":  "GQ-014",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "contracts/foundation/recurring-issues.v1.json"
+                      },
+                      {
+                          "question_id":  "GQ-005",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
+                      }
+                  ],
+    "remediation_sources":  [
+
+                            ]
+}

@@ -1,0 +1,81 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260714-PROJECT-BRAIN-V2-M0-ACTIVATION-R2",
+  "title": "Project Brain v2 M0 legal activation intermediate snapshot superseded by scope correction",
+  "date": "2026-07-14",
+  "status": "superseded",
+  "objective": "保留一次中间治理快照以供审计；范围复核发现 registry 中一个无关工作项状态被误改后，本快照立即废止，修正后的最终证据由 R3 记录承接。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-14-project-brain-v2-m0-activation-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-14-project-brain-v2-m0-activation-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-14-project-brain-v2-m0-activation-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.schema.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json",
+    "contracts/foundation/implementation-record.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-14-project-brain-v2-m0-activation-task-order.md",
+    "contracts/foundation/development-checklists/2026-07-14-project-brain-v2-m0-activation.json",
+    "contracts/foundation/development-checklists/2026-07-14-project-brain-v2-m0-activation-r2.json",
+    "contracts/foundation/governance-exams/2026-07-14-project-brain-v2-m0-activation-attempt-1.json",
+    "contracts/foundation/governance-exams/2026-07-14-project-brain-v2-m0-activation-r2-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-14-project-brain-v2-m0-activation-r2.json"
+  ],
+  "verification": [
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-AgentDevelopmentPreflight.ps1",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File C:/Users/shugo/.codex/skills/heaotang-worktree-bootstrap/scripts/Test-HeaotangWorktreeBootstrap.ps1 -WorktreePath <activation-worktree> -SharedAppPath <shared-app> -AllowExistingChanges",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File C:/Users/shugo/.codex/skills/heaotang-worktree-bootstrap/scripts/Test-HeaotangWorktreeBootstrap.ps1 -WorktreePath <operations-worktree> -SharedAppPath <shared-app>",
+    "python -X utf8 scripts/validate_agent_collaboration.py contracts/foundation/agent-collaboration.v1.schema.json contracts/foundation/agent-collaboration.v1.json",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-ServicePlazaContracts.ps1",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-TextEncoding.ps1",
+    "python -X utf8 scripts/validate_implementation_records.py contracts/foundation/implementation-record.v1.schema.json contracts/foundation/implementation-records",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-IntegrationPushFreshness.ps1 -ProjectRoot <activation-worktree> -ExpectedRemoteHead 36b245871dd95d53964fb20cf4c30a05ceb89a77 -CandidateRef HEAD"
+  ],
+  "evidence": [
+    "docs/project-management/notices/2026-07-14-project-brain-v2-m0-activation-task-order.md",
+    "contracts/foundation/development-checklists/2026-07-14-project-brain-v2-m0-activation-r2.json",
+    "contracts/foundation/governance-exams/2026-07-14-project-brain-v2-m0-activation-r2-attempt-1.json",
+    "contracts/foundation/agent-collaboration.v1.json"
+  ],
+  "premises": [
+    "本 R2 快照不得作为完成或集成依据；它因范围复核发现无关工作项状态漂移而被 R3 supersede。",
+    "origin/codex/service-plaza-phase1-integration 的执行时 exact HEAD 为 36b245871dd95d53964fb20cf4c30a05ceb89a77；若变化，停止并重新执行 freshness 与受控集成判断。",
+    "operations 工作树保持 clean、分支 codex/project-brain-v2-operations、HEAD 与 base 均为 exact authority；本激活提交不得修改该工作树。",
+    "operations active 只授权原登记的 M0 治理冻结 allowed paths；M1-M5 继续 No-Go。",
+    "本提交不触达 App、scripts、Project Brain v1、SC remediation、真实数据、凭据、环境、部署或 production。",
+    "activation handoff-ready 不等于独立验收、集成或生产启用；后续仍需独立 reviewer 与平台受控集成。"
+  ],
+  "implementation_mode": "ai-assisted"
+}

@@ -1,0 +1,81 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-PROJECT-BRAIN-V2-M0-ACTIVATION-RECONCILIATION-R1",
+  "title": "Project Brain v2 M0 activation authority-drift reconciliation",
+  "date": "2026-07-15",
+  "status": "verified",
+  "objective": "Reconcile the independently accepted Project Brain v2 activation source onto authority 5d5a462 without losing Protection Mall authority changes, weakening v1 fail-closed boundaries, completing M0, unlocking M1-M5, or enabling production.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-15-project-brain-v2-m0-activation-reconciliation-r1.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-15-project-brain-v2-m0-activation-reconciliation-r1-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-14-project-brain-v2-m0-activation-task-order.md",
+    "docs/project-management/notices/2026-07-15-project-brain-v2-m0-activation-reconciliation-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json",
+    "contracts/foundation/implementation-record.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklists/2026-07-14-project-brain-v2-m0-activation-r2.json",
+    "contracts/foundation/development-checklists/2026-07-14-project-brain-v2-m0-activation-r3.json",
+    "contracts/foundation/development-checklists/2026-07-14-project-brain-v2-m0-activation.json",
+    "contracts/foundation/governance-exams/2026-07-14-project-brain-v2-m0-activation-attempt-1.json",
+    "contracts/foundation/governance-exams/2026-07-14-project-brain-v2-m0-activation-r2-attempt-1.json",
+    "contracts/foundation/governance-exams/2026-07-14-project-brain-v2-m0-activation-r3-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-14-project-brain-v2-m0-activation-r2.json",
+    "contracts/foundation/implementation-records/2026-07-14-project-brain-v2-m0-activation-r3.json",
+    "docs/project-management/notices/2026-07-14-project-brain-v2-m0-activation-task-order.md",
+    "docs/project-management/notices/2026-07-15-project-brain-v2-m0-activation-reconciliation-task-order.md",
+    "contracts/foundation/development-checklists/2026-07-15-project-brain-v2-m0-activation-reconciliation-r1.json",
+    "contracts/foundation/governance-exams/2026-07-15-project-brain-v2-m0-activation-reconciliation-r1-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-15-project-brain-v2-m0-activation-reconciliation-r1.json"
+  ],
+  "verification": [
+    "New authority base confirmed as 5d5a46271c4c343f95d723e75666ced7dbc10119 after the original authority freshness gate failed closed",
+    "Old authority 36b245871dd95d53964fb20cf4c30a05ceb89a77 is an ancestor of the new authority and the activation source merge base",
+    "Nine non-registry activation files match the exact f3767b7e34b3d8fb16ad0af955f7d0ac46de935d blobs",
+    "All 135 pre-existing non-operations registry work items remain structurally unchanged, including all Protection Mall authority changes",
+    "Registry adds only activation and reconciliation work items and changes operations to its independently accepted active state",
+    "Reconciliation scope has fourteen allowed paths and no active or handoff-ready ownership conflict",
+    "Current checklist completed with 26 of 26 current governance hashes and zero mismatch",
+    "Governance exam attempt 1 passed with score 100",
+    "Preflight, collaboration schema, checklist and exam linkage, implementation-record validation, total contracts, UTF-8 for 1464 files, exact scope 14 of 14, secret scan with zero hits, diff check, authority freshness, exact source freshness, and clean operations worktree all passed before candidate commit"
+  ],
+  "evidence": [
+    "contracts/foundation/development-checklists/2026-07-15-project-brain-v2-m0-activation-reconciliation-r1.json",
+    "contracts/foundation/governance-exams/2026-07-15-project-brain-v2-m0-activation-reconciliation-r1-attempt-1.json",
+    "docs/project-management/notices/2026-07-15-project-brain-v2-m0-activation-reconciliation-task-order.md"
+  ],
+  "premises": [
+    "Project Brain v1 remains the sole integrated authority for v1 facts and fail-closed behavior",
+    "Reconciliation only makes the M0 operations work item legally active; it does not complete M0 or unlock M1-M5",
+    "Project Brain v2 scheduling and dashboard behavior remain read-only and no-writeback, with explicit Unknown and No-Go",
+    "Production routes, snapshots, jobs, data access, deployment, and dashboard enablement remain closed until separate authorization after M4",
+    "Operations retains activation base 36b245871dd95d53964fb20cf4c30a05ceb89a77 and its clean isolated worktree; code integration is not production enablement"
+  ],
+  "implementation_mode": "ai-assisted"
+}
