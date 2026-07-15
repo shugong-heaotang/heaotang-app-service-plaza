@@ -3031,6 +3031,34 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "用户要求多个智能代理从服务广场入口到生命导航、俱乐部联盟、健康大管家逐板块端到端检查，确认问题后立即根因修复。仅允许合成测试账号与测试服务器；禁止真实会员、真实健康数据、支付、生产和不可逆操作。候选 74d3876 与发布证据 79b8d2f 已完成；独立复验发现旧 IR 与 R2 checklist record_id 不一致，R3 current checklist 26/26、exam100 和 exact record_id 根因修复后，总合同、23/237 前端测试、test-server build、部署安全及 UTF-8 1331 文件门禁全部通过，现重新 handoff-ready。",
                            "handoff_record":  "docs/project-management/service-plaza/service-plaza-e2e-uat-remediation-2026-07-13.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260715-CLUB-UF-M0-GOVERNANCE",
+                           "title":  "俱乐部友联体 CA-UF-M0 中级治理基线",
+                           "owner":  "Codex Club Federation governance agent",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-uf-m0-governance",
+                           "branch":  "codex/club-uf-m0-governance",
+                           "base_commit":  "5c1069b134747ae5a702ae677457c2422d3137da",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "contracts/foundation/development-checklists/2026-07-15-club-uf-m0-governance*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-15-club-uf-m0-governance*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-15-club-uf-m0-governance*.json",
+                                                 "contracts/modules/club-alliance/federation/**",
+                                                 "contracts/modules/club-alliance/internal-dependencies.v1.json",
+                                                 "docs/project-management/notices/2026-07-15-club-uf-m0-governance-task-order.md",
+                                                 "docs/project-management/modules/club-alliance/README.md",
+                                                 "docs/project-management/modules/club-alliance/federation/**",
+                                                 "docs/project-management/service-plaza/club-uf-m0-governance-2026-07-15.md",
+                                                 "docs/project-management/service-plaza/handoff-log.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "用户确认在既有俱乐部联盟基础上继续推进，先冻结友联体编号、立体审批、代表权、章程和交流治理。只交付 P0/P1 治理与机器合同，不实现业务 API、页面、即时聊天、支付、部署、生产或真实数据。",
+                           "handoff_record":  "docs/project-management/service-plaza/club-uf-m0-governance-2026-07-15.md"
                        }
                    ]
 }
