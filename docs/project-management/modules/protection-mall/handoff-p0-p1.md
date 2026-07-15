@@ -25,9 +25,10 @@
 - 精确路由 `/services/protection-mall` 位于通用 `/services/:serviceKey` 之前。
 - 路由测试：`App.test.tsx` 8/8 passed；证明真实目录信封、独立页面和共享 Authorization。
 - APP 全量回归：26 files / 250 tests passed。
+- 焦点竞态修复 `ab1be6c` 已 Independent Go 并受控集成；合并后连续 5 轮全量 250/250，共 1,250 项通过。
 - 生产构建：`tsc -b && vite build` passed。
 - APP quality CI：锁文件安装、全量测试、生产构建、UTF-8；最小权限 `contents: read`。
-- 当前 implementation record：`IR-20260715-PROTECTION-MALL-P0-P1-PLATFORM-WIRING`。
+- 当前 implementation record：`IR-20260715-PROTECTION-MALL-P0-P1-PLATFORM-WIRING-R2`；原记录保留为 superseded 快照。
 
 ## 下一检查点
 
