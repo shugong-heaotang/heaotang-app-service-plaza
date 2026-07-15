@@ -133,7 +133,7 @@ describe("ProtectionMallPage", () => {
     renderPage({ loadCatalog });
 
     const retry = await screen.findByRole("button", { name: "重新加载" });
-    expect(retry).toHaveFocus();
+    await waitFor(() => expect(retry).toHaveFocus());
     expect(screen.getByText("req-mall-001")).toBeInTheDocument();
     await user.click(retry);
     expect(await screen.findByText("当前场景暂无内容")).toBeInTheDocument();
