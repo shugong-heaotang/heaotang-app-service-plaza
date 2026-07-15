@@ -356,19 +356,23 @@ class DeliveryFlowPolicyV3ReceiptTests(unittest.TestCase):
         self.registry_bytes = self.registry_path.read_bytes()
         self.registry = json.loads(self.registry_bytes.decode("utf-8"))
 
-    def run_policy(self, policy):
+    def run_policy(self, policy, registry=None):
         with tempfile.TemporaryDirectory() as tmp:
             policy_path = Path(tmp) / "policy.json"
             policy_path.write_text(json.dumps(policy, ensure_ascii=False), encoding="utf-8")
+            registry_path = self.registry_path
+            if registry is not None:
+                registry_path = Path(tmp) / "registry.json"
+                registry_path.write_text(json.dumps(registry, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
             return FLOW.validate(
                 policy_path,
                 self.schema_path,
-                self.registry_path,
+                registry_path,
                 now=datetime(2026, 7, 15, 12, 50, tzinfo=timezone.utc),
                 repo_root=ROOT,
             )
 
-    def run_batch_mutation(self, mutate, registry_bytes=None):
+    def run_batch_mutation(self, mutate, registry=None, registry_bytes=None):
         receipt = json.loads(self.receipt_path.read_text(encoding="utf-8"))
         mutate(receipt)
         schema = json.loads(self.receipt_schema_path.read_text(encoding="utf-8"))
@@ -393,11 +397,15 @@ class DeliveryFlowPolicyV3ReceiptTests(unittest.TestCase):
                 return original(_root, relative)
 
             with mock.patch.object(FLOW, "safe_repo_file", side_effect=resolve):
+                live_registry = registry if registry is not None else self.registry
+                live_bytes = registry_bytes
+                if live_bytes is None:
+                    live_bytes = (json.dumps(live_registry, ensure_ascii=False, indent=2) + "\n").encode("utf-8")
                 return FLOW.validate_v2_receipt(
                     registration,
                     ROOT,
-                    self.registry,
-                    registry_bytes if registry_bytes is not None else self.registry_bytes,
+                    live_registry,
+                    live_bytes,
                 )[0]
 
     def test_v3_current_registry_and_both_registered_receipts_pass(self):
@@ -429,15 +437,85 @@ class DeliveryFlowPolicyV3ReceiptTests(unittest.TestCase):
         batch["receipt_sha256"] = activity["receipt_sha256"]
         self.assertIn("DELIVERY_LEGACY_RECEIPT_REGISTRATION_MISMATCH", self.run_policy(substituted))
 
-    def test_rejects_current_registry_drift_and_false_applied_state(self):
-        self.assertIn(
-            "DELIVERY_LEGACY_CURRENT_REGISTRY_DRIFT",
-            self.run_batch_mutation(lambda _receipt: None, self.registry_bytes + b" "),
-        )
+    def test_accepts_live_governance_updates_and_append_only_rows(self):
+        registry = copy.deepcopy(self.registry)
+        registry["work_items"][136]["status"] = "integrated"
+        registry["work_items"][136]["allowed_paths"] = [
+            "__released_no_write__/AIW-20260715-PLATFORM-LEGACY-LIFECYCLE-RECEIPT-GENERALIZATION-R3"
+        ]
+        registry["work_items"][137]["status"] = "handoff-ready"
+        registry["work_items"][137]["handoff_record"] = "docs/project-management/service-plaza/r12n-handoff.md"
+        registry["work_items"][137]["next_checkpoint"] = "Independent R12-N handoff."
+        template = copy.deepcopy(registry["work_items"][132])
+        for number in range(3):
+            appended = copy.deepcopy(template)
+            appended["work_id"] = f"AIW-20260715-R31-APPEND-{number}"
+            appended["title"] = f"R3.1 append-only governance row {number}"
+            appended["workspace_path"] = f"C:/Users/shugo/Documents/worktrees/r31-append-{number}"
+            appended["branch"] = f"codex/r31-append-{number}"
+            appended["allowed_paths"] = [f"__r31_append__/{number}"]
+            registry["work_items"].append(appended)
+        self.assertEqual([], self.run_batch_mutation(lambda _receipt: None, registry=registry))
+
+        globally_valid = copy.deepcopy(registry)
+        globally_valid["work_items"][136] = copy.deepcopy(self.registry["work_items"][136])
+        globally_valid["work_items"][137] = copy.deepcopy(self.registry["work_items"][137])
+        globally_valid["work_items"][136]["migration_note"] += " R3.1 live-governance refresh."
+        globally_valid["work_items"][137]["migration_note"] += " R3.1 supervision refresh."
+        self.assertEqual([], self.run_policy(self.policy, registry=globally_valid))
+
+    def test_rejects_false_applied_state(self):
         self.assertIn(
             "DELIVERY_LEGACY_RECEIPT_FALSE_AUTHORIZATION",
             self.run_batch_mutation(lambda receipt: receipt.update({"applied": True})),
         )
+
+    def test_rejects_audit_row_field_drift(self):
+        for index in (47, 88, 89, 90, 92, 132):
+            with self.subTest(index=index):
+                registry = copy.deepcopy(self.registry)
+                registry["work_items"][index]["migration_note"] = "unauthorized audit row drift"
+                self.assertIn(
+                    "DELIVERY_LEGACY_AUDIT_ROW_DRIFT",
+                    self.run_batch_mutation(lambda _receipt: None, registry=registry),
+                )
+
+    def test_rejects_historical_insert_delete_reorder_and_replacement(self):
+        cases = {}
+        inserted = copy.deepcopy(self.registry)
+        inserted["work_items"].insert(10, copy.deepcopy(inserted["work_items"][-1]))
+        cases["insert"] = inserted
+        deleted = copy.deepcopy(self.registry)
+        deleted["work_items"].pop(20)
+        cases["delete"] = deleted
+        reordered = copy.deepcopy(self.registry)
+        reordered["work_items"][20], reordered["work_items"][21] = reordered["work_items"][21], reordered["work_items"][20]
+        cases["reorder"] = reordered
+        replaced = copy.deepcopy(self.registry)
+        replaced["work_items"][20]["work_id"] = "AIW-REPLACED-HISTORICAL-ID"
+        cases["replace"] = replaced
+        duplicated_append = copy.deepcopy(self.registry)
+        duplicated_append["work_items"].append(copy.deepcopy(duplicated_append["work_items"][20]))
+        cases["duplicate-append"] = duplicated_append
+        for label, registry in cases.items():
+            with self.subTest(case=label):
+                self.assertIn(
+                    "DELIVERY_LEGACY_CURRENT_REGISTRY_HISTORY_INVALID",
+                    self.run_batch_mutation(lambda _receipt: None, registry=registry),
+                )
+
+    def test_rejects_precondition_commit_path_and_sha_tampering(self):
+        mutations = (
+            lambda receipt: receipt["current_registry_precondition"].update({"commit": "0" * 40}),
+            lambda receipt: receipt["current_registry_precondition"].update({"path": "README.md"}),
+            lambda receipt: receipt["current_registry_precondition"].update({"sha256": "0" * 64}),
+        )
+        for mutate in mutations:
+            with self.subTest(mutate=mutate):
+                self.assertIn(
+                    "DELIVERY_LEGACY_CURRENT_REGISTRY_PRECONDITION_INVALID",
+                    self.run_batch_mutation(mutate),
+                )
 
     def test_rejects_audit_scope_omission_and_partial_atomic_group(self):
         self.assertIn(
