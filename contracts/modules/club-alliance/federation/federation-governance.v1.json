@@ -1,0 +1,148 @@
+{
+  "contract_version": "club-alliance.federation-governance.v1",
+  "module_id": "club-alliance",
+  "child_project_id": "CA-UF",
+  "entity_kind": "club_relationship",
+  "relationship_kind": "club-federation",
+  "implementation_authorized": false,
+  "identity": {
+    "internal_key": {
+      "visibility": "server-only",
+      "format": "opaque-immutable",
+      "public_use": "forbidden"
+    },
+    "public_code_policy": {
+      "alphabet": "crockford-base32-without-i-l-o-u",
+      "random_length": 8,
+      "check_algorithm": "mod37-crockford",
+      "allocation": "server-only-after-authoritative-event",
+      "reuse": "never",
+      "mutable_attributes_embedded": false
+    },
+    "namespaces": [
+      {"entity": "club", "prefix": "CA-CLB", "pattern": "^CA-CLB-[0-9]{4}-[0-9A-HJKMNP-TV-Z]{8}-[0-9A-Z]$", "allocation_event": "club-approved"},
+      {"entity": "club_federation", "prefix": "CA-UF", "pattern": "^CA-UF-[0-9]{4}-[0-9A-HJKMNP-TV-Z]{8}-[0-9A-Z]$", "allocation_event": "federation-approved"},
+      {"entity": "club_membership", "prefix": "CA-MBR", "pattern": "^CA-MBR-[0-9]{4}-[0-9A-HJKMNP-TV-Z]{8}-[0-9A-Z]$", "allocation_event": "membership-created"},
+      {"entity": "communication_group", "prefix": "CA-GRP", "pattern": "^CA-GRP-[0-9]{4}-[0-9A-HJKMNP-TV-Z]{8}-[0-9A-Z]$", "allocation_event": "group-approved"},
+      {"entity": "application", "prefix": "CA-APP", "pattern": "^CA-APP-[0-9]{8}-[0-9A-HJKMNP-TV-Z]{8}-[0-9A-Z]$", "allocation_event": "application-submitted"},
+      {"entity": "resolution", "prefix": "CA-RES", "pattern": "^CA-RES-[0-9]{4}-[0-9A-HJKMNP-TV-Z]{8}-[0-9A-Z]$", "allocation_event": "resolution-opened"}
+    ]
+  },
+  "approval": {
+    "application_states": ["draft", "submitted", "member-club-confirmation", "alliance-governance-review", "conditional-risk-review", "approved", "rejected", "withdrawn"],
+    "dimensions": [
+      {"dimension_id": "organization-eligibility", "required": true, "owner_role": "alliance-reviewer", "evidence": ["club-active", "club-code-valid", "no-disqualifying-state"]},
+      {"dimension_id": "member-club-consent", "required": true, "owner_role": "authorized-club-delegate", "evidence": ["distinct-club-confirmations", "representative-mandate-current"]},
+      {"dimension_id": "alliance-governance-review", "required": true, "owner_role": "alliance-reviewer", "evidence": ["purpose", "scope", "effective-charter", "responsibility-map"]},
+      {"dimension_id": "risk-and-compliance", "required": "conditional", "owner_role": "risk-reviewer", "evidence": ["trigger-policy-version", "review-reason", "decision-record"]}
+    ],
+    "maker_checker": {
+      "required": true,
+      "same_actor_final_review": "forbidden",
+      "same_actor_risk_review": "forbidden",
+      "same_club_duplicate_confirmation": "forbidden",
+      "idempotency_required": true,
+      "decision_reason_required": true,
+      "immutable_audit_event_required": true
+    },
+    "variable_keys": {
+      "minimum_founder_clubs": "club_federation.min_founder_clubs",
+      "application_validity": "club_federation.application_validity",
+      "risk_trigger_policy": "club_federation.risk_trigger_policy",
+      "approval_quorum_policy": "club_federation.approval_quorum_policy"
+    },
+    "missing_variable_behavior": "fail-closed",
+    "official_code_before_approval": "forbidden"
+  },
+  "representation": {
+    "source_of_authority": "member-club-mandate",
+    "direct_personal_membership_in_federation": "forbidden",
+    "mandate_fields": ["member_club_id", "representative_user_id", "role", "scope", "starts_at", "ends_at", "issued_by", "issued_at", "revoked_at"],
+    "roles": [
+      {"role": "ordinary-member", "may_deliberate": "policy-controlled", "may_propose": false, "may_vote": false, "may_administer": false},
+      {"role": "club-delegate", "may_deliberate": true, "may_propose": true, "may_vote": "charter-controlled", "may_administer": false},
+      {"role": "federation-director", "may_deliberate": true, "may_propose": true, "may_vote": "separate-delegate-mandate-required", "may_administer": true},
+      {"role": "secretariat", "may_deliberate": true, "may_propose": false, "may_vote": "separate-delegate-mandate-required", "may_administer": "records-only"},
+      {"role": "moderator", "may_deliberate": "space-policy-controlled", "may_propose": false, "may_vote": "separate-delegate-mandate-required", "may_administer": "communication-only"},
+      {"role": "auditor", "may_deliberate": false, "may_propose": false, "may_vote": false, "may_administer": "read-and-audit-only"}
+    ],
+    "rules": {
+      "scope_and_term_required": true,
+      "expired_or_revoked_mandate": "deny",
+      "member_club_may_revoke": true,
+      "conflict_disclosure_required": true,
+      "conflicted_actor_decision": "recuse",
+      "auditor_reviews_own_action": "forbidden",
+      "vote_weight_source": "effective-charter-version",
+      "missing_vote_policy": "fail-closed"
+    }
+  },
+  "charter": {
+    "versioned": true,
+    "states": ["draft", "member-club-confirmation", "effective", "superseded", "revoked"],
+    "required_sections": ["purpose-and-scope", "admission-and-exit", "representative-mandates", "decision-and-voting", "conflict-of-interest", "communication-governance", "privacy-and-data", "discipline-and-appeal", "dispute-resolution", "dissolution-and-records"],
+    "effective_version_immutable": true,
+    "member_club_confirmation_required": true,
+    "change_process": ["proposal", "impact-summary", "member-club-confirmation", "independent-review", "effective-at", "supersede-prior-version"],
+    "activation_without_effective_charter": "forbidden",
+    "governance_write_without_effective_charter": "forbidden",
+    "variable_keys": {
+      "charter_confirmation_policy": "club_federation.charter_confirmation_policy",
+      "voting_quorum_policy": "club_federation.voting_quorum_policy",
+      "resolution_pass_policy": "club_federation.resolution_pass_policy"
+    },
+    "missing_variable_behavior": "fail-closed"
+  },
+  "communication": {
+    "backend_identity": "verified-account",
+    "frontend_identity": "display-name-and-role",
+    "group_unique_code_required": true,
+    "spaces": [
+      {"space_type": "official-announcement", "publish_roles": ["federation-director", "secretariat"], "read_scope": "eligible-federation-participants"},
+      {"space_type": "governance-deliberation", "publish_roles": ["club-delegate", "federation-director", "secretariat"], "read_scope": "mandated-representatives"},
+      {"space_type": "member-collaboration", "publish_roles": ["ordinary-member", "club-delegate", "federation-director", "secretariat", "moderator"], "read_scope": "policy-eligible-members"},
+      {"space_type": "public-information", "publish_roles": ["federation-director", "secretariat"], "read_scope": "public"}
+    ],
+    "direct_message": {
+      "default": "disabled",
+      "enablement": "mutual-explicit-consent",
+      "consent_revocable": true
+    },
+    "prohibited_content_classes": ["harassment-or-network-violence", "false-or-misleading-information", "personal-data-disclosure", "health-or-family-sensitive-data", "payment-or-account-data", "unauthorized-fundraising-or-financial-solicitation", "illegal-content"],
+    "moderation": {
+      "actions": ["warn", "restrict", "mute", "remove-content", "remove-member", "close-group"],
+      "reason_required": true,
+      "evidence_reference_required": true,
+      "immutable_audit_event_required": true,
+      "appeal_required": true,
+      "appeal_reviewer_independent": true,
+      "report_entry_required": true
+    },
+    "privacy": {
+      "cross_club_phone_visibility": "forbidden-by-default",
+      "full_user_id_visibility": "forbidden",
+      "sensitive_profile_visibility": "forbidden",
+      "minimum_necessary_fields": true
+    },
+    "variable_keys": {
+      "group_capacity_policy": "club_federation.group_capacity_policy",
+      "moderation_sla": "club_federation.moderation_sla",
+      "audit_retention_policy": "club_federation.audit_retention_policy"
+    },
+    "missing_variable_behavior": "fail-closed"
+  },
+  "lifecycle": {
+    "states": ["proposed", "active", "suspended", "ended"],
+    "active_requires": ["approved-application", "official-federation-code", "effective-charter", "current-founding-club-confirmations"],
+    "ended_code_reuse": "forbidden"
+  },
+  "commercial": {
+    "membership_fee": "forbidden",
+    "fundraising": "forbidden",
+    "payment": "forbidden",
+    "withdrawal": "forbidden",
+    "refund": "forbidden",
+    "subscription": "forbidden"
+  },
+  "decision_refs": ["D-CA-002", "D-UF-001", "D-UF-002", "D-UF-003", "D-UF-004", "D-UF-005"]
+}

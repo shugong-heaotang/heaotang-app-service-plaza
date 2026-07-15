@@ -248,6 +248,48 @@
       "owner": "平台集成负责人",
       "blocks": ["sc.integration"],
       "does_not_block": ["CA-FC", "CA-PC", "CA-UF"]
+    },
+    {
+      "dependency_id": "uf.m0-governance-contract",
+      "kind": "contract",
+      "description": "CA-UF numbering, layered approval, representation, charter and communication governance baseline",
+      "status": "standardized",
+      "required_for_slice": false,
+      "depends_on": ["decision.uf", "relationship.schema"],
+      "contracts": ["contracts/modules/club-alliance/federation/federation-governance.v1.json"],
+      "evidence": ["docs/project-management/modules/club-alliance/federation/requirements.md", "docs/project-management/modules/club-alliance/federation/decisions.md"],
+      "unresolved": [],
+      "owner": "club federation owner",
+      "blocks": ["uf.m0-conformance", "uf.p2-implementation"],
+      "does_not_block": ["CA-SC", "CA-FC", "CA-PC", "H2-M3"]
+    },
+    {
+      "dependency_id": "uf.m0-conformance",
+      "kind": "acceptance",
+      "description": "CA-UF M0 schema and synthetic governance conformance",
+      "status": "test-verified",
+      "required_for_slice": false,
+      "depends_on": ["uf.m0-governance-contract"],
+      "contracts": ["contracts/modules/club-alliance/federation/federation-governance.v1.schema.json", "contracts/modules/club-alliance/federation/fixtures/cases.v1.json"],
+      "evidence": ["contracts/modules/club-alliance/federation/conformance/test_federation_governance_contracts.py", "docs/project-management/modules/club-alliance/federation/acceptance-matrix.md"],
+      "unresolved": [],
+      "owner": "club federation owner",
+      "blocks": ["uf.m0-handoff"],
+      "does_not_block": ["CA-SC", "CA-FC", "CA-PC", "H2-M3"]
+    },
+    {
+      "dependency_id": "uf.m0-handoff",
+      "kind": "handoff",
+      "description": "CA-UF M0 contract-only checkpoint handoff",
+      "status": "implemented",
+      "required_for_slice": false,
+      "depends_on": ["uf.m0-conformance"],
+      "contracts": ["docs/project-management/modules/club-alliance/federation/handoff.md"],
+      "evidence": ["docs/project-management/modules/club-alliance/federation/handoff.md"],
+      "unresolved": ["independent platform acceptance required before P2 implementation"],
+      "owner": "platform integration owner",
+      "blocks": ["uf.p2-implementation"],
+      "does_not_block": ["CA-SC", "CA-FC", "CA-PC", "H2-M3"]
     }
   ]
 }

@@ -29,3 +29,7 @@
 ## 必读与门禁
 
 先完成根 README 第 0 节，再读 `docs/project-management/notices/2026-07-12-club-sc-first-closure-task-order.md`、两层依赖和 `self-created/CA-SC-handoff.md`。每阶段独立工作项、分支/工作树、检查单、考试、实现记录和 Handoff；无证据即未通过。
+
+## CA-UF M0 并行治理检查点（2026-07-15）
+
+友联体已在 `federation/` 冻结编号、分层审批、代表权、章程和交流治理五类合同。当前结论为 `Contract Go / Implementation No-Go`：可提交平台独立验收，但不授权数据库、API、页面、聊天、部署、真实数据或商业能力。

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/club-alliance/federation/federation-governance.v1.schema.json",
+  "title": "Club Federation Governance Contract v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "module_id", "child_project_id", "entity_kind", "relationship_kind", "implementation_authorized", "identity", "approval", "representation", "charter", "communication", "lifecycle", "commercial", "decision_refs"],
+  "properties": {
+    "contract_version": {"const": "club-alliance.federation-governance.v1"},
+    "module_id": {"const": "club-alliance"},
+    "child_project_id": {"const": "CA-UF"},
+    "entity_kind": {"const": "club_relationship"},
+    "relationship_kind": {"const": "club-federation"},
+    "implementation_authorized": {"const": false},
+    "identity": {
+      "type": "object",
+      "required": ["internal_key", "public_code_policy", "namespaces"],
+      "properties": {
+        "internal_key": {"type": "object", "required": ["visibility", "format", "public_use"]},
+        "public_code_policy": {"type": "object", "required": ["alphabet", "random_length", "check_algorithm", "allocation", "reuse", "mutable_attributes_embedded"]},
+        "namespaces": {
+          "type": "array", "minItems": 6, "maxItems": 6,
+          "items": {"type": "object", "additionalProperties": false, "required": ["entity", "prefix", "pattern", "allocation_event"], "properties": {"entity": {"type": "string"}, "prefix": {"type": "string", "pattern": "^CA-[A-Z]+$"}, "pattern": {"type": "string"}, "allocation_event": {"type": "string"}}}
+        }
+      }
+    },
+    "approval": {"type": "object", "required": ["application_states", "dimensions", "maker_checker", "variable_keys", "missing_variable_behavior", "official_code_before_approval"]},
+    "representation": {"type": "object", "required": ["source_of_authority", "direct_personal_membership_in_federation", "mandate_fields", "roles", "rules"]},
+    "charter": {"type": "object", "required": ["versioned", "states", "required_sections", "effective_version_immutable", "member_club_confirmation_required", "change_process", "activation_without_effective_charter", "governance_write_without_effective_charter", "variable_keys", "missing_variable_behavior"]},
+    "communication": {"type": "object", "required": ["backend_identity", "frontend_identity", "group_unique_code_required", "spaces", "direct_message", "prohibited_content_classes", "moderation", "privacy", "variable_keys", "missing_variable_behavior"]},
+    "lifecycle": {"type": "object", "required": ["states", "active_requires", "ended_code_reuse"]},
+    "commercial": {"type": "object", "required": ["membership_fee", "fundraising", "payment", "withdrawal", "refund", "subscription"]},
+    "decision_refs": {"type": "array", "minItems": 6, "items": {"type": "string"}, "uniqueItems": true}
+  }
+}

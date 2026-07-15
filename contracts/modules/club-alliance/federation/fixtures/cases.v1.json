@@ -1,0 +1,22 @@
+{
+  "fixture_version": "club-alliance.federation-governance.cases.v1",
+  "synthetic_only": true,
+  "cases": [
+    {"case_id": "UF-C001", "area": "approval", "facts": ["distinct-founder-clubs", "current-mandates", "independent-final-review", "effective-charter"], "expected": "approve-and-allocate-ca-uf-code"},
+    {"case_id": "UF-B001", "area": "approval", "facts": ["submitter-equals-final-reviewer"], "expected": "reject-same-actor-review"},
+    {"case_id": "UF-B002", "area": "approval", "facts": ["duplicate-confirmation-from-same-club"], "expected": "reject-duplicate-club-confirmation"},
+    {"case_id": "UF-B003", "area": "approval", "facts": ["required-variable-missing"], "expected": "fail-closed"},
+    {"case_id": "UF-B004", "area": "identity", "facts": ["official-code-requested-before-approval"], "expected": "reject-code-allocation"},
+    {"case_id": "UF-B005", "area": "representation", "facts": ["ordinary-member-attempts-vote"], "expected": "deny"},
+    {"case_id": "UF-B006", "area": "representation", "facts": ["delegate-mandate-expired"], "expected": "deny"},
+    {"case_id": "UF-B007", "area": "representation", "facts": ["auditor-reviews-own-action"], "expected": "deny-and-require-independent-review"},
+    {"case_id": "UF-B008", "area": "charter", "facts": ["charter-draft-only"], "expected": "deny-activation"},
+    {"case_id": "UF-B009", "area": "charter", "facts": ["effective-charter-edited-in-place"], "expected": "reject-and-require-new-version"},
+    {"case_id": "UF-B010", "area": "communication", "facts": ["group-has-no-ca-grp-code"], "expected": "reject-group-activation"},
+    {"case_id": "UF-B011", "area": "communication", "facts": ["direct-message-without-mutual-consent"], "expected": "deny"},
+    {"case_id": "UF-B012", "area": "communication", "facts": ["ordinary-member-publishes-official-announcement"], "expected": "deny"},
+    {"case_id": "UF-B013", "area": "communication", "facts": ["personal-data-disclosure"], "expected": "remove-content-and-open-audited-case"},
+    {"case_id": "UF-B014", "area": "commercial", "facts": ["unauthorized-fundraising"], "expected": "deny-and-escalate"},
+    {"case_id": "UF-B015", "area": "moderation", "facts": ["sanction-without-reason-or-appeal"], "expected": "reject-sanction"}
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-CLUB-UF-M0-GOVERNANCE",
+  "title": "俱乐部友联体 CA-UF M0 中级治理合同冻结",
+  "date": "2026-07-15",
+  "status": "verified",
+  "objective": "冻结友联体编号、分层审批、代表权、章程和交流治理，并维持 Contract Go / Implementation No-Go 边界。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-15-club-uf-m0-governance-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-15-club-uf-m0-governance-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/modules/club-alliance/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-15-club-uf-m0-governance-task-order.md",
+    "docs/project-management/modules/club-alliance/federation/requirements.md"
+  ],
+  "capabilities": [
+    "foundation.governance-certification",
+    "foundation.ai-collaboration-safety"
+  ],
+  "contracts": [
+    "contracts/modules/club-alliance/relationship.v1.json",
+    "contracts/modules/club-alliance/federation/federation-governance.v1.json",
+    "contracts/modules/club-alliance/federation/federation-governance.v1.schema.json",
+    "contracts/modules/club-alliance/federation/fixtures/cases.v1.json"
+  ],
+  "decisions": [
+    "docs/project-management/modules/club-alliance/CA-F0-H0-decisions.md",
+    "docs/project-management/modules/club-alliance/federation/decisions.md"
+  ],
+  "changed_areas": [
+    "contracts/modules/club-alliance/federation/",
+    "contracts/modules/club-alliance/internal-dependencies.v1.json",
+    "docs/project-management/modules/club-alliance/federation/",
+    "docs/project-management/modules/club-alliance/README.md"
+  ],
+  "verification": [
+    "15 CA-UF conformance tests pass",
+    "federation governance contract validates against Draft 2020-12 schema",
+    "club-alliance internal dependency graph validates",
+    "final R2 governance exam passes with score 100",
+    "commercial capabilities remain forbidden and implementation_authorized remains false"
+  ],
+  "evidence": [
+    "contracts/modules/club-alliance/federation/conformance/test_federation_governance_contracts.py",
+    "docs/project-management/modules/club-alliance/federation/acceptance-matrix.md",
+    "docs/project-management/modules/club-alliance/federation/handoff.md",
+    "docs/project-management/service-plaza/club-uf-m0-governance-2026-07-15.md"
+  ],
+  "premises": [
+    "友联体继续作为 club-federation 关系而不是 ClubType",
+    "个人通过成员俱乐部授权参与而不直接取得友联体成员身份",
+    "所有阈值由批准的版本化变量提供且缺失时失败关闭",
+    "本检查点不授权业务代码、部署、真实数据或资金能力"
+  ],
+  "implementation_mode": "ai-assisted"
+}
