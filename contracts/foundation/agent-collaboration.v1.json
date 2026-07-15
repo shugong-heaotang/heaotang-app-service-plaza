@@ -1522,7 +1522,7 @@
                            "title":  "俱乐部联盟 H2 会员工作台双层首页",
                            "owner":  "Club Alliance module agent",
                            "owner_role":  "俱乐部联盟负责人",
-                           "status":  "planned",
+                           "status":  "active",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-club-member-home-h2",
                            "branch":  "codex/club-member-home-h2",
@@ -3330,7 +3330,7 @@
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-protection-mall-p0-p1-runtime-r2",
                            "branch":  "codex/protection-mall-p0-p1-runtime-r2",
-                           "base_commit":  "4e40a45b2f1eab932d1f5607534028a57b15cf0b",
+                           "base_commit":  "16523bc1d36c9cd503afdc3a13fc345aff3246e7",
                            "allowed_paths":  [
                                                  "app/src/modules/protection-mall/**",
                                                  "contracts/modules/protection-mall/internal-dependencies.v2.json",
@@ -3364,9 +3364,9 @@
                                                  "contracts/foundation/implementation-records/2026-07-15-protection-mall-p0-p1-platform-wiring*.json",
                                                  "docs/project-management/modules/protection-mall/handoff-p0-p1.md"
                                              ],
-                           "started_with_clean_worktree":  false,
-                           "preexisting_changes_acknowledged":  true,
-                           "migration_note":  "planned；仅在runtime独立Go后从最新authority创建干净工作树并激活。只负责App路由、路由测试和质量CI，不重写商城业务。部署、测试服发布与生产继续No-Go。",
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "Runtime source 6ea6be4 已Independent Go并集成至authority 16523bc；本工作项据此从精确最新authority创建干净专用工作树并激活。只负责App路由、路由测试和质量CI，不重写商城业务。必须先完成foundation current checklist与exam100；部署、测试服发布与生产继续No-Go。",
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-p0-p1.md"
                        }
                    ]
