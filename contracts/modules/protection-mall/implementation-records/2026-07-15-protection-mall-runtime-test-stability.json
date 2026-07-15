@@ -1,0 +1,55 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-PROTECTION-MALL-RUNTIME-TEST-STABILITY",
+  "title": "保障商城 Runtime 焦点测试稳定性修复",
+  "date": "2026-07-15",
+  "status": "verified",
+  "objective": "消除错误态重试按钮异步聚焦断言与 React effect 调度之间的竞态，使即将启用的 APP 全量测试 CI 成为确定性门禁。",
+  "governance_checklist": "contracts/modules/protection-mall/development-checklists/2026-07-15-protection-mall-runtime-test-stability.json",
+  "governance_exam": "contracts/modules/protection-mall/governance-exams/2026-07-15-protection-mall-runtime-test-stability-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-15-protection-mall-p0-p1-productization-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.contract-tooling",
+    "foundation.frontend-shell"
+  ],
+  "contracts": [
+    "contracts/modules/protection-mall/internal-dependencies.v2.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md"
+  ],
+  "changed_areas": [
+    "app/src/modules/protection-mall/ProtectionMallPage.test.tsx",
+    "contracts/modules/protection-mall/development-checklists/2026-07-15-protection-mall-runtime-test-stability.json",
+    "contracts/modules/protection-mall/governance-exams/2026-07-15-protection-mall-runtime-test-stability-attempt-1.json"
+  ],
+  "verification": [
+    "the focus assertion waits for the observable effect result instead of racing findByRole",
+    "five consecutive full APP rounds passed 26 files and 249 tests each for 1245 passing test executions",
+    "the remediation does not change production code or platform wiring"
+  ],
+  "evidence": [
+    "app/src/modules/protection-mall/ProtectionMallPage.test.tsx"
+  ],
+  "premises": [
+    "the Platform Wiring candidate remains No-Go until this remediation is independently accepted and integrated",
+    "existing unrelated React act warnings are outside this narrow focus-race remediation",
+    "backend routes database writes payment deployment and production remain No-Go"
+  ],
+  "implementation_mode": "ai-assisted"
+}
