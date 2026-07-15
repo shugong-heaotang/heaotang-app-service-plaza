@@ -1,0 +1,85 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260714-PROJECT-BRAIN-V2-M0",
+  "title": "Project Brain v2 operations M0 governance freeze",
+  "date": "2026-07-15",
+  "status": "verified",
+  "objective": "Freeze the Project Brain v2 charter, requirements, read-only architecture, data classification, delivery gates, independent acceptance, ADR, and Handoff without implementing runtime behavior, touching Project Brain v1, admitting real or row-level sensitive data, or enabling production.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-14-project-brain-v2-m0.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-14-project-brain-v2-m0-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-14-project-brain-v2-operations-task-order.md",
+    "docs/project-management/project-brain-v2/task-comprehension-receipt-m0.md",
+    "docs/project-management/project-brain-v2/requirements-v2.md",
+    "docs/project-management/project-brain-v2/acceptance-v2.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json",
+    "contracts/foundation/implementation-record.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0021-project-brain-v2-operational-read-model.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/notices/2026-07-14-project-brain-v2-operations-task-order.md",
+    "docs/project-management/project-brain-v2/README.md",
+    "docs/project-management/project-brain-v2/task-comprehension-receipt-m0.md",
+    "docs/project-management/project-brain-v2/requirements-v2.md",
+    "docs/project-management/project-brain-v2/architecture-v2.md",
+    "docs/project-management/project-brain-v2/data-classification-v2.md",
+    "docs/project-management/project-brain-v2/delivery-plan-v2.md",
+    "docs/project-management/project-brain-v2/acceptance-v2.md",
+    "docs/project-management/project-brain-v2/handoff-v2.md",
+    "docs/decisions/0021-project-brain-v2-operational-read-model.md",
+    "contracts/foundation/development-checklists/2026-07-14-project-brain-v2-m0.json",
+    "contracts/foundation/governance-exams/2026-07-14-project-brain-v2-m0-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-14-project-brain-v2-m0.json"
+  ],
+  "verification": [
+    "Operations worktree resumed by fast-forward from initial activation base 36b245871dd95d53964fb20cf4c30a05ceb89a77 to authority a47bbbacae21596be6511b70539d92f0666715a5 and remained clean before M0 editing",
+    "Worktree bootstrap reported correct branch, clean state, lock-compatible dependencies, and ready_for_preflight true",
+    "Repository preflight returned ready",
+    "Current checklist completed with 26 of 26 governance inputs and zero SHA mismatch",
+    "Random governance exam attempt 1 passed with score 100",
+    "Task order, eight project governance documents, and ADR0021 were created within the registered M0 scope",
+    "Content consistency confirmed all twelve required boundary concepts; exact M0 scope is 13 of 13 with zero forbidden or missing paths; secret scan returned zero high-confidence hits; diff check, current checklist, exam linkage, implementation-record validation, total contracts, UTF-8 for 1477 files, preflight, and live authority freshness at a47bbbacae21596be6511b70539d92f0666715a5 all passed before candidate commit"
+  ],
+  "evidence": [
+    "docs/project-management/project-brain-v2/handoff-v2.md",
+    "contracts/foundation/development-checklists/2026-07-14-project-brain-v2-m0.json",
+    "contracts/foundation/governance-exams/2026-07-14-project-brain-v2-m0-attempt-1.json",
+    "docs/decisions/0021-project-brain-v2-operational-read-model.md"
+  ],
+  "premises": [
+    "Project Brain v1 remains the sole authority for its existing facts and fail-closed behavior",
+    "M0 admits no real data and authorizes no runtime implementation",
+    "Only governance facts and separately approved de-identified business aggregates may be considered in M1",
+    "Row-level member, health, transaction, customer-service data and secrets remain prohibited",
+    "Scheduler and dashboard remain read-only and no-writeback with explicit Unknown and No-Go",
+    "Production routes, snapshots, jobs, dashboard, export, deployment, and data access remain closed",
+    "Code integration, test-environment validation, and production enablement are separate approvals",
+    "M1-M5 remain No-Go until their own work items and predecessor gates are complete"
+  ],
+  "implementation_mode": "ai-assisted"
+}
