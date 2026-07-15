@@ -2,7 +2,7 @@
 
 ## 结论
 
-`Handoff-ready / pending independent review`。原 Evidence `f332c7e45bc09b520505f5c4a509c567e16f2ffa` 仅通过结构检查，但与后端稳定 scope、错误码和权益语义存在漂移，已被 R2 取代且不得集成。后端候选仍为 `22073cd8ddeff48a4f679ffcd41a2686d8ea3ba5`。
+`R2 remediation candidate / pending independent re-review`。原 Evidence `f332c7e45bc09b520505f5c4a509c567e16f2ffa` 仅通过结构检查，但与后端稳定 scope、错误码和权益语义存在漂移，已被 R2 取代且不得集成。后端候选更新为 `a2648bad68964bcf561507405667d0dd6b6c5fec`，其中 `22073cd8ddeff48a4f679ffcd41a2686d8ea3ba5` 的领域实现保持不变，仅追加真实读写交叠并发回归。
 
 ## 已验证范围
 
@@ -13,7 +13,8 @@
 - 会员方案组合、替换、预算、币种、整数溢出与跨会员失败关闭。
 - `product → physical`，`service/course/activity → service`；俱乐部商城保障权益失败关闭。
 - 保障商城目录快照可描述保障权益，但实际发放仍延后至订单完成且售后关闭。
-- 内存 repository 并发读写竞态验证。
+- 内存 repository 以 16 writers 与 16 readers 同步放行、每个 worker 32 次操作，验证真实读写交叠并通过 race。
+- Schema 精确锁定 `mall.catalog.v1`、快照不可变/深复制、仅内存 repository、读写交叠安全和完整 No-Go；19 个 fixture 的 ID、rule、input、expected 与字段形状全部强断言。
 
 ## 独立验证
 
@@ -22,7 +23,7 @@
 - `go test ./...`：通过。
 - `go vet ./...`：通过。
 - `gofmt -d`、`git diff --check`：通过。
-- `validate_catalog_contracts.py`：合同/schema、完整稳定错误集合和 19 个逐项强断言合成 fixture 通过。
+- `validate_catalog_contracts.py`：合同/schema、完整稳定错误集合和 19 个逐项强断言合成 fixture 通过；篡改 rule/input、快照、repository 或 No-Go 将失败关闭。
 - R2 只修改登记的 7 条 Evidence 路径；旧 checklist/exam 保持不可变。
 
 ## No-Go

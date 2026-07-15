@@ -33,15 +33,26 @@
     "catalog_entry": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["required_fields", "scene_ids", "publish_scope", "cross_seller_scope"],
+      "required": ["contract_version", "required_fields", "scene_ids", "publish_scope", "cross_seller_scope"],
       "properties": {
+        "contract_version": {"const": "mall.catalog.v1"},
         "required_fields": {"const": ["contract_version", "id", "kind", "title", "scene_ids", "responsibility", "price_snapshot", "benefit_snapshot"]},
         "scene_ids": {"const": "non_empty_unique_strings"},
         "publish_scope": {"const": "catalog:write"},
         "cross_seller_scope": {"const": "catalog:write:any"}
       }
     },
-    "snapshots": {"type": "object", "required": ["price", "benefit", "mutation_policy", "copy_policy"]},
+    "snapshots": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["price", "benefit", "mutation_policy", "copy_policy"],
+      "properties": {
+        "price": {"const": ["snapshot_id", "version", "currency", "amount_minor"]},
+        "benefit": {"const": ["snapshot_id", "version", "grants"]},
+        "mutation_policy": {"const": "immutable_after_first_save"},
+        "copy_policy": {"const": "detached_copy"}
+      }
+    },
     "membership_plan": {
       "type": "object",
       "additionalProperties": false,
@@ -58,8 +69,17 @@
         "replacement_policy": {"const": "rebuild_and_revalidate"}
       }
     },
-    "repository": {"type": "object", "required": ["implementation", "concurrency", "external_io"], "properties": {"external_io": {"const": false}}},
+    "repository": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["implementation", "concurrency", "external_io"],
+      "properties": {
+        "implementation": {"const": "in_memory_only"},
+        "concurrency": {"const": "safe_for_overlapping_parallel_read_write"},
+        "external_io": {"const": false}
+      }
+    },
     "error_codes": {"const": ["MALL_CATALOG_INVALID_ARGUMENT", "MALL_CATALOG_UNTRUSTED_SCOPE", "MALL_CATALOG_FORBIDDEN", "MALL_CATALOG_RESPONSIBILITY_MISSING", "MALL_CATALOG_NOT_FOUND", "MALL_CATALOG_SNAPSHOT_IMMUTABLE", "MALL_CATALOG_BUDGET_EXCEEDED", "MALL_CATALOG_CURRENCY_MISMATCH", "MALL_CATALOG_ARITHMETIC_OVERFLOW", "MALL_CATALOG_REPLACEMENT_NOT_FOUND", "MALL_CATALOG_DUPLICATE_PLAN_ITEM", "MALL_BENEFIT_FORBIDDEN"]},
-    "no_go": {"type": "array", "minItems": 9, "uniqueItems": true, "items": {"type": "string"}}
+    "no_go": {"const": ["database", "route", "network", "payment", "refund", "reconciliation", "real_data", "deployment", "production"]}
   }
 }
