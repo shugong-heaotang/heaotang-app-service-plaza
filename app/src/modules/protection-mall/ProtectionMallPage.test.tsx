@@ -116,6 +116,14 @@ describe("ProtectionMallPage", () => {
     expect(screen.getByText(/售后关闭后生效/)).toBeInTheDocument();
   });
 
+  it("以整数 minor-unit 精确格式化最大安全金额", async () => {
+    const boundaryCatalog = structuredClone(readyCatalog);
+    boundaryCatalog.items[0].price.amountMinor = Number.MAX_SAFE_INTEGER;
+    renderPage(api(async () => boundaryCatalog));
+
+    expect(await screen.findByText("¥90,071,992,547,409.91")).toBeInTheDocument();
+  });
+
   it("失败后聚焦重试并只触发一次恢复请求", async () => {
     const loadCatalog = vi
       .fn<ProtectionMallCatalogApi["loadCatalog"]>()

@@ -33,13 +33,21 @@ const kindLabels: Record<ProtectionMallCatalogEntry["kind"], string> = {
 
 function formatPrice({ amountMinor, currency }: ProtectionMallCatalogEntry["price"]): string {
   try {
-    return new Intl.NumberFormat("zh-CN", {
+    const formatter = new Intl.NumberFormat("zh-CN", {
       style: "currency",
       currency,
-      minimumFractionDigits: 2,
-    }).format(amountMinor / 100);
+    });
+    const resolved = formatter.resolvedOptions();
+    const fractionDigits = resolved.maximumFractionDigits ?? resolved.minimumFractionDigits ?? 2;
+    const divisor = 10n ** BigInt(fractionDigits);
+    const minorUnits = BigInt(amountMinor);
+    const majorUnits = minorUnits / divisor;
+    const fraction = (minorUnits % divisor).toString().padStart(fractionDigits, "0");
+    return formatter.formatToParts(majorUnits).map((part) =>
+      part.type === "fraction" ? fraction : part.value
+    ).join("");
   } catch {
-    return `${currency} ${(amountMinor / 100).toFixed(2)}`;
+    return `${currency} ${BigInt(amountMinor)} 最小货币单位`;
   }
 }
 
