@@ -1,0 +1,74 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-PLATFORM-LEGACY-LIFECYCLE-RECEIPT-GENERALIZATION-R3-1",
+  "title": "Legacy lifecycle receipt live-registry compatibility R3.1",
+  "date": "2026-07-15",
+  "status": "implemented",
+  "objective": "Remove the v3 structural deadlock that equated an immutable historical registry precondition with the evolving live registry, while preserving exact historical Git bytes, the full historical index-to-work-id identity prefix and all six audit rows fail-closed.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3-1.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3-1-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3-task-order.md",
+    "docs/project-management/service-plaza/platform-legacy-lifecycle-receipt-generalization-r3-handoff.md",
+    "contracts/foundation/legacy-lifecycle-migrations/LLM-20260715-TECHNICAL-SOCIAL-BATCH-R2.json"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.delivery-recovery"
+  ],
+  "contracts": [
+    "contracts/foundation/delivery-flow-policy.v3.json",
+    "contracts/foundation/legacy-lifecycle-migration.v2.schema.json",
+    "contracts/foundation/legacy-lifecycle-migrations/LLM-20260715-TECHNICAL-SOCIAL-BATCH-R2.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "changed_areas": [
+    "scripts/validate_delivery_flow_policy.py",
+    "scripts/tests/test_validate_delivery_flow_policy.py",
+    "contracts/foundation/development-checklists/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3-1.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3-1-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3-1.json",
+    "docs/project-management/service-plaza/platform-legacy-lifecycle-receipt-generalization-r3-handoff.md"
+  ],
+  "verification": [
+    "clean R3 exact 381039f fast-forwarded only to integrated authority 06047119c12384498af78f5feab2425c6136ea52 and remained clean before R3.1 edits",
+    "fresh R3.1 checklist completed 26 of 26 and governance exam attempt 1 passed with score 100",
+    "the historical current_registry_precondition commit path bytes and SHA are still verified with git show and are never replaced by live bytes",
+    "the live registry may change any audit-scope-external governance fields and append unique tail rows while every historical index retains its original work_id",
+    "indices47 88 89 90 92 and132 require complete canonical row equality with the receipt precondition; omitted and atomic gates remain unchanged",
+    "the positive regression changes row136 status and allowed paths, changes row137 handoff state and appends three rows without a receipt drift error",
+    "negative regressions reject audit-row field drift, historical insertion deletion reorder replacement duplicate append and precondition commit path or SHA tampering",
+    "Delivery Flow focused suite passes 39 of 39 and preserves every original R3 test",
+    "no policy schema receipt task order original R3 checklist exam or registry bytes are modified",
+    "no lifecycle or business status transaction is executed"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/platform-legacy-lifecycle-receipt-generalization-r3-handoff.md",
+    "contracts/foundation/development-checklists/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3-1.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3-1-attempt-1.json"
+  ],
+  "premises": [
+    "an immutable historical precondition proves the receipt target rows but cannot require the entire live registry to remain byte-identical forever",
+    "audit-scope-external governance evolution remains governed by the existing agent-collaboration and Delivery Flow contracts rather than this receipt validator",
+    "tail append is lawful only when the complete historical index-to-work-id prefix remains unchanged and all work ids stay unique",
+    "developer stops at an exact candidate and does not push self-review self-integrate apply a receipt deploy or access production real data or funds"
+  ],
+  "implementation_mode": "ai-assisted"
+}

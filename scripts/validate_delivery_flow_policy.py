@@ -109,6 +109,55 @@ def canonical_row_sha256(row: dict) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+def validate_live_registry_extension(
+    precondition_registry: dict,
+    live_registry: dict,
+    receipt: dict,
+) -> list[str]:
+    errors: list[str] = []
+    historical_items = precondition_registry.get("work_items", [])
+    live_items = live_registry.get("work_items", [])
+    if len(live_items) < len(historical_items):
+        errors.append("DELIVERY_LEGACY_CURRENT_REGISTRY_HISTORY_INVALID")
+        return errors
+    if any(
+        live_items[index].get("work_id") != historical.get("work_id")
+        for index, historical in enumerate(historical_items)
+    ):
+        errors.append("DELIVERY_LEGACY_CURRENT_REGISTRY_HISTORY_INVALID")
+    live_ids = [item.get("work_id") for item in live_items]
+    if any(not isinstance(work_id, str) or not work_id for work_id in live_ids) or len(live_ids) != len(set(live_ids)):
+        errors.append("DELIVERY_LEGACY_CURRENT_REGISTRY_HISTORY_INVALID")
+
+    transitions = {
+        entry.get("registry_index"): entry
+        for entry in receipt.get("transitions", [])
+        if isinstance(entry.get("registry_index"), int)
+    }
+    for audit_entry in receipt.get("audit_scope", []):
+        index = audit_entry.get("registry_index")
+        work_id = audit_entry.get("work_id")
+        if (
+            not isinstance(index, int)
+            or index < 0
+            or index >= len(historical_items)
+            or index >= len(live_items)
+            or historical_items[index].get("work_id") != work_id
+            or live_items[index].get("work_id") != work_id
+        ):
+            errors.append("DELIVERY_LEGACY_AUDIT_ROW_DRIFT")
+            continue
+        transition = transitions.get(index)
+        expected_hash = (
+            transition.get("current_row_sha256")
+            if transition is not None
+            else canonical_row_sha256(historical_items[index])
+        )
+        if canonical_row_sha256(historical_items[index]) != expected_hash or canonical_row_sha256(live_items[index]) != expected_hash:
+            errors.append("DELIVERY_LEGACY_AUDIT_ROW_DRIFT")
+    return errors
+
+
 def validate_legacy_receipt(policy: dict, repo_root: Path, registry: dict) -> tuple[list[str], dict | None]:
     if policy.get("contract_version") != "delivery-flow-policy.v2":
         return [], None
@@ -263,16 +312,18 @@ def validate_v2_receipt(
         return errors, receipt, None
     current = receipt.get("current_registry_precondition", {})
     current_bytes = git_bytes_at_commit(repo_root, current.get("commit", ""), current.get("path", ""))
-    if (
-        current_bytes is None
-        or hashlib.sha256(current_bytes).hexdigest() != current.get("sha256")
-        or current_bytes != registry_bytes
-    ):
-        errors.append("DELIVERY_LEGACY_CURRENT_REGISTRY_DRIFT")
+    if current_bytes is None or hashlib.sha256(current_bytes).hexdigest() != current.get("sha256"):
+        errors.append("DELIVERY_LEGACY_CURRENT_REGISTRY_PRECONDITION_INVALID")
+        return errors, receipt, None
     try:
         source_registry = json.loads(source_bytes.decode("utf-8"))
+        precondition_registry = json.loads(current_bytes.decode("utf-8"))
+        live_registry_from_bytes = json.loads(registry_bytes.decode("utf-8"))
     except (UnicodeDecodeError, json.JSONDecodeError):
         return errors + ["DELIVERY_LEGACY_RECEIPT_SOURCE_REGISTRY_INVALID"], receipt, None
+    if live_registry_from_bytes != registry:
+        errors.append("DELIVERY_LEGACY_CURRENT_REGISTRY_BYTES_INVALID")
+        return errors, receipt, None
 
     transitions = receipt.get("transitions", [])
     indices = [entry.get("registry_index") for entry in transitions]
@@ -336,6 +387,7 @@ def validate_v2_receipt(
         index = entry.get("registry_index")
         if not isinstance(index, int) or index >= len(source_items) or source_items[index].get("work_id") != entry.get("work_id"):
             errors.append("DELIVERY_LEGACY_OMITTED_ROW_INVALID")
+    errors.extend(validate_live_registry_extension(precondition_registry, registry, receipt))
 
     declared_groups = receipt.get("atomic_groups", [])
     group_members = {group.get("group_id"): group.get("members", []) for group in declared_groups}

@@ -40,3 +40,20 @@ The first focused run had one controlled test failure: arbitrary v1-to-v2 receip
 ## No-transaction boundary
 
 No registry status is changed. No receipt is applied, partially projected or marked reviewed/integrated. Social rows132/133 remain planned. The developer will commit only the 12 authorized paths and stop. Push, self-review, self-integration, deployment, production, real-data and funds access remain prohibited.
+
+## R3.1 live-registry compatibility addendum
+
+R3 exact `381039fe4d971fc97c2aa85cef3cf4b2aa0bb5ee` was controlled-integrated as authority `06047119c12384498af78f5feab2425c6136ea52`. The existing row136 owner fast-forwarded from its clean exact candidate only to that authority before starting R3.1. The immutable task order, original R3 checklist and exam, policy v3, both policy schemas, both lifecycle schemas, both receipts and the collaboration registry remain unchanged.
+
+R3.1 removes one structural deadlock in the v2 receipt handler. `current_registry_precondition` still means exact historical Git evidence: the validator reads `git show <commit>:<path>`, verifies its SHA256 and parses those bytes. It no longer requires the entire evolving live registry file to be byte-identical to that historical object.
+
+The replacement live-registry gate is deliberately narrow:
+
+- the live registry must contain at least the complete historical prefix;
+- every historical index must retain the same non-empty `work_id`, so insertion, deletion, reorder or replacement fails closed;
+- every live `work_id`, including appended rows, must remain unique;
+- audit indices 47, 88, 89, 90, 92 and 132 must retain complete canonical row hashes from the receipt precondition;
+- all existing transition, partial/mixed, audit partition, omitted row92, 90/132 atomic, evidence, review and blob-equivalence gates remain active;
+- fields outside those six audit rows and unique tail appends are not frozen here; existing agent-collaboration and Delivery Flow contracts continue to govern them.
+
+The positive regression explicitly changes row136 status and released paths, changes row137 Handoff state and appends three unique governance rows. The receipt handler accepts that shape. Negative cases reject any field drift on each audit row, historical insertion/deletion/reorder/work-id replacement, duplicate append and precondition commit/path/SHA substitution. Focused Delivery Flow regression is 39/39, including all original 35 R3 tests. R3.1 does not apply the Batch receipt or mutate any real registry or business state.
