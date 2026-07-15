@@ -1,0 +1,46 @@
+name: APP quality
+
+on:
+  pull_request:
+    paths:
+      - "app/**"
+      - "scripts/Test-TextEncoding.ps1"
+      - ".github/workflows/app-quality.yml"
+  push:
+    paths:
+      - "app/**"
+      - "scripts/Test-TextEncoding.ps1"
+      - ".github/workflows/app-quality.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  frontend:
+    runs-on: windows-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+
+      - name: Install locked dependencies
+        working-directory: app
+        run: npm ci
+
+      - name: Run frontend tests
+        working-directory: app
+        run: npm test
+
+      - name: Build production frontend
+        working-directory: app
+        run: npm run build
+
+      - name: Validate UTF-8 and PowerShell files
+        shell: powershell
+        run: powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-TextEncoding.ps1

@@ -149,6 +149,50 @@ describe("服务广场主链路", () => {
     expect(screen.getByRole("link", { name: "← 返回服务广场" })).toBeInTheDocument();
   });
 
+  it("保障商城使用独立只读目录路由，不落入通用业务页", async () => {
+    setAuthenticatedSession();
+    const catalog = {
+      contract_version: "mall.catalog.v1",
+      items: [{
+        contract_version: "mall.catalog.v1",
+        id: "route-item-1",
+        kind: "service",
+        title: "家庭健康咨询",
+        scene_ids: ["family-care"],
+        responsibility: {
+          mall_type: "protection_mall",
+          product_type: "service",
+          seller_id: "seller-1",
+          fulfillment_owner_id: "health-team-1",
+          after_sale_owner_id: "support-1",
+        },
+        price_snapshot: {
+          snapshot_id: "price-route-1",
+          version: 1,
+          currency: "CNY",
+          amount_minor: 19900,
+        },
+        benefit_snapshot: {
+          snapshot_id: "benefit-route-1",
+          version: 1,
+          grants: [],
+        },
+      }],
+    };
+    const fetchMock = vi.spyOn(globalThis, "fetch").mockResolvedValue(jsonResponse(catalog));
+
+    renderAt("/services/protection-mall");
+
+    expect(screen.getByRole("heading", { level: 1, name: "保障商城" })).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "家庭健康咨询" })).toBeInTheDocument();
+    expect(screen.getByText("¥199.00")).toBeInTheDocument();
+    expect(screen.queryByLabelText("联调状态切换")).not.toBeInTheDocument();
+    expect(fetchMock).toHaveBeenCalledTimes(1);
+    expect(requestUrl(fetchMock.mock.calls[0][0])).toBe("/api/v1/mall/catalog");
+    expect((fetchMock.mock.calls[0][1]?.headers as Headers).get("Authorization"))
+      .toBe("Bearer app-route-token");
+  });
+
   it("未知路由提供返回服务广场的恢复路径", () => {
     renderAt("/missing");
 
