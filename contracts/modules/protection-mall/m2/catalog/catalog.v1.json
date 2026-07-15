@@ -16,6 +16,7 @@
     "failure_mode": "fail_closed"
   },
   "catalog_entry": {
+    "contract_version": "mall.catalog.v1",
     "required_fields": ["contract_version", "id", "kind", "title", "scene_ids", "responsibility", "price_snapshot", "benefit_snapshot"],
     "scene_ids": "non_empty_unique_strings",
     "publish_scope": "catalog:write",
@@ -40,7 +41,7 @@
   },
   "repository": {
     "implementation": "in_memory_only",
-    "concurrency": "safe_for_parallel_read_write",
+    "concurrency": "safe_for_overlapping_parallel_read_write",
     "external_io": false
   },
   "error_codes": [
