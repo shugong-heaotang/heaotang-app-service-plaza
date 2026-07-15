@@ -3043,7 +3043,6 @@
                            "branch":  "codex/club-uf-m0-governance",
                            "base_commit":  "5c1069b134747ae5a702ae677457c2422d3137da",
                            "allowed_paths":  [
-                                                 "contracts/foundation/agent-collaboration.v1.json",
                                                  "contracts/foundation/development-checklists/2026-07-15-club-uf-m0-governance*.json",
                                                  "contracts/foundation/governance-exams/2026-07-15-club-uf-m0-governance*.json",
                                                  "contracts/foundation/implementation-records/2026-07-15-club-uf-m0-governance*.json",
@@ -3052,8 +3051,7 @@
                                                  "docs/project-management/notices/2026-07-15-club-uf-m0-governance-task-order.md",
                                                  "docs/project-management/modules/club-alliance/README.md",
                                                  "docs/project-management/modules/club-alliance/federation/**",
-                                                 "docs/project-management/service-plaza/club-uf-m0-governance-2026-07-15.md",
-                                                 "docs/project-management/service-plaza/handoff-log.md"
+                                                 "docs/project-management/service-plaza/club-uf-m0-governance-2026-07-15.md"
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
