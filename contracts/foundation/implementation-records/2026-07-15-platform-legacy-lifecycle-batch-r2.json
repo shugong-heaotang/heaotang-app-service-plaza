@@ -1,0 +1,77 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-PLATFORM-LEGACY-LIFECYCLE-BATCH-R2",
+  "title": "Platform Legacy Lifecycle Batch R2 non-contract transaction design",
+  "date": "2026-07-15",
+  "status": "implemented",
+  "objective": "Audit legacy technical and Social lifecycle evidence and prepare only a fixed draft-not-registered, non-executable transaction design after proving the existing Activity/Mall-specific schema cannot register this batch.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-15-platform-legacy-lifecycle-batch-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-15-platform-legacy-lifecycle-batch-r2-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0021-versioned-legacy-lifecycle-receipts.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-15-platform-legacy-lifecycle-batch-r2-task-order.md",
+    "docs/project-management/notices/2026-07-15-platform-registry-r12l-parallel-activation-task-order.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.delivery-recovery"
+  ],
+  "contracts": [
+    "contracts/foundation/delivery-flow-policy.v2.json",
+    "contracts/foundation/legacy-lifecycle-migration.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0021-versioned-legacy-lifecycle-receipts.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/notices/2026-07-15-platform-legacy-lifecycle-batch-r2-task-order.md",
+    "contracts/foundation/development-checklists/2026-07-15-platform-legacy-lifecycle-batch-r2.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-legacy-lifecycle-batch-r2-attempt-1.json",
+    "contracts/foundation/legacy-lifecycle-migrations/LLM-20260715-TECHNICAL-SOCIAL-BATCH-R2.json",
+    "contracts/foundation/implementation-records/2026-07-15-platform-legacy-lifecycle-batch-r2.json",
+    "docs/project-management/service-plaza/platform-legacy-lifecycle-batch-r2-handoff.md"
+  ],
+  "verification": [
+    "authorized implementation chain d7d57bd -> 8f8f2f6 -> controlled integration 05bbf64 -> explicit ff-only base 05bbf64 is recorded",
+    "current checklist completed 26 of 26 and exam attempt 1 passed with score 100",
+    "source and current registry both bind exact 05bbf64 bytes SHA and five canonical row hashes",
+    "Telemetry five source blobs at a0b21cf equal backend authority 091c9be9 blobs",
+    "Network two source blobs at f6ba650c equal backend authority 091c9be9 blobs",
+    "row 89 cancellation is bound to whole-candidate No-Go and integrated replacement row 128",
+    "final dispatch Handoff bytes SHA 2de166bf are bound to exact evidence finalization commit 86d68db while Network APP integration remains exact 610ba656",
+    "Social rows 90 and 132 share one required atomic group",
+    "row 92 is omitted because file-backed independent Go is absent",
+    "draft invariant checks, governance contracts, total contracts, UTF-8, scope, secret scan and diff checks pass"
+  ],
+  "evidence": [
+    "contracts/foundation/legacy-lifecycle-migrations/LLM-20260715-TECHNICAL-SOCIAL-BATCH-R2.json",
+    "docs/project-management/service-plaza/platform-legacy-lifecycle-batch-r2-handoff.md",
+    "contracts/foundation/development-checklists/2026-07-15-platform-legacy-lifecycle-batch-r2.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-legacy-lifecycle-batch-r2-attempt-1.json"
+  ],
+  "premises": [
+    "the new JSON is not a registered contract or authorized receipt and cannot execute",
+    "the existing v1 schema remains unchanged and specific to Activity/Mall R1",
+    "47 and 88 integrated are future projections that require generalized validator proof of blob equivalence fresh acceptance and APP integration",
+    "no registry row or delivery policy is modified",
+    "review integration authorization and post registry remain null",
+    "the developer does not push independently accept or integrate this candidate",
+    "candidate 53e1b7ae2a771b79d9cc82f6eea517626dc7ad21 was independently rejected because it paired final Handoff bytes 2de166bf with earlier integration commit 610ba656; the amended candidate corrects the earliest controllable provenance field without changing projected statuses"
+  ],
+  "implementation_mode": "ai-assisted"
+}
