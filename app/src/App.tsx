@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from "react-router-dom";
 import { ClubAllianceRoute, SelfCreatedClubRoute } from "./modules/club-alliance";
 import { HealthManagerRoute } from "./modules/health-manager";
 import { LifeNavigationPage } from "./modules/life-navigation";
+import { ProtectionMallPage } from "./modules/protection-mall";
 import { ProjectBrainPage } from "./modules/project-brain/ProjectBrainPage";
 import { CoreServicePage } from "./pages/CoreServicePage";
 import { NotFoundPage } from "./pages/NotFoundPage";
@@ -31,6 +32,7 @@ export function AppRoutes() {
       />
       <Route path="/services/club-alliance" element={<ClubAllianceRoute />} />
       <Route path="/services/health-manager" element={<HealthManagerRoute />} />
+      <Route path="/services/protection-mall" element={<ProtectionMallPage />} />
       <Route path="/services/:serviceKey" element={<CoreServicePage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
