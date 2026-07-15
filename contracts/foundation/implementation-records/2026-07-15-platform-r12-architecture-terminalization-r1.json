@@ -1,0 +1,77 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-PLATFORM-R12-ARCHITECTURE-TERMINALIZATION-R1-FINAL-R2",
+  "title": "Platform R12 architecture evidence and terminalization remediation",
+  "date": "2026-07-15",
+  "status": "implemented",
+  "objective": "File the real later APP architecture verdict, preserve early-integration timing deviations, and prepare a fresh registry-only terminalization without replaying stale candidates or executing lifecycle receipts.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-15-platform-r12-architecture-terminalization-r1-final-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-15-platform-r12-architecture-terminalization-r1-final-r2-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-15-platform-r12-architecture-terminalization-r1-task-order.md",
+    "docs/project-management/independent-acceptance/platform-delivery-flow-legacy-v2-r1/evidence.md",
+    "docs/project-management/independent-acceptance/platform-r12-architecture-terminalization-r1/evidence.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.delivery-recovery"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/delivery-flow-policy.v3.json",
+    "contracts/foundation/legacy-lifecycle-migration.v2.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-15-platform-r12-architecture-terminalization-r1-task-order.md",
+    "contracts/foundation/development-checklists/2026-07-15-platform-r12-architecture-terminalization-r1.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-r12-architecture-terminalization-r1-attempt-1.json",
+    "contracts/foundation/development-checklists/2026-07-15-platform-r12-architecture-terminalization-r1-final-r2.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-r12-architecture-terminalization-r1-final-r2-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-15-platform-r12-architecture-terminalization-r1.json",
+    "docs/project-management/independent-acceptance/platform-r12-architecture-terminalization-r1/evidence.md",
+    "docs/project-management/independent-acceptance/platform-r12-architecture-terminalization-r1/handoff.md"
+  ],
+  "verification": [
+    "task order SHA 4950ec52fcbaad9c2253a0abf181904f046195e1c1b8b66ef6d389703071c69b was read before checklist completion and exam generation",
+    "entry checklist and exam are preserved as the pre-implementation snapshot; final R2 current checklist SHA 391c12ae30ad833cf483739d0f11da5fa7f6f0d12e2bf65ad6d5c13f6c6a5649 completed 26 of 26 and its attempt-1 exam passed with score 100",
+    "aa23dbe architecture Go is recorded at the real later review time and f986734 is preserved only as an early integration",
+    "8f8f2f6 is historical content Go but current direct integration No-Go; 05bbf646 is preserved as an early integration",
+    "2f4cb9d is technical content Go but direct integration Exact revision and is not replayed",
+    "old receipt SHA 5e85735d7c70a942efca1b8a8c6d9aecee4805a40282ae8cfbac27beab3207b1 remains authorized-not-applied with applied false and five transitions",
+    "no Mall status receipt policy schema validator Activity business deployment production real-data or funds path is changed"
+  ],
+  "evidence": [
+    "docs/project-management/independent-acceptance/platform-r12-architecture-terminalization-r1/evidence.md",
+    "docs/project-management/independent-acceptance/platform-r12-architecture-terminalization-r1/handoff.md",
+    "contracts/foundation/development-checklists/2026-07-15-platform-r12-architecture-terminalization-r1.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-r12-architecture-terminalization-r1-attempt-1.json",
+    "contracts/foundation/development-checklists/2026-07-15-platform-r12-architecture-terminalization-r1-final-r2.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-r12-architecture-terminalization-r1-final-r2-attempt-1.json"
+  ],
+  "premises": [
+    "historical integration commits must never substitute for later independent verdicts",
+    "stale registry candidates are evidence inputs and may not be directly replayed",
+    "terminalized items release write ownership without rewriting source history",
+    "Activity lifecycle decoupling remains a separate later work item",
+    "developer does not self-accept integrate deploy or access production real data or funds"
+  ],
+  "implementation_mode": "ai-assisted"
+}
