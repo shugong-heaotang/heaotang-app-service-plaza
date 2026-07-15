@@ -3333,6 +3333,7 @@
                            "base_commit":  "4e40a45b2f1eab932d1f5607534028a57b15cf0b",
                            "allowed_paths":  [
                                                  "app/src/modules/protection-mall/**",
+                                                 "contracts/modules/protection-mall/internal-dependencies.v2.json",
                                                  "contracts/modules/protection-mall/development-checklists/2026-07-15-protection-mall-p0-p1-runtime*.json",
                                                  "contracts/modules/protection-mall/governance-exams/2026-07-15-protection-mall-p0-p1-runtime*.json",
                                                  "contracts/modules/protection-mall/implementation-records/2026-07-15-protection-mall-p0-p1-runtime*.json",
@@ -3341,7 +3342,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "项目最高负责人授权在M2目录与Evidence受控集成后立即继续全部P0/P1。首检查点仅模块路径：共享businessApiAdapter、严格目录解码、loading/empty/error/success、取消与迟到响应隔离、重复请求抑制、无障碍和模块测试。后端路由、共享App、CI、写入、支付、部署与生产未授权。",
+                           "migration_note":  "项目最高负责人授权在M2目录与Evidence受控集成后立即继续全部P0/P1。入口检查发现internal-dependencies仍停留M0 partial-go，先精确更新该overlay并重新生成R2 current checklist/exam100，再开始模块代码。首检查点：共享businessApiAdapter、严格目录解码、loading/empty/error/success、取消与迟到响应隔离、重复请求抑制、无障碍和模块测试。后端路由、共享App、CI、写入、支付、部署与生产未授权。",
                            "handoff_record":  "docs/project-management/modules/protection-mall/handoff-p0-p1.md"
                        },
                        {
