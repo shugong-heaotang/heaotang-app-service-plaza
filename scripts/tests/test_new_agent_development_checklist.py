@@ -13,20 +13,13 @@ ROOT = Path(__file__).resolve().parents[2]
 SCRIPT = ROOT / "scripts" / "New-AgentDevelopmentChecklist.ps1"
 POWERSHELL = shutil.which("powershell") or "powershell"
 
+POLICY = json.loads((ROOT / "contracts/foundation/delivery-flow-policy.v2.json").read_text(encoding="utf-8"))
+RECEIPT = json.loads((ROOT / POLICY["migration"]["receipt_path"]).read_text(encoding="utf-8"))
+CHECKLIST_PROVENANCE = {entry["path"]: entry for entry in RECEIPT["checklist_compatibility"]}
 LEGACY_CORE_ONLY = {
-    "contracts/modules/network/development-checklists/2026-07-12-network-canonical-owner-r1.json",
-    "contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m0-r3-correction.json",
-    "contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m1-contracts.json",
-    "contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m1-domain-evidence.json",
+    path for path, entry in CHECKLIST_PROVENANCE.items()
+    if entry["scope"] == "legacy-core-only-module"
 }
-
-LEGACY_CORE_ONLY_SHA256 = {
-    "contracts/modules/network/development-checklists/2026-07-12-network-canonical-owner-r1.json": "dacb7ffd020dc501f4bf9fbc233030f0ab3885a9c1a7ce8547a02eeed21b2293",
-    "contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m0-r3-correction.json": "4aa3de76d86099dbc55474c61d35e4bc133b2babd5641bb81f40b52121d5318a",
-    "contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m1-contracts.json": "693dda7450d6d8dc7f10b7c9ed7a38952424671dad80c9d6b0b2767bf13addac",
-    "contracts/modules/protection-mall/development-checklists/2026-07-12-protection-mall-m1-domain-evidence.json": "b8a7e9ece9b9333144229aef4d0df77a6cdc48dadd23eb13f48f085ecf86276a",
-}
-
 FOUNDATION_GATE_BASE = "fb29b857a5476a62cc882bf6bf407e67febcacf9"
 
 
@@ -34,16 +27,22 @@ def platform_scope_errors(root: Path, relative: str, data: dict, registry: dict)
     errors: list[str] = []
     if data.get("module_id") is not None:
         return [f"{relative}: foundation checklist must be platform scoped and use module_id=null"]
+    provenance = CHECKLIST_PROVENANCE.get(relative)
+    if provenance:
+        if provenance.get("scope") != "platform":
+            errors.append(f"{relative}: receipt scope is not platform")
+        if provenance.get("record_id") != data.get("record_id"):
+            errors.append(f"{relative}: receipt record_id mismatch")
+        if hashlib.sha256((root / relative).read_bytes()).hexdigest() != provenance.get("sha256"):
+            errors.append(f"{relative}: receipt SHA-256 mismatch")
+        return errors
     record_id = str(data.get("record_id", ""))
-    candidate_record_ids = [record_id]
-    stripped = re.sub(r"-R[0-9]+$", "", record_id)
-    if stripped != record_id:
-        candidate_record_ids.append(stripped)
-    expected_work_ids = {candidate.replace("IR-", "AIW-", 1) for candidate in candidate_record_ids}
-    item = next(
-        (entry for entry in registry.get("work_items", []) if entry.get("work_id") in expected_work_ids),
-        None,
-    )
+    expected = record_id.replace("IR-", "AIW-", 1)
+    candidates = [
+        entry for entry in registry.get("work_items", [])
+        if expected == entry.get("work_id") or expected.startswith(str(entry.get("work_id")) + "-")
+    ]
+    item = max(candidates, key=lambda entry: len(str(entry.get("work_id"))), default=None)
     if item is None:
         return [f"{relative}: no registry work item proves platform scope for {data.get('record_id')}"]
     if item.get("owner_role") != "平台集成负责人":
@@ -191,7 +190,13 @@ class SharedModuleChecklistGateTests(unittest.TestCase):
             relative = path.relative_to(ROOT).as_posix()
             module_id = data.get("module_id")
             if not module_id:
-                if relative not in LEGACY_CORE_ONLY:
+                provenance = CHECKLIST_PROVENANCE.get(relative)
+                if (
+                    relative not in LEGACY_CORE_ONLY
+                    or not provenance
+                    or hashlib.sha256(path.read_bytes()).hexdigest() != provenance.get("sha256")
+                    or provenance.get("record_id") != data.get("record_id")
+                ):
                     errors.append(f"{relative}: completed module checklist must set module_id")
                 continue
             overlay = reading_list.get("module_overlays", {}).get(module_id)
@@ -218,7 +223,8 @@ class SharedModuleChecklistGateTests(unittest.TestCase):
         )
         core = reading_list["core"]
         errors = []
-        for relative, expected_hash in LEGACY_CORE_ONLY_SHA256.items():
+        for relative in LEGACY_CORE_ONLY:
+            expected_hash = CHECKLIST_PROVENANCE[relative]["sha256"]
             path = ROOT / relative
             data = json.loads(path.read_text(encoding="utf-8"))
             actual_hash = hashlib.sha256(path.read_bytes()).hexdigest()

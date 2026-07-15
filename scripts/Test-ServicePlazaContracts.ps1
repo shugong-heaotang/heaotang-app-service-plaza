@@ -9,8 +9,12 @@ $schema = Join-Path $repoRoot "contracts\service-plaza\service-plaza-action.sche
 $baseline = Join-Path $repoRoot "contracts\service-plaza\service-plaza-actions.v1.json"
 $foundationRegistry = Join-Path $repoRoot "contracts\foundation\foundation-capabilities.v1.json"
 $internalDependencyV2Schema = Join-Path $repoRoot "contracts\foundation\module-internal-dependencies.v2.schema.json"
+$deliveryFlowV2 = Join-Path $repoRoot "contracts\foundation\delivery-flow-policy.v2.json"
+$deliveryFlowV2Schema = Join-Path $repoRoot "contracts\foundation\delivery-flow-policy.v2.schema.json"
+$legacyMigrationSchema = Join-Path $repoRoot "contracts\foundation\legacy-lifecycle-migration.v1.schema.json"
+$legacyMigrationReceipt = Join-Path $repoRoot "contracts\foundation\legacy-lifecycle-migrations\LLM-20260715-ACTIVITY-MALL-M2-R1.json"
 
-foreach ($path in @($schema, $baseline, $internalDependencyV2Schema)) {
+foreach ($path in @($schema, $baseline, $internalDependencyV2Schema, $deliveryFlowV2, $deliveryFlowV2Schema, $legacyMigrationSchema, $legacyMigrationReceipt)) {
   if (-not (Test-Path -LiteralPath $path)) {
     throw "Service Plaza contract file is missing: $path"
   }
@@ -79,6 +83,13 @@ try {
   if ($LASTEXITCODE -ne 0) {
     throw "Agent workspace ownership and isolation validation failed."
   }
+  & python -X utf8 (Join-Path $PSScriptRoot "validate_delivery_flow_policy.py") `
+    $deliveryFlowV2 `
+    $deliveryFlowV2Schema `
+    (Join-Path $repoRoot "contracts\foundation\agent-collaboration.v1.json")
+  if ($LASTEXITCODE -ne 0) {
+    throw "Delivery Flow V2 policy, fixed receipt or lifecycle migration validation failed."
+  }
   & python -X utf8 (Join-Path $PSScriptRoot "validate_development_checklists.py") `
     (Join-Path $repoRoot "contracts\foundation\development-checklist.v1.schema.json") `
     (Join-Path $repoRoot "contracts\foundation\development-checklists") `
@@ -103,6 +114,12 @@ try {
     --include-module-records
   if ($LASTEXITCODE -ne 0) {
     throw "AI implementation record validation failed."
+  }
+  & python -X utf8 -m unittest `
+    scripts.tests.test_validate_delivery_flow_policy `
+    scripts.tests.test_new_agent_development_checklist
+  if ($LASTEXITCODE -ne 0) {
+    throw "Delivery Flow V2 and checklist provenance regression failed."
   }
   & python -X utf8 (Join-Path $PSScriptRoot "validate_engineering_standards.py") `
     --project-root $repoRoot `

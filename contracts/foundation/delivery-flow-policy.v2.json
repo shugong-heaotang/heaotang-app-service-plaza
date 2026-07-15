@@ -1,0 +1,79 @@
+{
+  "contract_version": "delivery-flow-policy.v2",
+  "effective_at": "2026-07-15T17:00:00+08:00",
+  "compatible_item_policy_versions": ["delivery-flow-policy.v1", "delivery-flow-policy.v2"],
+  "migration": {
+    "legacy_snapshot_commit": "33f5e45499fbadaac71f07bbe6de5d72579e39c9",
+    "legacy_snapshot_path": "contracts/foundation/agent-collaboration.v1.json",
+    "legacy_cutover_work_id": "AIW-20260713-PROTECTION-MALL-M2-PORTS-SIMULATION",
+    "legacy_work_ids_sha256": "64105cf520b0c971150d0491eba27967d7976aa0bad89400ececd302959d650e",
+    "legacy_work_states_sha256": "b7dc23fab67191405a852301ae4f9650164bf3e619bd323587d684f1e5773aaa",
+    "new_items_require_flow_policy": true,
+    "receipt_schema_path": "contracts/foundation/legacy-lifecycle-migration.v1.schema.json",
+    "receipt_path": "contracts/foundation/legacy-lifecycle-migrations/LLM-20260715-ACTIVITY-MALL-M2-R1.json",
+    "receipt_sha256": "5e85735d7c70a942efca1b8a8c6d9aecee4805a40282ae8cfbac27beab3207b1"
+  },
+  "checklist_provenance": {
+    "mode": "fixed-receipt-and-git-authority",
+    "receipt_path": "contracts/foundation/legacy-lifecycle-migrations/LLM-20260715-ACTIVITY-MALL-M2-R1.json",
+    "reject_unregistered_snapshots": true
+  },
+  "wip": {
+    "max_active_business_streams": 3,
+    "max_active_business_streams_per_module": 1,
+    "legacy_drain_mode": true,
+    "activation_rule": "No new business stream may activate while the unique active business-stream count exceeds the limit. Existing isolated work drains without forced interruption."
+  },
+  "handoff": {
+    "first_response_sla_hours": 4,
+    "decision_sla_hours": 24,
+    "on_expiry": "escalate-to-project-owner",
+    "required_next_owner": true,
+    "escalation_owner_role": "项目最高负责人"
+  },
+  "continuation": {
+    "default": "auto-continue",
+    "required_conditions": [
+      "current checkpoint evidence passed",
+      "next checkpoint is inside the original allowed paths and risk envelope",
+      "worktree is clean or contains only owned changes",
+      "no stop condition is present"
+    ],
+    "stop_conditions": [
+      "production access",
+      "real money",
+      "real health or member data",
+      "irreversible data change",
+      "authority or scope expansion",
+      "security or legal escalation",
+      "independent acceptance failure"
+    ]
+  },
+  "work_item_model": {
+    "one_business_outcome_one_work_item": true,
+    "supporting_evidence_is_checkpoint": true,
+    "independent_acceptance_required": true,
+    "developer_reviewer_approver_separation_for_high_risk": true
+  },
+  "business_value_gate": {
+    "required_for_active_business_stream": true,
+    "required_fields": [
+      "customer_segment", "customer_problem", "value_event", "success_metric",
+      "metric_target", "measurement_window", "end_to_end_owner_role",
+      "commercial_hypothesis", "kill_condition", "journey_scope"
+    ],
+    "cross_module_value_streams_use_one_end_to_end_owner": true,
+    "measurement_required_before_completion": true
+  },
+  "completion": {
+    "requires_business_flow_resumed": true,
+    "requires_independent_acceptance": true,
+    "commit_or_document_alone_is_not_completion": true,
+    "requires_value_event_evidence": true,
+    "accepted_independent_verdicts": ["go"],
+    "required_metric_evidence_fields": [
+      "metric_name", "target_value", "actual_value", "comparison", "unit",
+      "measured_at", "evidence_path", "evidence_sha256"
+    ]
+  }
+}
