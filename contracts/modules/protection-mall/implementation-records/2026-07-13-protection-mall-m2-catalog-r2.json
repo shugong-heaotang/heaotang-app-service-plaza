@@ -4,7 +4,7 @@
   "title": "保障商城 M2 目录 Evidence 语义一致性 R2",
   "date": "2026-07-13",
   "status": "verified",
-  "objective": "修复原 Evidence 与后端 a2648bad 在 scope、稳定错误、责任映射、保障权益、方案所有权、并发交叠和 fixture 验证上的语义漂移，并关闭独立首轮验收发现的门禁绕过。",
+  "objective": "修复原 Evidence 与后端 b81be1e5 在 scope、稳定错误、责任映射、保障权益、方案所有权、并发交叠和 fixture 验证上的语义漂移，并关闭独立验收发现的门禁绕过。",
   "governance_checklist": "contracts/modules/protection-mall/development-checklists/2026-07-13-protection-mall-m2-catalog-evidence-r2.json",
   "governance_exam": "contracts/modules/protection-mall/governance-exams/2026-07-13-protection-mall-m2-catalog-evidence-r2-attempt-1.json",
   "governance_inputs": [
@@ -36,8 +36,8 @@
     "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md"
   ],
   "changed_areas": [
-    "backend-go/plugins/mall-plugin/catalog_m2.go@a2648bad68964bcf561507405667d0dd6b6c5fec",
-    "backend-go/plugins/mall-plugin/catalog_m2_test.go@a2648bad68964bcf561507405667d0dd6b6c5fec",
+    "backend-go/plugins/mall-plugin/catalog_m2.go@b81be1e5c1ee8d237674bf060b5dd342b6779bdd",
+    "backend-go/plugins/mall-plugin/catalog_m2_test.go@b81be1e5c1ee8d237674bf060b5dd342b6779bdd",
     "contracts/modules/protection-mall/m2/catalog/",
     "docs/project-management/modules/protection-mall/m2-catalog-evidence.md",
     "docs/project-management/modules/protection-mall/handoff-m2.md"
@@ -45,7 +45,7 @@
   "verification": [
     "R2 checklist 29/29 completed; original checklist remains immutable",
     "R2 governance exam 100; original governance exam remains immutable",
-    "backend a2648bad uses synchronized 16 writer and 16 reader overlap and passes targeted race",
+    "backend b81be1e5 uses a ready barrier plus active reader writer probe to assert overlap and passes GOMAXPROCS=1 repetition and race",
     "validate_catalog_contracts.py locks exact contract values plus every fixture rule input expected and shape",
     "JSON schema and 19 synthetic fixtures passed",
     "UTF-8, scope, secret and git diff checks passed"
