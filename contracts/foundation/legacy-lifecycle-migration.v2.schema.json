@@ -1,0 +1,175 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/foundation/legacy-lifecycle-migration.v2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version","receipt_id","state","execution_enabled","applied","post_registry_sha256","review","integration","implementation_base_chain","source_registry","current_registry_precondition","task_order","canonical_transition_format","canonical_effective_state_format","repositories","audit_scope","atomic_groups","transitions","transition_sha256","post_effective_states_sha256","evidence_files","omitted_rows"],
+  "properties": {
+    "contract_version": {"const": "legacy-lifecycle-migration.v2"},
+    "receipt_id": {"type": "string", "pattern": "^LLM-[0-9]{8}-[A-Z0-9-]+$"},
+    "state": {"const": "authorized-not-applied"},
+    "execution_enabled": {"const": false},
+    "applied": {"const": false},
+    "post_registry_sha256": {"type": "null"},
+    "review": {"type": "null"},
+    "integration": {"type": "null"},
+    "implementation_base_chain": {
+      "type": "object", "additionalProperties": false,
+      "required": ["registered_base","r12l_candidate","controlled_integration","authorized_ff_only_implementation_base","branch","worktree_was_clean_after_ff_only"],
+      "properties": {
+        "registered_base": {"$ref": "#/$defs/commit"},
+        "r12l_candidate": {"$ref": "#/$defs/commit"},
+        "controlled_integration": {"$ref": "#/$defs/commit"},
+        "authorized_ff_only_implementation_base": {"$ref": "#/$defs/commit"},
+        "branch": {"type": "string", "minLength": 1},
+        "worktree_was_clean_after_ff_only": {"const": true}
+      }
+    },
+    "source_registry": {"$ref": "#/$defs/registryAuthority"},
+    "current_registry_precondition": {"$ref": "#/$defs/registryAuthority"},
+    "task_order": {"$ref": "#/$defs/fileEvidence"},
+    "canonical_transition_format": {"const": "registry_index<TAB>work_id<TAB>from_status<TAB>to_status<LF> in ascending registry index order"},
+    "canonical_effective_state_format": {"const": "registry_index<TAB>work_id<TAB>effective_status<LF> for every source registry row in ascending registry index order"},
+    "repositories": {
+      "type": "object", "minProperties": 1,
+      "propertyNames": {"pattern": "^[a-z][a-z0-9-]*$"},
+      "additionalProperties": {"type": "string", "pattern": "^[A-Za-z]:/[^\\r\\n]+$"}
+    },
+    "audit_scope": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/rowRef"}},
+    "atomic_groups": {
+      "type": "array", "uniqueItems": true,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["group_id","members"],
+        "properties": {
+          "group_id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+          "members": {"type": "array", "minItems": 2, "uniqueItems": true, "items": {"type": "integer", "minimum": 0}}
+        }
+      }
+    },
+    "transitions": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {"$ref": "#/$defs/transition"}
+    },
+    "transition_sha256": {"$ref": "#/$defs/sha256"},
+    "post_effective_states_sha256": {"$ref": "#/$defs/sha256"},
+    "evidence_files": {
+      "type": "array", "minItems": 1, "uniqueItems": true,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["path","sha256","authority_commit"],
+        "properties": {
+          "path": {"$ref": "#/$defs/repoPath"},
+          "sha256": {"$ref": "#/$defs/sha256"},
+          "authority_commit": {"$ref": "#/$defs/commit"}
+        }
+      }
+    },
+    "omitted_rows": {
+      "type": "array", "uniqueItems": true,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["registry_index","work_id","reason","evidence"],
+        "properties": {
+          "registry_index": {"type": "integer", "minimum": 0},
+          "work_id": {"$ref": "#/$defs/workId"},
+          "reason": {"type": "string", "minLength": 1},
+          "evidence": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/fileEvidence"}}
+        }
+      }
+    }
+  },
+  "$defs": {
+    "commit": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "sha256": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+    "gitBlob": {"type": "string", "pattern": "^[a-f0-9]{40}$"},
+    "workId": {"type": "string", "pattern": "^AIW-[0-9]{8}-[A-Z0-9-]+$"},
+    "status": {"enum": ["planned","active","handoff-ready","integrated","cancelled"]},
+    "repoPath": {"type": "string", "minLength": 1, "pattern": "^(?!/)(?![A-Za-z]:)(?!.*(?:^|/)\\.\\.(?:/|$))[^\\r\\n]+$"},
+    "registryAuthority": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path","commit","sha256"],
+      "properties": {"path": {"const": "contracts/foundation/agent-collaboration.v1.json"}, "commit": {"$ref": "#/$defs/commit"}, "sha256": {"$ref": "#/$defs/sha256"}}
+    },
+    "fileEvidence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["path","sha256"],
+      "properties": {"path": {"$ref": "#/$defs/repoPath"}, "sha256": {"$ref": "#/$defs/sha256"}}
+    },
+    "rowRef": {
+      "type": "object", "additionalProperties": false,
+      "required": ["registry_index","work_id"],
+      "properties": {"registry_index": {"type": "integer", "minimum": 0}, "work_id": {"$ref": "#/$defs/workId"}}
+    },
+    "blobEquivalence": {
+      "type": "object", "additionalProperties": false,
+      "required": ["repository_id","path","source_blob","authority_blob"],
+      "properties": {
+        "repository_id": {"type": "string", "pattern": "^[a-z][a-z0-9-]*$"},
+        "path": {"$ref": "#/$defs/repoPath"},
+        "source_blob": {"$ref": "#/$defs/gitBlob"},
+        "authority_blob": {"$ref": "#/$defs/gitBlob"}
+      }
+    },
+    "projectionBasis": {
+      "type": "object", "additionalProperties": false, "minProperties": 1,
+      "properties": {
+        "implementation_commit": {"$ref": "#/$defs/commit"},
+        "legacy_implementation_commit": {"$ref": "#/$defs/commit"},
+        "backend_authority_commit": {"$ref": "#/$defs/commit"},
+        "commit_is_authority_ancestor": {"type": "boolean"},
+        "all_authorized_path_blobs_equal": {"type": "boolean"},
+        "acceptance_subject_commit": {"$ref": "#/$defs/commit"},
+        "acceptance_registry_index": {"type": "integer", "minimum": 0},
+        "acceptance_work_id": {"$ref": "#/$defs/workId"},
+        "accepted_evidence_commit": {"$ref": "#/$defs/commit"},
+        "accepted_verdict": {"const": "go"},
+        "reviewer_role": {"type": "string", "minLength": 1},
+        "reviewed_at": {"type": "string", "format": "date-time"},
+        "acceptance_evidence_path": {"$ref": "#/$defs/repoPath"},
+        "app_integration_commit": {"$ref": "#/$defs/commit"},
+        "final_evidence_commit": {"$ref": "#/$defs/commit"},
+        "required_future_rule": {"type": "string", "minLength": 1},
+        "rejected_candidate_commit": {"$ref": "#/$defs/commit"},
+        "rejected_candidate_verdict": {"type": "string", "minLength": 1},
+        "replacement_registry_index": {"type": "integer", "minimum": 0},
+        "replacement_work_id": {"$ref": "#/$defs/workId"},
+        "replacement_accepted_commit": {"$ref": "#/$defs/commit"},
+        "replacement_app_integration_commit": {"$ref": "#/$defs/commit"},
+        "replacement_final_evidence_commit": {"$ref": "#/$defs/commit"},
+        "registered_base": {"$ref": "#/$defs/commit"},
+        "reason": {"type": "string", "minLength": 1}
+      }
+    },
+    "transition": {
+      "type": "object", "additionalProperties": false,
+      "required": ["registry_index","work_id","from_status","to_status","source_row_sha256","current_row_sha256","before_state_sha256","after_state_sha256","projection_basis"],
+      "properties": {
+        "registry_index": {"type": "integer", "minimum": 0},
+        "work_id": {"$ref": "#/$defs/workId"},
+        "from_status": {"$ref": "#/$defs/status"},
+        "to_status": {"$ref": "#/$defs/status"},
+        "atomic_group": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+        "source_row_sha256": {"$ref": "#/$defs/sha256"},
+        "current_row_sha256": {"$ref": "#/$defs/sha256"},
+        "before_state_sha256": {"$ref": "#/$defs/sha256"},
+        "after_state_sha256": {"$ref": "#/$defs/sha256"},
+        "projection_basis": {"$ref": "#/$defs/projectionBasis"},
+        "blob_equivalence": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/blobEquivalence"}}
+      },
+      "allOf": [
+        {
+          "if": {"properties": {"to_status": {"const": "integrated"}}, "required": ["to_status"]},
+          "then": {
+            "required": ["blob_equivalence"],
+            "properties": {
+              "projection_basis": {
+                "required": ["implementation_commit","backend_authority_commit","all_authorized_path_blobs_equal","acceptance_subject_commit","acceptance_registry_index","acceptance_work_id","accepted_evidence_commit","accepted_verdict","reviewer_role","reviewed_at","acceptance_evidence_path","app_integration_commit","final_evidence_commit"]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

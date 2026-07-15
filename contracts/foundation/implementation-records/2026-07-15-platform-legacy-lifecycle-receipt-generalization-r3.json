@@ -1,0 +1,83 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260715-PLATFORM-LEGACY-LIFECYCLE-RECEIPT-GENERALIZATION-R3",
+  "title": "Legacy lifecycle receipt generalization R3",
+  "date": "2026-07-15",
+  "status": "implemented",
+  "objective": "Generalize Delivery Flow lifecycle receipt registration and fail-closed validation while preserving v1 compatibility, then upgrade Batch R2 into a schema-valid authorized-not-applied receipt without executing any registry transition.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3-task-order.md",
+    "docs/project-management/notices/2026-07-15-platform-registry-r12m-legacy-generalization-activation-task-order.md",
+    "docs/project-management/service-plaza/platform-legacy-lifecycle-batch-r2-handoff.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.delivery-recovery"
+  ],
+  "contracts": [
+    "contracts/foundation/delivery-flow-policy.v3.json",
+    "contracts/foundation/delivery-flow-policy.v3.schema.json",
+    "contracts/foundation/legacy-lifecycle-migration.v2.schema.json",
+    "contracts/foundation/legacy-lifecycle-migrations/LLM-20260715-TECHNICAL-SOCIAL-BATCH-R2.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/delivery-flow-policy.v3.json",
+    "contracts/foundation/delivery-flow-policy.v3.schema.json",
+    "contracts/foundation/legacy-lifecycle-migration.v2.schema.json",
+    "contracts/foundation/legacy-lifecycle-migrations/LLM-20260715-TECHNICAL-SOCIAL-BATCH-R2.json",
+    "scripts/validate_delivery_flow_policy.py",
+    "scripts/tests/test_validate_delivery_flow_policy.py",
+    "scripts/Test-ServicePlazaContracts.ps1",
+    "docs/project-management/notices/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3-task-order.md",
+    "contracts/foundation/development-checklists/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3.json",
+    "docs/project-management/service-plaza/platform-legacy-lifecycle-receipt-generalization-r3-handoff.md"
+  ],
+  "verification": [
+    "authorized ff-only from registered dbfec271 base through R12-M candidate 2f4cb9d to implementation authority d079e98 succeeded with a clean worktree",
+    "fresh checklist completed 26 of 26 and governance exam attempt 1 passed with score 100",
+    "policy v3 explicitly registers byte-bound Activity v1 and Batch v2 receipts while policy v2 schema v2 Activity receipt and old v1 schema remain byte-identical",
+    "Batch R2 is authorized-not-applied with execution_enabled false applied false and null post registry review and integration",
+    "Batch source and current registry commit path bytes bind d079e98 and all transition row hashes canonical transition hash and projected state hash recompute",
+    "audit scope is exactly partitioned by transitions 47 88 89 90 132 plus omitted row92; indices90 and132 form one atomic group",
+    "integrated projections bind formal current-registry independent acceptance rows121 and128 and final evidence commit-path bytes at 86d68db rather than implementer-authored non-final Handoffs",
+    "blob equivalence is recomputed in the registered backend repository from exact source and authority commit-path objects",
+    "focused Delivery Flow tests pass 35 of 35 including v1 compatibility and negative substitution drift atomic evidence role reviewed-at and hash cases",
+    "Service Plaza total contract gate passes including 50 unit tests; PowerShell aggregate script parses and retains UTF-8 BOM with CRLF",
+    "no receipt is applied and agent collaboration registry bytes and Social rows132 133 remain unchanged"
+  ],
+  "evidence": [
+    "docs/project-management/service-plaza/platform-legacy-lifecycle-receipt-generalization-r3-handoff.md",
+    "contracts/foundation/development-checklists/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3.json",
+    "contracts/foundation/governance-exams/2026-07-15-platform-legacy-lifecycle-receipt-generalization-r3-attempt-1.json",
+    "contracts/foundation/legacy-lifecycle-migrations/LLM-20260715-TECHNICAL-SOCIAL-BATCH-R2.json"
+  ],
+  "premises": [
+    "a receipt is trusted only when registered by policy with exact schema path receipt path and receipt SHA256",
+    "authorization describes a complete future transaction but does not imply application review integration or registry mutation",
+    "omitted row92 produces no authorization and Social indices90 and132 cannot be projected independently",
+    "developer stops at an exact committed candidate and does not push self-review self-integrate deploy or access production real data or funds"
+  ],
+  "implementation_mode": "ai-assisted"
+}

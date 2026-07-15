@@ -86,6 +86,24 @@ def git_bytes_at_commit(repo_root: Path, commit: str, path: str) -> bytes | None
     return result.stdout if result.returncode == 0 else None
 
 
+def git_blob_at_commit(repo_root: Path, commit: str, path: str) -> str | None:
+    result = subprocess.run(
+        ["git", "-C", str(repo_root), "rev-parse", f"{commit}:{path}"],
+        capture_output=True,
+        text=True,
+    )
+    return result.stdout.strip() if result.returncode == 0 else None
+
+
+def safe_repo_file(repo_root: Path, relative: str) -> Path | None:
+    try:
+        candidate = (repo_root / relative).resolve()
+        candidate.relative_to(repo_root.resolve())
+    except (ValueError, TypeError, OSError):
+        return None
+    return candidate
+
+
 def canonical_row_sha256(row: dict) -> str:
     payload = json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
@@ -198,6 +216,289 @@ def validate_legacy_receipt(policy: dict, repo_root: Path, registry: dict) -> tu
     return errors, receipt
 
 
+def validate_v2_receipt(
+    registration: dict,
+    repo_root: Path,
+    registry: dict,
+    registry_bytes: bytes,
+) -> tuple[list[str], dict | None, str | None]:
+    errors: list[str] = []
+    receipt_path = safe_repo_file(repo_root, registration.get("receipt_path", ""))
+    schema_path = safe_repo_file(repo_root, registration.get("schema_path", ""))
+    if receipt_path is None or schema_path is None:
+        return ["DELIVERY_LEGACY_RECEIPT_PATH_INVALID"], None, None
+    if not receipt_path.is_file() or not schema_path.is_file():
+        return ["DELIVERY_LEGACY_RECEIPT_OR_SCHEMA_MISSING"], None, None
+    receipt_bytes = receipt_path.read_bytes()
+    if hashlib.sha256(receipt_bytes).hexdigest() != registration.get("receipt_sha256"):
+        errors.append("DELIVERY_LEGACY_RECEIPT_HASH_MISMATCH")
+    try:
+        receipt = json.loads(receipt_bytes.decode("utf-8"))
+        receipt_schema = json.loads(schema_path.read_text(encoding="utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        return errors + ["DELIVERY_LEGACY_RECEIPT_JSON_INVALID"], None, None
+    errors.extend(
+        f"DELIVERY_LEGACY_RECEIPT_SCHEMA: {error.message}"
+        for error in Draft202012Validator(receipt_schema, format_checker=FormatChecker()).iter_errors(receipt)
+    )
+    if receipt.get("receipt_id") != registration.get("receipt_id") or receipt.get("contract_version") != registration.get("contract_version"):
+        errors.append("DELIVERY_LEGACY_RECEIPT_REGISTRATION_MISMATCH")
+    if (
+        receipt.get("state") != "authorized-not-applied"
+        or receipt.get("execution_enabled") is not False
+        or receipt.get("applied") is not False
+        or receipt.get("post_registry_sha256") is not None
+        or receipt.get("review") is not None
+        or receipt.get("integration") is not None
+    ):
+        errors.append("DELIVERY_LEGACY_RECEIPT_FALSE_AUTHORIZATION")
+
+    task = receipt.get("task_order", {})
+    if not evidence_hash_matches(repo_root, task.get("path", ""), task.get("sha256", "")):
+        errors.append("DELIVERY_LEGACY_RECEIPT_TASK_ORDER_INVALID")
+    source = receipt.get("source_registry", {})
+    source_bytes = git_bytes_at_commit(repo_root, source.get("commit", ""), source.get("path", ""))
+    if source_bytes is None or hashlib.sha256(source_bytes).hexdigest() != source.get("sha256"):
+        errors.append("DELIVERY_LEGACY_RECEIPT_SOURCE_REGISTRY_INVALID")
+        return errors, receipt, None
+    current = receipt.get("current_registry_precondition", {})
+    current_bytes = git_bytes_at_commit(repo_root, current.get("commit", ""), current.get("path", ""))
+    if (
+        current_bytes is None
+        or hashlib.sha256(current_bytes).hexdigest() != current.get("sha256")
+        or current_bytes != registry_bytes
+    ):
+        errors.append("DELIVERY_LEGACY_CURRENT_REGISTRY_DRIFT")
+    try:
+        source_registry = json.loads(source_bytes.decode("utf-8"))
+    except (UnicodeDecodeError, json.JSONDecodeError):
+        return errors + ["DELIVERY_LEGACY_RECEIPT_SOURCE_REGISTRY_INVALID"], receipt, None
+
+    transitions = receipt.get("transitions", [])
+    indices = [entry.get("registry_index") for entry in transitions]
+    if any(not isinstance(index, int) for index in indices):
+        errors.append("DELIVERY_LEGACY_TRANSITION_INDEX_INVALID")
+        return errors, receipt, None
+    if indices != sorted(indices) or len(indices) != len(set(indices)):
+        errors.append("DELIVERY_LEGACY_TRANSITION_ORDER_INVALID")
+    canonical = "".join(
+        f"{entry.get('registry_index')}\t{entry.get('work_id')}\t{entry.get('from_status')}\t{entry.get('to_status')}\n"
+        for entry in transitions
+    )
+    if hashlib.sha256(canonical.encode("utf-8")).hexdigest() != receipt.get("transition_sha256"):
+        errors.append("DELIVERY_LEGACY_TRANSITION_HASH_INVALID")
+    source_items = source_registry.get("work_items", [])
+    current_items = registry.get("work_items", [])
+    modes: set[str] = set()
+    transition_by_index: dict[int, dict] = {}
+    for entry in transitions:
+        index = entry.get("registry_index")
+        if not isinstance(index, int) or index < 0 or index >= len(source_items) or index >= len(current_items):
+            errors.append("DELIVERY_LEGACY_TRANSITION_INDEX_INVALID")
+            continue
+        transition_by_index[index] = entry
+        before = source_items[index]
+        current_row = current_items[index]
+        if before.get("work_id") != entry.get("work_id") or before.get("status") != entry.get("from_status"):
+            errors.append("DELIVERY_LEGACY_TRANSITION_BEFORE_MISMATCH")
+        if canonical_row_sha256(before) != entry.get("source_row_sha256"):
+            errors.append("DELIVERY_LEGACY_TRANSITION_SOURCE_ROW_HASH_INVALID")
+        if canonical_row_sha256(current_row) != entry.get("current_row_sha256"):
+            errors.append("DELIVERY_LEGACY_TRANSITION_CURRENT_ROW_HASH_INVALID")
+        before_state = f"{entry.get('work_id')}\t{entry.get('from_status')}\n".encode("utf-8")
+        after_state = f"{entry.get('work_id')}\t{entry.get('to_status')}\n".encode("utf-8")
+        if hashlib.sha256(before_state).hexdigest() != entry.get("before_state_sha256"):
+            errors.append("DELIVERY_LEGACY_TRANSITION_BEFORE_STATE_HASH_INVALID")
+        if hashlib.sha256(after_state).hexdigest() != entry.get("after_state_sha256"):
+            errors.append("DELIVERY_LEGACY_TRANSITION_AFTER_STATE_HASH_INVALID")
+        if current_row.get("work_id") != entry.get("work_id"):
+            modes.add("invalid")
+        elif current_row.get("status") == entry.get("from_status"):
+            modes.add("before")
+        elif current_row.get("status") == entry.get("to_status"):
+            modes.add("after")
+        else:
+            modes.add("invalid")
+    mode = next(iter(modes)) if len(modes) == 1 else None
+    if mode is None or mode not in set(registration.get("allowed_state_modes", [])):
+        errors.append("DELIVERY_LEGACY_PARTIAL_TRANSITION")
+
+    omitted = receipt.get("omitted_rows", [])
+    omitted_indices = [entry.get("registry_index") for entry in omitted]
+    audit = receipt.get("audit_scope", [])
+    audit_pairs = [(entry.get("registry_index"), entry.get("work_id")) for entry in audit]
+    covered_pairs = [(entry.get("registry_index"), entry.get("work_id")) for entry in transitions + omitted]
+    if len(audit_pairs) != len(set(audit_pairs)) or sorted(audit_pairs) != sorted(covered_pairs):
+        errors.append("DELIVERY_LEGACY_AUDIT_SCOPE_INVALID")
+    if set(indices) & set(omitted_indices) or len(omitted_indices) != len(set(omitted_indices)):
+        errors.append("DELIVERY_LEGACY_OMITTED_ROW_INVALID")
+    for entry in omitted:
+        index = entry.get("registry_index")
+        if not isinstance(index, int) or index >= len(source_items) or source_items[index].get("work_id") != entry.get("work_id"):
+            errors.append("DELIVERY_LEGACY_OMITTED_ROW_INVALID")
+
+    declared_groups = receipt.get("atomic_groups", [])
+    group_members = {group.get("group_id"): group.get("members", []) for group in declared_groups}
+    for group_id, members in group_members.items():
+        actual = [entry.get("registry_index") for entry in transitions if entry.get("atomic_group") == group_id]
+        if actual != members or len(members) < 2:
+            errors.append("DELIVERY_LEGACY_ATOMIC_GROUP_INVALID")
+    for entry in transitions:
+        if entry.get("atomic_group") and entry.get("atomic_group") not in group_members:
+            errors.append("DELIVERY_LEGACY_ATOMIC_GROUP_INVALID")
+
+    effective = []
+    for index, row in enumerate(source_items):
+        transition = transition_by_index.get(index)
+        status = transition.get("to_status") if transition else row.get("status")
+        effective.append(f"{index}\t{row.get('work_id')}\t{status}\n")
+    if hashlib.sha256("".join(effective).encode("utf-8")).hexdigest() != receipt.get("post_effective_states_sha256"):
+        errors.append("DELIVERY_LEGACY_POST_STATES_HASH_INVALID")
+
+    for evidence in receipt.get("evidence_files", []):
+        evidence_bytes = git_bytes_at_commit(repo_root, evidence.get("authority_commit", ""), evidence.get("path", ""))
+        if evidence_bytes is None or hashlib.sha256(evidence_bytes).hexdigest() != evidence.get("sha256"):
+            errors.append("DELIVERY_LEGACY_EVIDENCE_COMMIT_BYTES_INVALID")
+    evidence_keys = {
+        (entry.get("authority_commit"), entry.get("path"))
+        for entry in receipt.get("evidence_files", [])
+    }
+    repositories = receipt.get("repositories", {})
+    for entry in transitions:
+        basis = entry.get("projection_basis", {})
+        source_row = source_items[entry["registry_index"]] if isinstance(entry.get("registry_index"), int) and entry["registry_index"] < len(source_items) else {}
+        if entry.get("to_status") == "integrated":
+            accepted_commit = basis.get("accepted_evidence_commit")
+            subject_commit = basis.get("acceptance_subject_commit")
+            accepted_path = basis.get("acceptance_evidence_path")
+            reviewer_role = basis.get("reviewer_role")
+            reviewed_at = basis.get("reviewed_at")
+            acceptance_index = basis.get("acceptance_registry_index")
+            acceptance_row = (
+                current_items[acceptance_index]
+                if isinstance(acceptance_index, int) and 0 <= acceptance_index < len(current_items)
+                else {}
+            )
+            independent = acceptance_row.get("independent_acceptance", {})
+            try:
+                reviewed_time = parse_time(reviewed_at)
+            except (AttributeError, TypeError, ValueError):
+                reviewed_time = None
+            if (
+                basis.get("accepted_verdict") != "go"
+                or not reviewer_role
+                or reviewer_role == acceptance_row.get("developer_role")
+                or reviewed_time is None
+                or reviewed_time.tzinfo is None
+                or (accepted_commit, accepted_path) not in evidence_keys
+                or acceptance_row.get("work_id") != basis.get("acceptance_work_id")
+                or acceptance_row.get("status") != "integrated"
+                or independent.get("exact_commit") != subject_commit
+                or independent.get("verdict") != basis.get("accepted_verdict")
+                or independent.get("reviewer_role") != reviewer_role
+                or independent.get("reviewed_at") != reviewed_at
+                or independent.get("evidence_path") != accepted_path
+                or not any(
+                    evidence.get("path") == accepted_path
+                    and evidence.get("authority_commit") == accepted_commit
+                    and evidence.get("sha256") == independent.get("evidence_sha256")
+                    for evidence in receipt.get("evidence_files", [])
+                )
+            ):
+                errors.append("DELIVERY_LEGACY_INDEPENDENT_ACCEPTANCE_INVALID")
+            integration_commit = basis.get("app_integration_commit")
+            final_commit = basis.get("final_evidence_commit")
+            if (
+                not git_commit_exists(repo_root, accepted_commit or "")
+                or not git_commit_exists(repo_root, subject_commit or "")
+                or not git_commit_exists(repo_root, integration_commit or "")
+                or not git_commit_exists(repo_root, final_commit or "")
+                or not git_is_ancestor(repo_root, subject_commit or "", accepted_commit or "")
+                or not git_is_ancestor(repo_root, accepted_commit or "", final_commit or "")
+                or not git_is_ancestor(repo_root, integration_commit or "", final_commit or "")
+            ):
+                errors.append("DELIVERY_LEGACY_ACCEPTANCE_INTEGRATION_CHAIN_INVALID")
+        replacement_index = basis.get("replacement_registry_index")
+        if replacement_index is not None:
+            if (
+                not isinstance(replacement_index, int)
+                or replacement_index >= len(current_items)
+                or current_items[replacement_index].get("work_id") != basis.get("replacement_work_id")
+                or current_items[replacement_index].get("status") != "integrated"
+                or current_items[replacement_index].get("integration_commit") != basis.get("replacement_app_integration_commit")
+            ):
+                errors.append("DELIVERY_LEGACY_REPLACEMENT_EVIDENCE_INVALID")
+        source_commit = basis.get("implementation_commit") or basis.get("legacy_implementation_commit")
+        authority_commit = basis.get("backend_authority_commit")
+        for blob in entry.get("blob_equivalence", []):
+            repository = repositories.get(blob.get("repository_id"))
+            repository_root = Path(repository).resolve() if repository else None
+            if repository_root is None or not (repository_root / ".git").exists():
+                errors.append("DELIVERY_LEGACY_BLOB_REPOSITORY_INVALID")
+                continue
+            source_blob = git_blob_at_commit(repository_root, source_commit or "", blob.get("path", ""))
+            authority_blob = git_blob_at_commit(repository_root, authority_commit or "", blob.get("path", ""))
+            if (
+                source_blob is None
+                or authority_blob is None
+                or source_blob != blob.get("source_blob")
+                or authority_blob != blob.get("authority_blob")
+                or source_blob != authority_blob
+            ):
+                errors.append("DELIVERY_LEGACY_BLOB_EQUIVALENCE_INVALID")
+    return errors, receipt, mode
+
+
+def validate_registered_receipts(
+    policy: dict,
+    repo_root: Path,
+    registry: dict,
+    registry_bytes: bytes,
+) -> tuple[list[str], list[tuple[dict, dict, str | None]]]:
+    if policy.get("contract_version") != "delivery-flow-policy.v3":
+        old_errors, old_receipt = validate_legacy_receipt(policy, repo_root, registry)
+        return old_errors, [({}, old_receipt, None)] if old_receipt else []
+    errors: list[str] = []
+    validated: list[tuple[dict, dict, str | None]] = []
+    registrations = policy.get("migration", {}).get("receipts", [])
+    identities = [(entry.get("receipt_id"), entry.get("receipt_path")) for entry in registrations]
+    if len(identities) != len(set(identities)):
+        errors.append("DELIVERY_LEGACY_RECEIPT_REGISTRATION_DUPLICATE")
+    claimed_rows: set[int] = set()
+    for registration in registrations:
+        version = registration.get("contract_version")
+        if version == "legacy-lifecycle-migration.v1":
+            compatibility_policy = {
+                "contract_version": "delivery-flow-policy.v2",
+                "migration": {
+                    "receipt_path": registration.get("receipt_path"),
+                    "receipt_schema_path": registration.get("schema_path"),
+                    "receipt_sha256": registration.get("receipt_sha256"),
+                },
+            }
+            item_errors, receipt = validate_legacy_receipt(compatibility_policy, repo_root, registry)
+            mode = None
+        elif version == "legacy-lifecycle-migration.v2":
+            item_errors, receipt, mode = validate_v2_receipt(registration, repo_root, registry, registry_bytes)
+        else:
+            item_errors, receipt, mode = ["DELIVERY_LEGACY_RECEIPT_VERSION_UNSUPPORTED"], None, None
+        errors.extend(item_errors)
+        if receipt is None:
+            continue
+        if receipt.get("receipt_id") != registration.get("receipt_id"):
+            errors.append("DELIVERY_LEGACY_RECEIPT_REGISTRATION_MISMATCH")
+        row_key = "legacy_index" if version == "legacy-lifecycle-migration.v1" else "registry_index"
+        claimed_entries = receipt.get("transitions", [])
+        if version == "legacy-lifecycle-migration.v2":
+            claimed_entries = receipt.get("audit_scope", [])
+        rows = {entry.get(row_key) for entry in claimed_entries}
+        if claimed_rows & rows:
+            errors.append("DELIVERY_LEGACY_RECEIPT_ROW_OVERLAP")
+        claimed_rows.update(rows)
+        validated.append((registration, receipt, mode))
+    return errors, validated
+
+
 def metric_target_met(metric: dict) -> bool:
     actual = metric["actual_value"]
     target = metric["target_value"]
@@ -224,8 +525,19 @@ def validate(
     if now.tzinfo is None:
         raise ValueError("validation clock must be timezone-aware")
     work_items = registry["work_items"]
-    receipt_errors, receipt = validate_legacy_receipt(policy, repo_root, registry)
+    receipt_errors, validated_receipts = validate_registered_receipts(
+        policy, repo_root, registry, registry_path.read_bytes()
+    )
     errors.extend(receipt_errors)
+    receipt = next(
+        (
+            candidate
+            for registration, candidate, _mode in validated_receipts
+            if registration.get("contract_version") == "legacy-lifecycle-migration.v1"
+            or candidate.get("contract_version") == "legacy-lifecycle-migration.v1"
+        ),
+        None,
+    )
     cutover_id = policy.get("migration", {}).get("legacy_cutover_work_id")
     snapshot = git_json_at_commit(repo_root, LEGACY_SNAPSHOT_COMMIT, LEGACY_SNAPSHOT_PATH)
     if snapshot is None:
