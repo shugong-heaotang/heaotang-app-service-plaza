@@ -3361,6 +3361,29 @@
                            "handoff_record":  "contracts/modules/protection-mall/implementation-records/2026-07-15-protection-mall-runtime-test-stability.json"
                        },
                        {
+                           "work_id":  "AIW-20260717-HEALTH-README-CURRENT-STATE-CLOSEOUT",
+                           "title":  "健康大管家项目入口当前状态与注册表防漂移收口",
+                           "owner":  "Health Manager continuous development agent",
+                           "owner_role":  "健康大管家负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-manager-readme-current-state-closeout",
+                           "branch":  "codex/health-manager-readme-current-state-closeout",
+                           "base_commit":  "cf802602c5adb0ad0940e20abf1b1bcf88083581",
+                           "allowed_paths":  [
+                                                 "docs/project-management/modules/health-manager/README.md",
+                                                 "docs/project-management/modules/health-manager/health-manager-readme-current-state-closeout-handoff.md",
+                                                 "contracts/modules/health-manager/conformance/test_health_manager_readme_current_state.py",
+                                                 "contracts/modules/health-manager/development-checklists/2026-07-17-health-manager-readme-current-state-closeout*.json",
+                                                 "contracts/modules/health-manager/governance-exams/2026-07-17-health-manager-readme-current-state-closeout*.json",
+                                                 "contracts/modules/health-manager/implementation-records/2026-07-17-health-manager-readme-current-state-closeout*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "从 exact authority cf802602c5adb0ad0940e20abf1b1bcf88083581 激活独立入口新鲜度收口。只修复 health-manager README 与 registry 当前事实漂移并增加机器防复发断言；R1-R5 历史项不重开，离线合成完成态不扩展为真实医疗、数据、收费、部署或生产授权。首检查点仅 ownership/preflight、current checklist 与 exam100。does_not_block=R1-R5 离线合成完成态及其他无重叠项目；blocks=README current-state closeout 后续实现与独立验收。",
+                           "handoff_record":  "docs/project-management/modules/health-manager/health-manager-readme-current-state-closeout-handoff.md"
+                       },
+                       {
                            "work_id":  "AIW-20260714-PROJECT-BRAIN-V2-M0-ACTIVATION",
                            "title":  "Project Brain v2 M0 合法激活与工作树派发",
                            "owner":  "Project Brain v2 M0 activation dispatch agent",
