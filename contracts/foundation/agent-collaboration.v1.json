@@ -3491,15 +3491,39 @@
                            "handoff_record":  "docs/project-management/project-brain-v2/handoff-m0-registry-closeout.md"
                        },
                        {
+                           "work_id":  "AIW-20260717-PROJECT-BRAIN-V2-M1-ACTIVATION",
+                           "title":  "Project Brain v2 M1 激活治理",
+                           "owner":  "Project Brain v2 M1 activation governance owner",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "integrated",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-m1-activation",
+                           "branch":  "codex/project-brain-v2-m1-activation",
+                           "base_commit":  "86ab20f8928a6d70195edb3879fbe7083c20a0f9",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "docs/project-management/notices/2026-07-17-project-brain-v2-m1-activation-task-order.md",
+                                                 "docs/project-management/project-brain-v2/task-comprehension-receipt-m1-activation.md",
+                                                 "docs/project-management/project-brain-v2/handoff-m1-activation.md",
+                                                 "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m1-activation*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m1-activation*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-17-project-brain-v2-m1-activation*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "仅完成Project Brain v2 M1激活治理。activation与M1工作树均从exact authority 86ab20f8928a6d70195edb3879fbe7083c20a0f9创建并核验clean；developer=Project Brain v2 M1 activation governance owner；reviewer=independent Project Brain v2 M1 activation reviewer；approver=项目最高负责人；integration owner=平台集成负责人。activation=integrated与M1=active仅当本exact candidate经独立Go并普通fast-forward进入authority后生效；候选、自测、工作树或Handoff均不是权威。blocks=M1首个去标识事实合同与来源映射检查点；does_not_block=Project Brain v1及所有非PB隔离项目。未实施任何M1合同；M2-M5、App、运行scripts、scheduler、snapshot、dashboard、通知、导出、行级或可重识别数据、真实数据、凭据、环境、部署和production继续No-Go。7类allowed paths允许首次证据原样保留并追加current R2 checklist/exam/IR；候选预计10文件，不得新增第八类路径。",
+                           "handoff_record":  "docs/project-management/project-brain-v2/handoff-m1-activation.md"
+                       },
+                       {
                            "work_id":  "AIW-20260716-PROJECT-BRAIN-V2-M1-FACT-CONTRACTS",
                            "title":  "Project Brain v2 M1 去标识经营事实合同与来源映射",
                            "owner":  "Project Brain v2 M1 project owner",
                            "owner_role":  "平台集成负责人",
-                           "status":  "planned",
+                           "status":  "active",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-m1-fact-contracts",
                            "branch":  "codex/project-brain-v2-m1-fact-contracts",
-                           "base_commit":  "9b221a8a2a4de7c70ef9d1f86a55656b2c0d2757",
+                           "base_commit":  "86ab20f8928a6d70195edb3879fbe7083c20a0f9",
                            "allowed_paths":  [
                                                  "contracts/project-brain/v2/**",
                                                  "docs/project-management/notices/2026-07-16-project-brain-v2-m1-fact-contracts-task-order.md",
@@ -3511,8 +3535,8 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "planned only；started_with_clean_worktree=true 是激活前必须满足的 clean-worktree 声明，不是工作树已创建、已核验或已获得写权限的事实；branch/workspace/base仅为预留。本条仅当本 registry exact candidate 独立Go并普通fast-forward进入authority后成为权威计划，不授予active或写入权限。激活条件=M0 registry收口已成为authority、重新核对当时exact authority/唯一owner/无路径冲突/clean隔离工作树/current checklist/exam100/任务令与独立准入。只允许去标识经营事实合同和来源映射；禁止行级会员、健康、交易、客服数据，禁止App/scripts/scheduler/dashboard/真实数据/凭据/环境/部署/production。M2-M5继续No-Go。blocks=M2；does_not_block=Project Brain v1及所有非PB隔离项目。",
-                           "handoff_record":  "docs/project-management/project-brain-v2/handoff-m0-registry-closeout.md"
+                           "migration_note":  "M1 active仅当AIW-20260717-PROJECT-BRAIN-V2-M1-ACTIVATION的exact candidate经独立Go并普通fast-forward进入authority后生效。M0 registry收口已在authority；本M1工作树已从exact authority 86ab20f8928a6d70195edb3879fbe7083c20a0f9创建并核验branch、base与clean，唯一owner且与现有active路径无冲突。下一动作不是运行实现，而是M1自身重新完成current checklist、exam100与任务令后，仅推进首个去标识经营事实合同和来源映射检查点。禁止行级会员、健康、订单、支付、客服、人脉数据及可重识别或小样本聚合；禁止App/运行scripts/scheduler/snapshot/dashboard/通知/导出/真实数据/凭据/环境/部署/production。M2-M5继续No-Go。blocks=M2；does_not_block=Project Brain v1及所有非PB隔离项目。",
+                           "handoff_record":  "docs/project-management/project-brain-v2/handoff-m1-activation.md"
                        }
                    ]
 }
