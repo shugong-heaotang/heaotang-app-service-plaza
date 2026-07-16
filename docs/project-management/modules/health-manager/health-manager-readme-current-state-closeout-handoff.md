@@ -23,19 +23,20 @@
 - 注册表：健康 active=1（仅本 freshness 项）；R1—R5 实现/验收=10/10 `integrated`。
 - `python -X utf8 -m unittest contracts.modules.health-manager.conformance.test_health_manager_readme_current_state -v`：9/9 passed。
 - 负例拒绝：R1—R5 状态重开、旧 M0 当前/唯一 active、删除合成边界、升级 executable、移除注册表权威、真实健康数据 Go、缺失 No-Go。
+- 实现提交：`cfe3e15a953f8c1b1c578e09a0d8f77ff826fd78`；以 expected remote `2c15e5e9e65f895df6f9fb1fa71d111b7160e55a` 执行 lease-protected push，随后 `ls-remote` 复核候选远端 exact=`cfe3e15a953f8c1b1c578e09a0d8f77ff826fd78`。
 
 ## Control-channel issue
 
 - 沙箱 `git ls-remote` 因 GitHub SSH 22 端口策略失败；受控只读重试在 30 秒内无响应并终止。
-- 影响：本轮开始时无法通过 SSH 独立刷新 GitHub remote exact HEAD。
-- 已确认：authority/candidate 本地跟踪引用分别为 `86ab20f8928a6d70195edb3879fbe7083c20a0f9` 与 `2c15e5e9e65f895df6f9fb1fa71d111b7160e55a`，两工作树 clean；push 前仍必须使用 expected-remote freshness/lease 门禁。
-- owner：Git/GitHub 控制通道；retry condition：网络/SSH 通道恢复，或受控 push freshness 脚本成功返回精确远端 HEAD。
+- 影响：本轮开始时无法通过 SSH 独立刷新 authority 与 candidate 两个 GitHub remote exact HEAD。
+- 已关闭部分：候选分支随后通过精确 expected-remote lease push 和 post-push `ls-remote` 复核，candidate remote freshness 已关闭。
+- 仍待后续独立验收关闭：authority remote exact freshness；owner=Git/GitHub 控制通道，retry condition=独立验收开始时受控 fetch/`ls-remote` 成功返回权威分支精确 HEAD。
 - does_not_block：范围内实现、离线测试、IR/Handoff、diff/UTF-8/范围/秘密门禁和本地提交。
 
 ## Pending
 
 - 独立 reviewer 复跑当前状态 conformance、checklist/exam/IR、依赖、UTF-8、diff、范围、秘密与敏感模式门禁。
-- expected-remote lease push 成功后，平台受控集成 exact candidate commit，并将本 freshness work item 收口 `integrated`。
+- authority remote freshness 通过后，平台独立验收 exact candidate，随后受控集成并将本 freshness work item 收口 `integrated`。
 - 医疗质量、隐私法律、平台安全、健康馆运营的真实运行会签继续 `pending-with-owner`。
 - does_not_block：R1—R5 离线/合成完成态及其他无重叠工作项。
 
