@@ -25,18 +25,20 @@
 - 负例拒绝：R1—R5 状态重开、旧 M0 当前/唯一 active、删除合成边界、升级 executable、移除注册表权威、真实健康数据 Go、缺失 No-Go。
 - 实现提交：`cfe3e15a953f8c1b1c578e09a0d8f77ff826fd78`；以 expected remote `2c15e5e9e65f895df6f9fb1fa71d111b7160e55a` 执行 lease-protected push，随后 `ls-remote` 复核候选远端 exact=`cfe3e15a953f8c1b1c578e09a0d8f77ff826fd78`。
 
-## Control-channel issue
+## Freshness update
 
 - 沙箱 `git ls-remote` 因 GitHub SSH 22 端口策略失败；受控只读重试在 30 秒内无响应并终止。
-- 影响：本轮开始时无法通过 SSH 独立刷新 authority 与 candidate 两个 GitHub remote exact HEAD。
-- 已关闭部分：候选分支随后通过精确 expected-remote lease push 和 post-push `ls-remote` 复核，candidate remote freshness 已关闭。
-- 仍待后续独立验收关闭：authority remote exact freshness；owner=Git/GitHub 控制通道，retry condition=独立验收开始时受控 fetch/`ls-remote` 成功返回权威分支精确 HEAD。
+- 控制通道随后恢复；候选通过精确 expected-remote lease push 和 post-push `ls-remote` 复核，authority 只读 fetch/`ls-remote` 也已成功。
+- authority remote 已从本地原跟踪值 `86ab20f8928a6d70195edb3879fbe7083c20a0f9` 前进到 `a472765f193f43d8acedf229a3cf48ae93b54c83`；新增提交只激活 Project Brain v2 M1，远端注册表仍保留本健康 work item 为合法 `active`。
+- 以 candidate `eb71b55fc9932f47403b39834b6c5300935dc3d7` 审计时，共同祖先为 `86ab20f8928a6d70195edb3879fbe7083c20a0f9`，authority/candidate 分叉计数为 `1/3`；authority 新增业务路径与本候选 4 个 changed paths 直接重叠为 0，只有平台注册表由 Project Brain owner 更新。
+- 影响：实现与候选推送成立，但独立验收/受控集成不得继续使用旧 authority 基线。
+- owner：平台独立验收负责人/集成负责人；retry condition：从届时 remote exact authority 启动独立 acceptance work item，绑定候选分支届时 remote exact HEAD，重跑 freshness、范围与全套验收后再受控集成。
 - does_not_block：范围内实现、离线测试、IR/Handoff、diff/UTF-8/范围/秘密门禁和本地提交。
 
 ## Pending
 
 - 独立 reviewer 复跑当前状态 conformance、checklist/exam/IR、依赖、UTF-8、diff、范围、秘密与敏感模式门禁。
-- authority remote freshness 通过后，平台独立验收 exact candidate，随后受控集成并将本 freshness work item 收口 `integrated`。
+- 从最新 authority exact 创建独立 acceptance 工作项，验收候选分支届时 remote exact HEAD；Go 后受控集成并将本 freshness work item 收口 `integrated`。
 - 医疗质量、隐私法律、平台安全、健康馆运营的真实运行会签继续 `pending-with-owner`。
 - does_not_block：R1—R5 离线/合成完成态及其他无重叠工作项。
 
