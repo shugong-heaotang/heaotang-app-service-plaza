@@ -1,0 +1,72 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260717-PLATFORM-PDCAR-REGISTRY-SCOPE-CORRECTION",
+  "title": "Release shared registry ownership from active PDCAR formal implementation scope",
+  "date": "2026-07-17",
+  "status": "verified",
+  "objective": "Apply the explicitly authorized one-element PDCAR scope correction while preserving the active implementation item, every other field and every other registry fact.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-17-platform-pdcar-registry-scope-correction.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-17-platform-pdcar-registry-scope-correction-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-17-platform-pdcar-registry-scope-correction-task-order.md",
+    "docs/project-management/pdcar/task-comprehension-platform-pdcar-registry-scope-correction.md",
+    "docs/project-management/pdcar/handoff-platform-pdcar-registry-scope-correction.md",
+    "C:/Users/shugo/Documents/项目最高负责人/project-brain-v2/2026-07-17-project-brain-v2-m2-remediation-registry-blockage.md",
+    "C:/Users/shugo/Documents/项目最高负责人/project-brain-v2/2026-07-17-pb-m2-registry-blockage-independent-review.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.schema.json",
+    "contracts/foundation/agent-collaboration.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-17-platform-pdcar-registry-scope-correction-task-order.md",
+    "docs/project-management/pdcar/task-comprehension-platform-pdcar-registry-scope-correction.md",
+    "docs/project-management/pdcar/handoff-platform-pdcar-registry-scope-correction.md",
+    "contracts/foundation/development-checklists/2026-07-17-platform-pdcar-registry-scope-correction.json",
+    "contracts/foundation/governance-exams/2026-07-17-platform-pdcar-registry-scope-correction-attempt-1.json"
+  ],
+  "verification": [
+    "Explicit highest-owner authorization limits the semantic change to one PDCAR allowed_paths element",
+    "Independent blockage review SHA-256 2978787a0ec2561a7e8dfb1ca7f619c68139a7dfe2e0fb956e935ead378714e9",
+    "Current checklist completed 26 of 26 and governance exam attempt 1 passed with score 100",
+    "Target PDCAR formal implementation remains active with fourteen non-registry allowed paths",
+    "Deep comparison passed with exactly one removed array element, target status active, fourteen remaining paths and zero other registry changes",
+    "Agent collaboration, development checklist, governance exam and implementation-record validators passed",
+    "Service Plaza total contract gate passed",
+    "Text encoding gate passed across 1605 files",
+    "Exact candidate contains seven files in seven allowed path classes with out_of_scope_count=0 and secret_hits=0",
+    "git diff --check passed and remote authority remained d3b0f69a49b05a9fb463e2575d23e14ac2dd9b6c"
+  ],
+  "evidence": [
+    "docs/project-management/notices/2026-07-17-platform-pdcar-registry-scope-correction-task-order.md",
+    "docs/project-management/pdcar/task-comprehension-platform-pdcar-registry-scope-correction.md",
+    "docs/project-management/pdcar/handoff-platform-pdcar-registry-scope-correction.md",
+    "contracts/foundation/development-checklists/2026-07-17-platform-pdcar-registry-scope-correction.json",
+    "contracts/foundation/governance-exams/2026-07-17-platform-pdcar-registry-scope-correction-attempt-1.json"
+  ],
+  "premises": [
+    "The candidate is not authority until independent Go and controlled integration",
+    "No PDCAR implementation status or capability is changed",
+    "Project Brain receives no runtime or integration authority from this correction",
+    "PDCAR lifecycle closeout must use a separate future registry work item",
+    "Real data, credentials, deployment and production remain No-Go"
+  ],
+  "implementation_mode": "ai-assisted"
+}

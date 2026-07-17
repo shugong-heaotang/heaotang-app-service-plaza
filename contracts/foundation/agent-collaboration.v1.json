@@ -3755,8 +3755,7 @@
                                                  "docs/project-management/pdcar/handoff-platform-pdcar-skill-enforcement.md",
                                                  "contracts/foundation/development-checklists/2026-07-17-platform-pdcar-skill-enforcement*.json",
                                                  "contracts/foundation/governance-exams/2026-07-17-platform-pdcar-skill-enforcement*.json",
-                                                 "contracts/foundation/implementation-records/2026-07-17-platform-pdcar-skill-enforcement*.json",
-                                                 "contracts/foundation/agent-collaboration.v1.json"
+                                                 "contracts/foundation/implementation-records/2026-07-17-platform-pdcar-skill-enforcement*.json"
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
