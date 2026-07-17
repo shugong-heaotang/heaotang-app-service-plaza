@@ -1,0 +1,75 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/project-brain/v2/fact-catalog.v1.schema.json",
+  "title": "Project Brain v2 fact catalog",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "facts"],
+  "properties": {
+    "contract_version": {"const": "project-brain-fact-catalog.v1"},
+    "facts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {"$ref": "#/$defs/fact"}
+    }
+  },
+  "$defs": {
+    "fact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["fact_id", "title", "business_definition", "classification", "source_owner", "authority_id", "read_mode", "write_capability", "aggregation", "freshness", "quality_rules", "allowed_roles", "permitted_use", "failure", "production_eligible", "data_origin"],
+      "properties": {
+        "fact_id": {"type": "string", "pattern": "^[a-z][a-z0-9_.-]{5,127}$"},
+        "title": {"type": "string", "minLength": 3},
+        "business_definition": {"type": "string", "minLength": 10},
+        "classification": {"enum": ["G0", "G1"]},
+        "source_owner": {"type": "string", "minLength": 3},
+        "authority_id": {"type": "string", "pattern": "^authority\\.[a-z0-9_.-]+$"},
+        "read_mode": {"const": "read_only"},
+        "write_capability": {"const": "none"},
+        "aggregation": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["metric", "method", "dimensions", "time_window", "timezone", "definition_version"],
+          "properties": {
+            "metric": {"type": "string", "minLength": 3},
+            "method": {"enum": ["count", "sum", "rate", "distribution"]},
+            "dimensions": {"type": "array", "uniqueItems": true, "maxItems": 4, "items": {"type": "string"}},
+            "time_window": {"type": "string", "minLength": 3},
+            "timezone": {"type": "string", "minLength": 3},
+            "definition_version": {"type": "string", "pattern": "^v[0-9]+$"}
+          }
+        },
+        "freshness": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["slo", "evaluation", "stale_behavior"],
+          "properties": {
+            "slo": {"type": "string", "pattern": "^PT?[0-9]+[MHD]$"},
+            "evaluation": {"enum": ["artifact_commit_time", "source_observed_at", "window_end"]},
+            "stale_behavior": {"const": "Unknown"}
+          }
+        },
+        "quality_rules": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string", "minLength": 3}},
+        "privacy_policy_id": {"type": ["string", "null"]},
+        "allowed_roles": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+        "permitted_use": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"type": "string"}},
+        "failure": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["missing", "stale", "quality", "authority_conflict", "unauthorized", "undersized"],
+          "properties": {
+            "missing": {"const": "Unknown"},
+            "stale": {"const": "Unknown"},
+            "quality": {"const": "No-Go"},
+            "authority_conflict": {"const": "No-Go"},
+            "unauthorized": {"const": "No-Go"},
+            "undersized": {"const": "No-Go"}
+          }
+        },
+        "production_eligible": {"const": false},
+        "data_origin": {"enum": ["authoritative_governance_artifact", "synthetic_contract_fixture"]}
+      }
+    }
+  }
+}

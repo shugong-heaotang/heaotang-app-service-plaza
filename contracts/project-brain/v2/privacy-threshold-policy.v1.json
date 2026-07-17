@@ -1,0 +1,18 @@
+{
+  "contract_version": "project-brain-privacy-threshold-policy.v1",
+  "policy_id": "privacy.g1.aggregate.v1",
+  "version": "v1",
+  "scope": "contract_validation_only",
+  "rules": {
+    "standard_minimum_group_size": 20,
+    "high_risk_minimum_group_size": 50,
+    "maximum_dimensions": 2,
+    "suppress_below_threshold": true,
+    "drill_down": false,
+    "unauthorized_join": false,
+    "rounding_base": 5
+  },
+  "forbidden_classifications": ["P1", "H1", "F1", "C1", "S1"],
+  "forbidden_dimensions": ["member_id", "name", "phone", "email", "health", "order_id", "payment_id", "customer_service_content", "relationship_identity", "precise_address"],
+  "production_enabled": false
+}

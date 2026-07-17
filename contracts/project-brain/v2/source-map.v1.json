@@ -1,0 +1,44 @@
+{
+  "contract_version": "project-brain-source-map.v1",
+  "sources": [
+    {
+      "fact_id": "governance.work_items.status_counts",
+      "authority_id": "authority.governance.agent_collaboration",
+      "authority_uri": "repo://contracts/foundation/agent-collaboration.v1.json",
+      "source_owner": "平台集成负责人",
+      "classification": "G0",
+      "source_status": "verified_governance",
+      "runtime_enabled": false,
+      "read_mode": "read_only",
+      "write_capability": "none",
+      "evidence": ["contracts/foundation/agent-collaboration.v1.json", "scripts/validate_agent_collaboration.py"],
+      "next_review_at": "2026-08-17T00:00:00Z"
+    },
+    {
+      "fact_id": "governance.implementation_records.verification_counts",
+      "authority_id": "authority.governance.implementation_records",
+      "authority_uri": "repo://contracts/foundation/implementation-records/",
+      "source_owner": "平台质量负责人",
+      "classification": "G0",
+      "source_status": "verified_governance",
+      "runtime_enabled": false,
+      "read_mode": "read_only",
+      "write_capability": "none",
+      "evidence": ["contracts/foundation/implementation-record.v1.schema.json", "scripts/validate_implementation_records.py"],
+      "next_review_at": "2026-08-17T00:00:00Z"
+    },
+    {
+      "fact_id": "synthetic.operations.completed_services.count",
+      "authority_id": "authority.synthetic.completed_services_fixture",
+      "authority_uri": "fixture://contracts/project-brain/v2/examples/trusted-g1-synthetic.json",
+      "source_owner": "Project Brain v2 M1 synthetic fixture owner",
+      "classification": "G1",
+      "source_status": "synthetic_only",
+      "runtime_enabled": false,
+      "read_mode": "read_only",
+      "write_capability": "none",
+      "evidence": ["contracts/project-brain/v2/privacy-threshold-policy.v1.json", "contracts/project-brain/v2/examples/trusted-g1-synthetic.json"],
+      "next_review_at": "2026-08-17T00:00:00Z"
+    }
+  ]
+}

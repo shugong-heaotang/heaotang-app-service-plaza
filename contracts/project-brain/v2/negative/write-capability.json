@@ -1,0 +1,1 @@
+{"fixture_kind":"fact","expected_error":"WRITE_CAPABILITY_FORBIDDEN","payload":{"fact_id":"bad.write.fact","classification":"G0","read_mode":"read_write","write_capability":"update"}}

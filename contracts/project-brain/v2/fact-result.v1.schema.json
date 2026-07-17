@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/project-brain/v2/fact-result.v1.schema.json",
+  "title": "Project Brain v2 fact result",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "fact_id", "classification", "status", "reason_code", "observed_at", "window_start", "window_end", "definition_version", "authority_id", "source_owner", "synthetic", "sample_size", "value", "decision_usable", "checks", "evidence_hash"],
+  "properties": {
+    "contract_version": {"const": "project-brain-fact-result.v1"},
+    "fact_id": {"type": "string"},
+    "classification": {"enum": ["G0", "G1"]},
+    "status": {"enum": ["Trusted", "Unknown", "No-Go"]},
+    "reason_code": {"type": "string", "pattern": "^[A-Z0-9_]+$"},
+    "observed_at": {"type": "string", "format": "date-time"},
+    "window_start": {"type": "string", "format": "date-time"},
+    "window_end": {"type": "string", "format": "date-time"},
+    "definition_version": {"type": "string"},
+    "authority_id": {"type": "string"},
+    "source_owner": {"type": "string"},
+    "synthetic": {"type": "boolean"},
+    "sample_size": {"type": ["integer", "null"], "minimum": 0},
+    "value": {"type": ["number", "integer", "object", "null"]},
+    "decision_usable": {"type": "boolean"},
+    "checks": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["source_available", "freshness", "quality", "authorization", "authority_conflict", "privacy_threshold"],
+      "properties": {
+        "source_available": {"type": "boolean"},
+        "freshness": {"enum": ["pass", "fail", "unknown"]},
+        "quality": {"enum": ["pass", "fail", "unknown"]},
+        "authorization": {"enum": ["pass", "fail", "unknown"]},
+        "authority_conflict": {"type": "boolean"},
+        "privacy_threshold": {"enum": ["pass", "fail", "not_applicable", "unknown"]}
+      }
+    },
+    "evidence_hash": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"}
+  }
+}

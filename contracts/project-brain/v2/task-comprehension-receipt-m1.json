@@ -1,0 +1,58 @@
+{
+  "receipt_version": "project-brain-task-comprehension.v1",
+  "work_id": "AIW-20260716-PROJECT-BRAIN-V2-M1-FACT-CONTRACTS",
+  "record_id": "IR-20260716-PROJECT-BRAIN-V2-M1-FACT-CONTRACTS",
+  "actor": "Project Brain v2 M1 project owner",
+  "goal": "Freeze machine-checkable G0 governance facts and G1 de-identified aggregate contracts, privacy thresholds, source ownership, synthetic examples and fail-closed negative evidence.",
+  "non_goals": [
+    "No scheduler, immutable snapshot runtime or alerts",
+    "No boss dashboard, export or notification",
+    "No real business data, credentials, environments, deployment or production",
+    "No Project Brain v1 or source-system modification"
+  ],
+  "allowed_path_classes": [
+    "contracts/project-brain/v2/**",
+    "docs/project-management/notices/2026-07-16-project-brain-v2-m1-fact-contracts-task-order.md",
+    "docs/project-management/project-brain-v2/source-map-v2.md",
+    "docs/project-management/project-brain-v2/handoff-m1.md",
+    "contracts/foundation/development-checklists/2026-07-16-project-brain-v2-m1*.json",
+    "contracts/foundation/governance-exams/2026-07-16-project-brain-v2-m1*.json",
+    "contracts/foundation/implementation-records/2026-07-16-project-brain-v2-m1*.json"
+  ],
+  "forbidden_actions": [
+    "Read or copy row-level member, health, order, payment, customer-service or relationship data",
+    "Create a source-system write path or second authority",
+    "Represent synthetic values as real facts",
+    "Silently reuse stale values or choose between conflicting authorities",
+    "Force push or integrate without independent Go"
+  ],
+  "dependencies": [
+    "Project Brain v2 M0 and M1 activation integrated",
+    "Exact current authority and clean isolated worktree",
+    "Current checklist and governance exam score 100",
+    "Independent data classification and re-identification review"
+  ],
+  "risks": [
+    "Small-sample or dimensional re-identification",
+    "Source ownership or metric-definition drift",
+    "A contract accidentally authorizing runtime or production",
+    "Synthetic evidence being mistaken for current business truth"
+  ],
+  "stop_conditions": [
+    "Authority drift or active path conflict",
+    "Any P1, H1, F1, C1 or S1 field appears",
+    "Any write capability, real data, secret or production enablement appears",
+    "Any validator, scope, freshness or independent-review gate fails"
+  ],
+  "developer": "Project Brain v2 M1 project owner",
+  "reviewer": "independent Project Brain v2 M1 reviewer",
+  "approver": "项目最高负责人",
+  "integration_owner": "平台集成负责人",
+  "acceptance_evidence": [
+    "Schema and semantic validation",
+    "Trusted synthetic examples",
+    "Fail-closed negative fixtures",
+    "Current checklist, exam100, verified IR and Handoff",
+    "Independent file-backed Go and fresh-authority integration"
+  ]
+}

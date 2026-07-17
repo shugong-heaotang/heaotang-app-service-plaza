@@ -1,0 +1,31 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/project-brain/v2/privacy-threshold-policy.v1.schema.json",
+  "title": "Project Brain v2 privacy threshold policy",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "policy_id", "version", "scope", "rules", "forbidden_classifications", "forbidden_dimensions", "production_enabled"],
+  "properties": {
+    "contract_version": {"const": "project-brain-privacy-threshold-policy.v1"},
+    "policy_id": {"const": "privacy.g1.aggregate.v1"},
+    "version": {"const": "v1"},
+    "scope": {"const": "contract_validation_only"},
+    "rules": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["standard_minimum_group_size", "high_risk_minimum_group_size", "maximum_dimensions", "suppress_below_threshold", "drill_down", "unauthorized_join", "rounding_base"],
+      "properties": {
+        "standard_minimum_group_size": {"type": "integer", "minimum": 10},
+        "high_risk_minimum_group_size": {"type": "integer", "minimum": 20},
+        "maximum_dimensions": {"type": "integer", "minimum": 0, "maximum": 3},
+        "suppress_below_threshold": {"const": true},
+        "drill_down": {"const": false},
+        "unauthorized_join": {"const": false},
+        "rounding_base": {"type": "integer", "minimum": 1}
+      }
+    },
+    "forbidden_classifications": {"const": ["P1", "H1", "F1", "C1", "S1"]},
+    "forbidden_dimensions": {"type": "array", "minItems": 8, "uniqueItems": true, "items": {"type": "string"}},
+    "production_enabled": {"const": false}
+  }
+}

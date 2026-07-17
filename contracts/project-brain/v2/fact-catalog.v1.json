@@ -1,0 +1,83 @@
+{
+  "contract_version": "project-brain-fact-catalog.v1",
+  "facts": [
+    {
+      "fact_id": "governance.work_items.status_counts",
+      "title": "Work items grouped by lifecycle status",
+      "business_definition": "Count the authoritative collaboration work items once each, grouped only by their registered lifecycle status.",
+      "classification": "G0",
+      "source_owner": "平台集成负责人",
+      "authority_id": "authority.governance.agent_collaboration",
+      "read_mode": "read_only",
+      "write_capability": "none",
+      "aggregation": {
+        "metric": "work_item_count",
+        "method": "count",
+        "dimensions": ["status"],
+        "time_window": "current_authority_snapshot",
+        "timezone": "UTC",
+        "definition_version": "v1"
+      },
+      "freshness": {"slo": "PT24H", "evaluation": "artifact_commit_time", "stale_behavior": "Unknown"},
+      "quality_rules": ["schema_valid", "work_id_unique", "status_in_registered_enum"],
+      "privacy_policy_id": null,
+      "allowed_roles": ["project_owner", "project_brain_reviewer", "platform_integration_owner"],
+      "permitted_use": ["portfolio_status", "ownership_audit"],
+      "failure": {"missing": "Unknown", "stale": "Unknown", "quality": "No-Go", "authority_conflict": "No-Go", "unauthorized": "No-Go", "undersized": "No-Go"},
+      "production_eligible": false,
+      "data_origin": "authoritative_governance_artifact"
+    },
+    {
+      "fact_id": "governance.implementation_records.verification_counts",
+      "title": "Implementation records grouped by verification status",
+      "business_definition": "Count schema-valid implementation records grouped by their declared status without reading business payloads.",
+      "classification": "G0",
+      "source_owner": "平台质量负责人",
+      "authority_id": "authority.governance.implementation_records",
+      "read_mode": "read_only",
+      "write_capability": "none",
+      "aggregation": {
+        "metric": "implementation_record_count",
+        "method": "count",
+        "dimensions": ["status"],
+        "time_window": "current_authority_snapshot",
+        "timezone": "UTC",
+        "definition_version": "v1"
+      },
+      "freshness": {"slo": "PT24H", "evaluation": "artifact_commit_time", "stale_behavior": "Unknown"},
+      "quality_rules": ["all_records_schema_valid", "record_id_unique", "evidence_paths_exist"],
+      "privacy_policy_id": null,
+      "allowed_roles": ["project_owner", "project_brain_reviewer", "platform_integration_owner"],
+      "permitted_use": ["delivery_quality", "evidence_completeness"],
+      "failure": {"missing": "Unknown", "stale": "Unknown", "quality": "No-Go", "authority_conflict": "No-Go", "unauthorized": "No-Go", "undersized": "No-Go"},
+      "production_eligible": false,
+      "data_origin": "authoritative_governance_artifact"
+    },
+    {
+      "fact_id": "synthetic.operations.completed_services.count",
+      "title": "Synthetic completed member-service count",
+      "business_definition": "Contract-only synthetic count used to prove suppression, freshness, authorization and re-identification controls before any real source is approved.",
+      "classification": "G1",
+      "source_owner": "Project Brain v2 M1 synthetic fixture owner",
+      "authority_id": "authority.synthetic.completed_services_fixture",
+      "read_mode": "read_only",
+      "write_capability": "none",
+      "aggregation": {
+        "metric": "completed_service_count",
+        "method": "count",
+        "dimensions": ["service_category"],
+        "time_window": "calendar_day",
+        "timezone": "Asia/Shanghai",
+        "definition_version": "v1"
+      },
+      "freshness": {"slo": "PT24H", "evaluation": "window_end", "stale_behavior": "Unknown"},
+      "quality_rules": ["synthetic_marker_true", "sample_size_at_or_above_policy", "rounded_value", "no_forbidden_dimensions"],
+      "privacy_policy_id": "privacy.g1.aggregate.v1",
+      "allowed_roles": ["project_brain_reviewer"],
+      "permitted_use": ["contract_validation_only"],
+      "failure": {"missing": "Unknown", "stale": "Unknown", "quality": "No-Go", "authority_conflict": "No-Go", "unauthorized": "No-Go", "undersized": "No-Go"},
+      "production_eligible": false,
+      "data_origin": "synthetic_contract_fixture"
+    }
+  ]
+}
