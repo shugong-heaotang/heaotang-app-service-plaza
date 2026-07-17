@@ -3833,6 +3833,36 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "本项active仅在AIW-20260717-PROJECT-BRAIN-V2-M2-G0-REMEDIATION-ACTIVATION exact candidate独立Go并受控进入authority后生效。只修复PBV2-M2-G0-PRIVACY-THRESHOLD-001：合法G0 Trusted必须要求sample_size=null与privacy_threshold=not_applicable且不执行G1样本阈值；G0伪造sample/privacy结果失败关闭；G1 high/standard阈值、rounding和既有失败关闭语义保持不变。不得修改M1/M3/v1、registry、App或环境。blocks=M3 overall Acceptance复验；does_not_block=PDCAR及其他非重叠项目。",
                            "handoff_record":  "docs/project-management/project-brain-v2/handoff-m2-g0-remediation-activation.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260717-PLATFORM-GOVERNANCE-EXAM-SELECTION-PROVENANCE-R1",
+                           "title":  "Governance Exam Deterministic Selection Provenance R1",
+                           "owner":  "/root/agent_a_platform_v8",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-platform-governance-exam-selection-provenance-r1",
+                           "branch":  "codex/platform-governance-exam-selection-provenance-r1",
+                           "base_commit":  "05eda778a08f6a4d63dd01a3f7511746e1f42c7a",
+                           "allowed_paths":  [
+                                                 "scripts/New-AgentGovernanceExam.ps1",
+                                                 "contracts/foundation/governance-exam.v1.schema.json",
+                                                 "scripts/validate_governance_exams.py",
+                                                 "scripts/tests/test_validate_governance_exams.py",
+                                                 "contracts/foundation/governance-exam-selection-legacy.v1.json",
+                                                 "contracts/foundation/governance-exam-selection-legacy.v1.schema.json",
+                                                 "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+                                                 "scripts/Test-AgentDevelopmentPreflight.ps1",
+                                                 "scripts/Test-ServicePlazaContracts.ps1",
+                                                 "contracts/foundation/development-checklists/2026-07-17-platform-governance-exam-selection-provenance-r1.json",
+                                                 "contracts/foundation/governance-exams/2026-07-17-platform-governance-exam-selection-provenance-r1-attempt-1.json",
+                                                 "contracts/foundation/implementation-records/2026-07-17-platform-governance-exam-selection-provenance-r1.json",
+                                                 "docs/project-management/service-plaza/handoff-governance-exam-selection-provenance-r1.md"
+                                             ],
+                           "started_with_clean_worktree":  false,
+                           "preexisting_changes_acknowledged":  true,
+                           "migration_note":  "One-time human bootstrap seed A. No implementation worktree exists at seed time; this is intentional pre-registration, not a dirty implementation start. After independently accepted seed integration, the implementation worktree must be created clean from the new exact authority. Implementation bootstrap is frozen to Windows PowerShell 5.1.26100.8875; integer seed 1013564206; exact same-process call $null = Get-Random -SetSeed 1013564206 once before the unmodified authority generator; bank SHA-256 215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40; reading-list SHA-256 b0df386a68e8e00a803a08d0b3e786893a47bad6742dd36a5b6273803b7abcb1; expected independently replayed ordered IDs GQ-002,GQ-015,GQ-016,GQ-010,GQ-007,GQ-012,GQ-011,GQ-006. Maker and reviewer must each generate from exact authority bytes and must not copy or manually patch the list. Implementation expires 2026-07-17T18:00:00+08:00. Sole implementation maker /root/agent_a_platform_v8; independent reviewer /root/agent_c_reviewer_v9. Exact nine implementation plus four governance evidence paths only. Any tenth implementation path, authority drift, actor/path/worktree/PowerShell/seed/ordered-ID change, manual attempt edit or expired checkpoint is No-Go. This row does not authorize target push, R4, R12-O/H2, CP1/H3, product, backend, deployment, production, funds or sensitive data.",
+                           "handoff_record":  null
                        }
                    ]
 }
