@@ -79,6 +79,47 @@ class ProjectBrainV2ContractsTest(unittest.TestCase):
         result = load_json(PACKAGE_ROOT / "examples" / "no-go-authority-conflict.json")
         validate_result(result, self.facts, self.sources, self.policy)
 
+    def test_stale_unknown_cannot_mask_no_go_failures(self) -> None:
+        mutations = (
+            ("authorization", "fail"),
+            ("authority_conflict", True),
+            ("quality", "fail"),
+        )
+        for key, value in mutations:
+            with self.subTest(key=key):
+                result = load_json(PACKAGE_ROOT / "examples" / "unknown-stale.json")
+                result["checks"][key] = value
+                with self.assertRaisesRegex(ContractError, "UNKNOWN_MASKS_NO_GO"):
+                    validate_result(result, self.facts, self.sources, self.policy)
+
+    def test_missing_unknown_cannot_mask_no_go_failures(self) -> None:
+        mutations = (("authorization", "fail"), ("authority_conflict", True), ("quality", "fail"))
+        for key, value in mutations:
+            with self.subTest(key=key):
+                result = load_json(PACKAGE_ROOT / "examples" / "unknown-source-missing.json")
+                result["checks"][key] = value
+                with self.assertRaisesRegex(ContractError, "SOURCE_UNAVAILABLE_STATE_INVALID"):
+                    validate_result(result, self.facts, self.sources, self.policy)
+
+    def test_stale_unknown_cannot_mask_undersized_no_go(self) -> None:
+        result = load_json(PACKAGE_ROOT / "examples" / "trusted-g1-synthetic.json")
+        result.update({"status": "Unknown", "reason_code": "SOURCE_STALE", "evaluated_at": "2026-07-20T20:00:00Z", "sample_size": 25, "value": None, "decision_usable": False, "evidence_hash": None})
+        result["checks"].update({"freshness": "fail", "privacy_threshold": "fail", "quality": "unknown"})
+        with self.assertRaisesRegex(ContractError, "UNKNOWN_MASKS_NO_GO"):
+            validate_result(result, self.facts, self.sources, self.policy)
+
+    def test_result_definition_version_must_match_fact(self) -> None:
+        result = load_json(PACKAGE_ROOT / "examples" / "trusted-g0-synthetic.json")
+        result["definition_version"] = "v999"
+        with self.assertRaisesRegex(ContractError, "RESULT_CONTRACT_MISMATCH"):
+            validate_result(result, self.facts, self.sources, self.policy)
+
+    def test_g0_cannot_claim_privacy_threshold_result(self) -> None:
+        result = load_json(PACKAGE_ROOT / "examples" / "trusted-g0-synthetic.json")
+        result["checks"]["privacy_threshold"] = "pass"
+        with self.assertRaisesRegex(ContractError, "RESULT_CONTRACT_MISMATCH"):
+            validate_result(result, self.facts, self.sources, self.policy)
+
     def test_g1_object_values_cannot_bypass_rounding(self) -> None:
         result = load_json(PACKAGE_ROOT / "examples" / "trusted-g1-synthetic.json")
         result["value"] = {"category_a": 25, "category_b": 21}

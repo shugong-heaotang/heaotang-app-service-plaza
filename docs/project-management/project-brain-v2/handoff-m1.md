@@ -16,7 +16,7 @@
 - 标准阈值 20、高风险阈值 50、最多 2 维、按 5 取整、低于阈值抑制；
 - 7 个 synthetic 正向/失败关闭样例；
 - 10 个负例及精确错误码；
-- 独立 contract validator 和 15 项回归/变异测试；
+- 独立 contract validator 和 20 项回归/变异测试；
 - 所有来源 `runtime_enabled=false`，package `runtime_enabled=false`、`production_enabled=false`。
 
 ## 明确未完成与未授权
@@ -32,7 +32,7 @@
 5. G1 只有 synthetic fixture、source disabled、production ineligible、decision unusable；
 6. 阈值策略版本化，低样本、敏感分类、禁用维度、拼接和下钻失败关闭；
 7. `Unknown/No-Go` 必须 value null 且不可用于决策；
-8. 10/10 负例均以预期错误码拒绝，15/15 回归/变异测试通过；
+8. 10/10 负例均以预期错误码拒绝，20/20 回归/变异测试通过；
 9. checklist/exam/IR、总合同、UTF-8、diff-check、secret0、scope 和 freshness 全部通过；
 10. 候选不存在 runtime、真实数据、部署或生产授权。
 
@@ -47,6 +47,10 @@
 第二个 immutable candidate `98ed142b57cb663bd24074bf3a7b9401dc41416c` 已由 R2 独立 reviewer 判定 `Acceptance No-Go / no-integrate`。R2 外部报告 SHA-256 为 `ec48f8cdbed4ab75471a5e67d8a841ceec7138c79258d209e6e55a89e30671d4`。R2 确认首轮四项整改有效，但发现：无时区 timestamp 和倒置窗口仍可接受；`SOURCE_MISSING` Unknown、权限失败/authority 冲突 No-Go 无法合法表达。
 
 R3 remediation 对所有非空时间强制时区，复算并校验窗口顺序/未来证据；新增 source-missing Unknown、unauthorized No-Go、authority-conflict No-Go 的机器可验证正例及变异测试。R2 报告继续不可覆盖，R3 必须另行独立验收。
+
+第三个 immutable candidate `381f85fad79926fb4231f77fb227c255e7f3c32d` 已由 R3 独立 reviewer 判定 `Acceptance No-Go / no-integrate`。R3 外部报告 SHA-256 为 `d39319382ee832423c5fafec26e1afd921df1c7819edba6d6afffc982c1fc1bc`。R3 确认时间和状态表达整改有效，但发现 stale/missing Unknown 可夹带 authorization fail、authority conflict、quality fail，从而隐藏必须为 No-Go 的明确失败。
+
+R4 remediation 固定 `No-Go > Unknown > Trusted` 的失败优先级；source-missing Unknown 必须保持 authorization/quality unknown、无 authority conflict，stale Unknown 不能夹带权限、权威、质量或低样本失败。新增混合失败变异测试，R3 报告继续不可覆盖，R4 必须另行独立验收。
 
 ## 下一动作
 

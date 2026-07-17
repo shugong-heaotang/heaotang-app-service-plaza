@@ -13,6 +13,7 @@ This package freezes the read-only fact boundary for Project Brain v2.
 - Rounding applies to every numeric leaf in an aggregate object, not only scalar values.
 - An undersized aggregate is a valid fail-closed `No-Go` only when its value is null, decision use is false and the threshold check/reason agree.
 - Missing or unreachable sources are expressible only as value-null `Unknown`; authorization and authority-conflict failures are expressible only as value-null `No-Go`.
+- Failure precedence is closed: authorization, authority conflict, quality failure and undersized aggregates require `No-Go` and may never be hidden inside an `Unknown` result.
 - No file in this package enables a scheduler, snapshot runtime, dashboard, export, deployment or production route.
 
 Run the package validator from the repository root:

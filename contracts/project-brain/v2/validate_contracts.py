@@ -194,7 +194,11 @@ def validate_result(result: dict[str, Any], facts: dict[str, dict[str, Any]], so
     for key in ("classification", "privacy_risk_tier", "authority_id", "source_owner"):
         if result.get(key) != fact.get(key):
             raise ContractError("RESULT_CONTRACT_MISMATCH", f"{fact_id}:{key}")
+    if result.get("definition_version") != fact.get("aggregation", {}).get("definition_version"):
+        raise ContractError("RESULT_CONTRACT_MISMATCH", f"{fact_id}:definition_version")
     checks = result.get("checks", {})
+    if fact["classification"] == "G0" and (result.get("sample_size") is not None or checks.get("privacy_threshold") != "not_applicable"):
+        raise ContractError("RESULT_CONTRACT_MISMATCH", f"{fact_id}:G0_privacy_fields")
     if fact["data_origin"] == "synthetic_contract_fixture" and result.get("synthetic") is not True:
         raise ContractError("SYNTHETIC_PROVENANCE_REQUIRED", fact_id)
 
@@ -202,6 +206,7 @@ def validate_result(result: dict[str, Any], facts: dict[str, dict[str, Any]], so
     status = result.get("status")
     source_available = checks.get("source_available")
     if source_available is False:
+        expected_privacy = "not_applicable" if fact["classification"] == "G0" else "unknown"
         if (
             status not in {"Unknown"}
             or result.get("reason_code") not in {"SOURCE_MISSING", "SOURCE_UNREACHABLE"}
@@ -210,6 +215,9 @@ def validate_result(result: dict[str, Any], facts: dict[str, dict[str, Any]], so
             or result.get("window_end") is not None
             or checks.get("freshness") != "unknown"
             or checks.get("quality") != "unknown"
+            or checks.get("authorization") != "unknown"
+            or checks.get("authority_conflict") is not False
+            or checks.get("privacy_threshold") != expected_privacy
             or result.get("sample_size") is not None
             or result.get("value") is not None
             or result.get("decision_usable") is not False
@@ -258,6 +266,13 @@ def validate_result(result: dict[str, Any], facts: dict[str, dict[str, Any]], so
         if result.get("value") is not None or result.get("decision_usable") is not False:
             raise ContractError("FAIL_CLOSED_VALUE_REQUIRED_NULL", fact_id)
         if status == "Unknown":
+            if (
+                checks.get("authorization") != "pass"
+                or checks.get("authority_conflict") is not False
+                or checks.get("quality") == "fail"
+                or undersized
+            ):
+                raise ContractError("UNKNOWN_MASKS_NO_GO", fact_id)
             if freshness_passed or result.get("reason_code") != "SOURCE_STALE":
                 raise ContractError("UNKNOWN_REASON_INVALID", fact_id)
         else:
