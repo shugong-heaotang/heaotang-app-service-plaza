@@ -1,0 +1,21 @@
+{
+  "contract_version": "project-brain-fact-result.v1",
+  "fact_id": "governance.work_items.status_counts",
+  "classification": "G0",
+  "privacy_risk_tier": "not_applicable",
+  "status": "Unknown",
+  "reason_code": "SOURCE_MISSING",
+  "observed_at": null,
+  "evaluated_at": "2026-07-17T12:00:00Z",
+  "window_start": null,
+  "window_end": null,
+  "definition_version": "v1",
+  "authority_id": "authority.governance.agent_collaboration",
+  "source_owner": "平台集成负责人",
+  "synthetic": true,
+  "sample_size": null,
+  "value": null,
+  "decision_usable": false,
+  "checks": {"source_available": false, "freshness": "unknown", "quality": "unknown", "authorization": "unknown", "authority_conflict": false, "privacy_threshold": "not_applicable"},
+  "evidence_hash": null
+}

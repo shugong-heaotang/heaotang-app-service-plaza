@@ -23,7 +23,7 @@ class ProjectBrainV2ContractsTest(unittest.TestCase):
         cls.sources = {item["fact_id"]: item for item in source_map["sources"]}
 
     def test_full_package(self) -> None:
-        self.assertEqual(validate_package(), {"facts": 3, "sources": 3, "positive": 4, "negative": 10})
+        self.assertEqual(validate_package(), {"facts": 3, "sources": 3, "positive": 7, "negative": 10})
 
     def test_unknown_must_not_carry_value(self) -> None:
         result = load_json(PACKAGE_ROOT / "examples" / "unknown-stale.json")
@@ -53,6 +53,31 @@ class ProjectBrainV2ContractsTest(unittest.TestCase):
         result["observed_at"] = "2020-01-01T00:00:00Z"
         with self.assertRaisesRegex(ContractError, "FRESHNESS_ASSERTION_MISMATCH"):
             validate_result(result, self.facts, self.sources, self.policy)
+
+    def test_timestamp_timezone_is_mandatory(self) -> None:
+        result = load_json(PACKAGE_ROOT / "examples" / "trusted-g0-synthetic.json")
+        result["evaluated_at"] = "2026-07-17T12:00:00"
+        with self.assertRaisesRegex(ContractError, "TIMESTAMP_TIMEZONE_REQUIRED"):
+            validate_result(result, self.facts, self.sources, self.policy)
+
+    def test_window_must_not_be_reversed(self) -> None:
+        result = load_json(PACKAGE_ROOT / "examples" / "trusted-g0-synthetic.json")
+        result["window_start"] = "2026-07-17T01:00:00Z"
+        result["window_end"] = "2026-07-17T00:00:00Z"
+        with self.assertRaisesRegex(ContractError, "TIME_WINDOW_INVALID"):
+            validate_result(result, self.facts, self.sources, self.policy)
+
+    def test_missing_source_unknown_is_valid(self) -> None:
+        result = load_json(PACKAGE_ROOT / "examples" / "unknown-source-missing.json")
+        validate_result(result, self.facts, self.sources, self.policy)
+
+    def test_unauthorized_no_go_is_valid(self) -> None:
+        result = load_json(PACKAGE_ROOT / "examples" / "no-go-unauthorized.json")
+        validate_result(result, self.facts, self.sources, self.policy)
+
+    def test_authority_conflict_no_go_is_valid(self) -> None:
+        result = load_json(PACKAGE_ROOT / "examples" / "no-go-authority-conflict.json")
+        validate_result(result, self.facts, self.sources, self.policy)
 
     def test_g1_object_values_cannot_bypass_rounding(self) -> None:
         result = load_json(PACKAGE_ROOT / "examples" / "trusted-g1-synthetic.json")

@@ -51,9 +51,12 @@ def recursive_keys(value: Any) -> set[str]:
 
 def parse_datetime(value: str, label: str) -> datetime:
     try:
-        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+        parsed = datetime.fromisoformat(value.replace("Z", "+00:00"))
     except (AttributeError, ValueError) as exc:
         raise ContractError("TIMESTAMP_INVALID", label) from exc
+    if parsed.utcoffset() is None:
+        raise ContractError("TIMESTAMP_TIMEZONE_REQUIRED", label)
+    return parsed
 
 
 def parse_slo(value: str) -> timedelta:
@@ -65,7 +68,7 @@ def parse_slo(value: str) -> timedelta:
     except ValueError as exc:
         raise ContractError("FRESHNESS_SLO_INVALID", value) from exc
     multipliers = {"M": timedelta(minutes=amount), "H": timedelta(hours=amount), "D": timedelta(days=amount)}
-    if amount < 0 or unit not in multipliers:
+    if amount <= 0 or unit not in multipliers:
         raise ContractError("FRESHNESS_SLO_INVALID", value)
     return multipliers[unit]
 
@@ -192,17 +195,41 @@ def validate_result(result: dict[str, Any], facts: dict[str, dict[str, Any]], so
         if result.get(key) != fact.get(key):
             raise ContractError("RESULT_CONTRACT_MISMATCH", f"{fact_id}:{key}")
     checks = result.get("checks", {})
-    if checks.get("authorization") == "fail":
-        raise ContractError("AUTHORIZATION_FAILED", fact_id)
-    if checks.get("authority_conflict") is True:
-        raise ContractError("AUTHORITY_CONFLICT", fact_id)
     if fact["data_origin"] == "synthetic_contract_fixture" and result.get("synthetic") is not True:
         raise ContractError("SYNTHETIC_PROVENANCE_REQUIRED", fact_id)
 
     evaluated_at = parse_datetime(result.get("evaluated_at"), "evaluated_at")
+    status = result.get("status")
+    source_available = checks.get("source_available")
+    if source_available is False:
+        if (
+            status not in {"Unknown"}
+            or result.get("reason_code") not in {"SOURCE_MISSING", "SOURCE_UNREACHABLE"}
+            or result.get("observed_at") is not None
+            or result.get("window_start") is not None
+            or result.get("window_end") is not None
+            or checks.get("freshness") != "unknown"
+            or checks.get("quality") != "unknown"
+            or result.get("sample_size") is not None
+            or result.get("value") is not None
+            or result.get("decision_usable") is not False
+            or result.get("evidence_hash") is not None
+        ):
+            raise ContractError("SOURCE_UNAVAILABLE_STATE_INVALID", fact_id)
+        return
+    if source_available is not True:
+        raise ContractError("SOURCE_AVAILABILITY_UNKNOWN", fact_id)
+
+    observed_at = parse_datetime(result.get("observed_at"), "observed_at")
+    window_start = parse_datetime(result.get("window_start"), "window_start")
+    window_end = parse_datetime(result.get("window_end"), "window_end")
+    if window_start > window_end:
+        raise ContractError("TIME_WINDOW_INVALID", fact_id)
+    if max(observed_at, window_end) > evaluated_at:
+        raise ContractError("FUTURE_EVIDENCE_FORBIDDEN", fact_id)
     freshness_field = "window_end" if fact["freshness"]["evaluation"] == "window_end" else "observed_at"
-    freshness_at = parse_datetime(result.get(freshness_field), freshness_field)
-    freshness_passed = evaluated_at >= freshness_at and evaluated_at - freshness_at <= parse_slo(fact["freshness"]["slo"])
+    freshness_at = window_end if freshness_field == "window_end" else observed_at
+    freshness_passed = evaluated_at - freshness_at <= parse_slo(fact["freshness"]["slo"])
     declared_freshness = checks.get("freshness")
     computed_freshness = "pass" if freshness_passed else "fail"
     if declared_freshness != computed_freshness:
@@ -227,21 +254,31 @@ def validate_result(result: dict[str, Any], facts: dict[str, dict[str, Any]], so
             raise ContractError("ROUNDING_POLICY_FAILED", fact_id)
         if source.get("source_status") != "synthetic_only" or source.get("runtime_enabled") is not False:
             raise ContractError("G1_REAL_SOURCE_NOT_AUTHORIZED", fact_id)
-    status = result.get("status")
     if status in {"Unknown", "No-Go"}:
         if result.get("value") is not None or result.get("decision_usable") is not False:
             raise ContractError("FAIL_CLOSED_VALUE_REQUIRED_NULL", fact_id)
         if status == "Unknown":
             if freshness_passed or result.get("reason_code") != "SOURCE_STALE":
                 raise ContractError("UNKNOWN_REASON_INVALID", fact_id)
-        elif undersized:
-            if result.get("reason_code") != "PRIVACY_THRESHOLD_FAILED" or checks.get("privacy_threshold") != "fail":
+        else:
+            active_failures: set[str] = set()
+            if checks.get("authorization") == "fail":
+                active_failures.add("AUTHORIZATION_FAILED")
+            if checks.get("authority_conflict") is True:
+                active_failures.add("AUTHORITY_CONFLICT")
+            if undersized:
+                active_failures.add("PRIVACY_THRESHOLD_FAILED")
+            if checks.get("quality") == "fail":
+                active_failures.add("QUALITY_FAILED")
+            if result.get("reason_code") not in active_failures:
                 raise ContractError("NO_GO_REASON_INVALID", fact_id)
-        elif checks.get("quality") != "fail":
-            raise ContractError("NO_GO_REASON_INVALID", fact_id)
         return
     if status != "Trusted":
         raise ContractError("RESULT_STATUS_INVALID", str(status))
+    if checks.get("authorization") == "fail":
+        raise ContractError("AUTHORIZATION_FAILED", fact_id)
+    if checks.get("authority_conflict") is True:
+        raise ContractError("AUTHORITY_CONFLICT", fact_id)
     required_checks = (
         checks.get("source_available") is True,
         checks.get("freshness") == "pass",

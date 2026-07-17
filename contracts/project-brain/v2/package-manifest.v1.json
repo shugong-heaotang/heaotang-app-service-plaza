@@ -2,7 +2,7 @@
   "contract_version": "project-brain-m1-package.v1",
   "schemas": ["fact-catalog.v1.schema.json", "source-map.v1.schema.json", "fact-result.v1.schema.json", "privacy-threshold-policy.v1.schema.json"],
   "contracts": ["fact-catalog.v1.json", "source-map.v1.json", "privacy-threshold-policy.v1.json"],
-  "positive_fixtures": ["examples/trusted-g0-synthetic.json", "examples/trusted-g1-synthetic.json", "examples/unknown-stale.json", "examples/no-go-small-sample.json"],
+  "positive_fixtures": ["examples/trusted-g0-synthetic.json", "examples/trusted-g1-synthetic.json", "examples/unknown-stale.json", "examples/unknown-source-missing.json", "examples/no-go-small-sample.json", "examples/no-go-unauthorized.json", "examples/no-go-authority-conflict.json"],
   "negative_fixtures": ["negative/row-level-member.json", "negative/small-sample.json", "negative/stale-as-trusted.json", "negative/unauthorized-as-trusted.json", "negative/sensitive-classification.json", "negative/multiple-authorities.json", "negative/write-capability.json", "negative/g1-real-source-enabled.json", "negative/unknown-with-value.json", "negative/missing-synthetic-provenance.json"],
   "runtime_enabled": false,
   "production_enabled": false
