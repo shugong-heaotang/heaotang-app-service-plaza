@@ -1,0 +1,77 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260717-PLATFORM-PDCAR-SKILL-ENFORCEMENT-ACTIVATION-C1",
+  "title": "APP PDCAR Skill 强制接入激活治理",
+  "date": "2026-07-17",
+  "status": "implemented",
+  "objective": "在不触碰正式实施路径的前提下，形成 PDCAR Skill 强制接入正式实施之前所需的 current checklist、Exam100、任务理解、实施记录和 Handoff，并提交独立验收。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-17-platform-pdcar-skill-enforcement-activation.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-17-platform-pdcar-skill-enforcement-activation-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/governance-reading-list.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-17-platform-pdcar-skill-enforcement-activation-task-order.md",
+    "docs/project-management/pdcar/task-comprehension-platform-pdcar-skill-enforcement-activation.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json",
+    "contracts/foundation/implementation-record.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/notices/2026-07-17-platform-pdcar-skill-enforcement-activation-task-order.md",
+    "docs/project-management/pdcar/task-comprehension-platform-pdcar-skill-enforcement-activation.md",
+    "contracts/foundation/development-checklists/2026-07-17-platform-pdcar-skill-enforcement-activation.json",
+    "contracts/foundation/governance-exams/2026-07-17-platform-pdcar-skill-enforcement-activation-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-17-platform-pdcar-skill-enforcement-activation-c1.json",
+    "docs/project-management/pdcar/handoff-platform-pdcar-skill-enforcement-activation.md"
+  ],
+  "verification": [
+    "exact authority and worktree HEAD are 09cd00a429da37a87d26870310617b928d0894a7 before B2 evidence changes",
+    "platform preflight returned ready",
+    "exact current checklist contains 26 of 26 checked inputs and passes current hash validation",
+    "random governance exam attempt 1 passed 8 of 8 with score 100",
+    "formal implementation paths remain unchanged and formal implementation activation remains No-Go",
+    "collaboration JSON schema exact checklist exam implementation-record UTF-8 diff and exact allowed-path gates passed with exit 0; changed paths are 6 of 6 allowed and 0 out of scope"
+  ],
+  "evidence": [
+    "docs/project-management/notices/2026-07-17-platform-pdcar-skill-enforcement-activation-task-order.md",
+    "docs/project-management/pdcar/task-comprehension-platform-pdcar-skill-enforcement-activation.md",
+    "contracts/foundation/development-checklists/2026-07-17-platform-pdcar-skill-enforcement-activation.json",
+    "contracts/foundation/governance-exams/2026-07-17-platform-pdcar-skill-enforcement-activation-attempt-1.json",
+    "docs/project-management/pdcar/handoff-platform-pdcar-skill-enforcement-activation.md"
+  ],
+  "premises": [
+    "09cd00a429da37a87d26870310617b928d0894a7 remains the exact authority for this activation candidate",
+    "only the seven registry-authorized activation path classes are writable",
+    "Project Brain remains independent from the activation writer",
+    "this candidate is not formal implementation authority and does not authorize push integration deployment production data or payment",
+    "historical checklist snapshots remain immutable even though a whole-directory current-hash scan reports expected stale acknowledgements"
+  ],
+  "implementation_mode": "ai-assisted"
+}
