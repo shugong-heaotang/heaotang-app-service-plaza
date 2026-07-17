@@ -1,0 +1,80 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260717-PROJECT-BRAIN-V2-M2-G0-REMEDIATION-ACTIVATION-R2",
+  "title": "Project Brain v2 M2 G0 Trusted refresh remediation activation",
+  "date": "2026-07-17",
+  "status": "verified",
+  "objective": "Activate only a two-file M2 runtime remediation for the independently proven G0 privacy-threshold classification defect after the shared registry path was released.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m2-g0-remediation-activation-r2.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m2-g0-remediation-activation-r2-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/project-brain-v2/delivery-plan-v2.md",
+    "docs/project-management/project-brain-v2/handoff-m2.md",
+    "docs/decisions/0021-project-brain-v2-operational-read-model.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-17-project-brain-v2-m2-g0-remediation-activation-task-order.md",
+    "docs/project-management/project-brain-v2/task-comprehension-receipt-m2-g0-remediation-activation.md",
+    "docs/project-management/project-brain-v2/handoff-m2-g0-remediation-activation.md",
+    "C:/Users/shugo/Documents/项目最高负责人/project-brain-v2/2026-07-17-project-brain-v2-m2-remediation-registry-blockage.md",
+    "C:/Users/shugo/Documents/项目最高负责人/project-brain-v2/2026-07-17-pb-m2-registry-blockage-independent-review.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.schema.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/project-brain/v2/fact-result.v1.schema.json",
+    "contracts/project-brain/v2/privacy-threshold-policy.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0021-project-brain-v2-operational-read-model.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-17-project-brain-v2-m2-g0-remediation-activation-task-order.md",
+    "docs/project-management/project-brain-v2/task-comprehension-receipt-m2-g0-remediation-activation.md",
+    "docs/project-management/project-brain-v2/handoff-m2-g0-remediation-activation.md",
+    "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m2-g0-remediation-activation-r2.json",
+    "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m2-g0-remediation-activation-r2-attempt-1.json"
+  ],
+  "verification": [
+    "R1 candidate 4221004dddf75ce6e9eb6b26e61849652cd2f6b9 remains immutable No-Go evidence after authority freshness drift and was not pushed or integrated",
+    "Authority 6ad2e7e1930f60dfe174397c480a9feefdd53c93 is the R2 exact base; PDCAR registry remains released and Dayi M0 is preserved",
+    "Only activation and formal remediation work items are added; all 152 pre-existing work items and top-level registry fields must remain unchanged",
+    "Activation has seven path classes and formal remediation has eight path classes with no active overlap",
+    "Current checklist completed 26 of 26 and governance exam attempt 1 passed with score 100",
+    "Formal remediation is limited to engine.py, test_engine.py and six exact governance evidence classes",
+    "M1, M3, v1, App, real data, credentials, network, deployment, timer and production remain unchanged and No-Go",
+    "Registry deep comparison passed: 152 pre-existing work items unchanged, two expected items added and top_level_changes=0",
+    "Collaboration, checklist, exam and implementation-record validators passed",
+    "Service Plaza total contract gate passed",
+    "Text encoding gate passed across the current authority file set",
+    "Exact candidate contains seven files in seven activation path classes with out_of_scope_count=0 and secret_hits=0",
+    "git diff --check passed and remote authority remained 6ad2e7e1930f60dfe174397c480a9feefdd53c93"
+  ],
+  "evidence": [
+    "docs/project-management/notices/2026-07-17-project-brain-v2-m2-g0-remediation-activation-task-order.md",
+    "docs/project-management/project-brain-v2/task-comprehension-receipt-m2-g0-remediation-activation.md",
+    "docs/project-management/project-brain-v2/handoff-m2-g0-remediation-activation.md",
+    "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m2-g0-remediation-activation-r2.json",
+    "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m2-g0-remediation-activation-r2-attempt-1.json"
+  ],
+  "premises": [
+    "Conditional registry statuses become effective only after independent Go and controlled integration",
+    "Activation does not implement or accept the M2 runtime repair",
+    "Historical M2 evidence is immutable and no old No-Go is relabeled",
+    "M3 overall Acceptance remains No-Go until the formal repair is independently accepted and integrated",
+    "M4-M5 and production require later independent activation"
+  ],
+  "implementation_mode": "ai-assisted"
+}

@@ -3784,6 +3784,55 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "从 exact authority 02f16fb6451ef23cc3da6da2a360f3b1efe67b60 激活。PDCAR formal implementation 仍 active，但 authority correction 已移除其 registry allowed path，当前 active/handoff-ready registry writers=0；候选模块路径与既有 active/handoff-ready 健康精确路径无重叠。只冻结非医疗大医健康馆 M0 的组织边界、IA、生命周期预览、角色/状态、学习/俱乐部权威跳转和正负合同；外部 m0-prereg 仅是不可信设计输入，必须在本工作项 current checklist/Exam100 后重新实现并验收。blocks=M0 runtime、M1、真实数据、医疗、收费、部署和production；does_not_block=本 M0 离线/合成合同、Schema、负例和Handoff。",
                            "handoff_record":  null
+                       },
+                       {
+                           "work_id":  "AIW-20260717-PROJECT-BRAIN-V2-M2-G0-REMEDIATION-ACTIVATION",
+                           "title":  "Project Brain v2 M2 G0刷新缺陷整改激活治理",
+                           "owner":  "Project Brain v2 M2 G0 remediation activation governance owner",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "integrated",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-m2-g0-remediation-activation-r2",
+                           "branch":  "codex/project-brain-v2-m2-g0-remediation-activation-r2",
+                           "base_commit":  "6ad2e7e1930f60dfe174397c480a9feefdd53c93",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "docs/project-management/notices/2026-07-17-project-brain-v2-m2-g0-remediation-activation-task-order.md",
+                                                 "docs/project-management/project-brain-v2/task-comprehension-receipt-m2-g0-remediation-activation.md",
+                                                 "docs/project-management/project-brain-v2/handoff-m2-g0-remediation-activation.md",
+                                                 "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m2-g0-remediation-activation*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m2-g0-remediation-activation*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-17-project-brain-v2-m2-g0-remediation-activation*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "R1 exact candidate 4221004dddf75ce6e9eb6b26e61849652cd2f6b9因authority推进到6ad2e7e1930f60dfe174397c480a9feefdd53c93而独立验收No-Go，未推送、未集成。R2保留新authority全部既有项目并只登记M2 G0 remediation两个工作项；activation integrated与remediation active仅在本R2 exact candidate独立Go并受控进入authority后生效。修复只允许纠正G0 privacy_threshold=not_applicable分支并增加G0/G1防复发测试，不修改M1合同、M3、v1、App、真实数据、网络、部署、timer或production。blocks=M2 remediation runtime；does_not_block=PDCAR、Dayi及其他非重叠项目。",
+                           "handoff_record":  "docs/project-management/project-brain-v2/handoff-m2-g0-remediation-activation.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260717-PROJECT-BRAIN-V2-M2-G0-REMEDIATION",
+                           "title":  "Project Brain v2 M2 G0 Trusted刷新根因修复",
+                           "owner":  "Project Brain v2 M2 G0 remediation runtime owner",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-m2-g0-remediation",
+                           "branch":  "codex/project-brain-v2-m2-g0-remediation",
+                           "base_commit":  "6ad2e7e1930f60dfe174397c480a9feefdd53c93",
+                           "allowed_paths":  [
+                                                 "project_brain_v2/runtime/engine.py",
+                                                 "project_brain_v2/runtime/tests/test_engine.py",
+                                                 "docs/project-management/notices/2026-07-17-project-brain-v2-m2-g0-remediation-task-order.md",
+                                                 "docs/project-management/project-brain-v2/task-comprehension-receipt-m2-g0-remediation.md",
+                                                 "docs/project-management/project-brain-v2/handoff-m2-g0-remediation.md",
+                                                 "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m2-g0-remediation*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m2-g0-remediation*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-17-project-brain-v2-m2-g0-remediation*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "本项active仅在AIW-20260717-PROJECT-BRAIN-V2-M2-G0-REMEDIATION-ACTIVATION exact candidate独立Go并受控进入authority后生效。只修复PBV2-M2-G0-PRIVACY-THRESHOLD-001：合法G0 Trusted必须要求sample_size=null与privacy_threshold=not_applicable且不执行G1样本阈值；G0伪造sample/privacy结果失败关闭；G1 high/standard阈值、rounding和既有失败关闭语义保持不变。不得修改M1/M3/v1、registry、App或环境。blocks=M3 overall Acceptance复验；does_not_block=PDCAR及其他非重叠项目。",
+                           "handoff_record":  "docs/project-management/project-brain-v2/handoff-m2-g0-remediation-activation.md"
                        }
                    ]
 }
