@@ -1,0 +1,23 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "project-brain-server-session-claims.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "iss", "aud", "sub", "roles", "iat", "exp", "nonce"],
+  "properties": {
+    "contract_version": {"const": "project-brain-server-session-claims.v1"},
+    "iss": {"type": "string", "minLength": 1, "maxLength": 128},
+    "aud": {"type": "string", "minLength": 1, "maxLength": 128},
+    "sub": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._:-]{0,127}$"},
+    "roles": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 8,
+      "uniqueItems": true,
+      "items": {"type": "string", "pattern": "^[a-z][a-z0-9_]{0,63}$"}
+    },
+    "iat": {"type": "integer", "minimum": 0},
+    "exp": {"type": "integer", "minimum": 1},
+    "nonce": {"type": "string", "pattern": "^[A-Za-z0-9_-]{16,128}$"}
+  }
+}

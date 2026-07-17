@@ -1,0 +1,19 @@
+{
+  "contract_version": "project-brain-dashboard-policy.v1",
+  "environment": "production",
+  "enabled": false,
+  "production_enabled": false,
+  "network_route_enabled": false,
+  "real_sources_enabled": false,
+  "export_enabled": false,
+  "source_writes_enabled": false,
+  "external_auth_enabled": false,
+  "audience": "project-brain-v2-boss-dashboard",
+  "issuer": "project-brain-v2-server-session",
+  "allowed_roles": ["project_owner", "project_brain_reviewer", "platform_integration_owner"],
+  "max_session_seconds": 900,
+  "clock_skew_seconds": 30,
+  "max_state_file_bytes": 1048576,
+  "max_audit_bytes": 16777216,
+  "max_audit_entries": 10000
+}

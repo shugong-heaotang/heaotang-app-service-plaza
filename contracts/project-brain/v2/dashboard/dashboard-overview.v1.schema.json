@@ -1,0 +1,67 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "project-brain-dashboard-overview.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "generated_at", "environment", "data_mode", "production_enabled", "network_route_enabled", "decision_usable", "as_of", "status_counts", "facts"],
+  "properties": {
+    "contract_version": {"const": "project-brain-dashboard-overview.v1"},
+    "generated_at": {"type": "string", "format": "date-time"},
+    "environment": {"const": "offline_synthetic_test"},
+    "data_mode": {"const": "synthetic_only"},
+    "production_enabled": {"const": false},
+    "network_route_enabled": {"const": false},
+    "decision_usable": {"const": false},
+    "as_of": {"type": ["string", "null"], "format": "date-time"},
+    "status_counts": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["Trusted", "Unknown", "No-Go"],
+      "properties": {
+        "Trusted": {"type": "integer", "minimum": 0},
+        "Unknown": {"type": "integer", "minimum": 0},
+        "No-Go": {"type": "integer", "minimum": 0}
+      }
+    },
+    "facts": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["fact_id", "title", "status", "reason_code", "explanation", "stale", "last_trusted", "cutoff_at", "observed_at", "source_owner", "authority_id", "classification", "definition", "definition_version", "permitted_use", "value", "sample_size", "synthetic", "decision_usable", "evidence"],
+        "properties": {
+          "fact_id": {"type": "string", "minLength": 1},
+          "title": {"type": "string", "minLength": 1},
+          "status": {"enum": ["Trusted", "Unknown", "No-Go"]},
+          "reason_code": {"type": "string", "pattern": "^[A-Z0-9_]+$"},
+          "explanation": {"type": "string", "minLength": 1},
+          "stale": {"type": "boolean"},
+          "last_trusted": {"type": "boolean"},
+          "cutoff_at": {"type": ["string", "null"], "format": "date-time"},
+          "observed_at": {"type": ["string", "null"], "format": "date-time"},
+          "source_owner": {"type": "string", "minLength": 1},
+          "authority_id": {"type": "string", "minLength": 1},
+          "classification": {"enum": ["G0", "G1"]},
+          "definition": {"type": "string", "minLength": 1},
+          "definition_version": {"type": "string", "minLength": 1},
+          "permitted_use": {"type": "array", "minItems": 1, "items": {"type": "string"}},
+          "value": {"type": ["number", "integer", "object", "null"]},
+          "sample_size": {"type": ["integer", "null"], "minimum": 0},
+          "synthetic": {"const": true},
+          "decision_usable": {"const": false},
+          "evidence": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["audit_entry_hash", "run_id", "snapshot_hash", "last_trusted_snapshot_hash"],
+            "properties": {
+              "audit_entry_hash": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+              "run_id": {"type": ["string", "null"], "minLength": 1},
+              "snapshot_hash": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"},
+              "last_trusted_snapshot_hash": {"type": ["string", "null"], "pattern": "^[a-f0-9]{64}$"}
+            }
+          }
+        }
+      }
+    }
+  }
+}
