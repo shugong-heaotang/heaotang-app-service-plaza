@@ -3583,7 +3583,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "仅激活Project Brain v2 M2治理；activation integrated与M2 active仅在本exact candidate独立Go并受控进入authority后生效。M1已在authority闭环。M2只允许只读scheduler、幂等/互斥/超时/有限重试、不可变快照、审计、告警、禁用与回滚演练；禁止真实生产源、App dashboard、部署和production。blocks=M2 runtime checkpoint；does_not_block=Project Brain v1及所有非PB隔离项目。",
+                           "migration_note":  "仅激活Project Brain v2 M2治理；activation integrated与M2 active仅在本exact candidate独立Go并受控进入authority后生效。首候选517c176因checklist未来时间与Exam/commit时序不可能成立，被独立验收No-Go（report SHA256=572a70eef9b3cfbf12adfb2a64168b3d92dd413c76869423d07883566fcc637f），不可覆盖或复用；R2必须建立真实时间链。M1已在authority闭环。M2只允许只读scheduler、幂等/互斥/超时/有限重试、不可变快照、审计、告警、禁用与回滚演练；禁止真实生产源、App dashboard、部署和production。blocks=M2 runtime checkpoint；does_not_block=Project Brain v1及所有非PB隔离项目。",
                            "handoff_record":  "docs/project-management/project-brain-v2/handoff-m2-activation.md"
                        },
                        {
