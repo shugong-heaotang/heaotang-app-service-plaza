@@ -3560,6 +3560,30 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "从 exact authority a472765f193f43d8acedf229a3cf48ae93b54c83 激活独立验收，source=eebe65c254934c86fc6d9b89497d8d5a929a4fe4，acceptance baseline=6c64dd9670006215bf767427291ce234be1d25ab。authority/source 共同基线 86ab20f8928a6d70195edb3879fbe7083c20a0f9 后分叉且新增路径直接重叠为0。current checklist 28/28、Exam100、9/9正负例、模块IR、两层依赖、collaboration、Service Plaza总合同、UTF-8/范围/秘密/医疗安全门禁全部通过；未扩展本 acceptance allowed paths，source 六路径保持由模块原 work item scope 承担，并在同一受控 merge 中将模块项和验收项收口 integrated。does_not_block=其他无重叠工作；blocks=none。真实身份、健康数据、医疗、收费、支付、测试服、生产与不可逆操作继续 No-Go。",
                            "handoff_record":  "docs/project-management/service-plaza/health-manager-readme-current-state-acceptance-2026-07-17.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260717-PLATFORM-PDCAR-SKILL-ENFORCEMENT-ACTIVATION",
+                           "title":  "APP PDCAR Skill 强制接入激活治理",
+                           "owner":  "APP PDCAR enforcement activation owner",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-platform-pdcar-skill-enforcement-activation",
+                           "branch":  "codex/platform-pdcar-skill-enforcement-activation",
+                           "base_commit":  "c11a5a5a0d0adbb67501a1aaf23ecfb991003a93",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "docs/project-management/notices/2026-07-17-platform-pdcar-skill-enforcement-activation-task-order.md",
+                                                 "docs/project-management/pdcar/task-comprehension-platform-pdcar-skill-enforcement-activation.md",
+                                                 "docs/project-management/pdcar/handoff-platform-pdcar-skill-enforcement-activation.md",
+                                                 "contracts/foundation/development-checklists/2026-07-17-platform-pdcar-skill-enforcement-activation*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-17-platform-pdcar-skill-enforcement-activation*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-17-platform-pdcar-skill-enforcement-activation*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "B1 registry-only bootstrap candidate from exact authority c11a5a5a0d0adbb67501a1aaf23ecfb991003a93. This active item authorizes only its seven exact governance paths after the registry-only candidate is independently accepted and controlled-integrated into authority. The current candidate is not authority and does not authorize B2, the formal implementation worktree, APP implementation, deployment, production, data, payment, or any other work item change. blocks=B2 activation governance; does_not_block=all existing non-overlapping work.",
+                           "handoff_record":  "docs/project-management/pdcar/handoff-platform-pdcar-skill-enforcement-activation.md"
                        }
                    ]
 }
