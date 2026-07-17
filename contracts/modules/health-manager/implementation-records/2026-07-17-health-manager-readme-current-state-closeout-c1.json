@@ -1,0 +1,68 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260717-HEALTH-README-CURRENT-STATE-CLOSEOUT-C1",
+  "title": "健康大管家项目入口当前状态与注册表防漂移收口",
+  "date": "2026-07-17",
+  "status": "implemented",
+  "objective": "把健康大管家项目入口从已失真的 MVP-90 M0 当前态改为 R1-R5 离线合成已受控集成的当前事实，并用机器负例拒绝历史切片复活和真实医疗或部署授权升级。",
+  "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-17-health-manager-readme-current-state-closeout.json",
+  "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-17-health-manager-readme-current-state-closeout-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/module-dependencies/health-manager.v1.json",
+    "contracts/modules/health-manager/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-17-health-manager-readme-current-state-closeout-task-order.md",
+    "C:/Users/shugo/Documents/项目最高负责人/health-cross-module-requirements/健康大管家-大益健康馆-学习广场-健康俱乐部需求补充-v1.0.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.contract-tooling",
+    "foundation.ai-collaboration-safety"
+  ],
+  "contracts": [
+    "docs/project-management/modules/health-manager/README.md",
+    "contracts/modules/health-manager/conformance/test_health_manager_readme_current_state.py"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/modules/health-manager/README.md",
+    "docs/project-management/modules/health-manager/health-manager-readme-current-state-closeout-handoff.md",
+    "contracts/modules/health-manager/conformance/test_health_manager_readme_current_state.py",
+    "contracts/modules/health-manager/implementation-records/2026-07-17-health-manager-readme-current-state-closeout-c1.json"
+  ],
+  "verification": [
+    "current checklist completed 28 of 28 with zero current SHA-256 mismatch and governance exam attempt 1 passed with score 100",
+    "current-state conformance passes 9 of 9 positive and fail-closed negative tests",
+    "negative tests reject reopening an R1-R5 work item stale MVP-90 M0 active claims removed synthetic or executable boundaries missing registry authority real-health-data Go and missing No-Go coverage",
+    "platform preflight is ready and registry proves the exact ten R1-R5 implementation and acceptance work items integrated",
+    "foundation dependency health internal dependency implementation-record collaboration UTF-8 diff scope secret and sensitive-pattern gates are required before commit"
+  ],
+  "evidence": [
+    "docs/project-management/modules/health-manager/README.md",
+    "contracts/modules/health-manager/conformance/test_health_manager_readme_current_state.py",
+    "docs/project-management/modules/health-manager/health-manager-readme-current-state-closeout-handoff.md"
+  ],
+  "premises": [
+    "the exact ten R1-R5 implementation and independent acceptance work items remain integrated in the platform registry",
+    "R1-R5 evidence remains synthetic_only=true and executable=false",
+    "the collaboration registry remains authoritative for current active health work",
+    "real identity member health data internet medical service diagnosis prescription medication change charging payment deployment production and irreversible operations remain No-Go",
+    "C:/Users/shugo/Documents/New project remains read-only protected input"
+  ],
+  "implementation_mode": "ai-assisted"
+}

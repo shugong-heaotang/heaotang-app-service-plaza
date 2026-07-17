@@ -818,7 +818,7 @@
                            "title":  "健康大管家 V1.0 PDCAR 需求策划文档归档与 GitHub 发布",
                            "owner":  "Health Manager module agent",
                            "owner_role":  "健康大管家负责人",
-                           "status":  "handoff-ready",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-health-v1-requirements",
                            "branch":  "codex/health-manager-v1-requirements",
@@ -3380,7 +3380,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "从 exact authority cf802602c5adb0ad0940e20abf1b1bcf88083581 激活独立入口新鲜度收口。实现、9项正负测试、同record_id IR/Handoff、范围/UTF-8/秘密/安全门禁已在exact candidate eebe65c254934c86fc6d9b89497d8d5a929a4fe4完成并推送，现移交平台独立验收，状态为handoff-ready。R1-R5 历史项不重开，离线合成完成态不扩展为真实医疗、数据、收费、部署或生产授权。does_not_block=R1-R5 离线合成完成态及其他无重叠项目；blocks=README freshness 独立验收与受控集成。",
+                           "migration_note":  "从 exact authority cf802602c5adb0ad0940e20abf1b1bcf88083581 激活独立入口新鲜度收口。exact source eebe65c254934c86fc6d9b89497d8d5a929a4fe4 的六路径实现、9项正负测试、同record_id IR/Handoff、范围/UTF-8/秘密/安全门禁已由 AIW-20260717-HEALTH-README-CURRENT-STATE-ACCEPTANCE 独立复核并通过单一受控 merge 纳入权威分支，生命周期收口为 integrated。R1-R5 历史项不重开，离线合成完成态不扩展为真实医疗、数据、收费、部署或生产授权。does_not_block=其他无重叠项目；blocks=none。",
                            "handoff_record":  "docs/project-management/modules/health-manager/health-manager-readme-current-state-closeout-handoff.md"
                        },
                        {
@@ -3519,7 +3519,7 @@
                            "title":  "Project Brain v2 M1 去标识经营事实合同与来源映射",
                            "owner":  "Project Brain v2 M1 project owner",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-m1-fact-contracts",
                            "branch":  "codex/project-brain-v2-m1-fact-contracts",
@@ -3558,7 +3558,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "从 exact authority a472765f193f43d8acedf229a3cf48ae93b54c83 激活独立验收，source=eebe65c254934c86fc6d9b89497d8d5a929a4fe4。authority 与 source 共同基线 86ab20f8928a6d70195edb3879fbe7083c20a0f9 后分叉 1/4，新增路径直接重叠为0。初始 allowed paths 只覆盖验收治理证据，不预占 handoff-ready 模块范围；仅在独立复核 Go 且同一受控集成提交收口模块生命周期时，才精确扩展为六个 source 路径。首检查点只完成 ownership/preflight、current checklist 与 exam100；不得提前给出 Go 或集成。does_not_block=R1-R5 离线合成完成态及其他无重叠工作；blocks=README freshness 独立验收与受控集成。真实身份、健康数据、医疗、收费、支付、测试服、生产与不可逆操作继续 No-Go。",
+                           "migration_note":  "从 exact authority a472765f193f43d8acedf229a3cf48ae93b54c83 激活独立验收，source=eebe65c254934c86fc6d9b89497d8d5a929a4fe4，acceptance baseline=6c64dd9670006215bf767427291ce234be1d25ab。authority/source 共同基线 86ab20f8928a6d70195edb3879fbe7083c20a0f9 后分叉且新增路径直接重叠为0。current checklist 28/28、Exam100、9/9正负例、模块IR、两层依赖、collaboration、Service Plaza总合同、UTF-8/范围/秘密/医疗安全门禁全部通过；未扩展本 acceptance allowed paths，source 六路径保持由模块原 work item scope 承担，并在同一受控 merge 中将模块项和验收项收口 integrated。does_not_block=其他无重叠工作；blocks=none。真实身份、健康数据、医疗、收费、支付、测试服、生产与不可逆操作继续 No-Go。",
                            "handoff_record":  "docs/project-management/service-plaza/health-manager-readme-current-state-acceptance-2026-07-17.md"
                        }
                    ]
