@@ -3566,7 +3566,7 @@
                            "title":  "APP PDCAR Skill 强制接入激活治理",
                            "owner":  "APP PDCAR enforcement activation owner",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-platform-pdcar-skill-enforcement-activation",
                            "branch":  "codex/platform-pdcar-skill-enforcement-activation",
@@ -3584,6 +3584,38 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "B1 registry-only bootstrap candidate from exact authority c11a5a5a0d0adbb67501a1aaf23ecfb991003a93. This active item authorizes only its seven exact governance paths after the registry-only candidate is independently accepted and controlled-integrated into authority. The current candidate is not authority and does not authorize B2, the formal implementation worktree, APP implementation, deployment, production, data, payment, or any other work item change. blocks=B2 activation governance; does_not_block=all existing non-overlapping work.",
                            "handoff_record":  "docs/project-management/pdcar/handoff-platform-pdcar-skill-enforcement-activation.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260717-PLATFORM-PDCAR-SKILL-ENFORCEMENT",
+                           "title":  "APP PDCAR Skill 强制接入正式实施",
+                           "owner":  "APP PDCAR enforcement implementation owner",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-platform-pdcar-skill-enforcement",
+                           "branch":  "codex/platform-pdcar-skill-enforcement",
+                           "base_commit":  "b94b7c3ef94419f556d96268ce435edeb7d3c310",
+                           "allowed_paths":  [
+                                                 "AGENTS.md",
+                                                 "README.md",
+                                                 ".github/workflows/pdcar-governance.yml",
+                                                 "scripts/validate_pdcar_package.py",
+                                                 "scripts/validate_pdcar_adoption.py",
+                                                 "scripts/tests/test_validate_pdcar_package.py",
+                                                 "scripts/tests/test_validate_pdcar_adoption.py",
+                                                 "docs/project-management/pdcar/README.md",
+                                                 "contracts/foundation/pdcar-package.v1.schema.json",
+                                                 "docs/project-management/notices/2026-07-17-platform-pdcar-skill-enforcement-task-order.md",
+                                                 "docs/project-management/pdcar/handoff-platform-pdcar-skill-enforcement.md",
+                                                 "contracts/foundation/development-checklists/2026-07-17-platform-pdcar-skill-enforcement*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-17-platform-pdcar-skill-enforcement*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-17-platform-pdcar-skill-enforcement*.json",
+                                                 "contracts/foundation/agent-collaboration.v1.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "B2 activation governance candidate b94b7c3ef94419f556d96268ce435edeb7d3c310 was independently accepted and controlled-integrated into authority. This formal implementation item becomes active only after this exact registry-only lifecycle candidate is independently accepted and controlled-integrated into authority. It authorizes only the listed APP PDCAR governance entrypoints, repo-local fail-closed validators, tests, schema, PDCAR governance documents, its own certification evidence, and registry lifecycle. It does not authorize business-module source, deployment, production, real data, payment, or the health pilot. blocks=formal D1 preflight and D2 implementation; does_not_block=all existing non-overlapping work. The registry candidate and its commit are not implementation authority before authority integration.",
+                           "handoff_record":  "docs/project-management/pdcar/handoff-platform-pdcar-skill-enforcement.md"
                        }
                    ]
 }
