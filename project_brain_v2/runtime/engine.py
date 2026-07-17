@@ -3,7 +3,9 @@ from __future__ import annotations
 import hashlib
 import json
 import os
+import queue
 import re
+import threading
 import time
 from contextlib import contextmanager
 from dataclasses import dataclass
@@ -15,11 +17,21 @@ RUN_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
 ALLOWED_FIXTURE_DIR = Path("contracts/project-brain/v2/examples")
 REQUIRED_OFF_SWITCHES = (
     "production_enabled",
+    "production_route_enabled",
+    "production_snapshot_source_enabled",
+    "scheduled_production_job_enabled",
+    "boss_dashboard_enabled",
+    "export_enabled",
+    "notification_enabled",
     "network_enabled",
     "real_sources_enabled",
     "source_writes_enabled",
     "external_notifications_enabled",
 )
+POLICY_KEYS = {
+    "contract_version", "enabled", *REQUIRED_OFF_SWITCHES, "max_attempts", "timeout_seconds",
+    "max_source_bytes", "schedule_interval_seconds", "allowed_fixtures",
+}
 REASON_STATUS = {
     "SOURCE_MISSING": "Unknown",
     "SOURCE_STALE": "Unknown",
@@ -90,6 +102,17 @@ class RefreshEngine:
         self.policy_path = policy_path.resolve()
         self.reader = reader or self._bounded_read
         self.clock = clock
+        try:
+            self.paths.root.relative_to(self.repo_root)
+            overlaps = True
+        except ValueError:
+            try:
+                self.repo_root.relative_to(self.paths.root)
+                overlaps = True
+            except ValueError:
+                overlaps = False
+        if overlaps:
+            raise RuntimeFailure("POLICY_INVALID", "state_root must be isolated outside the source repository")
         self.paths.root.mkdir(parents=True, exist_ok=True)
         self.paths.snapshots.mkdir(exist_ok=True)
         self.paths.runs.mkdir(exist_ok=True)
@@ -115,6 +138,8 @@ class RefreshEngine:
         policy, raw = self._json(self.policy_path)
         if policy.get("contract_version") != "project-brain-runtime-policy.v1":
             raise RuntimeFailure("POLICY_INVALID", "unknown runtime policy")
+        if set(policy) != POLICY_KEYS:
+            raise RuntimeFailure("POLICY_INVALID", "runtime policy keys must exactly match the M2 schema")
         if any(policy.get(name) is not False for name in REQUIRED_OFF_SWITCHES):
             raise RuntimeFailure("POLICY_INVALID", "all production capability switches must be false")
         for key in ("max_attempts", "timeout_seconds", "max_source_bytes", "schedule_interval_seconds"):
@@ -159,8 +184,16 @@ class RefreshEngine:
         catalog, cat_raw = self._json(base / "fact-catalog.v1.json")
         source_map, src_raw = self._json(base / "source-map.v1.json")
         privacy, privacy_raw = self._json(base / "privacy-threshold-policy.v1.json")
-        facts = [x for x in catalog.get("facts", []) if x.get("fact_id") == fact_id]
-        sources = [x for x in source_map.get("sources", []) if x.get("fact_id") == fact_id]
+        all_facts = catalog.get("facts", [])
+        all_sources = source_map.get("sources", [])
+        if any(item.get("production_eligible") is not False or item.get("read_mode") != "read_only"
+               or item.get("write_capability") != "none" for item in all_facts):
+            raise RuntimeFailure("POLICY_INVALID", "every M1 fact must remain read-only and production-ineligible")
+        if any(item.get("runtime_enabled") is not False or item.get("read_mode") != "read_only"
+               or item.get("write_capability") != "none" for item in all_sources):
+            raise RuntimeFailure("POLICY_INVALID", "every M1 source must remain read-only and runtime-off")
+        facts = [x for x in all_facts if x.get("fact_id") == fact_id]
+        sources = [x for x in all_sources if x.get("fact_id") == fact_id]
         if len(facts) != 1 or len(sources) != 1:
             raise RuntimeFailure("AUTHORITY_CONFLICT", "fact requires exactly one catalog and source entry")
         fact, source = facts[0], sources[0]
@@ -213,9 +246,21 @@ class RefreshEngine:
     def _read_with_retry(self, path: Path, policy: dict[str, Any], deadline: float) -> tuple[bytes, int]:
         last: Exception | None = None
         for attempt in range(1, policy["max_attempts"] + 1):
-            if self.clock() >= deadline: raise RuntimeFailure("TIMEOUT", attempts=attempt - 1)
+            remaining = deadline - self.clock()
+            if remaining <= 0: raise RuntimeFailure("TIMEOUT", attempts=attempt - 1)
+            outcome: queue.Queue[tuple[bool, Any]] = queue.Queue(maxsize=1)
+            def read_once() -> None:
+                try: outcome.put((True, self.reader(path, policy["max_source_bytes"])))
+                except BaseException as exc: outcome.put((False, exc))
+            worker = threading.Thread(target=read_once, name="project-brain-read", daemon=True)
+            worker.start()
+            worker.join(remaining)
+            if worker.is_alive():
+                raise RuntimeFailure("TIMEOUT", "read isolated after deadline", attempts=attempt)
+            succeeded, value = outcome.get_nowait()
             try:
-                data = self.reader(path, policy["max_source_bytes"])
+                if not succeeded: raise value
+                data = value
                 if self.clock() >= deadline: raise RuntimeFailure("TIMEOUT", attempts=attempt)
                 return data, attempt
             except FileNotFoundError as exc:
@@ -245,13 +290,36 @@ class RefreshEngine:
             recorded = entry.pop("entry_hash", None)
             if entry.get("previous_hash") != previous or recorded != sha256(canonical(entry)):
                 raise RuntimeFailure("TAMPER_DETECTED", "audit hash chain is broken")
+            self._validate_audit_payload({key: value for key, value in entry.items() if key != "previous_hash"})
             entry["entry_hash"] = recorded
             previous = recorded
             entries.append(entry)
         return entries
 
+    def _validate_audit_payload(self, payload: dict[str, Any]) -> None:
+        if payload.get("contract_version") != "project-brain-audit-event.v1":
+            raise RuntimeFailure("QUALITY_FAILED", "audit contract version is missing")
+        if not isinstance(payload.get("actor"), str) or not payload["actor"]:
+            raise RuntimeFailure("QUALITY_FAILED", "audit actor is required")
+        if not isinstance(payload.get("role"), str) or not payload["role"]:
+            raise RuntimeFailure("QUALITY_FAILED", "audit role is required")
+        if payload.get("event") in ("refresh", "refresh_failed"):
+            required = {"contract_version", "event", "actor", "role", "fact_id", "authority_id", "source_owner",
+                        "source_hash", "definition_version", "classification", "freshness", "quality", "output_hash",
+                        "run_record"}
+            if set(payload) != required or not isinstance(payload.get("run_record"), dict):
+                raise RuntimeFailure("QUALITY_FAILED", "refresh audit fields do not match the contract")
+            if payload["run_record"].get("contract_version") != "project-brain-run-record.v1":
+                raise RuntimeFailure("QUALITY_FAILED", "audit run record is invalid")
+        elif payload.get("event") == "rollback":
+            if set(payload) != {"contract_version", "event", "actor", "role", "snapshot_hash", "reason", "at"}:
+                raise RuntimeFailure("QUALITY_FAILED", "rollback audit fields do not match the contract")
+        else:
+            raise RuntimeFailure("QUALITY_FAILED", "unknown audit event")
+
     def _append(self, path: Path, payload: dict[str, Any], chained: bool = False) -> str:
         if chained:
+            self._validate_audit_payload(payload)
             entries = self._audit_entries()
             payload = {**payload, "previous_hash": entries[-1]["entry_hash"] if entries else "0" * 64}
             payload["entry_hash"] = sha256(canonical(payload))
@@ -269,9 +337,26 @@ class RefreshEngine:
                 "completed_at", "attempts", "snapshot_hash")
         matches = [entry for entry in self._audit_entries()
                    if entry.get("event") in ("refresh", "refresh_failed")
-                   and entry.get("run_id") == record.get("run_id")]
-        if not any(all(entry.get(key) == record.get(key) for key in keys) for entry in matches):
+                   and entry.get("run_record", {}).get("run_id") == record.get("run_id")]
+        if not any(all(entry["run_record"].get(key) == record.get(key) for key in keys) for entry in matches):
             raise RuntimeFailure("TAMPER_DETECTED", "run record is not bound to the audit chain")
+
+    def verify_run_history(self) -> list[dict[str, Any]]:
+        entries = self._audit_entries()
+        required = {entry["run_record"]["run_id"] for entry in entries
+                    if entry.get("event") in ("refresh", "refresh_failed")
+                    and entry.get("run_record", {}).get("reason_code") != "IDEMPOTENCY_CONFLICT"}
+        records: list[dict[str, Any]] = []
+        for run_id in sorted(required):
+            path = self.paths.runs / f"{run_id}.json"
+            if not path.exists():
+                raise RuntimeFailure("TAMPER_DETECTED", "audit references a missing immutable run record")
+        for path in self.paths.runs.glob("*.json"):
+            try: record = json.loads(path.read_text(encoding="utf-8"))
+            except Exception as exc: raise RuntimeFailure("TAMPER_DETECTED", "run history contains invalid JSON") from exc
+            self.verify_run_record(record)
+            records.append(record)
+        return records
 
     def verified_pointer(self) -> dict[str, Any] | None:
         if not self.paths.pointer.exists():
@@ -286,10 +371,20 @@ class RefreshEngine:
         snapshot = self.paths.snapshots / f"{snapshot_hash}.json"
         if not snapshot.exists() or sha256(snapshot.read_bytes()) != snapshot_hash:
             raise RuntimeFailure("TAMPER_DETECTED", "last-trusted pointer references an altered snapshot")
+        pointer_events = [entry for entry in self._audit_entries()
+                          if (entry.get("event") == "refresh" and entry.get("run_record", {}).get("status") == "Trusted")
+                          or entry.get("event") == "rollback"]
+        if not pointer_events:
+            raise RuntimeFailure("TAMPER_DETECTED", "last-trusted pointer has no audit authority")
+        authority = pointer_events[-1]
+        expected_action = "rollback" if authority["event"] == "rollback" else "advance"
+        expected_run = "rollback" if authority["event"] == "rollback" else authority["run_record"]["run_id"]
+        expected_snapshot = authority.get("snapshot_hash") if authority["event"] == "rollback" else authority["run_record"]["snapshot_hash"]
+        if pointer.get("snapshot_hash") != expected_snapshot or pointer.get("action") != expected_action or pointer.get("run_id") != expected_run:
+            raise RuntimeFailure("TAMPER_DETECTED", "last-trusted pointer is not bound to the latest pointer audit event")
         return pointer
 
     def _pointer(self, snapshot_hash: str, run_id: str, action: str = "advance") -> None:
-        self.verified_pointer()
         target = self.paths.snapshots / f"{snapshot_hash}.json"
         if not target.exists() or sha256(target.read_bytes()) != snapshot_hash:
             raise RuntimeFailure("TAMPER_DETECTED", "snapshot does not match content address")
@@ -312,11 +407,13 @@ class RefreshEngine:
                 raise RuntimeFailure("TAMPER_DETECTED", "idempotent replay snapshot was altered")
         return existing
 
-    def _run(self, run_id: str, fact_id: str, fixture_path: str, role: str) -> dict[str, Any]:
+    def _run(self, run_id: str, fact_id: str, fixture_path: str, role: str,
+             actor: str = "project_brain_v2_runtime") -> dict[str, Any]:
         if not RUN_ID.fullmatch(run_id): raise RuntimeFailure("QUALITY_FAILED", "unsafe run_id")
         started = utc_now()
         policy, policy_raw = self._policy()
-        input_seed = {"fact_id": fact_id, "fixture_path": fixture_path, "role": role, "policy_sha256": sha256(policy_raw)}
+        input_seed = {"fact_id": fact_id, "fixture_path": fixture_path, "actor": actor,
+                      "role": role, "policy_sha256": sha256(policy_raw)}
         existing_path = self.paths.runs / f"{run_id}.json"
         with self._lock(run_id):
             try:
@@ -356,11 +453,13 @@ class RefreshEngine:
                           "status": result["status"], "reason_code": result["reason_code"], "started_at": started,
                           "completed_at": utc_now(), "attempts": attempts, "snapshot_hash": snapshot_hash}
                 self._immutable(existing_path, record)
-                self._append(self.paths.audit, {"event": "refresh", "actor": role, "fact_id": fact_id,
+                self._append(self.paths.audit, {"contract_version": "project-brain-audit-event.v1",
+                             "event": "refresh", "actor": actor, "role": role, "fact_id": fact_id,
                              "authority_id": fact["authority_id"], "source_owner": fact["source_owner"],
                              "source_hash": sha256(raw), "definition_version": result["definition_version"],
                              "classification": fact["classification"], "freshness": result["checks"]["freshness"],
-                             "quality": result["checks"]["quality"], "output_hash": snapshot_hash, **record}, chained=True)
+                             "quality": result["checks"]["quality"], "output_hash": snapshot_hash,
+                             "run_record": record}, chained=True)
                 if result["status"] == "Trusted": self._pointer(snapshot_hash, run_id)
                 return record
             except RuntimeFailure as failure:
@@ -374,26 +473,30 @@ class RefreshEngine:
                 fixture_context = locals().get("fixture", {})
                 checks = fixture_context.get("checks", {}) if isinstance(fixture_context, dict) else {}
                 escalation_owner = fact_context.get("source_owner", "project_brain_v2_owner")
-                self._append(self.paths.audit, {"event": "refresh_failed", "actor": role, "fact_id": fact_id,
+                self._append(self.paths.audit, {"contract_version": "project-brain-audit-event.v1",
+                             "event": "refresh_failed", "actor": actor, "role": role, "fact_id": fact_id,
                              "authority_id": fact_context.get("authority_id"), "source_owner": escalation_owner,
                              "source_hash": sha256(locals().get("raw", b"")) if locals().get("raw") else None,
                              "definition_version": fixture_context.get("definition_version"),
                              "classification": fact_context.get("classification"), "freshness": checks.get("freshness", "unknown"),
-                             "quality": checks.get("quality", "unknown"), "output_hash": None, **record}, chained=True)
+                             "quality": checks.get("quality", "unknown"), "output_hash": None,
+                             "run_record": record}, chained=True)
                 self._append(self.paths.alerts, {"contract_version": "project-brain-alert.v1", "run_id": run_id,
                              "severity": "critical" if failure.status == "No-Go" else "warning", "status": failure.status,
                              "reason_code": failure.reason, "escalation_owner": escalation_owner,
                              "created_at": utc_now(), "delivery": "evidence_only_not_sent"})
                 return record
 
-    def run(self, run_id: str, fact_id: str, fixture_path: str, role: str) -> dict[str, Any]:
+    def run(self, run_id: str, fact_id: str, fixture_path: str, role: str,
+            actor: str = "project_brain_v2_runtime") -> dict[str, Any]:
         try:
-            return self._run(run_id, fact_id, fixture_path, role)
+            return self._run(run_id, fact_id, fixture_path, role, actor)
         except RuntimeFailure as failure:
             # A lock failure cannot safely extend the hash-chained audit because
             # another process owns it. Preserve an append-only alert instead.
             record = {"contract_version": "project-brain-run-record.v1", "run_id": run_id,
-                      "input_hash": sha256(canonical({"fact_id": fact_id, "fixture_path": fixture_path, "role": role})),
+                      "input_hash": sha256(canonical({"fact_id": fact_id, "fixture_path": fixture_path,
+                                                       "actor": actor, "role": role})),
                       "status": failure.status, "reason_code": failure.reason, "started_at": utc_now(),
                       "completed_at": utc_now(), "attempts": 0, "snapshot_hash": None}
             self._append(self.paths.alerts, {"contract_version": "project-brain-alert.v1", "run_id": run_id,
@@ -402,10 +505,15 @@ class RefreshEngine:
                          "delivery": "evidence_only_not_sent"})
             return record
 
-    def rollback(self, snapshot_hash: str, actor: str, reason: str) -> dict[str, Any]:
+    def rollback(self, snapshot_hash: str, actor: str, reason: str, role: str = "release_owner") -> dict[str, Any]:
         with self._lock("rollback"):
-            self.verify_audit()
-            self._pointer(snapshot_hash, "rollback", action="rollback")
-            event = {"event": "rollback", "actor": actor, "snapshot_hash": snapshot_hash, "reason": reason, "at": utc_now()}
+            self.verify_run_history()
+            self.verified_pointer()
+            target = self.paths.snapshots / f"{snapshot_hash}.json"
+            if not target.exists() or sha256(target.read_bytes()) != snapshot_hash:
+                raise RuntimeFailure("TAMPER_DETECTED", "rollback target is missing or altered")
+            event = {"contract_version": "project-brain-audit-event.v1", "event": "rollback", "actor": actor,
+                     "role": role, "snapshot_hash": snapshot_hash, "reason": reason, "at": utc_now()}
             self._append(self.paths.audit, event, chained=True)
+            self._pointer(snapshot_hash, "rollback", action="rollback")
             return event

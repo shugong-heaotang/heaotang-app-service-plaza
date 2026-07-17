@@ -14,8 +14,9 @@ def main() -> int:
     parser.add_argument("--fact-id", required=True)
     parser.add_argument("--fixture", required=True)
     parser.add_argument("--role", required=True)
+    parser.add_argument("--actor", required=True)
     args = parser.parse_args()
-    result = RefreshEngine(args.repo_root, args.state_root, args.policy).run(args.run_id, args.fact_id, args.fixture, args.role)
+    result = RefreshEngine(args.repo_root, args.state_root, args.policy).run(args.run_id, args.fact_id, args.fixture, args.role, args.actor)
     print(json.dumps(result, ensure_ascii=False, sort_keys=True))
     return 0 if result["status"] == "Trusted" else 2
 

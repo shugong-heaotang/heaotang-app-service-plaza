@@ -1,6 +1,5 @@
 from __future__ import annotations
 
-import json
 from datetime import datetime, timedelta, timezone
 from typing import Any
 
@@ -21,12 +20,9 @@ class OfflineScheduler:
         self.engine = engine
 
     def _last_completed(self) -> datetime | None:
-        self.engine.verify_audit()
+        records = self.engine.verify_run_history()
         completed: list[datetime] = []
-        for path in self.engine.paths.runs.glob("*.json"):
-            try: record = json.loads(path.read_text(encoding="utf-8"))
-            except Exception as exc: raise ValueError(f"invalid immutable run record: {path}") from exc
-            self.engine.verify_run_record(record)
+        for record in records:
             if record.get("completed_at"):
                 completed.append(parse_utc(record["completed_at"]))
         return max(completed) if completed else None
@@ -42,8 +38,9 @@ class OfflineScheduler:
                 "due_at": due_at.isoformat().replace("+00:00", "Z"), "due": now >= due_at,
                 "production_timer_present": False}
 
-    def tick(self, now: datetime, run_id: str, fact_id: str, fixture_path: str, role: str) -> dict[str, Any]:
+    def tick(self, now: datetime, run_id: str, fact_id: str, fixture_path: str, role: str,
+             actor: str = "project_brain_v2_scheduler") -> dict[str, Any]:
         decision = self.decision(now)
         if not decision["due"]:
             return {"schedule": decision, "run": None}
-        return {"schedule": decision, "run": self.engine.run(run_id, fact_id, fixture_path, role)}
+        return {"schedule": decision, "run": self.engine.run(run_id, fact_id, fixture_path, role, actor)}

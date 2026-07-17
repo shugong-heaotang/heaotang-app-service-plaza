@@ -1,0 +1,60 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "project-brain-audit-event.v1.schema.json",
+  "oneOf": [
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_version", "event", "actor", "role", "fact_id", "authority_id", "source_owner", "source_hash", "definition_version", "classification", "freshness", "quality", "output_hash", "run_record", "previous_hash", "entry_hash"],
+      "properties": {
+        "contract_version": {"const": "project-brain-audit-event.v1"},
+        "event": {"enum": ["refresh", "refresh_failed"]},
+        "actor": {"type": "string", "minLength": 1},
+        "role": {"type": "string", "minLength": 1},
+        "fact_id": {"type": "string", "minLength": 1},
+        "authority_id": {"type": ["string", "null"]},
+        "source_owner": {"type": "string", "minLength": 1},
+        "source_hash": {"oneOf": [{"type": "null"}, {"type": "string", "pattern": "^[a-f0-9]{64}$"}]},
+        "definition_version": {"type": ["string", "null"]},
+        "classification": {"enum": ["G0", "G1", null]},
+        "freshness": {"type": "string", "minLength": 1},
+        "quality": {"type": "string", "minLength": 1},
+        "output_hash": {"oneOf": [{"type": "null"}, {"type": "string", "pattern": "^[a-f0-9]{64}$"}]},
+        "run_record": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["contract_version", "run_id", "input_hash", "status", "reason_code", "started_at", "completed_at", "attempts", "snapshot_hash"],
+          "properties": {
+            "contract_version": {"const": "project-brain-run-record.v1"},
+            "run_id": {"type": "string", "pattern": "^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$"},
+            "input_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+            "status": {"enum": ["Trusted", "Unknown", "No-Go"]},
+            "reason_code": {"type": "string", "minLength": 1},
+            "started_at": {"type": "string", "format": "date-time"},
+            "completed_at": {"type": "string", "format": "date-time"},
+            "attempts": {"type": "integer", "minimum": 0, "maximum": 3},
+            "snapshot_hash": {"oneOf": [{"type": "null"}, {"type": "string", "pattern": "^[a-f0-9]{64}$"}]}
+          }
+        },
+        "previous_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "entry_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    },
+    {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["contract_version", "event", "actor", "role", "snapshot_hash", "reason", "at", "previous_hash", "entry_hash"],
+      "properties": {
+        "contract_version": {"const": "project-brain-audit-event.v1"},
+        "event": {"const": "rollback"},
+        "actor": {"type": "string", "minLength": 1},
+        "role": {"type": "string", "minLength": 1},
+        "snapshot_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "reason": {"type": "string", "minLength": 1},
+        "at": {"type": "string", "format": "date-time"},
+        "previous_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"},
+        "entry_hash": {"type": "string", "pattern": "^[a-f0-9]{64}$"}
+      }
+    }
+  ]
+}

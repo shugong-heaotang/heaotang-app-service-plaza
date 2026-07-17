@@ -1,8 +1,12 @@
 from __future__ import annotations
 
 import json
+import os
 import shutil
+import subprocess
 import tempfile
+import threading
+import time
 import unittest
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -36,7 +40,10 @@ class RuntimeTest(unittest.TestCase):
     def write_policy(self, **overrides) -> None:
         policy = {
             "contract_version": "project-brain-runtime-policy.v1", "enabled": True,
-            "production_enabled": False, "network_enabled": False, "real_sources_enabled": False,
+            "production_enabled": False, "production_route_enabled": False,
+            "production_snapshot_source_enabled": False, "scheduled_production_job_enabled": False,
+            "boss_dashboard_enabled": False, "export_enabled": False, "notification_enabled": False,
+            "network_enabled": False, "real_sources_enabled": False,
             "source_writes_enabled": False, "external_notifications_enabled": False,
             "max_attempts": 3, "timeout_seconds": 10, "max_source_bytes": 1048576,
             "schedule_interval_seconds": 3600,
@@ -75,6 +82,8 @@ class RuntimeTest(unittest.TestCase):
         self.assertEqual("pass", audit["freshness"])
         self.assertEqual("pass", audit["quality"])
         self.assertEqual(record["snapshot_hash"], audit["output_hash"])
+        self.assertEqual("project_brain_v2_runtime", audit["actor"])
+        self.assertEqual(ROLE, audit["role"])
 
     def test_idempotent_replay_does_not_append_a_second_audit(self):
         first = self.execute()
@@ -124,6 +133,24 @@ class RuntimeTest(unittest.TestCase):
         self.write_policy(timeout_seconds=1)
         record = self.execute(reader=reader, clock=clock)
         self.assertEqual("TIMEOUT", record["reason_code"])
+
+    def test_blocking_reader_is_interrupted_at_the_deadline(self):
+        release = threading.Event()
+        finished = threading.Event()
+        def reader(path, maximum):
+            try: release.wait(); return path.read_bytes()
+            finally: finished.set()
+        self.write_policy(timeout_seconds=1)
+        started = time.monotonic()
+        try:
+            record = self.execute(reader=reader)
+            elapsed = time.monotonic() - started
+            self.assertEqual("TIMEOUT", record["reason_code"])
+            self.assertLess(elapsed, 1.5)
+            self.assertFalse((self.state / "refresh.lock").exists())
+        finally:
+            release.set()
+            self.assertTrue(finished.wait(1))
 
     def test_disabled_policy_is_no_go_and_emits_no_snapshot(self):
         self.write_policy(enabled=False)
@@ -214,11 +241,18 @@ class RuntimeTest(unittest.TestCase):
         with self.assertRaises(RuntimeFailure): self.engine().rollback("0" * 64, "owner", "drill")
 
     def test_any_production_capability_switch_is_policy_no_go(self):
-        for switch in ("production_enabled", "network_enabled", "real_sources_enabled", "source_writes_enabled", "external_notifications_enabled"):
+        for switch in ("production_enabled", "production_route_enabled", "production_snapshot_source_enabled",
+                       "scheduled_production_job_enabled", "boss_dashboard_enabled", "export_enabled",
+                       "notification_enabled", "network_enabled", "real_sources_enabled",
+                       "source_writes_enabled", "external_notifications_enabled"):
             with self.subTest(switch=switch):
                 shutil.rmtree(self.state, ignore_errors=True)
                 self.write_policy(**{switch: True})
                 self.assertEqual("POLICY_INVALID", self.execute()["reason_code"])
+
+    def test_unknown_policy_capability_is_rejected(self):
+        self.write_policy(dashboard_enabled=True)
+        self.assertEqual("POLICY_INVALID", self.execute()["reason_code"])
 
     def test_path_traversal_is_unauthorized_even_if_allowlisted(self):
         escaped = "contracts/project-brain/v2/examples/../../fact-catalog.v1.json"
@@ -230,6 +264,13 @@ class RuntimeTest(unittest.TestCase):
         path = self.repo / "contracts/project-brain/v2/source-map.v1.json"
         source_map = json.loads(path.read_text(encoding="utf-8"))
         source_map["sources"][2]["runtime_enabled"] = True
+        path.write_text(json.dumps(source_map), encoding="utf-8")
+        self.assertEqual("POLICY_INVALID", self.execute()["reason_code"])
+
+    def test_non_selected_m1_source_runtime_enablement_is_rejected(self):
+        path = self.repo / "contracts/project-brain/v2/source-map.v1.json"
+        source_map = json.loads(path.read_text(encoding="utf-8"))
+        source_map["sources"][0]["runtime_enabled"] = True
         path.write_text(json.dumps(source_map), encoding="utf-8")
         self.assertEqual("POLICY_INVALID", self.execute()["reason_code"])
 
@@ -253,6 +294,49 @@ class RuntimeTest(unittest.TestCase):
         with self.assertRaises(RuntimeFailure):
             OfflineScheduler(self.engine()).decision(datetime.now(timezone.utc))
 
+    def test_scheduler_rejects_deleted_latest_run_record(self):
+        self.execute("first"); self.execute("second")
+        (self.state / "runs/second.json").unlink()
+        with self.assertRaises(RuntimeFailure):
+            OfflineScheduler(self.engine()).decision(datetime.now(timezone.utc))
+
+    def test_scheduler_rejects_truncated_audit_history(self):
+        self.execute("first"); self.execute("second")
+        audit = self.state / "audit.jsonl"
+        lines = audit.read_text(encoding="utf-8").splitlines()
+        audit.write_text(lines[0] + "\n", encoding="utf-8")
+        with self.assertRaises(RuntimeFailure):
+            OfflineScheduler(self.engine()).decision(datetime.now(timezone.utc))
+
+    def test_pointer_cannot_be_silently_moved_to_an_older_valid_snapshot(self):
+        first = self.execute("first"); self.execute("second")
+        pointer = {"snapshot_hash": first["snapshot_hash"], "run_id": "first", "updated_at": "2026-07-17T00:00:00Z", "action": "advance"}
+        (self.state / "last-trusted.json").write_text(json.dumps(pointer), encoding="utf-8")
+        self.assertEqual("TAMPER_DETECTED", self.execute("third")["reason_code"])
+
+    def test_state_root_cannot_overlap_m1_or_repository(self):
+        before = sorted(str(path.relative_to(self.repo)) for path in self.repo.rglob("*"))
+        with self.assertRaisesRegex(RuntimeFailure, "state_root"):
+            RefreshEngine(self.repo, self.repo / "contracts/project-brain/v2", self.policy)
+        after = sorted(str(path.relative_to(self.repo)) for path in self.repo.rglob("*"))
+        self.assertEqual(before, after)
+        with self.assertRaisesRegex(RuntimeFailure, "state_root"):
+            RefreshEngine(self.repo, self.repo.parent, self.policy)
+
+    def test_state_root_symlink_escape_into_contracts_is_rejected(self):
+        link = Path(self.temp.name) / "state-link"
+        target = self.repo / "contracts/project-brain/v2"
+        if os.name == "nt":
+            created = subprocess.run(["cmd", "/c", "mklink", "/J", str(link), str(target)], capture_output=True)
+            self.assertEqual(0, created.returncode, created.stderr.decode(errors="replace"))
+        else:
+            link.symlink_to(target, target_is_directory=True)
+        try:
+            with self.assertRaisesRegex(RuntimeFailure, "state_root"):
+                RefreshEngine(self.repo, link, self.policy)
+        finally:
+            os.rmdir(link)
+
     def test_generated_runtime_artifacts_match_contract_schemas(self):
         trusted = self.execute("schema-success")
         self.engine().run("schema-alert", FACT, FIXTURE, "project_owner")
@@ -267,6 +351,9 @@ class RuntimeTest(unittest.TestCase):
         validate("alert.v1.schema.json", alert)
         decision = OfflineScheduler(self.engine()).decision(datetime.now(timezone.utc))
         validate("schedule-decision.v1.schema.json", decision)
+        self.engine().rollback(trusted["snapshot_hash"], "release-actor", "schema drill")
+        for line in (self.state / "audit.jsonl").read_text(encoding="utf-8").splitlines():
+            validate("audit-event.v1.schema.json", json.loads(line))
 
 
 if __name__ == "__main__": unittest.main()
