@@ -1,0 +1,136 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/health-manager/dayi-health-hall/m0/scope-ia.v1.schema.json",
+  "title": "Dayi Health Hall M0 scope and IA freeze v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "module_id", "project_id", "checkpoint", "status", "synthetic_only", "executable", "source_bindings", "runtime_flags", "positioning", "organization_layers", "information_architecture", "hall_lifecycle", "role_boundaries", "member_relationship", "cross_module_protocols", "non_medical_service_catalog", "ai_boundary", "pending_authorizations", "acceptance_cases", "blocks", "does_not_block", "no_go"],
+  "properties": {
+    "contract_version": {"const": "health-manager.dayi-health-hall.m0.scope-ia.v1"},
+    "module_id": {"const": "health-manager"},
+    "project_id": {"const": "dayi-health-hall"},
+    "checkpoint": {"const": "M0-C1"},
+    "status": {"const": "frozen-non-medical-synthetic"},
+    "synthetic_only": {"const": true},
+    "executable": {"const": false},
+    "source_bindings": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"$ref": "#/$defs/sourceBinding"}},
+    "runtime_flags": {
+      "type": "object", "additionalProperties": false,
+      "required": ["real_identity_enabled", "real_health_data_enabled", "medical_capabilities_enabled", "payment_enabled", "deployment_enabled", "production_enabled"],
+      "properties": {
+        "real_identity_enabled": {"const": false}, "real_health_data_enabled": {"const": false},
+        "medical_capabilities_enabled": {"const": false}, "payment_enabled": {"const": false},
+        "deployment_enabled": {"const": false}, "production_enabled": {"const": false}
+      }
+    },
+    "positioning": {
+      "type": "object", "additionalProperties": false,
+      "required": ["canonical_name", "system_type", "is_medical_institution", "grants_medical_authority", "safety_notice"],
+      "properties": {
+        "canonical_name": {"const": "大医健康馆"},
+        "system_type": {"const": "non_medical_organization_and_service_navigation_system"},
+        "is_medical_institution": {"const": false}, "grants_medical_authority": {"const": false},
+        "safety_notice": {"const": "平台不提供诊断或处方；紧急情况请联系急救或前往有资质医疗机构。"}
+      }
+    },
+    "organization_layers": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"$ref": "#/$defs/organizationLayer"}},
+    "information_architecture": {
+      "type": "object", "additionalProperties": false,
+      "required": ["navigation_groups", "pages", "global_state_rules"],
+      "properties": {
+        "navigation_groups": {"type": "array", "minItems": 4, "maxItems": 4, "uniqueItems": true, "items": {"$ref": "#/$defs/code"}},
+        "pages": {"type": "array", "minItems": 7, "maxItems": 7, "items": {"$ref": "#/$defs/page"}},
+        "global_state_rules": {
+          "type": "object", "additionalProperties": false,
+          "required": ["synthetic_badge_required", "safety_notice_always_visible", "unauthorized_hides_member_summary", "error_disables_mutating_actions", "medical_actions_visible", "real_health_fields_visible"],
+          "properties": {
+            "synthetic_badge_required": {"const": true}, "safety_notice_always_visible": {"const": true},
+            "unauthorized_hides_member_summary": {"const": true}, "error_disables_mutating_actions": {"const": true},
+            "medical_actions_visible": {"const": false}, "real_health_fields_visible": {"const": false}
+          }
+        }
+      }
+    },
+    "hall_lifecycle": {
+      "type": "object", "additionalProperties": false,
+      "required": ["states", "transitions", "skip_review_forbidden", "self_approval_forbidden", "reactivation_requires_platform_review", "exited_requires_new_application"],
+      "properties": {
+        "states": {"type": "array", "minItems": 10, "maxItems": 10, "uniqueItems": true, "items": {"$ref": "#/$defs/code"}},
+        "transitions": {"type": "array", "minItems": 12, "maxItems": 12, "items": {"$ref": "#/$defs/transition"}},
+        "skip_review_forbidden": {"const": true}, "self_approval_forbidden": {"const": true},
+        "reactivation_requires_platform_review": {"const": true}, "exited_requires_new_application": {"const": true}
+      }
+    },
+    "role_boundaries": {"type": "array", "minItems": 6, "maxItems": 6, "items": {"$ref": "#/$defs/role"}},
+    "member_relationship": {
+      "type": "object", "additionalProperties": false,
+      "required": ["states", "member_actions", "member_confirmation_required", "automatic_confirmation", "hall_staff_may_change_consent", "exited_relationship_auto_reactivation", "source_and_version_required"],
+      "properties": {
+        "states": {"type": "array", "minItems": 6, "maxItems": 6, "uniqueItems": true, "items": {"$ref": "#/$defs/code"}},
+        "member_actions": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"$ref": "#/$defs/memberAction"}},
+        "member_confirmation_required": {"const": true}, "automatic_confirmation": {"const": false},
+        "hall_staff_may_change_consent": {"const": false}, "exited_relationship_auto_reactivation": {"const": false},
+        "source_and_version_required": {"const": true}
+      }
+    },
+    "cross_module_protocols": {"type": "array", "minItems": 2, "maxItems": 2, "items": {"$ref": "#/$defs/protocol"}},
+    "non_medical_service_catalog": {"type": "array", "minItems": 5, "maxItems": 5, "items": {"$ref": "#/$defs/service"}},
+    "ai_boundary": {
+      "type": "object", "additionalProperties": false,
+      "required": ["allowed", "forbidden", "professional_or_emergency_risk_must_remain_open"],
+      "properties": {
+        "allowed": {"$ref": "#/$defs/nonEmptyCodes"}, "forbidden": {"$ref": "#/$defs/nonEmptyCodes"},
+        "professional_or_emergency_risk_must_remain_open": {"const": true}
+      }
+    },
+    "pending_authorizations": {"type": "array", "minItems": 4, "maxItems": 4, "items": {"$ref": "#/$defs/authorization"}},
+    "acceptance_cases": {"type": "array", "minItems": 16, "maxItems": 16, "items": {"$ref": "#/$defs/acceptanceCase"}},
+    "blocks": {"$ref": "#/$defs/nonEmptyCodes"},
+    "does_not_block": {"$ref": "#/$defs/nonEmptyCodes"},
+    "no_go": {"$ref": "#/$defs/nonEmptyCodes"}
+  },
+  "$defs": {
+    "code": {"type": "string", "pattern": "^[a-z][a-z0-9_-]*$"},
+    "nonEmptyCodes": {"type": "array", "minItems": 1, "uniqueItems": true, "items": {"$ref": "#/$defs/code"}},
+    "sourceBinding": {
+      "type": "object", "additionalProperties": false, "required": ["source_id", "path", "sha256", "authority"],
+      "properties": {"source_id": {"$ref": "#/$defs/code"}, "path": {"type": "string", "minLength": 8}, "sha256": {"type": "string", "pattern": "^[0-9a-f]{64}$"}, "authority": {"$ref": "#/$defs/code"}}
+    },
+    "organizationLayer": {
+      "type": "object", "additionalProperties": false, "required": ["layer_id", "parent_layer_id", "label_zh", "responsibilities", "prohibitions"],
+      "properties": {"layer_id": {"$ref": "#/$defs/code"}, "parent_layer_id": {"type": ["string", "null"]}, "label_zh": {"type": "string", "minLength": 2}, "responsibilities": {"$ref": "#/$defs/nonEmptyCodes"}, "prohibitions": {"$ref": "#/$defs/nonEmptyCodes"}}
+    },
+    "page": {
+      "type": "object", "additionalProperties": false, "required": ["page_id", "route", "label_zh", "data_class", "required_states", "allowed_actions"],
+      "properties": {"page_id": {"$ref": "#/$defs/code"}, "route": {"type": "string", "pattern": "^/services/dayi-health-hall"}, "label_zh": {"type": "string", "minLength": 2}, "data_class": {"enum": ["public_synthetic", "member_synthetic"]}, "required_states": {"$ref": "#/$defs/nonEmptyCodes"}, "allowed_actions": {"$ref": "#/$defs/nonEmptyCodes"}}
+    },
+    "transition": {
+      "type": "object", "additionalProperties": false, "required": ["from", "to", "actor", "audit_required"],
+      "properties": {"from": {"$ref": "#/$defs/code"}, "to": {"$ref": "#/$defs/code"}, "actor": {"$ref": "#/$defs/code"}, "audit_required": {"const": true}}
+    },
+    "role": {
+      "type": "object", "additionalProperties": false, "required": ["role_id", "responsibilities", "prohibitions"],
+      "properties": {"role_id": {"$ref": "#/$defs/code"}, "responsibilities": {"$ref": "#/$defs/nonEmptyCodes"}, "prohibitions": {"$ref": "#/$defs/nonEmptyCodes"}}
+    },
+    "memberAction": {
+      "type": "object", "additionalProperties": false, "required": ["action", "from", "to"],
+      "properties": {"action": {"$ref": "#/$defs/code"}, "from": {"$ref": "#/$defs/code"}, "to": {"$ref": "#/$defs/code"}}
+    },
+    "protocol": {
+      "type": "object", "additionalProperties": false, "required": ["target_id", "authority_module", "protocol", "direct_database_write", "member_confirmation_required", "return_requires_provenance_and_version"],
+      "properties": {"target_id": {"enum": ["learning", "club"]}, "authority_module": {"enum": ["learning-plaza", "club-alliance"]}, "protocol": {"type": "array", "minItems": 3, "maxItems": 3, "items": {"$ref": "#/$defs/code"}}, "direct_database_write": {"const": false}, "member_confirmation_required": {"const": true}, "return_requires_provenance_and_version": {"const": true}}
+    },
+    "service": {
+      "type": "object", "additionalProperties": false, "required": ["service_id", "label_zh", "medical_service", "payment_available"],
+      "properties": {"service_id": {"$ref": "#/$defs/code"}, "label_zh": {"type": "string", "minLength": 2}, "medical_service": {"const": false}, "payment_available": {"const": false}}
+    },
+    "authorization": {
+      "type": "object", "additionalProperties": false, "required": ["authorization_id", "owner", "status", "blocks", "does_not_block"],
+      "properties": {"authorization_id": {"$ref": "#/$defs/code"}, "owner": {"type": "string", "minLength": 2}, "status": {"enum": ["pending-with-owner", "paused-by-highest-owner"]}, "blocks": {"$ref": "#/$defs/nonEmptyCodes"}, "does_not_block": {"$ref": "#/$defs/nonEmptyCodes"}}
+    },
+    "acceptanceCase": {
+      "type": "object", "additionalProperties": false, "required": ["case_id", "polarity", "assertion"],
+      "properties": {"case_id": {"type": "string", "pattern": "^M0-A0(0[1-9]|1[0-6])$"}, "polarity": {"enum": ["positive", "negative"]}, "assertion": {"$ref": "#/$defs/code"}}
+    }
+  }
+}

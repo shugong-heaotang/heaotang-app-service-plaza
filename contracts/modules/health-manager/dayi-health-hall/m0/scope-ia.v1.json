@@ -1,0 +1,235 @@
+{
+  "contract_version": "health-manager.dayi-health-hall.m0.scope-ia.v1",
+  "module_id": "health-manager",
+  "project_id": "dayi-health-hall",
+  "checkpoint": "M0-C1",
+  "status": "frozen-non-medical-synthetic",
+  "synthetic_only": true,
+  "executable": false,
+  "source_bindings": [
+    {
+      "source_id": "scope-pause-decision",
+      "path": "C:/Users/shugo/Documents/项目最高负责人/health-cross-module-requirements/2026-07-17-大医健康馆体系优先与真实医疗暂停决策.md",
+      "sha256": "1130fee3c432cfd3abadb2b5a06c1f496c5cd36a265168fb813287d3fbb0ab47",
+      "authority": "project-highest-owner-adopted-decision"
+    },
+    {
+      "source_id": "cross-module-requirement-supplement",
+      "path": "C:/Users/shugo/Documents/项目最高负责人/health-cross-module-requirements/健康大管家-大益健康馆-学习广场-健康俱乐部需求补充-v1.0.md",
+      "sha256": "fc07676f9d0ab0dbaf1a4575457e4d1a67d642d1c483187e28a5b2c64e2a9012",
+      "authority": "project-owner-confirmed-requirement-supplement"
+    },
+    {
+      "source_id": "historical-r1-boundary",
+      "path": "contracts/modules/health-manager/r1/cross-module-freeze.v1.json",
+      "sha256": "5b93845530b702f930c2257d60fec1e33f4925a7410ccd578d5d2fd98667e5ea",
+      "authority": "historical-synthetic-boundary-only"
+    }
+  ],
+  "runtime_flags": {
+    "real_identity_enabled": false,
+    "real_health_data_enabled": false,
+    "medical_capabilities_enabled": false,
+    "payment_enabled": false,
+    "deployment_enabled": false,
+    "production_enabled": false
+  },
+  "positioning": {
+    "canonical_name": "大医健康馆",
+    "system_type": "non_medical_organization_and_service_navigation_system",
+    "is_medical_institution": false,
+    "grants_medical_authority": false,
+    "safety_notice": "平台不提供诊断或处方；紧急情况请联系急救或前往有资质医疗机构。"
+  },
+  "organization_layers": [
+    {
+      "layer_id": "platform",
+      "parent_layer_id": null,
+      "label_zh": "平台",
+      "responsibilities": ["version_governance", "hall_admission_review", "global_audit_index"],
+      "prohibitions": ["provide_medical_service", "access_real_health_data_in_m0"]
+    },
+    {
+      "layer_id": "region",
+      "parent_layer_id": "platform",
+      "label_zh": "区域运营",
+      "responsibilities": ["regional_hall_support", "exception_escalation", "public_service_information_maintenance"],
+      "prohibitions": ["approve_own_hall_application", "provide_medical_service", "access_real_health_data_in_m0"]
+    },
+    {
+      "layer_id": "hall",
+      "parent_layer_id": "region",
+      "label_zh": "大医健康馆",
+      "responsibilities": ["member_relationship_support", "non_medical_activity_information", "learning_and_club_navigation"],
+      "prohibitions": ["impersonate_medical_institution", "replace_member_consent", "access_real_health_data_in_m0"]
+    }
+  ],
+  "information_architecture": {
+    "navigation_groups": ["find_hall", "my_service_relationship", "learning_and_club", "rules_and_safety"],
+    "pages": [
+      {
+        "page_id": "hall-home",
+        "route": "/services/dayi-health-hall",
+        "label_zh": "大医健康馆",
+        "data_class": "public_synthetic",
+        "required_states": ["ready", "unavailable_fail_closed"],
+        "allowed_actions": ["find_hall", "view_relationship"]
+      },
+      {
+        "page_id": "hall-discovery",
+        "route": "/services/dayi-health-hall/halls",
+        "label_zh": "健康馆列表",
+        "data_class": "public_synthetic",
+        "required_states": ["loading", "ready", "empty", "unavailable_fail_closed"],
+        "allowed_actions": ["filter_region", "view_hall_detail"]
+      },
+      {
+        "page_id": "hall-detail",
+        "route": "/services/dayi-health-hall/halls/:hall_id",
+        "label_zh": "健康馆详情",
+        "data_class": "public_synthetic",
+        "required_states": ["loading", "ready", "not_found", "hall_suspended", "unavailable_fail_closed"],
+        "allowed_actions": ["view_non_medical_services", "request_relationship"]
+      },
+      {
+        "page_id": "hall-lifecycle-status",
+        "route": "/services/dayi-health-hall/operations/status",
+        "label_zh": "健康馆状态",
+        "data_class": "member_synthetic",
+        "required_states": ["unauthenticated", "application_pending", "approved", "active", "hall_suspended", "rejected", "exited", "access_denied", "unavailable_fail_closed"],
+        "allowed_actions": ["view_status_reason"]
+      },
+      {
+        "page_id": "member-hall-relationship",
+        "route": "/services/dayi-health-hall/my-hall",
+        "label_zh": "我的服务关系",
+        "data_class": "member_synthetic",
+        "required_states": ["unauthenticated", "none", "candidate_confirmation_required", "confirmed", "correction_requested", "exit_requested", "exited", "access_denied", "unavailable_fail_closed"],
+        "allowed_actions": ["view_relationship_source", "confirm_candidate", "request_correction", "request_exit"]
+      },
+      {
+        "page_id": "learning-and-club-navigation",
+        "route": "/services/dayi-health-hall/navigation",
+        "label_zh": "学习与俱乐部",
+        "data_class": "member_synthetic",
+        "required_states": ["unauthenticated", "loading", "ready", "summary_unavailable", "confirmation_required", "access_denied", "unavailable_fail_closed"],
+        "allowed_actions": ["navigate_learning_plaza", "navigate_club_alliance", "confirm_return_summary"]
+      },
+      {
+        "page_id": "scope-and-safety",
+        "route": "/services/dayi-health-hall/scope",
+        "label_zh": "服务边界与安全",
+        "data_class": "public_synthetic",
+        "required_states": ["ready", "unavailable_fail_closed"],
+        "allowed_actions": ["view_service_boundary", "view_emergency_notice"]
+      }
+    ],
+    "global_state_rules": {
+      "synthetic_badge_required": true,
+      "safety_notice_always_visible": true,
+      "unauthorized_hides_member_summary": true,
+      "error_disables_mutating_actions": true,
+      "medical_actions_visible": false,
+      "real_health_fields_visible": false
+    }
+  },
+  "hall_lifecycle": {
+    "states": ["draft", "submitted", "under_review", "approved", "onboarding", "active", "suspended", "exiting", "exited", "rejected"],
+    "transitions": [
+      {"from": "draft", "to": "submitted", "actor": "applicant", "audit_required": true},
+      {"from": "submitted", "to": "under_review", "actor": "platform_reviewer", "audit_required": true},
+      {"from": "under_review", "to": "approved", "actor": "platform_reviewer", "audit_required": true},
+      {"from": "under_review", "to": "rejected", "actor": "platform_reviewer", "audit_required": true},
+      {"from": "rejected", "to": "draft", "actor": "applicant", "audit_required": true},
+      {"from": "approved", "to": "onboarding", "actor": "hall_owner", "audit_required": true},
+      {"from": "onboarding", "to": "active", "actor": "platform_reviewer", "audit_required": true},
+      {"from": "active", "to": "suspended", "actor": "regional_operator", "audit_required": true},
+      {"from": "suspended", "to": "active", "actor": "platform_reviewer", "audit_required": true},
+      {"from": "active", "to": "exiting", "actor": "hall_owner", "audit_required": true},
+      {"from": "suspended", "to": "exiting", "actor": "hall_owner", "audit_required": true},
+      {"from": "exiting", "to": "exited", "actor": "platform_reviewer", "audit_required": true}
+    ],
+    "skip_review_forbidden": true,
+    "self_approval_forbidden": true,
+    "reactivation_requires_platform_review": true,
+    "exited_requires_new_application": true
+  },
+  "role_boundaries": [
+    {"role_id": "platform_reviewer", "responsibilities": ["independent_admission_review", "activation_and_reactivation_review", "exit_closure"], "prohibitions": ["provide_medical_service", "use_real_health_data_in_m0"]},
+    {"role_id": "regional_operator", "responsibilities": ["regional_support", "suspension_escalation", "public_information_maintenance"], "prohibitions": ["reactivate_hall", "replace_platform_review", "provide_medical_service"]},
+    {"role_id": "hall_owner", "responsibilities": ["onboarding_preparation", "staff_assignment", "exit_request"], "prohibitions": ["approve_own_application", "replace_member_confirmation", "provide_medical_service"]},
+    {"role_id": "hall_staff", "responsibilities": ["non_medical_service_support", "record_candidate_relationship_source", "explain_navigation"], "prohibitions": ["confirm_for_member", "change_member_consent", "provide_diagnosis_or_treatment"]},
+    {"role_id": "member", "responsibilities": ["confirm_relationship", "request_correction", "request_exit", "confirm_cross_module_return"], "prohibitions": ["delegate_confirmation_to_staff_or_system"]},
+    {"role_id": "auditor", "responsibilities": ["read_audit_metadata", "verify_actor_and_version", "report_control_failure"], "prohibitions": ["mutate_business_state", "approve_application", "access_real_health_data_in_m0"]}
+  ],
+  "member_relationship": {
+    "states": ["none", "candidate", "confirmed", "correction_requested", "exit_requested", "exited"],
+    "member_actions": [
+      {"action": "confirm_candidate", "from": "candidate", "to": "confirmed"},
+      {"action": "request_correction", "from": "confirmed", "to": "correction_requested"},
+      {"action": "request_exit", "from": "confirmed", "to": "exit_requested"}
+    ],
+    "member_confirmation_required": true,
+    "automatic_confirmation": false,
+    "hall_staff_may_change_consent": false,
+    "exited_relationship_auto_reactivation": false,
+    "source_and_version_required": true
+  },
+  "cross_module_protocols": [
+    {
+      "target_id": "learning",
+      "authority_module": "learning-plaza",
+      "protocol": ["show_minimum_summary", "navigate_to_authority", "member_confirmed_return"],
+      "direct_database_write": false,
+      "member_confirmation_required": true,
+      "return_requires_provenance_and_version": true
+    },
+    {
+      "target_id": "club",
+      "authority_module": "club-alliance",
+      "protocol": ["show_minimum_summary", "navigate_to_authority", "member_confirmed_return"],
+      "direct_database_write": false,
+      "member_confirmation_required": true,
+      "return_requires_provenance_and_version": true
+    }
+  ],
+  "non_medical_service_catalog": [
+    {"service_id": "member-relationship-support", "label_zh": "会员服务关系支持", "medical_service": false, "payment_available": false},
+    {"service_id": "learning-navigation", "label_zh": "学习广场导航", "medical_service": false, "payment_available": false},
+    {"service_id": "club-navigation", "label_zh": "健康俱乐部导航", "medical_service": false, "payment_available": false},
+    {"service_id": "public-event-information", "label_zh": "公益活动信息", "medical_service": false, "payment_available": false},
+    {"service_id": "hall-operation-information", "label_zh": "健康馆运营信息", "medical_service": false, "payment_available": false}
+  ],
+  "ai_boundary": {
+    "allowed": ["organize_non_medical_material", "identify_missing_fields", "explain_non_medical_process", "build_synthetic_prototype", "show_safety_notice"],
+    "forbidden": ["diagnose", "treat", "prescribe", "change_medication", "recommend_doctor", "provide_real_consultation", "impersonate_doctor", "promise_outcome", "close_professional_risk", "close_emergency_risk"],
+    "professional_or_emergency_risk_must_remain_open": true
+  },
+  "pending_authorizations": [
+    {"authorization_id": "privacy-and-real-data", "owner": "隐私与法律负责人", "status": "pending-with-owner", "blocks": ["real_identity", "real_health_data"], "does_not_block": ["m0_synthetic_contract"]},
+    {"authorization_id": "medical-reactivation", "owner": "医疗质量负责人", "status": "paused-by-highest-owner", "blocks": ["medical_content", "medical_service"], "does_not_block": ["m0_synthetic_contract"]},
+    {"authorization_id": "runtime-security", "owner": "平台安全负责人", "status": "pending-with-owner", "blocks": ["runtime", "environment"], "does_not_block": ["m0_synthetic_contract"]},
+    {"authorization_id": "operations-pilot", "owner": "健康馆运营负责人", "status": "pending-with-owner", "blocks": ["real_member_pilot", "capacity_commitment"], "does_not_block": ["m0_synthetic_contract"]}
+  ],
+  "acceptance_cases": [
+    {"case_id": "M0-A001", "polarity": "positive", "assertion": "three_layer_organization_is_exact"},
+    {"case_id": "M0-A002", "polarity": "positive", "assertion": "seven_pages_and_fail_closed_states_are_exact"},
+    {"case_id": "M0-A003", "polarity": "positive", "assertion": "lifecycle_has_ten_states_and_twelve_audited_transitions"},
+    {"case_id": "M0-A004", "polarity": "positive", "assertion": "member_controls_relationship_confirmation_correction_and_exit"},
+    {"case_id": "M0-A005", "polarity": "positive", "assertion": "learning_and_club_authorities_retain_write_ownership"},
+    {"case_id": "M0-A006", "polarity": "positive", "assertion": "five_services_are_non_medical_and_non_payment"},
+    {"case_id": "M0-A007", "polarity": "negative", "assertion": "reject_medical_or_real_consultation_entry"},
+    {"case_id": "M0-A008", "polarity": "negative", "assertion": "reject_health_hall_as_medical_institution"},
+    {"case_id": "M0-A009", "polarity": "negative", "assertion": "reject_real_identity_or_health_data"},
+    {"case_id": "M0-A010", "polarity": "negative", "assertion": "reject_lifecycle_skip_or_self_approval"},
+    {"case_id": "M0-A011", "polarity": "negative", "assertion": "reject_staff_or_system_member_confirmation"},
+    {"case_id": "M0-A012", "polarity": "negative", "assertion": "reject_cross_module_direct_write"},
+    {"case_id": "M0-A013", "polarity": "negative", "assertion": "reject_unconfirmed_or_unversioned_return"},
+    {"case_id": "M0-A014", "polarity": "negative", "assertion": "reject_ai_diagnosis_treatment_or_risk_closure"},
+    {"case_id": "M0-A015", "polarity": "negative", "assertion": "reject_payment_deployment_or_production_enablement"},
+    {"case_id": "M0-A016", "polarity": "negative", "assertion": "pending_medical_authorization_does_not_block_synthetic_work"}
+  ],
+  "blocks": ["m0_runtime", "m1", "real_identity", "real_health_data", "medical_content", "medical_service", "charging", "payment", "deployment", "production"],
+  "does_not_block": ["m0_contract_conformance", "synthetic_test_fixtures", "independent_m0_review"],
+  "no_go": ["business_runtime", "api", "database", "real_identity", "real_health_data", "medical_record", "diagnosis", "treatment", "prescription", "medication_change", "doctor_recommendation", "real_consultation", "second_opinion", "case_solicitation", "multidisciplinary_consultation", "charging", "payment", "test_server_deployment", "production", "irreversible_operation"]
+}
