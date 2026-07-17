@@ -1,0 +1,84 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260717-PROJECT-BRAIN-V2-M2-M3-REGISTRY-CLOSEOUT",
+  "title": "Project Brain v2 M2 remediation and M3 registry closeout",
+  "date": "2026-07-17",
+  "status": "verified",
+  "objective": "Close only the registry lifecycle truth for the independently accepted and controlled-integrated Project Brain v2 M2 remediation and M3 boss dashboard, without changing v1 facts, activating M4-M5, or enabling product, deployment or production capabilities.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m2-m3-registry-closeout.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m2-m3-registry-closeout-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-17-project-brain-v2-m2-m3-registry-closeout-task-order.md",
+    "docs/project-management/project-brain-v2/task-comprehension-receipt-m2-m3-registry-closeout.md",
+    "docs/project-management/project-brain-v2/handoff-m2-g0-remediation.md",
+    "docs/project-management/project-brain-v2/handoff-m3.md",
+    "docs/project-management/project-brain-v2/handoff-m2-m3-registry-closeout.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/project-brain/v2/runtime/runtime-policy.v1.schema.json",
+    "contracts/project-brain/v2/dashboard/dashboard-policy.v1.schema.json",
+    "contracts/project-brain/v2/package-manifest.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0021-project-brain-v2-operational-read-model.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-17-project-brain-v2-m2-m3-registry-closeout-task-order.md",
+    "docs/project-management/project-brain-v2/task-comprehension-receipt-m2-m3-registry-closeout.md",
+    "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m2-m3-registry-closeout.json",
+    "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m2-m3-registry-closeout-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-17-project-brain-v2-m2-m3-registry-closeout.json",
+    "docs/project-management/project-brain-v2/handoff-m2-m3-registry-closeout.md"
+  ],
+  "verification": [
+    "Fresh remote authority after explicit H1 lease release remained 05eda778a08f6a4d63dd01a3f7511746e1f42c7a with zero pushes under that lease",
+    "M2 remediation exact content d1531daed440d4776c22f58c127710eb20eb2128 is an ancestor of the authority and its independent Go report SHA-256 is EA8390687C16902910E21F57FA72779EAEA959EE6AFC49E69C9D03799F985795",
+    "M3 R3 exact content equals authority 05eda778a08f6a4d63dd01a3f7511746e1f42c7a and its independent Go report SHA-256 is E1F67AC3C257D6B18C44F68BCCF48B74BA500BA0FCDE656F33B0DEFA564C2E1A",
+    "M2 evidence remains 43 of 43 tests plus M1 20 of 20; M3 evidence remains 48 of 48 plus independent attacks 27 of 27",
+    "Current checklist completed 26 of 26 and governance exam attempt 1 passed 8 of 8 with score 100 after the H1 lease was explicitly released",
+    "Registry semantic comparison against the base has 154 to 155 work items, one exact added closeout item, zero removals, 152 unchanged existing items, and changes only to the two named Project Brain targets",
+    "The governed scope is exactly seven allowed path classes and contains no product, route, timer, deployment or production change",
+    "The current checklist was independently recomputed as completed 26 of 26 with zero SHA-256 mismatch after the registry change",
+    "Agent collaboration, governance exam and implementation record validators passed; scripts/Test-ServicePlazaContracts.ps1 passed",
+    "git diff --check passed, scripts/Test-TextEncoding.ps1 passed 1648 files, changed path count equals seven, forbidden path count equals zero and new secret-pattern hit count equals zero",
+    "The repository-wide checklist --require-current audit still reports historical stale checklists outside this work item; those legacy findings are not relabeled, edited or used as evidence for this closeout",
+    "The exact candidate commit and independent verdict must still be established after this verified implementation record is frozen"
+  ],
+  "evidence": [
+    "docs/project-management/project-brain-v2/handoff-m2-g0-remediation.md",
+    "docs/project-management/project-brain-v2/handoff-m3.md",
+    "docs/project-management/project-brain-v2/handoff-m2-m3-registry-closeout.md",
+    "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m2-m3-registry-closeout.json",
+    "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m2-m3-registry-closeout-attempt-1.json",
+    "docs/project-management/notices/2026-07-17-project-brain-v2-m2-m3-registry-closeout-task-order.md"
+  ],
+  "premises": [
+    "Candidate integrated statuses become authoritative only after exact-candidate independent Go and controlled integration",
+    "Project Brain v1 and every non-target registry fact remain unchanged and authoritative within their existing scope",
+    "M4-M5, real data, credentials, external authentication, network, export, notification, timer, deployment and production remain No-Go",
+    "The H1 R4 preflight No-Go and its failed evidence remain separate and are not relabeled or repaired by this Project Brain closeout",
+    "Any authority drift, unknown evidence, eighth path class, non-target registry change or failed machine gate fails closed"
+  ],
+  "implementation_mode": "ai-assisted"
+}

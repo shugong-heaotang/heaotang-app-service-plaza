@@ -1,0 +1,5 @@
+# Project Brain v2 M2-M3 registry closeout comprehension receipt
+
+我确认本工作项不修改功能，只把已经独立Go并受控集成的M2 remediation与M3 dashboard事实写回registry，并登记closeout自身。目标以外任何对象变化、第三个目标状态变化、M4/M5激活、authority漂移或门禁失败均No-Go。
+
+M2权威内容=`d1531daed440d4776c22f58c127710eb20eb2128`，独立报告SHA256=`EA8390687C16902910E21F57FA72779EAEA959EE6AFC49E69C9D03799F985795`。M3权威内容=`05eda778a08f6a4d63dd01a3f7511746e1f42c7a`，独立报告SHA256=`E1F67AC3C257D6B18C44F68BCCF48B74BA500BA0FCDE656F33B0DEFA564C2E1A`。

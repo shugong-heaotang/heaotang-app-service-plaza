@@ -3664,11 +3664,11 @@
                             "title":  "Project Brain v2 M3 老板只读驾驶舱候选",
                             "owner":  "Project Brain v2 M3 dashboard owner",
                             "owner_role":  "平台集成负责人",
-                            "status":  "active",
+                            "status":  "integrated",
                             "repository_root":  "C:/Users/shugo/Documents/APP系统",
-                            "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-m3-dashboard",
-                            "branch":  "codex/project-brain-v2-m3-dashboard",
-                            "base_commit":  "65863009f9b950985c8850cc65d86a426ba128dd",
+                            "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-m3-dashboard-r3",
+                            "branch":  "codex/project-brain-v2-m3-dashboard-r3",
+                            "base_commit":  "d1531daed440d4776c22f58c127710eb20eb2128",
                             "allowed_paths":  [
                                                   "project_brain_v2/dashboard/**",
                                                   "contracts/project-brain/v2/dashboard/**",
@@ -3681,8 +3681,8 @@
                                               ],
                             "started_with_clean_worktree":  true,
                             "preexisting_changes_acknowledged":  false,
-                            "migration_note":  "M3 active仅在AIW-20260717-PROJECT-BRAIN-V2-M3-ACTIVATION的exact candidate独立Go并受控进入authority后生效。只实现离线、synthetic snapshot驱动、服务端授权的只读dashboard候选与权限/解释性/禁止下钻和导出负例；不得修改M1/M2、registry、App、公共scripts或v1。boss_dashboard_enabled仍为false；真实数据、凭据、网络、共享route、external auth接线、export、notification、deploy、timer与production继续No-Go。blocks=M4另行激活；does_not_block=Project Brain v1及所有非PB隔离项目。",
-                            "handoff_record":  "docs/project-management/project-brain-v2/handoff-m3-activation.md"
+                            "migration_note":  "M3 R3 exact 05eda778a08f6a4d63dd01a3f7511746e1f42c7a已在集成M2 remediation的authority上完成M3 48/48、M2 43/43、M1 20/20与独立攻击27/27；独立验收Implementation Go与Overall Acceptance Go，报告SHA256=E1F67AC3C257D6B18C44F68BCCF48B74BA500BA0FCDE656F33B0DEFA564C2E1A，并已受控进入authority。M4-M5、真实数据、auth/route、export、notification、deploy、timer与production继续No-Go。blocks=M4另行激活；does_not_block=所有非PB隔离项目。",
+                            "handoff_record":  "docs/project-management/project-brain-v2/handoff-m3.md"
                         },
                        {
                            "work_id":  "AIW-20260717-HEALTH-README-CURRENT-STATE-ACCEPTANCE",
@@ -3814,11 +3814,11 @@
                            "title":  "Project Brain v2 M2 G0 Trusted刷新根因修复",
                            "owner":  "Project Brain v2 M2 G0 remediation runtime owner",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-m2-g0-remediation",
                            "branch":  "codex/project-brain-v2-m2-g0-remediation",
-                           "base_commit":  "6ad2e7e1930f60dfe174397c480a9feefdd53c93",
+                           "base_commit":  "16d538c9f8f12dacfd9dba1ad82400f9724e9d94",
                            "allowed_paths":  [
                                                  "project_brain_v2/runtime/engine.py",
                                                  "project_brain_v2/runtime/tests/test_engine.py",
@@ -3831,8 +3831,32 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "本项active仅在AIW-20260717-PROJECT-BRAIN-V2-M2-G0-REMEDIATION-ACTIVATION exact candidate独立Go并受控进入authority后生效。只修复PBV2-M2-G0-PRIVACY-THRESHOLD-001：合法G0 Trusted必须要求sample_size=null与privacy_threshold=not_applicable且不执行G1样本阈值；G0伪造sample/privacy结果失败关闭；G1 high/standard阈值、rounding和既有失败关闭语义保持不变。不得修改M1/M3/v1、registry、App或环境。blocks=M3 overall Acceptance复验；does_not_block=PDCAR及其他非重叠项目。",
-                           "handoff_record":  "docs/project-management/project-brain-v2/handoff-m2-g0-remediation-activation.md"
+                           "migration_note":  "PBV2-M2-G0-PRIVACY-THRESHOLD-001已由exact d1531daed440d4776c22f58c127710eb20eb2128根因修复；M2 43/43、M1 20/20、独立变异20/20，独立验收P0/P1/P2=0/0/0且报告SHA256=EA8390687C16902910E21F57FA72779EAEA959EE6AFC49E69C9D03799F985795，已受控进入authority。历史错误No-Go保持不可变；M3已另行R3复验。does_not_block=PDCAR及其他非重叠项目。",
+                           "handoff_record":  "docs/project-management/project-brain-v2/handoff-m2-g0-remediation.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260717-PROJECT-BRAIN-V2-M2-M3-REGISTRY-CLOSEOUT",
+                           "title":  "Project Brain v2 M2 remediation与M3 registry收口",
+                           "owner":  "Project Brain v2 M2-M3 registry closeout platform governance owner",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "integrated",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-m2-m3-registry-closeout",
+                           "branch":  "codex/project-brain-v2-m2-m3-registry-closeout",
+                           "base_commit":  "05eda778a08f6a4d63dd01a3f7511746e1f42c7a",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "docs/project-management/notices/2026-07-17-project-brain-v2-m2-m3-registry-closeout-task-order.md",
+                                                 "docs/project-management/project-brain-v2/task-comprehension-receipt-m2-m3-registry-closeout.md",
+                                                 "docs/project-management/project-brain-v2/handoff-m2-m3-registry-closeout.md",
+                                                 "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m2-m3-registry-closeout*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m2-m3-registry-closeout*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-17-project-brain-v2-m2-m3-registry-closeout*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "Registry-only lifecycle candidate：仅将已进入authority的M2 G0 remediation与M3 dashboard两项收口为integrated并登记本closeout；三项integrated状态仅在本exact candidate独立Go且受控fast-forward进入authority后生效。M4-M5、App、route、真实数据、凭据、网络、export、notification、deploy、timer与production继续No-Go。",
+                           "handoff_record":  "docs/project-management/project-brain-v2/handoff-m2-m3-registry-closeout.md"
                        }
                    ]
 }
