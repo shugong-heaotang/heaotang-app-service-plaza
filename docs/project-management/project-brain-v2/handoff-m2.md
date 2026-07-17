@@ -2,7 +2,7 @@
 
 - work item：`AIW-20260717-PROJECT-BRAIN-V2-M2-READONLY-REFRESH`
 - exact base：`701519ea1130b6620607de753aa03a7d93953f0b`
-- 当前结论：R1 immutable No-Go；R2 remediation candidate ready for fresh independent review；不是 accepted、integrated 或 production
+- 当前结论：R1 immutable No-Go；R2 未经独立验收且已被 R3 验收候选取代；R3 正在完成候选冻结门禁；不是 accepted、integrated 或 production
 
 ## R1 独立验收历史
 
@@ -11,7 +11,9 @@
 - 外部报告：`C:\Users\shugo\Documents\项目最高负责人\project-brain-v2\2026-07-17-project-brain-v2-m2-runtime-independent-review.md`
 - 报告 SHA-256：`5445d33da285ef3437917db2f9fac6a52befb97165c42ce39ee1410ce0722d7b`
 
-R2 已针对六项发现增加强制隔离和变异回归：state root/repo/source/junction overlap、unknown/extra capability、非目标 M1 runtime flag、有效旧 pointer 替换、run 删除/audit 截断、永久阻塞 timeout、独立 actor+role audit Schema。
+R2 已针对六项发现增加强制隔离和变异回归：state root/repo/source/junction overlap、unknown/extra capability、非目标 M1 runtime flag、有效旧 pointer 替换、run 删除/audit 截断、永久阻塞 timeout、独立 actor+role audit Schema。R2 exact candidate `a4012e11284361b21f215b5e812768a9e297d072` 的独立复核通道中断，未形成 Go，也未推送或集成。
+
+开发者随后发现 R2 的 Schema 与手工引擎校验并非完全等价：JSON Schema 会拒绝整数限制中的 boolean，Python 手工 `int` 判断却会接受。R3 在每次运行入口直接执行固定的 `runtime-policy.v1.schema.json`，并增加 boolean integer、重复 fixture 与非法 fixture pattern 负向回归；R2 不再作为待验收候选。
 
 ## 已交付
 
@@ -25,15 +27,15 @@ R2 已针对六项发现增加强制隔离和变异回归：state root/repo/sour
 ## 开发者验证
 
 - M2 runtime contract validator：通过；6 个 Schema，默认禁用，production capability false，network-capable import 0。
-- M2 R2 单元、负向和变异测试：34/34 通过，0 skip。
+- M2 R3 单元、负向和变异测试：35/35 通过，0 skip。
 - M1 原合同 validator 与回归/变异测试：20/20 通过。
-- current checklist：26/26；随机治理考试：100。
-- 总合同、协作、checklist、exam、IR 与 UTF-8（1584 files）门禁：通过。
-- R2 exact scope：22 files，八类登记路径内，out-of-scope 0；changed-file secret scan 0。R1 的 21 files 结果未冒充 R2。
+- R3 current checklist：26/26；随机治理考试：100。
+- 总合同、协作、checklist、exam、IR 与 UTF-8（1587 files）门禁：通过。
+- R3 exact scope：25 files，八类登记路径内，out-of-scope 0；changed-file secret scan 0。R1/R2 的历史范围结果未冒充 R3。
 - fresh fetch 后 remote authority 与 local exact base 均为 `701519ea1130b6620607de753aa03a7d93953f0b`。
 - `git diff --check`：通过。
 
-开发者验证不是独立验收。R2 exact candidate commit、当前远端 authority、diff/secret/UTF-8/总合同/freshness 结果必须在候选提交后重新绑定；R1 reviewer 不自动成为 R2 Go。
+开发者验证不是独立验收。R3 exact candidate commit、当前远端 authority、diff/secret/UTF-8/总合同/freshness 结果必须在候选提交后重新绑定；R1 reviewer 不自动成为 R3 Go。
 
 ## 验收边界
 

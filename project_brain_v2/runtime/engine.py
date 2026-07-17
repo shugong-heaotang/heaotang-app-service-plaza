@@ -13,6 +13,9 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any, Callable
 
+from jsonschema import Draft202012Validator
+from jsonschema.exceptions import SchemaError, ValidationError
+
 RUN_ID = re.compile(r"^[A-Za-z0-9][A-Za-z0-9._-]{0,127}$")
 ALLOWED_FIXTURE_DIR = Path("contracts/project-brain/v2/examples")
 REQUIRED_OFF_SWITCHES = (
@@ -136,6 +139,13 @@ class RefreshEngine:
 
     def _policy(self) -> tuple[dict[str, Any], bytes]:
         policy, raw = self._json(self.policy_path)
+        schema_path = self.repo_root / "contracts/project-brain/v2/runtime/runtime-policy.v1.schema.json"
+        schema, _ = self._json(schema_path)
+        try:
+            Draft202012Validator.check_schema(schema)
+            Draft202012Validator(schema).validate(policy)
+        except (SchemaError, ValidationError) as exc:
+            raise RuntimeFailure("POLICY_INVALID", "runtime policy failed its fixed-version schema") from exc
         if policy.get("contract_version") != "project-brain-runtime-policy.v1":
             raise RuntimeFailure("POLICY_INVALID", "unknown runtime policy")
         if set(policy) != POLICY_KEYS:

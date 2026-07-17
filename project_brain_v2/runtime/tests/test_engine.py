@@ -254,11 +254,22 @@ class RuntimeTest(unittest.TestCase):
         self.write_policy(dashboard_enabled=True)
         self.assertEqual("POLICY_INVALID", self.execute()["reason_code"])
 
+    def test_runtime_executes_policy_schema_not_only_manual_guards(self):
+        for override in (
+            {"max_attempts": True},
+            {"allowed_fixtures": [FIXTURE, FIXTURE]},
+            {"allowed_fixtures": ["not-a-contract-fixture"]},
+        ):
+            with self.subTest(override=override):
+                shutil.rmtree(self.state, ignore_errors=True)
+                self.write_policy(**override)
+                self.assertEqual("POLICY_INVALID", self.execute()["reason_code"])
+
     def test_path_traversal_is_unauthorized_even_if_allowlisted(self):
         escaped = "contracts/project-brain/v2/examples/../../fact-catalog.v1.json"
         self.write_policy(allowed_fixtures=[escaped])
         record = self.engine().run("escape", FACT, escaped, ROLE)
-        self.assertEqual("UNAUTHORIZED", record["reason_code"])
+        self.assertEqual("POLICY_INVALID", record["reason_code"])
 
     def test_m1_runtime_enablement_is_rejected_not_overridden(self):
         path = self.repo / "contracts/project-brain/v2/source-map.v1.json"
