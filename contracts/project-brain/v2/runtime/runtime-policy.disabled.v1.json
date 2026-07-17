@@ -1,0 +1,14 @@
+{
+  "contract_version": "project-brain-runtime-policy.v1",
+  "enabled": false,
+  "production_enabled": false,
+  "network_enabled": false,
+  "real_sources_enabled": false,
+  "source_writes_enabled": false,
+  "external_notifications_enabled": false,
+  "max_attempts": 3,
+  "timeout_seconds": 10,
+  "max_source_bytes": 1048576,
+  "schedule_interval_seconds": 3600,
+  "allowed_fixtures": ["contracts/project-brain/v2/examples/trusted-g1-synthetic.json"]
+}

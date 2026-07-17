@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "project-brain-schedule-decision.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "evaluated_at", "last_completed_at", "due_at", "due", "production_timer_present"],
+  "properties": {
+    "contract_version": {"const": "project-brain-schedule-decision.v1"},
+    "evaluated_at": {"type": "string", "format": "date-time"},
+    "last_completed_at": {"oneOf": [{"type": "null"}, {"type": "string", "format": "date-time"}]},
+    "due_at": {"type": "string", "format": "date-time"},
+    "due": {"type": "boolean"},
+    "production_timer_present": {"const": false}
+  }
+}

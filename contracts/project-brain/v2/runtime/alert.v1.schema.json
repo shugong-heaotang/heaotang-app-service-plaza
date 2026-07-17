@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "project-brain-alert.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "run_id", "severity", "status", "reason_code", "escalation_owner", "created_at", "delivery"],
+  "properties": {
+    "contract_version": {"const": "project-brain-alert.v1"},
+    "run_id": {"type": "string"},
+    "severity": {"enum": ["warning", "critical"]},
+    "status": {"enum": ["Unknown", "No-Go"]},
+    "reason_code": {"type": "string"},
+    "escalation_owner": {"type": "string", "minLength": 1},
+    "created_at": {"type": "string", "format": "date-time"},
+    "delivery": {"const": "evidence_only_not_sent"}
+  }
+}
