@@ -23,7 +23,7 @@ class ProjectBrainV2ContractsTest(unittest.TestCase):
         cls.sources = {item["fact_id"]: item for item in source_map["sources"]}
 
     def test_full_package(self) -> None:
-        self.assertEqual(validate_package(), {"facts": 3, "sources": 3, "positive": 3, "negative": 10})
+        self.assertEqual(validate_package(), {"facts": 3, "sources": 3, "positive": 4, "negative": 10})
 
     def test_unknown_must_not_carry_value(self) -> None:
         result = load_json(PACKAGE_ROOT / "examples" / "unknown-stale.json")
@@ -33,8 +33,31 @@ class ProjectBrainV2ContractsTest(unittest.TestCase):
 
     def test_g1_threshold_is_versioned_and_enforced(self) -> None:
         result = load_json(PACKAGE_ROOT / "examples" / "trusted-g1-synthetic.json")
-        result["sample_size"] = self.policy["rules"]["standard_minimum_group_size"] - 1
+        self.assertEqual(self.facts[result["fact_id"]]["privacy_risk_tier"], "high")
+        result["sample_size"] = self.policy["rules"]["high_risk_minimum_group_size"] - 1
         with self.assertRaisesRegex(ContractError, "PRIVACY_THRESHOLD_FAILED"):
+            validate_result(result, self.facts, self.sources, self.policy)
+
+    def test_high_risk_threshold_does_not_fall_back_to_standard(self) -> None:
+        result = load_json(PACKAGE_ROOT / "examples" / "trusted-g1-synthetic.json")
+        result["sample_size"] = self.policy["rules"]["standard_minimum_group_size"] + 5
+        with self.assertRaisesRegex(ContractError, "PRIVACY_THRESHOLD_FAILED"):
+            validate_result(result, self.facts, self.sources, self.policy)
+
+    def test_fail_closed_small_sample_no_go_is_valid(self) -> None:
+        result = load_json(PACKAGE_ROOT / "examples" / "no-go-small-sample.json")
+        validate_result(result, self.facts, self.sources, self.policy)
+
+    def test_freshness_is_recomputed_from_timestamps(self) -> None:
+        result = load_json(PACKAGE_ROOT / "examples" / "trusted-g0-synthetic.json")
+        result["observed_at"] = "2020-01-01T00:00:00Z"
+        with self.assertRaisesRegex(ContractError, "FRESHNESS_ASSERTION_MISMATCH"):
+            validate_result(result, self.facts, self.sources, self.policy)
+
+    def test_g1_object_values_cannot_bypass_rounding(self) -> None:
+        result = load_json(PACKAGE_ROOT / "examples" / "trusted-g1-synthetic.json")
+        result["value"] = {"category_a": 25, "category_b": 21}
+        with self.assertRaisesRegex(ContractError, "ROUNDING_POLICY_FAILED"):
             validate_result(result, self.facts, self.sources, self.policy)
 
     def test_g1_cannot_be_relabelled_real(self) -> None:

@@ -3,8 +3,8 @@
   "fact_id": "synthetic.operations.completed_services.count",
   "classification": "G1",
   "privacy_risk_tier": "high",
-  "status": "Trusted",
-  "reason_code": "SYNTHETIC_CONTRACT_FIXTURE",
+  "status": "No-Go",
+  "reason_code": "PRIVACY_THRESHOLD_FAILED",
   "observed_at": "2026-07-17T00:00:00Z",
   "evaluated_at": "2026-07-17T20:00:00Z",
   "window_start": "2026-07-16T16:00:00Z",
@@ -13,9 +13,9 @@
   "authority_id": "authority.synthetic.completed_services_fixture",
   "source_owner": "Project Brain v2 M1 synthetic fixture owner",
   "synthetic": true,
-  "sample_size": 125,
-  "value": 120,
+  "sample_size": 25,
+  "value": null,
   "decision_usable": false,
-  "checks": {"source_available": true, "freshness": "pass", "quality": "pass", "authorization": "pass", "authority_conflict": false, "privacy_threshold": "pass"},
-  "evidence_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+  "checks": {"source_available": true, "freshness": "pass", "quality": "pass", "authorization": "pass", "authority_conflict": false, "privacy_threshold": "fail"},
+  "evidence_hash": null
 }

@@ -30,6 +30,8 @@ M1 只冻结事实定义、来源责任和失败关闭契约，不运行任何�
 
 该策略只用于 M1 合同验证，`production_enabled=false`。后续阈值变更必须新版本，不得在运行中静默改值。
 
+机器执行要求：fact 与 result 都必须声明并匹配 `privacy_risk_tier`；`high` 必须选择 50 人阈值，不能回退到标准 20。对象型聚合结果的每一个数值叶子都必须按 5 取整，不能用 object 包装绕过。freshness 必须由 fact SLO、`observed_at/window_end` 和 `evaluated_at` 复算，result 自报的 `checks.freshness` 只有与复算结果一致才有效。
+
 ## 4. 状态与失败关闭
 
 - `Trusted`：authority 唯一、来源可达、freshness/quality/authorization 均通过且无冲突；G1 还必须通过阈值。synthetic `Trusted` 仅表示合同测试通过，`decision_usable=false`。
@@ -45,6 +47,7 @@ M1 只冻结事实定义、来源责任和失败关闭契约，不运行任何�
 - G0 Trusted synthetic；
 - G1 Trusted synthetic（sample size 125、value 120、threshold pass、不可用于经营决策）；
 - G0 stale Unknown（value null）。
+- G1 undersized No-Go（high-risk sample size 25、value null、不可用于决策）。
 
 10 个负例必须全部被预期原因码拒绝：行级会员、小样本、stale-as-Trusted、unauthorized-as-Trusted、敏感分类、多个 authority、写能力、未批准 G1 真实源、Unknown 携带值、synthetic provenance 缺失。
 

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import sys
+from datetime import datetime, timedelta
 from pathlib import Path
 from typing import Any
 
@@ -48,6 +49,43 @@ def recursive_keys(value: Any) -> set[str]:
     return keys
 
 
+def parse_datetime(value: str, label: str) -> datetime:
+    try:
+        return datetime.fromisoformat(value.replace("Z", "+00:00"))
+    except (AttributeError, ValueError) as exc:
+        raise ContractError("TIMESTAMP_INVALID", label) from exc
+
+
+def parse_slo(value: str) -> timedelta:
+    if not isinstance(value, str) or not value.startswith("PT") or len(value) < 4:
+        raise ContractError("FRESHNESS_SLO_INVALID", str(value))
+    unit = value[-1]
+    try:
+        amount = int(value[2:-1])
+    except ValueError as exc:
+        raise ContractError("FRESHNESS_SLO_INVALID", value) from exc
+    multipliers = {"M": timedelta(minutes=amount), "H": timedelta(hours=amount), "D": timedelta(days=amount)}
+    if amount < 0 or unit not in multipliers:
+        raise ContractError("FRESHNESS_SLO_INVALID", value)
+    return multipliers[unit]
+
+
+def numeric_leaves(value: Any) -> list[float]:
+    if isinstance(value, bool):
+        return []
+    if isinstance(value, (int, float)):
+        return [float(value)]
+    if isinstance(value, dict):
+        leaves: list[float] = []
+        for child in value.values():
+            child_leaves = numeric_leaves(child)
+            if not child_leaves:
+                raise ContractError("AGGREGATE_VALUE_INVALID", "G1 aggregate objects must contain only numeric leaves")
+            leaves.extend(child_leaves)
+        return leaves
+    return []
+
+
 def validate_policy(policy: dict[str, Any]) -> None:
     if policy.get("contract_version") != "project-brain-privacy-threshold-policy.v1":
         raise ContractError("POLICY_VERSION_INVALID", "unexpected policy version")
@@ -74,7 +112,7 @@ def validate_fact(fact: dict[str, Any], policy: dict[str, Any]) -> None:
     if fact.get("read_mode") != "read_only" or fact.get("write_capability") != "none":
         raise ContractError("WRITE_CAPABILITY_FORBIDDEN", "every fact must be read-only with no write capability")
     required = {
-        "fact_id", "title", "business_definition", "classification", "source_owner", "authority_id",
+        "fact_id", "title", "business_definition", "classification", "privacy_risk_tier", "source_owner", "authority_id",
         "aggregation", "freshness", "quality_rules", "allowed_roles", "permitted_use", "failure",
         "production_eligible", "data_origin",
     }
@@ -92,9 +130,11 @@ def validate_fact(fact: dict[str, Any], policy: dict[str, Any]) -> None:
     if set(fact.get("aggregation", {}).get("dimensions", [])) & set(policy.get("forbidden_dimensions", [])):
         raise ContractError("FORBIDDEN_DIMENSION", fact["fact_id"])
     if fact["classification"] == "G0":
-        if fact.get("privacy_policy_id") is not None or fact.get("data_origin") != "authoritative_governance_artifact":
+        if fact.get("privacy_risk_tier") != "not_applicable" or fact.get("privacy_policy_id") is not None or fact.get("data_origin") != "authoritative_governance_artifact":
             raise ContractError("G0_SOURCE_POLICY_INVALID", fact["fact_id"])
     else:
+        if fact.get("privacy_risk_tier") not in {"standard", "high"}:
+            raise ContractError("G1_PRIVACY_RISK_TIER_MISSING", fact["fact_id"])
         if fact.get("privacy_policy_id") != policy["policy_id"]:
             raise ContractError("G1_PRIVACY_POLICY_MISSING", fact["fact_id"])
         if fact.get("data_origin") != "synthetic_contract_fixture":
@@ -148,7 +188,7 @@ def validate_result(result: dict[str, Any], facts: dict[str, dict[str, Any]], so
         raise ContractError("FACT_UNKNOWN", str(fact_id))
     fact = facts[fact_id]
     source = sources[fact_id]
-    for key in ("classification", "authority_id", "source_owner"):
+    for key in ("classification", "privacy_risk_tier", "authority_id", "source_owner"):
         if result.get(key) != fact.get(key):
             raise ContractError("RESULT_CONTRACT_MISMATCH", f"{fact_id}:{key}")
     checks = result.get("checks", {})
@@ -158,14 +198,32 @@ def validate_result(result: dict[str, Any], facts: dict[str, dict[str, Any]], so
         raise ContractError("AUTHORITY_CONFLICT", fact_id)
     if fact["data_origin"] == "synthetic_contract_fixture" and result.get("synthetic") is not True:
         raise ContractError("SYNTHETIC_PROVENANCE_REQUIRED", fact_id)
+
+    evaluated_at = parse_datetime(result.get("evaluated_at"), "evaluated_at")
+    freshness_field = "window_end" if fact["freshness"]["evaluation"] == "window_end" else "observed_at"
+    freshness_at = parse_datetime(result.get(freshness_field), freshness_field)
+    freshness_passed = evaluated_at >= freshness_at and evaluated_at - freshness_at <= parse_slo(fact["freshness"]["slo"])
+    declared_freshness = checks.get("freshness")
+    computed_freshness = "pass" if freshness_passed else "fail"
+    if declared_freshness != computed_freshness:
+        raise ContractError("FRESHNESS_ASSERTION_MISMATCH", fact_id)
+
+    undersized = False
     if fact["classification"] == "G1":
         sample_size = result.get("sample_size")
-        threshold = policy["rules"]["standard_minimum_group_size"]
-        if not isinstance(sample_size, int) or sample_size < threshold or checks.get("privacy_threshold") != "pass":
-            raise ContractError("PRIVACY_THRESHOLD_FAILED", fact_id)
+        threshold_key = "high_risk_minimum_group_size" if fact["privacy_risk_tier"] == "high" else "standard_minimum_group_size"
+        threshold = policy["rules"][threshold_key]
+        undersized = not isinstance(sample_size, int) or sample_size < threshold
+        declared_privacy = checks.get("privacy_threshold")
+        expected_privacy = "fail" if undersized else "pass"
+        if declared_privacy != expected_privacy:
+            if undersized:
+                raise ContractError("PRIVACY_THRESHOLD_FAILED", fact_id)
+            raise ContractError("PRIVACY_ASSERTION_MISMATCH", fact_id)
         value = result.get("value")
         rounding = policy["rules"]["rounding_base"]
-        if isinstance(value, (int, float)) and value % rounding != 0:
+        leaves = numeric_leaves(value) if value is not None else []
+        if value is not None and (not leaves or any(item % rounding != 0 for item in leaves)):
             raise ContractError("ROUNDING_POLICY_FAILED", fact_id)
         if source.get("source_status") != "synthetic_only" or source.get("runtime_enabled") is not False:
             raise ContractError("G1_REAL_SOURCE_NOT_AUTHORIZED", fact_id)
@@ -173,6 +231,14 @@ def validate_result(result: dict[str, Any], facts: dict[str, dict[str, Any]], so
     if status in {"Unknown", "No-Go"}:
         if result.get("value") is not None or result.get("decision_usable") is not False:
             raise ContractError("FAIL_CLOSED_VALUE_REQUIRED_NULL", fact_id)
+        if status == "Unknown":
+            if freshness_passed or result.get("reason_code") != "SOURCE_STALE":
+                raise ContractError("UNKNOWN_REASON_INVALID", fact_id)
+        elif undersized:
+            if result.get("reason_code") != "PRIVACY_THRESHOLD_FAILED" or checks.get("privacy_threshold") != "fail":
+                raise ContractError("NO_GO_REASON_INVALID", fact_id)
+        elif checks.get("quality") != "fail":
+            raise ContractError("NO_GO_REASON_INVALID", fact_id)
         return
     if status != "Trusted":
         raise ContractError("RESULT_STATUS_INVALID", str(status))
@@ -185,6 +251,8 @@ def validate_result(result: dict[str, Any], facts: dict[str, dict[str, Any]], so
     )
     if not all(required_checks):
         raise ContractError("TRUSTED_REQUIRES_ALL_CHECKS", fact_id)
+    if undersized:
+        raise ContractError("PRIVACY_THRESHOLD_FAILED", fact_id)
     if result.get("synthetic") is True and result.get("decision_usable") is not False:
         raise ContractError("SYNTHETIC_DECISION_FORBIDDEN", fact_id)
     if result.get("synthetic") is not True and result.get("decision_usable") is not True:

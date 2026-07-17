@@ -7,6 +7,10 @@ This package freezes the read-only fact boundary for Project Brain v2.
 - P1, H1, F1, C1 and S1 are rejected.
 - Every source is read-only and has no write capability.
 - Missing, stale, conflicting, low-quality, unauthorized or undersized evidence fails closed as `Unknown` or `No-Go`.
+- Every result declares a privacy risk tier that must match its fact; high-risk G1 results use the high-risk threshold, never the standard fallback.
+- Freshness is recomputed from the fact SLO and result timestamps; a self-declared freshness check cannot override the calculation.
+- Rounding applies to every numeric leaf in an aggregate object, not only scalar values.
+- An undersized aggregate is a valid fail-closed `No-Go` only when its value is null, decision use is false and the threshold check/reason agree.
 - No file in this package enables a scheduler, snapshot runtime, dashboard, export, deployment or production route.
 
 Run the package validator from the repository root:
