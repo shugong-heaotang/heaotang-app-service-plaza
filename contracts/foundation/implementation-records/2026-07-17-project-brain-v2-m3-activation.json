@@ -1,0 +1,84 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260717-PROJECT-BRAIN-V2-M3-ACTIVATION",
+  "title": "Project Brain v2 M3 governed boss dashboard activation",
+  "date": "2026-07-17",
+  "status": "verified",
+  "objective": "Activate only the governed M3 offline read-only boss dashboard candidate after M2 authority closure, with server-side authorization, explainability, no row-level drilldown, default-denied export and production still disabled.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m3-activation.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m3-activation-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/project-brain-v2/README.md",
+    "docs/project-management/project-brain-v2/requirements-v2.md",
+    "docs/project-management/project-brain-v2/architecture-v2.md",
+    "docs/project-management/project-brain-v2/delivery-plan-v2.md",
+    "docs/project-management/project-brain-v2/acceptance-v2.md",
+    "docs/decisions/0021-project-brain-v2-operational-read-model.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-17-project-brain-v2-m3-activation-task-order.md",
+    "docs/project-management/project-brain-v2/task-comprehension-receipt-m3-activation.md",
+    "docs/project-management/project-brain-v2/handoff-m2.md",
+    "docs/project-management/project-brain-v2/handoff-m2-registry-closeout.md",
+    "docs/project-management/project-brain-v2/handoff-m3-activation.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/project-brain/v2/runtime/runtime-policy.v1.schema.json",
+    "contracts/project-brain/v2/runtime/snapshot.v1.schema.json",
+    "contracts/project-brain/v2/runtime/run-record.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0021-project-brain-v2-operational-read-model.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-17-project-brain-v2-m3-activation-task-order.md",
+    "docs/project-management/project-brain-v2/task-comprehension-receipt-m3-activation.md",
+    "docs/project-management/project-brain-v2/handoff-m3-activation.md",
+    "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m3-activation.json",
+    "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m3-activation-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-17-project-brain-v2-m3-activation.json"
+  ],
+  "verification": [
+    "M2 activation, runtime and registry closeout are integrated at exact authority 65863009f9b950985c8850cc65d86a426ba128dd",
+    "M2 R3 independent review SHA-256 bbfcf311940ad10254f3df1e4c4053baed630ade2982558dfe9ec4629fc5de98 and registry closeout review SHA-256 d739b549da60d02806e14157949fbea3b4695386c8d4ab6deccae1a5da8b4ff4",
+    "M3 implementation is limited to eight registered path classes and an offline synthetic snapshot-driven dashboard candidate",
+    "Server-side authorization, anonymous and unauthorized denial, direct URL and API denial, export denial, state explanation and no sensitive drilldown are mandatory acceptance evidence",
+    "M1 and M2, Project Brain v1, App, public scripts, real data, credentials, network, external auth, deployment, timer and production are outside scope",
+    "Current checklist completed 26 of 26 and governance exam attempt 1 passed with score 100",
+    "Only two new Project Brain work items are added; all pre-existing work items remain semantically unchanged",
+    "Seven activation path classes and seven changed files; no eighth activation path class",
+    "Collaboration, total contracts, UTF-8, diff-check, secret0 and authority freshness are required before independent review",
+    "Activation and M3 active statuses become effective only after independent Go and controlled integration"
+  ],
+  "evidence": [
+    "docs/project-management/notices/2026-07-17-project-brain-v2-m3-activation-task-order.md",
+    "docs/project-management/project-brain-v2/task-comprehension-receipt-m3-activation.md",
+    "docs/project-management/project-brain-v2/handoff-m3-activation.md",
+    "docs/project-management/project-brain-v2/handoff-m2-registry-closeout.md",
+    "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m3-activation.json",
+    "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m3-activation-attempt-1.json"
+  ],
+  "premises": [
+    "M2 authority and failure-closed invariants remain unchanged",
+    "The M3 dashboard candidate consumes only immutable synthetic M2 evidence and is not a deployed route",
+    "Production dashboard and export switches remain false",
+    "M4-M5 and production enablement require separate authorization",
+    "Any scope overlap, unknown evidence, authority drift or server-side authorization gap fails closed"
+  ],
+  "implementation_mode": "ai-assisted"
+}

@@ -3635,6 +3635,55 @@
                             "migration_note":  "仅处理Project Brain v2自身M2 registry收口：M2 active→integrated并登记本closeout。两项integrated状态仅当本exact candidate独立Go且受控fast-forward进入authority后生效；候选本身不是权威。developer=Project Brain v2 M2 registry closeout platform governance owner；reviewer=independent platform reviewer；approver=项目最高负责人；integration owner=平台集成负责人。blocks=M3另行激活；does_not_block=Project Brain v1及所有非PB隔离项目。M3-M5、真实数据、凭据、网络、dashboard、export、notification、deploy、timer与production均No-Go。仅7类allowed paths，不得增加第八类路径。",
                             "handoff_record":  "docs/project-management/project-brain-v2/handoff-m2-registry-closeout.md"
                         },
+                        {
+                            "work_id":  "AIW-20260717-PROJECT-BRAIN-V2-M3-ACTIVATION",
+                            "title":  "Project Brain v2 M3 老板只读驾驶舱激活治理",
+                            "owner":  "Project Brain v2 M3 activation governance owner",
+                            "owner_role":  "平台集成负责人",
+                            "status":  "integrated",
+                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                            "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-m3-activation",
+                            "branch":  "codex/project-brain-v2-m3-activation",
+                            "base_commit":  "65863009f9b950985c8850cc65d86a426ba128dd",
+                            "allowed_paths":  [
+                                                  "contracts/foundation/agent-collaboration.v1.json",
+                                                  "docs/project-management/notices/2026-07-17-project-brain-v2-m3-activation-task-order.md",
+                                                  "docs/project-management/project-brain-v2/task-comprehension-receipt-m3-activation.md",
+                                                  "docs/project-management/project-brain-v2/handoff-m3-activation.md",
+                                                  "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m3-activation*.json",
+                                                  "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m3-activation*.json",
+                                                  "contracts/foundation/implementation-records/2026-07-17-project-brain-v2-m3-activation*.json"
+                                              ],
+                            "started_with_clean_worktree":  true,
+                            "preexisting_changes_acknowledged":  false,
+                            "migration_note":  "仅激活Project Brain v2 M3治理并预登记一个M3 dashboard工作项。activation integrated与M3 active只在本exact candidate独立Go并受控进入authority后生效。M2已在authority 65863009f9b950985c8850cc65d86a426ba128dd闭环。M3只允许服务端授权的只读查询模型、老板UI、截至时间/来源/口径/Owner/Unknown-No-Go解释、禁止行级下钻与默认拒绝导出；必须负向证明未授权角色、direct URL、API和export拒绝。禁止App共享路由、真实数据/凭据/网络、源写入、审批/重算/改状态、部署、真实timer与production。blocks=M3 dashboard checkpoint；does_not_block=Project Brain v1及所有非PB隔离项目。",
+                            "handoff_record":  "docs/project-management/project-brain-v2/handoff-m3-activation.md"
+                        },
+                        {
+                            "work_id":  "AIW-20260717-PROJECT-BRAIN-V2-M3-BOSS-DASHBOARD",
+                            "title":  "Project Brain v2 M3 老板只读驾驶舱候选",
+                            "owner":  "Project Brain v2 M3 dashboard owner",
+                            "owner_role":  "平台集成负责人",
+                            "status":  "active",
+                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                            "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-m3-dashboard",
+                            "branch":  "codex/project-brain-v2-m3-dashboard",
+                            "base_commit":  "65863009f9b950985c8850cc65d86a426ba128dd",
+                            "allowed_paths":  [
+                                                  "project_brain_v2/dashboard/**",
+                                                  "contracts/project-brain/v2/dashboard/**",
+                                                  "docs/project-management/notices/2026-07-17-project-brain-v2-m3-dashboard-task-order.md",
+                                                  "docs/project-management/project-brain-v2/task-comprehension-receipt-m3.md",
+                                                  "docs/project-management/project-brain-v2/handoff-m3.md",
+                                                  "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m3-dashboard*.json",
+                                                  "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m3-dashboard*.json",
+                                                  "contracts/foundation/implementation-records/2026-07-17-project-brain-v2-m3-dashboard*.json"
+                                              ],
+                            "started_with_clean_worktree":  true,
+                            "preexisting_changes_acknowledged":  false,
+                            "migration_note":  "M3 active仅在AIW-20260717-PROJECT-BRAIN-V2-M3-ACTIVATION的exact candidate独立Go并受控进入authority后生效。只实现离线、synthetic snapshot驱动、服务端授权的只读dashboard候选与权限/解释性/禁止下钻和导出负例；不得修改M1/M2、registry、App、公共scripts或v1。boss_dashboard_enabled仍为false；真实数据、凭据、网络、共享route、external auth接线、export、notification、deploy、timer与production继续No-Go。blocks=M4另行激活；does_not_block=Project Brain v1及所有非PB隔离项目。",
+                            "handoff_record":  "docs/project-management/project-brain-v2/handoff-m3-activation.md"
+                        },
                        {
                            "work_id":  "AIW-20260717-HEALTH-README-CURRENT-STATE-ACCEPTANCE",
                            "title":  "健康大管家 README 当前状态独立验收与受控集成",
