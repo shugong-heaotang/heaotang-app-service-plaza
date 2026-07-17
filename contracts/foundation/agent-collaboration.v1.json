@@ -3761,6 +3761,29 @@
                            "preexisting_changes_acknowledged":  false,
                            "migration_note":  "B2 activation governance candidate b94b7c3ef94419f556d96268ce435edeb7d3c310 was independently accepted and controlled-integrated into authority. This formal implementation item becomes active only after this exact registry-only lifecycle candidate is independently accepted and controlled-integrated into authority. It authorizes only the listed APP PDCAR governance entrypoints, repo-local fail-closed validators, tests, schema, PDCAR governance documents, its own certification evidence, and registry lifecycle. It does not authorize business-module source, deployment, production, real data, payment, or the health pilot. blocks=formal D1 preflight and D2 implementation; does_not_block=all existing non-overlapping work. The registry candidate and its commit are not implementation authority before authority integration.",
                            "handoff_record":  "docs/project-management/pdcar/handoff-platform-pdcar-skill-enforcement.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260717-DAYI-HEALTH-HALL-M0-SCOPE-IA",
+                           "title":  "大医健康馆 M0 非医疗范围与信息架构冻结",
+                           "owner":  "Dayi Health Hall continuous development agent",
+                           "owner_role":  "健康大管家负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/项目最高负责人/worktrees/heaotang-dayi-health-hall-m0-scope-ia",
+                           "branch":  "codex/dayi-health-hall-m0-scope-ia",
+                           "base_commit":  "02f16fb6451ef23cc3da6da2a360f3b1efe67b60",
+                           "allowed_paths":  [
+                                                 "contracts/modules/health-manager/dayi-health-hall/m0/**",
+                                                 "docs/project-management/modules/health-manager/dayi-health-hall/m0/**",
+                                                 "contracts/modules/health-manager/development-checklists/2026-07-17-dayi-health-hall-m0*.json",
+                                                 "contracts/modules/health-manager/governance-exams/2026-07-17-dayi-health-hall-m0*.json",
+                                                 "contracts/modules/health-manager/implementation-records/2026-07-17-dayi-health-hall-m0*.json",
+                                                 "docs/project-management/notices/2026-07-17-dayi-health-hall-m0-scope-ia-task-order.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "从 exact authority 02f16fb6451ef23cc3da6da2a360f3b1efe67b60 激活。PDCAR formal implementation 仍 active，但 authority correction 已移除其 registry allowed path，当前 active/handoff-ready registry writers=0；候选模块路径与既有 active/handoff-ready 健康精确路径无重叠。只冻结非医疗大医健康馆 M0 的组织边界、IA、生命周期预览、角色/状态、学习/俱乐部权威跳转和正负合同；外部 m0-prereg 仅是不可信设计输入，必须在本工作项 current checklist/Exam100 后重新实现并验收。blocks=M0 runtime、M1、真实数据、医疗、收费、部署和production；does_not_block=本 M0 离线/合成合同、Schema、负例和Handoff。",
+                           "handoff_record":  null
                        }
                    ]
 }
