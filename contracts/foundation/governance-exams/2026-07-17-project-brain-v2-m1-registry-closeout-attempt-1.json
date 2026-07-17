@@ -1,0 +1,70 @@
+{
+    "contract_version":  "governance-exam.v1",
+    "attempt_id":  "EX-20260717-PROJECT-BRAIN-V2-M1-REGISTRY-CLOSEOUT-1",
+    "record_id":  "IR-20260717-PROJECT-BRAIN-V2-M1-REGISTRY-CLOSEOUT",
+    "actor":  "Project Brain v2 M1 registry closeout platform governance owner",
+    "attempt_number":  1,
+    "status":  "passed",
+    "generated_at":  "2026-07-17T04:10:28.4680727Z",
+    "completed_at":  "2026-07-17T04:10:40.9525846Z",
+    "question_count":  8,
+    "passing_score":  100,
+    "score":  100,
+    "bank_sha256":  "215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40",
+    "reading_list_sha256":  "b0df386a68e8e00a803a08d0b3e786893a47bad6742dd36a5b6273803b7abcb1",
+    "checklist_path":  "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m1-registry-closeout.json",
+    "checklist_sha256":  "01d1b04f97deaae58980aa7df18814eb29c0112ca01bbb945d649c0c83f29c04",
+    "responses":  [
+                      {
+                          "question_id":  "GQ-011",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/project-management/module-internal-dependency-standard-v1.md"
+                      },
+                      {
+                          "question_id":  "GQ-003",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0011-two-person-config-approval.md"
+                      },
+                      {
+                          "question_id":  "GQ-010",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0012-two-strike-root-cause-rule.md"
+                      },
+                      {
+                          "question_id":  "GQ-009",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0010-ai-implementation-records-required.md"
+                      },
+                      {
+                          "question_id":  "GQ-008",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0007-stable-foundation-variable-business.md"
+                      },
+                      {
+                          "question_id":  "GQ-016",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0013-mandatory-ai-development-entrypoint.md"
+                      },
+                      {
+                          "question_id":  "GQ-002",
+                          "selected_option":  "C",
+                          "correct":  true,
+                          "source_path":  "docs/decisions/0008-versioned-business-variables.md"
+                      },
+                      {
+                          "question_id":  "GQ-012",
+                          "selected_option":  "B",
+                          "correct":  true,
+                          "source_path":  "contracts/foundation/agent-collaboration.v1.json"
+                      }
+                  ],
+    "remediation_sources":  [
+
+                            ]
+}

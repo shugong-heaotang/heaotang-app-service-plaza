@@ -3519,7 +3519,7 @@
                            "title":  "Project Brain v2 M1 去标识经营事实合同与来源映射",
                            "owner":  "Project Brain v2 M1 project owner",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-m1-fact-contracts",
                            "branch":  "codex/project-brain-v2-m1-fact-contracts",
@@ -3535,8 +3535,32 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "M1 active仅当AIW-20260717-PROJECT-BRAIN-V2-M1-ACTIVATION的exact candidate经独立Go并普通fast-forward进入authority后生效。M0 registry收口已在authority；本M1工作树已从exact authority 86ab20f8928a6d70195edb3879fbe7083c20a0f9创建并核验branch、base与clean，唯一owner且与现有active路径无冲突。下一动作不是运行实现，而是M1自身重新完成current checklist、exam100与任务令后，仅推进首个去标识经营事实合同和来源映射检查点。禁止行级会员、健康、订单、支付、客服、人脉数据及可重识别或小样本聚合；禁止App/运行scripts/scheduler/snapshot/dashboard/通知/导出/真实数据/凭据/环境/部署/production。M2-M5继续No-Go。blocks=M2；does_not_block=Project Brain v1及所有非PB隔离项目。",
-                           "handoff_record":  "docs/project-management/project-brain-v2/handoff-m1-activation.md"
+                           "migration_note":  "M1 fact contracts exact candidate 62b55dbf2d8d8ee5b522692da0cc72ebc7678477 已由R4独立验收Go（report SHA256=c3edbc9b6c524329eb370378306197c4f3ac60daa2299fb6203fb5ad791b1ec2），并以lease保护的普通fast-forward进入authority。R1 367a8d4、R2 98ed142、R3 381f85f 的No-Go历史均保留；最终合同为3 facts/3 sources/7 positive/10 negative/20 tests，read-only、runtime off、production off。integrated状态仅在本closeout exact candidate经独立Go并受控进入authority后生效。M2-M5、App、scheduler、snapshot、dashboard、真实数据、凭据、环境、部署与production继续No-Go。blocks=M2另行激活；does_not_block=Project Brain v1及所有非PB隔离项目。",
+                           "handoff_record":  "docs/project-management/project-brain-v2/handoff-m1.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260717-PROJECT-BRAIN-V2-M1-REGISTRY-CLOSEOUT",
+                           "title":  "Project Brain v2 M1 registry 收口",
+                           "owner":  "Project Brain v2 M1 registry closeout platform governance owner",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "integrated",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-m1-closeout",
+                           "branch":  "codex/project-brain-v2-m1-closeout",
+                           "base_commit":  "62b55dbf2d8d8ee5b522692da0cc72ebc7678477",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "docs/project-management/notices/2026-07-17-project-brain-v2-m1-registry-closeout-task-order.md",
+                                                 "docs/project-management/project-brain-v2/task-comprehension-receipt-m1-registry-closeout.md",
+                                                 "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m1-registry-closeout*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m1-registry-closeout*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-17-project-brain-v2-m1-registry-closeout*.json",
+                                                 "docs/project-management/project-brain-v2/handoff-m1-registry-closeout.md"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "仅处理Project Brain v2自身M1 registry收口：M1 active→integrated并登记本closeout。两项integrated状态仅当本exact candidate独立Go且受控fast-forward进入authority后生效；候选本身不是权威。developer=Project Brain v2 M1 registry closeout platform governance owner；reviewer=independent platform reviewer；approver=项目最高负责人；integration owner=平台集成负责人。blocks=M2另行激活；does_not_block=Project Brain v1及所有非PB隔离项目。M2-M5、App、scripts、真实数据、凭据、环境、部署和production均No-Go。仅7类allowed paths，不得增加第八类路径。",
+                           "handoff_record":  "docs/project-management/project-brain-v2/handoff-m1-registry-closeout.md"
                        },
                        {
                            "work_id":  "AIW-20260717-HEALTH-README-CURRENT-STATE-ACCEPTANCE",
