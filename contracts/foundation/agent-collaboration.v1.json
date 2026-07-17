@@ -3563,6 +3563,55 @@
                            "handoff_record":  "docs/project-management/project-brain-v2/handoff-m1-registry-closeout.md"
                        },
                        {
+                           "work_id":  "AIW-20260717-PROJECT-BRAIN-V2-M2-ACTIVATION",
+                           "title":  "Project Brain v2 M2 定时刷新激活治理",
+                           "owner":  "Project Brain v2 M2 activation governance owner",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "integrated",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-m2-activation",
+                           "branch":  "codex/project-brain-v2-m2-activation",
+                           "base_commit":  "9194d3c52bb1206bedbc6ecd6d5444cb2c6f5df7",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "docs/project-management/notices/2026-07-17-project-brain-v2-m2-activation-task-order.md",
+                                                 "docs/project-management/project-brain-v2/task-comprehension-receipt-m2-activation.md",
+                                                 "docs/project-management/project-brain-v2/handoff-m2-activation.md",
+                                                 "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m2-activation*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m2-activation*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-17-project-brain-v2-m2-activation*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "仅激活Project Brain v2 M2治理；activation integrated与M2 active仅在本exact candidate独立Go并受控进入authority后生效。M1已在authority闭环。M2只允许只读scheduler、幂等/互斥/超时/有限重试、不可变快照、审计、告警、禁用与回滚演练；禁止真实生产源、App dashboard、部署和production。blocks=M2 runtime checkpoint；does_not_block=Project Brain v1及所有非PB隔离项目。",
+                           "handoff_record":  "docs/project-management/project-brain-v2/handoff-m2-activation.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260717-PROJECT-BRAIN-V2-M2-READONLY-REFRESH",
+                           "title":  "Project Brain v2 M2 只读定时刷新与不可变快照",
+                           "owner":  "Project Brain v2 M2 runtime owner",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/APP系统",
+                           "workspace_path":  "C:/Users/shugo/Documents/APP系统/.codex-worktrees/project-brain-v2-m2-runtime",
+                           "branch":  "codex/project-brain-v2-m2-runtime",
+                           "base_commit":  "9194d3c52bb1206bedbc6ecd6d5444cb2c6f5df7",
+                           "allowed_paths":  [
+                                                 "project_brain_v2/**",
+                                                 "contracts/project-brain/v2/runtime/**",
+                                                 "docs/project-management/notices/2026-07-17-project-brain-v2-m2-runtime-task-order.md",
+                                                 "docs/project-management/project-brain-v2/task-comprehension-receipt-m2.md",
+                                                 "docs/project-management/project-brain-v2/handoff-m2.md",
+                                                 "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m2-runtime*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m2-runtime*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-17-project-brain-v2-m2-runtime*.json"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "M2 active仅在AIW-20260717-PROJECT-BRAIN-V2-M2-ACTIVATION的exact candidate独立Go并受控进入authority后生效。仅实现读取M1合同所列G0与synthetic-only G1 fixture的离线运行框架、不可变快照、审计、告警和失败演练；所有source allowlist、runtime_enabled=false与production_enabled=false继续强制。禁止真实数据/凭据/环境、App/dashboard、公共scripts、部署与production。blocks=M3另行激活；does_not_block=Project Brain v1及所有非PB隔离项目。",
+                           "handoff_record":  "docs/project-management/project-brain-v2/handoff-m2-activation.md"
+                       },
+                       {
                            "work_id":  "AIW-20260717-HEALTH-README-CURRENT-STATE-ACCEPTANCE",
                            "title":  "健康大管家 README 当前状态独立验收与受控集成",
                            "owner":  "Codex platform independent acceptance agent",
