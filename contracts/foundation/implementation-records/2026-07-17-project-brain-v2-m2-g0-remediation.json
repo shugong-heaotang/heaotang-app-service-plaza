@@ -1,0 +1,80 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260717-PROJECT-BRAIN-V2-M2-G0-REMEDIATION",
+  "title": "Project Brain v2 M2 G0 Trusted refresh root-cause remediation",
+  "date": "2026-07-17",
+  "status": "verified",
+  "objective": "Correct the M2 evaluator so G0 Trusted results use not-applicable privacy semantics while G1 thresholds and fail-closed behavior remain intact.",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m2-g0-remediation.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m2-g0-remediation-attempt-1.json",
+  "governance_inputs": [
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/project-brain-v2/handoff-m2.md",
+    "docs/project-management/project-brain-v2/handoff-m2-g0-remediation-activation.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-17-project-brain-v2-m2-g0-remediation-task-order.md",
+    "docs/project-management/project-brain-v2/task-comprehension-receipt-m2-g0-remediation.md",
+    "docs/project-management/project-brain-v2/handoff-m2-g0-remediation.md"
+  ],
+  "capabilities": [
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/project-brain/v2/fact-catalog.v1.json",
+    "contracts/project-brain/v2/fact-result.v1.schema.json",
+    "contracts/project-brain/v2/privacy-threshold-policy.v1.json",
+    "contracts/project-brain/v2/runtime/runtime-policy.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0021-project-brain-v2-operational-read-model.md"
+  ],
+  "changed_areas": [
+    "project_brain_v2/runtime/engine.py",
+    "project_brain_v2/runtime/tests/test_engine.py",
+    "docs/project-management/notices/2026-07-17-project-brain-v2-m2-g0-remediation-task-order.md",
+    "docs/project-management/project-brain-v2/task-comprehension-receipt-m2-g0-remediation.md",
+    "docs/project-management/project-brain-v2/handoff-m2-g0-remediation.md",
+    "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m2-g0-remediation.json",
+    "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m2-g0-remediation-attempt-1.json"
+  ],
+  "verification": [
+    "Activation R2 exact candidate 16d538c9f8f12dacfd9dba1ad82400f9724e9d94 was independently accepted with P0/P1/P2 0/0/0 and controlled-integrated before runtime work began",
+    "G0 Trusted requires sample_size null and privacy_threshold not_applicable and does not execute a G1 minimum group size",
+    "G0 with any sample size or forged pass/fail privacy result fails with PRIVACY_THRESHOLD_FAILED",
+    "Fixture classification and privacy risk tier must match the authoritative fact catalog",
+    "G1 high threshold accepts 50 and rejects 45; standard threshold accepts 20 and rejects 19; boolean samples fail closed",
+    "M2 runtime tests passed 43 of 43 with zero skips",
+    "M1 contract regression and mutation tests passed 20 of 20 including rounding and threshold rules",
+    "Runtime contract validation passed with default_disabled true, production_capabilities false, network_imports 0 and schemas 6",
+    "Current checklist completed 26 of 26 and governance exam attempt 1 passed with score 100",
+    "Only the two runtime files and six exact governance evidence classes are authorized",
+    "M1, M3, v1, registry, App, real data, network, deployment, timer and production remain unchanged",
+    "Collaboration, checklist, exam, implementation-record and total contract validators passed",
+    "Text encoding passed across 1618 files; git diff check passed",
+    "Exact scope contains eight files in the eight registered path classes with out_of_scope_count 0 and secret_hits 0",
+    "Final pre-freeze fetch kept remote authority and merge-base at 16d538c9f8f12dacfd9dba1ad82400f9724e9d94"
+  ],
+  "evidence": [
+    "project_brain_v2/runtime/tests/test_engine.py",
+    "docs/project-management/notices/2026-07-17-project-brain-v2-m2-g0-remediation-task-order.md",
+    "docs/project-management/project-brain-v2/task-comprehension-receipt-m2-g0-remediation.md",
+    "docs/project-management/project-brain-v2/handoff-m2-g0-remediation.md",
+    "contracts/foundation/development-checklists/2026-07-17-project-brain-v2-m2-g0-remediation.json",
+    "contracts/foundation/governance-exams/2026-07-17-project-brain-v2-m2-g0-remediation-attempt-1.json"
+  ],
+  "premises": [
+    "Historical M2 and M3 No-Go evidence remains immutable",
+    "This offline synthetic runtime repair does not activate production or real sources",
+    "M3 overall Acceptance requires reconstruction and independent review on the integrated remediation authority",
+    "M4 and M5 remain separately governed and unauthorized"
+  ],
+  "implementation_mode": "ai-assisted"
+}

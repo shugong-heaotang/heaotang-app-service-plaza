@@ -17,7 +17,9 @@ from project_brain_v2.runtime.scheduler import OfflineScheduler
 
 
 FIXTURE = "contracts/project-brain/v2/examples/trusted-g1-synthetic.json"
+G0_FIXTURE = "contracts/project-brain/v2/examples/trusted-g0-synthetic.json"
 FACT = "synthetic.operations.completed_services.count"
+G0_FACT = "governance.work_items.status_counts"
 ROLE = "project_brain_reviewer"
 
 
@@ -65,6 +67,10 @@ class RuntimeTest(unittest.TestCase):
 
     def execute(self, run_id="run-1", **kwargs):
         return self.engine(**kwargs).run(run_id, FACT, FIXTURE, ROLE)
+
+    def execute_g0(self, run_id="g0-run", fact_id=G0_FACT, fixture_path=G0_FIXTURE):
+        self.write_policy(allowed_fixtures=[fixture_path])
+        return self.engine().run(run_id, fact_id, fixture_path, ROLE)
 
     def test_trusted_run_creates_content_addressed_snapshot_pointer_and_audit(self):
         record = self.execute()
@@ -186,6 +192,63 @@ class RuntimeTest(unittest.TestCase):
     def test_high_risk_small_sample_is_no_go(self):
         fixture = self.fixture_json(); fixture["sample_size"] = 45; self.write_fixture(fixture)
         self.assertEqual("PRIVACY_THRESHOLD_FAILED", self.execute()["reason_code"])
+
+    def test_high_risk_threshold_boundary_remains_trusted(self):
+        fixture = self.fixture_json(); fixture["sample_size"] = 50; self.write_fixture(fixture)
+        self.assertEqual("Trusted", self.execute()["status"])
+
+    def test_standard_threshold_boundary_is_enforced(self):
+        catalog_path = self.repo / "contracts/project-brain/v2/fact-catalog.v1.json"
+        catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
+        fact = next(item for item in catalog["facts"] if item["fact_id"] == FACT)
+        fact["privacy_risk_tier"] = "standard"
+        catalog_path.write_text(json.dumps(catalog), encoding="utf-8")
+        fixture = self.fixture_json(); fixture["privacy_risk_tier"] = "standard"; fixture["sample_size"] = 20
+        self.write_fixture(fixture)
+        self.assertEqual("Trusted", self.execute("standard-20")["status"])
+        fixture["sample_size"] = 19; self.write_fixture(fixture)
+        self.assertEqual("PRIVACY_THRESHOLD_FAILED", self.execute("standard-19")["reason_code"])
+
+    def test_boolean_g1_sample_is_not_an_integer_threshold(self):
+        fixture = self.fixture_json(); fixture["sample_size"] = True; self.write_fixture(fixture)
+        self.assertEqual("PRIVACY_THRESHOLD_FAILED", self.execute()["reason_code"])
+
+    def test_legal_g0_trusted_creates_snapshot_pointer_audit_and_run(self):
+        record = self.execute_g0()
+        self.assertEqual("Trusted", record["status"])
+        self.assertIsNotNone(record["snapshot_hash"])
+        self.assertTrue((self.state / "snapshots" / f'{record["snapshot_hash"]}.json').exists())
+        self.assertTrue((self.state / "last-trusted.json").exists())
+        self.assertTrue((self.state / "runs/g0-run.json").exists())
+        audit = json.loads((self.state / "audit.jsonl").read_text(encoding="utf-8"))
+        self.assertEqual("G0", audit["classification"])
+
+    def test_second_g0_fact_uses_not_applicable_privacy_semantics(self):
+        fact_id = "governance.implementation_records.verification_counts"
+        fixture_path = "contracts/project-brain/v2/examples/trusted-g0-implementation-records.json"
+        fixture = self.fixture_json(G0_FIXTURE)
+        sources = json.loads((self.repo / "contracts/project-brain/v2/source-map.v1.json").read_text(encoding="utf-8"))["sources"]
+        source = next(item for item in sources if item["fact_id"] == fact_id)
+        fixture.update({"fact_id": fact_id, "authority_id": source["authority_id"], "source_owner": source["source_owner"]})
+        self.write_fixture(fixture, fixture_path)
+        self.assertEqual("Trusted", self.execute_g0("g0-second", fact_id, fixture_path)["status"])
+
+    def test_g0_rejects_any_sample_size(self):
+        fixture = self.fixture_json(G0_FIXTURE); fixture["sample_size"] = 0; self.write_fixture(fixture, G0_FIXTURE)
+        self.assertEqual("PRIVACY_THRESHOLD_FAILED", self.execute_g0()["reason_code"])
+
+    def test_g0_rejects_forged_privacy_threshold_results(self):
+        for result in ("pass", "fail"):
+            with self.subTest(result=result):
+                fixture = self.fixture_json(G0_FIXTURE); fixture["checks"]["privacy_threshold"] = result
+                self.write_fixture(fixture, G0_FIXTURE)
+                self.assertEqual("PRIVACY_THRESHOLD_FAILED", self.execute_g0(result)["reason_code"])
+
+    def test_fixture_classification_and_risk_tier_must_match_catalog(self):
+        for field, value in (("classification", "G0"), ("privacy_risk_tier", "standard")):
+            with self.subTest(field=field):
+                fixture = self.fixture_json(); fixture[field] = value; self.write_fixture(fixture)
+                self.assertEqual("QUALITY_FAILED", self.execute(field)["reason_code"])
 
     def test_failure_does_not_overwrite_last_trusted_pointer(self):
         trusted = self.execute("trusted")

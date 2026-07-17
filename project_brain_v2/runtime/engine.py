@@ -223,6 +223,10 @@ class RefreshEngine:
             raise RuntimeFailure("UNAUTHORIZED")
         if fixture.get("fact_id") != fact.get("fact_id"):
             raise RuntimeFailure("QUALITY_FAILED", "fixture fact mismatch")
+        if fixture.get("classification") != fact.get("classification"):
+            raise RuntimeFailure("QUALITY_FAILED", "fixture classification mismatch")
+        if fixture.get("privacy_risk_tier") != fact.get("privacy_risk_tier"):
+            raise RuntimeFailure("QUALITY_FAILED", "fixture privacy risk tier mismatch")
         if fixture.get("authority_id") != source.get("authority_id"):
             raise RuntimeFailure("AUTHORITY_CONFLICT")
         if fixture.get("synthetic") is not True:
@@ -246,11 +250,21 @@ class RefreshEngine:
         if checks.get("freshness") == "fail":
             raise RuntimeFailure("SOURCE_STALE")
         if status == "Trusted":
-            minimum = privacy["rules"]["high_risk_minimum_group_size"] if fact.get("privacy_risk_tier") == "high" else privacy["rules"]["standard_minimum_group_size"]
-            if not isinstance(fixture.get("sample_size"), int) or fixture["sample_size"] < minimum:
-                raise RuntimeFailure("PRIVACY_THRESHOLD_FAILED")
-            if not all(checks.get(k) == "pass" for k in ("freshness", "quality", "authorization", "privacy_threshold")):
-                raise RuntimeFailure("QUALITY_FAILED", "Trusted requires all checks pass")
+            if not all(checks.get(k) == "pass" for k in ("freshness", "quality", "authorization")):
+                raise RuntimeFailure("QUALITY_FAILED", "Trusted requires freshness, quality and authorization checks to pass")
+            classification = fact.get("classification")
+            sample_size = fixture.get("sample_size")
+            if classification == "G0":
+                if sample_size is not None or checks.get("privacy_threshold") != "not_applicable":
+                    raise RuntimeFailure("PRIVACY_THRESHOLD_FAILED", "G0 requires no sample threshold")
+            elif classification == "G1":
+                minimum = privacy["rules"]["high_risk_minimum_group_size"] if fact.get("privacy_risk_tier") == "high" else privacy["rules"]["standard_minimum_group_size"]
+                if isinstance(sample_size, bool) or not isinstance(sample_size, int) or sample_size < minimum:
+                    raise RuntimeFailure("PRIVACY_THRESHOLD_FAILED")
+                if checks.get("privacy_threshold") != "pass":
+                    raise RuntimeFailure("PRIVACY_THRESHOLD_FAILED", "G1 requires a passed sample threshold")
+            else:
+                raise RuntimeFailure("QUALITY_FAILED", "unsupported fact classification")
         return fixture
 
     def _read_with_retry(self, path: Path, policy: dict[str, Any], deadline: float) -> tuple[bytes, int]:
