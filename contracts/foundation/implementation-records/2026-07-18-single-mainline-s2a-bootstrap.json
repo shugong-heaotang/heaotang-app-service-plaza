@@ -1,0 +1,94 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260718-SINGLE-MAINLINE-S2A-BOOTSTRAP-C1",
+  "title": "单一产品主线 S2A 治理启动",
+  "date": "2026-07-18",
+  "status": "implemented",
+  "objective": "从独立接受的同步锚点建立一个干净且唯一的主线治理身份，完成协作登记、任务理解、current checklist、Exam100、实施记录和 Handoff，不实施业务功能。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-18-single-mainline-s2a-bootstrap.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-18-single-mainline-s2a-bootstrap-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md",
+    "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json",
+    "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md",
+    "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-18-single-mainline-s2a-bootstrap-task-order.md",
+    "docs/project-management/pdcar/task-comprehension-single-mainline-s2a-bootstrap.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json",
+    "contracts/foundation/implementation-record.v1.schema.json"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-18-single-mainline-s2a-bootstrap-task-order.md",
+    "docs/project-management/pdcar/task-comprehension-single-mainline-s2a-bootstrap.md",
+    "contracts/foundation/development-checklists/2026-07-18-single-mainline-s2a-bootstrap.json",
+    "contracts/foundation/governance-exams/2026-07-18-single-mainline-s2a-bootstrap-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-18-single-mainline-s2a-bootstrap.json",
+    "docs/project-management/pdcar/handoff-single-mainline-s2a-bootstrap.md"
+  ],
+  "verification": [
+    "remote authority remained 126419d9aea93b86a8449fabe7156e03d78572dc immediately before worktree creation",
+    "new branch codex/single-mainline-s2-r1 and worktree were created once from exact authority and verified clean",
+    "agent collaboration registry schema and active-scope overlap validation passed with exit 0",
+    "platform preflight returned ready",
+    "current checklist contains 26 of 26 checked inputs with zero SHA drift and passed snapshot validation",
+    "random governance exam attempt 1 passed 8 of 8 with score 100",
+    "only seven governance path classes changed; no product source push merge integration deployment production data or payment action occurred"
+  ],
+  "evidence": [
+    "docs/project-management/notices/2026-07-18-single-mainline-s2a-bootstrap-task-order.md",
+    "docs/project-management/pdcar/task-comprehension-single-mainline-s2a-bootstrap.md",
+    "contracts/foundation/development-checklists/2026-07-18-single-mainline-s2a-bootstrap.json",
+    "contracts/foundation/governance-exams/2026-07-18-single-mainline-s2a-bootstrap-attempt-1.json",
+    "docs/project-management/pdcar/handoff-single-mainline-s2a-bootstrap.md"
+  ],
+  "premises": [
+    "126419d9aea93b86a8449fabe7156e03d78572dc remains the exact S2A base authority",
+    "all historical active handoff-ready and planned work remains frozen by the highest-owner global pause",
+    "only the seven registry-authorized governance path classes are writable in S2A",
+    "Project Brain remains independent from the S2A writer",
+    "S2A does not authorize S2B product code push merge integration deployment production real data payment or external action"
+  ],
+  "implementation_mode": "ai-assisted"
+}
