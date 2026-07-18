@@ -3871,7 +3871,7 @@
                            "title":  "单一产品主线 S2A 治理启动",
                            "owner":  "Codex highest owner / thread 019f72ee-3907-7b21-9498-8e918ac53aac",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/worktrees/heaotang-app-service-integration-recovery",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-single-mainline-s2-r1",
                            "branch":  "codex/single-mainline-s2-r1",
@@ -3887,8 +3887,34 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
-                           "migration_note":  "S1 independently accepted 212/212 worktree reconciliation and proposed remote 126419d9aea93b86a8449fabe7156e03d78572dc only as the S2 synchronization anchor. Project Brain independently accepted S2A R2 Report/Plan/Execution Activation Go with Exam100 and P0/P1/P2=0/0/0. This row authorizes only governance bootstrap, current checklist, governance exam, implementation record, Handoff and one local candidate commit. All prior active/handoff-ready/planned rows remain globally paused and provide no residual authority. It does not authorize S2B, product code, push, merge, integration, deployment, production, real data, payment or external action.",
+                           "migration_note":  "S1 independently accepted 212/212 worktree reconciliation and proposed remote 126419d9aea93b86a8449fabe7156e03d78572dc only as the S2 synchronization anchor. Project Brain independently accepted S2A R2 Report/Plan/Execution Activation Go with Exam100 and P0/P1/P2=0/0/0. S2A local-mainline candidate 9a4fc29837d80cc3d3856056a5c97fb13b83a3c2 was independently accepted in C:/Users/shugo/Documents/项目最高负责人/2026-07-18-全局暂停与单主线重排/s2a-acceptance-r1/S2A-independent-acceptance.md, SHA-256 B77CF2BFDC64158F240DAAF356444AA8E6B08953A75AD37FD0E6F2C2334C9C89, Acceptance Go and P0/P1/P2=0/0/0. This integrated state preserves the actual S2A branch/worktree identity. Successor S2B uses a new unique branch/worktree under independently accepted R4. There is no push, merge, remote integration or deployment evidence. All prior active/handoff-ready/planned rows remain globally paused and provide no residual authority.",
                            "handoff_record":  "docs/project-management/pdcar/handoff-single-mainline-s2a-bootstrap.md"
+                       },
+                       {
+                           "work_id":  "AIW-20260718-SINGLE-MAINLINE-S2B-LIFE-APPLICATION-HISTORY-BUILD-TEST",
+                           "title":  "单一产品主线 S2B 生命导航申请历史纵向切片构建测试",
+                           "owner":  "Codex highest owner / thread 019f72ee-3907-7b21-9498-8e918ac53aac",
+                           "owner_role":  "平台集成负责人",
+                           "status":  "active",
+                           "repository_root":  "C:/Users/shugo/Documents/worktrees/heaotang-app-service-integration-recovery",
+                           "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-single-mainline-s2b-life-r1",
+                           "branch":  "codex/single-mainline-s2b-life-r1",
+                           "base_commit":  "9a4fc29837d80cc3d3856056a5c97fb13b83a3c2",
+                           "allowed_paths":  [
+                                                 "contracts/foundation/agent-collaboration.v1.json",
+                                                 "docs/project-management/notices/2026-07-18-single-mainline-s2b-life-application-history-build-test-task-order.md",
+                                                 "docs/project-management/pdcar/task-comprehension-single-mainline-s2b-life-application-history-build-test.md",
+                                                 "docs/project-management/pdcar/handoff-single-mainline-s2b-life-application-history-build-test.md",
+                                                 "contracts/foundation/development-checklists/2026-07-18-single-mainline-s2b-life-application-history-build-test*.json",
+                                                 "contracts/foundation/governance-exams/2026-07-18-single-mainline-s2b-life-application-history-build-test*.json",
+                                                 "contracts/foundation/implementation-records/2026-07-18-single-mainline-s2b-life-application-history-build-test*.json",
+                                                 "app/node_modules/**",
+                                                 "app/dist/**"
+                                             ],
+                           "started_with_clean_worktree":  true,
+                           "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "Created from accepted local-mainline predecessor 9a4fc29837d80cc3d3856056a5c97fb13b83a3c2 in the unique successor branch/worktree authorized by Project Brain S2B-G1 R4 review SHA-256 24564D15677900DD5DD1346E77E6AA70787367223A06B5E9F2E0B3DDF90EE80E. Effective G1 authority is restricted to seven governance path classes and one local commit. The app/node_modules/** and app/dist/** entries are future G2 declarations only and grant no current authority. G1 must independently accept 31/31 life-navigation checklist, same-record Exam100, implementation record and Handoff before a separate G2 Plan/Activation. No npm, product change, push, integration or deployment is authorized.",
+                           "handoff_record":  "docs/project-management/pdcar/handoff-single-mainline-s2b-life-application-history-build-test.md"
                        }
                    ]
 }

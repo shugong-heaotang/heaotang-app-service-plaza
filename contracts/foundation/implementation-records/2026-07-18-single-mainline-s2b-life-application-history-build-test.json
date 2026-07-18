@@ -1,0 +1,101 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260718-SINGLE-MAINLINE-S2B-LIFE-APPLICATION-HISTORY-BUILD-TEST-C1",
+  "title": "单一产品主线 S2B 生命导航申请历史构建测试治理准入",
+  "date": "2026-07-18",
+  "status": "implemented",
+  "objective": "在新的唯一 successor branch/worktree 上完成 S2B 首个纵向切片的治理身份、life-navigation current checklist、Exam100、实施记录和 Handoff，不运行产品构建测试。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-18-single-mainline-s2b-life-application-history-build-test.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-18-single-mainline-s2b-life-application-history-build-test-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md",
+    "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json",
+    "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md",
+    "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md",
+    "docs/project-management/modules/life-navigation/README.md",
+    "docs/project-management/notices/2026-07-10-life-navigation-first-phase-task-order.md",
+    "docs/project-management/modules/life-navigation-first-slice-contract-v1.md",
+    "contracts/foundation/module-dependencies/life-navigation.v1.json",
+    "contracts/modules/life-navigation/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-18-single-mainline-s2b-life-application-history-build-test-task-order.md",
+    "docs/project-management/pdcar/task-comprehension-single-mainline-s2b-life-application-history-build-test.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.ai-collaboration-safety",
+    "foundation.governance-certification"
+  ],
+  "contracts": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/development-checklist.v1.schema.json",
+    "contracts/foundation/governance-exam.v1.schema.json",
+    "contracts/foundation/implementation-record.v1.schema.json",
+    "docs/project-management/modules/life-navigation-first-slice-contract-v1.md"
+  ],
+  "decisions": [
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-18-single-mainline-s2b-life-application-history-build-test-task-order.md",
+    "docs/project-management/pdcar/task-comprehension-single-mainline-s2b-life-application-history-build-test.md",
+    "contracts/foundation/development-checklists/2026-07-18-single-mainline-s2b-life-application-history-build-test.json",
+    "contracts/foundation/governance-exams/2026-07-18-single-mainline-s2b-life-application-history-build-test-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-18-single-mainline-s2b-life-application-history-build-test.json",
+    "docs/project-management/pdcar/handoff-single-mainline-s2b-life-application-history-build-test.md"
+  ],
+  "verification": [
+    "successor branch and worktree were created once from accepted commit 9a4fc29837d80cc3d3856056a5c97fb13b83a3c2 and verified clean",
+    "failed predecessor worktree remained unchanged and was not cleaned or reset",
+    "agent collaboration registry schema and active-scope overlap validation passed with exit 0",
+    "platform preflight returned ready",
+    "current life-navigation checklist contains 31 of 31 unique inputs with zero SHA drift",
+    "random governance exam attempt 1 passed 8 of 8 with score 100",
+    "only seven governance path classes changed and no npm product source push integration or deployment action occurred"
+  ],
+  "evidence": [
+    "docs/project-management/notices/2026-07-18-single-mainline-s2b-life-application-history-build-test-task-order.md",
+    "docs/project-management/pdcar/task-comprehension-single-mainline-s2b-life-application-history-build-test.md",
+    "contracts/foundation/development-checklists/2026-07-18-single-mainline-s2b-life-application-history-build-test.json",
+    "contracts/foundation/governance-exams/2026-07-18-single-mainline-s2b-life-application-history-build-test-attempt-1.json",
+    "docs/project-management/pdcar/handoff-single-mainline-s2b-life-application-history-build-test.md"
+  ],
+  "premises": [
+    "9a4fc29837d80cc3d3856056a5c97fb13b83a3c2 remains the accepted local-mainline base",
+    "all historical active handoff-ready and planned work remains frozen by the highest-owner global pause",
+    "only the seven registry-authorized governance path classes are writable in G1",
+    "Project Brain remains independent from the G1 writer",
+    "D-LN-S2-001 remains Pending and the dimension selector is excluded",
+    "G1 does not authorize G2 npm tests build product push integration deployment production real data payment or external action"
+  ],
+  "implementation_mode": "ai-assisted"
+}
