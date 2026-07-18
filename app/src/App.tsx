@@ -1,11 +1,12 @@
 import { Navigate, Route, Routes } from "react-router-dom";
-import { ClubAllianceRoute, SelfCreatedClubRoute } from "./modules/club-alliance";
+import { ClubAllianceRoute, MemberHomeRoute, SelfCreatedClubRoute } from "./modules/club-alliance";
 import { HealthManagerRoute } from "./modules/health-manager";
 import { LifeNavigationPage } from "./modules/life-navigation";
 import { ProtectionMallPage } from "./modules/protection-mall";
 import { ProjectBrainPage } from "./modules/project-brain/ProjectBrainPage";
 import { CoreServicePage } from "./pages/CoreServicePage";
 import { NotFoundPage } from "./pages/NotFoundPage";
+import { PlannedServicePage } from "./pages/PlannedServicePage";
 import { ServicePlazaPage } from "./pages/ServicePlazaPage";
 
 export function AppRoutes() {
@@ -18,6 +19,9 @@ export function AppRoutes() {
         element={import.meta.env.DEV || import.meta.env.MODE === "test-server" ? <ProjectBrainPage /> : <Navigate to="/services" replace />}
       />
       <Route path="/services/life-navigation" element={<LifeNavigationPage />} />
+      <Route path="/services/activity-plaza" element={<PlannedServicePage service="activity-plaza" />} />
+      <Route path="/services/ai-assistant" element={<PlannedServicePage service="ai-assistant" />} />
+      <Route path="/services/club-alliance/member-home" element={<MemberHomeRoute />} />
       <Route
         path="/services/club-alliance/self-created/applications"
         element={<SelfCreatedClubRoute mode="applications" />}

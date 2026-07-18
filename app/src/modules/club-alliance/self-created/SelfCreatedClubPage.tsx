@@ -139,10 +139,10 @@ function SessionBar() {
   );
 }
 
-function PageFrame({ children }: { children: ReactNode }) {
+function PageFrame({ children, title = "自建俱乐部" }: { children: ReactNode; title?: string }) {
   return (
     <AppFrame
-      title="自建俱乐部"
+      title={title}
       actions={[]}
       backAction={(
         <Link
@@ -159,10 +159,15 @@ function PageFrame({ children }: { children: ReactNode }) {
   );
 }
 
-function AuthenticationRequired({ notice }: { notice?: string }) {
+function AuthenticationRequired({ notice, mode }: { notice?: string; mode: SelfCreatedClubPageMode }) {
+  const title = mode === "applications"
+    ? "本人加入申请"
+    : mode === "detail"
+      ? "自建俱乐部详情"
+      : "自建俱乐部";
   return (
-    <PageFrame>
-      <main className="self-created-page" data-page-state="authentication-required">
+    <PageFrame title={title}>
+      <main className="self-created-page" data-route-kind={mode}>
         {notice && <div className="feedback error" role="alert">{notice}</div>}
         <StatePanel state="authentication-required" title="登录后使用自建俱乐部">
           <p>列表、详情、加入申请和本人状态都使用平台共享登录会话。</p>
@@ -564,10 +569,16 @@ export function SelfCreatedClubPage({ mode, clubId, api }: SelfCreatedClubPagePr
     logout();
   }, [logout]);
 
-  if (!isAuthenticated) return <AuthenticationRequired notice={authNotice} />;
+  if (!isAuthenticated) return <AuthenticationRequired notice={authNotice} mode={mode} />;
+
+  const pageTitle = mode === "applications"
+    ? "本人加入申请"
+    : mode === "detail"
+      ? "自建俱乐部详情"
+      : "自建俱乐部";
 
   return (
-    <PageFrame>
+    <PageFrame title={pageTitle}>
       <main className="self-created-page" data-page-state={mode}>
         {authNotice && <div className="feedback error" role="alert">{authNotice}</div>}
         <SessionBar />

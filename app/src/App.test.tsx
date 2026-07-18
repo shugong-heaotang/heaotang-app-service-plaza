@@ -193,6 +193,32 @@ describe("服务广场主链路", () => {
       .toBe("Bearer app-route-token");
   });
 
+  it("活动广场使用显式公共占位路由并保留活动列表身份", () => {
+    renderAt("/services/activity-plaza");
+
+    expect(screen.getByRole("heading", { level: 1, name: "活动广场" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "活动列表" })).toBeInTheDocument();
+    expect(screen.queryByText("这个页面不存在")).not.toBeInTheDocument();
+  });
+
+  it("Nova AI 使用显式失败关闭路由而不是未知服务回退", () => {
+    renderAt("/services/ai-assistant");
+
+    expect(screen.getByRole("heading", { level: 1, name: "Nova AI 助手" })).toBeInTheDocument();
+    expect(screen.getByText(/AI 能力尚未开放/)).toBeInTheDocument();
+    expect(screen.queryByText("这个页面不存在")).not.toBeInTheDocument();
+  });
+
+  it("俱乐部会员首页为访客提供带路由身份的登录门且不读取会员数据", () => {
+    const fetchMock = vi.spyOn(globalThis, "fetch");
+    renderAt("/services/club-alliance/member-home");
+
+    expect(screen.getByRole("heading", { level: 1, name: "俱乐部会员首页" })).toBeInTheDocument();
+    expect(screen.getByRole("heading", { name: "登录后查看会员首页" })).toBeInTheDocument();
+    expect(screen.getByRole("button", { name: "发送验证码" })).toBeInTheDocument();
+    expect(fetchMock).not.toHaveBeenCalled();
+  });
+
   it("未知路由提供返回服务广场的恢复路径", () => {
     renderAt("/missing");
 

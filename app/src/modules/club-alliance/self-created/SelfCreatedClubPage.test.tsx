@@ -92,6 +92,15 @@ describe("SelfCreatedClubRoute", () => {
     renderRoute(route, mode, testApi);
 
     expect(screen.getByRole("heading", { name: "登录后使用自建俱乐部" })).toBeInTheDocument();
+    expect(document.querySelectorAll("[data-page-state='authentication-required']")).toHaveLength(1);
+    expect(screen.getByRole("heading", {
+      level: 1,
+      name: mode === "applications"
+        ? "本人加入申请"
+        : mode === "detail"
+          ? "自建俱乐部详情"
+          : "自建俱乐部",
+    })).toBeInTheDocument();
     expect(screen.getByRole("button", { name: "发送验证码" })).toBeInTheDocument();
     await waitFor(() => {
       expect(testApi.search).not.toHaveBeenCalled();

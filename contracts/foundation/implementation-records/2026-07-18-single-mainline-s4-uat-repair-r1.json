@@ -1,0 +1,66 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260718-SINGLE-MAINLINE-S4-UAT-PRODUCT-REPAIR-R1",
+  "title": "S4 UAT 六路由产品修复 R1 G1 治理准入",
+  "date": "2026-07-18",
+  "status": "implemented",
+  "objective": "从已接受候选 2df75b 创建唯一修复工作树，完成工作项登记、根因记录、current checklist、Exam100、实施记录和 Handoff；不写产品代码。",
+  "governance_checklist": "contracts/foundation/development-checklists/2026-07-18-single-mainline-s4-uat-repair-r1.json",
+  "governance_exam": "contracts/foundation/governance-exams/2026-07-18-single-mainline-s4-uat-repair-r1-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json", "AGENTS.md", "README.md", "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md", "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json", "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json", "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md", "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md", "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md", "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md", "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md", "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md", "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md", "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-18-single-mainline-s4-uat-repair-r1-task-order.md",
+    "docs/project-management/pdcar/task-comprehension-single-mainline-s4-uat-repair-r1.md",
+    "docs/project-management/pdcar/root-cause-single-mainline-s4-uat-repair-r1.md"
+  ],
+  "capabilities": ["foundation.ai-engineering-traceability", "foundation.ai-collaboration-safety", "foundation.governance-certification", "foundation.recurrence-prevention"],
+  "contracts": ["contracts/foundation/agent-collaboration.v1.json", "contracts/foundation/development-checklist.v1.schema.json", "contracts/foundation/governance-exam.v1.schema.json", "contracts/foundation/implementation-record.v1.schema.json"],
+  "decisions": ["docs/decisions/0010-ai-implementation-records-required.md", "docs/decisions/0012-two-strike-root-cause-rule.md", "docs/decisions/0014-ai-development-flight-checklist.md", "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md", "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md", "docs/decisions/0017-readme-course-and-random-governance-exam.md", "docs/decisions/0018-recursive-project-governance.md"],
+  "changed_areas": [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/notices/2026-07-18-single-mainline-s4-uat-repair-r1-task-order.md",
+    "docs/project-management/pdcar/task-comprehension-single-mainline-s4-uat-repair-r1.md",
+    "docs/project-management/pdcar/root-cause-single-mainline-s4-uat-repair-r1.md",
+    "docs/project-management/pdcar/handoff-single-mainline-s4-uat-repair-r1.md",
+    "contracts/foundation/development-checklists/2026-07-18-single-mainline-s4-uat-repair-r1.json",
+    "contracts/foundation/governance-exams/2026-07-18-single-mainline-s4-uat-repair-r1-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-18-single-mainline-s4-uat-repair-r1.json"
+  ],
+  "verification": [
+    "G1 activation SHA-256 5DA37526F63AD46F28EA09205E04C18CCCF8382942CCC3269F8AE46EB7309644 was current and exact",
+    "unique branch and worktree were created once from 2df75badec2ae5f8c7b04c4c3ae2602b8d4f2ef9",
+    "registry contains 158 rows, closes S2B active to integrated, appends the S4 row last and passes schema and overlap validation",
+    "preflight returned ready; all 26 current governance inputs were reviewed with current SHA",
+    "random governance exam attempt 1 passed 8 of 8 with score 100 and immutable-link validation passed",
+    "only the eight G1 governance path classes changed; no product, commit, push, integration or deployment action occurred"
+  ],
+  "evidence": [
+    "docs/project-management/notices/2026-07-18-single-mainline-s4-uat-repair-r1-task-order.md",
+    "docs/project-management/pdcar/task-comprehension-single-mainline-s4-uat-repair-r1.md",
+    "docs/project-management/pdcar/root-cause-single-mainline-s4-uat-repair-r1.md",
+    "contracts/foundation/development-checklists/2026-07-18-single-mainline-s4-uat-repair-r1.json",
+    "contracts/foundation/governance-exams/2026-07-18-single-mainline-s4-uat-repair-r1-attempt-1.json",
+    "docs/project-management/pdcar/handoff-single-mainline-s4-uat-repair-r1.md"
+  ],
+  "premises": [
+    "2df75badec2ae5f8c7b04c4c3ae2602b8d4f2ef9 remains the accepted and deployed frontend candidate",
+    "R5 immutable browser evidence remains the sole current UAT fact source and is not modified or reused",
+    "all historical active, planned and handoff-ready rows remain globally paused and provide no residual authority",
+    "G1 does not authorize product changes, commit, push, integration, deployment, production, real funds, sensitive data or irreversible action",
+    "G2 product authority must be independently reviewed and activated after this G1 package is accepted"
+  ],
+  "implementation_mode": "ai-assisted"
+}

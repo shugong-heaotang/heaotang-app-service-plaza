@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { describe, expect, it, vi } from "vitest";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { ProjectBrainPage } from "./ProjectBrainPage";
 import type { ProjectBrainSnapshot } from "./projectBrainTypes";
 
@@ -53,6 +53,21 @@ const snapshot: ProjectBrainSnapshot = {
   audit_summary: { warning: 1 },
 };
 
+const jsonResponse = (value: unknown) => new Response(JSON.stringify(value), {
+  status: 200,
+  headers: { "Content-Type": "application/json" },
+});
+
+const expectMalformedSnapshotToFailClosed = async (value: unknown) => {
+  vi.stubGlobal("fetch", vi.fn().mockResolvedValue(jsonResponse(value)));
+  render(<ProjectBrainPage />);
+  expect(await screen.findByRole("heading", { name: "项目大脑暂不可用" })).toBeInTheDocument();
+  expect(screen.getByText("Project Brain 快照版本无效")).toBeInTheDocument();
+  expect(screen.queryByText(/Cannot read|Unexpected token|TypeError|undefined is not/)).not.toBeInTheDocument();
+};
+
+afterEach(() => vi.unstubAllGlobals());
+
 describe("ProjectBrainPage", () => {
   it("shows the owner summary, sources, next checkpoint, decisions and risks", () => {
     render(<ProjectBrainPage snapshot={snapshot} />);
@@ -84,7 +99,35 @@ describe("ProjectBrainPage", () => {
     render(<ProjectBrainPage />);
     expect(await screen.findByRole("heading", { name: "项目大脑暂不可用" })).toBeInTheDocument();
     expect(screen.getByText(/Unknown/)).toBeInTheDocument();
-    vi.unstubAllGlobals();
+  });
+
+  it("fails closed on HTML fallback without exposing a raw parser error", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(new Response("<!doctype html>", {
+      status: 200,
+      headers: { "Content-Type": "text/html" },
+    })));
+    render(<ProjectBrainPage />);
+    expect(await screen.findByRole("heading", { name: "项目大脑暂不可用" })).toBeInTheDocument();
+    expect(screen.getByText("Project Brain 快照格式不可用")).toBeInTheDocument();
+    expect(screen.queryByText(/Unexpected token|<!doctype/)).not.toBeInTheDocument();
+  });
+
+  it("loads a complete valid snapshot from the generated JSON contract", async () => {
+    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(jsonResponse(snapshot)));
+    render(<ProjectBrainPage />);
+    expect(await screen.findByRole("heading", { name: "和奥堂项目大脑" })).toBeInTheDocument();
+    expect(screen.queryByRole("heading", { name: "项目大脑暂不可用" })).not.toBeInTheDocument();
+  });
+
+  it.each([
+    ["null collection member", { ...snapshot, active_work: [null] }],
+    ["missing required member field", { ...snapshot, modules: [{ ...snapshot.modules[0], source_path: undefined }] }],
+    ["wrong member field type", { ...snapshot, risks: [{ ...snapshot.risks[0], title: 42 }] }],
+    ["invalid enum", { ...snapshot, overall_verdict: "ready" }],
+    ["invalid work_summary value", { ...snapshot, work_summary: { active: -1 } }],
+    ["invalid audit_summary value", { ...snapshot, audit_summary: { error: "1" } }],
+  ])("fails closed for %s without exposing parser or render errors", async (_label, malformed) => {
+    await expectMalformedSnapshotToFailClosed(malformed);
   });
 
   it("renders empty authoritative sections without inventing progress", () => {

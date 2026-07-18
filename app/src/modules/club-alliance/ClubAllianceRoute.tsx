@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { useActionRuntime } from "../../auth/ActionRuntimeContext";
+import { AuthPanel } from "../../components/AuthPanel";
+import { AppFrame } from "../../components/AppFrame";
 import type { ServiceAction } from "../../domain/serviceActions";
 import { evaluateActionAccess } from "../../infrastructure/actionExecutor";
 import { ApiError } from "../../infrastructure/apiClient";
@@ -20,6 +22,7 @@ type CatalogState =
 export type ClubAllianceRouteProps = {
   repository?: ServiceCatalogRepository;
   memberHomeLoader?: (explore: readonly ExploreEntry[], signal?: AbortSignal) => Promise<MemberHomeModel>;
+  forceMemberHome?: boolean;
 };
 
 const errorState = (reason: unknown): Extract<CatalogState, { status: "error" }> => {
@@ -35,7 +38,7 @@ const memberHomeFailure = (reason: unknown): MemberHomeModel => {
   return { state: "error", message: reason instanceof Error ? reason.message : "无法读取您的俱乐部信息。" };
 };
 
-export function ClubAllianceRoute({ repository = serviceCatalogRepository, memberHomeLoader = loadMemberHome }: ClubAllianceRouteProps) {
+export function ClubAllianceRoute({ repository = serviceCatalogRepository, memberHomeLoader = loadMemberHome, forceMemberHome = false }: ClubAllianceRouteProps) {
   const location = useLocation();
   const runtime = useActionRuntime();
   const [requestVersion, setRequestVersion] = useState(0);
@@ -43,7 +46,7 @@ export function ClubAllianceRoute({ repository = serviceCatalogRepository, membe
   const [memberHome, setMemberHome] = useState<MemberHomeModel>({ state: "loading" });
   const retry = useCallback(() => setRequestVersion((current) => current + 1), []);
   const isEmptyQuery = new URLSearchParams(location.search).size === 0;
-  const shouldLoadMemberHome = isEmptyQuery && runtime.session.authenticated;
+  const shouldLoadMemberHome = (forceMemberHome || isEmptyQuery) && runtime.session.authenticated;
 
   useEffect(() => {
     let active = true;
@@ -101,4 +104,24 @@ export function ClubAllianceRoute({ repository = serviceCatalogRepository, membe
   }, [catalogState, location.search, memberHome, runtime.session, shouldLoadMemberHome]);
 
   return <ClubAlliancePage model={model} onRetry={retry} />;
+}
+
+export function MemberHomeRoute(props: ClubAllianceRouteProps) {
+  const runtime = useActionRuntime();
+  if (runtime.session.authenticated) return <ClubAllianceRoute {...props} forceMemberHome />;
+
+  return (
+    <AppFrame
+      title="俱乐部会员首页"
+      actions={[]}
+      backAction={<Link className="back-button" to="/services/club-alliance" aria-label="返回俱乐部联盟">←</Link>}
+    >
+      <section data-page-state="authentication-required-member-home" aria-labelledby="member-home-auth-title">
+        <h2 id="member-home-auth-title">登录后查看会员首页</h2>
+        <p>登录后可查看您的俱乐部身份、待办和常用入口；访客状态不会读取会员数据。</p>
+        <AuthPanel />
+        <Link to="/services/club-alliance">← 返回俱乐部联盟</Link>
+      </section>
+    </AppFrame>
+  );
 }
