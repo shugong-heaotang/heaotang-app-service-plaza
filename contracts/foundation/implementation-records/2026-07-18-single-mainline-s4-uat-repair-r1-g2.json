@@ -1,10 +1,10 @@
 {
   "contract_version": "implementation-record.v1",
   "record_id": "IR-20260718-SINGLE-MAINLINE-S4-UAT-PRODUCT-REPAIR-R1-G2",
-  "title": "S4 UAT 六路由产品修复 R1 G2 实施与 R2 失败关闭修复",
+  "title": "S4 UAT 六路由产品修复 R1 G2、R2 失败关闭与 P008 部署路径修复",
   "date": "2026-07-18",
   "status": "implemented",
-  "objective": "修复 R5 UAT 六路由缺陷并补齐 Project Brain full-shape fail-closed，完成一次性测试与构建证据，形成待独立提交验收的候选。",
+  "objective": "修复 R5 UAT 六路由缺陷，补齐 Project Brain full-shape fail-closed，并纠正 P008 客户端 URL 与测试服部署路径不一致；完成独立根因、候选、全量测试与构建验收，形成尚待提交、集成、部署和 UAT closure 的候选。",
   "governance_checklist": "contracts/foundation/development-checklists/2026-07-18-single-mainline-s4-uat-repair-r1-g2.json",
   "governance_exam": "contracts/foundation/governance-exams/2026-07-18-single-mainline-s4-uat-repair-r1-g2-attempt-1.json",
   "governance_inputs": [
@@ -34,6 +34,7 @@
     "contracts/foundation/governance-exams/2026-07-18-single-mainline-s4-uat-repair-r1-g2-attempt-1.json",
     "contracts/foundation/implementation-records/2026-07-18-single-mainline-s4-uat-repair-r1-g2.json",
     "docs/project-management/pdcar/handoff-single-mainline-s4-uat-repair-r1.md",
+    "docs/project-management/pdcar/root-cause-single-mainline-s4-uat-repair-r1.md",
     "app/src/App.tsx",
     "app/src/App.test.tsx",
     "app/src/pages/PlannedServicePage.tsx",
@@ -62,7 +63,13 @@
     "Product G2 R2 remediation activation SHA-256 AB37B4FFB87845E9547108AD25CF0501403D68F0F786C2D5C2AD988B5BBBE13B was consumed once after exact fresh precheck",
     "Project Brain now validates every work item, module, decision and risk member shape and accepts only finite non-negative integer work_summary and audit_summary values",
     "R2 focused Project Brain tests passed 13/13, full tests passed 261/261, and the single test-server build succeeded; all commands ran exactly once",
-    "R2 generated snapshot SHA-256 1398C19895CE6600048C240C0C7ECEB14904ED6A2A17F4F1A5348A99D14A605B remains truthful with source_freshness unknown and overall_verdict no-go; all eight frozen product paths, registry, package-lock and node_modules Junction remained exact"
+    "R2 generated snapshot SHA-256 1398C19895CE6600048C240C0C7ECEB14904ED6A2A17F4F1A5348A99D14A605B remains truthful with source_freshness unknown and overall_verdict no-go; all eight frozen product paths, registry, package-lock and node_modules Junction remained exact",
+    "R5 11-route dual-viewport UAT passed 20/22; P008 desktop and mobile were one distinct P1 root cause, with independent UAT Acceptance MD SHA-256 324E9717A878EF6800B0AFE55E20606E2E72162C5FA589B4AC16FD511F24F063 and JSON SHA-256 4DC9BC770054105E0AD68B61BD77BD1996E3E0851D520CF34CF28A9CD3EE6554",
+    "independently accepted server-backup evidence proved a valid deployed snapshot under the Service Plaza root while the old client root URL bypassed the /app/ alias and hit the acceptance-app SPA HTML fallback; Root Cause Go SHA-256 4D0151A34C43F1F63264B100DA20B15FBC99A15E3AA3C85B8A722E1FCB93946D",
+    "the minimum P008 repair uses /app/service-plaza/project-brain/project-brain.snapshot.json and asserts that exact URL with credentials same-origin while preserving MIME, strict JSON and full-shape v1 fail-closed behavior",
+    "independent candidate Acceptance Go SHA-256 37659B3E5D35AE3B958C3B691729C5E0DDFD89209054B94F3CFA35D365FDF4D2; focused tests passed 13/13 and full tests passed 261/261 exactly once",
+    "independent Build Acceptance Go SHA-256 B74D5B1E28B6E5E74E28F08F8B7B07B4E0BCF999B295AF9364235253E3EB8298; fresh snapshot bytes 699 SHA-256 90290FAF510D1908547DCBDCED316318E283601C31685D831607B96299F9AC8C is strict v1 Unknown/No-Go, route index parity is 6/6 and contract copy parity is 3/3",
+    "the P008 repair remains uncommitted, unintegrated and undeployed; P008 and full 11-route UAT closure remain separately governed"
   ],
   "evidence": [
     "contracts/foundation/development-checklists/2026-07-18-single-mainline-s4-uat-repair-r1-g2.json",
@@ -70,7 +77,13 @@
     "docs/project-management/pdcar/handoff-single-mainline-s4-uat-repair-r1.md",
     "C:/Users/shugo/Documents/项目最高负责人/2026-07-18-全局暂停与单主线重排/s4-product-repair-r1/g15-registry-deps-r1/review-g15-execution-r1/g2-governance-prep-r3-activation.json",
     "C:/Users/shugo/Documents/项目最高负责人/2026-07-18-全局暂停与单主线重排/s4-product-repair-r1/g15-registry-deps-r1/review-g15-execution-r1/product-g2-r2-remediation-activation.json",
-    "C:/Users/shugo/Documents/项目最高负责人/2026-07-18-全局暂停与单主线重排/s4-product-repair-r1/g15-registry-deps-r1/review-g15-execution-r1/product-g2-r2-remediation-evidence"
+    "C:/Users/shugo/Documents/项目最高负责人/2026-07-18-全局暂停与单主线重排/s4-product-repair-r1/g15-registry-deps-r1/review-g15-execution-r1/product-g2-r2-remediation-evidence",
+    "C:/Users/shugo/Documents/项目最高负责人/2026-07-18-全局暂停与单主线重排/s4-uat-regression-r3-execution-plan-r5/19-independent-uat-acceptance.md",
+    "C:/Users/shugo/Documents/项目最高负责人/2026-07-18-全局暂停与单主线重排/s4-uat-regression-r3-execution-plan-r5/uat-execution-acceptance-r5.json",
+    "C:/Users/shugo/Documents/项目最高负责人/2026-07-18-全局暂停与单主线重排/s4-p008-backup-root-cause-r1/03-independent-root-cause-review.md",
+    "C:/Users/shugo/Documents/项目最高负责人/2026-07-18-全局暂停与单主线重排/s4-p008-minimal-repair-acceptance-r2/S4-P008-independent-execution-candidate-acceptance-r2.md",
+    "C:/Users/shugo/Documents/项目最高负责人/2026-07-18-全局暂停与单主线重排/s4-p008-full-verification-r1/04-full-test-result.json",
+    "C:/Users/shugo/Documents/项目最高负责人/2026-07-18-全局暂停与单主线重排/s4-p008-build-acceptance-r2/S4-P008-independent-build-acceptance-r2.md"
   ],
   "premises": [
     "2df75badec2ae5f8c7b04c4c3ae2602b8d4f2ef9 remains the accepted and deployed frontend candidate",

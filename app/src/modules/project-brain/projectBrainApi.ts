@@ -2,7 +2,7 @@ import type { ProjectBrainSnapshot } from "./projectBrainTypes";
 
 // Vite fingerprints and copies the generated read-only snapshot into the build.
 // The browser never scans the repository or reads source governance files.
-export const PROJECT_BRAIN_SNAPSHOT_URL = "/project-brain/project-brain.snapshot.json";
+export const PROJECT_BRAIN_SNAPSHOT_URL = "/app/service-plaza/project-brain/project-brain.snapshot.json";
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
   Boolean(value) && typeof value === "object" && !Array.isArray(value);

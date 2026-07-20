@@ -1,6 +1,6 @@
 # S4 UAT 六路由产品修复 R1 Handoff
 
-状态：Product G2 R2 remediation and one-build evidence complete，待独立 R2 Execution Acceptance；尚未提交、推送、集成或部署。
+状态：P008 部署路径根因、最小修复候选、全量测试与本地测试服构建均已独立接受；当前修复尚未提交、推送、集成或部署，P008 与全 11 路由 UAT 尚未关闭。
 
 R3 Activation SHA-256 `DEAA23E2B2817629C986B40C94AA93E4FAB5DE5C8CD3D68F136DA6F8906949A6` 已消费并以 `P0/P1/P2=0/2/0` 失败关闭：执行者增加了全历史 checklist 门，且组合 PowerShell 未可靠传播 native nonzero。R4 Activation SHA-256 `E0B0CBEAD4525EB2F55FB14DC2FDFEE2284C9B91A7C47B5543E248DE80EED07F` 已消费一次，仅用于逐命令验证和证据冻结。R1、R2、R3 均不可复用。
 
@@ -27,4 +27,12 @@ R3 Activation SHA-256 `DEAA23E2B2817629C986B40C94AA93E4FAB5DE5C8CD3D68F136DA6F89
 
 独立 R2 Execution Acceptance 已 Go，`P0/P1/P2=0/0/1`：Acceptance MD SHA-256 `6A83EB68088494A57F2D18D3C35DFBA08FD44AE0296C1276E7D6AD5BCAD8070D`，JSON SHA-256 `061F27FBD0BE69F514FD5A34A5A33EEC0F4A6627E377821ABB4EC23810EE4382`。唯一 P2 是 G2 IR 的 title/objective 仍写“治理准备”；C1 已按验收事实将其修正为产品实施与 R2 fail-closed 修复，不改变任何产品源文件。
 
-下一门：独立 Product G2 R2 Execution Acceptance。只有其 Go 后才可申请候选提交/推送/受控集成；随后必须另行验收、部署并完成 11 路由双视口回归和最终 Record。
+## P008 部署路径修复当前事实
+
+- R5 11 路由双视口 UAT 为 20/22 通过；P008 desktop/mobile 是同一不同产品根因，独立 UAT Acceptance MD SHA-256 `324E9717A878EF6800B0AFE55E20606E2E72162C5FA589B4AC16FD511F24F063`、JSON SHA-256 `4DC9BC770054105E0AD68B61BD77BD1996E3E0851D520CF34CF28A9CD3EE6554`。
+- 已验收服务器备份证明部署 snapshot 有效且位于 Service Plaza 根；客户端旧 URL 绕过 `/app/` alias，命中 `acceptance-app` SPA HTML 回退。独立 Root Cause Go SHA-256 `4D0151A34C43F1F63264B100DA20B15FBC99A15E3AA3C85B8A722E1FCB93946D`。
+- 最小产品修复把 URL 固定为 `/app/service-plaza/project-brain/project-brain.snapshot.json`，并增加精确 URL 与 `credentials: same-origin` 回归；MIME、严格 JSON 与 full-shape v1 失败关闭没有放宽。
+- 独立候选 Acceptance Go SHA-256 `37659B3E5D35AE3B958C3B691729C5E0DDFD89209054B94F3CFA35D365FDF4D2`；定向 13/13、全量 261/261 均一次通过。
+- 独立 Build Acceptance Go SHA-256 `B74D5B1E28B6E5E74E28F08F8B7B07B4E0BCF999B295AF9364235253E3EB8298`。新构建 index 使用 `/app/service-plaza/` asset base，六个路由 index 6/6、合同副本 3/3；snapshot 699 bytes、SHA-256 `90290FAF510D1908547DCBDCED316318E283601C31685D831607B96299F9AC8C`，保持 Unknown/No-Go。
+
+下一门：独立 record-sync Acceptance。其 Go 后才可申请本地候选提交和受控集成；随后另行部署并执行 P008 双视口、受影响扫描与全 11 路由 closure。当前无提交、推送、集成、部署或 UAT 完成声明。

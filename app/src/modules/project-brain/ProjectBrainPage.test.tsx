@@ -113,8 +113,13 @@ describe("ProjectBrainPage", () => {
   });
 
   it("loads a complete valid snapshot from the generated JSON contract", async () => {
-    vi.stubGlobal("fetch", vi.fn().mockResolvedValue(jsonResponse(snapshot)));
+    const fetchMock = vi.fn().mockResolvedValue(jsonResponse(snapshot));
+    vi.stubGlobal("fetch", fetchMock);
     render(<ProjectBrainPage />);
+    expect(fetchMock).toHaveBeenCalledWith(
+      "/app/service-plaza/project-brain/project-brain.snapshot.json",
+      expect.objectContaining({ credentials: "same-origin" }),
+    );
     expect(await screen.findByRole("heading", { name: "和奥堂项目大脑" })).toBeInTheDocument();
     expect(screen.queryByRole("heading", { name: "项目大脑暂不可用" })).not.toBeInTheDocument();
   });
