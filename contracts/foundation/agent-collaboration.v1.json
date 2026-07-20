@@ -3985,7 +3985,10 @@
         "contracts/foundation/development-checklists/2026-07-20-platform-governance-exam-generation-cas-v2.json",
         "contracts/foundation/governance-exams/2026-07-20-platform-governance-exam-generation-cas-v2-attempt-1.json",
         "contracts/foundation/implementation-records/2026-07-20-platform-governance-exam-generation-cas-v2.json",
-        "docs/project-management/service-plaza/handoff-governance-exam-generation-cas-v2.md"
+        "docs/project-management/service-plaza/handoff-governance-exam-generation-cas-v2.md",
+        "contracts/foundation/development-checklists/2026-07-21-platform-governance-exam-generation-cas-v2-final-r2.json",
+        "contracts/foundation/governance-exams/2026-07-21-platform-governance-exam-generation-cas-v2-final-r2-attempt-1.json",
+        "contracts/foundation/governance-exams/2026-07-21-platform-governance-exam-generation-cas-v2-final-r2-attempt-2.json"
       ],
       "started_with_clean_worktree": false,
       "preexisting_changes_acknowledged": true,
