@@ -3839,7 +3839,7 @@
                            "title":  "Governance Exam Deterministic Selection Provenance R1",
                            "owner":  "/root/agent_a_platform_v8",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "cancelled",
                            "repository_root":  "C:/Users/shugo/Documents/APP系统",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-platform-governance-exam-selection-provenance-r1",
                            "branch":  "codex/platform-governance-exam-selection-provenance-r1",
@@ -3863,7 +3863,7 @@
                                              ],
                            "started_with_clean_worktree":  false,
                            "preexisting_changes_acknowledged":  true,
-                           "migration_note":  "One-time human bootstrap seed A. No implementation worktree exists at seed time; this is intentional pre-registration, not a dirty implementation start. After independently accepted seed integration, the implementation worktree must be created clean from the new exact authority. Implementation bootstrap is frozen to Windows PowerShell 5.1.26100.8875; integer seed 1013564206; exact same-process call $null = Get-Random -SetSeed 1013564206 once before the unmodified authority generator; bank SHA-256 215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40; reading-list SHA-256 b0df386a68e8e00a803a08d0b3e786893a47bad6742dd36a5b6273803b7abcb1; expected independently replayed ordered IDs GQ-002,GQ-015,GQ-016,GQ-010,GQ-007,GQ-012,GQ-011,GQ-006. Maker and reviewer must each generate from exact authority bytes and must not copy or manually patch the list. Implementation expires 2026-07-17T18:00:00+08:00. Sole implementation maker /root/agent_a_platform_v8; independent reviewer /root/agent_c_reviewer_v9. Exact nine implementation plus four governance evidence paths only. Any tenth implementation path, authority drift, actor/path/worktree/PowerShell/seed/ordered-ID change, manual attempt edit or expired checkpoint is No-Go. This row does not authorize target push, R4, R12-O/H2, CP1/H3, product, backend, deployment, production, funds or sensitive data.",
+                           "migration_note":  "One-time human bootstrap seed A. No implementation worktree exists at seed time; this is intentional pre-registration, not a dirty implementation start. After independently accepted seed integration, the implementation worktree must be created clean from the new exact authority. Implementation bootstrap is frozen to Windows PowerShell 5.1.26100.8875; integer seed 1013564206; exact same-process call $null = Get-Random -SetSeed 1013564206 once before the unmodified authority generator; bank SHA-256 215f1c73ed04453d8c58d9e066e915641df31615cfe449b4ec5dd273f0f94f40; reading-list SHA-256 b0df386a68e8e00a803a08d0b3e786893a47bad6742dd36a5b6273803b7abcb1; expected independently replayed ordered IDs GQ-002,GQ-015,GQ-016,GQ-010,GQ-007,GQ-012,GQ-011,GQ-006. Maker and reviewer must each generate from exact authority bytes and must not copy or manually patch the list. Implementation expires 2026-07-17T18:00:00+08:00. Sole implementation maker /root/agent_a_platform_v8; independent reviewer /root/agent_c_reviewer_v9. Exact nine implementation plus four governance evidence paths only. Any tenth implementation path, authority drift, actor/path/worktree/PowerShell/seed/ordered-ID change, manual attempt edit or expired checkpoint is No-Go. This row does not authorize target push, R4, R12-O/H2, CP1/H3, product, backend, deployment, production, funds or sensitive data. Superseded by AIW-20260720-PLATFORM-GOVERNANCE-EXAM-GENERATION-CAS-V2 under PBV2-CD-G0-REGISTRY-TRANSITION-20260720-R4 at authority 74872ecf12b36631fb2b36bfdaf9d5ea8c326ad6; predecessor cancelled without implementation.",
                            "handoff_record":  null
                        },
                        {
@@ -3951,6 +3951,46 @@
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
                            "handoff_record":  "docs/project-management/pdcar/handoff-single-mainline-s4-uat-repair-r1.md"
-                       }
+                       },
+    {
+      "work_id": "AIW-20260720-PLATFORM-GOVERNANCE-EXAM-GENERATION-CAS-V2",
+      "title": "Platform Governance Exam Generation CAS v2",
+      "owner": "G0 generation CAS v2 implementation owner / agent /root/g0_generation_cas_v2",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/APP系统",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-platform-governance-exam-generation-cas-v2",
+      "branch": "codex/platform-governance-exam-generation-cas-v2",
+      "base_commit": "74872ecf12b36631fb2b36bfdaf9d5ea8c326ad6",
+      "allowed_paths": [
+        "contracts/foundation/gate-control-ledger.v1.schema.json",
+        "contracts/foundation/gate-control-ledger.v1.json",
+        "contracts/foundation/recurring-issues.v1.json",
+        "scripts/Invoke-GateControlTransition.ps1",
+        "scripts/Test-GateControlGeneration.ps1",
+        "scripts/validate_gate_control_ledger.py",
+        "scripts/tests/test_validate_gate_control_ledger.py",
+        "scripts/Test-AgentDevelopmentPreflight.ps1",
+        "docs/decisions/0023-gate-control-generation-cas.md",
+        "scripts/New-AgentGovernanceExam.ps1",
+        "contracts/foundation/governance-exam.v1.schema.json",
+        "scripts/validate_governance_exams.py",
+        "scripts/tests/test_validate_governance_exams.py",
+        "contracts/foundation/governance-exam-selection-legacy.v1.json",
+        "contracts/foundation/governance-exam-selection-legacy.v1.schema.json",
+        "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+        "scripts/Test-ServicePlazaContracts.ps1",
+        "docs/project-management/notices/2026-07-20-platform-governance-exam-generation-cas-v2-task-order.md",
+        "docs/project-management/service-plaza/task-comprehension-governance-exam-generation-cas-v2.md",
+        "contracts/foundation/development-checklists/2026-07-20-platform-governance-exam-generation-cas-v2.json",
+        "contracts/foundation/governance-exams/2026-07-20-platform-governance-exam-generation-cas-v2-attempt-1.json",
+        "contracts/foundation/implementation-records/2026-07-20-platform-governance-exam-generation-cas-v2.json",
+        "docs/project-management/service-plaza/handoff-governance-exam-generation-cas-v2.md"
+      ],
+      "started_with_clean_worktree": false,
+      "preexisting_changes_acknowledged": true,
+      "migration_note": "One-time current-authority registry bootstrap under PBV2-CD-G0-REGISTRY-TRANSITION-20260720-R4. No implementation worktree exists at registration time; this is intentional pre-registration, not a dirty implementation start. After independently accepted registry integration, the implementation worktree must be created clean from exact authority 74872ecf12b36631fb2b36bfdaf9d5ea8c326ad6. The later 23-path implementation requires its own current checklist, Exam100, implementation record, automated gates, independent acceptance and Handoff. This row does not authorize registry retry, commit, push, integration, deployment, production, source-system writes, real funds, sensitive data, permission expansion or destructive action.",
+      "handoff_record": "docs/project-management/service-plaza/handoff-governance-exam-generation-cas-v2.md"
+    }
                    ]
 }
