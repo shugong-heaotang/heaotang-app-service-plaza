@@ -4009,11 +4009,17 @@
       "allowed_paths": [
         "contracts/foundation/agent-collaboration.v1.json",
         "contracts/foundation/development-checklists/2026-07-22-project-brain-visible-snapshot-r1.json",
-        "contracts/foundation/governance-exams/2026-07-22-project-brain-visible-snapshot-r1-attempt-1.json"
+        "contracts/foundation/governance-exams/2026-07-22-project-brain-visible-snapshot-r1-attempt-1.json",
+        "contracts/foundation/development-checklists/2026-07-22-project-brain-visible-snapshot-r1-v2.json",
+        "contracts/foundation/governance-exams/2026-07-22-project-brain-visible-snapshot-r1-v2-attempt-1.json",
+        "contracts/project-brain/generated/project-brain.snapshot.json",
+        "contracts/project-brain/generated/project-brain.audit.json",
+        "contracts/foundation/implementation-records/2026-07-22-project-brain-visible-snapshot-r1.json",
+        "docs/project-management/project-brain/visible-snapshot-r1-handoff.md"
       ],
       "started_with_clean_worktree": true,
       "preexisting_changes_acknowledged": false,
-      "migration_note": "Activated only by independent V1 review 07-v1-independent-execution-activation-review.md, SHA-256 96A4A896DCCB18E813E394CF432C66CBD6E60255BAC9FDFE6F43EE8B15F6939E, expiring 2026-07-23T19:30:47+08:00. Authority is exact remote integration 59cacd7ac282fb6b26f67b5b232e9e7e660bbc19 and registry SHA-256 B1408D597F977D5A3689F88AFB958B3E493CA4F4D8BEA6942F7E91AA09F658F7. V1 authorizes only this atomic registry reconciliation, current checklist, attempt-1 Exam100, local validation and independent post-check. Snapshot/audit/product changes, commit, push, integration, build, deployment, server, production, real data and attempt-2 are not authorized.",
+      "migration_note": "Activated only by independent V1 review 07-v1-independent-execution-activation-review.md, SHA-256 96A4A896DCCB18E813E394CF432C66CBD6E60255BAC9FDFE6F43EE8B15F6939E, expiring 2026-07-23T19:30:47+08:00. Authority is exact remote integration 59cacd7ac282fb6b26f67b5b232e9e7e660bbc19 and registry SHA-256 B1408D597F977D5A3689F88AFB958B3E493CA4F4D8BEA6942F7E91AA09F658F7. V1 authorizes only this atomic registry reconciliation, current checklist, attempt-1 Exam100, local validation and independent post-check. V2A scope bootstrap is independently activated by 19-v2a-snapshot-scope-execution-activation-review.md, SHA-256 DD24E23EADC1110FF1E897A887F6DAC7498BC2E19B8A359C1ECBCB18C0B065BD, against authoritative base 94091f75a1796c042ef79ecd7b15b8428b512fde. V2A only expands the exact nine-path envelope and creates its current checklist and attempt-1 Exam100; it does not authorize snapshot/audit generation, implementation record, Handoff, commit, push, integration, build, deployment, server, production, real data or attempt-2.",
       "handoff_record": "C:/Users/shugo/Documents/项目最高负责人/2026-07-22-project-brain-test-server-visible-progress/07-v1-independent-execution-activation-review.md"
     }
                    ]
