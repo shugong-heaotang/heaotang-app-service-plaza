@@ -1,7 +1,7 @@
 {
   "contract_version": "project-brain.snapshot.v1",
-  "generated_at": "2026-07-12T14:08:20.170532Z",
-  "source_commit": "7a3f254bebe18f37a7b85163b096f37b68612900",
+  "generated_at": "2026-07-22T13:22:39.903579Z",
+  "source_commit": "6d77521fc3818ebe082bb1ab46c3956faad112e9",
   "overall_verdict": "no-go",
   "source_freshness": "current",
   "modules": [
@@ -116,10 +116,11 @@
     }
   ],
   "work_summary": {
-    "active": 7,
-    "handoff-ready": 2,
-    "integrated": 87,
-    "planned": 2
+    "active": 16,
+    "cancelled": 2,
+    "handoff-ready": 3,
+    "integrated": 135,
+    "planned": 4
   },
   "active_work": [
     {
@@ -163,14 +164,6 @@
       "handoff_record": "docs/project-management/modules/club-alliance/member-home/acceptance/m3-handoff.md"
     },
     {
-      "work_id": "AIW-20260712-PROTECTION-MALL-M0",
-      "title": "保障商城持续开发启动与 M0 接入契约冻结",
-      "owner_role": "商城板块唯一负责人",
-      "status": "planned",
-      "branch": "codex/protection-mall-m0",
-      "handoff_record": "docs/project-management/modules/protection-mall/handoff-m0.md"
-    },
-    {
       "work_id": "AIW-20260712-NOVA-M2-NETWORK-READ-PROVIDER-BACKEND",
       "title": "NOVA M2 member_search Network 读侧 Provider",
       "owner_role": "平台后端负责人",
@@ -209,6 +202,110 @@
       "status": "active",
       "branch": "codex/nova-m2-migration-disable-drill",
       "handoff_record": "docs/project-management/modules/network/migration-drill-handoff.md"
+    },
+    {
+      "work_id": "AIW-20260713-HEALTH-R0-F2-AUDIT",
+      "title": "健康大管家 HM-R0 F2 专业与责任边界审计",
+      "owner_role": "健康大管家负责人",
+      "status": "handoff-ready",
+      "branch": "codex/health-manager-r0-f2-audit",
+      "handoff_record": "docs/project-management/notices/2026-07-13-health-r0-f2-audit-task-order.md"
+    },
+    {
+      "work_id": "AIW-20260713-PROTECTION-MALL-M2-ORDER-FULFILLMENT",
+      "title": "保障商城 M2 无资金订单与履约编排离线核",
+      "owner_role": "商城M2订单履约唯一负责人",
+      "status": "planned",
+      "branch": "codex/protection-mall-m2-order-fulfillment",
+      "handoff_record": "docs/project-management/modules/protection-mall/handoff-m2.md"
+    },
+    {
+      "work_id": "AIW-20260713-PROTECTION-MALL-M2-PORTS-SIMULATION",
+      "title": "保障商城 M2 外围端口与失败关闭模拟合同",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "branch": "codex/protection-mall-m2-ports-simulation",
+      "handoff_record": "docs/project-management/modules/protection-mall/handoff-m2.md"
+    },
+    {
+      "work_id": "AIW-20260713-LEARNING-PLAZA-M0",
+      "title": "学习广场 M0 核心体系合同化与离线闭环",
+      "owner_role": "学习广场持续开发负责人",
+      "status": "active",
+      "branch": "codex/learning-plaza-m0",
+      "handoff_record": "docs/project-management/modules/learning-plaza/handoff-m0.md"
+    },
+    {
+      "work_id": "AIW-20260713-ACTIVITY-V3-M1-FRONTEND",
+      "title": "活动板块 V3.0 M1 前端最小闭环",
+      "owner_role": "活动板块 V3.0 持续负责人",
+      "status": "active",
+      "branch": "codex/activity-v3-m1-frontend",
+      "handoff_record": "docs/project-management/modules/activity/handoff-m1-frontend.md"
+    },
+    {
+      "work_id": "AIW-20260713-ACTIVITY-V3-M1-BACKEND",
+      "title": "活动板块 V3.0 M1 后端最小真实闭环",
+      "owner_role": "活动板块后端唯一负责人",
+      "status": "planned",
+      "branch": "codex/activity-v3-m1-backend",
+      "handoff_record": null
+    },
+    {
+      "work_id": "AIW-20260713-ACTIVITY-V3-M1-SHARED-ROUTE",
+      "title": "活动板块 V3.0 M1 共享路由挂载",
+      "owner_role": "平台集成负责人",
+      "status": "planned",
+      "branch": "codex/activity-v3-m1-shared-route",
+      "handoff_record": null
+    },
+    {
+      "work_id": "AIW-20260717-PROJECT-BRAIN-V2-M3-BOSS-DASHBOARD",
+      "title": "Project Brain v2 M3 老板只读驾驶舱候选",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "branch": "codex/project-brain-v2-m3-dashboard",
+      "handoff_record": "docs/project-management/project-brain-v2/handoff-m3-activation.md"
+    },
+    {
+      "work_id": "AIW-20260717-PLATFORM-PDCAR-SKILL-ENFORCEMENT",
+      "title": "APP PDCAR Skill 强制接入正式实施",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "branch": "codex/platform-pdcar-skill-enforcement",
+      "handoff_record": "docs/project-management/pdcar/handoff-platform-pdcar-skill-enforcement.md"
+    },
+    {
+      "work_id": "AIW-20260717-DAYI-HEALTH-HALL-M0-SCOPE-IA",
+      "title": "大医健康馆 M0 非医疗范围与信息架构冻结",
+      "owner_role": "健康大管家负责人",
+      "status": "active",
+      "branch": "codex/dayi-health-hall-m0-scope-ia",
+      "handoff_record": null
+    },
+    {
+      "work_id": "AIW-20260717-PROJECT-BRAIN-V2-M2-G0-REMEDIATION",
+      "title": "Project Brain v2 M2 G0 Trusted刷新根因修复",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "branch": "codex/project-brain-v2-m2-g0-remediation",
+      "handoff_record": "docs/project-management/project-brain-v2/handoff-m2-g0-remediation-activation.md"
+    },
+    {
+      "work_id": "AIW-20260720-PLATFORM-GOVERNANCE-EXAM-GENERATION-CAS-V2",
+      "title": "Platform Governance Exam Generation CAS v2",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "branch": "codex/platform-governance-exam-generation-cas-v2",
+      "handoff_record": "docs/project-management/service-plaza/handoff-governance-exam-generation-cas-v2.md"
+    },
+    {
+      "work_id": "AIW-20260722-PROJECT-BRAIN-VISIBLE-SNAPSHOT-R1",
+      "title": "Project Brain test-server truthful visible snapshot R1",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "branch": "codex/project-brain-visible-snapshot-r1",
+      "handoff_record": "C:/Users/shugo/Documents/项目最高负责人/2026-07-22-project-brain-test-server-visible-progress/07-v1-independent-execution-activation-review.md"
     }
   ],
   "pending_decisions": [],
@@ -278,92 +375,100 @@
       "status": "handoff-ready",
       "branch": "codex/health-manager-mvp90-prd",
       "handoff_record": "docs/project-management/service-plaza/handoff-log.md#sp-h031健康大管家-mvp-90-prd-独立派发"
+    },
+    {
+      "work_id": "AIW-20260713-HEALTH-R0-F2-AUDIT",
+      "title": "健康大管家 HM-R0 F2 专业与责任边界审计",
+      "owner_role": "健康大管家负责人",
+      "status": "handoff-ready",
+      "branch": "codex/health-manager-r0-f2-audit",
+      "handoff_record": "docs/project-management/notices/2026-07-13-health-r0-f2-audit-task-order.md"
     }
   ],
   "recent_integrations": [
     {
-      "work_id": "AIW-20260712-PROTECTION-MALL-M0-R3-CORRECTION",
-      "title": "保障商城 M0 R3 模块证据与依赖纠正",
-      "owner_role": "商城板块唯一负责人",
-      "status": "integrated",
-      "branch": "codex/protection-mall-m0-r3-correction",
-      "handoff_record": "docs/project-management/modules/protection-mall/handoff-m0.md"
-    },
-    {
-      "work_id": "AIW-20260712-PROTECTION-MALL-M1-CONTRACTS",
-      "title": "保障商城 M1 责任边界、状态机与 mall.api.v1 合同首切片",
-      "owner_role": "商城板块唯一负责人",
-      "status": "integrated",
-      "branch": "codex/protection-mall-m1-contracts",
-      "handoff_record": "docs/project-management/modules/protection-mall/handoff-m1.md"
-    },
-    {
-      "work_id": "AIW-20260712-HEALTH-MVP90-M1-P2-DISPATCH",
-      "title": "健康大管家 MVP-90 M1 P2 合成运行内核规划与派发",
+      "work_id": "AIW-20260717-PROJECT-BRAIN-V2-M2-ACTIVATION",
+      "title": "Project Brain v2 M2 定时刷新激活治理",
       "owner_role": "平台集成负责人",
       "status": "integrated",
-      "branch": "codex/health-mvp90-m1-p2-dispatch",
-      "handoff_record": "docs/project-management/service-plaza/health-mvp90-m1-p2-dispatch-2026-07-12.md"
+      "branch": "codex/project-brain-v2-m2-activation",
+      "handoff_record": "docs/project-management/project-brain-v2/handoff-m2-activation.md"
     },
     {
-      "work_id": "AIW-20260712-HEALTH-MVP90-M1-P2-SYNTHETIC-REPLAY",
-      "title": "健康大管家 MVP-90 M1 P2 确定性合成 PDCAR 重放",
-      "owner_role": "健康大管家负责人",
-      "status": "integrated",
-      "branch": "codex/health-manager-mvp90-m1-p2-synthetic-replay",
-      "handoff_record": "docs/project-management/modules/health-manager/health-manager-mvp90-m1-p2-handoff.md"
-    },
-    {
-      "work_id": "AIW-20260712-NOVA-M2-PEOPLE-TOOLS-DISPATCH",
-      "title": "NOVA M2 人脉 Owner 与四工具契约平台派发",
+      "work_id": "AIW-20260717-PROJECT-BRAIN-V2-M2-READONLY-REFRESH",
+      "title": "Project Brain v2 M2 只读定时刷新与不可变快照",
       "owner_role": "平台集成负责人",
       "status": "integrated",
-      "branch": "codex/nova-m2-people-tools-dispatch",
-      "handoff_record": "docs/project-management/service-plaza/nova-m2-people-tools-dispatch-2026-07-12.md"
+      "branch": "codex/project-brain-v2-m2-runtime",
+      "handoff_record": "docs/project-management/project-brain-v2/handoff-m2.md"
     },
     {
-      "work_id": "AIW-20260712-NETWORK-CANONICAL-OWNER-DECISION",
-      "title": "人脉 canonical 实现、唯一 Owner 与 legacy 迁移禁用裁决",
-      "owner_role": "人脉板块唯一负责人",
-      "status": "integrated",
-      "branch": "codex/network-canonical-owner-decision",
-      "handoff_record": "docs/project-management/notices/2026-07-12-nova-m2-people-tools-task-order.md"
-    },
-    {
-      "work_id": "AIW-20260712-NOVA-M2-PEOPLE-TOOLS-CONTRACT",
-      "title": "NOVA M2 人脉四工具与结果 callback 版本化契约会签",
+      "work_id": "AIW-20260717-PROJECT-BRAIN-V2-M2-REGISTRY-CLOSEOUT",
+      "title": "Project Brain v2 M2 registry 收口",
       "owner_role": "平台集成负责人",
       "status": "integrated",
-      "branch": "codex/nova-m2-people-tools-contract",
-      "handoff_record": "docs/project-management/notices/2026-07-12-nova-m2-people-tools-task-order.md"
+      "branch": "codex/project-brain-v2-m2-closeout",
+      "handoff_record": "docs/project-management/project-brain-v2/handoff-m2-registry-closeout.md"
     },
     {
-      "work_id": "AIW-20260712-NOVA-M2-PROVIDER-DISPATCH",
-      "title": "NOVA M2 三包 Provider 与迁移演练正式派发",
+      "work_id": "AIW-20260717-PROJECT-BRAIN-V2-M3-ACTIVATION",
+      "title": "Project Brain v2 M3 老板只读驾驶舱激活治理",
       "owner_role": "平台集成负责人",
       "status": "integrated",
-      "branch": "codex/nova-m2-provider-dispatch",
-      "handoff_record": "docs/project-management/service-plaza/nova-m2-provider-dispatch-2026-07-12.md"
+      "branch": "codex/project-brain-v2-m3-activation",
+      "handoff_record": "docs/project-management/project-brain-v2/handoff-m3-activation.md"
     },
     {
-      "work_id": "AIW-20260712-GOVERNANCE-EXAM-RETRY-EVIDENCE",
-      "title": "治理考试重试前序失败与补课重读证据根因修复",
+      "work_id": "AIW-20260717-HEALTH-README-CURRENT-STATE-ACCEPTANCE",
+      "title": "健康大管家 README 当前状态独立验收与受控集成",
       "owner_role": "平台集成负责人",
       "status": "integrated",
-      "branch": "codex/governance-exam-retry-evidence",
-      "handoff_record": "docs/project-management/service-plaza/governance-exam-retry-evidence-2026-07-12.md"
+      "branch": "codex/health-manager-readme-current-state-acceptance",
+      "handoff_record": "docs/project-management/service-plaza/health-manager-readme-current-state-acceptance-2026-07-17.md"
     },
     {
-      "work_id": "AIW-20260712-PROJECT-BRAIN-V1",
-      "title": "Project Brain v1 统一知识入口、权威事实模型与只读驾驶舱",
+      "work_id": "AIW-20260717-PLATFORM-PDCAR-SKILL-ENFORCEMENT-ACTIVATION",
+      "title": "APP PDCAR Skill 强制接入激活治理",
       "owner_role": "平台集成负责人",
       "status": "integrated",
-      "branch": "codex/project-brain-v1",
-      "handoff_record": "docs/project-management/project-brain/handoff-v1.md"
+      "branch": "codex/platform-pdcar-skill-enforcement-activation",
+      "handoff_record": "docs/project-management/pdcar/handoff-platform-pdcar-skill-enforcement-activation.md"
+    },
+    {
+      "work_id": "AIW-20260717-PROJECT-BRAIN-V2-M2-G0-REMEDIATION-ACTIVATION",
+      "title": "Project Brain v2 M2 G0刷新缺陷整改激活治理",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "branch": "codex/project-brain-v2-m2-g0-remediation-activation-r2",
+      "handoff_record": "docs/project-management/project-brain-v2/handoff-m2-g0-remediation-activation.md"
+    },
+    {
+      "work_id": "AIW-20260718-SINGLE-MAINLINE-S2A-BOOTSTRAP",
+      "title": "单一产品主线 S2A 治理启动",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "branch": "codex/single-mainline-s2-r1",
+      "handoff_record": "docs/project-management/pdcar/handoff-single-mainline-s2a-bootstrap.md"
+    },
+    {
+      "work_id": "AIW-20260718-SINGLE-MAINLINE-S2B-LIFE-APPLICATION-HISTORY-BUILD-TEST",
+      "title": "单一产品主线 S2B 生命导航申请历史纵向切片构建测试",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "branch": "codex/single-mainline-s2b-life-r1",
+      "handoff_record": "docs/project-management/pdcar/handoff-single-mainline-s2b-life-application-history-build-test.md"
+    },
+    {
+      "work_id": "AIW-20260718-SINGLE-MAINLINE-S4-UAT-PRODUCT-REPAIR-R1",
+      "title": "S4 UAT 六路由产品修复 R1",
+      "owner_role": "平台集成负责人",
+      "status": "integrated",
+      "branch": "codex/single-mainline-s4-uat-repair-r1",
+      "handoff_record": "docs/project-management/pdcar/handoff-single-mainline-s4-uat-repair-r1.md"
     }
   ],
   "audit_summary": {
     "error": 4,
-    "warning": 7
+    "warning": 17
   }
 }

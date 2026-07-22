@@ -1,7 +1,7 @@
 {
   "contract_version": "project-brain.audit.v1",
-  "generated_at": "2026-07-12T14:08:20.170532Z",
-  "source_commit": "7a3f254bebe18f37a7b85163b096f37b68612900",
+  "generated_at": "2026-07-22T13:22:39.903579Z",
+  "source_commit": "6d77521fc3818ebe082bb1ab46c3956faad112e9",
   "verdict": "no-go",
   "errors": [
     {
@@ -93,12 +93,93 @@
       "subject_id": "AIW-20260712-NOVA-M2-MIGRATION-DISABLE-DRILL",
       "source_path": "contracts/foundation/agent-collaboration.v1.json",
       "message": "active work lacks an explicit next checkpoint"
+    },
+    {
+      "rule_id": "PB-WORK-NEXT",
+      "severity": "warning",
+      "subject_type": "work-item",
+      "subject_id": "AIW-20260713-PROTECTION-MALL-M2-PORTS-SIMULATION",
+      "source_path": "contracts/foundation/agent-collaboration.v1.json",
+      "message": "active work lacks an explicit next checkpoint"
+    },
+    {
+      "rule_id": "PB-WORK-NEXT",
+      "severity": "warning",
+      "subject_type": "work-item",
+      "subject_id": "AIW-20260713-LEARNING-PLAZA-M0",
+      "source_path": "contracts/foundation/agent-collaboration.v1.json",
+      "message": "active work lacks an explicit next checkpoint"
+    },
+    {
+      "rule_id": "PB-WORK-NEXT",
+      "severity": "warning",
+      "subject_type": "work-item",
+      "subject_id": "AIW-20260713-ACTIVITY-V3-M1-FRONTEND",
+      "source_path": "contracts/foundation/agent-collaboration.v1.json",
+      "message": "active work lacks an explicit next checkpoint"
+    },
+    {
+      "rule_id": "PB-WORK-NEXT",
+      "severity": "warning",
+      "subject_type": "work-item",
+      "subject_id": "AIW-20260717-PROJECT-BRAIN-V2-M3-BOSS-DASHBOARD",
+      "source_path": "contracts/foundation/agent-collaboration.v1.json",
+      "message": "active work lacks an explicit next checkpoint"
+    },
+    {
+      "rule_id": "PB-WORK-NEXT",
+      "severity": "warning",
+      "subject_type": "work-item",
+      "subject_id": "AIW-20260717-PLATFORM-PDCAR-SKILL-ENFORCEMENT",
+      "source_path": "contracts/foundation/agent-collaboration.v1.json",
+      "message": "active work lacks an explicit next checkpoint"
+    },
+    {
+      "rule_id": "PB-WORK-NEXT",
+      "severity": "warning",
+      "subject_type": "work-item",
+      "subject_id": "AIW-20260717-DAYI-HEALTH-HALL-M0-SCOPE-IA",
+      "source_path": "contracts/foundation/agent-collaboration.v1.json",
+      "message": "active work lacks an explicit next checkpoint"
+    },
+    {
+      "rule_id": "PB-WORK-NEXT",
+      "severity": "warning",
+      "subject_type": "work-item",
+      "subject_id": "AIW-20260717-PROJECT-BRAIN-V2-M2-G0-REMEDIATION",
+      "source_path": "contracts/foundation/agent-collaboration.v1.json",
+      "message": "active work lacks an explicit next checkpoint"
+    },
+    {
+      "rule_id": "PB-WORK-NEXT",
+      "severity": "warning",
+      "subject_type": "work-item",
+      "subject_id": "AIW-20260720-PLATFORM-GOVERNANCE-EXAM-GENERATION-CAS-V2",
+      "source_path": "contracts/foundation/agent-collaboration.v1.json",
+      "message": "active work lacks an explicit next checkpoint"
+    },
+    {
+      "rule_id": "PB-WORK-NEXT",
+      "severity": "warning",
+      "subject_type": "work-item",
+      "subject_id": "AIW-20260722-PROJECT-BRAIN-VISIBLE-SNAPSHOT-R1",
+      "source_path": "contracts/foundation/agent-collaboration.v1.json",
+      "message": "active work lacks an explicit next checkpoint"
+    },
+    {
+      "rule_id": "PB-STALE-SOURCE",
+      "severity": "warning",
+      "subject_type": "knowledge-sources",
+      "subject_id": "KB-WORK-REGISTRY",
+      "source_path": "contracts/project-brain/knowledge-sources.v1.json",
+      "message": "review date is missing, invalid, or expired"
     }
   ],
   "unknowns": [],
   "rule_summary": {
     "PB-INTEGRATED-EVIDENCE": 3,
     "PB-SCOPE-CONFLICT": 1,
-    "PB-WORK-NEXT": 7
+    "PB-STALE-SOURCE": 1,
+    "PB-WORK-NEXT": 16
   }
 }
