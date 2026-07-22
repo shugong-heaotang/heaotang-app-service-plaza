@@ -3921,7 +3921,7 @@
                            "title":  "S4 UAT 六路由产品修复 R1",
                            "owner":  "Codex highest owner / thread 019f72ee-3907-7b21-9498-8e918ac53aac",
                            "owner_role":  "平台集成负责人",
-                           "status":  "active",
+                           "status":  "integrated",
                            "repository_root":  "C:/Users/shugo/Documents/worktrees/heaotang-app-service-integration-recovery",
                            "workspace_path":  "C:/Users/shugo/Documents/worktrees/heaotang-single-mainline-s4-uat-repair-r1",
                            "branch":  "codex/single-mainline-s4-uat-repair-r1",
@@ -3950,6 +3950,7 @@
                                              ],
                            "started_with_clean_worktree":  true,
                            "preexisting_changes_acknowledged":  false,
+                           "migration_note":  "The S4 product objective and final Record were independently closed at candidate 74872ecf12b36631fb2b36bfdaf9d5ea8c326ad6. File-backed lane release HT-HO-S4-SHARED-REGISTRY-LANE-RELEASE-20260720-R1 set lane_released=true and residual authority=false; independent audit SHA-256 C6E284F2C39978A85FF8E9E1EC587DA431331153D721F22CB2764D74EE2747C1. This atomic registry-only successor change terminalizes the stale historical active row before registering AIW-20260722-PROJECT-BRAIN-VISIBLE-SNAPSHOT-R1. No S4 authority is reused.",
                            "handoff_record":  "docs/project-management/pdcar/handoff-single-mainline-s4-uat-repair-r1.md"
                        },
     {
@@ -3994,6 +3995,26 @@
       "preexisting_changes_acknowledged": true,
       "migration_note": "One-time current-authority registry bootstrap under PBV2-CD-G0-REGISTRY-TRANSITION-20260720-R4. No implementation worktree exists at registration time; this is intentional pre-registration, not a dirty implementation start. After independently accepted registry integration, the implementation worktree must be created clean from exact authority 74872ecf12b36631fb2b36bfdaf9d5ea8c326ad6. The later 23-path implementation requires its own current checklist, Exam100, implementation record, automated gates, independent acceptance and Handoff. This row does not authorize registry retry, commit, push, integration, deployment, production, source-system writes, real funds, sensitive data, permission expansion or destructive action.",
       "handoff_record": "docs/project-management/service-plaza/handoff-governance-exam-generation-cas-v2.md"
+    },
+    {
+      "work_id": "AIW-20260722-PROJECT-BRAIN-VISIBLE-SNAPSHOT-R1",
+      "title": "Project Brain test-server truthful visible snapshot R1",
+      "owner": "Project Brain visible snapshot writer / Codex root",
+      "owner_role": "平台集成负责人",
+      "status": "active",
+      "repository_root": "C:/Users/shugo/Documents/worktrees/heaotang-app-integration",
+      "workspace_path": "C:/Users/shugo/Documents/worktrees/heaotang-project-brain-visible-snapshot-r1",
+      "branch": "codex/project-brain-visible-snapshot-r1",
+      "base_commit": "59cacd7ac282fb6b26f67b5b232e9e7e660bbc19",
+      "allowed_paths": [
+        "contracts/foundation/agent-collaboration.v1.json",
+        "contracts/foundation/development-checklists/2026-07-22-project-brain-visible-snapshot-r1.json",
+        "contracts/foundation/governance-exams/2026-07-22-project-brain-visible-snapshot-r1-attempt-1.json"
+      ],
+      "started_with_clean_worktree": true,
+      "preexisting_changes_acknowledged": false,
+      "migration_note": "Activated only by independent V1 review 07-v1-independent-execution-activation-review.md, SHA-256 96A4A896DCCB18E813E394CF432C66CBD6E60255BAC9FDFE6F43EE8B15F6939E, expiring 2026-07-23T19:30:47+08:00. Authority is exact remote integration 59cacd7ac282fb6b26f67b5b232e9e7e660bbc19 and registry SHA-256 B1408D597F977D5A3689F88AFB958B3E493CA4F4D8BEA6942F7E91AA09F658F7. V1 authorizes only this atomic registry reconciliation, current checklist, attempt-1 Exam100, local validation and independent post-check. Snapshot/audit/product changes, commit, push, integration, build, deployment, server, production, real data and attempt-2 are not authorized.",
+      "handoff_record": "C:/Users/shugo/Documents/项目最高负责人/2026-07-22-project-brain-test-server-visible-progress/07-v1-independent-execution-activation-review.md"
     }
                    ]
 }
