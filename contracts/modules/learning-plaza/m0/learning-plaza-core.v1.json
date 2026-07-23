@@ -1,0 +1,41 @@
+{
+  "contract_version": "learning-plaza.core.v1",
+  "module_id": "learning-plaza",
+  "execution": {"executable": false, "mode": "mock-only", "environment": "non-production"},
+  "domains": ["learning_resource", "learning_path", "course_progress", "club_cohort", "learning_outcome", "nova_grounding"],
+  "resource_types": ["article", "course", "book", "note", "live", "replay"],
+  "dimensions": ["destiny", "timing", "environment", "virtue", "reading", "reputation", "appearance", "reverence", "network", "wellness"],
+  "visibility": {
+    "public": "anonymous-or-authenticated",
+    "login": "authenticated-user",
+    "club_member": "authenticated-current-club-member",
+    "private": "authenticated-resource-owner"
+  },
+  "progress_state_machine": {
+    "initial": "not_started",
+    "terminal": ["completed"],
+    "transitions": {
+      "not_started": ["accepted"],
+      "accepted": ["in_progress", "abandoned"],
+      "in_progress": ["completed", "abandoned"],
+      "abandoned": ["in_progress"],
+      "completed": []
+    }
+  },
+  "completion_event": {
+    "event_type": "learning.outcome.completed.v1",
+    "required": ["event_id", "idempotency_key", "user_id", "target_type", "target_id", "dimension", "completed_at", "evidence_refs"],
+    "write_policy": "emit-versioned-event-never-write-consumer-database"
+  },
+  "nova_policy": {
+    "minimum_citations": 1,
+    "visible-resources-only": true,
+    "prohibited_actions": ["accept_path", "complete_learning", "join_club", "publish_note", "send_message", "purchase"]
+  },
+  "ports": [
+    {"port_id": "life-navigation.recommendations.read.v1", "direction": "inbound", "owner": "Life Navigation interface owner", "readiness": "provisional", "failure_policy": "fail-closed"},
+    {"port_id": "club.membership.read.v1", "direction": "inbound", "owner": "Club Alliance interface owner", "readiness": "provisional", "failure_policy": "fail-closed"},
+    {"port_id": "nova.grounded-assistance.v1", "direction": "outbound", "owner": "NOVA interface owner", "readiness": "provisional", "failure_policy": "fail-closed"},
+    {"port_id": "life-navigation.learning-outcome.v1", "direction": "outbound", "owner": "Life Navigation interface owner", "readiness": "provisional", "failure_policy": "fail-closed"}
+  ]
+}

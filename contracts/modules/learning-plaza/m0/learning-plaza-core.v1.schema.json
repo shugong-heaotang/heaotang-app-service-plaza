@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/modules/learning-plaza/m0/learning-plaza-core.v1.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version", "module_id", "execution", "domains", "resource_types", "dimensions", "visibility", "progress_state_machine", "completion_event", "nova_policy", "ports"],
+  "properties": {
+    "contract_version": {"const": "learning-plaza.core.v1"},
+    "module_id": {"const": "learning-plaza"},
+    "execution": {"type": "object"},
+    "domains": {"type": "array", "minItems": 6, "uniqueItems": true},
+    "resource_types": {"type": "array", "contains": {"const": "book"}},
+    "dimensions": {"type": "array", "minItems": 10, "uniqueItems": true},
+    "visibility": {"type": "object", "required": ["public", "login", "club_member", "private"]},
+    "progress_state_machine": {"type": "object", "required": ["initial", "terminal", "transitions"]},
+    "completion_event": {"type": "object", "required": ["event_type", "required", "write_policy"]},
+    "nova_policy": {"type": "object", "required": ["minimum_citations", "visible-resources-only", "prohibited_actions"]},
+    "ports": {"type": "array", "minItems": 4}
+  }
+}

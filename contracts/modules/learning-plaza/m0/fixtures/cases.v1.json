@@ -1,0 +1,21 @@
+{
+  "contract_version": "learning-plaza.m0-fixtures.v1",
+  "cases": [
+    {"id": "public-resource-visible", "operation": "view", "actor": {"authenticated": false}, "resource": {"visibility": "public", "owner_id": "u2", "club_id": null}, "expect": "allow"},
+    {"id": "login-resource-visible", "operation": "view", "actor": {"authenticated": true, "user_id": "u1"}, "resource": {"visibility": "login", "owner_id": "u2", "club_id": null}, "expect": "allow"},
+    {"id": "anonymous-login-resource-denied", "operation": "view", "actor": {"authenticated": false}, "resource": {"visibility": "login", "owner_id": "u2", "club_id": null}, "expect": "deny"},
+    {"id": "club-member-resource-visible", "operation": "view", "actor": {"authenticated": true, "user_id": "u1", "club_ids": ["c1"]}, "resource": {"visibility": "club_member", "owner_id": "u2", "club_id": "c1"}, "expect": "allow"},
+    {"id": "club-nonmember-resource-denied", "operation": "view", "actor": {"authenticated": true, "user_id": "u1", "club_ids": []}, "resource": {"visibility": "club_member", "owner_id": "u2", "club_id": "c1"}, "expect": "deny"},
+    {"id": "private-owner-visible", "operation": "view", "actor": {"authenticated": true, "user_id": "u1"}, "resource": {"visibility": "private", "owner_id": "u1", "club_id": null}, "expect": "allow"},
+    {"id": "private-other-user-denied", "operation": "view", "actor": {"authenticated": true, "user_id": "u1"}, "resource": {"visibility": "private", "owner_id": "u2", "club_id": null}, "expect": "deny"},
+    {"id": "progress-normal-transition", "operation": "progress", "from": "accepted", "to": "in_progress", "expect": "allow"},
+    {"id": "progress-skip-denied", "operation": "progress", "from": "not_started", "to": "completed", "expect": "deny"},
+    {"id": "nova-grounded-answer", "operation": "nova", "citations": ["resource:r1"], "requested_action": "explain", "expect": "allow"},
+    {"id": "nova-no-citation-denied", "operation": "nova", "citations": [], "requested_action": "explain", "expect": "deny"},
+    {"id": "nova-action-denied", "operation": "nova", "citations": ["resource:r1"], "requested_action": "complete_learning", "expect": "deny"},
+    {"id": "provisional-port-denied", "operation": "port", "readiness": "provisional", "failure_policy": "fail-closed", "expect": "deny"},
+    {"id": "verified-port-allowed", "operation": "port", "readiness": "verified", "failure_policy": "fail-closed", "expect": "allow"},
+    {"id": "first-completion-event", "operation": "completion", "idempotency_key": "lp:u1:path1:v1", "seen_keys": [], "expect": "allow"},
+    {"id": "duplicate-completion-event-denied", "operation": "completion", "idempotency_key": "lp:u1:path1:v1", "seen_keys": ["lp:u1:path1:v1"], "expect": "deny"}
+  ]
+}
