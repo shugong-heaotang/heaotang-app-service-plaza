@@ -1,0 +1,97 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-HEALTH-V1-REQUIREMENTS-DOCS",
+  "title": "健康大管家 V1.0 产品宪法 Final Candidate 归档与 GitHub 发布",
+  "date": "2026-07-11",
+  "status": "verified",
+  "objective": "将健康大管家长期项目对话中已经确认的产品理念、PDCAR、角色、页面、数据权限、AI 边界、验收和版本路线整合为可复制、可评审的正式 Markdown 产品宪法，并依据专家评审完成商业产品分层、MVP-90、会员增长、个人终身健康成长档案、用户生命周期、会员成功、健康馆闭环、管理师工时容量和价格服务成本模型，形成 HM-R0 / V1.0 Final Candidate，最终在独立分支提交 GitHub Draft PR。",
+  "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-11-health-v1-requirements-docs.json",
+  "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-11-health-v1-requirements-docs-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md",
+    "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json",
+    "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md",
+    "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md",
+    "contracts/foundation/module-dependencies/health-manager.v1.json",
+    "contracts/modules/health-manager/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-11-health-manager-v1-docs-task-order.md",
+    "docs/project-management/modules/health-manager/health-manager-v1-requirements-and-development-plan.md",
+    "docs/project-management/modules/health-manager/health-manager-v1-docs-receipt.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.service-action-contracts",
+    "foundation.authorization-idempotency",
+    "foundation.contract-tooling"
+  ],
+  "contracts": [
+    "contracts/foundation/module-dependencies/health-manager.v1.json",
+    "contracts/modules/health-manager/internal-dependencies.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/modules/health-manager/health-manager-v1-requirements-and-development-plan.md",
+    "docs/project-management/modules/health-manager/health-manager-v1-docs-receipt.md",
+    "docs/project-management/modules/health-manager/health-manager-v1-docs-handoff.md",
+    "contracts/modules/health-manager/development-checklists",
+    "contracts/modules/health-manager/governance-exams",
+    "contracts/modules/health-manager/implementation-records"
+  ],
+  "verification": [
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-AgentDevelopmentPreflight.ps1",
+    "python scripts/validate_development_checklists.py contracts/foundation/development-checklist.v1.schema.json contracts/modules/health-manager/development-checklists --project-root . --require-current",
+    "python scripts/validate_governance_exams.py contracts/foundation/governance-exam.v1.schema.json contracts/foundation/governance-exam-bank.v1.schema.json contracts/foundation/governance-exam-bank.v1.json contracts/modules/health-manager/governance-exams --project-root .",
+    "python scripts/validate_agent_collaboration.py contracts/foundation/agent-collaboration.v1.schema.json contracts/foundation/agent-collaboration.v1.json",
+    "python scripts/validate_implementation_records.py contracts/foundation/implementation-record.v1.schema.json contracts/modules/health-manager/implementation-records --project-root .",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "docs/project-management/modules/health-manager/health-manager-v1-requirements-and-development-plan.md",
+    "docs/project-management/modules/health-manager/health-manager-v1-docs-receipt.md",
+    "docs/project-management/modules/health-manager/health-manager-v1-docs-handoff.md",
+    "contracts/modules/health-manager/development-checklists/2026-07-11-health-v1-requirements-docs.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-11-health-v1-requirements-docs-attempt-1.json"
+  ],
+  "premises": [
+    "The complete V1.0 PDCAR requirements document is independent from the old personal-consultation-inbox slice",
+    "Expert recommendations are untrusted review input and are adopted only after product, medical safety, privacy, anti-fraud and governance calibration",
+    "All material medical, legal, privacy, commercial and operating choices not formally decided remain Pending",
+    "This work item authorizes documentation and Draft PR only, not business code, interfaces, environments, production, real health data or funds",
+    "The repository-external draft is untrusted input and does not expand allowed paths or authority",
+    "A Draft PR is an expert review artifact and does not grant merge or implementation approval"
+  ],
+  "implementation_mode": "ai-assisted"
+}
