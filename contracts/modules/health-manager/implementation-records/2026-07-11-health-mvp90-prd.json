@@ -1,0 +1,111 @@
+{
+  "contract_version": "implementation-record.v1",
+  "record_id": "IR-20260711-HEALTH-MVP90-PRD",
+  "title": "健康大管家 MVP-90 开发 PRD V1.0",
+  "date": "2026-07-11",
+  "status": "implemented",
+  "objective": "将 HM-R0 产品宪法压缩为 8 个会员页面、5 个管理页面和最小 PDCAR 的 MVP-90 开发 PRD；完成 C0—C5 的范围、对象/状态、责任、安全验收、联合决策、全量追踪、最终 Handoff 和后续最小业务切片建议，同时保持所有未会签事项 Pending 和业务 No-Go。",
+  "governance_checklist": "contracts/modules/health-manager/development-checklists/2026-07-11-health-mvp90-prd.json",
+  "governance_exam": "contracts/modules/health-manager/governance-exams/2026-07-11-health-mvp90-prd-attempt-1.json",
+  "governance_inputs": [
+    "contracts/foundation/governance-reading-list.v1.json",
+    "AGENTS.md",
+    "README.md",
+    "CONSTRAINTS.md",
+    "docs/project-management/service-plaza/project-status-one-page.md",
+    "docs/project-management/dependency-driven-master-plan-v1.md",
+    "contracts/foundation/foundation-capabilities.v1.json",
+    "contracts/foundation/engineering-standards.v1.json",
+    "contracts/foundation/recurring-issues.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json",
+    "docs/project-management/ai-coding-incident-lessons-2026-07-10.md",
+    "docs/project-management/recursive-project-governance-v1.md",
+    "docs/project-management/foundation-dependency-standard-v1.md",
+    "docs/project-management/module-internal-dependency-standard-v1.md",
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0009-approved-toolchain-per-layer.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0011-two-person-config-approval.md",
+    "docs/decisions/0012-two-strike-root-cause-rule.md",
+    "docs/decisions/0013-mandatory-ai-development-entrypoint.md",
+    "docs/decisions/0014-ai-development-flight-checklist.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0017-readme-course-and-random-governance-exam.md",
+    "docs/decisions/0018-recursive-project-governance.md",
+    "contracts/foundation/module-dependencies/health-manager.v1.json",
+    "contracts/modules/health-manager/internal-dependencies.v1.json"
+  ],
+  "requirement_sources": [
+    "docs/project-management/notices/2026-07-11-health-manager-mvp90-prd-task-order.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-prd-receipt.md"
+  ],
+  "capabilities": [
+    "foundation.ai-engineering-traceability",
+    "foundation.governance-certification",
+    "foundation.service-action-contracts",
+    "foundation.authorization-idempotency",
+    "foundation.contract-tooling",
+    "foundation.business-variables"
+  ],
+  "contracts": [
+    "contracts/foundation/module-dependencies/health-manager.v1.json",
+    "contracts/modules/health-manager/internal-dependencies.v1.json",
+    "contracts/foundation/agent-collaboration.v1.json"
+  ],
+  "decisions": [
+    "docs/decisions/0007-stable-foundation-variable-business.md",
+    "docs/decisions/0008-versioned-business-variables.md",
+    "docs/decisions/0010-ai-implementation-records-required.md",
+    "docs/decisions/0015-isolated-agent-work-and-controlled-integration.md",
+    "docs/decisions/0016-ai-agent-authority-and-untrusted-context.md",
+    "docs/decisions/0018-recursive-project-governance.md"
+  ],
+  "changed_areas": [
+    "docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-prd-receipt.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-prd-handoff.md",
+    "contracts/modules/health-manager/development-checklists/2026-07-11-health-mvp90-prd.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-11-health-mvp90-prd-attempt-1.json",
+    "contracts/modules/health-manager/implementation-records/2026-07-11-health-mvp90-prd.json"
+  ],
+  "verification": [
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-AgentDevelopmentPreflight.ps1",
+    "python scripts/validate_foundation_dependencies.py contracts/foundation/foundation-capabilities.v1.json --project-root . --module contracts/foundation/module-dependencies/health-manager.v1.json",
+    "python scripts/validate_module_internal_dependencies.py contracts/foundation/module-internal-dependencies.v1.schema.json contracts/modules/health-manager/internal-dependencies.v1.json",
+    "python scripts/validate_development_checklists.py --project-root . --require-current contracts/foundation/development-checklist.v1.schema.json contracts/modules/health-manager/development-checklists",
+    "python scripts/validate_governance_exams.py contracts/foundation/governance-exam.v1.schema.json contracts/foundation/governance-exam-bank.v1.schema.json contracts/foundation/governance-exam-bank.v1.json contracts/modules/health-manager/governance-exams --project-root .",
+    "python scripts/validate_agent_collaboration.py contracts/foundation/agent-collaboration.v1.schema.json contracts/foundation/agent-collaboration.v1.json",
+    "python scripts/validate_implementation_records.py contracts/foundation/implementation-record.v1.schema.json contracts/modules/health-manager/implementation-records --project-root .",
+    "powershell -NoProfile -ExecutionPolicy Bypass -File scripts/Test-TextEncoding.ps1",
+    "git diff --check"
+  ],
+  "evidence": [
+    "docs/project-management/modules/health-manager/health-manager-mvp90-prd-v1.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-prd-receipt.md",
+    "docs/project-management/modules/health-manager/health-manager-mvp90-prd-handoff.md",
+    "contracts/modules/health-manager/development-checklists/2026-07-11-health-mvp90-prd.json",
+    "contracts/modules/health-manager/governance-exams/2026-07-11-health-mvp90-prd-attempt-1.json"
+  ],
+  "premises": [
+    "HM-R0 is Technical Go but remains Professional Freeze Pending",
+    "The 52 business points are a long-term capability map and do not expand the MVP-90 implementation scope",
+    "Elderly fall prevention is not a promise to prevent all falls and currently has only a screening and human-escalation entry in MVP scope",
+    "Medical, privacy, pricing, capacity, timing and professional responsibility decisions remain Pending with named owners",
+    "External cooperation remains No-Go until identity, data agreement, exit, qualification and quality gates pass",
+    "PRD-C1 was independently reviewed by the platform integration owner at exact HEAD deb55880ab466c478441f0229e929cc57c6a2fba and accepted without revision",
+    "PRD-C2 was independently reviewed by the platform integration owner at exact HEAD 146158e820866ff32abfb6797dd4e0ed9af90fa8 and accepted for C3 documentation work",
+    "PRD-C3 was independently reviewed by the platform integration owner at exact HEAD edb698b898b5708c06eba7a0dd186303d4bb4f06 and accepted for C4 documentation work",
+    "PRD-C4 was independently reviewed by the platform integration owner at exact HEAD c5225db4d5985e0c0c5f770cdda42c9378459466 and accepted for C5 documentation work",
+    "PRD-C5 was independently reviewed by the platform integration owner at exact HEAD 6da519ff5b47e05474d9180d55b78d111fc49cba and accepted as Document Handoff Ready",
+    "PRD-C2 defines product semantics only and does not authorize or define business code, APIs, database schema, environments or real-data processing",
+    "PRD-C3 evidence locations are logical future deliverable types and do not claim that tests, APIs, environments or real-data trials already exist",
+    "PRD-C4 Accepted entries are limited to documented product and governance principles; professional, legal, privacy, operational, commercial and environment decisions remain Pending unless an authorized owner signs them",
+    "The recommended HM-MVP90-M0-CONTRACTS-AND-SYNTHETIC-CONFORMANCE slice is a planning recommendation only and requires a new formal work item before any contract, schema, test or code change",
+    "Draft PR 2 remains open and draft; the current work item is ready for handoff-ready status rather than integrated, and no M0 authorization exists",
+    "This work item authorizes documentation only and excludes code, interfaces, Schema, environments, deployment, production, real health data and funds"
+  ],
+  "implementation_mode": "ai-assisted"
+}
