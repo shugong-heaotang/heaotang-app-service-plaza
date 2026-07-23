@@ -24,3 +24,6 @@ Thumbs.db
 # Python validation caches
 __pycache__/
 *.py[cod]
+
+# Local linked worktrees are archived as branches, never nested in this checkout.
+.codex-worktrees/
