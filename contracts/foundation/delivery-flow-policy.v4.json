@@ -39,7 +39,7 @@
         "contract_version":"legacy-lifecycle-migration.v3",
         "schema_path":"contracts/foundation/legacy-lifecycle-migration.v3.schema.json",
         "receipt_path":"contracts/foundation/legacy-lifecycle-migrations/LLM-20260728-ACTIVITY-ONLY-R1.json",
-        "receipt_sha256":"19c53c982a618112314dbb0b2b5f1e631c1aef09f9cafd3b82e0220cac33de27",
+        "receipt_sha256":"28c0533fd8c17823ccc12f5e3313faf1350c92f425d8f53d537fdc3e3bcd0821",
         "allowed_state_modes":["activation-base","candidate"],
         "checklist_provenance":false
       }

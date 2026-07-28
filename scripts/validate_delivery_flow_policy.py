@@ -109,6 +109,24 @@ def canonical_row_sha256(row: dict) -> str:
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 
 
+def raw_work_item_bytes(registry_bytes: bytes, index: int) -> bytes | None:
+    try:
+        text = registry_bytes.decode("utf-8")
+        marker = text.index('"work_items"')
+        cursor = text.index("[", marker) + 1
+        decoder = json.JSONDecoder()
+        for current_index in range(index + 1):
+            while cursor < len(text) and (text[cursor].isspace() or text[cursor] == ","):
+                cursor += 1
+            start = cursor
+            _item, cursor = decoder.raw_decode(text, cursor)
+            if current_index == index:
+                return text[start:cursor].encode("utf-8")
+    except (UnicodeDecodeError, ValueError, json.JSONDecodeError):
+        return None
+    return None
+
+
 def validate_live_registry_extension(
     precondition_registry: dict,
     live_registry: dict,
@@ -535,12 +553,12 @@ ACTIVITY_ONLY_ALLOWED_PATHS = [
 ]
 
 
-def canonical_row_sha256(row: dict) -> str:
-    payload = json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
-    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
-
-
-def validate_activity_only_v3_receipt(registration: dict, repo_root: Path, registry: dict) -> tuple[list[str], dict | None, str | None]:
+def validate_activity_only_v3_receipt(
+    registration: dict,
+    repo_root: Path,
+    registry: dict,
+    registry_bytes: bytes,
+) -> tuple[list[str], dict | None, str | None]:
     errors: list[str] = []
     receipt_path = registration.get("receipt_path", "")
     schema_path = registration.get("schema_path", "")
@@ -554,8 +572,12 @@ def validate_activity_only_v3_receipt(registration: dict, repo_root: Path, regis
     errors.extend(e.message for e in Draft202012Validator(schema, format_checker=FormatChecker()).iter_errors(receipt))
     if receipt.get("source_registry", {}).get("commit") != "d428747a072ab8a21bc07667d3b65be4906fb6c2":
         errors.append("DELIVERY_ACTIVITY_ONLY_SOURCE_COMMIT_INVALID")
-    source = git_json_at_commit(repo_root, "d428747a072ab8a21bc07667d3b65be4906fb6c2", LEGACY_SNAPSHOT_PATH)
-    if source is None:
+    source_bytes = git_bytes_at_commit(
+        repo_root,
+        "d428747a072ab8a21bc07667d3b65be4906fb6c2",
+        LEGACY_SNAPSHOT_PATH,
+    )
+    if source_bytes is None:
         errors.append("DELIVERY_ACTIVITY_ONLY_SOURCE_UNAVAILABLE")
     elif hashlib.sha256(
         subprocess.run(
@@ -576,8 +598,14 @@ def validate_activity_only_v3_receipt(registration: dict, repo_root: Path, regis
         if index not in {111, 112, 113, 114} or index >= len(registry["work_items"]):
             errors.append("DELIVERY_ACTIVITY_ONLY_MALL_SCOPE_INVALID")
             continue
-        actual = canonical_row_sha256(registry["work_items"][index])
-        if actual != protected.get("activation_row_sha256") or protected.get("activation_row_sha256") != protected.get("candidate_row_sha256"):
+        actual_bytes = raw_work_item_bytes(registry_bytes, index)
+        source_row_bytes = raw_work_item_bytes(source_bytes, index) if source_bytes else None
+        actual = hashlib.sha256(actual_bytes).hexdigest() if actual_bytes is not None else None
+        if (
+            actual != protected.get("activation_row_sha256")
+            or protected.get("activation_row_sha256") != protected.get("candidate_row_sha256")
+            or (index in {112, 113, 114} and source_row_bytes != actual_bytes)
+        ):
             errors.append(f"DELIVERY_ACTIVITY_ONLY_MALL_ROW_DRIFT:{index}")
     return errors, receipt, "activation-base"
 
@@ -658,7 +686,12 @@ def validate_registered_receipts(
         elif version == "legacy-lifecycle-migration.v2":
             item_errors, receipt, mode = validate_v2_receipt(registration, repo_root, registry, registry_bytes)
         elif version == "legacy-lifecycle-migration.v3":
-            item_errors, receipt, mode = validate_activity_only_v3_receipt(registration, repo_root, registry)
+            item_errors, receipt, mode = validate_activity_only_v3_receipt(
+                registration,
+                repo_root,
+                registry,
+                registry_bytes,
+            )
         else:
             item_errors, receipt, mode = ["DELIVERY_LEGACY_RECEIPT_VERSION_UNSUPPORTED"], None, None
         errors.extend(item_errors)
@@ -721,16 +754,6 @@ def validate(
         for path, expected_hash in immutable_artifacts.items():
             if not evidence_hash_matches(repo_root, path, expected_hash):
                 errors.append(f"DELIVERY_IMMUTABLE_LEGACY_ARTIFACT_CHANGED:{path}")
-    activity_migrated_integrated_ids: set[str] = set()
-    if policy.get("contract_version") == "delivery-flow-policy.v4":
-        application_path = policy.get("applications", [{}])[0].get("application_path", "")
-        if evidence_exists(repo_root, application_path):
-            application = json.loads((repo_root / application_path).read_text(encoding="utf-8"))
-            activity_migrated_integrated_ids = {
-                entry.get("work_id")
-                for entry in application.get("expired_dispositions", [])
-                if entry.get("action") == "integrate"
-            }
     receipt = next(
         (
             candidate
@@ -850,7 +873,7 @@ def validate(
                         errors.append(f"{item['work_id']}: DELIVERY_HANDOFF_ESCALATION_EVIDENCE_REQUIRED")
                 if decision and parse_time(decision) > requested + timedelta(hours=policy["handoff"]["decision_sla_hours"]):
                     errors.append(f"{item['work_id']}: DELIVERY_HANDOFF_DECISION_SLA_EXCEEDED")
-        if item.get("status") == "integrated" and item.get("work_id") not in activity_migrated_integrated_ids:
+        if item.get("status") == "integrated":
             if item.get("flow_class") == "business-stream":
                 missing_business = sorted(REQUIRED_BUSINESS_FIELDS - item.keys())
                 if missing_business:

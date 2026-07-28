@@ -30,10 +30,10 @@
     {"registry_index":109,"work_id":"AIW-20260713-ACTIVITY-V3-M0","from_status":"active","to_status":"handoff-ready"}
   ],
   "protected_rows": [
-    {"registry_index":111,"work_id":"AIW-20260713-PROTECTION-MALL-M2-CATALOG-SOLUTION","activation_row_sha256":"b2c1f14b33936b1b8845973e8086d56a75f7b11472f0bc4c809186db5bbad4fd","candidate_row_sha256":"b2c1f14b33936b1b8845973e8086d56a75f7b11472f0bc4c809186db5bbad4fd","byte_equal":true},
-    {"registry_index":112,"work_id":"AIW-20260713-PROTECTION-MALL-M2-CATALOG-EVIDENCE","activation_row_sha256":"64eb1cf61ef679f4637c32ffe47dec25d8f50aeb96e58137418ee4e8864e5bb7","candidate_row_sha256":"64eb1cf61ef679f4637c32ffe47dec25d8f50aeb96e58137418ee4e8864e5bb7","byte_equal":true},
-    {"registry_index":113,"work_id":"AIW-20260713-PROTECTION-MALL-M2-ORDER-FULFILLMENT","activation_row_sha256":"cee4b150123b4eafdaddd1c505eca3a38a29787a5d0051f5ae86a931e5eca54b","candidate_row_sha256":"cee4b150123b4eafdaddd1c505eca3a38a29787a5d0051f5ae86a931e5eca54b","byte_equal":true},
-    {"registry_index":114,"work_id":"AIW-20260713-PROTECTION-MALL-M2-PORTS-SIMULATION","activation_row_sha256":"4526ad58d3ba274cd5de9aa159907cb51acfa3d002e6975fc53935251320bc53","candidate_row_sha256":"4526ad58d3ba274cd5de9aa159907cb51acfa3d002e6975fc53935251320bc53","byte_equal":true}
+    {"registry_index":111,"work_id":"AIW-20260713-PROTECTION-MALL-M2-CATALOG-SOLUTION","activation_row_sha256":"75180f815ff479165687785504338181c8133d5570777d4ea7aedde8de785b50","candidate_row_sha256":"75180f815ff479165687785504338181c8133d5570777d4ea7aedde8de785b50","byte_equal":true},
+    {"registry_index":112,"work_id":"AIW-20260713-PROTECTION-MALL-M2-CATALOG-EVIDENCE","activation_row_sha256":"2927222b192b968f184b1af49360092094b891c300a9609baa10b016e439d0d3","candidate_row_sha256":"2927222b192b968f184b1af49360092094b891c300a9609baa10b016e439d0d3","byte_equal":true},
+    {"registry_index":113,"work_id":"AIW-20260713-PROTECTION-MALL-M2-ORDER-FULFILLMENT","activation_row_sha256":"55c4d0d781ad005d29c8392ec5f2d5aecf23260cfb046275b5d2608f0550fdcc","candidate_row_sha256":"55c4d0d781ad005d29c8392ec5f2d5aecf23260cfb046275b5d2608f0550fdcc","byte_equal":true},
+    {"registry_index":114,"work_id":"AIW-20260713-PROTECTION-MALL-M2-PORTS-SIMULATION","activation_row_sha256":"9e2f98a5dc4d0f9d196691cbea83046754db9e3618dc9affb17c907c685f1465","candidate_row_sha256":"9e2f98a5dc4d0f9d196691cbea83046754db9e3618dc9affb17c907c685f1465","byte_equal":true}
   ],
   "transition_sha256": "456f433cd9fe09bc2545eab416ff92379d4131d58d19ae13c2952befdc9d7aef",
   "review": null,

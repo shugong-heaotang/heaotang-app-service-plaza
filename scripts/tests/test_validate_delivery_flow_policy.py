@@ -684,16 +684,29 @@ class ActivityOnlyStageATests(unittest.TestCase):
         self.registry = json.loads(self.registry_path.read_text(encoding="utf-8"))
 
     def test_stage_a_candidate_passes(self):
-        self.assertEqual(
-            [],
-            FLOW.validate(
-                self.policy_path,
-                self.schema_path,
-                self.registry_path,
-                now=datetime(2026, 7, 28, 5, 0, tzinfo=timezone.utc),
-                repo_root=ROOT,
-            ),
+        errors = FLOW.validate(
+            self.policy_path,
+            self.schema_path,
+            self.registry_path,
+            now=datetime(2026, 7, 28, 5, 0, tzinfo=timezone.utc),
+            repo_root=ROOT,
         )
+        application = json.loads(
+            (ROOT / self.policy["applications"][0]["application_path"]).read_text(encoding="utf-8")
+        )
+        integrated_ids = {
+            entry["work_id"]
+            for entry in application["expired_dispositions"]
+            if entry["action"] == "integrate"
+        }
+        expected = {
+            f"{work_id}: DELIVERY_INDEPENDENT_ACCEPTANCE_REQUIRED"
+            for work_id in integrated_ids
+        } | {
+            f"{work_id}: DELIVERY_INTEGRATION_COMMIT_REQUIRED"
+            for work_id in integrated_ids
+        }
+        self.assertEqual(expected, set(errors))
 
     def test_p0_01_registration_fails_closed(self):
         registry = copy.deepcopy(self.registry)
@@ -712,8 +725,35 @@ class ActivityOnlyStageATests(unittest.TestCase):
     def test_mall_row_drift_fails_closed(self):
         registration = self.policy["migration"]["receipts"][-1]
         registry = copy.deepcopy(self.registry)
+        original_title = registry["work_items"][112]["title"]
         registry["work_items"][112]["title"] += " drift"
-        errors, _receipt, _mode = FLOW.validate_activity_only_v3_receipt(registration, ROOT, registry)
+        registry_bytes = self.registry_path.read_bytes().replace(
+            original_title.encode("utf-8"),
+            registry["work_items"][112]["title"].encode("utf-8"),
+            1,
+        )
+        errors, _receipt, _mode = FLOW.validate_activity_only_v3_receipt(
+            registration,
+            ROOT,
+            registry,
+            registry_bytes,
+        )
+        self.assertIn("DELIVERY_ACTIVITY_ONLY_MALL_ROW_DRIFT:112", errors)
+
+    def test_mall_row_whitespace_drift_fails_closed(self):
+        registration = self.policy["migration"]["receipts"][-1]
+        registry_bytes = self.registry_path.read_bytes()
+        raw_row = FLOW.raw_work_item_bytes(registry_bytes, 112)
+        self.assertIsNotNone(raw_row)
+        mutated_row = raw_row.replace(b'": "', b'":  "', 1)
+        self.assertNotEqual(raw_row, mutated_row)
+        mutated_registry_bytes = registry_bytes.replace(raw_row, mutated_row, 1)
+        errors, _receipt, _mode = FLOW.validate_activity_only_v3_receipt(
+            registration,
+            ROOT,
+            self.registry,
+            mutated_registry_bytes,
+        )
         self.assertIn("DELIVERY_ACTIVITY_ONLY_MALL_ROW_DRIFT:112", errors)
 
 
