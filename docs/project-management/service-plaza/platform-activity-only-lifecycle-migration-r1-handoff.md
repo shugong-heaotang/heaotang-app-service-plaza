@@ -1,6 +1,6 @@
 # Activity-only lifecycle migration R1 Handoff
 
-Status: in progress  
+Status: in progress
 Work ID: `AIW-20260728-ACTIVITY-ONLY-LIFECYCLE-MIGRATION-R1`
 
 ## Authority

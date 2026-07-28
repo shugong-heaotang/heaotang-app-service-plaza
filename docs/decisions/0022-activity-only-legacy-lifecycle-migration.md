@@ -1,6 +1,6 @@
 # ADR 0022: Activity-only two-stage lifecycle migration
 
-Status: Proposed for independent review  
+Status: Proposed for independent review
 Date: 2026-07-28
 
 ## Decision
