@@ -1,0 +1,41 @@
+{
+  "contract_version": "legacy-lifecycle-migration.v3",
+  "receipt_id": "LLM-20260728-ACTIVITY-ONLY-R1",
+  "work_id": "AIW-20260728-ACTIVITY-ONLY-LIFECYCLE-MIGRATION-R1",
+  "state": "authorized-not-applied",
+  "execution_enabled": false,
+  "applied": false,
+  "source_registry": {
+    "path": "contracts/foundation/agent-collaboration.v1.json",
+    "commit": "d428747a072ab8a21bc07667d3b65be4906fb6c2",
+    "sha256": "611c804346b2e3861118b2d7cde6c827263b16e5d9669ab8c07b62169acc702d"
+  },
+  "activation_registry_precondition": {
+    "path": "contracts/foundation/agent-collaboration.v1.json",
+    "commit": "0000000000000000000000000000000000000000",
+    "sha256": "18eb7861af04b45957a6474184fd0d2356fe0d2721607aba51aa2fe43361eff5"
+  },
+  "task_order": {
+    "path": "docs/project-management/notices/2026-07-28-platform-activity-only-lifecycle-migration-r1-task-order.md",
+    "sha256": "cddd5454043951d25e0a88791586f18ed864d0ee2953139ffcbf5a8563087db5"
+  },
+  "audit_scope": [
+    {"registry_index":109,"work_id":"AIW-20260713-ACTIVITY-V3-M0"},
+    {"registry_index":111,"work_id":"AIW-20260713-PROTECTION-MALL-M2-CATALOG-SOLUTION"},
+    {"registry_index":112,"work_id":"AIW-20260713-PROTECTION-MALL-M2-CATALOG-EVIDENCE"},
+    {"registry_index":113,"work_id":"AIW-20260713-PROTECTION-MALL-M2-ORDER-FULFILLMENT"},
+    {"registry_index":114,"work_id":"AIW-20260713-PROTECTION-MALL-M2-PORTS-SIMULATION"}
+  ],
+  "transitions": [
+    {"registry_index":109,"work_id":"AIW-20260713-ACTIVITY-V3-M0","from_status":"active","to_status":"handoff-ready"}
+  ],
+  "protected_rows": [
+    {"registry_index":111,"work_id":"AIW-20260713-PROTECTION-MALL-M2-CATALOG-SOLUTION","activation_row_sha256":"b2c1f14b33936b1b8845973e8086d56a75f7b11472f0bc4c809186db5bbad4fd","candidate_row_sha256":"b2c1f14b33936b1b8845973e8086d56a75f7b11472f0bc4c809186db5bbad4fd","byte_equal":true},
+    {"registry_index":112,"work_id":"AIW-20260713-PROTECTION-MALL-M2-CATALOG-EVIDENCE","activation_row_sha256":"64eb1cf61ef679f4637c32ffe47dec25d8f50aeb96e58137418ee4e8864e5bb7","candidate_row_sha256":"64eb1cf61ef679f4637c32ffe47dec25d8f50aeb96e58137418ee4e8864e5bb7","byte_equal":true},
+    {"registry_index":113,"work_id":"AIW-20260713-PROTECTION-MALL-M2-ORDER-FULFILLMENT","activation_row_sha256":"cee4b150123b4eafdaddd1c505eca3a38a29787a5d0051f5ae86a931e5eca54b","candidate_row_sha256":"cee4b150123b4eafdaddd1c505eca3a38a29787a5d0051f5ae86a931e5eca54b","byte_equal":true},
+    {"registry_index":114,"work_id":"AIW-20260713-PROTECTION-MALL-M2-PORTS-SIMULATION","activation_row_sha256":"4526ad58d3ba274cd5de9aa159907cb51acfa3d002e6975fc53935251320bc53","candidate_row_sha256":"4526ad58d3ba274cd5de9aa159907cb51acfa3d002e6975fc53935251320bc53","byte_equal":true}
+  ],
+  "transition_sha256": "456f433cd9fe09bc2545eab416ff92379d4131d58d19ae13c2952befdc9d7aef",
+  "review": null,
+  "integration": null
+}

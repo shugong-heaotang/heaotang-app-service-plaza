@@ -1,0 +1,139 @@
+{
+  "contract_version": "legacy-lifecycle-application.v2",
+  "application_id": "LLA-20260728-ACTIVITY-ONLY-R1",
+  "work_id": "AIW-20260728-ACTIVITY-ONLY-LIFECYCLE-MIGRATION-R1",
+  "state": "candidate-not-applied",
+  "source_registry": {
+    "path": "contracts/foundation/agent-collaboration.v1.json",
+    "commit": "d428747a072ab8a21bc07667d3b65be4906fb6c2",
+    "sha256": "611c804346b2e3861118b2d7cde6c827263b16e5d9669ab8c07b62169acc702d"
+  },
+  "expected_activation_registry": {
+    "path": "contracts/foundation/agent-collaboration.v1.json",
+    "commit": "0000000000000000000000000000000000000000",
+    "sha256": "18eb7861af04b45957a6474184fd0d2356fe0d2721607aba51aa2fe43361eff5"
+  },
+  "expired_dispositions": [
+    {
+      "registry_index": 109,
+      "work_id": "AIW-20260713-ACTIVITY-V3-M0",
+      "source_status": "active",
+      "action": "renew",
+      "before_row_sha256": "8699a409c851a11b08c3295c04f07850492f35cfacbf83fb0cb89db66fee1371",
+      "after_row_sha256": "24c9d88cbd681ec930fd3f2cc0a8af1ca7dc998e44600c03d0d72e70fd852f0a",
+      "allowed_changed_fields": ["updated_at","target_date","next_checkpoint","status_expires_at"],
+      "basis": "Stage A retains Activity active; Stage B is the only allowed lifecycle transition."
+    },
+    {
+      "registry_index": 111,
+      "work_id": "AIW-20260713-PROTECTION-MALL-M2-CATALOG-SOLUTION",
+      "source_status": "active",
+      "action": "renew",
+      "before_row_sha256": "0fc9e3681dd663cf67672a13730abf73cf2031f15afb0e00974b468483a9db6e",
+      "after_row_sha256": "b2c1f14b33936b1b8845973e8086d56a75f7b11472f0bc4c809186db5bbad4fd",
+      "allowed_changed_fields": ["updated_at","target_date","next_checkpoint","status_expires_at"],
+      "basis": "Mall business state remains active; only governance freshness changes."
+    },
+    {
+      "registry_index": 117,
+      "work_id": "AIW-20260712-NOVA-PHASE5-M1-RUNTIME",
+      "source_status": "active",
+      "action": "handoff",
+      "before_row_sha256": "2a35bc3a0d372c6b0f72beeaabe70d1132bf0f1d5ff5ffa20d3bee34233d002c",
+      "after_row_sha256": "a91fda506ec04b5b76d932423ca602365b1aff99ae555059c5e5f18bb5a0ec5f",
+      "allowed_changed_fields": ["status","updated_at","target_date","next_checkpoint","status_expires_at","next_owner_role","handoff_requested_at"],
+      "basis": "Accepted M1 material exists, while the synthetic E2E blocker prevents an integrated claim."
+    },
+    {
+      "registry_index": 123,
+      "work_id": "AIW-20260714-PLATFORM-REGISTRY-DISPATCH-R1",
+      "source_status": "active",
+      "action": "integrate",
+      "before_row_sha256": "e4dce75bf465a7057736b20abeda79fdce6efe7110cb1406d582b6031df481b8",
+      "after_row_sha256": "cab53d193a024f744e52ec8234a8b1b3272cda8865b8a8b4c27143207a9324ee",
+      "allowed_changed_fields": ["status"],
+      "basis": "Recorded R12-J chain is complete and its source head is an ancestor of the authority base."
+    },
+    {
+      "registry_index": 130,
+      "work_id": "AIW-20260715-PLATFORM-REGISTRY-R12K-SOCIAL-OVERLAY-UNBLOCK",
+      "source_status": "active",
+      "action": "integrate",
+      "before_row_sha256": "83659a7e3409cd6d62a6eac673db5ed8f4b08b85fb09953b5988a98e0ab3596f",
+      "after_row_sha256": "a75ceb14b9279dbfb66596b817ceddef5ecf52cfe79a96b70f77cb0bb2080fa6",
+      "allowed_changed_fields": ["status"],
+      "basis": "Exact accepted head is an ancestor of the authority base."
+    },
+    {
+      "registry_index": 131,
+      "work_id": "AIW-20260715-PLATFORM-REGISTRY-R12L-PARALLEL-ACTIVATION",
+      "source_status": "active",
+      "action": "integrate",
+      "before_row_sha256": "d6c6f0dcd757b8c12156b2f58e40ea2e8d129a50acdb9c0fdf721407ad4dc896",
+      "after_row_sha256": "a8d2e8628d6ad103d3de45363ef10a96d3c9c327f2b74b5a93d8b737eebfa38e",
+      "allowed_changed_fields": ["status"],
+      "basis": "Recorded integrated evidence and accepted head are in the authority ancestry."
+    },
+    {
+      "registry_index": 134,
+      "work_id": "AIW-20260715-PLATFORM-DELIVERY-FLOW-LEGACY-V2-INDEPENDENT-ACCEPTANCE-R1",
+      "source_status": "active",
+      "action": "integrate",
+      "before_row_sha256": "2557769d861812874b9b8be3278612802df53c2adef1db715cf59223d005bc8a",
+      "after_row_sha256": "14f415b5293ded82110aaa0d21be1058b07fa355fb8fffdc1a2b4ab513ea8047",
+      "allowed_changed_fields": ["status"],
+      "basis": "File-backed independent Go is present in the authority ancestry."
+    },
+    {
+      "registry_index": 137,
+      "work_id": "AIW-20260715-PLATFORM-REGISTRY-R12M-LEGACY-GENERALIZATION-ACTIVATION",
+      "source_status": "active",
+      "action": "integrate",
+      "before_row_sha256": "3ea12cd5007dcd91bd1eebd9e3f7e8fac62700f20397209f66737231b1b95dbb",
+      "after_row_sha256": "6139baa89dd6debaee4833da50363b086d59d2cbb4b7cf4bf5c359f86f35ace8",
+      "allowed_changed_fields": ["status"],
+      "basis": "R12-M controlled-integration evidence is recorded and in authority ancestry."
+    },
+    {
+      "registry_index": 138,
+      "work_id": "AIW-20260715-PLATFORM-LEGACY-LIFECYCLE-APPLICATION-R4",
+      "source_status": "active",
+      "action": "cancel",
+      "before_row_sha256": "b7337e6dbe42bfaaeb175b5359cbb04e293d83e23f90fa0b4a9381fae028619f",
+      "after_row_sha256": "e22edf66d9d240030d0ae3d8da42bc8f017f2ab6bd25b7df701132a28a80d496",
+      "allowed_changed_fields": ["status"],
+      "basis": "The unintegrated Technical/Social application maker is superseded by the Activity-only v2 application contract."
+    },
+    {
+      "registry_index": 139,
+      "work_id": "AIW-20260715-PLATFORM-REGISTRY-R12N-R2-APPLICATION-ACTIVATION",
+      "source_status": "active",
+      "action": "integrate",
+      "before_row_sha256": "eeecaa7454d87ffdd77cf6b532c014c33710274942ace2d9c26e7e82e5fed009",
+      "after_row_sha256": "674d8d8f125d29974e922178b736ccb5d34a790cf134dc4f3b408d9a93f2ce2f",
+      "allowed_changed_fields": ["status"],
+      "basis": "R12-N-R2 accepted head and controlled follow-up are in authority ancestry."
+    },
+    {
+      "registry_index": 140,
+      "work_id": "AIW-20260715-PLATFORM-LEGACY-LIFECYCLE-REGISTRY-TRANSACTION-R12O",
+      "source_status": "active",
+      "action": "cancel",
+      "before_row_sha256": "cc1d9d6de034b97658a24293db97a426b33a26ad8cdd1eb9210732c16a4c2f90",
+      "after_row_sha256": "383a6a2f63bdb0c99b7cafa392e0258cfdae23c298013f883ab92445eea0c41e",
+      "allowed_changed_fields": ["status"],
+      "basis": "The old No-Write transaction is superseded, but this candidate cannot release central authority before independent Go and separate activation authorization."
+    }
+  ],
+  "mall_protection": {
+    "old_receipt_sha256": "5e85735d7c70a942efca1b8a8c6d9aecee4805a40282ae8cfbac27beab3207b1",
+    "rows_112_114_unchanged": true
+  },
+  "r12o_guard": {
+    "central_source_remains_active_until_review_go": true,
+    "p0_01_absent": true,
+    "activation_requires_separate_authorization": true
+  },
+  "review": null,
+  "integration": null
+}

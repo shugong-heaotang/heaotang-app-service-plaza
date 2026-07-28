@@ -675,5 +675,47 @@ class AgentCollaborationBaseCommitTests(unittest.TestCase):
         )
 
 
+class ActivityOnlyStageATests(unittest.TestCase):
+    def setUp(self):
+        self.policy_path = ROOT / "contracts/foundation/delivery-flow-policy.v4.json"
+        self.schema_path = ROOT / "contracts/foundation/delivery-flow-policy.v4.schema.json"
+        self.registry_path = ROOT / "contracts/foundation/agent-collaboration.v1.json"
+        self.policy = json.loads(self.policy_path.read_text(encoding="utf-8"))
+        self.registry = json.loads(self.registry_path.read_text(encoding="utf-8"))
+
+    def test_stage_a_candidate_passes(self):
+        self.assertEqual(
+            [],
+            FLOW.validate(
+                self.policy_path,
+                self.schema_path,
+                self.registry_path,
+                now=datetime(2026, 7, 28, 5, 0, tzinfo=timezone.utc),
+                repo_root=ROOT,
+            ),
+        )
+
+    def test_p0_01_registration_fails_closed(self):
+        registry = copy.deepcopy(self.registry)
+        premature = copy.deepcopy(registry["work_items"][-1])
+        premature["work_id"] = "AIW-20260728-MEMBER-NOVA-TUTOR-IDENTITY-PROJECTION-R1"
+        registry["work_items"].append(premature)
+        errors = FLOW.validate_activity_only_application(self.policy, ROOT, registry)
+        self.assertIn("DELIVERY_ACTIVITY_ONLY_P0_01_PREMATURE", errors)
+
+    def test_exact_writer_paths_are_required(self):
+        registry = copy.deepcopy(self.registry)
+        registry["work_items"][-1]["allowed_paths"].append("unexpected/**")
+        errors = FLOW.validate_activity_only_application(self.policy, ROOT, registry)
+        self.assertIn("DELIVERY_ACTIVITY_ONLY_WORK_ITEM_OR_PATHS_INVALID", errors)
+
+    def test_mall_row_drift_fails_closed(self):
+        registration = self.policy["migration"]["receipts"][-1]
+        registry = copy.deepcopy(self.registry)
+        registry["work_items"][112]["title"] += " drift"
+        errors, _receipt, _mode = FLOW.validate_activity_only_v3_receipt(registration, ROOT, registry)
+        self.assertIn("DELIVERY_ACTIVITY_ONLY_MALL_ROW_DRIFT:112", errors)
+
+
 if __name__ == "__main__":
     unittest.main()

@@ -11,12 +11,18 @@ $foundationRegistry = Join-Path $repoRoot "contracts\foundation\foundation-capab
 $internalDependencyV2Schema = Join-Path $repoRoot "contracts\foundation\module-internal-dependencies.v2.schema.json"
 $deliveryFlowV3 = Join-Path $repoRoot "contracts\foundation\delivery-flow-policy.v3.json"
 $deliveryFlowV3Schema = Join-Path $repoRoot "contracts\foundation\delivery-flow-policy.v3.schema.json"
+$deliveryFlowV4 = Join-Path $repoRoot "contracts\foundation\delivery-flow-policy.v4.json"
+$deliveryFlowV4Schema = Join-Path $repoRoot "contracts\foundation\delivery-flow-policy.v4.schema.json"
 $legacyMigrationV1Schema = Join-Path $repoRoot "contracts\foundation\legacy-lifecycle-migration.v1.schema.json"
 $legacyMigrationV2Schema = Join-Path $repoRoot "contracts\foundation\legacy-lifecycle-migration.v2.schema.json"
 $legacyMigrationV1Receipt = Join-Path $repoRoot "contracts\foundation\legacy-lifecycle-migrations\LLM-20260715-ACTIVITY-MALL-M2-R1.json"
 $legacyMigrationV2Receipt = Join-Path $repoRoot "contracts\foundation\legacy-lifecycle-migrations\LLM-20260715-TECHNICAL-SOCIAL-BATCH-R2.json"
+$legacyMigrationV3Schema = Join-Path $repoRoot "contracts\foundation\legacy-lifecycle-migration.v3.schema.json"
+$legacyMigrationV3Receipt = Join-Path $repoRoot "contracts\foundation\legacy-lifecycle-migrations\LLM-20260728-ACTIVITY-ONLY-R1.json"
+$legacyApplicationV2Schema = Join-Path $repoRoot "contracts\foundation\legacy-lifecycle-application.v2.schema.json"
+$legacyApplicationV2 = Join-Path $repoRoot "contracts\foundation\legacy-lifecycle-applications\LLA-20260728-ACTIVITY-ONLY-R1.json"
 
-foreach ($path in @($schema, $baseline, $internalDependencyV2Schema, $deliveryFlowV3, $deliveryFlowV3Schema, $legacyMigrationV1Schema, $legacyMigrationV2Schema, $legacyMigrationV1Receipt, $legacyMigrationV2Receipt)) {
+foreach ($path in @($schema, $baseline, $internalDependencyV2Schema, $deliveryFlowV3, $deliveryFlowV3Schema, $deliveryFlowV4, $deliveryFlowV4Schema, $legacyMigrationV1Schema, $legacyMigrationV2Schema, $legacyMigrationV1Receipt, $legacyMigrationV2Receipt, $legacyMigrationV3Schema, $legacyMigrationV3Receipt, $legacyApplicationV2Schema, $legacyApplicationV2)) {
   if (-not (Test-Path -LiteralPath $path)) {
     throw "Service Plaza contract file is missing: $path"
   }
@@ -86,11 +92,11 @@ try {
     throw "Agent workspace ownership and isolation validation failed."
   }
   & python -X utf8 (Join-Path $PSScriptRoot "validate_delivery_flow_policy.py") `
-    $deliveryFlowV3 `
-    $deliveryFlowV3Schema `
+    $deliveryFlowV4 `
+    $deliveryFlowV4Schema `
     (Join-Path $repoRoot "contracts\foundation\agent-collaboration.v1.json")
   if ($LASTEXITCODE -ne 0) {
-    throw "Delivery Flow V3 policy or registered lifecycle receipt validation failed."
+    throw "Delivery Flow V4 policy, registered lifecycle receipt or application validation failed."
   }
   & python -X utf8 (Join-Path $PSScriptRoot "validate_development_checklists.py") `
     (Join-Path $repoRoot "contracts\foundation\development-checklist.v1.schema.json") `

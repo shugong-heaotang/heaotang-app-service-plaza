@@ -1,0 +1,40 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/foundation/legacy-lifecycle-application.v2.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version","application_id","work_id","state","source_registry","expected_activation_registry","expired_dispositions","mall_protection","r12o_guard","review","integration"],
+  "properties": {
+    "contract_version": {"const":"legacy-lifecycle-application.v2"},
+    "application_id": {"const":"LLA-20260728-ACTIVITY-ONLY-R1"},
+    "work_id": {"const":"AIW-20260728-ACTIVITY-ONLY-LIFECYCLE-MIGRATION-R1"},
+    "state": {"const":"candidate-not-applied"},
+    "source_registry": {"$ref":"#/$defs/authority"},
+    "expected_activation_registry": {"$ref":"#/$defs/authority"},
+    "expired_dispositions": {
+      "type":"array","minItems":11,"maxItems":11,"uniqueItems":true,
+      "items":{
+        "type":"object","additionalProperties":false,
+        "required":["registry_index","work_id","source_status","action","before_row_sha256","after_row_sha256","allowed_changed_fields","basis"],
+        "properties":{
+          "registry_index":{"type":"integer"},
+          "work_id":{"type":"string"},
+          "source_status":{"enum":["active","handoff-ready"]},
+          "action":{"enum":["renew","handoff","integrate","cancel"]},
+          "before_row_sha256":{"$ref":"#/$defs/sha"},
+          "after_row_sha256":{"$ref":"#/$defs/sha"},
+          "allowed_changed_fields":{"type":"array","uniqueItems":true,"items":{"type":"string"}},
+          "basis":{"type":"string","minLength":1}
+        }
+      }
+    },
+    "mall_protection":{"type":"object","required":["old_receipt_sha256","rows_112_114_unchanged"],"properties":{"old_receipt_sha256":{"const":"5e85735d7c70a942efca1b8a8c6d9aecee4805a40282ae8cfbac27beab3207b1"},"rows_112_114_unchanged":{"const":true}}},
+    "r12o_guard":{"type":"object","required":["central_source_remains_active_until_review_go","p0_01_absent","activation_requires_separate_authorization"],"properties":{"central_source_remains_active_until_review_go":{"const":true},"p0_01_absent":{"const":true},"activation_requires_separate_authorization":{"const":true}}},
+    "review":{"type":"null"},
+    "integration":{"type":"null"}
+  },
+  "$defs":{
+    "sha":{"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "authority":{"type":"object","required":["path","commit","sha256"],"properties":{"path":{"const":"contracts/foundation/agent-collaboration.v1.json"},"commit":{"type":"string","pattern":"^[a-f0-9]{40}$"},"sha256":{"$ref":"#/$defs/sha"}}}
+  }
+}

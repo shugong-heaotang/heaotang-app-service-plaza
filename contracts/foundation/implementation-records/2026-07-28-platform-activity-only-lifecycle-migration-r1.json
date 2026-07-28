@@ -1,0 +1,12 @@
+{
+  "record_id": "IR-20260728-PLATFORM-ACTIVITY-ONLY-LIFECYCLE-MIGRATION-R1",
+  "work_id": "AIW-20260728-ACTIVITY-ONLY-LIFECYCLE-MIGRATION-R1",
+  "status": "in-progress",
+  "base_commit": "d428747a072ab8a21bc07667d3b65be4906fb6c2",
+  "candidate_commit": null,
+  "writer": "platform registry owner",
+  "reviewer": "independent platform governance validator/reviewer",
+  "summary": "Stage A successor activation-base machine candidate only; no central activation.",
+  "checks": [],
+  "independent_review": null
+}

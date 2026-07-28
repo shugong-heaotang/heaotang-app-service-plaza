@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://heaotang.cn/contracts/foundation/legacy-lifecycle-migration.v3.schema.json",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["contract_version","receipt_id","work_id","state","execution_enabled","applied","source_registry","activation_registry_precondition","task_order","audit_scope","transitions","protected_rows","transition_sha256","review","integration"],
+  "properties": {
+    "contract_version": {"const": "legacy-lifecycle-migration.v3"},
+    "receipt_id": {"const": "LLM-20260728-ACTIVITY-ONLY-R1"},
+    "work_id": {"const": "AIW-20260728-ACTIVITY-ONLY-LIFECYCLE-MIGRATION-R1"},
+    "state": {"const": "authorized-not-applied"},
+    "execution_enabled": {"const": false},
+    "applied": {"const": false},
+    "source_registry": {"$ref": "#/$defs/authority"},
+    "activation_registry_precondition": {"$ref": "#/$defs/authority"},
+    "task_order": {"$ref": "#/$defs/file"},
+    "audit_scope": {
+      "const": [
+        {"registry_index":109,"work_id":"AIW-20260713-ACTIVITY-V3-M0"},
+        {"registry_index":111,"work_id":"AIW-20260713-PROTECTION-MALL-M2-CATALOG-SOLUTION"},
+        {"registry_index":112,"work_id":"AIW-20260713-PROTECTION-MALL-M2-CATALOG-EVIDENCE"},
+        {"registry_index":113,"work_id":"AIW-20260713-PROTECTION-MALL-M2-ORDER-FULFILLMENT"},
+        {"registry_index":114,"work_id":"AIW-20260713-PROTECTION-MALL-M2-PORTS-SIMULATION"}
+      ]
+    },
+    "transitions": {
+      "const": [{"registry_index":109,"work_id":"AIW-20260713-ACTIVITY-V3-M0","from_status":"active","to_status":"handoff-ready"}]
+    },
+    "protected_rows": {
+      "type": "array", "minItems": 4, "maxItems": 4, "uniqueItems": true,
+      "items": {
+        "type": "object", "additionalProperties": false,
+        "required": ["registry_index","work_id","activation_row_sha256","candidate_row_sha256","byte_equal"],
+        "properties": {
+          "registry_index": {"enum":[111,112,113,114]},
+          "work_id": {"type":"string","minLength":1},
+          "activation_row_sha256": {"$ref":"#/$defs/sha"},
+          "candidate_row_sha256": {"$ref":"#/$defs/sha"},
+          "byte_equal": {"const":true}
+        }
+      }
+    },
+    "transition_sha256": {"$ref":"#/$defs/sha"},
+    "review": {"type":"null"},
+    "integration": {"type":"null"}
+  },
+  "$defs": {
+    "sha": {"type":"string","pattern":"^[a-f0-9]{64}$"},
+    "commit": {"type":"string","pattern":"^[a-f0-9]{40}$"},
+    "authority": {
+      "type":"object","additionalProperties":false,
+      "required":["path","commit","sha256"],
+      "properties":{"path":{"const":"contracts/foundation/agent-collaboration.v1.json"},"commit":{"$ref":"#/$defs/commit"},"sha256":{"$ref":"#/$defs/sha"}}
+    },
+    "file": {
+      "type":"object","additionalProperties":false,
+      "required":["path","sha256"],
+      "properties":{"path":{"type":"string","minLength":1},"sha256":{"$ref":"#/$defs/sha"}}
+    }
+  }
+}

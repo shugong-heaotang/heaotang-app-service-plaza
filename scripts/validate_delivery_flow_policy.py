@@ -501,13 +501,138 @@ def validate_v2_receipt(
     return errors, receipt, mode
 
 
+ACTIVITY_ONLY_WORK_ID = "AIW-20260728-ACTIVITY-ONLY-LIFECYCLE-MIGRATION-R1"
+ACTIVITY_ONLY_EXPIRED_ROWS = {
+    109: "AIW-20260713-ACTIVITY-V3-M0",
+    111: "AIW-20260713-PROTECTION-MALL-M2-CATALOG-SOLUTION",
+    117: "AIW-20260712-NOVA-PHASE5-M1-RUNTIME",
+    123: "AIW-20260714-PLATFORM-REGISTRY-DISPATCH-R1",
+    130: "AIW-20260715-PLATFORM-REGISTRY-R12K-SOCIAL-OVERLAY-UNBLOCK",
+    131: "AIW-20260715-PLATFORM-REGISTRY-R12L-PARALLEL-ACTIVATION",
+    134: "AIW-20260715-PLATFORM-DELIVERY-FLOW-LEGACY-V2-INDEPENDENT-ACCEPTANCE-R1",
+    137: "AIW-20260715-PLATFORM-REGISTRY-R12M-LEGACY-GENERALIZATION-ACTIVATION",
+    138: "AIW-20260715-PLATFORM-LEGACY-LIFECYCLE-APPLICATION-R4",
+    139: "AIW-20260715-PLATFORM-REGISTRY-R12N-R2-APPLICATION-ACTIVATION",
+    140: "AIW-20260715-PLATFORM-LEGACY-LIFECYCLE-REGISTRY-TRANSACTION-R12O",
+}
+ACTIVITY_ONLY_ALLOWED_PATHS = [
+    "contracts/foundation/agent-collaboration.v1.json",
+    "contracts/foundation/delivery-flow-policy.v4.json",
+    "contracts/foundation/delivery-flow-policy.v4.schema.json",
+    "contracts/foundation/legacy-lifecycle-migration.v3.schema.json",
+    "contracts/foundation/legacy-lifecycle-migrations/LLM-20260728-ACTIVITY-ONLY-R1.json",
+    "contracts/foundation/legacy-lifecycle-application.v2.schema.json",
+    "contracts/foundation/legacy-lifecycle-applications/LLA-20260728-ACTIVITY-ONLY-R1.json",
+    "scripts/validate_delivery_flow_policy.py",
+    "scripts/tests/test_validate_delivery_flow_policy.py",
+    "scripts/Test-ServicePlazaContracts.ps1",
+    "docs/decisions/0022-activity-only-legacy-lifecycle-migration.md",
+    "docs/project-management/notices/2026-07-28-platform-activity-only-lifecycle-migration-r1-task-order.md",
+    "contracts/foundation/development-checklists/2026-07-28-platform-activity-only-lifecycle-migration-r1.json",
+    "contracts/foundation/governance-exams/2026-07-28-platform-activity-only-lifecycle-migration-r1-attempt-1.json",
+    "contracts/foundation/implementation-records/2026-07-28-platform-activity-only-lifecycle-migration-r1.json",
+    "docs/project-management/service-plaza/platform-activity-only-lifecycle-migration-r1-handoff.md",
+]
+
+
+def canonical_row_sha256(row: dict) -> str:
+    payload = json.dumps(row, ensure_ascii=False, sort_keys=True, separators=(",", ":")) + "\n"
+    return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+
+def validate_activity_only_v3_receipt(registration: dict, repo_root: Path, registry: dict) -> tuple[list[str], dict | None, str | None]:
+    errors: list[str] = []
+    receipt_path = registration.get("receipt_path", "")
+    schema_path = registration.get("schema_path", "")
+    if not evidence_hash_matches(repo_root, receipt_path, registration.get("receipt_sha256", "")):
+        return ["DELIVERY_ACTIVITY_ONLY_RECEIPT_HASH_INVALID"], None, None
+    try:
+        receipt = json.loads((repo_root / receipt_path).read_text(encoding="utf-8"))
+        schema = json.loads((repo_root / schema_path).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return ["DELIVERY_ACTIVITY_ONLY_RECEIPT_UNREADABLE"], None, None
+    errors.extend(e.message for e in Draft202012Validator(schema, format_checker=FormatChecker()).iter_errors(receipt))
+    if receipt.get("source_registry", {}).get("commit") != "d428747a072ab8a21bc07667d3b65be4906fb6c2":
+        errors.append("DELIVERY_ACTIVITY_ONLY_SOURCE_COMMIT_INVALID")
+    source = git_json_at_commit(repo_root, "d428747a072ab8a21bc07667d3b65be4906fb6c2", LEGACY_SNAPSHOT_PATH)
+    if source is None:
+        errors.append("DELIVERY_ACTIVITY_ONLY_SOURCE_UNAVAILABLE")
+    elif hashlib.sha256(
+        subprocess.run(
+            ["git", "-C", str(repo_root), "show", "d428747a072ab8a21bc07667d3b65be4906fb6c2:contracts/foundation/agent-collaboration.v1.json"],
+            check=True, capture_output=True,
+        ).stdout
+    ).hexdigest() != receipt.get("source_registry", {}).get("sha256"):
+        errors.append("DELIVERY_ACTIVITY_ONLY_SOURCE_HASH_INVALID")
+    expected = receipt.get("activation_registry_precondition", {}).get("sha256")
+    current = hashlib.sha256((repo_root / LEGACY_SNAPSHOT_PATH).read_bytes()).hexdigest()
+    if expected != current:
+        errors.append("DELIVERY_ACTIVITY_ONLY_ACTIVATION_CAS_INVALID")
+    transition = receipt.get("transitions", [])
+    if transition != [{"registry_index": 109, "work_id": ACTIVITY_ONLY_EXPIRED_ROWS[109], "from_status": "active", "to_status": "handoff-ready"}]:
+        errors.append("DELIVERY_ACTIVITY_ONLY_TRANSITION_NOT_UNIQUE")
+    for protected in receipt.get("protected_rows", []):
+        index = protected.get("registry_index")
+        if index not in {111, 112, 113, 114} or index >= len(registry["work_items"]):
+            errors.append("DELIVERY_ACTIVITY_ONLY_MALL_SCOPE_INVALID")
+            continue
+        actual = canonical_row_sha256(registry["work_items"][index])
+        if actual != protected.get("activation_row_sha256") or protected.get("activation_row_sha256") != protected.get("candidate_row_sha256"):
+            errors.append(f"DELIVERY_ACTIVITY_ONLY_MALL_ROW_DRIFT:{index}")
+    return errors, receipt, "activation-base"
+
+
+def validate_activity_only_application(policy: dict, repo_root: Path, registry: dict) -> list[str]:
+    errors: list[str] = []
+    applications = policy.get("applications", [])
+    if len(applications) != 1:
+        return ["DELIVERY_ACTIVITY_ONLY_APPLICATION_REGISTRATION_INVALID"]
+    registration = applications[0]
+    path = registration.get("application_path", "")
+    schema_path = registration.get("schema_path", "")
+    if not evidence_hash_matches(repo_root, path, registration.get("application_sha256", "")):
+        return ["DELIVERY_ACTIVITY_ONLY_APPLICATION_HASH_INVALID"]
+    try:
+        application = json.loads((repo_root / path).read_text(encoding="utf-8"))
+        schema = json.loads((repo_root / schema_path).read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError):
+        return ["DELIVERY_ACTIVITY_ONLY_APPLICATION_UNREADABLE"]
+    errors.extend(e.message for e in Draft202012Validator(schema, format_checker=FormatChecker()).iter_errors(application))
+    dispositions = application.get("expired_dispositions", [])
+    actual_set = {(d.get("registry_index"), d.get("work_id")) for d in dispositions}
+    expected_set = set(ACTIVITY_ONLY_EXPIRED_ROWS.items())
+    if actual_set != expected_set or len(dispositions) != len(expected_set):
+        errors.append("DELIVERY_ACTIVITY_ONLY_EXPIRED_SET_INVALID")
+    source = git_json_at_commit(repo_root, "d428747a072ab8a21bc07667d3b65be4906fb6c2", LEGACY_SNAPSHOT_PATH)
+    for disposition in dispositions:
+        index = disposition.get("registry_index")
+        if source is None or not isinstance(index, int) or index >= len(registry["work_items"]):
+            errors.append("DELIVERY_ACTIVITY_ONLY_DISPOSITION_INDEX_INVALID")
+            continue
+        before = source["work_items"][index]
+        after = registry["work_items"][index]
+        if canonical_row_sha256(before) != disposition.get("before_row_sha256") or canonical_row_sha256(after) != disposition.get("after_row_sha256"):
+            errors.append(f"DELIVERY_ACTIVITY_ONLY_DISPOSITION_HASH_INVALID:{index}")
+        changed = {key for key in before.keys() | after.keys() if before.get(key) != after.get(key)}
+        if changed != set(disposition.get("allowed_changed_fields", [])):
+            errors.append(f"DELIVERY_ACTIVITY_ONLY_DISPOSITION_FIELDS_INVALID:{index}")
+    targets = [item for item in registry["work_items"] if item.get("work_id") == ACTIVITY_ONLY_WORK_ID]
+    if len(targets) != 1 or targets[0].get("allowed_paths") != ACTIVITY_ONLY_ALLOWED_PATHS:
+        errors.append("DELIVERY_ACTIVITY_ONLY_WORK_ITEM_OR_PATHS_INVALID")
+    if any(item.get("work_id") == "AIW-20260728-MEMBER-NOVA-TUTOR-IDENTITY-PROJECTION-R1" for item in registry["work_items"]):
+        errors.append("DELIVERY_ACTIVITY_ONLY_P0_01_PREMATURE")
+    if not application.get("r12o_guard", {}).get("activation_requires_separate_authorization"):
+        errors.append("DELIVERY_ACTIVITY_ONLY_R12O_GUARD_MISSING")
+    return errors
+
+
 def validate_registered_receipts(
     policy: dict,
     repo_root: Path,
     registry: dict,
     registry_bytes: bytes,
 ) -> tuple[list[str], list[tuple[dict, dict, str | None]]]:
-    if policy.get("contract_version") != "delivery-flow-policy.v3":
+    if policy.get("contract_version") not in {"delivery-flow-policy.v3", "delivery-flow-policy.v4"}:
         old_errors, old_receipt = validate_legacy_receipt(policy, repo_root, registry)
         return old_errors, [({}, old_receipt, None)] if old_receipt else []
     errors: list[str] = []
@@ -532,6 +657,8 @@ def validate_registered_receipts(
             mode = None
         elif version == "legacy-lifecycle-migration.v2":
             item_errors, receipt, mode = validate_v2_receipt(registration, repo_root, registry, registry_bytes)
+        elif version == "legacy-lifecycle-migration.v3":
+            item_errors, receipt, mode = validate_activity_only_v3_receipt(registration, repo_root, registry)
         else:
             item_errors, receipt, mode = ["DELIVERY_LEGACY_RECEIPT_VERSION_UNSUPPORTED"], None, None
         errors.extend(item_errors)
@@ -544,9 +671,10 @@ def validate_registered_receipts(
         if version == "legacy-lifecycle-migration.v2":
             claimed_entries = receipt.get("audit_scope", [])
         rows = {entry.get(row_key) for entry in claimed_entries}
-        if claimed_rows & rows:
+        if version != "legacy-lifecycle-migration.v3" and claimed_rows & rows:
             errors.append("DELIVERY_LEGACY_RECEIPT_ROW_OVERLAP")
-        claimed_rows.update(rows)
+        if version != "legacy-lifecycle-migration.v3":
+            claimed_rows.update(rows)
         validated.append((registration, receipt, mode))
     return errors, validated
 
@@ -581,6 +709,28 @@ def validate(
         policy, repo_root, registry, registry_path.read_bytes()
     )
     errors.extend(receipt_errors)
+    if policy.get("contract_version") == "delivery-flow-policy.v4":
+        errors.extend(validate_activity_only_application(policy, repo_root, registry))
+        immutable_artifacts = {
+            "contracts/foundation/delivery-flow-policy.v3.json": "1880c069f7fa2e7a3933ca3d749c37adf00d53377bef430e908fbb90abc39841",
+            "contracts/foundation/legacy-lifecycle-migration.v1.schema.json": "f35ece671353c53e7314c9eadc1f0b0f6262ceba1e3e292e78b73022a038cde5",
+            "contracts/foundation/legacy-lifecycle-migration.v2.schema.json": "ab63b7d55ab652a1e51d34a17363946be9c991c3719dcf1b4d5875e47495ef8a",
+            "contracts/foundation/legacy-lifecycle-migrations/LLM-20260715-ACTIVITY-MALL-M2-R1.json": "5e85735d7c70a942efca1b8a8c6d9aecee4805a40282ae8cfbac27beab3207b1",
+            "contracts/foundation/legacy-lifecycle-migrations/LLM-20260715-TECHNICAL-SOCIAL-BATCH-R2.json": "13b5096c9af214b9f5c010b0ece65802cdbcef7fb19602c76aa8c6e0c9873cf6",
+        }
+        for path, expected_hash in immutable_artifacts.items():
+            if not evidence_hash_matches(repo_root, path, expected_hash):
+                errors.append(f"DELIVERY_IMMUTABLE_LEGACY_ARTIFACT_CHANGED:{path}")
+    activity_migrated_integrated_ids: set[str] = set()
+    if policy.get("contract_version") == "delivery-flow-policy.v4":
+        application_path = policy.get("applications", [{}])[0].get("application_path", "")
+        if evidence_exists(repo_root, application_path):
+            application = json.loads((repo_root / application_path).read_text(encoding="utf-8"))
+            activity_migrated_integrated_ids = {
+                entry.get("work_id")
+                for entry in application.get("expired_dispositions", [])
+                if entry.get("action") == "integrate"
+            }
     receipt = next(
         (
             candidate
@@ -700,7 +850,7 @@ def validate(
                         errors.append(f"{item['work_id']}: DELIVERY_HANDOFF_ESCALATION_EVIDENCE_REQUIRED")
                 if decision and parse_time(decision) > requested + timedelta(hours=policy["handoff"]["decision_sla_hours"]):
                     errors.append(f"{item['work_id']}: DELIVERY_HANDOFF_DECISION_SLA_EXCEEDED")
-        if item.get("status") == "integrated":
+        if item.get("status") == "integrated" and item.get("work_id") not in activity_migrated_integrated_ids:
             if item.get("flow_class") == "business-stream":
                 missing_business = sorted(REQUIRED_BUSINESS_FIELDS - item.keys())
                 if missing_business:
